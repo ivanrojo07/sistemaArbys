@@ -76,5 +76,19 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript">
+        function formulario(elemento){
+            if (elemento.value == "Prospecto") {
+                document.getElementById('cliente').style.display='none';
+                document.getElementById('cliente1').style.display='none';
+                document.getElementById('cliente2').style.display='none';
+            }
+            if (elemento.value == "Cliente") {
+                document.getElementById('cliente').style.display='inline';
+                document.getElementById('cliente1').style.display='inline';
+                document.getElementById('cliente2').style.display='inline';
+            }
+        }
+    </script>
 </body>
 </html>
