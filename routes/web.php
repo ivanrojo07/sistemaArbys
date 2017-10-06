@@ -22,3 +22,4 @@ Route::resource('personals', 'PersonalController');
 Route::resource('datoslaborales','DatosLabController');
 Route::resource('referenciapersonales','RefPersonalController');
 Route::resource('beneficiarios', 'BeneficiariosController');
+Route::resource('prodpersonal','ProdUsuarioController');
