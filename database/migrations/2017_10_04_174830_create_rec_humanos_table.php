@@ -74,7 +74,7 @@ class CreateRecHumanosTable extends Migration
             $table->boolean('solicitarinfocompania3');
             $table->boolean('confirmactanac');
             $table->boolean('confirmcomprobantedom');
-            $table->boolean('confi')
+            $table->boolean('confi');
             $table->timestamps();
         });
     }
