@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('personals', 'PersonalController');
 Route::resource('datoslaborales','DatosLabController');
 Route::resource('referenciapersonales','RefPersonalController');
+Route::resource('beneficiarios', 'BeneficiariosController');

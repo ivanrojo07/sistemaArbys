@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Personal;
 use App\DatosLab;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DatosLabController extends Controller
 {
@@ -24,8 +28,8 @@ class DatosLabController extends Controller
      */
     public function create()
     {
-        //
-
+        // $cliente = Personal::find($cliente);
+        // dd($cliente);
         return view('datoslab.create');
     }
 
@@ -37,7 +41,7 @@ class DatosLabController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

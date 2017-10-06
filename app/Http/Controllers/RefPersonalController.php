@@ -15,6 +15,7 @@ class RefPersonalController extends Controller
     public function index()
     {
         //
+        return view('refpers.index');
     }
 
     /**
@@ -25,6 +26,7 @@ class RefPersonalController extends Controller
     public function create()
     {
         //
+        return view('refpers.create');
     }
 
     /**

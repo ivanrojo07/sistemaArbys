@@ -62,7 +62,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ url('/personals/create')}}">Alta</a>
-                                <a href="#">Busqueda</a>
+                                <a href="{{ url('/personals') }}">Busqueda</a>
                                 <a href="#">Seguimiento</a>    
                             </li>                     
                         </ul>

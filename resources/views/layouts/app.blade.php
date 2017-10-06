@@ -29,9 +29,10 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Arbys') }}
                     </a>
                 </div>
+
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
@@ -66,6 +67,57 @@
                                 </ul>
                             </li>
                         @endguest
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clientes<span class="caret"></span> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ url('/personals/create')}}">Alta</a>
+                                <a href="{{ url('/personals') }}">Busqueda</a>
+                                <a href="#">Seguimiento</a>    
+                            </li>                     
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oficinas <span class="caret"></span> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Alta</a>
+                                <a href="#">Busqueda</a>  
+                            </li>                     
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Recursos Humanos <span class="caret"></span> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Alta</a>
+                                <a href="#">Busqueda</a>    
+                            </li>                     
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Productos <span class="caret"></span> </a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-submenu">
+                        <a class="test" href="#">Vehiculos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Alta</a></li>
+                          <li><a href="#">Busqueda</a></li>
+                        </ul>
+                        <a class="test" href="#">Motocicletas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Alta</a></li>
+                          <li><a href="#">Busqueda</a></li>
+                        </ul>
+                         <a class="test" href="#">Casas <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Alta</a></li>
+                          <li><a href="#">Busqueda</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </div>
             </div>
