@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id','name', 'email', 'password',
     ];
 
     /**
@@ -36,3 +36,7 @@ function sendPasswordResetNotification($token)
 {
     $this->notify(new MailResetPasswordToken($token));
 }
+
+public function datosLab() {
+    return $this->hasOne('DatosLab\Cliente');
+} 

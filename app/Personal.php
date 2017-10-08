@@ -14,7 +14,8 @@ class Personal extends Model
      * @var array
      */
     protected $fillable = [
-        'tipo', 'nombre', 'apellidopaterno','apellidomaterno', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
+
+        'id','tipo', 'nombre', 'apellidopaterno','apellidomaterno', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
     ];
 
     /**
@@ -26,7 +27,13 @@ class Personal extends Model
         'created_at', 'updated_at'
     ];
 
-    public function clientes(){
-        return $this->hasMany('App\DatosLab', 'clientes_id');
+    // public function clientes(){
+    //     return $this->hasMany('App\DatosLab', 'clientes_id');
+    // }
+    public function datosLab(){
+        return $this->hasOne('App\DatosLab');
+    }
+    public function beneficiarios(){
+        return $this->hasMany('App\Beneficiarios');
     }
 }
