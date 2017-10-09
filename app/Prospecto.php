@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prospecto extends Model
+class Prospecto extends Personal
 {
     //
 }

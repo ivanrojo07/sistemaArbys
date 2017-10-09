@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Cliente;
 use App\Personal;
+use Illuminate\Database\Eloquent\Model;
 
 class DatosLab extends Model
 {
@@ -28,6 +29,6 @@ class DatosLab extends Model
     ];
 
     public function clientes(){
-    	return $this->belongsTo('App\Personal', 'clientes_id');
+    	return $this->belongsTo(Cliente::class);
     }
 }
