@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Personal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Personal;
 
 class PersonalController extends Controller
 {
@@ -14,17 +15,18 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        //
+        $personals = Personal::orderBy('id','DESC')->paginate();
+        return view('personal.index',['personals'=>$personals]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         //
+        return view('personal.create');
     }
 
     /**
@@ -36,26 +38,37 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
         //
+        Personal::create($request->all());
+        if ($request['tipo'] == 'Cliente') {
+            return redirect('personals');
+        }
+        if($request['tipo'] == 'Prospecto') {
+            return redirect('personals');
+        }
+        // return redirect('/personals');
+        // return response()->json($request['tipo']);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Personal $personal)
     {
         //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Personal $personal)
     {
         //
     }
@@ -64,10 +77,10 @@ class PersonalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Personal $personal)
     {
         //
     }
@@ -75,10 +88,10 @@ class PersonalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Personal $personal)
     {
         //
     }

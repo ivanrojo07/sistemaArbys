@@ -24,9 +24,10 @@ class PersonalDatosLabController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Personal $cliente)
     {
-        //
+        dd($cliente);
+        return view('datoslab.create');
     }
 
     /**
