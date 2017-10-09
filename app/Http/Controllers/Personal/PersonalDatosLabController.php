@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Personal;
 
+use App\DatosLab;
+use App\Http\Controllers\Controller;
 use App\Personal;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PersonalDatosLabController extends Controller
 {
@@ -13,10 +14,17 @@ class PersonalDatosLabController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Personal $cliente)
+    public function index(Personal $personal)
     {
-        $datoslab = $personal->datoslab;
-        return view('datoslab.index', ['datoslab'=>$datoslab]);
+        if ($personal->tipo == 'Cliente') {
+            // $datoslab = DatosLab::where('clientes_id', $personal->id);
+            $datoslab = $personal->datosLab()->get();
+            dd(['datoslab',$datoslab]);
+            // return view('datoslab.index',[$datoslab]);
+        }
+        else{
+            return redirect('personals');
+        }
     }
 
     /**

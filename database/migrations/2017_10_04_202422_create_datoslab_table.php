@@ -15,8 +15,8 @@ class CreateDatoslabTable extends Migration
     {
         Schema::create('datoslab', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('clientes_id')->unsigned();
-            $table->foreign('clientes_id')->references('id')->on('clientes');
+            $table->integer('personal_id')->unsigned();
+            $table->foreign('personal_id')->references('id')->on('personals');
             $table->string('nombreempresa');
             $table->string('calleempresa');
             $table->integer('numextempresa');

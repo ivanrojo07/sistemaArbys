@@ -1,112 +1,117 @@
 @extends('layouts.app')
 	@section('content')
 		<div class="container">
-			<form role="form" method="POST" action="{{ route('personals.store') }}" class="prs">
 				<div class="panel-body">
-					{{ csrf_field() }}
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
     					<label class="control-label" for="tipo">Tipo de cliente:</label>
-    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
-    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
-    						<option id="Cliente" value="Cliente">Cliente</option>
-    					</select>
+    					<dd>{{ $personal->tipo}}</dd>
   					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="nombre">Nombre(s):</label>
-  						<input type="text" class="form-control" id="nombre" name="nombre">
+  						<dd>{{ $personal->nombre}}</dd>
   					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno">
+  						<dd>{{ $personal->apellidopaterno }}</dd>
   					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno">
+  						<dd>{{ $personal->apellidomaterno }}</dd>
   					</div>
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<h2><span>Dirección</span></h2>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
 						<label class="control-label" for="calle">Calle:</label>
-						<input type="text" class="form-control" id="calle" name="calle">
+						<dd>{{ $personal->calle }}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
 						<label class="control-label" for="numext" >Número Exterior:</label>
-						<input type="text" class="form-control" id="numext" name="numext">
+						<dd>{{ $personal->numext}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="numinter">Número Interior:</label>
-						<input type="text" class="form-control" id="numinter" name="numinter">
+						<dd>{{ $personal->numinter}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="cp">Código Postal:</label>
-						<input type="text" class="form-control" id="cp" name="cp">
+						<dd>{{ $personal->cp}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="colonia">Colonia:</label>
-						<input type="text" class="form-control" id="colonia" name="colonia">
+						<dd>{{ $personal->colonia}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="municipio">Municipio/Delegación</label>
-						<input type="text" class="form-control" id="municipio" name="municipio">
+						<dd>{{ $personal->municipio}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="ciudad">Ciudad:</label>
-						<input type="text" class="form-control" id="ciudad" name="ciudad">
+						<dd>{{ $personal->ciudad}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="estado">Estado:</label>
-						<input type="text" class="form-control" id="estado" name="estado">
+						<dd>{{ $personal->estado}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="calle1">Entre calle:</label>
-						<input type="text" class="form-control" id="calle1" name="calle1">
+						<dd>{{ $personal->calle1}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="calle2">Y calle:</label>
-						<input type="text" class="form-control" id="calle2" name="calle2">
+						<dd>{{ $personal->calle2}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="referencia">Referencia:</label>
-						<input type="text" class="form-control" id="referencia" name="referencia">
+						<dd>{{ $personal->referencia}}</dd>
 					</div>
-					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente" style="display:none;">
+					@if ($personal->tipo == "Cliente")
+						{{-- expr --}}
+					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="recidir">Tiempo recidiendo:</label>
-						<input type="date" class="form-control" id="recidir" name="recidir">
+						<dd>{{ $personal->recidir}}</dd>
 					</div>
-					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente1" style="display:none;">
+					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="vivienda">Tipo de vivienda:</label>
-						<input type="text" class="form-control" id="vivienda" name="vivienda">
+						<dd>{{ $personal->vivienda}}</dd>
 					</div>
+					@endif
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<h2><span>Datos personales</span></h2>
 					
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="mail">Correo:</label>
-						<input type="email" class="form-control" id="mail" name="mail">
+						<dd>{{ $personal->mail}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="rfc">RFC:</label>
-						<input type="text" class="form-control" id="rfc" name="rfc">
+						<dd>{{ $personal->rfc}}</dd>
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="telefonofijo">Número de Telefono:</label>
-						<input type="text" class="form-control" id="telefonofijo" name="telefonofijo">
+						<dd>{{ $personal->telefonofijo}}
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="telefonocel">Número Celular:</label>
-						<input type="text" class="form-control" id="telefonocel" name="telefonocel">
+						<dd>{{ $personal->telefonocel}}</dd>
 					</div>
-					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
+					@if ($personal->tipo == "Cliente")
+						{{-- expr --}}
+					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<label class="control-label" for="estadocivil">Estado Civil:</label>
-						<select type="select" class="form-control" id="estadocivil" name="estadocivil">
-    						<option value="Casado">Casado</option>
-    						<option value="Soltero">Soltero</optio>
-    					</select>
+						<dd>{{ $personal->estadocivil}}</dd>
 					</div>
+					@endif
 				</div>
-  				<button type="submit" class="btn btn-default">Guardar</button>
-			</form>
+				@if ($personal->tipo == "Cliente")
+					<a href="{{ route('personals.datoslaborales.index', $personal) }}" class="btn btn-primary btn-lg">Datos Laborales</a>
+					<a href="#" class="btn btn-primary btn-lg">Referencias Personales</a>
+					<a href="#" class="btn btn-primary btn-lg">Datos Beneficiarios</a>
+				@endif
+				<a href="#" class="btn btn-primary btn-lg">Productos</a>
+				@if ($personal->tipo == 'Prospecto')
+					<a href="#" class="btn btn-primary btn-lg">Venta Frio</a>
+				@endif
 		</div>
 	@endsection

@@ -15,10 +15,9 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        $personals = Personal::orderBy('id','DESC')->paginate();
+        $personals = Personal::orderBy('id','DESC')->paginate(10);
         return view('personal.index',['personals'=>$personals]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +27,6 @@ class PersonalController extends Controller
         //
         return view('personal.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -47,9 +45,7 @@ class PersonalController extends Controller
         }
         // return redirect('/personals');
         // return response()->json($request['tipo']);
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -59,9 +55,9 @@ class PersonalController extends Controller
     public function show(Personal $personal)
     {
         //
-
+        // var_dump($personal->id);
+        return view('personal.view',['personal'=>$personal]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -71,8 +67,9 @@ class PersonalController extends Controller
     public function edit(Personal $personal)
     {
         //
+        // dd($personal);
+        return view('personal.edit',['personal'=>$personal]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -83,8 +80,14 @@ class PersonalController extends Controller
     public function update(Request $request, Personal $personal)
     {
         //
+        // dd($request);
+        $personal->update($request->all());
+        // Personal::where('id'=>$personal->id)->update($request->all());
+        return redirect('/personals');
+        // $personal->fill($request->all());
+        // $personal->save();
+        // return redirect('personals');
     }
-
     /**
      * Remove the specified resource from storage.
      *

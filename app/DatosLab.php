@@ -29,6 +29,6 @@ class DatosLab extends Model
     ];
 
     public function clientes(){
-    	return $this->belongsTo(Cliente::class);
+    	return $this->belongsTo(Personal::class, 'clientes_id');
     }
 }
