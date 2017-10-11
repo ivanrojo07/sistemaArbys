@@ -33,6 +33,9 @@ class Personal extends Model
     public function datosLab(){
         return $this->hasOne('App\DatosLab');
     }
+    public function refpersonals(){
+        return $this->hasMany('App\RefPersonal');
+    }
     public function beneficiarios(){
         return $this->hasMany('App\Beneficiarios');
     }

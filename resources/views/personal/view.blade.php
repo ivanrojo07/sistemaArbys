@@ -106,7 +106,7 @@
 				</div>
 				@if ($personal->tipo == "Cliente")
 					<a href="{{ route('personals.datoslaborales.index', $personal) }}" class="btn btn-primary btn-lg">Datos Laborales</a>
-					<a href="#" class="btn btn-primary btn-lg">Referencias Personales</a>
+					<a href="{{ route('personals.referenciapersonales.index', $personal) }}" class="btn btn-primary btn-lg">Referencias Personales</a>
 					<a href="#" class="btn btn-primary btn-lg">Datos Beneficiarios</a>
 				@endif
 				<a href="#" class="btn btn-primary btn-lg">Productos</a>

@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('personals', 'Personal\PersonalController');
 Route::resource('personals.datoslaborales', 'Personal\PersonalDatosLabController');
+Route::resource('personals.referenciapersonales', 'Personal\PersonalRefPersonalController');
 Route::resource('datoslaborales','DatosLabController');
 Route::resource('referenciapersonales','RefPersonalController');
 Route::resource('beneficiarios', 'BeneficiariosController');
