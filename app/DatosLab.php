@@ -16,7 +16,7 @@ class DatosLab extends Model
      */
     protected $fillable = [
 
-    	'id','clientes_id','nombreempresa', 'calleempresa', 'numextempresa', 'numinterempresa', 'cpempresa', 'coloniaempresa', 'municipioempresa', 'ciudadempresa', 'estadoempresa', 'giroempresa','puestoempresa','antiguedadempresa','telefonoempresa', 'ingresosmesempresa'
+    	'id','personal_id','nombreempresa', 'calleempresa', 'numextempresa', 'numinterempresa', 'cpempresa', 'coloniaempresa', 'municipioempresa', 'ciudadempresa', 'estadoempresa', 'giroempresa','puestoempresa','antiguedadempresa','telefonoempresa', 'ingresosmesempresa'
     ];
 
     /**

@@ -1,9 +1,11 @@
 @extends('layouts.app')
 	@section('content')
-	<div class="row-8">
-			<form role="form" method="POST" action="{{ route('datoslaborales.store') }}" class="prs">
+	<div class="container">
+    <h2>Datos Laborales de {{ $personal->nombre }} {{$personal->apellidopaterno}} {{$personal->apellidomaterno}}</h2>
+			<form role="form" method="POST" action="{{ route('personals.datoslaborales.store',$personal) }}" class="prs">
 				<div class="panel-body">
 					{{ csrf_field() }}
+          <input type="hidden" name="personal_id" value="{{$personal->id}}">
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="nombreempresa">Nombre de la empresa:</label>
   						<input type="text" class="form-control" id="nombreempresa" name="nombreempresa">
@@ -17,8 +19,8 @@
   						<input type="text" class="form-control" id="numextempresa" name="numextempresa">
   					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-  						<label class="control-label" for="numintempresa">Número interior:</label>
-  						<input type="text" class="form-control" id="numintempresa" name="numintempresa">
+  						<label class="control-label" for="numinterempresa">Número interior:</label>
+  						<input type="text" class="form-control" id="numinterempresa" name="numinterempresa">
   					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="cpempresa">Código Postal:</label>

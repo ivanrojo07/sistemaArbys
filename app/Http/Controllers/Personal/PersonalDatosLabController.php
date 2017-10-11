@@ -18,9 +18,10 @@ class PersonalDatosLabController extends Controller
     {
         if ($personal->tipo == 'Cliente') {
             // $datoslab = DatosLab::where('clientes_id', $personal->id);
-            $datoslab = $personal->datosLab()->get();
-            dd(['datoslab',$datoslab]);
-            // return view('datoslab.index',[$datoslab]);
+            $datoslab = $personal->datosLab;
+            $personal = Personal::findOrFail($personal->id);
+            // dd($personal);
+            return view('datoslab.index', compact('datoslab','personal'));
         }
         else{
             return redirect('personals');
@@ -32,10 +33,10 @@ class PersonalDatosLabController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Personal $cliente)
+    public function create(Personal $personal)
     {
-        dd($cliente);
-        return view('datoslab.create');
+        // dd($personal);
+        return view('datoslab.create', compact('personal'));
     }
 
     /**
@@ -44,9 +45,13 @@ class PersonalDatosLabController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Personal $personal)
     {
         //
+        // dd($request->all());
+        $datoslab = DatosLab::create($request->all());
+        return redirect()->route('personals.datoslaborales.index',compact('datoslab','personal'));
+
     }
 
     /**
@@ -58,6 +63,16 @@ class PersonalDatosLabController extends Controller
     public function show(Personal $personal)
     {
         //
+        if ($personal->tipo == 'Cliente') {
+            // $datoslab = DatosLab::where('clientes_id', $personal->id);
+            $datoslab = $personal->datosLab;
+            $personal = Personal::findOrFail($personal->id);
+            // dd($personal);
+            return view('datoslab.show', compact('datoslab','personal'));
+        }
+        else{
+            return redirect('personals');
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 	@section('content')
-		<div class="row-8">
+		<div class="container">
+					
 			<form role="form" method="POST" action="{{ route('personals.store') }}" class="prs">
 				<div class="panel-body">
 					{{ csrf_field() }}

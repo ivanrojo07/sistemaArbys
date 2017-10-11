@@ -21,15 +21,6 @@
 					<td>
 						<a class="btn btn-success btn-sm" href="{{ route('personals.show',$personal) }}">Ver</a>
 						<a class="btn btn-info btn-sm" href="{{ route('personals.edit', $personal) }}">Editar</a>
-						{{-- @if ( $personal->tipo == 'Cliente')
-							<a type="button" class="btn btn-primary btn-xs" href="{{ url('datoslaborales/create') }}">Datos Laborales</a>
-						<a type="button" class="btn btn-primary btn-xs" href="{{ url('referenciapersonales') }}">Referencias Personales</a>
-						<a type="button" class="btn btn-primary btn-xs" href="{{ url('beneficiarios') }}">Datos Beneficiarios</a>
-						@endif
-						@if ($personal->tipo == 'Prospecto')
-							<a type="button" class="btn btn-primary btn-xs">Ventas Frio</a>
-						@endif
-					<a type="button" class="btn btn-primary btn-xs">Productos</a> --}}
 				</tr>
 					</td>
 				</tbody>
