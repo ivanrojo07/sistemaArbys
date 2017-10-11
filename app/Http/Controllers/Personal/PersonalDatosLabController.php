@@ -68,7 +68,7 @@ class PersonalDatosLabController extends Controller
             $datoslab = $personal->datosLab;
             $personal = Personal::findOrFail($personal->id);
             // dd($personal);
-            return view('datoslab.show', compact('datoslab','personal'));
+            return view('datoslab.view', compact('datoslab','personal'));
         }
         else{
             return redirect('personals');

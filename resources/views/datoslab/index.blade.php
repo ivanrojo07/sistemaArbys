@@ -28,8 +28,8 @@
 						<td>{{$datoslab->puestoempresa}}</td>
 						<td>${{$datoslab->ingresosmesempresa}}</td>
 						<td>
-							<a class="btn btn-success btn-sm" href="{{ route('personals.show',$personal) }}">Ver</a>
-							<a class="btn btn-info btn-sm" href="{{ route('personals.edit', $personal) }}">Editar</a>
+							<a class="btn btn-success btn-sm" href="{{ route('personals.datoslaborales.show',[$personal,$datoslab]) }}">Ver</a>
+							<a class="btn btn-info btn-sm" href="{{ route('personals.datoslaborales.edit', [$personal,$datoslab]) }}">Editar</a>
 					</tr>
 						</td>
 					</tbody>
