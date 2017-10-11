@@ -84,6 +84,16 @@ class PersonalDatosLabController extends Controller
     public function edit(Personal $personal)
     {
         //
+        if ($personal->tipo == 'Cliente') {
+            // $datoslab = DatosLab::where('clientes_id', $personal->id);
+            $datoslab = $personal->datosLab;
+            $personal = Personal::findOrFail($personal->id);
+            // dd($personal);
+            return view('datoslab.edit', compact('datoslab','personal'));
+        }
+        else{
+            return redirect('personals');
+        }
     }
 
     /**
@@ -93,9 +103,13 @@ class PersonalDatosLabController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personal $personal)
+    public function update(Request $request, Personal $personal, DatosLab $datoslab)
     {
         //
+        // dd($request->all());
+        $datoslab = $personal->datosLab;
+        $datoslab->update($request->all());
+        return redirect()->route('personals.datoslaborales.index',compact('datoslab','personal'));
     }
 
     /**
