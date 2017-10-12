@@ -4,7 +4,7 @@
 		<div class="jumbotron">
 			{{-- {{dd($personal)}} --}}
 			<h2><span class="label label-default">Datos Laborales: </span></h2>
-		@if (isset($datoslab))
+		@if (!$datoslab)
 				<p>Aún no tienes Datos Laborales</p>
 		    	<a type="button" class="btn btn-sm btn-success" href="{{ route('personals.datoslaborales.create', $personal) }}">Agregar</a>
 		@endif
