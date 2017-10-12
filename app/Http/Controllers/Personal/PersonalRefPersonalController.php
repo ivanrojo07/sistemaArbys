@@ -14,7 +14,7 @@ class PersonalRefPersonalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Personal $personal)
+    public function index(Personal $personal, RefPersonal $refpersonals)
     {
         //
         if ($personal->tipo = 'Cliente') {
@@ -80,9 +80,19 @@ class PersonalRefPersonalController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personal $personal)
+    public function edit(Personal $personal, $refpersonale)
     {
         //
+        if ($personal->tipo == 'Cliente') {
+            // $datoslab = DatosLab::where('clientes_id', $personal->id);
+            $refpersonal = RefPersonal::findOrFail($refpersonale);
+            $personal = Personal::findOrFail($personal->id);
+            // dd($personal);
+            return view('refpers.edit', compact('refpersonal','personal'));
+        }
+        else{
+            return redirect('personals');
+        }
     }
 
     /**
@@ -92,9 +102,12 @@ class PersonalRefPersonalController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personal $personal)
+    public function update(Request $request, Personal $personal,$refpersonale)
     {
         //
+        $refpersonal = RefPersonal::findOrFail($refpersonale);
+        $refpersonal->update($request->all());
+        return redirect()->route('personals.referenciapersonales.index',compact('refpersonals','personal'));
     }
 
     /**

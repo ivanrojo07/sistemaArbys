@@ -24,7 +24,7 @@
 							<td>{{ $refpersonal->telefono1 }}<br>{{$refpersonal->telefono2}}<br>{{$refpersonal->telefono3}}</td>
 							<td>{{$refpersonal->parentesco}}</td>
 							<td>
-								<a class="btn btn-success btn-sm" href="{{ route('personals.referenciapersonales.show',['personal'=$personal,'refpersonale'=>$refpersonal]) }}">Ver</a>
+								<a class="btn btn-success btn-sm" href="{{ route('personals.referenciapersonales.show',[$personal,$refpersonal]) }}">Ver</a>
 								<a class="btn btn-info btn-sm" href="{{ route('personals.referenciapersonales.edit',[$personal,$refpersonal]) }}">Editar</a>
 						</tr>
 							</td>
