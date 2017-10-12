@@ -44,20 +44,34 @@ class PersonalRefPersonalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Personal $personal)
     {
         //
+        // dd($request->all());
+        $refpersonal = RefPersonal::create($request->all());
+        return redirect()->route('personals.referenciapersonales.index', compact('refpersonal','personal'));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Personal  $personal
+     * @param  \App\Refpersonal $refpersonal
      * @return \Illuminate\Http\Response
      */
-    public function show(Personal $personal)
+    public function show(Personal $personal,$refpersonale)
     {
         //
+        if ($personal->tipo == 'Cliente') {
+            // $datoslab = DatosLab::where('clientes_id', $personal->id);
+            $refpersonal = RefPersonal::findOrFail($refpersonale);
+            $personal = Personal::findOrFail($personal->id);
+            // dd($personal);
+            return view('refpers.view', compact('refpersonal','personal'));
+        }
+        else{
+            return redirect('personals');
+        }
     }
 
     /**

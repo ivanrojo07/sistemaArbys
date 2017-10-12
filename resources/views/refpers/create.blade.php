@@ -34,8 +34,8 @@
 						<label class="control-label" for="parentesco">Parentesco:</label>
 						<input type="text" class="form-control" id="parentesco" name="parentesco">
 					</div>
+  					<button type="submit" class="btn btn-default">Guardar</button>
 				</div>
-  				<button type="submit" class="btn btn-default">Guardar</button>
 			</form>
 		</div>
 	@endsection

@@ -2,13 +2,11 @@
 	@section('content')
 	<div class="container theme-showcase">
 		<div class="jumbotron">
-			<h2><span class="label label-default">Datos Laborales: </span></h2>
-			{{-- {{dd($refpersonals)}} --}}
-			@if (isset($refpersonals))
-				{{-- true expr --}}
+			<h2><span class="label label-default">Datos Laborales:</span></h2>
+			@if (!$refpersonals)
 				<p>Aún no tienes referencias personales</p>
-			@else
-				{{-- false expr --}}
+			@endif
+			@if ($refpersonals)
 			<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 					<thead>
 						<tr class="info">
@@ -16,7 +14,6 @@
 							<th>Nombre de la referecia</th>
 							<th>Telefono</th>
 							<th>Parentesco</th>
-							<
 							<th>Operaciones</th>
 						</tr>
 					</thead>
@@ -27,8 +24,8 @@
 							<td>{{ $refpersonal->telefono1 }}<br>{{$refpersonal->telefono2}}<br>{{$refpersonal->telefono3}}</td>
 							<td>{{$refpersonal->parentesco}}</td>
 							<td>
-								<a class="btn btn-success btn-sm" href="{{ route('personals.referenciapersonales.show',[$personal,$refpersonal]) }}">Ver</a>
-								<a class="btn btn-info btn-sm" href="{{ route('personals.referecnciapersonales.edit',[$personal,$refpersonal]) }}">Editar</a>
+								<a class="btn btn-success btn-sm" href="{{ route('personals.referenciapersonales.show',['personal'=$personal,'refpersonale'=>$refpersonal]) }}">Ver</a>
+								<a class="btn btn-info btn-sm" href="{{ route('personals.referenciapersonales.edit',[$personal,$refpersonal]) }}">Editar</a>
 						</tr>
 							</td>
 						</tbody>
