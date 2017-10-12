@@ -3,10 +3,10 @@
 	<div class="container theme-showcase">
 		<div class="jumbotron">
 			<h2><span class="label label-default">Datos Laborales:</span></h2>
-			@if (!$refpersonals)
+			@if (count($refpersonals) == 0)
 				<p>Aún no tienes referencias personales</p>
 			@endif
-			@if ($refpersonals)
+			@if (count($refpersonals) != 0)
 			<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 					<thead>
 						<tr class="info">

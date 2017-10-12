@@ -12,7 +12,7 @@
 					<thead>
 						<tr class="info">
 							<th>Nombre del cliente</th>
-							<th>Nombre de la referecia</th>
+							<th>Nombre del beneficiario</th>
 							<th>Telefono</th>
 							<th>Parentesco</th>
 							<th>Operaciones</th>
