@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Personal;
 
-use App\Beneficiarios;
+use App\Personal;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class BeneficiariosController extends Controller
+class PersonalProductosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,6 @@ class BeneficiariosController extends Controller
     public function index()
     {
         //
-        return view('benef.index');
     }
 
     /**
@@ -26,7 +26,6 @@ class BeneficiariosController extends Controller
     public function create()
     {
         //
-        return view('benef.create');
     }
 
     /**
@@ -43,10 +42,10 @@ class BeneficiariosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Beneficiarios  $beneficiarios
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function show(Beneficiarios $beneficiarios)
+    public function show(Personal $personal)
     {
         //
     }
@@ -54,10 +53,10 @@ class BeneficiariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Beneficiarios  $beneficiarios
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Beneficiarios $beneficiarios)
+    public function edit(Personal $personal)
     {
         //
     }
@@ -66,10 +65,10 @@ class BeneficiariosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Beneficiarios  $beneficiarios
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Beneficiarios $beneficiarios)
+    public function update(Request $request, Personal $personal)
     {
         //
     }
@@ -77,10 +76,10 @@ class BeneficiariosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Beneficiarios  $beneficiarios
+     * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Beneficiarios $beneficiarios)
+    public function destroy(Personal $personal)
     {
         //
     }

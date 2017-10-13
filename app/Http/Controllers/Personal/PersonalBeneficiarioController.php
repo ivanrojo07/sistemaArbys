@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Personal;
 
 use App\Personal;
-use App\RefPersonal;
-use Illuminate\Http\Request;
+use App\Beneficiarios;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class PersonalRefPersonalController extends Controller
+class PersonalBeneficiarioController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Personal $personal, RefPersonal $refpersonals)
+    public function index(Personal $personal, Beneficiarios $beneficiarios)
     {
         //
         if ($personal->tipo = 'Cliente') {
-            $refpersonals = $personal->refpersonals;
-            return view('refpers.index', compact('refpersonals','personal'));
+            $beneficiarios = $personal->beneficiarios;
+            return view('benef.index', compact('beneficiarios','personal'));
         }
         else{
             return redirect('personals');
@@ -34,8 +34,7 @@ class PersonalRefPersonalController extends Controller
     public function create(Personal $personal)
     {
         //
-        // dd($personal);
-        return view('refpers.create',compact('personal'));
+        return view('benef.create', compact('personal'));
     }
 
     /**
@@ -48,26 +47,25 @@ class PersonalRefPersonalController extends Controller
     {
         //
         // dd($request->all());
-        $refpersonal = RefPersonal::create($request->all());
-        return redirect()->route('personals.referenciapersonales.index', compact('refpersonal','personal'));
+        $beneficiario = Beneficiarios::create($request->all());
+        return redirect()->route('personals.datosbeneficiario.index', compact('beneficiario','personal'));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Personal  $personal
-     * @param  \App\Refpersonal $refpersonal
      * @return \Illuminate\Http\Response
      */
-    public function show(Personal $personal,$refpersonale)
+    public function show(Personal $personal, $datosbeneficiario)
     {
         //
         if ($personal->tipo == 'Cliente') {
             // $datoslab = DatosLab::where('clientes_id', $personal->id);
-            $refpersonal = RefPersonal::findOrFail($refpersonale);
+            $beneficiario = Beneficiarios::findOrFail($datosbeneficiario);
             $personal = Personal::findOrFail($personal->id);
             // dd($personal);
-            return view('refpers.view', compact('refpersonal','personal'));
+            return view('benef.view', compact('beneficiario','personal'));
         }
         else{
             return redirect('personals');
@@ -80,15 +78,15 @@ class PersonalRefPersonalController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personal $personal, $refpersonale)
+    public function edit(Personal $personal,$datosbeneficiario)
     {
         //
         if ($personal->tipo == 'Cliente') {
             // $datoslab = DatosLab::where('clientes_id', $personal->id);
-            $refpersonal = RefPersonal::findOrFail($refpersonale);
+            $beneficiario = Beneficiarios::findOrFail($datosbeneficiario);
             $personal = Personal::findOrFail($personal->id);
             // dd($personal);
-            return view('refpers.edit', compact('refpersonal','personal'));
+            return view('benef.edit', compact('beneficiario','personal'));
         }
         else{
             return redirect('personals');
@@ -102,12 +100,12 @@ class PersonalRefPersonalController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personal $personal,$refpersonale)
+    public function update(Request $request, Personal $personal, $datosbeneficiario)
     {
         //
-        $refpersonal = RefPersonal::findOrFail($refpersonale);
-        $refpersonal->update($request->all());
-        return redirect()->route('personals.referenciapersonales.index',compact('refpersonals','personal'));
+        $beneficiario = Beneficiarios::findOrFail($datosbeneficiario);
+        $beneficiario->update($request->all());
+        return redirect()->route('personals.datosbeneficiario.index',compact('beneficiario','personal'));
     }
 
     /**
