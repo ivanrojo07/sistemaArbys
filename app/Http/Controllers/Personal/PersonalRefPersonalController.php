@@ -81,6 +81,7 @@ class PersonalRefPersonalController extends Controller
     public function update(Request $request, Personal $personal)
     {
         //
+        var_dump($request);
     }
 
     /**
