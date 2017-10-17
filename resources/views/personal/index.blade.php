@@ -6,6 +6,7 @@
 			<thead>
 				<tr class="info">
 					<th>Nombre</th>
+					<th>Tipo de persona</th>
 					<th>Tipo de cliente</th>
 					<th>RFC</th>
 					<th>Correo</th>
@@ -14,7 +15,14 @@
 			</thead>
 			@foreach($personals as $personal)
 				<tr class="active">
-					<td>{{$personal->nombre}} {{ $personal->apellidopaterno }} {{ $personal->apellidomaterno }}</td>
+					<td>
+						@if ($personal->tipopersona == "Fisica")
+						{{$personal->nombre}} {{ $personal->apellidopaterno }} {{ $personal->apellidomaterno }}
+						@else
+						{{$personal->razonsocial}}
+						@endif
+					</td>
+					<td>{{ $personal->tipopersona }}</td>
 					<td>{{ $personal->tipo }}</td>
 					<td>{{ strtoupper($personal->rfc) }}</td>
 					<td>{{$personal->mail}}</td>
