@@ -16,7 +16,7 @@ class CreatePersonalsTable extends Migration
         Schema::create('personals', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('tipo', ['Prospecto','Cliente']);
-            $table->enum('persona',['Fisica','Moral']);
+            $table->enum('tipopersona',['Fisica','Moral']);
             $table->string('nombre');
             $table->string('apellidopaterno')->nullable();
             $table->string('apellidomaterno')->nullable();
@@ -37,7 +37,7 @@ class CreatePersonalsTable extends Migration
             $table->string('rfc');
             $table->string('telefonofijo');
             $table->string('telefonocel');
-            $table->enum('estadocivil',['Casado','Soltero'])->nullable();
+            $table->string('estadocivil')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 	@section('content')
 		<div class="container">
-			<form role="form" method="POST" action="{{ route('personals.store') }}" class="prs">
+			<form role="form" method="POST" action="{{ route('personals.store') }}" name="form">
 				<div class="panel-body">
 					{{ csrf_field() }}
 					<div class="col-md-12 offset-md-2 mt-3">
@@ -23,7 +23,7 @@
 					<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	  						<label class="control-label" for="nombre">Nombre(s):</label>
-	  						<input type="text" class="form-control" id="nombre" name="nombre">
+	  						<input type="text" class="form-control" id="nombre" name="nombrepers" onkeypress="document.forms.form.nombreempr.value = this.value">
 	  					</div>
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
@@ -39,7 +39,7 @@
 					<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	  						<label class="control-label" for="nombre">Razon Social:</label>
-	  						<input type="text" class="form-control" id="nombre" name="nombre">
+	  						<input type="text" class="form-control" id="nombre" name="nombreempr" onkeypress="document.forms.form.nombrepers.value = this.value">
 	  					</div>
 					</div>
 				<div class="col-md-12 offset-md-2 mt-3">
@@ -65,7 +65,7 @@
 						<input type="text" class="form-control" id="colonia" name="colonia">
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<label class="control-label" for="municipio">Municipio/Delegación</label>
+						<label class="control-label" for="municipio">Municipio/Delegación:</label>
 						<input type="text" class="form-control" id="municipio" name="municipio">
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -119,7 +119,7 @@
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
 						<label class="control-label" for="estadocivil">Estado Civil:</label>
 						<select type="select" class="form-control" id="estadocivil" name="estadocivil">
-							<option value="NULL" selected="selected">seleccionar</option>
+							<option value="" selected="selected">seleccionar</option>
     						<option value="Casado">Casado</option>
     						<option value="Soltero">Soltero</optio>
     					</select>
