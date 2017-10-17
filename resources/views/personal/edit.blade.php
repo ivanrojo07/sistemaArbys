@@ -20,10 +20,10 @@
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
 	    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
-	    						<option id="Fisica" value="Fisica" @if ($personal->persona == "Fisica")
+	    						<option id="Fisica" value="Fisica" @if ($personal->tipopersona == "Fisica")
 	    							selected="selected"
 	    						@endif >Fisica</option>
-	    						<option id="Moral" value="Moral" @if ($personal->persona == "Moral")
+	    						<option id="Moral" value="Moral" @if ($personal->tipopersona == "Moral")
 	    							selected="selected"
 	    						@endif >Moral</option>
 	    					</select>
@@ -72,7 +72,7 @@
 						<input type="text" class="form-control" id="colonia" value="{{ $personal->colonia }}" name="colonia">
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<label class="control-label" for="municipio">Municipio/Delegación</label>
+						<label class="control-label" for="municipio">Municipio/Delegación:</label>
 						<input type="text" class="form-control" id="municipio" value="{{ $personal->municipio }}" name="municipio">
 					</div>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
