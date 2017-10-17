@@ -6,6 +6,13 @@
     					<label class="control-label" for="tipo">Tipo de cliente:</label>
     					<dd>{{ $personal->tipo}}</dd>
   					</div>
+
+					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
+    					<dd>{{ $personal->tipopersona}}</dd>
+  					</div>
+					@if ($personal->tipopersona == "Fisica")
+						{{-- true expr --}}
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="nombre">Nombre(s):</label>
   						<dd>{{ $personal->nombre}}</dd>
@@ -18,6 +25,13 @@
   						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
   						<dd>{{ $personal->apellidomaterno }}</dd>
   					</div>
+					@else
+						{{-- false expr --}}
+						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+  						<label class="control-label" for="razonsocial">Razón Social:</label>
+  						<dd>{{ $personal->razonsocial}}</dd>
+  					</div>
+					@endif
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<h2><span>Dirección</span></h2>
