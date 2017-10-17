@@ -4,28 +4,46 @@
 			<form role="form" method="POST" action="{{ route('personals.store') }}" class="prs">
 				<div class="panel-body">
 					{{ csrf_field() }}
-					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    					<label class="control-label" for="tipo">Tipo de cliente:</label>
-    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
-    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
-    						<option id="Cliente" value="Cliente">Cliente</option>
-    					</select>
-  					</div>
-  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-  						<label class="control-label" for="nombre">Nombre(s):</label>
-  						<input type="text" class="form-control" id="nombre" name="nombre">
-  					</div>
-  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno">
-  					</div>
-  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno">
-  					</div>
-				</div>
+					<div class="col-md-12 offset-md-2 mt-3">
+						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	    					<label class="control-label" for="tipo">Tipo de cliente:</label>
+	    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
+	    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
+	    						<option id="Cliente" value="Cliente">Cliente</option>
+	    					</select>
+	  					</div>
+	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
+	    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
+	    						<option id="Fisica" value="Fisica" selected="selected">Fisica</option>
+	    						<option id="Moral" value="Moral">Moral</option>
+	    					</select>
+	  					</div>	
+					</div>
+					<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	  						<label class="control-label" for="nombre">Nombre(s):</label>
+	  						<input type="text" class="form-control" id="nombre" name="nombre">
+	  					</div>
+	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
+	  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno">
+	  					</div>
+	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
+	  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno">
+	  					</div>
+	
+					</div>
+
+					<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
+						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	  						<label class="control-label" for="nombre">Razon Social:</label>
+	  						<input type="text" class="form-control" id="nombre" name="nombre">
+	  					</div>
+					</div>
 				<div class="col-md-12 offset-md-2 mt-3">
-					<h2><span>Dirección</span></h2>
+					<h2><span>Dirección/Domicilio</span></h2>
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
 						<label class="control-label" for="calle">Calle:</label>
 						<input type="text" class="form-control" id="calle" name="calle">
@@ -101,12 +119,14 @@
 					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
 						<label class="control-label" for="estadocivil">Estado Civil:</label>
 						<select type="select" class="form-control" id="estadocivil" name="estadocivil">
+							<option value="NULL" selected="selected">seleccionar</option>
     						<option value="Casado">Casado</option>
     						<option value="Soltero">Soltero</optio>
     					</select>
 					</div>
 				</div>
   				<button type="submit" class="btn btn-default">Guardar</button>
+  				</div>
 			</form>
 		</div>
 	@endsection

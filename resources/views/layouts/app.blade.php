@@ -141,6 +141,16 @@
                 document.getElementById('cliente2').style.display='inline';
             }
         }
+        function persona(elemento){
+            if(elemento.value == "Fisica"){
+                document.getElementById('perfisica').style.display='inline';
+                document.getElementById('permoral').style.display='none';
+            }
+            if(elemento.value =="Moral"){
+                document.getElementById('perfisica').style.display='none';
+                document.getElementById('permoral').style.display='inline';
+            }
+        }
     </script>
 </body>
 </html>
