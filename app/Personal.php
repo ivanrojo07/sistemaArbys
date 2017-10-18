@@ -15,11 +15,9 @@ class Personal extends Model
      */
     protected $fillable = [
 
-<<<<<<< HEAD
-        'id','tipo','tipopersona', 'nombre', 'apellidopaterno','apellidomaterno','razonsocial', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
-=======
+
         'id','tipo', 'tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
->>>>>>> 048fb935f2d0de00ab53c0dd6730d2470a1223c7
+
     ];
 
     /**
