@@ -4,7 +4,7 @@
 			<form role="form" id="form-cliente" method="POST" action="{{ route('personals.store') }}" name="form">
 				{{ csrf_field() }}
 				<div role="application" class="wizard clearfix" >
-					<ul role="tablist" class="nav nav-pills nav-justified">
+					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
 						<li role="presentation" tabindex="0" class="active" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Datos Generales:</a></li>
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección:</a></li>
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
