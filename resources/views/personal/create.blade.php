@@ -6,7 +6,7 @@
 					{{ csrf_field() }}
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	    					<label class="control-label" for="tipo">Tipo de cliente:</label>
+	    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 	    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
 	    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
 	    						<option id="Cliente" value="Cliente">Cliente</option>
