@@ -128,7 +128,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function formulario(elemento){
             if (elemento.value == "Prospecto") {
                 document.getElementById('cliente').style.display='none';
@@ -151,6 +151,7 @@
                 document.getElementById('permoral').style.display='inline';
             }
         }
-    </script>
+    </script> --}}
+    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
 </body>
 </html>
