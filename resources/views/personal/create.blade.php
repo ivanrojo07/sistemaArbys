@@ -9,7 +9,7 @@
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección:</a></li>
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
 					</ul>
-					<fieldset id="tabs1" style="display: inline;">
+					<div id="tab1" {{-- style="display: inline;" --}} class="pestana" style="display: inline;">
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<legend>Información general:</legend>
@@ -51,11 +51,11 @@
 			  						<input type="text" class="form-control" id="razonsocial" name="razonsocial">
 			  					</div>
 							</div></div>
-					</fieldset>
-					<fieldset id="tab2" style="display: none;">
+					</div>
+					<div id="tab2" {{-- style="display: none;" --}} class="pestana">
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<h2><span>Dirección/Domicilio:</span></h2>
+								<legend>Dirección/Domicilio:</legend>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
 									<label class="control-label" for="calle">Calle:</label>
 									<input type="text" class="form-control" id="calle" name="calle">
@@ -110,11 +110,11 @@
 								</div>
 							</div>
 						</div>
-					</fieldset>
-					<fieldset  id="tab3" style="display: none;">
+					</div>
+					<div  id="tab3" {{-- style="display: none;" --}} class="pestana">
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<h2><span>Datos personales:</span></h2>
+								<legend>Datos personales:</legend>
 								
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="mail">Correo:</label>
@@ -142,7 +142,7 @@
 								</div>
 							</div>
 						</div>
-					</fieldset>
+					</div>
 	  				<button type="submit" class="btn btn-default">Guardar</button>
   				</div>
 			</form>

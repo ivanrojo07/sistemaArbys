@@ -21,7 +21,12 @@ function formulario(elemento){
             }
         }
 
-$(function() {
-   $("#tab").tabs().style.display='inline';
+// $(function() {
+//    $("#tab").tabs();
 
+// });
+
+$('li a').click(function(){
+    $('.pestana').hide();
+    $(this.getAttribute('href')).show();
 });
