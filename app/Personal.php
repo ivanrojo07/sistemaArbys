@@ -2,16 +2,19 @@
 
 namespace App;
 
-use Laravel\Scout\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use App\DatosLab;
+use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
+use Laravel\Scout\Searchable;
 
 class Personal extends Model
 {
 
-    use Searchable;
+    use Searchable, Sortable;
     //
     protected $table='personals';
+
+    public $sortable = [ 'nombre','tipopersona','tipo', 'rfc', 'mail'];
    /**
      * The attributes that are mass assignable.
      *

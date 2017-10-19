@@ -22,11 +22,11 @@
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>
 				<tr class="info">
-					<th>Nombre</th>
-					<th>Tipo de persona</th>
-					<th>Tipo de cliente</th>
-					<th>RFC</th>
-					<th>Correo</th>
+					<th>@sortablelink('nombre', 'Nombre'){{-- Nombre --}}</th>
+					<th>@sortablelink('tipopersona', 'Tipo de persona')</th>
+					<th>@sortablelink('tipo', 'Tipo de cliente')</th>
+					<th>@sortablelink('rfc', 'RFC')</th>
+					<th>@sortablelink('mail', 'Correo') </th>
 					<th>Operacion</th>
 				</tr>
 			</thead>

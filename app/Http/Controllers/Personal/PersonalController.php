@@ -15,7 +15,7 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        $personals = Personal::orderBy('id','DESC')->paginate(10);
+        $personals = Personal::sortable()->paginate(10);
         return view('personal.index',['personals'=>$personals]);
     }
     /**
@@ -102,7 +102,7 @@ class PersonalController extends Controller
     public function search(Request $request){
         $query = $request->input('query');
         // $personals = Personal::search($query)->get();
-        $personals = Personal::where('nombre','LIKE',"%$query%")
+        $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
         ->orWhere('apellidopaterno','LIKE',"%$query%")
         ->orWhere('apellidomaterno','LIKE',"%$query%")
         ->orWhere('rfc','LIKE',"%$query%")
@@ -120,12 +120,12 @@ class PersonalController extends Controller
     }
 
     public function clientes(){
-        $personals = Personal::where('tipo','=','Cliente')->get();
+        $personals = Personal::sortable()->where('tipo','=','Cliente')->get();
         return view('personal.index',['personals'=>$personals]);
     }
 
     public function prospectos(){
-        $personals = Personal::where('tipo','=','Prospecto')->get();
+        $personals = Personal::sortable()->where('tipo','=','Prospecto')->get();
         return view('personal.index',['personals'=>$personals]);
     }
 }
