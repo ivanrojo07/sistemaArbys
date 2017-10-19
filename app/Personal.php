@@ -2,12 +2,16 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use App\DatosLab;
 
 class Personal extends Model
 {
+
+    use Searchable;
     //
+    protected $table='personals';
    /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +45,9 @@ class Personal extends Model
     public function beneficiarios(){
         return $this->hasMany('App\Beneficiarios');
     }
+
+    public function toSearchableArray(){
+        return $this->toArray();
+    }
+
 }

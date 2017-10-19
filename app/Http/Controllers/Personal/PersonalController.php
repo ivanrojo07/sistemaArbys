@@ -98,4 +98,34 @@ class PersonalController extends Controller
     {
         //
     }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+        // $personals = Personal::search($query)->get();
+        $personals = Personal::where('nombre','LIKE',"%$query%")
+        ->orWhere('apellidopaterno','LIKE',"%$query%")
+        ->orWhere('apellidomaterno','LIKE',"%$query%")
+        ->orWhere('rfc','LIKE',"%$query%")
+        ->orWhere('mail','LIKE',"%$query%")
+        ->get();
+        // dd($personals);
+        return view('personal.index',['personals'=>$personals]);
+        //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        //motor de busquedas
+        // $message = Message::search($query)->get();
+        // $message->load('user');
+        // return view('messages.index', [
+        //     'messages' => $message
+        //     ]);
+    }
+
+    public function clientes(){
+        $personals = Personal::where('tipo','=','Cliente')->get();
+        return view('personal.index',['personals'=>$personals]);
+    }
+
+    public function prospectos(){
+        $personals = Personal::where('tipo','=','Prospecto')->get();
+        return view('personal.index',['personals'=>$personals]);
+    }
 }
