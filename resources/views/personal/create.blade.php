@@ -3,16 +3,17 @@
 		<div class="container" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('personals.store') }}" name="form">
 				{{ csrf_field() }}
-				<div role="application" class="wizard clearfix" >
+				<div role="application" class="panel panel-group" >
 					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
 						<li role="presentation" tabindex="0" class="active" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Datos Generales:</a></li>
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección:</a></li>
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
 					</ul>
-					<div id="tab1" {{-- style="display: inline;" --}} class="pestana" style="display: inline;">
+					<div id="tab1" {{-- style="display: inline;" --}} class="pestana panel-default" style="display: inline;">
+						<div class="panel-heading"><legend>Información general:</legend></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<legend>Información general:</legend>
+								
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
@@ -52,10 +53,10 @@
 			  					</div>
 							</div></div>
 					</div>
-					<div id="tab2" {{-- style="display: none;" --}} class="pestana">
+					<div id="tab2" {{-- style="display: none;" --}} class="pestana panel-default">
+						<div class="panel-heading"><legend>Dirección/Domicilio:</legend></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<legend>Dirección/Domicilio:</legend>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
 									<label class="control-label" for="calle">Calle:</label>
 									<input type="text" class="form-control" id="calle" name="calle">
@@ -111,11 +112,10 @@
 							</div>
 						</div>
 					</div>
-					<div  id="tab3" {{-- style="display: none;" --}} class="pestana">
+					<div  id="tab3" {{-- style="display: none;" --}} class="pestana panel-default">
+						<div class="panel-heading"><legend>Datos personales:</legend></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<legend>Datos personales:</legend>
-								
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="mail">Correo:</label>
 									<input type="email" class="form-control" id="mail" name="mail">

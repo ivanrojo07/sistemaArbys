@@ -25,6 +25,15 @@ function formulario(elemento){
 //    $("#tab").tabs();
 
 // });
+
+$(function(){
+              $('.dropdown-submenu a.test').on("click", function(e){
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+              });
+            });
+
 $(function() {
    $("li").click(function() {
       // remove classes from all

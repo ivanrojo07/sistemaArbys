@@ -16,6 +16,7 @@ class PersonalController extends Controller
     public function index()
     {
         $personals = Personal::sortable()->paginate(10);
+        // dd($personals);
         return view('personal.index',['personals'=>$personals]);
     }
     /**
@@ -107,7 +108,7 @@ class PersonalController extends Controller
         ->orWhere('apellidomaterno','LIKE',"%$query%")
         ->orWhere('rfc','LIKE',"%$query%")
         ->orWhere('mail','LIKE',"%$query%")
-        ->get();
+        ->paginate(10);
         // dd($personals);
         return view('personal.index',['personals'=>$personals]);
         //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
@@ -120,12 +121,12 @@ class PersonalController extends Controller
     }
 
     public function clientes(){
-        $personals = Personal::sortable()->where('tipo','=','Cliente')->get();
+        $personals = Personal::sortable()->where('tipo','=','Cliente')->paginate(10);
         return view('personal.index',['personals'=>$personals]);
     }
 
     public function prospectos(){
-        $personals = Personal::sortable()->where('tipo','=','Prospecto')->get();
+        $personals = Personal::sortable()->where('tipo','=','Prospecto')->paginate(10);
         return view('personal.index',['personals'=>$personals]);
     }
 }
