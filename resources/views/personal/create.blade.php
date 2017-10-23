@@ -10,7 +10,7 @@
 						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
 					</ul>
 					<div id="tab1" {{-- style="display: inline;" --}} class="pestana panel-default" style="display: inline;">
-						<div class="panel-heading"><legend>Información general:</legend></div>
+						<div class="panel-heading">Información general:</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								
@@ -54,7 +54,7 @@
 							</div></div>
 					</div>
 					<div id="tab2" {{-- style="display: none;" --}} class="pestana panel-default">
-						<div class="panel-heading"><legend>Dirección/Domicilio:</legend></div>
+						<div class="panel-heading">Dirección/Domicilio:</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
@@ -113,7 +113,7 @@
 						</div>
 					</div>
 					<div  id="tab3" {{-- style="display: none;" --}} class="pestana panel-default">
-						<div class="panel-heading"><legend>Datos personales:</legend></div>
+						<div class="panel-heading">Datos personales:</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
