@@ -37,6 +37,4 @@ function sendPasswordResetNotification($token)
     $this->notify(new MailResetPasswordToken($token));
 }
 
-public function datosLab() {
-    return $this->hasOne('DatosLab\Cliente');
-} 
+
