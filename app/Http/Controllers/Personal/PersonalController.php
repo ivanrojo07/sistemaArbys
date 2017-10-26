@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Personal;
 
-use App\Personal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Personal;
 
 class PersonalController extends Controller
 {
@@ -15,22 +15,19 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        //
         $personals = Personal::sortable()->paginate(10);
-        return view('clientes.index', ['personals'=>$personals]);
+        // dd($personals);
+        return view('personal.index',['personals'=>$personals]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
         //
-        return view('clientes.create');
+        return view('personal.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,33 +37,40 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
         //
-        $cliente = Personal::create($request->all());
-        return redirect()->route('clientes.direccionfisica.create',['personal'=>$cliente]);
+        Personal::create($request->all());
+        if ($request['tipo'] == 'Cliente') {
+            return redirect('personals');
+        }
+        if($request['tipo'] == 'Prospecto') {
+            return redirect('personals');
+        }
+        // return redirect('/personals');
+        // return response()->json($request['tipo']);
     }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function show(Personal $cliente)
+    public function show(Personal $personal)
     {
-        return view('clientes.view',['personal'=>$cliente]);
+        //
+        // var_dump($personal->id);
+        return view('personal.view',['personal'=>$personal]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personal $cliente)
+    public function edit(Personal $personal)
     {
         //
-        return view('clientes.edit',['personal'=>$cliente]);
+        // dd($personal);
+        return view('personal.edit',['personal'=>$personal]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -74,33 +78,55 @@ class PersonalController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Personal $cliente)
+    public function update(Request $request, Personal $personal)
     {
         //
-        $cliente->update($request->all());
-        return redirect()->route('clientes.index');
+        // dd($request);
+        $personal->update($request->all());
+        // Personal::where('id'=>$personal->id)->update($request->all());
+        return redirect('/personals');
+        // $personal->fill($request->all());
+        // $personal->save();
+        // return redirect('personals');
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Personal $cliente)
+    public function destroy(Personal $personal)
     {
         //
     }
-    public function buscar(Request $request){
+
+    public function search(Request $request){
         $query = $request->input('query');
-        $clientes = Personal::sortable()->where('nombre','LIKE',"%$query%")
+        // $personals = Personal::search($query)->get();
+        $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
         ->orWhere('apellidopaterno','LIKE',"%$query%")
         ->orWhere('apellidomaterno','LIKE',"%$query%")
-        ->orWhere('razonsocial','LIKE','%$query%')
         ->orWhere('rfc','LIKE',"%$query%")
-        ->orWhere('alias','LIKE',"%$query%")
-        ->orWhere('tipopersona','LIKE',"%$query%")
+        ->orWhere('mail','LIKE',"%$query%")
         ->paginate(10);
-        return view('clientes.index',['personals'=>$clientes]);
+        // dd($personals);
+        return view('personal.index',['personals'=>$personals]);
+        //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        //motor de busquedas
+        // $message = Message::search($query)->get();
+        // $message->load('user');
+        // return view('messages.index', [
+        //     'messages' => $message
+        //     ]);
+    }
+
+    public function clientes(){
+        $personals = Personal::sortable()->where('tipo','=','Cliente')->paginate(10);
+        return view('personal.index',['personals'=>$personals]);
+    }
+
+    public function prospectos(){
+        $personals = Personal::sortable()->where('tipo','=','Prospecto')->paginate(10);
+        return view('personal.index',['personals'=>$personals]);
     }
 }
