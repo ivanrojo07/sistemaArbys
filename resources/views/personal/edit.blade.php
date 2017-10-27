@@ -4,157 +4,161 @@
 			<form role="form" id="form-cliente" method="POST" action="{{ route('personals.update',['personal'=>$personal]) }}" name="form">
 					{{ csrf_field() }}
 				<input type="hidden" name="_method" value="PUT">
-				<div role="application" class="wizard clearfix" >
-					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-						<li role="presentation" tabindex="0" class="active" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Datos Generales:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
-					</ul>
-					<div id="tab1" class="pestana" style="display: inline;">
+				<div role="application" class="panel panel-group" >
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Datos del Personal:</h4></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								<legend>Información general:</legend>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    								<label class="control-label" for="tipo">Tipo de cliente:</label>
+			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
-			    						<option id="Prospecto" value="Prospecto" @if ($personal->tipo == "Prospecto")
-			    							selected="selected" 
-			    						@endif>Prospecto</option>
-			    						<option id="Cliente" value="Cliente" @if ($personal->tipo == "Cliente")
-			    							selected="selected" 
-			    						@endif>Cliente</option>
+			    						@if ($personal->tipo == 'Prospecto')
+			    							{{-- true expr --}}
+			    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
+			    						@else
+			    							{{-- false expr --}}
+			    						<option id="Cliente" value="Cliente" value="selected">Cliente</option>
+			    						@endif
 			    					</select>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
 			    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
-			    						<option id="Fisica" value="Fisica" @if ($personal->tipopersona == "Fisica")
-			    							selected="selected"
-			    						@endif >Fisica</option>
-			    						<option id="Moral" value="Moral" @if ($personal->tipopersona == "Moral")
-			    							selected="selected"
-			    						@endif >Moral</option>
+			    						@if ($personal->tipopersona)
+			    						
+			    							{{-- true expr --}}
+			    						<option id="Fisica" value="Fisica" selected="selected">Fisica</option>
+			    						@else
+			    							{{-- false expr --}}
+			    						<option id="Moral" value="Moral" selected="selected">Moral</option>
+			    						@endif
 			    					</select>
-			  					</div>
-			  				</div>
-			  				<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombre">Nombre(s):</label>
+			  					</div>	
+							</div>
+							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="nombre">* Nombre(s):</label>
 			  						<input type="text" class="form-control" id="nombre" name="nombre" value="{{ $personal->nombre }}">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-			  						<input type="text" class="form-control" id="apellidopaterno" value="{{ $personal->apellidopaterno }}" name="apellidopaterno">
+			  						<label class="control-label" for="apellidopaterno">* Apellido Paterno:</label>
+			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" value="{{ $personal->apellidopaterno }}">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-			  						<input type="text" class="form-control" id="apellidomaterno" value="{{ $personal->apellidomaterno }}" name="apellidomaterno">
+			  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno" value="{{ $personal->apellidomaterno }}">
 			  					</div>
-			  				</div>
-			  				<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
+							</div>
+							<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="razonsocial">Razon Social:</label>
+
+			  						<label class="control-label" for="razonsocial">* Razon Social:</label>
 			  						<input type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{ $personal->razonsocial }}">
 			  					</div>
 							</div>
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="mail">* Correo:</label>
+									<input type="email" class="form-control" id="mail" name="mail" value="{{ $personal->mail }}" required>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="rfc">* RFC:</label>
+									<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $personal->rfc }}" required>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="telefonofijo">* Número de Telefono:</label>
+									<input type="text" class="form-control" id="telefonofijo" name="telefonofijo" value="{{ $personal->telefonofijo }}" required>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="telefonocel">* Número Celular:</label>
+									<input type="text" class="form-control" id="telefonocel" name="telefonocel" value="{{ $personal->telefonocel }}" required>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
+									<label class="control-label" for="estadocivil">Estado Civil:</label>
+									<select type="select" class="form-control" id="estadocivil" name="estadocivil">
+										<option value="" selected="selected">seleccionar</option>
+										@if ($personal->estadocivil == 'Casado')
+											{{-- true expr --}}
+			    						<option value="Casado" selected="selected">Casado</option>
+										@else
+											{{-- false expr --}}
+			    						<option value="Soltero" selected="selected">Soltero</optio>
+										@endif
+			    					</select>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div id="tab2" class="pestana">
+				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+					<li class="active"><a href="#tab1">Dirección/Domicilio:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Datos Laborales:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Referencias Personales:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Datos de Beneficiarios:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Productos:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">C.R.M.:</a></li>
+				</ul>
+				<div class="panel-default">
+					<div class="panel-heading">Dirección/Domicilio:</div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
-							<legend>Dirección/Domicilio:</legend>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-								<label class="control-label" for="calle">Calle:</label>
-								<input type="text" class="form-control" id="calle" value="{{ $personal->calle }}" name="calle">
+								<label class="control-label" for="calle">* Calle:</label>
+								<input type="text" class="form-control" id="calle" name="calle" value="{{ $personal->calle }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-								<label class="control-label" for="numext" >Número Exterior:</label>
-								<input type="text" class="form-control" id="numext" value="{{ $personal->numext }}" name="numext">
+								<label class="control-label" for="numext" >* Número Exterior:</label>
+								<input type="text" class="form-control" id="numext" name="numext" value="{{ $personal->numext }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="numinter">Número Interior:</label>
-								<input type="text" class="form-control" id="numinter" value="{{ $personal->numinter }}" name="numinter">
+								<input type="text" class="form-control" id="numinter" name="numinter" value="{{ $personal->numinter }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="cp">Código Postal:</label>
-								<input type="text" class="form-control" id="cp" value="{{ $personal->cp }}" name="cp">
+								<input type="text" class="form-control" id="cp" name="cp" value="{{ $personal->cp }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="colonia">Colonia:</label>
-								<input type="text" class="form-control" id="colonia" value="{{ $personal->colonia }}" name="colonia">
+								<label class="control-label" for="colonia">* Colonia:</label>
+								<input type="text" class="form-control" id="colonia" name="colonia" value="{{ $personal->colonia }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="municipio">Municipio/Delegación:</label>
-								<input type="text" class="form-control" id="municipio" value="{{ $personal->municipio }}" name="municipio">
+								<label class="control-label" for="municipio">* Municipio/Delegación:</label>
+								<input type="text" class="form-control" id="municipio" name="municipio" value="{{ $personal }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="ciudad">Ciudad:</label>
-								<input type="text" class="form-control" id="ciudad" value="{{ $personal->ciudad }}" name="ciudad">
+								<label class="control-label" for="ciudad">* Ciudad:</label>
+								<input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $personal->ciudad }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="estado">Estado:</label>
-								<input type="text" class="form-control" id="estado" value="{{ $personal->estado }}" name="estado">
+								<label class="control-label" for="estado">* Estado:</label>
+								<input type="text" class="form-control" id="estado" name="estado" value="{{ $personal->estado }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="calle1">Entre calle:</label>
-								<input type="text" class="form-control" id="calle1" value="{{ $personal->calle1 }}" name="calle1">
+								<input type="text" class="form-control" id="calle1" name="calle1" value="{{ $personal->calle1 }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="calle2">Y calle:</label>
-								<input type="text" class="form-control" id="calle2" value="{{ $personal->calle2 }}" name="calle2">
+								<input type="text" class="form-control" id="calle2" name="calle2" value="{{ $personal->calle2 }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="referencia">Referencia:</label>
-								<input type="text" class="form-control" id="referencia" value="{{ $personal->referencia }}" name="referencia">
+								<input type="text" class="form-control" id="referencia" name="referencia" value="{{ $personal->referencia }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente" style="display:none;">
 								<label class="control-label" for="recidir">Tiempo recidiendo:</label>
-								<input type="date" class="form-control" id="recidir" value="{{ $personal->recidir }}" name="recidir">
+								<input type="date" class="form-control" id="recidir" name="recidir" value="{{ $personal->recidir }}">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente1" style="display:none;">
 								<label class="control-label" for="vivienda">Tipo de vivienda:</label>
-								<input type="text" class="form-control" id="vivienda" value="{{ $personal->vivienda }}" name="vivienda">
+								<input type="text" class="form-control" id="vivienda" name="vivienda" value="{{ $personal->vivienda }}">
 							</div>
 						</div>
+	  				<button type="submit" class="btn btn-default">Guardar</button>
+	  				<p><strong>*Campo requerido</strong></p>
 					</div>
 				</div>
-				<div id="tab3" class="pestana">
-					<div class="panel-body">
-						<div class="col-md-12 offset-md-2 mt-3">
-							<legend>Datos personales:</legend>
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="mail">Correo:</label>
-								<input type="email" class="form-control" id="mail" value="{{ $personal->mail }}" name="mail">
-							</div>
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="rfc">RFC:</label>
-								<input type="text" class="form-control" id="rfc" value="{{ $personal->rfc }}" name="rfc">
-							</div>
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="telefonofijo">Número de Telefono:</label>
-								<input type="text" class="form-control" id="telefonofijo" value="{{ $personal->telefonofijo }}" name="telefonofijo">
-							</div>
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="telefonocel">Número Celular:</label>
-								<input type="text" class="form-control" id="telefonocel" value="{{ $personal->telefonocel }}" name="telefonocel">
-							</div>
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
-								<label class="control-label" for="estadocivil">Estado Civil:</label>
-								<select type="select" class="form-control" id="estadocivil" value="{{ $personal->estadocivil }}" name="estadocivil">
-		    						<option value="Casado" @if ($personal->estadocivil == "Casado")
-		    							selected="selected" 
-		    						@endif>Casado</option>
-		    						<option value="Soltero" @if ($personal->estadocivil == "Soltero")
-		    							selected="selected" 
-		    						@endif>Soltero</optio>
-		    					</select>
-							</div>
-						</div>
-					</div>
-				</div>
-  				<button type="submit" class="btn btn-default">Guardar</button>
-				</div>
+  				</div>
 			</form>
 		</div>
 	@endsection

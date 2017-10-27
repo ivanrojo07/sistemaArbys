@@ -17,6 +17,7 @@ class CreatePersonalsTable extends Migration
             $table->increments('id');
             $table->enum('tipo', ['Prospecto','Cliente']);
             $table->enum('tipopersona',['Fisica','Moral']);
+            $table->string('nombre')->nullable();
             $table->string('apellidopaterno')->nullable();
             $table->string('apellidomaterno')->nullable();
             $table->string('razonsocial')->nullable();

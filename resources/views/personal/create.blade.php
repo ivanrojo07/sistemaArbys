@@ -138,6 +138,7 @@
 							</div>
 						</div>
 	  				<button type="submit" class="btn btn-default">Guardar</button>
+	  				<p><strong>*Campo requerido</strong></p>
 					</div>
 				</div>
   				</div>
