@@ -4,16 +4,10 @@
 			<form role="form" id="form-cliente" method="POST" action="{{ route('personals.store') }}" name="form">
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group" >
-					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-						<li role="presentation" tabindex="0" class="active" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="#tab1" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Datos Generales:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Personales:</a></li>
-					</ul>
-					<div id="tab1" {{-- style="display: inline;" --}} class="pestana panel-default" style="display: inline;">
-						<div class="panel-heading">Información general:</div>
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Datos del Personal:</h4></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
-								
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
@@ -42,79 +36,14 @@
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
 			  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno">
 			  					</div>
-			
 							</div>
-
 							<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
 			  						<label class="control-label" for="razonsocial">Razon Social:</label>
 			  						<input type="text" class="form-control" id="razonsocial" name="razonsocial">
 			  					</div>
-							</div></div>
-					</div>
-					<div id="tab2" {{-- style="display: none;" --}} class="pestana panel-default">
-						<div class="panel-heading">Dirección/Domicilio:</div>
-						<div class="panel-body">
-							<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-									<label class="control-label" for="calle">Calle:</label>
-									<input type="text" class="form-control" id="calle" name="calle">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-									<label class="control-label" for="numext" >Número Exterior:</label>
-									<input type="text" class="form-control" id="numext" name="numext">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="numinter">Número Interior:</label>
-									<input type="text" class="form-control" id="numinter" name="numinter">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="cp">Código Postal:</label>
-									<input type="text" class="form-control" id="cp" name="cp">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="colonia">Colonia:</label>
-									<input type="text" class="form-control" id="colonia" name="colonia">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="municipio">Municipio/Delegación:</label>
-									<input type="text" class="form-control" id="municipio" name="municipio">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="ciudad">Ciudad:</label>
-									<input type="text" class="form-control" id="ciudad" name="ciudad">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="estado">Estado:</label>
-									<input type="text" class="form-control" id="estado" name="estado">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="calle1">Entre calle:</label>
-									<input type="text" class="form-control" id="calle1" name="calle1">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="calle2">Y calle:</label>
-									<input type="text" class="form-control" id="calle2" name="calle2">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="referencia">Referencia:</label>
-									<input type="text" class="form-control" id="referencia" name="referencia">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente" style="display:none;">
-									<label class="control-label" for="recidir">Tiempo recidiendo:</label>
-									<input type="date" class="form-control" id="recidir" name="recidir">
-								</div>
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente1" style="display:none;">
-									<label class="control-label" for="vivienda">Tipo de vivienda:</label>
-									<input type="text" class="form-control" id="vivienda" name="vivienda">
-								</div>
 							</div>
-						</div>
-					</div>
-					<div  id="tab3" {{-- style="display: none;" --}} class="pestana panel-default">
-						<div class="panel-heading">Datos personales:</div>
-						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="mail">Correo:</label>
@@ -143,7 +72,72 @@
 							</div>
 						</div>
 					</div>
+				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+					<li class="active"><a href="#tab1">Dirección Fiscal:</a></li>
+						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="presentation" tabindex="-1" class="ui-tabs-anchor disabled" id="ui-id-2">Dirección Fisica:</a></li>
+						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor disabled" id="ui-id-3">Contacto:</a></li>
+						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="presentation" tabindex="-1" class="ui-tabs-anchor disabled" id="ui-id-3">Datos Generales:</a></li>
+				</ul>
+				<div class="panel-default">
+					<div class="panel-heading">Dirección:</div>
+					<div class="panel-body">
+						<div class="col-md-12 offset-md-2 mt-3">
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
+								<label class="control-label" for="calle">Calle:</label>
+								<input type="text" class="form-control" id="calle" name="calle">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
+								<label class="control-label" for="numext" >Número Exterior:</label>
+								<input type="text" class="form-control" id="numext" name="numext">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="numinter">Número Interior:</label>
+								<input type="text" class="form-control" id="numinter" name="numinter">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="cp">Código Postal:</label>
+								<input type="text" class="form-control" id="cp" name="cp">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="colonia">Colonia:</label>
+								<input type="text" class="form-control" id="colonia" name="colonia">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="municipio">Municipio/Delegación:</label>
+								<input type="text" class="form-control" id="municipio" name="municipio">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="ciudad">Ciudad:</label>
+								<input type="text" class="form-control" id="ciudad" name="ciudad">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="estado">Estado:</label>
+								<input type="text" class="form-control" id="estado" name="estado">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="calle1">Entre calle:</label>
+								<input type="text" class="form-control" id="calle1" name="calle1">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="calle2">Y calle:</label>
+								<input type="text" class="form-control" id="calle2" name="calle2">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<label class="control-label" for="referencia">Referencia:</label>
+								<input type="text" class="form-control" id="referencia" name="referencia">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente" style="display:none;">
+								<label class="control-label" for="recidir">Tiempo recidiendo:</label>
+								<input type="date" class="form-control" id="recidir" name="recidir">
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente1" style="display:none;">
+								<label class="control-label" for="vivienda">Tipo de vivienda:</label>
+								<input type="text" class="form-control" id="vivienda" name="vivienda">
+							</div>
+						</div>
 	  				<button type="submit" class="btn btn-default">Guardar</button>
+					</div>
+				</div>
   				</div>
 			</form>
 		</div>

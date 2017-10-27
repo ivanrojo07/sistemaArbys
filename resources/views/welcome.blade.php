@@ -15,6 +15,7 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
@@ -50,7 +51,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70">
+                        {{-- <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70"> --}}
                         {{-- {{ config('app.name', 'Arbys') }} --}}
                     </a>
             </div>
