@@ -23,7 +23,7 @@ class Personal extends Model
     protected $fillable = [
 
 
-        'id','tipo', 'tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
+        'id','tipo', 'tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'razonsocial', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
 
     ];
 

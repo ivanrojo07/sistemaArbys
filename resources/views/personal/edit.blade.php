@@ -12,26 +12,18 @@
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
-			    						@if ($personal->tipo == 'Prospecto')
-			    							{{-- true expr --}}
 			    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
-			    						@else
-			    							{{-- false expr --}}
 			    						<option id="Cliente" value="Cliente" value="selected">Cliente</option>
-			    						@endif
+			    						
 			    					</select>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
 			    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
-			    						@if ($personal->tipopersona)
 			    						
 			    							{{-- true expr --}}
 			    						<option id="Fisica" value="Fisica" selected="selected">Fisica</option>
-			    						@else
-			    							{{-- false expr --}}
-			    						<option id="Moral" value="Moral" selected="selected">Moral</option>
-			    						@endif
+			    						<option id="Moral" value="Moral" >Moral</option>
 			    					</select>
 			  					</div>	
 							</div>
@@ -123,7 +115,7 @@
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="municipio">* Municipio/Delegación:</label>
-								<input type="text" class="form-control" id="municipio" name="municipio" value="{{ $personal }}" required>
+								<input type="text" class="form-control" id="municipio" name="municipio" value="{{ $personal->municipio }}" required>
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="ciudad">* Ciudad:</label>

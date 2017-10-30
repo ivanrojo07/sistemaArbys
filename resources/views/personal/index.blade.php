@@ -52,6 +52,6 @@
 			@endforeach
 		</table>
 	</div>
-	{{ $personals->links()}}
+	{{ $personals->links() }}
 </div>
 @endsection

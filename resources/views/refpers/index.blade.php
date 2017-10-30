@@ -1,8 +1,16 @@
-@extends('layouts.app')
-	@section('content')
-	<div class="container theme-showcase">
-		<div class="jumbotron">
-			<h2><span class="label label-default">Datos Laborales:</span></h2>
+@extends('layouts.infopersonal')
+	@section('personal')
+	<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+    	<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#">Dirección/Domicilio:</a></li>
+    	<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Datos Laborales:</a></li>
+    	<li class="active"><a href="" class="ui-tabs-anchor">Referencias Personales:</a></li>
+    	<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Datos de Beneficiarios:</a></li>
+    	<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Productos:</a></li>
+    	<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">C.R.M.:</a></li>
+  	</ul>
+	<div class="panel-default">
+		<div class="panel-heading">Referencias Personales</div>
+		<div class="panel-body">
 			@if (count($refpersonals) == 0)
 				<p>Aún no tienes referencias personales</p>
 			@endif

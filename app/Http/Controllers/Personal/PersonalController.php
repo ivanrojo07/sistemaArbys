@@ -37,12 +37,12 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
         //
-        Personal::create($request->all());
+        $personal = Personal::create($request->all());
         if ($request['tipo'] == 'Cliente') {
-            return redirect('personals');
+            return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
         }
         if($request['tipo'] == 'Prospecto') {
-            return redirect('personals');
+            return redirect()->route('personals.index');
         }
         // return redirect('/personals');
         // return response()->json($request['tipo']);
@@ -81,9 +81,9 @@ class PersonalController extends Controller
     public function update(Request $request, Personal $personal)
     {
         //
-        // dd($request);
+        // dd($request->all());
         $personal->update($request->all());
-        // Personal::where('id'=>$personal->id)->update($request->all());
+        // Personal::where('id',$personal->id)->update($request->all());
         return redirect('/personals');
         // $personal->fill($request->all());
         // $personal->save();
