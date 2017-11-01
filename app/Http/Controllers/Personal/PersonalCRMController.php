@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Personal;
 
+use App\CRM;
+use App\Http\Controllers\Controller;
 use App\Personal;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PersonalCRMController extends Controller
 {
@@ -13,9 +14,14 @@ class PersonalCRMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Personal $personal)
     {
         //
+        
+        $crms = $personal->crm;
+        return view('crm.index',['personal'=>$personal, 'crms'=>$crms]);
+        
+
     }
 
     /**
@@ -34,9 +40,12 @@ class PersonalCRMController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Personal $personal)
     {
         //
+        // dd($request->all());
+        $crm = CRM::create($request->all());
+        return redirect()->route('personals.crm.index',['personal'=>$personal]);
     }
 
     /**

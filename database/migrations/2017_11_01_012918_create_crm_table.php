@@ -20,8 +20,8 @@ class CreateCrmTable extends Migration
             $table->date('fecha_act');
             $table->date('fecha_cont');
             $table->string('hora');
-            $table->text('acuerdos');
-            $table->text('observaciones');
+            $table->text('acuerdos')->nullable();
+            $table->text('observaciones')->nullable();
             $table->enum('tipo_cont',['Mail','Telefono','Cita','Whatsapp','Otro']);
             $table->timestamps();
         });
