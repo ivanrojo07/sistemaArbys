@@ -67,6 +67,7 @@
 									<th>Forma de contacto</th>
 									<th>Acuerdos</th>
 									<th>Observaciones</th>
+									<th>Operación</th>
 								</tr>
 							</thead>
 							@foreach ($crms as $crm)
@@ -76,8 +77,9 @@
 									<td>{{$crm->fecha_cont}}</td>
 									<td>{{$crm->hora}}</td>
 									<td>{{$crm->tipo_cont}}</td>
-									<td>{{$crm->acuerdos}}</td>
-									<td>{{$crm->observaciones}}</td>
+									<td>{{substr($crm->acuerdos,0,50)}}...</td>
+									<td>{{substr($crm->observaciones,0,50)}}...</td>
+									<td><a class="btn btn-primary" href="">Ver</a></td>
 								</tr>
 							@endforeach
 						</table>

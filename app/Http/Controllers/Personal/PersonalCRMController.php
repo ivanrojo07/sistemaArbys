@@ -54,9 +54,11 @@ class PersonalCRMController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function show(Personal $personal)
+    public function show(Personal $personal, $crm)
     {
         //
+        $crm = CRM::findOrFail($crm);
+        return view('crm.view',['personal'=>$personal,'crm'=>$crm]);
     }
 
     /**
