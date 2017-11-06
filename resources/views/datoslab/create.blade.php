@@ -73,7 +73,7 @@
               <input type="text" class="form-control" id="ingresosmesempresa" name="ingresosmesempresa">
             </div>
         </div>
-          <button type="submit" class="btn btn-default">Guardar</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
       </form>
     </div>
   </div>

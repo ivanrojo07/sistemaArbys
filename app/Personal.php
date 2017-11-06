@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Personal extends Model
 {
 
-    use Searchable, Sortable;
+    use Sortable;
     //
     protected $table='personals';
 

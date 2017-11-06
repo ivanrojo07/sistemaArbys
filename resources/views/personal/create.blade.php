@@ -129,7 +129,7 @@
 								<input type="text" class="form-control" id="referencia" name="referencia">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente" style="display:none;">
-								<label class="control-label" for="recidir">Tiempo recidiendo:</label>
+								<label class="control-label" for="recidir">Tiempo residiendo:</label>
 								<input type="date" class="form-control" id="recidir" name="recidir">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente1" style="display:none;">

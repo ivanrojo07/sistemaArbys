@@ -102,7 +102,7 @@ class PersonalController extends Controller
 
     public function search(Request $request){
         $query = $request->input('query');
-        // $personals = Personal::search($query)->get();
+                // $personals = Personal::search($query)->get();
         $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
         ->orWhere('apellidopaterno','LIKE',"%$query%")
         ->orWhere('apellidomaterno','LIKE',"%$query%")
