@@ -101,14 +101,47 @@ class PersonalController extends Controller
     }
 
     public function search(Request $request){
-        $query = $request->input('query');
-        // $personals = Personal::search($query)->get();
-        $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
+        (string)$query = $request->input('query');
+        if (($request->cliente == "on" && $request->prospecto == "on") || (!$request->cliente && !$request->prospecto)) {
+            # code...
+            $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
         ->orWhere('apellidopaterno','LIKE',"%$query%")
         ->orWhere('apellidomaterno','LIKE',"%$query%")
+        ->orWhere('razonsocial','LIKE',"%$query%")
         ->orWhere('rfc','LIKE',"%$query%")
         ->orWhere('mail','LIKE',"%$query%")
         ->paginate(10);
+        } else {
+            # code...
+        if ($request->cliente == "on") {
+            # code...
+            $personals = Personal::sortable()->where('tipo','=','Cliente')
+            ->where(function($busqueda) use($query){
+                $busqueda->where('nombre','LIKE',"%$query%")
+                ->orWhere('apellidopaterno','LIKE',"%$query%")
+                ->orWhere('apellidomaterno','LIKE',"%$query%")
+                ->orWhere('razonsocial','LIKE',"%$query%")
+                ->orWhere('rfc','LIKE',"%$query%")
+                ->orWhere('mail','LIKE',"%$query%");
+            })->paginate(10);
+        }
+        elseif ($request->prospecto == 'on') {
+             # code...
+            $personals = Personal::sortable()->where('tipo','=','Prospecto')
+            ->where(function($busqueda) use($query){
+                $busqueda->where('nombre','LIKE',"%$query%")
+                ->orWhere('apellidopaterno','LIKE',"%$query%")
+                ->orWhere('apellidomaterno','LIKE',"%$query%")
+                ->orWhere('razonsocial','LIKE',"%$query%")
+                ->orWhere('rfc','LIKE',"%$query%")
+                ->orWhere('mail','LIKE',"%$query%");
+            })->paginate(10);
+         } 
+        }
+        
+        
+                // $personals = Personal::search($query)->get();
+        
         // dd($personals);
         return view('personal.index',['personals'=>$personals]);
         //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();

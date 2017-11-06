@@ -32,7 +32,7 @@ class CreatePersonalsTable extends Migration
             $table->string('calle1')->nullable();
             $table->string('calle2')->nullable();
             $table->string('referencia')->nullable();
-            $table->date('recidir')->nullable();
+            $table->string('recidir')->nullable();
             $table->string('vivienda')->nullable();
             $table->string('mail');
             $table->string('rfc');
