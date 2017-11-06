@@ -26,11 +26,11 @@
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="nombre">* Nombre(s):</label>
-			  						<input type="text" class="form-control" id="nombre" name="nombrepers">
+			  						<input type="text" class="form-control" id="idnombre" name="nombrepers" required="">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidopaterno">* Apellido Paterno:</label>
-			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno">
+			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
@@ -51,7 +51,7 @@
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="rfc">* RFC:</label>
-									<input type="text" class="form-control" id="rfc" name="rfc" required>
+									<input type="text" class="form-control" id="varrfc" name="rfc" required minlength="12" maxlength="13" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" placeholder="Ingrese 13 caracteres" title="Siga el formato 4 letras seguidas por 6 digitos y 3 caracteres">
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="telefonofijo">* Número de Telefono:</label>
@@ -66,7 +66,7 @@
 									<select type="select" class="form-control" id="estadocivil" name="estadocivil">
 										<option value="" selected="selected">seleccionar</option>
 			    						<option value="Casado">Casado</option>
-			    						<option value="Soltero">Soltero</optio>
+			    						<option value="Soltero">Soltero</option>
 			    					</select>
 								</div>
 							</div>
@@ -137,7 +137,7 @@
 								<input type="text" class="form-control" id="vivienda" name="vivienda">
 							</div>
 						</div>
-	  				<button type="submit" class="btn btn-default">Guardar</button>
+	  				<button type="submit" class="btn btn-success">Guardar</button>
 	  				<p><strong>*Campo requerido</strong></p>
 					</div>
 				</div>

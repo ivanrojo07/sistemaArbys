@@ -14,6 +14,14 @@
 			</form>
 		</div>
 		<div class="col-lg-6">
+			<label>
+				<input id="boton-toggle" href="/clientes" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios">
+			Clientes
+			</label>
+			<label>
+				<input href="/prospectos" id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios">Prospectos
+			</label>
+
 			<a class="btn btn-success" href="/clientes"><i class="fa fa-user" aria-hidden="true"></i> Clientes</a>
 			<a class="btn btn-success" href="/prospectos"><i class="fa fa-user" aria-hidden="true"></i> Prospectos</a>
 		</div>
