@@ -5,7 +5,6 @@ namespace App;
 use App\DatosLab;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
-use Laravel\Scout\Searchable;
 
 class Personal extends Model
 {
