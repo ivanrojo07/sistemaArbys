@@ -9,7 +9,7 @@
 	    @endif
 	    <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.producto.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Productos:</a></li>
 	    <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">C.R.M.:</a></li>
-  </ul>
+  	</ul>
 	<div class="panel-default">
 		<div class="panel-heading">Referencias Personales</div>
 		<div class="panel-body">
