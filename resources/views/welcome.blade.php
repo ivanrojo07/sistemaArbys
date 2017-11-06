@@ -5,15 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Arbys</title>
+        <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link rel="text/javascript" href="{{ URL::asset('assets/js/jquery.js') }}" />
-<link rel="text/javascript" href="{{ URL::asset('assets/js/bootstrap.min.js') }}" />
+{{--     <script href="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+ --}}    <!-- Styles -->
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    {{-- Latest compiled and minified JavaScript --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+     <!-- Custom Fonts -->
+    <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 <style>
 .dropdown-submenu {
     position: relative;
@@ -39,7 +50,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">{{config('app.name', 'Laravel')}}</a>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                        {{-- <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70"> --}}
+                        {{-- {{ config('app.name', 'Arbys') }} --}}
+                    </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,61 +65,61 @@
                     </li>
                     @else
                     <li>
-                        <a href="{{ url('/login') }}">Login</a>
+                        <a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
                     </li>
                     <li>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/register') }}"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</a>
                     @endif
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Clientes<span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ url('/personals/create')}}">Alta</a>
-                                <a href="{{ url('/personals') }}">Busqueda</a>
-                                <a href="#">Seguimiento</a>    
+                                <a href="{{ url('/personals/create')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="{{ url('/personals') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> Seguimiento</a>    
                             </li>                     
                         </ul>
                     </li>
                     
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Oficinas <span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <i class="fa fa-building" aria-hidden="true"></i> Oficinas <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#">Alta</a>
-                                <a href="#">Busqueda</a>  
+                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
                             </li>                     
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Recursos Humanos <span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#">Alta</a>
-                                <a href="#">Busqueda</a>    
+                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
                             </li>                     
                         </ul>
                     </li>
                     
                     <li class="dropdown-submenu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Productos <span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
                       <li class="dropdown-submenu">
-                        <a class="test" href="#">Vehiculos <span class="caret"></span></a>
+                        <a class="test" href="#"><i class="fa fa-car" aria-hidden="true"></i> Vehiculos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Alta</a></li>
-                          <li><a href="#">Busqueda</a></li>
+                          <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
+                          <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
                         </ul>
-                        <a class="test" href="#">Motocicletas <span class="caret"></span></a>
+                        <a class="test" href="#"><i class="fa fa-motorcycle" aria-hidden="true"></i> Motocicletas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Alta</a></li>
-                          <li><a href="#">Busqueda</a></li>
+                          <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
+                          <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
                         </ul>
-                         <a class="test" href="#">Casas <span class="caret"></span></a>
+                         <a class="test" href="#"><i class="fa fa-home" aria-hidden="true"></i>Casas <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Alta</a></li>
-                          <li><a href="#">Busqueda</a></li>
+                          <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
+                          <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
                         </ul>
                       </li>
                     </li>
@@ -118,6 +132,7 @@
     </nav>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
     <script>
 $(document).ready(function(){
   $('.dropdown-submenu a.test').on("click", function(e){

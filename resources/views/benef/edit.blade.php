@@ -1,8 +1,17 @@
-@extends('layouts.app')
-	@section('content')
-		<div class="container">
-			{{-- {{dd($beneficiario)}} --}}
-			<form role="form" method="POST" action="{{ route('personals.datosbeneficiario.update',['personal'=>$personal, 'beneficiario'=>$beneficiario]) }}">
+@extends('layouts.infopersonal')
+	@section('personal')
+	<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#">Dirección/Domicilio:</a></li>
+      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Datos Laborales:</a></li>
+      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Referencias Personales:</a></li>
+      <li class="active"><a href="" class="ui-tabs-anchor">Datos de Beneficiarios:</a></li>
+      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">Productos:</a></li>
+      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="" class="ui-tabs-anchor">C.R.M.:</a></li>
+    </ul>
+    <div class="panel-default">
+    	<div class="panel-heading">Datos de Beneficiarios</div>
+    	<div class="panel-body">
+    		<form role="form" method="POST" action="{{ route('personals.datosbeneficiario.update',['personal'=>$personal, 'beneficiario'=>$beneficiario]) }}">
 				<div class="panel-body">
 					{{ csrf_field() }}
 					<input type="hidden" name="_method" value="PUT">
@@ -37,5 +46,6 @@
   				<button type="submit" class="btn btn-default">Guardar</button>
 				</div>
 			</form>
-		</div>
+    	</div>
+    </div>
 	@endsection

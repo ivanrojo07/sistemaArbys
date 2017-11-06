@@ -19,12 +19,19 @@ class PersonalDatosLabController extends Controller
         if ($personal->tipo == 'Cliente') {
             // $datoslab = DatosLab::where('clientes_id', $personal->id);
             $datoslab = $personal->datosLab;
-            $personal = Personal::findOrFail($personal->id);
+            if ($datoslab == null) {
+                # code...
+                return redirect()->route('personals.datoslaborales.create',['personal'=>$personal]);
+            } else {
+                # code...
+                return view('datoslab.view',['personal'=>$personal, 'datoslab'=>$datoslab]);
+            }
+            
             // dd($personal);
-            return view('datoslab.index', compact('datoslab','personal'));
+            // return view('datoslab.index', compact('datoslab','personal'));
         }
         else{
-            return redirect('personals');
+            return redirect()->route('personals.index');
         }
     }
 
@@ -68,7 +75,7 @@ class PersonalDatosLabController extends Controller
             $datoslab = $personal->datosLab;
             $personal = Personal::findOrFail($personal->id);
             // dd($personal);
-            return view('datoslab.view', compact('datoslab','personal'));
+            return view('datoslab.view',['personal'=>$personal,'datoslab'=>$datoslab]);
         }
         else{
             return redirect('personals');

@@ -17,11 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/personal', 'Personal\PersonalController@search');
+Route::get('/clientes', 'Personal\PersonalController@clientes');
+Route::get('/prospectos', 'Personal\PersonalController@prospectos');
 Route::resource('personals', 'Personal\PersonalController');
 Route::resource('personals.datoslaborales', 'Personal\PersonalDatosLabController');
 Route::resource('personals.referenciapersonales', 'Personal\PersonalRefPersonalController');
 Route::resource('personals.datosbeneficiario', 'Personal\PersonalBeneficiarioController');
+Route::resource('personals.producto','Personal\PersonalProductoController');
+Route::resource('personals.crm','Personal\PersonalCRMController');
 // Route::resource('datoslaborales','DatosLabController');
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');

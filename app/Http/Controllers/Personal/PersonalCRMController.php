@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers\Personal;
 
+use App\CRM;
+use App\Http\Controllers\Controller;
 use App\Personal;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class PersonalProductosController extends Controller
+class PersonalCRMController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Personal $personal)
     {
         //
+        
+        $crms = $personal->crm;
+        return view('crm.index',['personal'=>$personal, 'crms'=>$crms]);
+        
+
     }
 
     /**
@@ -34,9 +40,12 @@ class PersonalProductosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Personal $personal)
     {
         //
+        // dd($request->all());
+        $crm = CRM::create($request->all());
+        return redirect()->route('personals.crm.index',['personal'=>$personal]);
     }
 
     /**
@@ -45,9 +54,11 @@ class PersonalProductosController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function show(Personal $personal)
+    public function show(Personal $personal, $crm)
     {
         //
+        $crm = CRM::findOrFail($crm);
+        return view('crm.view',['personal'=>$personal,'crm'=>$crm]);
     }
 
     /**

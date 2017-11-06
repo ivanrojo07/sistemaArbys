@@ -15,7 +15,8 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        $personals = Personal::orderBy('id','DESC')->paginate(10);
+        $personals = Personal::sortable()->paginate(10);
+        // dd($personals);
         return view('personal.index',['personals'=>$personals]);
     }
     /**
@@ -36,12 +37,12 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
         //
-        Personal::create($request->all());
+        $personal = Personal::create($request->all());
         if ($request['tipo'] == 'Cliente') {
-            return redirect('personals');
+            return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
         }
         if($request['tipo'] == 'Prospecto') {
-            return redirect('personals');
+            return redirect()->route('personals.index');
         }
         // return redirect('/personals');
         // return response()->json($request['tipo']);
@@ -80,9 +81,9 @@ class PersonalController extends Controller
     public function update(Request $request, Personal $personal)
     {
         //
-        // dd($request);
+        // dd($request->all());
         $personal->update($request->all());
-        // Personal::where('id'=>$personal->id)->update($request->all());
+        // Personal::where('id',$personal->id)->update($request->all());
         return redirect('/personals');
         // $personal->fill($request->all());
         // $personal->save();
@@ -97,5 +98,35 @@ class PersonalController extends Controller
     public function destroy(Personal $personal)
     {
         //
+    }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+        // $personals = Personal::search($query)->get();
+        $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
+        ->orWhere('apellidopaterno','LIKE',"%$query%")
+        ->orWhere('apellidomaterno','LIKE',"%$query%")
+        ->orWhere('rfc','LIKE',"%$query%")
+        ->orWhere('mail','LIKE',"%$query%")
+        ->paginate(10);
+        // dd($personals);
+        return view('personal.index',['personals'=>$personals]);
+        //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        //motor de busquedas
+        // $message = Message::search($query)->get();
+        // $message->load('user');
+        // return view('messages.index', [
+        //     'messages' => $message
+        //     ]);
+    }
+
+    public function clientes(){
+        $personals = Personal::sortable()->where('tipo','=','Cliente')->paginate(10);
+        return view('personal.index',['personals'=>$personals]);
+    }
+
+    public function prospectos(){
+        $personals = Personal::sortable()->where('tipo','=','Prospecto')->paginate(10);
+        return view('personal.index',['personals'=>$personals]);
     }
 }
