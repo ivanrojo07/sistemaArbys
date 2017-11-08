@@ -134,6 +134,7 @@
 							@endif
 						</div>
 					</div>
+					<a class="btn btn-info btn-md" href="{{ route('personals.edit', [$personal]) }}">Editar</a>
 				</div>
   				</div>
 		</div>
