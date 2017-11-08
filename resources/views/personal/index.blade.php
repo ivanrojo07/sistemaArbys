@@ -8,22 +8,24 @@
 				<div class="input-group">
 					<input type="text" name="query" class="form-control" placeholder="Buscar...">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit" onclick="function()"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
 					</span>
+		<div>
+			<div class="col-xs-2">
+			
+				<input id="boton-toggle" href="/clientes" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" id="tgCliente"><label>&nbsp;&nbsp;&nbsp;Clientes
+			</label>
+		</div>
+		<div  class="col-xs-2">
+				<input href="/prospectos" id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" id="tgProspecto"><label>&nbsp;&nbsp;&nbsp;Prospectos
+			</label>
+		</div>
 				</div>
 
-					<div class="col-xs-2">
 					
-						<input id="boton-toggle" name="cliente" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true"  id="tgCliente"><label>&nbsp;&nbsp;&nbsp;Clientes
-					</label>
-					</div>
-				<div  class="col-xs-2">
-						<input id="boton-toggle" name="prospecto" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" id="tgProspecto"><label>&nbsp;&nbsp;&nbsp;Prospectos
-					</label>
-				</div>
 			</form>
 		</div>
-		</div>
+		
 	</div>
 	<div class="jumbotron">
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">

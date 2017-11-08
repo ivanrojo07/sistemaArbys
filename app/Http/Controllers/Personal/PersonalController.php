@@ -101,6 +101,7 @@ class PersonalController extends Controller
     }
 
     public function search(Request $request){
+
         (string)$query = $request->input('query');
         if (($request->cliente == "on" && $request->prospecto == "on") || (!$request->cliente && !$request->prospecto)) {
             # code...
@@ -151,15 +152,5 @@ class PersonalController extends Controller
         // return view('messages.index', [
         //     'messages' => $message
         //     ]);
-    }
-
-    public function clientes(){
-        $personals = Personal::sortable()->where('tipo','=','Cliente')->paginate(10);
-        return view('personal.index',['personals'=>$personals]);
-    }
-
-    public function prospectos(){
-        $personals = Personal::sortable()->where('tipo','=','Prospecto')->paginate(10);
-        return view('personal.index',['personals'=>$personals]);
     }
 }
