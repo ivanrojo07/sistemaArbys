@@ -27,6 +27,9 @@ Route::resource('personals.referenciapersonales', 'Personal\PersonalRefPersonalC
 Route::resource('personals.datosbeneficiario', 'Personal\PersonalBeneficiarioController');
 Route::resource('personals.producto','Personal\PersonalProductoController');
 Route::resource('personals.crm','Personal\PersonalCRMController');
+Route::get('import-export-csv-excel','FileController@importExportExcelORCSV');
+Route::post('import-csv-excel','FileController@importFileIntoDB');
+Route::get('download-excel-file/{type}','FileController@downloadExcelFile');
 // Route::resource('datoslaborales','DatosLabController');
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');
