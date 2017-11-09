@@ -29,22 +29,22 @@ class FileController extends Controller
     			if (!empty($arr)) {
     				# code...
     				DB::table('products')->insert($arr);
-    				dd('los datos se insertaron correctamente');
+    				return redirect()->back()->with('success', 'Archivo subido correctamente.');
     			} else {
     				# code...
-    				dd('error, el archivo esta vacio');
+    				return redirect()->back()->with('error', 'Error al subir el archivo.');
     			}
     			
     		} else {
     			# code...
-    			dd('error, no puedo leer el archivo');
+    			return redirect()->back()->with('error', 'Error al subir el archivo.');
     		}
     		
     	} else {
     		# code...
-    		dd('error, archivo incompatible');
+    		return redirect()->back()->with('error', 'No se subio ningun archivo');
     	}
-    	dd('error, no subio ningun archivo');
+    	return redirect()->back()->with('error', 'Error al subir el archivo.');
     }
     public function downloadExcelFile($type){
     	$products = Product::get()->toArray();

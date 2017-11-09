@@ -20,7 +20,7 @@
 					
 					<label for="sample_file" class="col-md-3">Seleccionar archivo a importar:</label>
 					<div class="col-md-9">
-                    <input class="form-control" name="sample_file" type="file" id="sample_file">
+                    <input class="form-control" name="sample_file" type="file" id="sample_file" accept=".xls, .xlsx, .csv">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 10px;">
 			<input class="btn btn-primary" type="submit" value="Importar">
 			</div>
