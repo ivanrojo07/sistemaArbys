@@ -19,7 +19,7 @@ class FileController extends Controller
     	if ($request->hasFile('sample_file')) {
     		# code...
     		$path = $request->file('sample_file')->getRealPath();
-    		$data = Excel::load($path)->get();
+            $data = \Excel::load($path)->get();
     		if ($data->count()) {
     			# code...
     			foreach ($data as $key => $value) {
@@ -37,12 +37,12 @@ class FileController extends Controller
     			
     		} else {
     			# code...
-    			dd('error, no puedo leer el archivo')
+    			dd('error, no puedo leer el archivo');
     		}
     		
     	} else {
     		# code...
-    		dd('error, archivo incompatible')
+    		dd('error, archivo incompatible');
     	}
     	dd('error, no subio ningun archivo');
     }
@@ -51,7 +51,7 @@ class FileController extends Controller
     	return Excel::create('expertphp_demo', function($excel) use($products){
     			$excel->sheet('sheet name', function($sheet) use($products){
     				$sheet->fromArray($products);
-    			})
+    			});
     	})->download($type);
     }
 }
