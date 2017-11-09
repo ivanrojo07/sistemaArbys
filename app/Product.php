@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     //
-    protected $table='product';
-    protected $fillabble=['name','details'];
+    public $table='products';
+    public $fillabble=['name','details'];
 }
