@@ -8,5 +8,8 @@ class Product extends Model
 {
     //
     public $table='products';
-    public $fillabble=['name','details'];
+    protected $fillabble=['name','details'];
+    protected $hidden = [
+        'id','created_at', 'updated_at'
+    ];
 }

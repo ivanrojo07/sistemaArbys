@@ -48,7 +48,7 @@ class FileController extends Controller
     }
     public function downloadExcelFile($type){
     	$products = Product::get()->toArray();
-    	return \Excel::create('expertphp_demo', function($excel) use($products){
+    	return \Excel::create('productos', function($excel) use($products){
     			$excel->sheet('sheet name', function($sheet) use($products){
     				$sheet->fromArray($products);
     			});
