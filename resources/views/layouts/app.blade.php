@@ -97,16 +97,16 @@
                     </li>
                     
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-building" aria-hidden="true"></i> Oficinas <span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="{{ url('import-export-csv-excel') }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
                                 <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
                             </li>                     
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
@@ -114,9 +114,9 @@
                                 <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
                             </li>                     
                         </ul>
-                    </li>
+                    </li> --}}
                     
-                    <li class="dropdown-submenu">
+                    {{-- <li class="dropdown-submenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
                       <li class="dropdown-submenu">
@@ -137,6 +137,7 @@
                         </ul>
                       </li>
                     </ul>
+                </li> --}}
                 </div>
             </div>
         </nav>
