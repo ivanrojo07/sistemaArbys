@@ -22,10 +22,12 @@ class FileController extends Controller
             $data = \Excel::load($path)->get();
     		if ($data->count()) {
     			# code...
+                // dd($data);
     			foreach ($data as $key => $value) {
     				# code...
-    				$arr[]=['name'=>$value->name,'details'=>$value->details];
-    			}
+    				$arr[]=['clave'=>$value->clave,'descripcion'=>$value->descripcion, 'precio_lista'=>$value->precio_de_lista,'mensualidad_p_fisica'=>$value->pago_mensual_p_fisica,'mensualidad_p_moral'=>$value->p_moral,'apertura'=>$value->apertura,'inicial'=>$value->inicial,'marca'=>$value->marca];
+                }
+                // dd($arr);
     			if (!empty($arr)) {
     				# code...
     				DB::table('products')->insert($arr);
