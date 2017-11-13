@@ -15,25 +15,30 @@ class CreatePersonalsTable extends Migration
     {
         Schema::create('personals', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('tipo', ['Prospecto','Cliente']);
             $table->enum('tipopersona',['Fisica','Moral']);
             $table->string('nombre')->nullable();
             $table->string('apellidopaterno')->nullable();
             $table->string('apellidomaterno')->nullable();
             $table->string('razonsocial')->nullable();
-            $table->string('alias');
-            $table->string('rfc');
-            $table->string('vendedor');
             $table->string('calle');
-            $table->integer('numext');
-            $table->integer('numinter');
+            $table->string('numext');
+            $table->string('numinter')->nullable();
             $table->string('cp')->nullable();
             $table->string('colonia');
             $table->string('municipio');
             $table->string('ciudad');
             $table->string('estado');
-            $table->string('calle1');
-            $table->string('calle2');
+            $table->string('calle1')->nullable();
+            $table->string('calle2')->nullable();
             $table->string('referencia')->nullable();
+            $table->string('recidir')->nullable();
+            $table->string('vivienda')->nullable();
+            $table->string('mail');
+            $table->string('rfc');
+            $table->string('telefonofijo');
+            $table->string('telefonocel');
+            $table->string('estadocivil')->nullable();
             $table->timestamps();
         });
     }

@@ -14,17 +14,25 @@
  --}}    <!-- Styles -->
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="{{ asset('css/forms.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    {{-- Latest compiled and minified JavaScript --}}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
      <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<style>
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    margin-top: 0;
+    right: 0;
+    left: auto;
+}
+</style>
     </head>
     <body>
 
@@ -41,13 +49,12 @@
                 </button>
                 <a class="navbar-brand" href="{{ url('/') }}">
                         {{-- <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70"> --}}
-                        {{-- {{ config('app.name', 'Laravel') }} --}}
+                        {{-- {{ config('app.name', 'Arbys') }} --}}
                     </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <ul class="nav navbar-nav navbar-right">
                 @if (Route::has('login'))
                     <li>
                         @if (Auth::check())
@@ -65,24 +72,24 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ url('/clientes/create')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="{{ url('/clientes') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
-                                <a href="{{ url('/giros') }}"><i class="fa fa-location-arrow" aria-hidden="true"></i> Precargas Giros</a>  
+                                <a href="{{ url('/personals/create')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="{{ url('/personals') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> Seguimiento</a>    
                             </li>                     
                         </ul>
                     </li>
                     
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <i class="fa fa-building" aria-hidden="true"></i> Oficinas <span class="caret"></span> </a>
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="{{ url('import-export-csv-excel') }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
                                 <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
                             </li>                     
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
@@ -90,9 +97,9 @@
                                 <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
                             </li>                     
                         </ul>
-                    </li>
+                    </li> --}}
                     
-                    <li class="dropdown-submenu">
+                    {{-- <li class="dropdown-submenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
                       <li class="dropdown-submenu">
@@ -113,8 +120,7 @@
                         </ul>
                       </li>
                     </li>
-                    </ul>
-                </ul>
+                </ul> --}}
             </div>
             @endif
             <!-- /.navbar-collapse -->
@@ -122,6 +128,7 @@
         <!-- /.container -->
     </nav>
     <!-- Scripts -->
+    <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
