@@ -1,32 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container clearfix">
+		<div class="row">
 	<div class="panel-body">
-		<div class="col-lg-6">
+			<div class="col-xs-12">
 			<form action="/personal">
 				<div class="input-group">
-					<input type="text" name="query" class="form-control" placeholder="Buscar...">
+					<input type="text" name="query" class="form-control" placeholder="Buscar..."> 
+			
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-					</span>
-		<div>
-			<div class="col-xs-2">
-			
-				<input id="boton-toggle" href="/clientes" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" id="tgCliente"><label>&nbsp;&nbsp;&nbsp;Clientes
+					</span>	
+			<div class="col-xs-3">
+				<input id="boton-toggle" href="/clientes" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" name="cliente" id="tgCliente" ><label>&nbsp;&nbsp;Clientes
 			</label>
 		</div>
-		<div  class="col-xs-2">
-				<input href="/prospectos" id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" checked="true" id="tgProspecto"><label>&nbsp;&nbsp;&nbsp;Prospectos
+		<div  class="col-xs-3">
+				<input href="/prospectos" id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" name="prospecto" data-off="No" data-style="ios" checked="true" id="tgProspecto"><label>&nbsp;&nbsp;Prospectos
 			</label>
-		</div>
-				</div>
-
-					
-			</form>
-		</div>
 		
+					</div>	
+				</div>	
+			</form>
 	</div>
+</div>
+</div>
 	<div class="jumbotron">
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>

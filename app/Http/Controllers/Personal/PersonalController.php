@@ -102,7 +102,7 @@ class PersonalController extends Controller
 
     public function search(Request $request){
 
-        (string)$query = $request->input('query');
+        $query = $request->input('query');
         if (($request->cliente == "on" && $request->prospecto == "on") || (!$request->cliente && !$request->prospecto)) {
             # code...
             $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
