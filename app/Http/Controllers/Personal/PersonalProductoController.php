@@ -16,13 +16,13 @@ class PersonalProductoController extends Controller
     public function index(Personal $personal)
     {
         //
-        if ($personal->tipo == 'Cliente') {
-            # code...
+        // if ($personal->tipo == 'Cliente') {
+        //     # code...
             return view('productos.index',['personal'=>$personal]);
-        } else {
-            # code...
-            return redirect('personals');
-        }
+        // } else {
+        //     # code...
+        //     return redirect('personals');
+        // }
         
     }
 

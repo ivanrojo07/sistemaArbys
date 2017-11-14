@@ -15,6 +15,8 @@
 			    					<dd>{{ $personal->tipopersona }}</dd>
 			  					</div>	
 							</div>
+							@if ($personal->tipopersona == "Fisica")
+								{{-- expr --}}
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="nombre">* Nombre(s):</label>
@@ -29,13 +31,16 @@
 			  						<dd>{{ $personal->apellidomaterno }}</dd>
 			  					</div>
 							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
+							@else
+
+							<div class="col-md-12 offset-md-2 mt-3" id="permoral">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
 			  						<label class="control-label" for="razonsocial">* Razon Social:</label>
 			  						<dd>{{ $personal->razonsocial }}</dd>
 			  					</div>
 							</div>
+							@endif
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 									<label class="control-label" for="mail">* Correo:</label>
