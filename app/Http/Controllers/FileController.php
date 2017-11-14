@@ -18,9 +18,10 @@ class FileController extends Controller
     public function importFileIntoDB(Request $request){
     	if ($request->hasFile('sample_file')) {
     		# code...
-    		$path = $request->file('sample_file')->getRealPath();
-            dd(\Excel::load($path));
-            $data = \Excel::load($path)->get();
+            // dd($request->file('sample_file')->getPathName());
+    		$path = $request->file('sample_file')->getPathName();
+            // dd($path);
+            $data = \Excel::load($path,null,null,true,null)->get();
     		if ($data->count()) {
     			# code...
                 // dd($data);

@@ -31,20 +31,20 @@
 					<th>Operacion</th>
 				</tr>
 			</thead>
-			@foreach($productos as $producto)
+			@foreach($productos as $product)
 				<tr class="active">
 					<td>
-						{{ $producto->clave }}
+						{{ $product->clave }}
 					</td>
-					<td>{{ $producto->marca }}</td>
-					<td>{{ $producto->descripcion }}</td>
-					<td>$ {{ number_format($producto->precio_lista,2) }}</td>
-					<td>$ {{number_format($producto->apertura,2)}}</td>
+					<td>{{ $product->marca }}</td>
+					<td>{{ $product->descripcion }}</td>
+					<td>$ {{ number_format($product->precio_lista,2) }}</td>
+					<td>$ {{number_format($product->apertura,2)}}</td>
 					<td>
-						$ {{number_format($producto->inicial,2)}}
+						$ {{number_format($product->inicial,2)}}
 					</td>
 					<td>
-						<a class="btn btn-success btn-sm" href=""><i class="fa fa-eye" aria-hidden="true"></i> Más información</a>
+						<a class="btn btn-success btn-sm" href="{{ route('productos.show',['product'=>$product]) }}"><i class="fa fa-eye" aria-hidden="true"></i> Más información</a>
 					</td>
 				</tr>
 				</tbody>
