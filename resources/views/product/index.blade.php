@@ -1,6 +1,22 @@
 @extends('layouts.app')
 @section('content')
 	{{-- expr --}}
+	<div class="container clearfix">
+		<div class="row">
+			<div class="panel-body">
+				<div class="col-xs-12">
+					<form action="{{ url('producto') }}">
+						<div class="input-group">
+							<input type="text" name="query" class="form-control" placeholder="Buscar...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 	<div class="jumbotron">
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">

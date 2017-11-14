@@ -31,7 +31,7 @@ Route::resource('productos','Producto\ProductController',['only'=>'index']);
 Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
-Route::get('productos', 'Producto\ProductController@search');
+Route::get('producto', 'Producto\ProductController@search');
 // Route::resource('datoslaborales','DatosLabController');
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');
