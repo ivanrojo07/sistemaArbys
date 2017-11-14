@@ -19,7 +19,7 @@ class FileController extends Controller
     	if ($request->hasFile('sample_file')) {
     		# code...
     		$path = $request->file('sample_file')->getRealPath();
-            dd($path);
+            dd(\Excel::load($path));
             $data = \Excel::load($path)->get();
     		if ($data->count()) {
     			# code...
