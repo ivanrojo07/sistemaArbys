@@ -5,7 +5,7 @@
 		<div class="row">
 	<div class="panel-body">
 			<div class="col-xs-12">
-			<form action="/personal">
+			<form action="{{ url('personal') }}">
 				<div class="input-group">
 					<input type="text" name="query" class="form-control" placeholder="Buscar..."> 
 			

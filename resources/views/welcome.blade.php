@@ -84,7 +84,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ url('import-export-csv-excel') }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
-                                <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
+                                <a href="{{ url('productos') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
                             </li>                     
                         </ul>
                     </li>
