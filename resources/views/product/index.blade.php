@@ -4,7 +4,7 @@
 	<div class="container clearfix">
 		<div class="row">
 			<div class="panel-body">
-				<div class="col-xs-12">
+				<div class="col-xs-6">
 					<form action="{{ url('producto') }}">
 						<div class="input-group">
 							<input type="text" name="query" class="form-control" placeholder="Buscar...">
