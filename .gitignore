@@ -6,7 +6,7 @@
 /.idea
 /.vagrant
 /.phpintel
-/composer.lock 
+composer.lock 
 Homestead.json
 Homestead.yaml
 npm-debug.log
