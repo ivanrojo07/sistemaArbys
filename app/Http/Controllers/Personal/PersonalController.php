@@ -37,6 +37,7 @@ class PersonalController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
         $personal = Personal::create($request->all());
         if ($request['tipo'] == 'Cliente') {
             return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
