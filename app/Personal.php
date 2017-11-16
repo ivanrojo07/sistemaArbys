@@ -13,7 +13,7 @@ class Personal extends Model
     //
     protected $table='personals';
 
-    public $sortable = [ 'nombre','tipopersona','tipo', 'rfc', 'mail'];
+    public $sortable = ['id', 'nombre','prioridad','tipo', 'calificacion', 'mail', 'created_at'];
    /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +22,7 @@ class Personal extends Model
     protected $fillable = [
 
 
-        'id','tipo', 'tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'razonsocial', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
+        'id','tipo', 'tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'razonsocial', 'prioridad', 'calificacion', 'calle', 'numext', 'numinter', 'cp', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia','recidir','vivienda','mail', 'rfc', 'telefonofijo', 'telefonocel', 'estadocivil'
 
     ];
 
@@ -32,7 +32,7 @@ class Personal extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at', 'updated_at'
+        'updated_at'
     ];
 
     // public function clientes(){

@@ -22,6 +22,29 @@
 			    						<option id="Moral" value="Moral">Moral</option>
 			    					</select>
 			  					</div>	
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="prioridad">Prioridad:</label>
+			    					<select type="select" name="prioridad" class="form-control" id="prioridad" onchange="persona(this)">
+			    						<option id="Baja" value="Baja">Baja</option>
+			    						<option id="Mediana" value="Mediana">Mediana</option>
+			    						<option id="Alta" value="Alta">Alta</option>
+			    					</select>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calificacion">Calificación:</label>
+			    					<select type="select" name="calificacion" class="form-control" id="calificacion" onchange="persona(this)">
+			    						<option id="1" value=1>1</option>
+			    						<option id="2" value=2>2</option>
+			    						<option id="3" value=3>3</option>
+			    						<option id="4" value=4>4</option>
+			    						<option id="5" value=5>5</option>
+			    						<option id="6" value=6>6</option>
+			    						<option id="7" value=7>7</option>
+			    						<option id="8" value=8>8</option>
+			    						<option id="9" value=9>9</option>
+			    						<option id="10" value=10>10</option>
+			    					</select>
+			  					</div>
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
