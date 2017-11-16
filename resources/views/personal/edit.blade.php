@@ -12,8 +12,14 @@
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
-			    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
-			    						<option id="Cliente" value="Cliente" value="selected">Cliente</option>
+			    						<option id="Prospecto" value="Prospecto" @if ($personal->tipo == "Prospecto")
+			    							{{-- expr --}}
+			    							selected="selected"
+			    						@endif>Prospecto</option>
+			    						<option id="Cliente" value="Cliente" @if ($personal->tipo == "Cliente")
+			    							{{-- expr --}}
+			    							selected="selected"
+			    						@endif>Cliente</option>
 			    						
 			    					</select>
 			  					</div>
@@ -22,8 +28,14 @@
 			    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
 			    						
 			    							{{-- true expr --}}
-			    						<option id="Fisica" value="Fisica" selected="selected">Fisica</option>
-			    						<option id="Moral" value="Moral" >Moral</option>
+			    						<option id="Fisica" value="Fisica" @if ($personal->tipopersona == "Fisica")
+			    							{{-- expr --}}
+			    							selected="selected"
+			    						@endif>Fisica</option>
+			    						<option id="Moral" value="Moral" @if ($personal->tipopersona == "Moral")
+			    							{{-- expr --}}
+			    							selected="selected"
+			    						@endif>Moral</option>
 			    					</select>
 			  					</div>	
 							</div>
