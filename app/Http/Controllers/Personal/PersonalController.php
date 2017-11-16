@@ -38,13 +38,23 @@ class PersonalController extends Controller
     {
         //
         // dd($request->all());
-        $personal = Personal::create($request->all());
-        if ($request['tipo'] == 'Cliente') {
-            return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
+        $rfc = Personal::where('rfc', $request->rfc)->get();
+        if (count($rfc)!=0) {
+            # code...
+            return redirect()->back()->with('errors','El RFC ya existe');                               
+        } else {
+            # code...
+
+            $personal = Personal::create($request->all());
+            if ($request['tipo'] == 'Cliente') {
+                return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
+            }
+            if($request['tipo'] == 'Prospecto') {
+                return redirect()->route('personals.index');
+            }   
         }
-        if($request['tipo'] == 'Prospecto') {
-            return redirect()->route('personals.index');
-        }
+        
+
         // return redirect('/personals');
         // return response()->json($request['tipo']);
     }
