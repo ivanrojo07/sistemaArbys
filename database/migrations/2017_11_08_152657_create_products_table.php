@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('apertura');
             $table->string('inicial');
             $table->string('marca');
+            $table->string('tipo');
             $table->timestamps();
         });
     }

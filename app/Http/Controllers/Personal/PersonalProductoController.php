@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Personal;
 
-use App\Personal;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Personal;
+use App\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PersonalProductoController extends Controller
 {
@@ -13,16 +15,52 @@ class PersonalProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Personal $personal)
+    public function index(Personal $personal, Request $request)
     {
-        //
-        // if ($personal->tipo == 'Cliente') {
-        //     # code...
-            return view('productos.index',['personal'=>$personal]);
-        // } else {
-        //     # code...
-        //     return redirect('personals');
-        // }
+        $marcas = DB::select('select distinct marca from products');
+        $tipos = DB::select('select distinct tipo from products');
+        // dd($marcas[0]);
+        if (count($request->all()) == 0) {
+            # code...
+            //
+            // if ($personal->tipo == 'Cliente') {
+            //     # code...
+            $productos = Product::sortable()->paginate(10);
+            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos]);
+            // } else {
+            //     # code...
+            //     return redirect('personals');
+            // }
+        } else {
+            # code...
+            // dd($request->all());
+            $precio1 = (int)$request->costo1;
+            $precio2 = (int)$request->costo2;
+            $mensual1 = $request->mensualidad1;
+            $mensual2 = $request->mensualidad2;
+            $marca = $request->marca;
+            $tipo = $request->tipo;
+            $productos = Product::sortable()->where(function($busqueda) use($precio1, $precio2, $mensual1, $mensual2,$marca,$tipo){
+                if ($precio1 != null || $precio1 != 0) {
+                    # code...
+                    if ($precio2 != null || $precio2 <$precio1 || $precio2 != 0) {
+                        # code...
+                        $busqueda->whereBetween('precio_lista',[$precio1,$precio2]);
+                    } else {
+                        # code...
+                        $busqueda->whereBetween('precio_lista',[$precio1,$precio1+1]);
+                    }
+                    
+                } 
+                
+            })->paginate(50);
+            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos]);
+            // $productos = Product::sortable()->where(
+            //     function($query) use())->get();
+
+        }
+        
+        
         
     }
 
