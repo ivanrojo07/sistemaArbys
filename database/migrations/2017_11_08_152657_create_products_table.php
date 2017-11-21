@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('clave');
             $table->string('descripcion');
-            $table->integer('precio_lista');
-            $table->integer('mensualidad_p_fisica');
-            $table->integer('mensualidad_p_moral')->nullable();
-            $table->integer('apertura');
-            $table->integer('inicial');
+            $table->string('precio_lista');
+            $table->string('mensualidad_p_fisica');
+            $table->string('mensualidad_p_moral')->nullable();
+            $table->string('apertura');
+            $table->string('inicial');
             $table->string('marca');
             $table->string('tipo');
             $table->timestamps();
