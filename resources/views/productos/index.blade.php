@@ -18,23 +18,25 @@
             <div class="container">
               <div class="panel-body">
                 <label class="control-label" for="costo1">Costo de:</label>
-                <input type="number" class="form-control"  name="costo1">  
+                <input type="number" class="form-control"  name="costo1" value="{{ $request->costo1 }}">  
                 <label class="control-label" for="costo2">a:</label>
-                <input type="number" class="form-control" name="costo2">
+                <input type="number" class="form-control" name="costo2" value="{{ $request->costo2 }}">
               
             
                 <label class="control-label" for="mensualidad1">Mensualidades de:</label>
-                <input type="number" class="form-control" name="mensualidad1"></input>
+                <input type="number" class="form-control" name="mensualidad1" value="{{ $request->mensualidad1 }}"></input>
                 <label class="control-label" for="mensualidad2">a:</label>
-                <input type="number" class="form-control" name="mensualidad2">
+                <input type="number" class="form-control" name="mensualidad2" value="{{ $request->mensualidad2 }}">
               </div>
               <div class="panel-body">
                 <label class="control-label" for="marca">Marca:</label>
                 <select type="select" name="marca" class="form-control" id="marca">
-                  <option id="default" value="" selected="selected">Todos</option>
+                  <option id="default" value="">Todos</option>
                   @foreach ($marcas as $marca)
                     {{-- expr --}}
-                    <option id="{{$marca->marca}}" value="{{$marca->marca}}">{{$marca->marca}}</option>
+                    <option id="{{$marca->marca}}" value="{{$marca->marca}}" @if ($marca->marca == $request->marca)
+                      selected="selected" 
+                    @endif>{{$marca->marca}}</option>
                   @endforeach
                 </select>
                 <label class="control-label" for="tipo">Tipo:</label>
@@ -42,7 +44,10 @@
                   <option id="default" value="" selected="selected">Todos</option>
                   @foreach ($tipos as $tipo)
                     {{-- expr --}}
-                    <option id="{{$tipo->tipo}}" value="{{$tipo->tipo}}">{{$tipo->tipo}}</option>
+                    <option id="{{$tipo->tipo}}" value="{{$tipo->tipo}}" @if ($tipo->tipo == $request->tipo)
+                      {{-- expr --}}
+                      selected="selected" 
+                    @endif>{{$tipo->tipo}}</option>
 
                   @endforeach
                 </select>
@@ -85,7 +90,7 @@
           @endforeach
     		</table>
         </div>
-        {{$productos->links()}}
+        {{$productos->appends(Request::all())->links()}}
     	</div>
     </div>			
 	@endsection

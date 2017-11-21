@@ -17,6 +17,7 @@ class PersonalProductoController extends Controller
      */
     public function index(Personal $personal, Request $request)
     {
+        // dd(Request::only($request));
         $marcas = DB::select('select distinct marca from products');
         $tipos = DB::select('select distinct tipo from products');
         // dd($marcas[0]);
@@ -26,7 +27,7 @@ class PersonalProductoController extends Controller
             // if ($personal->tipo == 'Cliente') {
             //     # code...
             $productos = Product::sortable()->paginate(10);
-            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos]);
+            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos,'request'=>$request]);
             // } else {
             //     # code...
             //     return redirect('personals');
@@ -103,8 +104,8 @@ class PersonalProductoController extends Controller
                     # code...
                     $busqueda->where('tipo','=',$tipo);
                 }
-            })->paginate(50);
-            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos]);
+            })->paginate(15);
+            return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
             // $productos = Product::sortable()->where(
             //     function($query) use())->get();
 
