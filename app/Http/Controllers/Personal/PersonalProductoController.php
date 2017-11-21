@@ -104,7 +104,7 @@ class PersonalProductoController extends Controller
                     # code...
                     $busqueda->where('tipo','=',$tipo);
                 }
-            })->paginate(15);
+            })->paginate(10);
             return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
             // $productos = Product::sortable()->where(
             //     function($query) use())->get();

@@ -10,7 +10,7 @@ class CRM extends Model
     //
     protected $table = 'crm';
 
-    protected $fillable=['id', 'personal_id', 'fecha_act', 'fecha_cont','hora','acuerdos','observaciones','tipo_cont'];
+    protected $fillable=['id', 'personal_id', 'fecha_act', 'fecha_cont', 'fecha_aviso', 'hora', 'status','comentarios','acuerdos','observaciones','tipo_cont'];
 
     protected $hidden = ['created_at','updated_at'];
     public function clientes(){

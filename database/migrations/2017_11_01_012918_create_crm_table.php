@@ -19,7 +19,10 @@ class CreateCrmTable extends Migration
             $table->foreign('personal_id')->references('id')->on('personals');
             $table->date('fecha_act');
             $table->date('fecha_cont');
+            $table->date('fecha_aviso');
             $table->string('hora');
+            $table->string('status');
+            $table->text('comentarios')->nullable();
             $table->text('acuerdos')->nullable();
             $table->text('observaciones')->nullable();
             $table->enum('tipo_cont',['Mail','Telefono','Cita','Whatsapp','Otro']);
