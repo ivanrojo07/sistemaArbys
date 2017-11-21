@@ -40,19 +40,69 @@ class PersonalProductoController extends Controller
             $mensual2 = $request->mensualidad2;
             $marca = $request->marca;
             $tipo = $request->tipo;
-            $productos = Product::sortable()->where(function($busqueda) use($precio1, $precio2, $mensual1, $mensual2,$marca,$tipo){
+            $productos = Product::sortable()->where(function($busqueda) use($precio1, $precio2){
                 if ($precio1 != null || $precio1 != 0) {
                     # code...
-                    if ($precio2 != null || $precio2 <$precio1 || $precio2 != 0) {
+                    // dd($precio2);
+                    if ($precio2 == 0 || $precio2 == null) {
+                        # code...
+                        // dd($busqueda);
+                        $busqueda->where('precio_lista','>=',$precio1);
+                    }
+                    elseif ($precio2 != null || $precio2 <$precio1 || $precio2 != 0) {
                         # code...
                         $busqueda->whereBetween('precio_lista',[$precio1,$precio2]);
-                    } else {
-                        # code...
-                        $busqueda->whereBetween('precio_lista',[$precio1,$precio1+1]);
-                    }
+                    } 
+                    // dd($precio1);
+                    
                     
                 } 
+                elseif ($precio1 == null || $precio1 == 0) {
+                    # code...
+                    if ($precio2 != 0 || $precio2 != null) {
+                        # code...
+                        $busqueda->where('precio_lista','<=',$precio2);
+
+                    }
+
+                }
                 
+            })->where(function($busqueda) use($mensual1, $mensual2){
+                if ($mensual1 != null || $mensual1 != 0) {
+                    # code...
+                    
+                    if ($mensual2 == 0 || $mensual2 == null) {
+                        # code...
+                        // dd($busqueda);
+                        $busqueda->where('mensualidad_p_fisica','>=',$mensual1);
+                    }
+                    elseif ($mensual2 != null || $mensual2 <$mensual1 || $mensual2 != 0) {
+                        # code...
+                        $busqueda->whereBetween('mensualidad_p_fisica',[$mensual1,$mensual2]);
+                    } 
+                    // dd($mensual1);
+                    
+                    
+                } 
+                elseif ($mensual1 == null || $mensual1 == 0) {
+                    # code...
+                    if ($mensual2 != 0 || $mensual2 != null) {
+                        # code...
+                        $busqueda->where('mensualidad_p_fisica','<=',$mensual2);
+
+                    }
+
+                }
+            })->where(function($busqueda) use($marca){
+                if ($marca != null || $marca != 0) {
+                    # code...
+                    $busqueda->where('marca','=',$marca);
+                }
+            })->where(function($busqueda) use($tipo){
+                if ($tipo != null || $tipo !=0) {
+                    # code...
+                    $busqueda->where('tipo','=',$tipo);
+                }
             })->paginate(50);
             return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos]);
             // $productos = Product::sortable()->where(
