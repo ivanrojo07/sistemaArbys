@@ -14,19 +14,19 @@
     	<div class="panel-heading">Productos del Cliente:</div>
     	<div class="panel-body">
         <div class="container">
-          <form class="form-inline" action="{{ route('personals.producto.index',['personal'=>$personal]) }}">
+          <form class="form-inline" id="search" action="{{ route('personals.producto.index',['personal'=>$personal]) }}">
             <div class="container">
               <div class="panel-body">
                 <label class="control-label" for="costo1">Costo de:</label>
-                <input type="number" class="form-control"  name="costo1" value="{{ $request->costo1 }}">  
+                <input type="number" class="form-control"  name="costo1" id="costo1" value="{{ $request->costo1 }}">  
                 <label class="control-label" for="costo2">a:</label>
-                <input type="number" class="form-control" name="costo2" value="{{ $request->costo2 }}">
+                <input type="number" class="form-control" name="costo2" id="costo2" value="{{ $request->costo2 }}">
               
             
                 <label class="control-label" for="mensualidad1">Mensualidades de:</label>
-                <input type="number" class="form-control" name="mensualidad1" value="{{ $request->mensualidad1 }}"></input>
+                <input type="number" class="form-control" name="mensualidad1" id="mensualidad1" value="{{ $request->mensualidad1 }}"></input>
                 <label class="control-label" for="mensualidad2">a:</label>
-                <input type="number" class="form-control" name="mensualidad2" value="{{ $request->mensualidad2 }}">
+                <input type="number" class="form-control" name="mensualidad2" id="mensualidad2" value="{{ $request->mensualidad2 }}">
               </div>
               <div class="panel-body">
                 <label class="control-label" for="marca">Marca:</label>
@@ -54,16 +54,37 @@
                 <label class="control-label">Meses:</label>
                 <select type="select" name="mensualidades" class="form-control" id="mensualidades">
                   <option id="seleccionar" value="" selected="selected">Seleccionar</option>
-                  <option id="6" value="6">6 meses</option>
-                  <option id="12" value="12">12 meses</option>
-                  <option id="18" value="18">18 meses</option>
-                  <option id="24" value="24">24 meses</option>
-                  <option id="36" value="36">36 meses</option>
-                  <option id="48" value="48">48 meses</option>
-                  <option id="60" value="60">60 meses</option>
+                  <option id="6" value="6" @if ($request->mensualidades == "6")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>6 meses</option>
+                  <option id="12" value="12" @if ($request->mensualidades == "12")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>12 meses</option>
+                  <option id="18" value="18" @if ($request->mensualidades == "18")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>18 meses</option>
+                  <option id="24" value="24" @if ($request->mensualidades == "24")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>24 meses</option>
+                  <option id="36" value="36" @if ($request->mensualidades == "36")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>36 meses</option>
+                  <option id="48" value="48" @if ($request->mensualidades == "48")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>48 meses</option>
+                  <option id="60" value="60" @if ($request->mensualidades == "60")
+                    {{-- expr --}}
+                    selected="selected" 
+                  @endif>60 meses</option>
                 </select>
                 <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-                <button class="btn btn-warning"> Borrar</button>
+                <a type="submit" class="btn btn-warning" onclick='limpiarBusqueda(this)'>Borrar</a>
               </div>
             </div>
           </form>
@@ -93,4 +114,15 @@
         {{$productos->appends(Request::all())->links()}}
     	</div>
     </div>			
+    <script type="text/javascript">
+    function limpiarBusqueda(){
+      document.getElementById('costo1').value = "";
+      document.getElementById('costo2').value = "";
+      document.getElementById('mensualidad1').value = "";
+      document.getElementById('mensualidad2').value = "";
+      document.getElementById('marca').value = "";
+      document.getElementById('tipo').value = "";
+      document.getElementById('mensualidades').value = "";
+    }
+    </script>
 	@endsection

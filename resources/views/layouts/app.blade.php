@@ -146,6 +146,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
 
     {{-- <script type="text/javascript">
         function formulario(elemento){
@@ -171,7 +172,6 @@
             }
         }
     </script> --}}
-    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     @include('sweet::alert')
 </body>
