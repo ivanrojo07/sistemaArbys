@@ -3,7 +3,7 @@
 		<div class="container" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('personals.store') }}" name="form">
 				{{ csrf_field() }}
-				<div role="application" class="panel panel-group" >
+				<div role="application" class="panel panel-group">
 					<div class="panel-default">
 						<div class="panel-heading"><h4>Datos del Personal:</h4></div>
 						<div class="panel-body">
@@ -108,36 +108,36 @@
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-								<label class="control-label" for="calle">Calle:</label>
-								<input type="text" class="form-control" id="calle" name="calle" required>
+								<label class="control-label" for="calle" id="lbl_calle">Calle:</label>
+								<input type="text" class="form-control" id="calle" name="calle">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
-								<label class="control-label" for="numext" >* Número Exterior:</label>
-								<input type="text" class="form-control" id="numext" name="numext" required>
+								<label class="control-label" for="numext" id="lbl_numext">Número Exterior:</label>
+								<input type="text" class="form-control" id="numext" name="numext">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="numinter">Número Interior:</label>
 								<input type="text" class="form-control" id="numinter" name="numinter">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="cp">Código Postal:</label>
-								<input type="text" class="form-control" id="cp" name="cp">
+								<label class="control-label" for="cp" id="lbl_cp">* Código Postal:</label>
+								<input type="text" class="form-control" id="cp" name="cp" required="">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="colonia">* Colonia:</label>
-								<input type="text" class="form-control" id="colonia" name="colonia" required>
+								<label class="control-label" for="colonia" id="lbl_colonia">Colonia:</label>
+								<input type="text" class="form-control" id="colonia" name="colonia">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="municipio">* Municipio/Delegación:</label>
-								<input type="text" class="form-control" id="municipio" name="municipio" required>
+								<label class="control-label" for="municipio" id="lbl_municipio">Municipio/Delegación:</label>
+								<input type="text" class="form-control" id="municipio" name="municipio">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="ciudad">* Ciudad:</label>
-								<input type="text" class="form-control" id="ciudad" name="ciudad" required>
+								<label class="control-label" for="ciudad" id="lbl_ciudad">Ciudad:</label>
+								<input type="text" class="form-control" id="ciudad" name="ciudad">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="estado">* Estado:</label>
-								<input type="text" class="form-control" id="estado" name="estado" required>
+								<label class="control-label" for="estado" id="lbl_estado">Estado:</label>
+								<input type="text" class="form-control" id="estado" name="estado">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<label class="control-label" for="calle1">Entre calle:</label>

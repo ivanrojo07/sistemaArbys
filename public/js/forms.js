@@ -31,6 +31,7 @@ function formulario(elemento){
         document.getElementById('municipio').required=true;
         document.getElementById('ciudad').required=true;
         document.getElementById('estado').required=true;
+        document.getElementById('lbl_numext').value='*numero exterior';
     }
 }
 function persona(elemento){
@@ -60,9 +61,8 @@ function persona(elemento){
 //    $("#tab").tabs();
 
 // });
-$(function(){
+$("#tipopersona").change(function (){
   tipopersona = $('#tipopersona').val();
-  // var valor = String(tipopersona.value);
     if(tipopersona == "Fisica"){
         document.getElementById('perfisica').style.display='inline';
         document.getElementById('permoral').style.display='none';
@@ -84,7 +84,7 @@ $(function(){
         document.getElementById('apellidopaterno').required=false;
     }
 });
-$(function(){
+$("#tipo").change(function (){
     tipo = $('#tipo').val();
     if (tipo == "Prospecto") {
         document.getElementById('cliente').style.display='none';
@@ -100,6 +100,14 @@ $(function(){
         document.getElementById('municipio').required=false;
         document.getElementById('ciudad').required=false;
         document.getElementById('estado').required=false;
+        $('#lbl_numext').text('Número Exterior:');
+        $('#lbl_calle').text('Calle:');
+        $('#lbl_cp').text('* Código Postal:');
+        $('#lbl_colonia').text('Colonia:');
+        $('#lbl_municipio').text('Municipio/Delegación:');
+        $('#lbl_ciudad').text('Ciudad:');
+        $('#lbl_estado').text('Estado:');
+
 
     }
     if (tipo == "Cliente") {
@@ -116,6 +124,13 @@ $(function(){
         document.getElementById('municipio').required=true;
         document.getElementById('ciudad').required=true;
         document.getElementById('estado').required=true;
+        $('#lbl_numext').text('* Número Exterior:');
+        $('#lbl_calle').text('* Calle:');
+        $('#lbl_cp').text('Código Postal:');
+        $('#lbl_colonia').text('* Colonia:');
+        $('#lbl_municipio').text('* Municipio/Delegación:');
+        $('#lbl_ciudad').text('* Ciudad:');
+        $('#lbl_estado').text('* Estado:');
     }
 });
 $(function(){
