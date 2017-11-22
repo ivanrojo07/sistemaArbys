@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsClienteTable extends Migration
+class CreateTransactionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateProductsClienteTable extends Migration
     public function up()
     {
         //
-        Schema::create('products-cliente', function(Blueprint $table){
+        Schema::create('transactions', function(Blueprint $table){
             $table->increments('id');
             $table->integer('personal_id')->unsigned();
             $table->foreign('personal_id')->references('id')->on('personals');
@@ -32,6 +32,6 @@ class CreateProductsClienteTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('products-cliente');
+        Schema::dropIfExists('transactions');
     }
 }

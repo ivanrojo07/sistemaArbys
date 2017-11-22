@@ -97,6 +97,7 @@
     					<th>@sortablelink('precio_lista','Precio de Lista')</th>
     					<th>@sortablelink('apertura','Precio de Apertura')</th>
               <th>@sortablelink('inicial','Precio Inicial')</th>
+              <th>Agregar</th>
     				</tr>
     			</thead>
           @foreach ($productos as $producto)
@@ -107,6 +108,10 @@
               <td>${{ number_format($producto->precio_lista,2)}}</td>
               <td>${{ number_format($producto->apertura,2)}}</td>
               <td>${{ number_format($producto->inicial,2)}}</td>
+              <td><form role="form" id="form-cliente" method="POST"  action="{{ route('personals.products.transactions.store',['personal'=>$personal,'product'=>$producto]) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-info"> Agregar al cliente</button>
+              </form></td>
             </tr>
           @endforeach
     		</table>
