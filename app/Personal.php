@@ -50,6 +50,9 @@ class Personal extends Model
     public function crm(){
         return $this->hasMany('App\CRM');
     }
+    public function productosclientes(){
+        return $this->hasMany('App\Transaction');
+    }
 
     public function toSearchableArray(){
         return $this->toArray();
