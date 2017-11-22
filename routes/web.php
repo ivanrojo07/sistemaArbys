@@ -36,3 +36,4 @@ Route::get('producto', 'Producto\ProductController@search');
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');
 // Route::resource('prodpersonal','ProdUsuarioController');
+// Route::get('PersonalProductos','Personal\PersonalProductoController');
