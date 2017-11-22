@@ -18,8 +18,8 @@ class CreateTransactionTable extends Migration
             $table->increments('id');
             $table->integer('personal_id')->unsigned();
             $table->foreign('personal_id')->references('id')->on('personals');
-            $table->integer('producto_id')->unsigned();
-            $table->foreign('producto_id')->references('id')->on('products');
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestampsTz();
         });
     }

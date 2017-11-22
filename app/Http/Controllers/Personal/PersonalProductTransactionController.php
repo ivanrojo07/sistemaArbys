@@ -42,12 +42,15 @@ class PersonalProductTransactionController extends Controller
     public function store(Request $request, Personal $personal, Product $product)
     {
         //
-
+        // $product->noestaDisponible;
+        $product->status = Product::PRODUCTO_NO_DISPONIBLE;
+        $product->save();
+        // dd($product);
         $transaction = Transaction::create([
             'personal_id' => $personal->id,
-            'producto_id' => $product->id,
+            'product_id' => $product->id,
         ]);
-        return $transaction;
+        return redirect()->back()->with('success','Producto añadido con exito');
 
 
     }

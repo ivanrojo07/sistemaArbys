@@ -11,7 +11,7 @@ class Transaction extends Model
     //
    	use Sortable;
    	public $table='transactions';
-   	protected $fillable=['id','personal_id','producto_id'];
+   	protected $fillable=['id','personal_id','product_id'];
    	public $sortable=['id'];
    	protected $hidden=['created_at','updated_at'];
 
