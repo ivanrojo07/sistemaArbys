@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class PruebasController extends Controller
 {
-    public function view()
+    public function create()
     {
-        return view('PersonalProductos.view');
+        return view('rhpersonal.create');
     }
 }

@@ -37,4 +37,4 @@ Route::resource('personals.products.transactions', 'Personal\PersonalProductTran
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');
 // Route::resource('prodpersonal','ProdUsuarioController');
-// Route::get('PersonalProductos','Personal\PersonalProductoController');
+Route::get('pruebas','PruebasController@create');
