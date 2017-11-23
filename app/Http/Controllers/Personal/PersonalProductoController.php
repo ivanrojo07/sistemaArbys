@@ -26,7 +26,7 @@ class PersonalProductoController extends Controller
             //
             // if ($personal->tipo == 'Cliente') {
             //     # code...
-            $productos = Product::sortable()->paginate(10);
+            $productos = Product::where('status','=','disponible')->sortable()->paginate(10);
             return view('productos.index',['personal'=>$personal,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos,'request'=>$request]);
             // } else {
             //     # code...
@@ -41,7 +41,8 @@ class PersonalProductoController extends Controller
             $mensual2 = $request->mensualidad2;
             $marca = $request->marca;
             $tipo = $request->tipo;
-            $productos = Product::sortable()->where(function($busqueda) use($precio1, $precio2){
+            $productos = Product::sortable()->where('status','=','disponible')
+            ->where(function($busqueda) use($precio1, $precio2){
                 if ($precio1 != null || $precio1 != 0) {
                     # code...
                     // dd($precio2);
