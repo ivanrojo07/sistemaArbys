@@ -17,7 +17,7 @@ class PersonalProductController extends Controller
     {
         //
         $productos = $personal->transactions()->with('product')->get()->pluck('product');
-        dd($productos);
+        return view('productos.indexproducselect',['personal'=>$personal,'productos'=>$productos]);
     }
 
     /**
