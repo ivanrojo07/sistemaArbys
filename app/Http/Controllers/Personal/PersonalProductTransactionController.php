@@ -11,27 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class PersonalProductTransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Personal $personal, Product $product)
-    {
-        //
-        dd('controller');
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -43,6 +22,7 @@ class PersonalProductTransactionController extends Controller
     {
         //
         // $product->noestaDisponible;
+
         $product->status = Product::PRODUCTO_NO_DISPONIBLE;
         $product->save();
         // dd($product);

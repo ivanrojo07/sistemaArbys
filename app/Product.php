@@ -18,8 +18,11 @@ class Product extends Model
     protected $hidden = [
         'id','created_at', 'updated_at'
     ];
-    public function productosclientes(){
+    public function transactions(){
     	return $this->hasMany('App\Transaction');
+    }
+    public function personals(){
+        return $this->belongsTo('App\Personal');
     }
     public function noestaDisponible(){
    		

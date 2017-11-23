@@ -18,8 +18,8 @@ class Transaction extends Model
    	public function cliente(){
    		return $this->belongsTo(Personal::class);
    	}
-   	public function productos(){
-   		return $this->belongsTo(Product::class);
+   	public function product(){
+   		return $this->belongsTo('App\Product');
    	}
 
 }

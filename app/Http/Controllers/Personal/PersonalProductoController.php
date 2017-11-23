@@ -18,6 +18,7 @@ class PersonalProductoController extends Controller
     public function index(Personal $personal, Request $request)
     {
         // dd(Request::only($request));
+        // dd($personal->transactions()->with('product')->get()->pluck('product'));
         $marcas = DB::select('select distinct marca from products');
         $tipos = DB::select('select distinct tipo from products');
         // dd($marcas[0]);
