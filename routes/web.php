@@ -38,4 +38,4 @@ Route::resource('personals.product','Personal\PersonalProductController', ['only
 // Route::resource('referenciapersonales','RefPersonalController');
 // Route::resource('beneficiarios', 'BeneficiariosController');
 // Route::resource('prodpersonal','ProdUsuarioController');
-// Route::get('PersonalProductos','Personal\PersonalProductoController');
+Route::get('pruebas','PruebasController@create');
