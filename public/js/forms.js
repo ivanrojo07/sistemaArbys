@@ -57,10 +57,12 @@ function persona(elemento){
             }
         }
 
-// $(function() {
-//    $("#tab").tabs();
+$(function() {
+    $("#tabs").hide();
+    $("#tabs").tabs();
+    $("#tabs").show();
 
-// });
+});
 $("#tipopersona").change(function (){
   tipopersona = $('#tipopersona').val();
     if(tipopersona == "Fisica"){

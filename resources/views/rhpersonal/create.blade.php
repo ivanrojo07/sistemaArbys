@@ -1,6 +1,6 @@
 @extends('layouts.app')
 	@section('content')
-		<div class="container" id="tab">
+		<div class="container" >
 			<form role="form" id="form-cliente" method="POST" action="" name="form">
 				<div role="application" class="panel panel-group">
 					<div class="panel-default">
@@ -26,14 +26,18 @@
 			  				</div>
 						</div>
 					</div>
-				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li class="active"><a href="#tab1">Generales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default "><a href="" class="ui-tabs-anchor disabled" id="rhli1">Laborales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default " id="rhli2"><a href="" class="ui-tabs-anchor disabled">Estudios:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default" id="rhli3"><a href="" class="ui-tabs-anchor disabled">Emergencias:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Administrarivo:</a></li>
-				</ul>
-				<div class="panel-default">
+
+					<div class="tabs">
+						
+						<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+							<li class="active"><a href="#tabs-1">Generales:</a></li>
+							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tabs-2" class="ui-tabs-anchor" id="rhli1">Laborales:</a></li>
+							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" id="rhli2"><a href="#tabs-3" class="ui-tabs-anchor">Estudios:</a></li>
+							<li class="ui-tabs-tab ui-corner-top ui-state-default" id="rhli3"><a href="#tabs3" class="ui-tabs-anchor">Emergencias:</a></li>
+							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tab4s" class="ui-tabs-anchor">Vacaciones:</a></li>
+							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tab4s" class="ui-tabs-anchor">Administrativo:</a></li>
+						</ul>
+				<div class="panel-default" id="tabs-1">
 					<div class="panel-heading"><h5>Datos Generales:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -115,7 +119,7 @@
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-					<div class="panel-default">
+					<div class="panel-default" id="tabs-2" >
 					<div class="panel-heading"><h5>Laborales:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -226,12 +230,13 @@
 							</div>
 						</div>
 					</div>
+				</div>
 
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-					<div class="panel-default">
+					<div class="panel-default" id="tabs-3">
 					<div class="panel-heading"><h5>Estudios:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -282,46 +287,288 @@
 							
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-xs-3">
-								<label class="control-label" for="calle" id="lbl_calle">Calle:</label>
-								<input type="text" class="form-control" id="calle" name="calle">
+								<label class="control-label" for="idioma" id="lbl_idioma">Idioma:</label>
+								<select type="select" name="idioma" class="form-control" id="idioma1">
+									<option id="1" value=1>Inglés</option>
+									<option id="2" value=2>Frances</option>
+			    					<option id="3" value=3>Portugues</option>
+			    					<option id="4" value=4>Aleman</option>
+									<option id="5" value=5>Italiano</option>
+			    					<option id="6" value=6>Chino</option>
+			    					<option id="7" value=7>Japones</option>
+								</select>
 							</div>
 							<div class="form-group col-xs-3">
-								<label class="control-label" for="numext" id="lbl_numext">Número Exterior:</label>
-								<input type="text" class="form-control" id="id_numext" name="numext">
-							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="numint" id="lbl_numint">Número Interior:</label>
-								<input type="text" class="form-control" id="id_numint" name="numint">
-							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="colonia" id="lbl_colonia">Colonia:</label>
-								<input type="text" class="form-control" id="id_colonia" name="colonia">
+								<label class="control-label" for="nivel" id="lbl_nivel">Nivel:</label>
+								<select type="select" name="nivel" class="form-control" id="nivel1">
+									<option id="1" value=1>Básico</option>
+									<option id="2" value=2>Medio</option>
+			    					<option id="3" value=3>Alto</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-xs-3">
-								<label class="control-label" for="delegacion" id="lbl_delegacion">Delegación/Municipio:</label>
-								<input type="text" class="form-control" id="delegacion" name="delegacion">
+								<label class="control-label" for="idioma" id="lbl_idioma">Idioma 2:</label>
+								<select type="select" name="idioma" class="form-control" id="idioma2">
+									<option id="1" value=1>Inglés</option>
+									<option id="2" value=2>Frances</option>
+			    					<option id="3" value=3>Portugues</option>
+			    					<option id="4" value=4>Aleman</option>
+									<option id="5" value=5>Italiano</option>
+			    					<option id="6" value=6>Chino</option>
+			    					<option id="7" value=7>Japones</option>
+								</select>
 							</div>
 							<div class="form-group col-xs-3">
-								<label class="control-label" for="estado" id="lbl_estado">Estado:</label>
-								<input type="text" class="form-control" id="estado" name="estado">
+								<label class="control-label" for="nivel" id="lbl_nivel">Nivel:</label>
+								<select type="select" name="nivel" class="form-control" id="nivel2">
+									<option id="1" value=1>Básico</option>
+									<option id="2" value=2>Medio</option>
+			    					<option id="3" value=3>Alto</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12 offset-md-2 mt-3">
+							<div class="form-group col-xs-3">
+								<label class="control-label" for="idioma" id="lbl_idioma">Idioma 3:</label>
+								<select type="select" name="idioma" class="form-control" id="idioma3">
+									<option id="1" value=1>Inglés</option>
+									<option id="2" value=2>Frances</option>
+			    					<option id="3" value=3>Portugues</option>
+			    					<option id="4" value=4>Aleman</option>
+									<option id="5" value=5>Italiano</option>
+			    					<option id="6" value=6>Chino</option>
+			    					<option id="7" value=7>Japones</option>
+								</select>
 							</div>
 							<div class="form-group col-xs-3">
-								<label class="control-label" for="entre" id="lbl_entre">Entre Calles:</label>
-								<input type="text" class="form-control" id="id_entre" name="entre">
+								<label class="control-label" for="nivel" id="lbl_nivel">Nivel:</label>
+								<select type="select" name="nivel" class="form-control" id="nivel3">
+									<option id="1" value=1>Básico</option>
+									<option id="2" value=2>Medio</option>
+			    					<option id="3" value=3>Alto</option>
+								</select>
 							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="referencia" id="lbl_referencia">Referencia:</label>
-								<input type="text" class="form-control" id="referencia" name="referencia">
+						</div>
+						<div class="col-md-12 offset-md-2 mt-3">
+							<div class="form-group col-xs-4">
+								<label class="control-label" for="curso" id="lbl_curso">Curso:</label>
+								<input type="text" class="form-control" id="id_curso1" name="curso">
+								<div class="boton checkbox-disabled">
+									<label>
+								<input id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios"> ¿Certificación?
+								</label>
 							</div>
-
-						<button type="submit" class="btn btn-success">Guardar</button>
-	  				<p><strong>*Campo requerido</strong></p>
+						</div>
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="curso" id="lbl_curso">Curso 2:</label>
+								<input type="text" class="form-control" id="id_curso2" name="curso">
+								<div class="boton checkbox-disabled">
+									<label>
+								<input id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios"> ¿Certificación?
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="curso" id="lbl_curso">Curso 3:</label>
+								<input type="text" class="form-control" id="id_curso3" name="curso">
+								<div class="boton checkbox-disabled">
+									<label>
+								<input id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios"> ¿Certificación?
+								</label>
+							</div>
+						</div>
+					
 					</div>
 				</div>
 			</div>
+			{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+			<div class="panel-default" id="tabs-3">
+				<div class="panel-heading"><h5>Emergencias:</h5></div>
+				<div class="panel-body">
+					<div class="col-md-12 offset-md-2 mt-3">
+							<div class="form-group col-xs-4">
+								<label class="control-label" for="sangre" id="lbl_idioma">Tipo de Sangre:</label>
+								<select type="select" name="sangre" class="form-control" id="sangre">
+									<option id="1" value=1>O-</option>
+									<option id="2" value=2>O+</option>
+			    					<option id="3" value=3>AB+</option>
+			    					<option id="4" value=4>AB-</option>
+									<option id="5" value=5>A+</option>
+			    					<option id="6" value=6>A-</option>
+			    					<option id="7" value=7>B-</option>
+			    					<option id="8" value=7>B+</option>
+								</select>
+							</div>
+						</div>
+					<div class="col-md-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="enfermedades" id="lbl_enf">Enfermedades:</label>
+								<textarea class="form-control" id="id_enf" name="enfermedades" maxlength="500"> </textarea>
+								</div>
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="alergias" id="lbl_alerg">Alergias:</label>
+								<textarea class="form-control" id="id_alerg" name="alerg" maxlength="500"> </textarea>
+								</div>
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="oper" id="lbl_oper">Operaciones:</label>
+								<textarea class="form-control" id="id_oper" name="oper" maxlength="500"> </textarea>
+						</div>
+					</div>
+					<div class="panel-heading"><h5>En caso de emergencia llamar a:</h5></div>
+					<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Nombre:</label>
+			    					<input type="text" class="form-control" id="nombre1" name="nombre">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Parentesco</label>
+			    					<input type="text" class="form-control" id="parentesco1" name="parentesco">
+			  					</div>
+			  				</div>
+			  		<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="telefono">Telefono:</label>
+			    					<input type="text" class="form-control" id="telefono1" name="telefono">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="celular">Celular</label>
+			    					<input type="text" class="form-control" id="celular1" name="celular">
+			  					</div>
+			  				</div>
+			  				<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Nombre 2:</label>
+			    					<input type="text" class="form-control" id="nombre1" name="nombre">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Parentesco</label>
+			    					<input type="text" class="form-control" id="parentesco1" name="parentesco">
+			  					</div>
+			  				</div>
+			  		<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="telefono">Telefono 2:</label>
+			    					<input type="text" class="form-control" id="telefono1" name="telefono">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="celular">Celular 2:</label>
+			    					<input type="text" class="form-control" id="celular1" name="celular">
+			  					</div>
+			  				</div>
+			  				<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Nombre:</label>
+			    					<input type="text" class="form-control" id="nombre1" name="nombre">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="nombre">Parentesco</label>
+			    					<input type="text" class="form-control" id="parentesco1" name="parentesco">
+			  					</div>
+			  				</div>
+			  		<div class="col-xs-12 offset-md-2 mt-3">
+								<div class="form-group col-xs-4">
+			    					<label class="control-label" for="telefono">Telefono 3:</label>
+			    					<input type="text" class="form-control" id="telefono1" name="telefono">
+			  					</div>
+			  					<div class="form-group col-xs-4">
+			    					<label class="control-label" for="celular">Celular 3:</label>
+			    					<input type="text" class="form-control" id="celular1" name="celular">
+			  					</div>
+			  				</div>
+				</div>
+				</div>
+			</div>
+
+{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+					<div class="panel-default" id="tabs-3">
+					<div class="panel-heading"><h5>Vacaciones:</h5></div>
+					<div class="panel-body">
+						<div class="col-xs-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="vacaciones" id="lbl_vacaciones">Fecha de Inicio:</label>
+								<input type="date" class="form-control" id="id_vacaciones" name="vacaciones">
+							</div>
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="vacaciones" id="lbl_vacaciones">Fecha de Fin:</label>
+								<input type="date" class="form-control" id="id_vacaciones_fin" name="vacaciones">
+							</div>
+						
+						</div>
+						<div class="col-xs-12 offset-md-2 mt-3">
+									<div class="form-group col-xs-4">
+			    					<label class="control-label" for="celular">Número de días de vacaiones:</label>
+			    					<input type="text" class="form-control" id="dias_vac" name="vacaciones">
+			  			</div>
+						</div>
+						<div class="col-xs-12 offset-md-2 mt-3">
+									<div class="form-group col-xs-4">
+			    					<label class="control-label" for="dias_vac_rest">Días vacaiones restantes:</label>
+			    					<input type="text" class="form-control" id="dias_vac_rest" name="restantes">
+			  			</div>
+						</div>
+						<div class="col-xs-12 offset-md-2 mt-3">
+							<div class="form-group col-xs-8">
+								<label class="" for="dias_vac_rest">Periodo de:  <input type="text" class="form-control" id="dias_vac_rest" name="restantes"> a: <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
+								</label>
+								<label class="" for="dias_vac_rest">Días totales: </label> <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+
+
+<div class="panel-default" id="tabs-3">
+					<div class="panel-heading"><h5>
+					Administrativo:</h5></div>
+					<div class="panel-body">
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						{{--***************************************************--}}
+						<button type="submit" class="btn btn-success">Guardar</button>
+	  				<p><strong>*Campo requerido</strong></p>
 		</form>
 	</div>
-
+{{-- 
+<script>
+$('li a').click(function(){
+    $(this.getAttribute('class')).addClass("active");
+    $('.pestana').hide();
+    $(this.getAttribute('href')).show();
+});
+</script> --}}
 		@endsection
