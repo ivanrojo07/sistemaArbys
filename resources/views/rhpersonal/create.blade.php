@@ -504,7 +504,7 @@
 						</div>
 						<div class="col-xs-12 offset-md-2 mt-3">
 									<div class="form-group col-xs-4">
-			    					<label class="control-label" for="celular">Número de días de vacaiones:</label>
+			    					<label class="control-label" for="celular">Número de días de vacaciones:</label>
 			    					<input type="text" class="form-control" id="dias_vac" name="vacaciones">
 			  			</div>
 						</div>
@@ -528,32 +528,55 @@
 			</div>
 
 
-
-
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 
 
-<div class="panel-default" id="tabs-3">
+<div class="panel-default" id="tabs-5">
 					<div class="panel-heading"><h5>
 					Administrativo:</h5></div>
 					<div class="panel-body">
+						<div class="col-xs-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-4">
+								<label class="control-label" for="fecha" id="lbl_fecha">Fecha:</label>
+								<input type="date" class="form-control" id="id_fecha" name="fecha">
+							</div>
+					<div class="form-group col-xs-3">
+								<label class="control-label" for="comentarios" id="lbl_comen">Comentarios:</label>
+								<textarea class="form-control" id="id_coment" name="comentarios" maxlength="500"> </textarea>
+						</div>
+					<div class="form-group col-xs-3">
+								<label class="control-label" for="problema" id="lbl_problema">Problema:</label>
+								<textarea class="form-control" id="id_problema" name="problema" maxlength="500"> </textarea>
+						</div>
 					</div>
-				</div>
+					<div class="col-xs-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-3">
+								<label class="control-label" for="falta" id="lbl_falta">Tipo de falta:</label>
+								<select type="select" name="falta" class="form-control" id="id_falta">
+									<option id="1" value=1>falta 1</option>
+									<option id="2" value=2>falta 2</option>
+			    					<option id="3" value=3>falta 3</option>
+			    					<option id="4" value=4>falta 4</option>
+									<option id="5" value=5>falta 5</option>
+			    					<option id="6" value=6>falta 6</option>
+			    					<option id="7" value=7>falta 7</option>
+									<option id="8" value=8>falta 8</option>
+			    					<option id="9" value=9>falta 9</option>
+								</select>
+							</div>
+					</div>
+					<div class="col-xs-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-4">
+			    					<label class="control-label" for="reporto">Quién lo reportó:</label>
+			    					<input type="text" class="form-control" id="reporto" name="reporto">
+			  			</div>
 
-
-
-
-
-
-
-
-
-
-
-
+					</div>
+				</div>}
+			</div>
 
 						{{--***************************************************--}}
 						{{--***************************************************--}}
