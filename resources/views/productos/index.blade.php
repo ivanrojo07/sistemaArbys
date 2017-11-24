@@ -111,7 +111,7 @@
               <td>${{ number_format($producto->inicial,2)}}</td>
               <td><form role="form" id="form-cliente" method="POST"  action="{{ route('personals.products.transactions.store',['personal'=>$personal,'product'=>$producto]) }}">
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-info"> Agregar al cliente</button>
+                <input class="btn btn-primary" type="submit" value="Agregar al cliente">
               </form></td>
             </tr>
           @endforeach

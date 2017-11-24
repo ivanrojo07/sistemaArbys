@@ -69,4 +69,5 @@
 						</div>
 					</div>
 				@yield('personal')
+				</div>
 			@endsection
