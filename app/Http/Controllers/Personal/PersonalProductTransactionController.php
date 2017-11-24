@@ -30,7 +30,7 @@ class PersonalProductTransactionController extends Controller
             'personal_id' => $personal->id,
             'product_id' => $product->id,
         ]);
-        return redirect()->back()->with('success','Producto añadido con exito');
+        return redirect()->back()->with('success', 'Producto añadido con exito');
 
 
     }
