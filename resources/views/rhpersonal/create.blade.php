@@ -1,7 +1,7 @@
 @extends('layouts.app')
 	@section('content')
 		<div class="container" >
-			<form role="form" id="form-cliente" method="POST" action="" name="form">
+			<form role="form" id="form-cliente">
 				<div role="application" class="panel panel-group">
 					<div class="panel-default">
 						<div class="panel-heading"><h4>Datos del Empleado</h4></div>
@@ -27,17 +27,23 @@
 						</div>
 					</div>
 
-					<div class="tabs">
+				<div class="tabs">
 						
 						<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-							<li class="active"><a href="#tabs-1">Generales:</a></li>
-							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tabs-2" class="ui-tabs-anchor" id="rhli1">Laborales:</a></li>
-							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" id="rhli2"><a href="#tabs-3" class="ui-tabs-anchor">Estudios:</a></li>
-							<li class="ui-tabs-tab ui-corner-top ui-state-default" id="rhli3"><a href="#tabs3" class="ui-tabs-anchor">Emergencias:</a></li>
-							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tab4s" class="ui-tabs-anchor">Vacaciones:</a></li>
-							<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="#tab4s" class="ui-tabs-anchor">Administrativo:</a></li>
+							<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1"  class="ui-tabs-anchor" tabindex="-1">Generales:</a></li>
+
+							<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Laborales:</a></li>
+
+							<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Estudios:</a></li>
+
+							<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false"><a href="#tab4" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">Emergencias:</a></li>
+
+							<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-5" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false"><a href="#tab5" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-5">Vacaciones:</a></li>
+
+							<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-6" aria-labelledby="ui-id-6" aria-selected="false" aria-expanded="false"><a href="#tab6" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-6">Administrativo:</a></li>
+
 						</ul>
-				<div class="panel-default" id="tabs-1">
+				<div class="panel-default pestana" aria-hidden="false" id="tab1" style="display: block;">
 					<div class="panel-heading"><h5>Datos Generales:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -119,7 +125,7 @@
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-					<div class="panel-default" id="tabs-2" >
+				<div class="panel-default pestana" id="tab2">
 					<div class="panel-heading"><h5>Laborales:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -236,7 +242,7 @@
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-					<div class="panel-default" id="tabs-3">
+				<div class="panel-default pestana" id="tab3">
 					<div class="panel-heading"><h5>Estudios:</h5></div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
@@ -380,17 +386,17 @@
 							</div>
 						</div>
 					
+						</div>
 					</div>
 				</div>
-			</div>
-			{{--***************************************************--}}
+				{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-			<div class="panel-default" id="tabs-3">
-				<div class="panel-heading"><h5>Emergencias:</h5></div>
-				<div class="panel-body">
-					<div class="col-md-12 offset-md-2 mt-3">
+				<div class="panel-default pestana" id="tab4">
+					<div class="panel-heading"><h5>Emergencias:</h5></div>
+					<div class="panel-body">
+						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-xs-4">
 								<label class="control-label" for="sangre" id="lbl_idioma">Tipo de Sangre:</label>
 								<select type="select" name="sangre" class="form-control" id="sangre">
@@ -480,15 +486,14 @@
 			    					<input type="text" class="form-control" id="celular1" name="celular">
 			  					</div>
 			  				</div>
+					</div>
 				</div>
-				</div>
-			</div>
-
-{{--***************************************************--}}
+				
+				{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-					<div class="panel-default" id="tabs-3">
+				<div class="panel-default pestana" id="tab5">
 					<div class="panel-heading"><h5>Vacaciones:</h5></div>
 					<div class="panel-body">
 						<div class="col-xs-12 offset-md-2 mt-3">
@@ -514,30 +519,48 @@
 			    					<input type="text" class="form-control" id="dias_vac_rest" name="restantes">
 			  			</div>
 						</div>
-						<div class="col-xs-12 offset-md-2 mt-3">
-							<div class="form-group col-xs-8">
-								<label class="" for="dias_vac_rest">Periodo de:  <input type="text" class="form-control" id="dias_vac_rest" name="restantes"> a: <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
-								</label>
-								<label class="" for="dias_vac_rest">Días totales: </label> <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
-
+						<div class="col-xs-12 offset-md-2 mt-6">
+							<div class="form-group col-xs-2">
+								<label class="" for="dias_vac_rest">Periodo de:<input type="text" class="form-control" id="dias_vac_rest" name="restantes"></label> 
 							</div>
+								<div class="form-group col-xs-2">
+									<label>al día : <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
+								</label> </div>
+								<div class="form-group col-xs-2">
+								<label class="" for="dias_vac_rest">Días totales: </label> <input type="text" class="form-control" id="dias_vac_rest" name="restantes">
+							</div>
+						</div>
+						<div class="col-xs-12 offset-md-2 mt-6">
+							<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
+								<thead>
+									<tr class="info">
+										<th><a href="">Fecha:</a></th> 
+										<th><a href="">Fecha Inicio:</a></th>
+										<th><a href="">Fecha Fin:</a></th>
+										<th><a href="">Días:</a> </th>
+										<th><a href="">Días Restantes:</a></th>
+									</tr>
+								</thead>
+								<tr>
+									<th>28/11/2017</th> 
+									<th>28/11/2017</th>
+									<th>30/11/2017</th>
+									<th>2</th>
+									<th>4</th>
+								</tr>
+							</table>
+
 						</div>
 
 					</div>
 				</div>
-			</div>
-
-
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-
-
-<div class="panel-default" id="tabs-5">
-					<div class="panel-heading"><h5>
-					Administrativo:</h5></div>
-					<div class="panel-body">
+				<div class="panel-default pestana" id="tab6">
+				<div class="panel-heading"><h5>Administrativo:</h5></div>
+				<div class="panel-body">
 						<div class="col-xs-12 offset-md-2 mt-3">
 						<div class="form-group col-xs-4">
 								<label class="control-label" for="fecha" id="lbl_fecha">Fecha:</label>
@@ -575,23 +598,36 @@
 			  			</div>
 
 					</div>
-				</div>}
+					<div class="col-xs-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-12">
+					<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
+								<thead>
+									<tr class="info">
+										<th><a href="">Fecha:</a></th> 
+										<th><a href="">Tipo:</a></th>
+										<th><a href="">Quién Reporto:</a></th>
+										<th><a href="">Problema:</a> </th>
+									</tr>
+								</thead>
+								<tr>
+									<th>28/11/2017</th> 
+									<th>Administrativo</th>
+									<th>José Juan Perez Lopez</th>
+									<th>No portaba gafete visible.</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				</div>
 			</div>
-
+			</div>
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
 						{{--***************************************************--}}
-						<button type="submit" class="btn btn-success">Guardar</button>
+						<button class="btn btn-success">Guardar</button>
 	  				<p><strong>*Campo requerido</strong></p>
 		</form>
 	</div>
-{{-- 
-<script>
-$('li a').click(function(){
-    $(this.getAttribute('class')).addClass("active");
-    $('.pestana').hide();
-    $(this.getAttribute('href')).show();
-});
-</script> --}}
 		@endsection

@@ -57,12 +57,6 @@ function persona(elemento){
             }
         }
 
-$(function() {
-    $("#tabs").hide();
-    $("#tabs").tabs();
-    $("#tabs").show();
-
-});
 $("#tipopersona").change(function (){
   tipopersona = $('#tipopersona').val();
     if(tipopersona == "Fisica"){
@@ -135,6 +129,20 @@ $("#tipo").change(function (){
         $('#lbl_estado').text('* Estado:');
     }
 });
+$(function() {
+  $("li").click(function() {
+  // remove classes from all
+  $("li").removeClass("active");
+  // add class to the one we clicked
+  $(this).addClass("active");
+ });
+});
+  
+$('li a').click(function(){
+  $(this.getAttribute('class')).addClass("active");
+  $('.pestana').hide();
+  $(this.getAttribute('href')).show();
+}); 
 $(function(){
               $('.dropdown-submenu a.test').on("click", function(e){
                 $(this).next('ul').toggle();
@@ -150,10 +158,4 @@ $(function() {
       // add class to the one we clicked
       $(this).addClass("active");
    });
-});
-
-$('li a').click(function(){
-    $(this.getAttribute('class')).addClass("active");
-    $('.pestana').hide();
-    $(this.getAttribute('href')).show();
 });

@@ -101,7 +101,7 @@
 					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" id="clienteli2" style="display:none;"><a href="" class="ui-tabs-anchor disabled">Referencias Personales:</a></li>
 					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" id="clienteli3" style="display:none;"><a href="" class="ui-tabs-anchor disabled">Datos de Beneficiarios:</a></li>
 					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Productos:</a></li>
-					<li class="disabled" disabled><a href="{{ route('personals.product.index',['personal'=>$personal]) }}" class="ui-tabs-anchor disabled">Productos seleccionados:</a></li>
+					<li class="disabled" disabled><a href="" class="ui-tabs-anchor disabled">Productos seleccionados:</a></li>
 					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">C.R.M.:</a></li>
 				</ul>
 				<div class="panel-default">
