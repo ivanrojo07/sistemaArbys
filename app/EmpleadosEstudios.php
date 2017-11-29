@@ -16,6 +16,6 @@ class EmpleadosEstudios extends Model
     protected $hidden=['created_at','updated_at'];
 
     public function empleado(){
-    	return $this->belongsTo('App\Empleado')
+    	return $this->belongsTo('App\Empleado');
     }
 }
