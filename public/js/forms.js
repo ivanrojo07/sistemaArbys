@@ -129,14 +129,14 @@ $("#tipo").change(function (){
         $('#lbl_estado').text('* Estado:');
     }
 });
-$(function() {
-  $("li").click(function() {
-  // remove classes from all
-  $("li").removeClass("active");
-  // add class to the one we clicked
-  $(this).addClass("active");
- });
-});
+// $(function() {
+//   $("li").click(function() {
+//   // remove classes from all
+//   $("li").removeClass("active");
+//   // add class to the one we clicked
+//   $(this).addClass("active");
+//  });
+// });
   
 $('li a').click(function(){
   $(this.getAttribute('class')).addClass("active");
@@ -151,11 +151,11 @@ $(function(){
               });
             });
 
-$(function() {
-   $("div.panel div ul li").click(function() {
-      // remove classes from all
-      $("li").removeClass("active");
-      // add class to the one we clicked
-      $(this).addClass("active");
-   });
-});
+// $(function() {
+//    $("div.panel div ul li").click(function() {
+//       // remove classes from all
+//       $("li").removeClass("active");
+//       // add class to the one we clicked
+//       $(this).addClass("active");
+//    });
+// });

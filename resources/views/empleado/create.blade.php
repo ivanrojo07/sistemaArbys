@@ -27,19 +27,19 @@
 					</div>
 				</div>
 			</div>
-			<div id="tabs">
-				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1"  class="ui-tabs-anchor" tabindex="-1">Generales:</a></li>
+			<div>
+				<ul class="nav nav-pills nav-justified">
+					<li class="active"><a href="#tab1"  class="ui-tabs-anchor">Generales:</a></li>
 
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false" disabled="disabled"><a href="#tab2" role="tab" tabindex="-1" class="ui-tabs-anchor disabled" id="ui-id-2" disabled="disabled">Laborales:</a></li>
+					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Laborales:</a></li>
 
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Estudios:</a></li>
+					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Estudios:</a></li>
 
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false"><a href="#tab4" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">Emergencias:</a></li>
+					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Emergencias:</a></li>
 
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-5" aria-labelledby="ui-id-5" aria-selected="false" aria-expanded="false"><a href="#tab5" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-5">Vacaciones:</a></li>
+					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Vacaciones:</a></li>
 
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-6" aria-labelledby="ui-id-6" aria-selected="false" aria-expanded="false"><a href="#tab6" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-6">Administrativo:</a></li>
+					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Administrativo:</a></li>
 				</ul>
 				<div class="panel-default">
 					<div class="panel-heading"><h5>Datos Generales:</h5></div>

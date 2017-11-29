@@ -21,4 +21,10 @@ class Empleado extends Model
     protected $hidden=[
     	'created_at','updated_at'
     ];
+    public function datosLab(){
+        return $this->hasOne('App\EmpleadoDatosLab');
+    }
+    public function estudios(){
+        return $this->hasOne('App\EmpleadosEstudios');
+    }
 }
