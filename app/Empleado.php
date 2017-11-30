@@ -27,4 +27,13 @@ class Empleado extends Model
     public function estudios(){
         return $this->hasOne('App\EmpleadosEstudios');
     }
+    public function emergencias(){
+        return $this->hasOne('App\EmpleadosEmergencias');
+    }
+    public function vacaciones(){
+        return $this->hasMany('App\EmpleadoVacaciones');
+    }
+    public function faltasAdmin(){
+        return $this->hasMany('App\EmpleadoFaltasAdministrativas');
+    }
 }
