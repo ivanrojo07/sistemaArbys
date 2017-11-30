@@ -16,7 +16,7 @@ class CreateEmpleadosemergenciasTable extends Migration
         Schema::create('empleadosemergencias', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
-            $table->foreign('empleado_id')->refereneces('id')->on('empleados');
+            $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->enum('sangre',['O-','O+','AB+','AB-','A+','A-','B+','B-']);
             $table->text('enfermedades')->nullable();
             $table->text('alergias')->nullable();

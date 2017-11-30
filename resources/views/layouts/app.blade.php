@@ -10,6 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('img//favicon.ico') }}" type="image/x-icon">
+    
     <!-- Styles -->
      <script href="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

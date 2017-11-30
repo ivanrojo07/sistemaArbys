@@ -19,8 +19,8 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('personal', 'Personal\PersonalController@search');
-Route::get('clientes', 'Personal\PersonalController@clientes');
-Route::get('prospectos', 'Personal\PersonalController@prospectos');
+// Route::get('clientes', 'Personal\PersonalController@clientes');
+// Route::get('prospectos', 'Personal\PersonalController@prospectos');
 Route::resource('personals', 'Personal\PersonalController');
 Route::resource('personals.datoslaborales', 'Personal\PersonalDatosLabController');
 Route::resource('personals.referenciapersonales', 'Personal\PersonalRefPersonalController');
@@ -40,3 +40,5 @@ Route::resource('personals.product','Personal\PersonalProductController', ['only
 // Route::resource('prodpersonal','ProdUsuarioController');
 Route::get('pruebas','PruebasController@create');
 Route::resource('empleados','Empleado\EmpleadoController');
+Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
+

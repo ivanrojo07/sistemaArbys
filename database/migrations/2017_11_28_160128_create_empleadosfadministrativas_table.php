@@ -16,7 +16,7 @@ class CreateEmpleadosfadministrativasTable extends Migration
         Schema::create('empleadosfadministrativas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
-            $table->foreign('empleado_id')->refereneces('id')->on('empleados');
+            $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->date('fecha')->nullable();
             $table->text('comentarios')->nullable();
             $table->text('problema')->nullable();

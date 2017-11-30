@@ -22,7 +22,7 @@ class Empleado extends Model
     	'created_at','updated_at'
     ];
     public function datosLab(){
-        return $this->hasOne('App\EmpleadoDatosLab');
+        return $this->hasOne('App\EmpleadosDatosLab');
     }
     public function estudios(){
         return $this->hasOne('App\EmpleadosEstudios');
@@ -31,9 +31,9 @@ class Empleado extends Model
         return $this->hasOne('App\EmpleadosEmergencias');
     }
     public function vacaciones(){
-        return $this->hasMany('App\EmpleadoVacaciones');
+        return $this->hasMany('App\EmpleadosVacaciones');
     }
     public function faltasAdmin(){
-        return $this->hasMany('App\EmpleadoFaltasAdministrativas');
+        return $this->hasMany('App\EmpleadosFaltasAdministrativas');
     }
 }

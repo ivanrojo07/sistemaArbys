@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
-use Illuminate\Http\Request;
+use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class EmpleadoController extends Controller
+class EmpleadosDatosLabController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Empleado $empleado)
     {
         //
-        $empleados = Empleado::sortable()->paginate(10);
-        return view('empleado.index',['empleados'=>$empleados]);
-
+        $datoslab = $empleado->datosLab;
+        return view('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**
@@ -26,10 +26,11 @@ class EmpleadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
         //
-        return view('empleado.create');
+        $datoslab = new EmpleadosDatosLab;
+        return view('empleadodatoslab.create',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**
@@ -38,18 +39,11 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Empleado $empleado)
     {
         //
-        $rfc = Empleado::where('rfc',$request->rfc)->get();
-        if (count($rfc)!=0) {
-            # code...
-            return redirect()->back()->with('errors','El RFC ya existe');
-        }
-        else {
-            $empleado = Empleado::create($request->all());
-            return redirect()->route('empleados.index')->with('success','Empleado Creado');
-        }
+        $datoslab = EmpleadosDatosLab::create($request->all());
+        return redirect()->route('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**
@@ -61,7 +55,6 @@ class EmpleadoController extends Controller
     public function show(Empleado $empleado)
     {
         //
-        return view('empleado.view',['empleado'=>$empleado]);
     }
 
     /**
@@ -70,9 +63,12 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit(Empleado $empleado,$datoslaborale)
     {
         //
+        $datoslab = $empleado->datosLab;
+        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'empleado'=>$empleado]);
+
     }
 
     /**
@@ -82,9 +78,12 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, Empleado $empleado, $datoslaborale)
     {
         //
+        $datoslab = EmpleadosDatosLab::findOrFail($datoslaborale);
+        $datoslab->update($request->all());
+        return redirect()->route('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**
