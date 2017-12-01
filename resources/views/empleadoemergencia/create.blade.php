@@ -1,0 +1,151 @@
+@extends('layouts.infoempleado')
+@section('infoempleado')
+	{{-- expr --}}
+	<div>
+		<ul class="nav nav-pills nav-justified">
+			<li role="presentation" class=""><a href="#"  class="ui-tabs-anchor">Generales:</a></li>
+
+			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Laborales:</a></li>
+
+			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Estudios:</a></li>
+
+			<li role="presentation" class="active"><a href="#" class="ui-tabs-anchor">Emergencias:</a></li>
+
+			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Vacaciones:</a></li>
+
+			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Administrativo:</a></li>
+		</ul>
+	</div>
+	<div class="panel-default">
+		<div class="panel-heading"><h5>Emergencias:</h5></div>
+		<div class="panel-body">
+			@if ($edit == true)
+				{{-- true expr --}}
+			<form role="form" method="POST" action="{{ route('empleados.emergencias.update',['emergencia'=>$emergencias, 'empleado'=>$empleado]) }}">
+				{{ csrf_field() }}
+				<input type="hidden" name="_method" value="PUT">
+			@else
+				{{-- false expr --}}
+			<form role="form" method="POST" action="{{ route('empleados.emergencias.store',['empleado'=>$empleado]) }}">
+				{{ csrf_field() }}
+				
+			@endif
+				<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
+				<div class="col-md-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+						<label class="control-label" for="sangre" id="sangre">Tipo de Sangre:</label>
+						<select type="select" name="sangre" class="form-control" id="sangre">
+							<option id="1" value="O-" @if ($emergencias->sangre == "O-")
+								{{-- expr --}}
+								selected="selected" 
+							@endif>O-</option>
+							<option id="2" value="O+" @if ($emergencias->sangre == "O+")
+								{{-- expr --}}
+								selected="selected" 
+							@endif>O+</option>
+	    					<option id="3" value="AB+" @if ($emergencias->sangre == "AB+")
+	    						{{-- expr --}}
+	    						selected="selected" 
+	    					@endif>AB+</option>
+	    					<option id="4" value="AB-" @if ($emergencias->sangre == "AB-")
+	    						{{-- expr --}}
+	    						selected="selected" 
+	    					@endif>AB-</option>
+							<option id="5" value="A+" @if ($emergencias->sangre == "A+")
+								{{-- expr --}}
+								selected="selected" 
+							@endif>A+</option>
+	    					<option id="6" value="A-" @if ($emergencias->sangre == "A-")
+	    						{{-- expr --}}
+	    						selected="selected" 
+	    					@endif>A-</option>
+	    					<option id="7" value="B-" @if ($emergencias->sangre == "B-")
+	    						{{-- expr --}}
+	    						selected="selected" 
+	    					@endif>B-</option>
+	    					<option id="8" value="B+" @if ($emergencias->sangre == "B+")
+	    						{{-- expr --}}
+	    						selected="selected" 
+	    					@endif>B+</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+						<label class="control-label" for="enfermedades" id="lbl_enf">Enfermedades:</label>
+						<textarea class="form-control" id="enfermedades" name="enfermedades" maxlength="500" value="{{ $emergencias->enfermedades }}"></textarea>
+					</div>
+					<div class="form-group col-xs-4">
+						<label class="control-label" for="alergias" id="lbl_alerg">Alergias:</label>
+						<textarea class="form-control" id="alergias" name="alergias" maxlength="500" value="{{ $emergencias->alergias }}"> </textarea>
+					</div>
+					<div class="form-group col-xs-4">
+						<label class="control-label" for="operaciones" id="lbl_oper">Operaciones:</label>
+						<textarea class="form-control" id="operaciones" name="operaciones" maxlength="500" value="{{ $emergencias->operaciones }}"> </textarea>
+					</div>
+				</div>
+				<div class="panel-heading"><h5>En caso de emergencia llamar a:</h5></div>
+				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="nombrecontac1">Nombre:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="parentescocontac1">Parentesco:</label>
+    					<input type="text" class="form-control" id="parentescocontac1" name="parentescocontac1">
+  					</div>
+  				</div>
+  				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="telefonocontac1">Télefono:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="movilcontac1">Telefono celular:</label>
+    					<input type="text" class="form-control" id="movilcontac1" name="movilcontac1">
+  					</div>
+  				</div>
+  				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="nombrecontac1">Nombre:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="parentescocontac1">Parentesco:</label>
+    					<input type="text" class="form-control" id="parentescocontac1" name="parentescocontac1">
+  					</div>
+  				</div>
+  				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="telefonocontac1">Télefono:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="movilcontac1">Telefono celular:</label>
+    					<input type="text" class="form-control" id="movilcontac1" name="movilcontac1">
+  					</div>
+  				</div>
+  				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="nombrecontac1">Nombre:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="parentescocontac1">Parentesco:</label>
+    					<input type="text" class="form-control" id="parentescocontac1" name="parentescocontac1">
+  					</div>
+  				</div>
+  				<div class="col-xs-12 offset-md-2 mt-3">
+					<div class="form-group col-xs-4">
+    					<label class="control-label" for="telefonocontac1">Télefono:</label>
+    					<input type="text" class="form-control" id="nombrecontac1" name="nombrecontac1">
+  					</div>
+  					<div class="form-group col-xs-4">
+    					<label class="control-label" for="movilcontac1">Telefono celular:</label>
+    					<input type="text" class="form-control" id="movilcontac1" name="movilcontac1">
+  					</div>
+  				</div>
+			</form>
+		</div>
+	</div>
+@endsection

@@ -30,7 +30,8 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = new EmpleadosDatosLab;
-        return view('empleadodatoslab.create',['empleado'=>$empleado,'datoslab'=>$datoslab]);
+        $edit = false;
+        return view('empleadodatoslab.create',['empleado'=>$empleado,'datoslab'=>$datoslab,'edit'=>$edit]);
     }
 
     /**
@@ -43,7 +44,7 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = EmpleadosDatosLab::create($request->all());
-        return redirect()->route('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
+        return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**
@@ -67,7 +68,8 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = $empleado->datosLab;
-        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'empleado'=>$empleado]);
+        $edit = true;
+        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'empleado'=>$empleado,'edit'=>$edit]);
 
     }
 
@@ -83,7 +85,7 @@ class EmpleadosDatosLabController extends Controller
         //
         $datoslab = EmpleadosDatosLab::findOrFail($datoslaborale);
         $datoslab->update($request->all());
-        return redirect()->route('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
+        return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
     /**

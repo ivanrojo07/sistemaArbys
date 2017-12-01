@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
-use Illuminate\Http\Request;
+use App\EmpleadosEmergencias;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class EmpleadosEmergenciasController extends Controller
 {
@@ -16,6 +17,8 @@ class EmpleadosEmergenciasController extends Controller
     public function index(Empleado $empleado)
     {
         //
+        $emergencias = $empleado->emergencias;
+        return view('empleadoemergencia.view',['empleado'=>$empleado, 'emergencias'=>$emergencias]);
     }
 
     /**
@@ -23,9 +26,12 @@ class EmpleadosEmergenciasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Empleado $empleado)
     {
         //
+        $emergencias = new EmpleadosEmergencias;
+        $edit = false;
+        return view('empleadoemergencia.create',['empleado'=>$empleado,'emergencias'=>$emergencias,'edit'=>$edit]);
     }
 
     /**
@@ -34,9 +40,12 @@ class EmpleadosEmergenciasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Empleado $empleado)
     {
         //
+        $emergencias = EmpleadosEmergencias::create($request->all());
+        return redirect()->route('empleados.emergencias.index',['empleado'=>$empleado,'emergencias'=>$emergencias]);
+
     }
 
     /**
@@ -56,9 +65,13 @@ class EmpleadosEmergenciasController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit(Empleado $empleado, $emergencia)
     {
         //
+        $emergencias = $empleado->emergencias;
+        $edit = true;
+        return view('empleadoemergencia.create',['empleado'=>$empleado, 'emergencias'=>$emergencias,'edit'=>$edit]);
+
     }
 
     /**
@@ -68,9 +81,12 @@ class EmpleadosEmergenciasController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, Empleado $empleado, $emergencia)
     {
         //
+        $emergencias = EmpleadosEmergencias::findOrFail($emergencia);
+        $emergencias->update($request->all());
+        return redirect()->route('empleados.emergencias.index',['empleado'=>$empleado,'emergencias'=>$emergencias]);
     }
 
     /**
