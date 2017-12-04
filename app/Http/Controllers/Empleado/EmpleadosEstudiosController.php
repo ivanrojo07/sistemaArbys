@@ -30,7 +30,8 @@ class EmpleadosEstudiosController extends Controller
     {
         //
         $estudios = new EmpleadosEstudios;
-        return vew('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios]);
+        $edit = false;
+        return view('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios,'edit'=>$edit]);
     }
 
     /**
@@ -67,7 +68,8 @@ class EmpleadosEstudiosController extends Controller
     {
         //
         $estudios = $empleado->estudios;
-        return vew('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios]);
+        $edit = true;
+        return vew('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios,'edit'=>$edit]);
     }
 
     /**

@@ -98,51 +98,51 @@
   				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
     					<label class="control-label" for="telefonocontac1">Télefono:</label>
-    					<input type="text" class="form-control" id="telefonocontac1" name="telefonocontac1">
+    					<input type="text" class="form-control" id="telefonocontac1" name="telefonocontac1" value="{{ $emergencias->telefonocontac1 }}">
   					</div>
   					<div class="form-group col-xs-4">
     					<label class="control-label" for="movilcontac1">Telefono celular:</label>
-    					<input type="text" class="form-control" id="movilcontac1" name="movilcontac1">
+    					<input type="text" class="form-control" id="movilcontac1" name="movilcontac1" value="{{ $emergencias->movilcontac1 }}">
   					</div>
   				</div>
   				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
     					<label class="control-label" for="nombrecontac2">Nombre:</label>
-    					<input type="text" class="form-control" id="nombrecontac2" name="nombrecontac2">
+    					<input type="text" class="form-control" id="nombrecontac2" name="nombrecontac2" value="{{ $emergencias->nombrecontac2 }}">
   					</div>
   					<div class="form-group col-xs-4">
     					<label class="control-label" for="parentescocontac2">Parentesco:</label>
-    					<input type="text" class="form-control" id="parentescocontac2" name="parentescocontac2">
+    					<input type="text" class="form-control" id="parentescocontac2" name="parentescocontac2" value="{{ $emergencias->parentescocontac2 }}">
   					</div>
   				</div>
   				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
     					<label class="control-label" for="telefonocontac2">Télefono:</label>
-    					<input type="text" class="form-control" id="telefonocontac2" name="telefonocontac2">
+    					<input type="text" class="form-control" id="telefonocontac2" name="telefonocontac2" value="{{ $emergencias->telefonocontac2 }}">
   					</div>
   					<div class="form-group col-xs-4">
     					<label class="control-label" for="movilcontac2">Telefono celular:</label>
-    					<input type="text" class="form-control" id="movilcontac2" name="movilcontac2">
+    					<input type="text" class="form-control" id="movilcontac2" name="movilcontac2" value="{{ $emergencias->movilcontac2 }}">
   					</div>
   				</div>
   				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
     					<label class="control-label" for="nombrecontac3">Nombre:</label>
-    					<input type="text" class="form-control" id="nombrecontac3" name="nombrecontac3">
+    					<input type="text" class="form-control" id="nombrecontac3" name="nombrecontac3" value="{{ $emergencias->nombrecontac3 }}">
   					</div>
   					<div class="form-group col-xs-4">
     					<label class="control-label" for="parentescocontac3">Parentesco:</label>
-    					<input type="text" class="form-control" id="parentescocontac3" name="parentescocontac3">
+    					<input type="text" class="form-control" id="parentescocontac3" name="parentescocontac3" value="{{ $emergencias->parentescocontac3 }}">
   					</div>
   				</div>
   				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
     					<label class="control-label" for="telefonocontac3">Télefono:</label>
-    					<input type="text" class="form-control" id="telefonocontac3" name="telefonocontac3">
+    					<input type="text" class="form-control" id="telefonocontac3" name="telefonocontac3" value="{{ $emergencias->telefonocontac3 }}">
   					</div>
   					<div class="form-group col-xs-4">
     					<label class="control-label" for="movilcontac3">Telefono celular:</label>
-    					<input type="text" class="form-control" id="movilcontac3" name="movilcontac3">
+    					<input type="text" class="form-control" id="movilcontac3" name="movilcontac3" value="{{ $emergencias->movilcontac3 }}">
   					</div>
   				</div>
   				<button type="submit" class="btn btn-success">Guardar</button>
