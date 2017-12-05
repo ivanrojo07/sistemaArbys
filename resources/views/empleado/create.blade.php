@@ -41,6 +41,7 @@
 
 					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Administrativo:</a></li>
 				</ul>
+			</div>
 				<div class="panel-default">
 					<div class="panel-heading"><h5>Datos Generales:</h5></div>
 					<div class="panel-body">

@@ -3,17 +3,17 @@
 	{{-- expr --}}
 	<div>
 		<ul class="nav nav-pills nav-justified">
-			<li role="presentation" class=""><a href="#"  class="ui-tabs-anchor">Generales:</a></li>
+			<li role="presentation" class=""><a href="{{ route('empleados.show',['empleado'=>$empleado]) }}"  class="ui-tabs-anchor">Generales:</a></li>
 
-			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Laborales:</a></li>
+			<li role="presentation" class=""><a href="{{ route('empleados.datoslaborales.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Laborales:</a></li>
 
-			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Estudios:</a></li>
+			<li role="presentation" class=""><a href="{{ route('empleados.estudios.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Estudios:</a></li>
 
-			<li role="presentation" class="active"><a href="#" class="ui-tabs-anchor">Emergencias:</a></li>
+			<li role="presentation" class="active"><a href="{{ route('empleados.emergencias.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Emergencias:</a></li>
 
-			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Vacaciones:</a></li>
+			<li role="presentation" class=""><a href="{{ route('empleados.vacaciones.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Vacaciones:</a></li>
 
-			<li role="presentation" class=""><a href="#" class="ui-tabs-anchor">Administrativo:</a></li>
+			<li role="presentation" class=""><a href="{{ route('empleados.faltas.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Administrativo:</a></li>
 		</ul>
 	</div>
 	<div class="panel-default">
