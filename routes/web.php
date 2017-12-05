@@ -43,4 +43,6 @@ Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
+Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
+Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 

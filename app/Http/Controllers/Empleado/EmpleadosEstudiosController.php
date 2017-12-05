@@ -43,7 +43,47 @@ class EmpleadosEstudiosController extends Controller
     public function store(Request $request, Empleado $empleado)
     {
         //
-        $estudios = EmpleadosEstudios::create($request->all());
+        // dd($request->all());
+        $estudios = new EmpleadosEstudios;
+        $estudios->empleado_id = $request->empleado_id;
+        $estudios->escolaridad1 = $request->escolaridad1;
+        $estudios->institucion1 = $request->institucion1;
+        $estudios->cedula1 = $request->cedula1;
+        $estudios->escolaridad2 = $request->escolaridad2;
+        $estudios->institucion2 = $request->institucion2;
+        $estudios->cedula2 = $request->cedula2;
+        $estudios->idioma1 = $request->idioma1;
+        $estudios->nivel1 = $request->nivel1;
+        $estudios->idioma2 = $request->idioma2;
+        $estudios->nivel2 = $request->nivel2;
+        $estudios->idioma3 = $request->idioma3;
+        $estudios->nivel3 = $request->nivel3;
+        $estudios->curso1 = $request->curso1;
+        if ($request->certificado1 == "on") {
+            # code...
+            $estudios->certificado1 = true;
+        }
+        else {
+            $estudios->certificado1 = false;   
+        }
+        $estudios->curso2 = $request->curso2;
+        if ($request->certificado2 == "on") {
+            # code...
+            $estudios->certificado2 = true;
+        } else {
+            # code...
+            $estudios->certificado2 = false;
+        }
+        $estudios->curso3 = $request->curso3;
+        if ($request->certificado3 == "on") {
+            # code...
+            $estudios->certificado3 = true;
+        } else {
+            # code...
+            $estudios->certificado3 = false;
+        }
+        // dd($estudios);
+        $estudios->save();
         return redirect()->route('empleadoestudios.view',['empleado'=>$empleado,'estudios'=>$estudios]);
     }
 
@@ -69,7 +109,7 @@ class EmpleadosEstudiosController extends Controller
         //
         $estudios = $empleado->estudios;
         $edit = true;
-        return vew('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios,'edit'=>$edit]);
+        return view('empleadoestudios.create',['empleado'=>$empleado,'estudios'=>$estudios,'edit'=>$edit]);
     }
 
     /**
@@ -79,11 +119,48 @@ class EmpleadosEstudiosController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, Empleado $empleado, $estudio)
     {
         //
         $estudios = EmpleadosEstudios::findOrFail($estudio);
-        $estudios->update($request->all());
+        $estudios->escolaridad1 = $request->escolaridad1;
+        $estudios->institucion1 = $request->institucion1;
+        $estudios->cedula1 = $request->cedula1;
+        $estudios->escolaridad2 = $request->escolaridad2;
+        $estudios->institucion2 = $request->institucion2;
+        $estudios->cedula2 = $request->cedula2;
+        $estudios->idioma1 = $request->idioma1;
+        $estudios->nivel1 = $request->nivel1;
+        $estudios->idioma2 = $request->idioma2;
+        $estudios->nivel2 = $request->nivel2;
+        $estudios->idioma3 = $request->idioma3;
+        $estudios->nivel3 = $request->nivel3;
+        $estudios->curso1 = $request->curso1;
+        if ($request->certificado1 == "on") {
+            # code...
+            $estudios->certificado1 = true;
+        }
+        else {
+            $estudios->certificado1 = false;   
+        }
+        $estudios->curso2 = $request->curso2;
+        if ($request->certificado2 == "on") {
+            # code...
+            $estudios->certificado2 = true;
+        } else {
+            # code...
+            $estudios->certificado2 = false;
+        }
+        $estudios->curso3 = $request->curso3;
+        if ($request->certificado3 == "on") {
+            # code...
+            $estudios->certificado3 = true;
+        } else {
+            # code...
+            $estudios->certificado3 = false;
+        }
+        // dd($estudios);
+        $estudios->save();
         return redirect()->route('empleadoestudios.view',['empleado'=>$empleado,'estudios'=>$estudios]);
     }
 

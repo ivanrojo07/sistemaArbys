@@ -18,10 +18,10 @@ class CreateEmpleadosestudiosTable extends Migration
             $table->integer('empleado_id')->unsigned();
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->string('escolaridad1');
-            $table->string('intitucion1')->nullable();
+            $table->string('institucion1')->nullable();
             $table->string('cedula1')->nullable();
             $table->string('escolaridad2');
-            $table->string('intitucion2')->nullable();
+            $table->string('institucion2')->nullable();
             $table->string('cedula2')->nullable();
             $table->string('idioma1');
             $table->string('nivel1');

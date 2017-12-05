@@ -14,9 +14,9 @@ class EmpleadosFaltasAdministrativas extends Model
     
     protected $fillable=['id','empleado_id','fecha','comentarios','problema','tipofalta','reporto'];
     
-    public $sortable=['id','fecha','tipofalta','reporto'];
+    public $sortable=['id','fecha','tipofalta','reporto','problema'];
     
-    protected $fillable=['created_at','updated_at'];
+    protected $hidden=['created_at','updated_at'];
     
     public function empleado(){
     	return $this->belongsTo('App\Empleado','empleado_id');

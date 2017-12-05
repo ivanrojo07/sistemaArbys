@@ -22,7 +22,7 @@ class CreateEmpleadosvacacionesTable extends Migration
             $table->string('diastomados')->nullable();
             $table->string('diasrestantes')->nullable();
             $table->string('periodo1')->nullable();
-            $table->string('perdiodo2')->nullable();
+            $table->string('periodo2')->nullable();
             $table->string('diastotal')->nullable();
             $table->timestampsTz();
         });
