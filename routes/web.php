@@ -45,4 +45,20 @@ Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
+    
+//Añadido <Iyari> 5/dic/2017//
+Route::get('sucursales',function(){
+	return View::make('Sucursales.index');
+});
+Route::get('gastos',function(){
 
+	return View::make('Gastos.formulario');
+});
+Route::get('consulta',function(){
+
+	return View::make('Empleadoconsulta.consulta');
+});
+Route::get('bonos',function(){
+
+	return View::make('Empleadobonos.bonos');
+});

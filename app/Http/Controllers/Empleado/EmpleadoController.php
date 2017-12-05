@@ -97,4 +97,10 @@ class EmpleadoController extends Controller
     {
         //
     }
+
+//Añadido : Iyari 05/Dic/2017
+    public function consulta()
+    {
+        return view('empleado.consulta');
+    }
 }
