@@ -19,12 +19,7 @@
 							</select> 
 	    		</div>
 
-	    		 <div class="col-sm-4">
-	    			<h5>Monto
-	    				<i class="fa fa-money" aria-hidden="true"></i>
-	    			</h5>
-	    			<input type="text" name="responsable" class="form-control" placeholder="$--">
-	    	 	 </div>
+	    		 
 
 
 	    	 	 <div class="col-sm-4">
@@ -44,6 +39,16 @@
   							 ?>
 							</select> 
 	    		</div>
+
+
+
+	    		<div class="col-sm-3">
+	    			<h5>Monto
+	    				<i class="fa fa-money" aria-hidden="true"></i>
+	    			</h5>
+	    			<input type="text" name="responsable" class="form-control" placeholder="$--">
+	    	 	 </div>
+
 
 			 </div>
 	</form>
