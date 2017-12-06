@@ -18,7 +18,15 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = $empleado->datosLab;
-        return view('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]);
+        // dd($datoslab);
+        if ($datoslab == null) {
+            # code...
+            return redirect()->route('empleados.datoslaborales.create',['empleado'=>$empleado]);
+        } else {
+            # code...
+            return view('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]); 
+        }
+        
     }
 
     /**
