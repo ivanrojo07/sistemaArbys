@@ -159,3 +159,25 @@ $(function(){
 //       $(this).addClass("active");
 //    });
 // });
+function deleteFunction() {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+        swal({
+  title: "¿Estas seguro?",
+  text: "Si eliminas, no podras recuperar tu información.",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "SI",
+  cancelButtonText: "¡NO!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},
+function(isConfirm){
+  if (isConfirm) {
+    form.submit();          // submitting the form when user press yes
+  } else {
+    swal("Cancelado", "", "error");
+  }
+});
+}

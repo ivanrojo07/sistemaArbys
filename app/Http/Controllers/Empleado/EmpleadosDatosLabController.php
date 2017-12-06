@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Empleado;
 use App\Empleado;
 use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
+use App\TipoBaja;
+use App\TipoContrato;
 use Illuminate\Http\Request;
 
 class EmpleadosDatosLabController extends Controller
@@ -38,8 +40,10 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = new EmpleadosDatosLab;
+        $contratos = TipoContrato::get();
+        $bajas = TipoBaja::get();
         $edit = false;
-        return view('empleadodatoslab.create',['empleado'=>$empleado,'datoslab'=>$datoslab,'edit'=>$edit]);
+        return view('empleadodatoslab.create',['empleado'=>$empleado,'bajas'=>$bajas,'contratos'=>$contratos,'datoslab'=>$datoslab,'edit'=>$edit]);
     }
 
     /**
@@ -51,7 +55,37 @@ class EmpleadosDatosLabController extends Controller
     public function store(Request $request, Empleado $empleado)
     {
         //
-        $datoslab = EmpleadosDatosLab::create($request->all());
+        $datoslab = new EmpleadosDatosLab;
+        $datoslab->empleado_id = $request->empleado_id;
+        $datoslab->fechacontratacion = $request->fechacontratacion;
+        $datoslab->area = $request->area;
+        $datoslab->puesto = $request->puesto;
+        $datoslab->salarionom = $request->salarionom;
+        $datoslab->salariodia = $request->salariodia ;
+        $datoslab->puesto_inicio = $request->puesto_inicio ;
+        $datoslab->periodopaga = $request->periodopaga ;
+        $datoslab->prestaciones = $request->prestaciones ;
+        $datoslab->regimen = $request->regimen ;
+        $datoslab->hentrada = $request->hentrada ;
+        $datoslab->hsalida = $request->hsalida ;
+        $datoslab->hcomida = $request->hcomida ;
+        $datoslab->lugartrabajo = $request->lugartrabajo ;
+        $datoslab->banco = $request->banco ;
+        $datoslab->cuenta = $request->cuenta ;
+        $datoslab->clabe = $request->clabe ;
+        $datoslab->fechabaja = $request->fechabaja ;
+        $datoslab->tipobaja_id = $request->tipobaja_id ;
+        $datoslab->comentariobaja = $request->comentariobaja ;
+        $datoslab->contrato_id = $request->contrato_id ;
+        if ($request->bonopuntualidad == 'on') {
+            # code...
+            $datoslab->bonopuntualidad = true;
+            // dd($request->all());
+        } else {
+            # code...
+            $datoslab->bonopuntualidad = false;
+        }
+        $datoslab->save();
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
@@ -76,8 +110,10 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = $empleado->datosLab;
+        $contratos = TipoContrato::get();
+        $bajas = TipoBaja::get();
         $edit = true;
-        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'empleado'=>$empleado,'edit'=>$edit]);
+        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'bajas'=>$bajas,'contratos'=>$contratos,'empleado'=>$empleado,'edit'=>$edit]);
 
     }
 

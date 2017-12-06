@@ -37,7 +37,15 @@
 					</div>
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="contrato">Tipo de contrato:</label>
-						<input class="form-control" type="text" id="contrato" name="contrato" value="{{ $datoslab->contrato }}">
+						<select type="select" class="form-control" name="contrato_id">
+							@foreach ($contratos as $contrato)
+								{{-- expr --}}
+								<option id="{{$contrato->id}}" value="{{$contrato->id}}" @if ($datoslab->contrato_id == $contrato->id)
+									{{-- expr --}}
+									selected="selected" 
+								@endif>{{$contrato->nombre}}</option>
+							@endforeach
+						</select>
 					</div>
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="area">Área:</label>
@@ -194,6 +202,39 @@
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="clabe">CLABE(Clave Bancaria Estandarizada):</label>
 						<input class="form-control" type="clabe" name="clabe" id="clabe" value="{{ $datoslab->clabe }}">
+					</div>
+					<div class="form-group col-xs-3">
+						<label class="control-label" for="bonopuntualidad" id="lbl_inst2">Bono Puntualidad:</label>
+						<input id="boton-toggle" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" name="bonopuntualidad" @if ($datoslab->bonopuntualidad == 1)
+							{{-- expr --}}
+							checked="checked"
+						@endif>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">Datos de Baja:</div>
+					<div class="col-md-12 offset-md-2 mt-3">
+						<div class="form-group col-xs-3">
+							<label class="control-label" for="fechabaja">Fecha de la baja:</label>
+							<input class="form-control" type="date" id="fechabaja" name="fechabaja" value="{{ $datoslab->fechabaja }}">
+						</div>
+						<div class="form-group col-xs-3">
+							<label class="control-label" for="tipobaja_id">Tipo de Baja:</label>
+							<select class="form-control" type="select" name="tipobaja_id" id="tipobaja_id">
+								<option id="0" value="">No hay baja</option>
+								@foreach ($bajas as $baja)
+									{{-- expr --}}
+									<option id="{{$baja->id}}" value="{{$baja->id}}" @if ($datoslab->tipobaja_id == $baja->id)
+										{{-- expr --}}
+										selected="selected" 
+									@endif>{{ $baja->nombre }}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="form-group col-xs-3">
+							<label class="control-label" for="comentariobaja">Comentarios:</label>
+							<textarea class="form-control" id="comentariobaja" name="comentariobaja" maxlength="500">{{$datoslab->comentariobaja}}</textarea>
+						</div>
 					</div>
 				</div>
 				<button type="submit" class="btn btn-success">Guardar</button>
