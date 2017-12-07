@@ -18,7 +18,14 @@ class EmpleadosEstudiosController extends Controller
     {
         //
         $estudios = $empleado->estudios;
-        return view('empleadoestudios.view',['empleado'=>$empleado, 'estudios'=>$estudios]);
+        if ($estudios == null) {
+            # code...
+            return redirect()->route('empleados.estudios.create',['empleado'=>$empleado]);
+        } else {
+            # code...
+            return view('empleadoestudios.view',['empleado'=>$empleado, 'estudios'=>$estudios]);
+        }
+        
     }
 
     /**

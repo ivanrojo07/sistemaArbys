@@ -18,7 +18,14 @@ class EmpleadosEmergenciasController extends Controller
     {
         //
         $emergencias = $empleado->emergencias;
-        return view('empleadoemergencia.view',['empleado'=>$empleado, 'emergencias'=>$emergencias]);
+        if ($emergencias == null) {
+            # code...
+            return redirect()->route('empleados.emergencias.create',['empleado'=>$empleado]);
+        }
+        else {
+
+            return view('empleadoemergencia.view',['empleado'=>$empleado, 'emergencias'=>$emergencias]);
+        }
     }
 
     /**
