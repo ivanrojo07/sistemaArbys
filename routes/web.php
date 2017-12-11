@@ -45,6 +45,8 @@ Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
+Route::resource('contratos','Precargas\TipoContratoController');
+Route::resource('bajas','Precargas\TipoBajaController');
     
 //Añadido <Iyari> 5/dic/2017//
 Route::get('sucursales',function(){
@@ -62,3 +64,15 @@ Route::get('bonos',function(){
 
 	return View::make('Empleadobonos.bonos');
 });
+//   11/Dic/2017
+//-----------------------------------------------------
+Route::resource('provedores','Provedor\ProvedorController');
+
+Route::resource('formacontactos','FormaContacto\FormaContactoController');
+
+Route::resource('clientes','Personal\PersonalController');
+Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
+Route::resource('clientes.contacto','Personal\PersonalContactoController');
+Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);
+
+Route::get('prueba','Provedor\ProvedorDireccionFisicaController@prueba');

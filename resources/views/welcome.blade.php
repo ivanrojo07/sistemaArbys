@@ -10,8 +10,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-{{--     <script href="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
- --}}    <!-- Styles -->
+    {{-- <script href="{{ asset('js/jquery-3.2.1.min.js') }}"></script> --}}
+    <!-- Styles -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('img//favicon.ico') }}" type="image/x-icon">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,17 +23,6 @@
      <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-<style>
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-    margin-top: 0;
-    right: 0;
-    left: auto;
-}
-</style>
     </head>
     <body>
 
@@ -94,8 +83,15 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{url('pruebas')}}"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
-                                {{-- <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  --}}   
+                                <a href="{{url('empleados/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="{{ url('empleados') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
+                                <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas:</a>
+                                    <ul class="dropdown-menu">
+                                      <li><a tabindex="-1" href="{{ url('bajas') }}"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
+                                      <li><a href="{{ url('contratos') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
+                                    </ul>
+                                  </li>
                             </li>                     
                         </ul>
                     </li>
@@ -124,6 +120,7 @@
                 </ul> --}}
             </div>
             @endif
+        </ul>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -131,15 +128,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script>
+    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
     </body>
 </html>

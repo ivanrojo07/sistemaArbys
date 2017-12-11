@@ -1,6 +1,7 @@
 @extends('layouts.infoempleado')
 @section('infoempleado')
 	{{-- expr --}}
+	
 	<div>
 		<ul class="nav nav-pills nav-justified">
 			<li role="presentation" class=""><a href="{{ route('empleados.show',['empleado'=>$empleado]) }}"  class="ui-tabs-anchor">Generales:</a></li>

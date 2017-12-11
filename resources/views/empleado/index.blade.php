@@ -5,7 +5,7 @@
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px;">
 			<thead>
 				<tr class="info">
-					<th>@sortablelink('id','#')</th>
+					<th>@sortablelink('identificador','#')</th>
 					<th>@sortablelink('nombre','Nombre')</th>
 					<th>@sortablelink('appaterno','Apellido Paterno')</th>
 					<th>@sortablelink('apmaterno','Apellido Materno')</th>
@@ -15,7 +15,7 @@
 			</thead>
 			@foreach ($empleados as $empleado)
 				{{-- expr --}}
-				<td>{{$empleado->id}}</td>
+				<td>{{$empleado->identificador}}</td>
 				<td>{{$empleado->nombre}}</td>
 				<td>{{$empleado->appaterno}}</td>
 				<td>{{$empleado->apmaterno}}</td>

@@ -29,7 +29,9 @@ class EmpleadoController extends Controller
     public function create()
     {
         //
-        return view('empleado.create');
+        $empleado = new Empleado;
+        $edit = false;
+        return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
     }
 
     /**
@@ -48,7 +50,7 @@ class EmpleadoController extends Controller
         }
         else {
             $empleado = Empleado::create($request->all());
-            return redirect()->route('empleados.index')->with('success','Empleado Creado');
+            return redirect()->route('empleados.show',['empleado'=>$empleado])->with('success','Empleado Creado');
         }
     }
 
@@ -73,6 +75,8 @@ class EmpleadoController extends Controller
     public function edit(Empleado $empleado)
     {
         //
+        $edit= true;
+        return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
     }
 
     /**
@@ -85,6 +89,9 @@ class EmpleadoController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
         //
+        $empleado->update($request->all());
+        return redirect()->route('empleados.show',['empleado'=>$empleado])->with('success','Empleado Actualizado');
+
     }
 
     /**

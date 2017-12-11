@@ -47,6 +47,20 @@
 	    				<i class="fa fa-money" aria-hidden="true"></i>
 	    			</h5>
 	    			<input type="text" name="responsable" class="form-control" placeholder="$--">
+	    	 	 </div><br/><br/>
+
+
+	    	 	 <div class="col-sm-3">
+	    			
+               	<button type="submit" name="submit" value="Ingresar">
+	    				<strong>
+	    					Ingresar
+	    					<i class="fa fa-reply" aria-hidden="true"></i>
+	    				</strong>
+	    				
+	    					
+	    			</button>
+               
 	    	 	 </div>
 
 

@@ -12,10 +12,10 @@ class Empleado extends Model
     protected $table = 'empleados';
 
     protected $fillable = [
-    	'id','nombre','appaterno','apmaterno','rfc','telefono','movil','email','nss','curp','infonavit','fnac','cp','calle','numext','numint','colonia','municipio','estado','calles','referencia'
+    	'id','identificador','nombre','appaterno','apmaterno','rfc','telefono','movil','email','nss','curp','infonavit','fnac','cp','calle','numext','numint','colonia','municipio','estado','calles','referencia'
     ];
     public $sortable = [
-    	'id','nombre','appaterno','apmaterno','rfc'
+    	'identificador','nombre','appaterno','apmaterno','rfc'
     ];
 
     protected $hidden=[

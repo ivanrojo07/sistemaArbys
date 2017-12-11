@@ -18,7 +18,8 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->integer('empleado_id')->unsigned();
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->date('fechacontratacion')->nullable();
-            $table->string('contrato')->nullable();
+            $table->integer('contrato_id')->unsigned();
+            $table->foreign('contrato_id')->references('id')->on('tipocontrato');
             $table->string('area')->nullable();
             $table->string('puesto')->nullable();
             $table->decimal('salarionom',8,2)->nullable();
