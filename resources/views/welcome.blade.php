@@ -27,7 +27,8 @@
     <body>
 
 <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -62,8 +63,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ url('/personals/create')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="{{ url('/personals') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a onclick="AgregarNuevoTab('{{ url('/personals/create') }}','Agregar cliente')"{{--  href="{{ url('/personals/create')}}" --}}><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a onclick="AgregarNuevoTab('{{ url('/personals') }}','Buscar cliente')"{{--  href="{{ url('/personals') }}" --}}><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
                                 <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> Seguimiento</a>    
                             </li>                     
                         </ul>
@@ -116,8 +117,8 @@
                           <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
                         </ul>
                       </li>
-                    </li>
-                </ul> --}}
+                    </li>--}}
+                </ul> 
             </div>
             @endif
         </ul>
@@ -125,9 +126,15 @@
         </div>
         <!-- /.container -->
     </nav>
+    <div class="container" style="width: 100%; height: 100%;">
+        <ul id="tabsApp" class="nav nav-tabs"></ul>
+        <div id="contenedortab" class="tab-content"></div>
+    </div>
+</div>
+    </body>
     <!-- Scripts -->
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
-    </body>
+    <script src="{{ asset('js/pestanas.js') }}"></script>
 </html>
