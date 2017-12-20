@@ -130,7 +130,7 @@
                         </ul>
                       </li>
                     </li>--}}
-<<<<<<< HEAD
+
 
                          <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
@@ -146,8 +146,7 @@
 
 
 
-=======
->>>>>>> 1a97dd9b55d371411bf9b0e2c4a8d9490a227f9e
+
                 </ul> 
             </div>
             @endif
