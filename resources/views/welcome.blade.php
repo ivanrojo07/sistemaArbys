@@ -12,17 +12,18 @@
 
     {{-- <script href="{{ asset('js/jquery-3.2.1.min.js') }}"></script> --}}
     <!-- Styles -->
-    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('img//favicon.ico') }}" type="image/x-icon">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
 
      <!-- Custom Fonts -->
     <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    {{-- <link href="{{asset('font-awesome5.0.1/css/fontawesome.min.css')}}" rel="stylesheet" type="text/css"> --}}
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="{{ asset('js/peticion.js') }}"></script>
     </head>
     <body>
 
@@ -63,8 +64,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a onclick="AgregarNuevoTab('{{ url('/personals/create') }}','Agregar cliente')"{{--  href="{{ url('/personals/create')}}" --}}><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a onclick="AgregarNuevoTab('{{ url('/personals') }}','Buscar cliente')"{{--  href="{{ url('/personals') }}" --}}><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/personals/create') }}','Agregar cliente')"{{--  href="{{ url('/personals/create')}}" --}}><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/personals') }}','Buscar cliente')"{{--  href="{{ url('/personals') }}" --}}><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
                             </li>                     
                         </ul>
                     </li>
@@ -73,8 +74,8 @@
                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ url('import-export-csv-excel') }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
-                                <a href="{{ url('productos') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
+                                <a onclick="AgregarNuevoTab('{{ url('import-export-csv-excel') }}','Alta de productos')"  href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('productos') }}','Buscar Producto')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
                             </li>                     
                         </ul>
                     </li>
@@ -83,15 +84,27 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{url('empleados/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="{{ url('empleados') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
+                                <a href="#" onclick="AgregarNuevoTab('{{url('empleados/create')}}','Nuevo Empleado')"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Buscar Empleado')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
                                 <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas:</a>
                                     <ul class="dropdown-menu">
-                                      <li><a tabindex="-1" href="{{ url('bajas') }}"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
-                                      <li><a href="{{ url('contratos') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
+                                      <li><a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('bajas') }}','Bajas')"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
+                                      <li><a href="#" onclick="AgregarNuevoTab('{{ url('contratos') }}','Contratos')"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
                                     </ul>
                                   </li>
+                            </li>                     
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/provedores/create')}}','Agrega Proveedor')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#" 
+                                onclick="AgregarNuevoTab('{{ url('/provedores') }}','Buscar Proveedor')">
+                                <i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
                             </li>                     
                         </ul>
                     </li>
@@ -117,21 +130,6 @@
                         </ul>
                       </li>
                     </li>--}}
-
-                         <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="#" onclick="AgregarNuevoTab('{{ url('/provedores/create')}}','Agrega Proveedor')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="#" 
-                                onclick="AgregarNuevoTab('{{ url('/provedores') }}','Buscar Proveedor')">
-                                <i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
-                            </li>                     
-                        </ul>
-                    </li>
-
-
-
                 </ul> 
             </div>
             @endif
@@ -151,12 +149,12 @@
     <script src="{{ asset('js/pestanas.js') }}"></script>
     <script src="{{ asset('js/forms.js') }}"></script>
     <script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script>
+    $(document).ready(function(){
+      $('.dropdown-submenu a.test').on("click", function(e){
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+    </script>
 </html>

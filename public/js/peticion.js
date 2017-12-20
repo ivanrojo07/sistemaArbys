@@ -10,7 +10,7 @@ function obtener_registros(busqueda)
 
 	
 	
-<<<<<<< HEAD
+
 	// $.ajax({
 	// 	//url : "http://localhost/clientes",
 	// 	url : "buscarcliente",
@@ -21,18 +21,6 @@ function obtener_registros(busqueda)
 	// 	$("#datos").html(resultado);
 
 	// });
-=======
-	$.ajax({
-		//url : "http://localhost/clientes",
-		url : "buscarcliente",
-		type : "GET",
-		dataType : "html",
-		data :{busqueda:busqueda},
-		}).done(function(resultado){
-		$("#datos").html(resultado);
-
-	});
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
 }
 
 $(document).on('keyup', '#query', function()

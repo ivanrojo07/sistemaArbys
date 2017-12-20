@@ -74,6 +74,33 @@
             }
         }
     </script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
+
+    {{-- <script type="text/javascript">
+        function formulario(elemento){
+            if (elemento.value == "Prospecto") {
+                document.getElementById('cliente').style.display='none';
+                document.getElementById('cliente1').style.display='none';
+                document.getElementById('cliente2').style.display='none';
+            }
+            if (elemento.value == "Cliente") {
+                document.getElementById('cliente').style.display='inline';
+                document.getElementById('cliente1').style.display='inline';
+                document.getElementById('cliente2').style.display='inline';
+            }
+        }
+        function persona(elemento){
+            if(elemento.value == "Fisica"){
+                document.getElementById('perfisica').style.display='inline';
+                document.getElementById('permoral').style.display='none';
+            }
+            if(elemento.value =="Moral"){
+                document.getElementById('perfisica').style.display='none';
+                document.getElementById('permoral').style.display='inline';
+            }
+        }
+    </script> --}}
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="{{ asset('js/pestanas.js') }}"></script>

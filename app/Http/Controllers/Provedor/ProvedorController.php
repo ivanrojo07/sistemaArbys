@@ -53,15 +53,9 @@ class ProvedorController extends Controller{
             return redirect()->back()->with('errors', 'El RFC ya existe');
         } else {
             # code...
-<<<<<<< HEAD
-            $cliente = Provedor::create($request->all());
-            return redirect()->route('clientes.direccionfisica.create',['provedor'=>$cliente]);
-
-=======
             $provedore = Provedor::create($request->all());
             Alert::success("Proveedor creado con exito, sigue agregando información")->persistent("Cerrar");
             return redirect()->route('provedores.direccionfisica.create',['provedore'=>$provedore]);
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
         }
         
     }
@@ -72,12 +66,8 @@ class ProvedorController extends Controller{
      * @param  \App\provedore  $provedore
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
 
-    public function show(Provedor $cliente)
-=======
     public function show(Provedor $provedore)
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
     {
         
         return view('provedores.view',['provedore'=>$provedore]);
@@ -89,12 +79,7 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-
-    public function edit(Provedor $cliente)
-=======
     public function edit(Provedor $provedore)
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
     {
         //
         return view('provedores.edit',['provedore'=>$provedore]);
@@ -107,11 +92,8 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function update(Request $request, Provedor $cliente)
-=======
+
     public function update(Request $request, Provedor $provedor)
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
     {
         //
         $provedor->update($request->all());
@@ -125,28 +107,17 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
 
-    public function destroy(Provedor $cliente)
-
-=======
     public function destroy(Provedor $provedore)
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
     {
         //
     }
     public function buscar(Request $request){
-<<<<<<< HEAD
-        $query = $request->input('query');
-        $wordsquery = explode(' ',$query);
-        
-        $clientes = Provedor::where(function($q) use($wordsquery){
-=======
     // dd($request);
     $query = $request->input('busqueda');
     $wordsquery = explode(' ',$query);
     $provedore = Provedor::where(function($q) use($wordsquery){
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
+
             foreach ($wordsquery as $word) {
                 # code...
             $q->orWhere('nombre','LIKE',"%$word%")
@@ -157,24 +128,11 @@ class ProvedorController extends Controller{
                 // ->orWhere('alias','LIKE',"%$word%");
                 // ->orWhere('tipopersona','LIKE',"%$word%")
             }
-<<<<<<< HEAD
-        })->paginate(10);
-
-        // $clientes = Provedor::sortable()->where('nombre','LIKE',"%$query%")
-        // ->orWhere('apellidopaterno','LIKE',"%$query%")
-        // ->orWhere('apellidomaterno','LIKE',"%$query%")
-        // ->orWhere('razonsocial','LIKE','%$query%')
-        // ->orWhere('rfc','LIKE',"%$query%")
-        // ->orWhere('alias','LIKE',"%$query%")
-        // ->orWhere('tipopersona','LIKE',"%$query%")
-        // ->paginate(10);
-        return view('clientes.index',['personals'=>$clientes]);
-=======
         })->get();
     return view('provedores.busqueda', ['provedore'=>$provedore]);
         
 
->>>>>>> f5eda1cf75c3786972366f0e998e124cf26c9969
+
     }
 
 
