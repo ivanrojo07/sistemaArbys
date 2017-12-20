@@ -18,6 +18,10 @@
 				<div class="panel-body">
 					{{ csrf_field() }}
 					<input type="hidden" name="personal_id" value="{{$personal->id}}">
+					<div class="col-xs-2 col-xs-offset-10">
+						<button type="submit" class="btn btn-success">Guardar</button>
+						<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+					</div>
   					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
   						<label class="control-label" for="nombre">Nombre(s):</label>
   						<input type="text" class="form-control" id="nombre" name="nombre">
@@ -47,7 +51,6 @@
 						<input type="text" class="form-control" id="parentesco" name="parentesco">
 					</div>
 				</div>
-				<button type="submit" class="btn btn-default">Guardar</button>
 			</form>
 		</div>
 	</div>

@@ -48,9 +48,11 @@ class PersonalController extends Controller
 
             $personal = Personal::create($request->all());
             if ($request['tipo'] == 'Cliente') {
+                Alert::success('Cliente creado con éxito', 'Siga agregando información');
                 return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
             }
             if($request['tipo'] == 'Prospecto') {
+                Alert::success('Prospecto creado con éxito');
                 return redirect()->route('personals.index');
             }   
         }
@@ -96,7 +98,15 @@ class PersonalController extends Controller
         // dd($request->all());
         $personal->update($request->all());
         // Personal::where('id',$personal->id)->update($request->all());
-        return redirect('/personals');
+        if ($request['tipo'] == 'Cliente') {
+            Alert::success('Cliente modificado con éxito');
+            return redirect()->route('personals.datoslaborales.index', ['personal'=>$personal]);
+        }
+        if($request['tipo'] == 'Prospecto') {
+            Alert::success('Prospecto modificado con éxito');
+            return redirect()->route('personals.index');
+        }
+        // return redirect('/personals');
         // $personal->fill($request->all());
         // $personal->save();
         // return redirect('personals');

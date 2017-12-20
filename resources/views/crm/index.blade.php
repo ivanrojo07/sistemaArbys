@@ -18,6 +18,13 @@
 					<form role="form" method="POST" action="{{ route('personals.crm.store',['personal'=>$personal]) }}">
 						{{ csrf_field() }}
 						<input type="hidden" name="personal_id" value="{{ $personal->id }}">
+						<div class="col-xs-4 col-xs-offset-10">
+							<a class="btn btn-warning" id="limpiar" onclick="limpiar()">Limpiar</a>
+							<button id="submit" type="submit" class="btn btn-success">Guardar</button>
+							<a id="modificar" class="btn btn-primary" onclick="modificar()" style="display: none;">Modificar</a>
+							<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+
+						</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label" for="fecha_act">Fecha Actual:</label>
@@ -77,12 +84,6 @@
 						</div>
 						
 					</div>
-						<div class="col-md-12 offset-md-2 mt-3">
-							<a class="btn btn-warning" id="limpiar" onclick="limpiar()">Limpiar</a>
-							<button id="submit" type="submit" class="btn btn-success">Guardar</button>
-							<a id="modificar" class="btn btn-primary" onclick="modificar()" style="display: none;">Modificar</a>
-						
-						</div>
 					</form>
 				</div>
 				<div class="panel-body">
