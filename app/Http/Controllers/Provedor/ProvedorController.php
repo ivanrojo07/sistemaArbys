@@ -18,8 +18,9 @@ class ProvedorController extends Controller{
     public function index()
     {
         //
-        $provedores = Provedor::sortable()->paginate(10);
+        // $provedores = Provedor::get();
         // Alert::message('Robots are working!');
+        dd(Provedor::where('id','1')->get());
         return view('provedores.index', ['provedores'=>$provedores]);
     }
 
