@@ -38,6 +38,7 @@
          <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          <script src="{{ asset('js/peticion.js') }}"></script>
+         
 
     </head>
 <body>
