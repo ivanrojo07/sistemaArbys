@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 	@section('content')
 		<div class="container" id="tab">
-			<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.store') }}" name="form">
+			<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.store') }}" name="form">
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">

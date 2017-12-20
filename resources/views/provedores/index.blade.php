@@ -6,10 +6,9 @@
 			<form action="buscarprovedor">
 				{{ csrf_field() }}
 				<div class="input-group">
-					<input type="text" name="query" class="form-control" placeholder="Buscar...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-					</span>
+					<input type="text" name="query" class="form-control" placeholder="Buscar..."
+					onKeypress="if(event.keyCode == 13) event.returnValue = false;">
+					
 				</div>
 			</form>
 		</div>
