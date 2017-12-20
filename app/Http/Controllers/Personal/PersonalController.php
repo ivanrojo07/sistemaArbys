@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Personal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Personal;
 
 class PersonalController extends Controller

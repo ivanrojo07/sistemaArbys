@@ -95,14 +95,14 @@
 							</div>
 						</div>
 					</div>
-				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li class="active"><a href="#tab1" class="ui-tabs-anchor">Dirección/Domicilio:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" style="display:none;"><a href="" class="ui-tabs-anchor disabled" id="clienteli1">Datos Laborales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" id="clienteli2" style="display:none;"><a href="" class="ui-tabs-anchor disabled">Referencias Personales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled" id="clienteli3" style="display:none;"><a href="" class="ui-tabs-anchor disabled">Datos de Beneficiarios:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">Productos:</a></li>
-					<li class="disabled" disabled><a href="" class="ui-tabs-anchor disabled">Productos seleccionados:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab disabled"><a href="" class="ui-tabs-anchor disabled">C.R.M.:</a></li>
+				<ul role="tablist" class="nav nav-tabs">
+					<li class="active" role="presentation"><a href="#">Dirección/Domicilio:</a></li>
+					<li class="disabled" style="display:none;" role="presentation"><a href="#" class="disabled" id="clienteli1">Datos Laborales:</a></li>
+					<li class="disabled" id="clienteli2" style="display:none;" role="presentation"><a href="#" class="disabled">Referencias Personales:</a></li>
+					<li class="disabled" id="clienteli3" style="display:none;" role="presentation"><a href="#" class="disabled">Datos de Beneficiarios:</a></li>
+					<li class="disabled"><a href="#" class="disabled">Productos:</a></li>
+					<li class="disabled" disabled  role="presentation"><a href="" class="disabled">Productos seleccionados:</a></li>
+					<li class="disabled"  role="presentation"><a href="#" class="disabled">C.R.M.:</a></li>
 				</ul>
 				<div class="panel-default">
 					<div class="panel-heading">Dirección/Domicilio:</div>
