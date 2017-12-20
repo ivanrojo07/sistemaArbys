@@ -88,16 +88,16 @@
 							</div>
 						</div>
 					</div>
-				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li class="active"><a href="#tab1">Dirección/Domicilio:</a></li>
+				<ul role="tablist" class="nav nav-tabs">
+					<li class="active"><a href="{{ route('personals.edit',['personal'=>$personal]) }}">Dirección/Domicilio:</a></li>
 					@if ($personal->tipo == 'Cliente')
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datoslaborales.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Datos Laborales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.referenciapersonales.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Referencias Personales:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datosbeneficiario.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Datos de Beneficiarios:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datoslaborales.index',['personal'=>$personal]) }}">Datos Laborales:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.referenciapersonales.index',['personal'=>$personal]) }}">Referencias Personales:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datosbeneficiario.index',['personal'=>$personal]) }}">Datos de Beneficiarios:</a></li>
 					@endif
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.producto.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Productos:</a></li>
-					<li class=""><a href="{{ route('personals.product.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">Productos seleccionados:</a></li>
-					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}" class="ui-tabs-anchor">C.R.M.:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.producto.index',['personal'=>$personal]) }}">Productos:</a></li>
+					<li class=""><a href="{{ route('personals.product.index',['personal'=>$personal]) }}">Productos seleccionados:</a></li>
+					<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}">C.R.M.:</a></li>
 				</ul>
 				<div class="panel-default">
 					<div class="panel-heading">Dirección/Domicilio:</div>

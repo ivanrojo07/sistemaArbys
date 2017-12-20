@@ -53,11 +53,8 @@ class ProvedorController extends Controller{
         } else {
             # code...
             $cliente = Provedor::create($request->all());
-<<<<<<< HEAD
-            return redirect()->route('clientes.direccionfisica.create',['personal'=>$cliente]);
-=======
             return redirect()->route('clientes.direccionfisica.create',['provedor'=>$cliente]);
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
+
         }
         
     }
@@ -68,11 +65,8 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function show(Personal $cliente)
-=======
+
     public function show(Provedor $cliente)
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
     {
         return view('clientes.view',['personal'=>$cliente]);
     }
@@ -83,11 +77,8 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function edit(Personal $cliente)
-=======
+
     public function edit(Provedor $cliente)
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
     {
         //
         return view('clientes.edit',['personal'=>$cliente]);
@@ -100,11 +91,7 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function update(Request $request, Personal $cliente)
-=======
     public function update(Request $request, Provedor $cliente)
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
     {
         //
         $cliente->update($request->all());
@@ -117,11 +104,9 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function destroy(Personal $cliente)
-=======
+
     public function destroy(Provedor $cliente)
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
+
     {
         //
     }
@@ -129,11 +114,7 @@ class ProvedorController extends Controller{
         $query = $request->input('query');
         $wordsquery = explode(' ',$query);
         
-<<<<<<< HEAD
-        $clientes = Personal::where(function($q) use($wordsquery){
-=======
         $clientes = Provedor::where(function($q) use($wordsquery){
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
             foreach ($wordsquery as $word) {
                 # code...
             $q->orWhere('nombre','LIKE',"%$word%")
@@ -145,11 +126,8 @@ class ProvedorController extends Controller{
                 ->orWhere('tipopersona','LIKE',"%$word%");
             }
         })->paginate(10);
-<<<<<<< HEAD
-        // $clientes = Personal::sortable()->where('nombre','LIKE',"%$query%")
-=======
+
         // $clientes = Provedor::sortable()->where('nombre','LIKE',"%$query%")
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
         // ->orWhere('apellidopaterno','LIKE',"%$query%")
         // ->orWhere('apellidomaterno','LIKE',"%$query%")
         // ->orWhere('razonsocial','LIKE','%$query%')

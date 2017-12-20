@@ -1,6 +1,6 @@
-$(function limpiarBusqueda(){
-    console.log('limpiar');
-});
+// $(function limpiarBusqueda(){
+//     // console.log('limpiar');
+// });
 function formulario(elemento){
     if (elemento.value == "Prospecto") {
         document.getElementById('cliente').style.display='none';
@@ -138,11 +138,11 @@ $("#tipo").change(function (){
 //  });
 // });
   
-$('li a').click(function(){
-  $(this.getAttribute('class')).addClass("active");
-  $('.pestana').hide();
-  $(this.getAttribute('href')).show();
-}); 
+// $('li a').click(function(){
+//   $(this.getAttribute('class')).addClass("active");
+//   $('.pestana').hide();
+//   $(this.getAttribute('href')).show();
+// }); 
 $(function(){
               $('.dropdown-submenu a.test').on("click", function(e){
                 $(this).next('ul').toggle();

@@ -24,6 +24,7 @@ function closeNav() {
 function AgregarNuevoTab(url, nombre) {
     closeNav();
     var tabs = document.getElementById("tabsApp");
+    // console.log(tabs);
     var obj = tabs.getElementsByTagName("li");
     for (var i = 0; i < obj.length; i++) {
         var anombre = obj[i].innerText.substring(0, obj[i].innerText.length - 2);
@@ -43,7 +44,7 @@ function AgregarNuevoTab(url, nombre) {
     var heigh = parseInt($(window).height()) - 150;
     titulo.setAttribute("data-toggle", "tab");
     titulo.setAttribute("href", "#tab" + numTab);
-    titulo.innerHTML = nombre + "<span class='close alignright' onclick='CerrarTab(this);'>&times;</span>";
+    titulo.innerHTML = nombre + "  <span class='close alignright' onclick='CerrarTab(this);'><i class='fa fa-times-circle' aria-hidden='true'></i></span>";
     lblTab.appendChild(titulo);
     tabs.appendChild(lblTab);
     CambiarAtributoElementosTag("li", "tabsApp", "class", "");
