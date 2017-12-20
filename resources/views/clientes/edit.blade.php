@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blank')
 	@section('content')
 		<div class="container" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.update',['cliente'=>$personal]) }}" name="form">

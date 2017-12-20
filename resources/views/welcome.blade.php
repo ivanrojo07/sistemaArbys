@@ -65,7 +65,6 @@
                             <li>
                                 <a onclick="AgregarNuevoTab('{{ url('/personals/create') }}','Agregar cliente')"{{--  href="{{ url('/personals/create')}}" --}}><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
                                 <a onclick="AgregarNuevoTab('{{ url('/personals') }}','Buscar cliente')"{{--  href="{{ url('/personals') }}" --}}><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
-                                <a href="#"><i class="fa fa-location-arrow" aria-hidden="true"></i> Seguimiento</a>    
                             </li>                     
                         </ul>
                     </li>
@@ -133,8 +132,16 @@
 </div>
     </body>
     <!-- Scripts -->
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
     <script src="{{ asset('js/pestanas.js') }}"></script>
+    <script src="{{ asset('js/forms.js') }}"></script>
+    <script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
 </html>
