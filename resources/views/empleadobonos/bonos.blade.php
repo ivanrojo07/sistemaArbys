@@ -1,5 +1,5 @@
-@extends('layouts.blank')
-@section('content')
+@extends('layouts.test')
+@section('content1')
 
 <div class="container" align="left">
 	<form>
@@ -22,7 +22,7 @@
 	    		 
 
 
-	    	 	 <div class="col-sm-4">
+	    	 	 <div class="col-sm-3">
 	    			<h5><strong>Nùmero de Dìas
 	    				<i class="fa fa-calculator" aria-hidden="true"></i>
 	    			</strong></h5> <select name="region">
@@ -41,16 +41,16 @@
 	    		</div>
 
 
-
 	    		<div class="col-sm-3">
 	    			<h5>Monto
 	    				<i class="fa fa-money" aria-hidden="true"></i>
 	    			</h5>
-	    			<input type="text" name="responsable" class="form-control" placeholder="$--">
+	    			<input type="text" name="responsable" class="form-control" placeholder="$--"
+	    			pattern="[0-9]+">
 	    	 	 </div><br/><br/>
 
 
-	    	 	 <div class="col-sm-3">
+	    	 	 <div class="col-sm-5">
 	    			
                	<button type="submit" name="submit" value="Ingresar">
 	    				<strong>
@@ -62,6 +62,7 @@
 	    			</button>
                
 	    	 	 </div>
+
 
 
 			 </div>

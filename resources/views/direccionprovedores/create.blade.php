@@ -22,9 +22,10 @@
 							
 							<label>
 
-								<input type="checkbox" checked data-toggle="toggle" onchange="datosFiscal();">
+								<input type="checkbox"  data-toggle="toggle" onchange="datosFiscal();">
 								¿Usar datos de dirección fiscal?.
 							</label>
+
 						</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -83,7 +84,7 @@
 </div>
 <script>
 	function datosFiscal(){
-                if($('#boton-toggle').prop('checked') == true){
+                if($(':checkbox').prop('checked') == true){
                 	document.domicilio.calle.defaultValue = "{{$provedore->calle}}";
                		document.domicilio.numext.defaultValue = "{{$provedore->numext}}";
                 	document.domicilio.numint.defaultValue = "{{$provedore->numinter}}";
@@ -95,7 +96,7 @@
                 	document.domicilio.calle2.defaultValue = "{{$provedore->calle2}}";
                 	document.domicilio.referencia.defaultValue = "{{$provedore->referencia}}";
 				}
-				else if($('#boton-toggle').prop('checked') == false){
+				else if($(':checkbox').prop('checked') == false){
                     document.domicilio.calle.defaultValue = "";
                     document.domicilio.numext.defaultValue = "";
                     document.domicilio.numint.defaultValue = "";

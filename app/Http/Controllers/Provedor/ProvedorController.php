@@ -93,10 +93,10 @@ class ProvedorController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Provedor $provedor)
+    public function update(Request $request, Provedor $provedore)
     {
         //
-        $provedor->update($request->all());
+        $provedore->update($request->all());
         Alert::success('Proveedor actualizado')->persistent("Cerrar");
         return redirect()->route('provedores.index');
     }
@@ -114,7 +114,7 @@ class ProvedorController extends Controller{
     }
     public function buscar(Request $request){
     // dd($request);
-    $query = $request->input('busqueda');
+    $query = $request->input('query');
     $wordsquery = explode(' ',$query);
     $provedore = Provedor::where(function($q) use($wordsquery){
 
@@ -129,7 +129,8 @@ class ProvedorController extends Controller{
                 // ->orWhere('tipopersona','LIKE',"%$word%")
             }
         })->get();
-    return view('provedores.busqueda', ['provedore'=>$provedore]);
+    //dd($provedore);
+    return view('provedores.view', ['provedore'=>$provedore]);
         
 
 

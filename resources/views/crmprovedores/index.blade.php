@@ -113,7 +113,7 @@
 									<td>{{$crm->status}}</td>
 									<td>{{substr($crm->acuerdos,0,50)}}...</td>
 									<td>{{substr($crm->observaciones,0,50)}}...</td>
-									<td><a class="btn btn-primary" onclick="crm({{$crm}})" {{-- href="{{ route('provedore.crm.show',['provedore'=>$provedore,'crm'=>$crm]) }}" --}}>Ver</a></td>
+									<td><a class="btn btn-primary" onclick="crm({{$crm}})"  href="{{ route('provedores.crm.show',['provedore'=>$provedore,'crm'=>$crm]) }}" >Ver</a></td>
 								</tr>
 							@endforeach
 						</table>
