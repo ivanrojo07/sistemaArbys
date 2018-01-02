@@ -64,6 +64,10 @@ Route::get('bonos',function(){
 
 	return View::make('Empleadobonos.bonos');
 });
+Route::get('comision',function(){
+
+	return View::make('Empleadobonos.comision');
+});
 //   11/Dic/2017
 //-----------------------------------------------------
 
@@ -75,7 +79,7 @@ Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaCont
 Route::resource('clientes.contacto','Personal\PersonalContactoController');
 Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);
 
-Route::get('prueba','Provedor\ProvedorDireccionFisicaController@prueba');
+
 //-----------------------------------------------------
 Route::resource('provedores','Provedor\ProvedorController');
 Route::get('buscarprovedor','Provedor\ProvedorController@buscar');
@@ -84,3 +88,4 @@ Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesCont
 Route::resource('provedores.contacto','Provedor\ProvedorContactoController');
 Route::resource('provedores.crm','Provedor\ProvedorCRMController');
 //----------------------------------------------------------
+Route::resource('giros','Giro\GiroController', ['except'=>'show']);

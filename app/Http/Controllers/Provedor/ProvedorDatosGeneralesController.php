@@ -91,7 +91,7 @@ class ProvedorDatosGeneralesController extends Controller
     public function edit(Provedor $provedore)
     {
         //
-        $datos = $provedore->datosGenerales;
+        $datos = $provedore->datosGeneralesProvedor;
         $giros = Giro::get();
         $formaContactos = FormaContacto::get();
         return view('datosgeneralesprovedores.edit',['provedore'=>$provedore, 'datos'=>$datos, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
