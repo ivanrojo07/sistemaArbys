@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @extends('layouts.infocliente')
 	@section('cliente')
 		<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
