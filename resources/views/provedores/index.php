@@ -9,7 +9,7 @@
 					<input type="text" name="query" class="form-control" placeholder="Buscar...">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-					</span>
+					</span> 
 				</div>
 			</form>
 		</div>
@@ -27,11 +27,9 @@
 					<th>Operacion</th>
 				</tr>
 			</thead>
-<<<<<<< HEAD
-			@foreach($personals as $personal)
-=======
+
 			@foreach($provedores as $personal)
->>>>>>> 3959c603c50cefa9e10ac7950f3b15e83ae0fa03
+
 				<tr class="active">
 					<td>{{$personal->id}}</td>
 					<td>

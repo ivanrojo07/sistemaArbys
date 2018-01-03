@@ -18,9 +18,8 @@ class ProvedorController extends Controller{
     public function index()
     {
         //
-        // $provedores = Provedor::get();
+        $provedores = Provedor::sortable()->paginate(5);
         // Alert::message('Robots are working!');
-        $provedores=Provedor::sortable()->paginate(10);
         return view('provedores.index', ['provedores'=>$provedores]);
     }
 
@@ -66,7 +65,6 @@ class ProvedorController extends Controller{
      * @param  \App\provedore  $provedore
      * @return \Illuminate\Http\Response
      */
-
     public function show(Provedor $provedore)
     {
         
@@ -92,13 +90,12 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, Provedor $provedore)
     {
-        //
+        
         $provedore->update($request->all());
         Alert::success('Proveedor actualizado')->persistent("Cerrar");
-        return redirect()->route('provedores.index');
+        return redirect()->route('provedores.show',['provedore'=>$provedore]);
     }
 
     /**
@@ -107,32 +104,28 @@ class ProvedorController extends Controller{
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-
     public function destroy(Provedor $provedore)
     {
         //
     }
     public function buscar(Request $request){
     // dd($request);
-    $query = $request->input('query');
+    $query = $request->input('busqueda');
     $wordsquery = explode(' ',$query);
-    $provedore = Provedor::where(function($q) use($wordsquery){
-
+    $provedores = Provedor::where(function($q) use($wordsquery){
             foreach ($wordsquery as $word) {
                 # code...
             $q->orWhere('nombre','LIKE',"%$word%")
                 ->orWhere('apellidopaterno','LIKE',"%$word%")
                 ->orWhere('apellidomaterno','LIKE',"%$word%")
-                ->orWhere('razonsocial','LIKE',"%$word%");
-                // ->orWhere('rfc','LIKE',"%$word%");
-                // ->orWhere('alias','LIKE',"%$word%");
-                // ->orWhere('tipopersona','LIKE',"%$word%")
+                ->orWhere('razonsocial','LIKE',"%$word%")
+                ->orWhere('rfc','LIKE',"%$word%")
+                ->orWhere('alias','LIKE',"%$word%")
+                ->orWhere('tipopersona','LIKE',"%$word%");
             }
         })->get();
-    //dd($provedore);
-    return view('provedores.view', ['provedore'=>$provedore]);
+    return view('provedores.busqueda', ['provedores'=>$provedores]);
         
-
 
     }
 

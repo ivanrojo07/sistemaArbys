@@ -47,7 +47,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                @if (Route::has('login'))
+
+               <!--  @if (Route::has('login'))
                     <li>
                         @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
@@ -59,16 +60,27 @@
                     <li>
                         <a href="{{ url('/register') }}"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</a>
                     @endif
-                    </li>
+                    </li> -->
+
+
+
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="#" onclick="AgregarNuevoTab('{{ url('/personals/create') }}','Agregar cliente')"{{--  href="{{ url('/personals/create')}}" --}}><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="#" onclick="AgregarNuevoTab('{{ url('/personals') }}','Buscar cliente')"{{--  href="{{ url('/personals') }}" --}}><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/clientes/create')}}','Agrega Cliente')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/clientes') }}','Buscar Cliente')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Giros</a>
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Forma de contactos</a>
                             </li>                     
                         </ul>
                     </li>
+
+
+
+
+                    
                     
                     <li class="dropdown">
                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
@@ -141,16 +153,17 @@
 
 
                          <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="#" onclick="AgregarNuevoTab('{{ url('/provedores/create')}}','Agrega Proveedor')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
+
                                 <a href="#" 
                                 onclick="AgregarNuevoTab('{{ url('/provedores') }}','Buscar Proveedor')">
                                 <i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
 
 
-                                 <li class="dropdown-submenu">
+                            <li class="dropdown-submenu">
                                 <a tabindex="-1" 
                                    href="#">
                                    <i class="fa fa-refresh" 
@@ -160,22 +173,22 @@
                                       <li>
                                         <a href="#" 
                                            onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')">
-                                           <i class="fa fa-ravelry" aria-hidden="true"></i> 
+                                           <i class="fa fa-refresh" aria-hidden="true"></i> 
                                        Giros</a></li>
 
                                       <li><a href="#" 
                                              onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')">
-                                             <i class="fa fa-handshake-o" aria-hidden="true"></i>Forma Contactos</a></li>
+                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li>
                                     </ul>
                                   </li>
-
-
 
 
 
                             </li>                     
                         </ul>
                     </li>
+
+                    
 
 
 

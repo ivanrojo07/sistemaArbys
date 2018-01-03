@@ -5,15 +5,17 @@
 		<div class="col-lg-6">
 			<form action="buscargiro">
 				<div class="input-group">
-					<input type="text" name="query" class="form-control" placeholder="Buscar...">
+					<input type="text" name="query" class="form-control" placeholder="Buscar..." autofocus>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
 					</span>
 				</div>
-			</form>
+			</form> 
 		</div>
 		<div class="col-lg-6">
-			<a class="btn btn-success" href="{{ route('giros.create') }}">Nuevo Giro</a>
+			<a class="btn btn-success" href="{{ route('giros.create') }}">
+				<strong>Agregar Giro</strong>
+			</a>
 		</div>
 	</div>
 	@if (count($giros) == 0)
@@ -41,14 +43,14 @@
 					<td>
 						<div class="row-8">
 							<div class="col-sm-4">
-								<a class="btn btn-info btn-sm" href="{{ route('giros.edit',['giro'=>$giro]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+								<a class="btn btn-info btn-sm" href="{{ route('giros.edit',['giro'=>$giro]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Editar</strong></a>
 								
 							</div>
 						</div>
-						<form role="form" method="POST" action="{{ route('giros.destroy',['giro'=>$giro]) }}">
+						<form role="form" id="eliminar {{ $giro->id }}" method="POST" action="{{ route('giros.destroy',['giro'=>$giro]) }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="_method" value="DELETE">
-						<button type="submit" onclick="deleteFunction()" class="btn btn-info btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+						<a type="submit" onclick="deleteFunction('eliminar {{ $giro->id }}')" class="btn btn-info btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i><strong> Borrar</strong></a>
 						</form>
 				</tr>
 					</td>

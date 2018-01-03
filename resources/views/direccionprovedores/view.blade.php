@@ -57,7 +57,8 @@
 			  						<dd>{{$direccion->referencia}}</dd>
 			  					</div>
 							</div>
-						<a class="btn btn-info" href="{{ route('provedores.direccionfisica.edit',['provedore'=>$provedore, 'direccionfisica'=>$direccion]) }}">Editar</a>
+						<a class="btn btn-info" href="{{ route('provedores.direccionfisica.edit',['provedore'=>$provedore, 'direccionfisica'=>$direccion]) }}">
+					<strong>Editar</strong>	</a>
 						</div>
 					</div>
   				</div>

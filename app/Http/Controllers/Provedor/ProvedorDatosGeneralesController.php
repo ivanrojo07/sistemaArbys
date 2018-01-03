@@ -73,13 +73,17 @@ class ProvedorDatosGeneralesController extends Controller
      */
     public function show(Provedor $provedore)
     {
-        //
+        
         $datos = $provedore->datosGeneralesProvedor;
-        // dd($datos);
+        
+        
         $giro = Giro::findorFail($datos->giro_id);
+
         $formaContacto = FormaContacto::findorFail($datos->forma_contacto_id);
-        // dd($giro);
-        return view('datosgeneralesprovedores.view',['datos'=>$datos, 'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
+       
+        return view('datosgeneralesprovedores.view',
+        ['datos'=>$datos, 'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
+
     }
 
     /**
@@ -90,11 +94,14 @@ class ProvedorDatosGeneralesController extends Controller
      */
     public function edit(Provedor $provedore)
     {
-        //
+         
         $datos = $provedore->datosGeneralesProvedor;
+        
         $giros = Giro::get();
+        
         $formaContactos = FormaContacto::get();
-        return view('datosgeneralesprovedores.edit',['provedore'=>$provedore, 'datos'=>$datos, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
+        return view('datosgeneralesprovedores.edit',
+        ['provedore'=>$provedore, 'datos'=>$datos, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
     }
 
     /**

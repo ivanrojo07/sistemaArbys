@@ -6,7 +6,7 @@
     	
     	
     
-    	<li class="active"><a href="{{ route('personals.crm.index',['provedore'=>$provedore]) }}" class="ui-tabs-anchor">C.R.M.:</a></li>
+    	<li class="active"><a href="{{ route('provedores.crm.index',['provedore'=>$provedore]) }}" class="ui-tabs-anchor">C.R.M.:</a></li>
 	</ul>
 		<div class="panel-default">
 			<div class="panel-heading">C.R.M.</div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Provedor;
-
+use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\DireccionFisicaProvedor;
 use App\Http\Controllers\Controller;
 use App\Provedor;
@@ -51,6 +51,8 @@ class ProvedorDireccionFisicaController extends Controller
         //
         // dd($request->all());
         $direccion = DireccionFisicaProvedor::create($request->all());
+
+        Alert::success('Direcciòn Fìsica del Proveedor Actualizada')->persistent("Cerrar");
         return redirect()->route('provedores.contacto.index',['provedore'=>$provedore]);
         // return view('d}ireccion.view',['direccion'=>$direccion,'personal'=>$cliente]);
 
@@ -95,6 +97,7 @@ class ProvedorDireccionFisicaController extends Controller
         //
         // dd($DireccionFiscal);
         $provedore->direccionFisicaProvedor->update($request->all());
+        Alert::success('Direcciòn Fisical del Proveedor Actializada')->persistent("Cerrar");
         return redirect()->route('provedores.direccionfisica.index',['provedore'=>$provedore]);
     }
 

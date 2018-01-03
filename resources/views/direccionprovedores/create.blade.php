@@ -1,7 +1,9 @@
 @extends('layouts.infoprovedor')
 	@section('cliente')
 		<ul role="tablist" class="nav nav-tabs">
-			<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fiscal:</a></li>
+			<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fiscal:
+				
+			</a></li>
 			<li class="active"><a href="{{ route('provedores.direccionfisica.index',['provedore'=>$provedore]) }}">Dirección Fisica:</a></li>
 			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.contacto.index',['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
 			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.datosgenerales.index', ['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a></li>
@@ -12,28 +14,35 @@
 			{{ csrf_field() }}
 			 <input type="hidden" name="provedor_id" value="{{$provedore->id}}">
 			 <div class="panel-default">
-				<div class="panel-heading">Dirección Fisica:</div>
+				<div class="panel-heading">Dirección Fisica:
+				&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
 				<div class="panel-body">
 						<div class="col-lg-offset-10">
-							<button type="submit" class="btn btn-success">Guardar</button>
-							<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+							<button type="submit" class="btn btn-success">
+								<strong> Guardar
+							</strong></button>
+							
 						</div>
 						<div class="col-lg-3">
 							
 							<label>
 
-								<input type="checkbox"  data-toggle="toggle" onchange="datosFiscal();">
+								<input type="checkbox" 
+								       data-toggle="toggle" 
+								       onchange="datosFiscal();"
+								       id="#boton-toggle">
 								¿Usar datos de dirección fiscal?.
 							</label>
+						
 
 						</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	    					<label class="control-label" for="calle">* Calle:</label>
+	    					<label class="control-label" for="calle"><i class="fa fa-asterisk" aria-hidden="true"></i> Calle:</label>
 	    					<input type="text" class="form-control" id="calle" name="calle" value="" autofocus required>
 	  					</div>
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	    					<label class="control-label" for="numext">* Numero exterior:</label>
+	    					<label class="control-label" for="numext"><i class="fa fa-asterisk" aria-hidden="true"></i> Numero exterior:</label>
 	    					<input type="text" class="form-control" id="numext" name="numext" value="" required>
 	  					</div>	
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -43,19 +52,19 @@
 					</div>
 					<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	  						<label class="control-label" for="colonia">* Colonia:</label>
+	  						<label class="control-label" for="colonia"><i class="fa fa-asterisk" aria-hidden="true"></i> Colonia:</label>
 	  						<input type="text" class="form-control" id="colonia" name="colonia" value="" required>
 	  					</div>
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	  						<label class="control-label" for="municipio">* Delegación o Municipio:</label>
+	  						<label class="control-label" for="municipio"><i class="fa fa-asterisk" aria-hidden="true"></i> Delegación o Municipio:</label>
 	  						<input type="text" class="form-control" id="municipio" name="municipio" value="" required>
 	  					</div>
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	  						<label class="control-label" for="ciudad">* Ciudad:</label>
+	  						<label class="control-label" for="ciudad"><i class="fa fa-asterisk" aria-hidden="true"></i> Ciudad:</label>
 	  						<input type="text" class="form-control" id="ciudad" name="ciudad" value="" required>
 	  					</div>
 	  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-	  						<label class="control-label" for="estado">* Estado:</label>
+	  						<label class="control-label" for="estado"><i class="fa fa-asterisk" aria-hidden="true"></i> Estado:</label>
 	  						<input type="text" class="form-control" id="estado" name="estado" value="" required>
 	  					</div>
 					</div>

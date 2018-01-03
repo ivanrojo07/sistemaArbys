@@ -61,10 +61,10 @@ class FormaContactoController extends Controller
      * @param  \App\FormaContacto  $formaContacto
      * @return \Illuminate\Http\Response
      */
-    public function edit(FormaContacto $formaContacto)
+    public function edit(FormaContacto $formacontacto)
     {
-        //
-        return view('formacontacto.edit',['formaContacto'=>$formaContacto]);
+        
+        return view('formacontacto.edit',['formaContacto'=>$formacontacto]);
     }
 
     /**
@@ -74,10 +74,10 @@ class FormaContactoController extends Controller
      * @param  \App\FormaContacto  $formaContacto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FormaContacto $formaContacto)
+    public function update(Request $request, FormaContacto $formacontacto)
     {
         //
-        $formaContacto->update($request->all());
+        $formacontacto->update($request->all());
         return redirect('formacontactos');
     }
 
@@ -87,10 +87,10 @@ class FormaContactoController extends Controller
      * @param  \App\FormaContacto  $formaContacto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FormaContacto $formaContacto)
+    public function destroy(FormaContacto $formacontacto)
     {
         //
-        $formaContacto->delete();
+        $formacontacto->delete();
         return redirect('formacontactos');
     }
     

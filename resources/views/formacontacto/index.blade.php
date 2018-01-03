@@ -5,7 +5,7 @@
 		<div class="col-lg-6">
 			<form action="buscarformacontacto">
 				<div class="input-group">
-					<input type="text" name="query" class="form-control" placeholder="Buscar...">
+					<input type="text" name="query" class="form-control" placeholder="Buscar..." autofocus>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
 					</span>
@@ -13,8 +13,10 @@
 			</form>
 		</div>
 		<div class="col-lg-6">
-			<a class="btn btn-success" href="{{ route('formacontactos.create') }}">Nueva Forma de Contacto</a>
-		</div>
+			<a class="btn btn-success" href="{{ route('formacontactos.create') }}">
+			<strong>Agregar Forma de Contacto</strong>
+		</a>
+		</div> 
 	</div>
 	@if (count($formaContactos) == 0)
 		{{-- true expr --}}
@@ -41,14 +43,15 @@
 					<td>
 						<div class="row-8">
 							<div class="col-sm-4">
-								<a class="btn btn-info btn-sm" href="{{ route('formacontactos.edit',['formaContacto'=>$formaContacto]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+								<a class="btn btn-info btn-sm" href="{{ route('formacontactos.edit',['formaContacto'=>$formaContacto]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+							<strong>Editar</strong>	 </a>
 								
 							</div>
 						</div>
-						<form role="form" method="POST" action="{{ route('formacontactos.destroy',['formaContacto'=>$formaContacto]) }}">
+						<form role="form" id="eliminar {{ $formaContacto->id }}" method="POST" action="{{ route('formacontactos.destroy',['formaContacto'=>$formaContacto]) }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="_method" value="DELETE">
-						<button type="submit" class="btn btn-info btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+						<a type="submit" onclick="deleteFunction('eliminar {{ $formaContacto->id }}')" class="btn btn-info btn-sm" ><i class="fa fa-trash" aria-hidden="true"></i><strong> Borrar</strong></a>
 						</form>
 				</tr>
 					</td>

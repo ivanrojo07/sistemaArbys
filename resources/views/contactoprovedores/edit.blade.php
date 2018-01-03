@@ -8,23 +8,28 @@
 						<li class=""><a href="{{ route('provedores.crm.index',['provedore'=>$provedore]) }}" class="ui-tabs-anchor">C.R.M.:</a></li>
 					</ul>
 					<div class="panel panel-default">
-						<div class="panel-heading">Contacto:</div>
+						<div class="panel-heading">Contacto:
+						&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
 							<form role="form" method="POST" action="{{ route('provedores.contacto.update', ['provedore'=>$provedore,'contacto'=>$contacto]) }}" name="form">
 								{{ csrf_field() }}
 							 	<input type="hidden" name="provedor_id" value="{{$provedore->id}}">
 							 	<input type="hidden" name="_method" value="PUT">
 						<div class="panel-body">
+
 							<div class="col-xs-offset-10">
-								<button type="submit" class="btn btn-success">Guardar</button>
-								<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+								<button type="submit" class="btn btn-success">
+								<strong>Guardar</strong>	
+								</button>
+								
 							</div>	
+							
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="nombre">* Nombre:</label>
+			    					<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre:</label>
 			    					<input type="text" class="form-control" id="nombre" name="nombre" value="{{ $contacto->nombre }}" required autofocus>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="apater">* Apellido paterno:</label>
+			    					<label class="control-label" for="apater"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido paterno:</label>
 			    					<input type="text" class="form-control" id="apater" name="apater" value="{{ $contacto->apater }}" required>
 			  					</div>	
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -60,7 +65,7 @@
 			  						<input type="text" class="form-control" id="ext2" name="ext2" value="{{ $contacto->ext2 }}">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telefonodir">* Telefono directo:</label>
+			  						<label class="control-label" for="telefonodir"><i class="fa fa-asterisk" aria-hidden="true"></i> Telefono directo:</label>
 			  						<input type="text" class="form-control" id="telefonodir" name="telefonodir" value="{{ $contacto->telefonodir }}" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -72,7 +77,7 @@
 			  						<input type="text" class="form-control" id="celular2" name="celular2" value="{{ $contacto->celular2 }}">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="email1">* Correo electronico:</label>
+			  						<label class="control-label" for="email1"><i class="fa fa-asterisk" aria-hidden="true"></i> Correo electronico:</label>
 			  						<input type="text" class="form-control" id="email1" name="email1" value="{{ $contacto->email1 }}" required>
 			  					</div>
 

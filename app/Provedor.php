@@ -9,24 +9,25 @@ use Kyslik\ColumnSortable\Sortable;
 
 
 
-class Provedor extends Model{
+class Provedor extends Model
+{
    
     use Sortable, SoftDeletes;
     //
     protected $table='proveedores';
 
-    protected $fillable = [
-
-
-        'id','tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'razonsocial', 'alias', 'rfc','vendedor','email', 'calle', 'numext', 'numinter', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia'
-
-    ];
     public $sortable = ['id', 'nombre','apellidopaterno','apellidomaterno', 'razonsocial', 'email'];
    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $fillable = [
+
+
+        'id','tipopersona', 'nombre', 'apellidopaterno','apellidomaterno', 'razonsocial', 'alias', 'rfc','vendedor','email', 'calle', 'numext', 'numinter', 'colonia', 'municipio', 'ciudad', 'estado', 'calle1', 'calle2','referencia'
+
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
