@@ -12,7 +12,12 @@
 			 			<i class="fa fa-sticky-note" aria-hidden="true"></i>
 			 		</h5>
 			 		
-			 		<input type="text" name="nombre" class="form-control" placeholder="Nombre del Bono" pattern="[A-Za-z]+">
+			 		<input type="text" 
+			 		       name="nombre" 
+			 		       class="form-control" 
+			 		       placeholder="Nombre del Bono" 
+			 		       pattern="[A-Za-z]+"
+			 		       autofocus="on">
 			 	
       			
 

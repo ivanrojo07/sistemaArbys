@@ -45,8 +45,12 @@
 	    			<h5>Monto
 	    				<i class="fa fa-money" aria-hidden="true"></i>
 	    			</h5>
-	    			<input type="text" name="responsable" class="form-control" placeholder="$--"
-	    			pattern="[0-9]+">
+	    			<input type="text" 
+	    			       name="responsable" 
+	    			       class="form-control" 
+	    			       placeholder="$--"
+	    				   pattern="[0-9]+"
+	    				   autofocus>
 	    	 	 </div><br/><br/>
 
 

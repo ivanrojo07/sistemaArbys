@@ -1,4 +1,4 @@
-@extends('layouts.blank')
+@extends('layouts.blank') 
 	@section('content')
 		<div class="container" id="tab">
 				<div role="application" class="panel panel-group" >

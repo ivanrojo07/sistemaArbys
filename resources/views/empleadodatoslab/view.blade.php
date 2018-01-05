@@ -96,7 +96,9 @@
 					<dd>{{ $datoslab->clabe }}</dd>
 				</div>
 			</div>
-			<a class="btn btn-info btn-md" href="{{ route('empleados.datoslaborales.edit',['empleado'=>$empleado,'datoslaborale'=>$datoslab]) }}">Editar</a>
+			<a class="btn btn-info btn-md" href="{{ route('empleados.datoslaborales.edit',['empleado'=>$empleado,'datoslaborale'=>$datoslab]) }}">
+				<strong>Editar</strong>
+			</a>
 		</div>
 	</div>
 @endsection

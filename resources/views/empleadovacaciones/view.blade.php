@@ -17,18 +17,19 @@
 		</ul>
 	</div>
 	<div class="panel-default">
-		<div class="panel-heading"><h5>Vacaciones:</h5></div>
+		<div class="panel-heading"><h5>Vacaciones:
+		&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h5></div>
 		<div class="panel-body">
 			<form role="form" method="POST" action="{{ route('empleados.vacaciones.store',['empleado'=>$empleado]) }}">
 				{{ csrf_field() }}
 				<input type="hidden" name="empleado_id" value="{{$empleado->id }}">
 				<div class="col-xs-12 offset-md-2 mt-3">
 				<div class="form-group col-xs-4">
-						<label class="control-label" for="fechainicio" id="lbl_vacaciones">Fecha de Inicio:</label>
+						<label class="control-label" for="fechainicio" id="lbl_vacaciones"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Inicio:</label>
 						<input type="date" class="form-control" id="id_vacaciones" name="fechainicio">
 					</div>
 				<div class="form-group col-xs-4">
-						<label class="control-label" for="fechafin" id="lbl_vacaciones">Fecha de Fin:</label>
+						<label class="control-label" for="fechafin" id="lbl_vacaciones"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Fin:</label>
 						<input type="date" class="form-control" id="id_vacaciones_fin" name="fechafin">
 					</div>
 				
@@ -57,7 +58,7 @@
 					</div>
 				</div>
 				<button type="submit" class="btn btn-success">Guardar</button>
-				<p><strong>*Campo requerido</strong></p>
+				
 			</form>
 			<div class="col-xs-12 offset-md-2 mt-6">
 				<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">

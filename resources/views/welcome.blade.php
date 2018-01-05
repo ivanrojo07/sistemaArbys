@@ -82,15 +82,33 @@
 
                     
                     
-                    <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a onclick="AgregarNuevoTab('{{ url('import-export-csv-excel') }}','Alta de productos')"  href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
-                                <a href="#" onclick="AgregarNuevoTab('{{ url('productos') }}','Buscar Producto')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
-                            </li>                     
-                        </ul>
+                    <li class="dropdown" role="menu" aria-labelledby="dLabel">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#" onclick="AgregarNuevoTab('{{ url('/productos/create')}}','Alta Producto')"><i class="fa fa-cart-plus" aria-hidden="true"></i> Alta</a>
+                        <a href="#" onclick="AgregarNuevoTab('{{ url('/productos') }}','Buscar Producto')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas</a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/marcas') }}','Marca')"><i class="fa fa-refresh" aria-hidden="true"></i> Marca</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/familias') }}','Familia')"><i class="fa fa-refresh" aria-hidden="true"></i> Familia</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/tipos') }}','Tipo')"><i class="fa fa-refresh" aria-hidden="true"></i> Tipo</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/subtipos') }}','Subtipo')"><i class="fa fa-refresh" aria-hidden="true"></i> Subtipo</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/unidad') }}','Unidad')"><i class="fa fa-refresh" aria-hidden="true"></i> Unidad</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/presentaciones') }}','Presentación')"><i class="fa fa-refresh" aria-hidden="true"></i> Presentación</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/calidad') }}','Calidad')"><i class="fa fa-refresh" aria-hidden="true"></i> Calidad</a>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('acabados') }}','Acabado')"><i class="fa fa-refresh" aria-hidden="true"></i> Acabado</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </li>                     
+                    </ul>
                     </li>
+
+
+                    
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>

@@ -17,7 +17,8 @@
 		</ul>
 	</div>
 	<div class="panel-default">
-		<div class="panel-heading"><h5>Estudios:</h5></div>
+		<div class="panel-heading"><h5>Estudios:
+		&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h5></div>
 		<div class="panel-body">
 			@if ($edit == true)
 				{{-- expr --}}
@@ -31,7 +32,7 @@
 			@endif
 				<div class="col-md-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="escolaridad1" id="lbl_escolaridad1">Escolaridad 1:</label>
+						<label class="control-label" for="escolaridad1" id="lbl_escolaridad1"><i class="fa fa-asterisk" aria-hidden="true"></i>Escolaridad 1:</label>
 						<select type="select" name="escolaridad1" class="form-control" id="escolaridad1">
 							<option id="1" value="Primaria" @if ($estudios->escolaridad1 == "Primaria")
 								{{-- expr --}}
@@ -68,13 +69,13 @@
 						<input type="text" class="form-control" id="institucion1" name="institucion1" value="{{ $estudios->institucion1 }}">
 					</div>
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="cedula1" id="lbl_cedula">Número de Cédula:</label>
+						<label class="control-label" for="cedula1" id="lbl_cedula"><i class="fa fa-asterisk" aria-hidden="true"></i>Número de Cédula:</label>
 						<input type="text" class="form-control" id="cedula1" name="cedula1" value="{{ $estudios->cedula1 }}">
 					</div>
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="escolaridad2" id="lbl_escolaridad2">Escolaridad 2:</label>
+						<label class="control-label" for="escolaridad2" id="lbl_escolaridad2"><i class="fa fa-asterisk" aria-hidden="true"></i>Escolaridad 2:</label>
 						<select type="select" name="escolaridad2" class="form-control" id="escolaridad2">
 							<option id="1" value="Primaria" @if ($estudios->escolaridad1 == "Primaria")
 								{{-- expr --}}
@@ -111,7 +112,7 @@
 						<input type="text" class="form-control" id="institucion2" name="institucion2" value="{{ $estudios->institucion2 }}">
 					</div>
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="cedula2" id="lbl_cedula2">Número de Cédula:</label>
+						<label class="control-label" for="cedula2" id="lbl_cedula2"><i class="fa fa-asterisk" aria-hidden="true"></i>Número de Cédula:</label>
 						<input type="text" class="form-control" id="cedula2" name="cedula2" value="{{ $estudios->cedula2 }}">
 					</div>
 				</div>
@@ -273,7 +274,7 @@
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-4">
-						<label class="control-label" for="curso1" id="lbl_curso">Curso:</label>
+						<label class="control-label" for="curso1" id="lbl_curso"><i class="fa fa-asterisk" aria-hidden="true"></i>Curso:</label>
 						<input type="text" class="form-control" id="id_curso1" name="curso1" value="{{ $estudios->curso1 }}">
 						<div class="boton checkbox-disabled">
 							<label>
@@ -310,7 +311,7 @@
 					</div>
 				</div>
 				<button type="submit" class="btn btn-success">Guardar</button>
-				<p><strong>*Campo requerido</strong></p>
+				
 				</form>
 		</div>
 	</div>

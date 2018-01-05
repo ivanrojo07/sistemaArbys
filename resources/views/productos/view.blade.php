@@ -47,48 +47,42 @@
 			    				
 			    			</div>
 			    			<div class="row">
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-6">
 			  						<label class="control-label" for="calidad">Calidad:</label>
 			    					<dd>{{$producto->calidad}}</dd>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-6">
 				  					<label class="control-label" for="acabado">Acabado:</label>
 				  					<dd>{{$producto->acabado}}</dd>
 			    				</div>
-			    			</div>
-			    			<div class="row mt-3">
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-4">
 				  					<label class="control-label" for="medida1">Medida 1:</label>
 				  					<dd>
 				  						{{$producto->medida1}} {{$producto->unidad1}}
 				  					</dd>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-4">
 			  						<label class="control-label" for="medida2">Medida 2:</label>
 			  						<dd>{{$producto->medida2}} {{$producto->unidad2}}</dd>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-4">
 			  						<label class="control-label" for="medida3">Medida 3:</label>
 			  						<dd>{{$producto->medida3}} {{$producto->unidad3}}</dd>
-			    				</div>	  					
-			    			</div>
-			    			<div class="row mt-3">
+			    				</div>
 			    				<div class="form-group col-xs-5">
 			  						<label class="control-label" for="corta">* Descripción corta:</label>
 			  						<dd>{{$producto->descripcion_short}}</dd>
 			  					</div>
-			    			<div class="form-group col-xs-6">
+			    				<div class="form-group col-xs-7">
 			  						<label class="control-label" for="descripcion">* Descripción Larga:</label>
 			  						<textarea class="form-control" id="descripcion" name="descripcion_large" required disabled>"{{$producto->descripcion_large}}"
 			  							</textarea>
 			  					</div>
-			  				</div>
-			  				<div class="row mt-3">
 			  					<div class="form-group col-xs-5">
 			  						<label class="control-label" for="sat">Clave Sat:</label>
 			  						<dd></dd>
 			  					</div>
-			    			<div class="form-group col-xs-6">
+			    				<div class="form-group col-xs-7">
 			  						<label class="control-label" for="descripcion_sat">Descripción SAT:</label>
 			  						<textarea class="form-control" id="descripcion_sat" name="descripcion_sat" disabled>
 			  							</textarea>

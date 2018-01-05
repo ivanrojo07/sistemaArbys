@@ -3,7 +3,10 @@
 <div class="container">
 	@if ($edit == true)
 		{{-- true expr --}}
-		<form role="form" method="POST" action="{{ route('empleados.update',['empleado'=>$empleado]) }}">
+
+		<form role="form" 
+		      method="POST" 
+		      action="{{ route('empleados.update',['empleado'=>$empleado]) }}">
 			{{ csrf_field() }}
 			<input type="hidden" name="_method" value="PUT">
 	@else
@@ -13,40 +16,49 @@
 	@endif
 		<div role="application" class="panel panel-group">
 			<div class="panel-default">
-				<div class="panel-heading"><h4>Datos del Empleado:</h4></div>
+				<div class="panel-heading"><h4>Datos del Empleado:
+					&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+					Campos Requeridos
+				</h4></div>
 				<div class="panel-body">
 					<div class="col-xs-12 offset-md-2 mt-3">
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="identificador">* ID de empleado:</label>
+							<label class="control-label" for="identificador"><i class="fa fa-asterisk" aria-hidden="true"></i> ID de empleado:</label>
 							@if ($edit == true)
 								{{-- true expr --}}
 								<dd>{{$empleado->identificador}}</dd>
 							@else
 								{{-- false expr --}}
-							<input class="form-control" id="identificador" type="text" name="identificador" required="required">
+							<input class="form-control" 
+							       id="identificador" 
+							       type="text" 
+							       name="identificador" 
+							       required="required"
+							       autofocus>
 							@endif
 						</div>
 					</div>
 					<div class="col-xs-12 offset-md-2 mt-3">
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="appaterno">* Apellido Paterno:</label>
+							<label class="control-label" for="appaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Paterno:</label>
 							<input type="text" class="form-control" id="appaterno" name="appaterno" required="required" value="{{ $empleado->appaterno }}">
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="apmaterno">* Apellido Materno:</label>
+							<label class="control-label" for="apmaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Materno:</label>
 							<input type="text" id="apmaterno" class="form-control" name="apmaterno" required="required" value="{{ $empleado->apmaterno }}">
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="nombre">* Nombre(s):</label>
+							<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" required="required" value="{{ $empleado->nombre }}">
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="rfc">RFC:</label>
+							<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i>RFC:</label>
 							<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $empleado->rfc }}">
 						</div>
 					</div>
 				</div>
 			</div>
+			@if($edit == false)
 			<div>
 				<ul class="nav nav-pills nav-justified">
 					<li class="active"><a href="#tab1"  class="ui-tabs-anchor">Generales:</a></li>
@@ -62,9 +74,42 @@
 					<li role="presentation" class="disabled" disabled="disabled"><a class="ui-tabs-anchor" disabled="disabled">Administrativo:</a></li>
 				</ul>
 			</div>
+			@else
+			<div>
+				<ul class="nav nav-pills nav-justified">
+					<li role="presentation" class="active"><a href="{{ route('empleados.show',['empleado'=>$empleado]) }}"  class="ui-tabs-anchor">Generales:</a></li>
+
+					<li role="presentation" class=""><a href="{{ route('empleados.datoslaborales.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Laborales:</a></li>
+
+					<li role="presentation" class=""><a href="{{ route('empleados.estudios.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Estudios:</a></li>
+
+					<li role="presentation" class=""><a href="{{ route('empleados.emergencias.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Emergencias:</a></li>
+
+					<li role="presentation" class=""><a href="{{ route('empleados.vacaciones.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Vacaciones:</a></li>
+
+					<li role="presentation" class=""><a href="{{ route('empleados.faltas.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Administrativo:</a></li>
+				</ul>
+			</div>
+			@endif
 				<div class="panel-default">
-					<div class="panel-heading"><h5>Datos Generales:</h5></div>
+					<div class="panel-heading"><h5>Datos Generales:
+					&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos
+				</h5>
+					
+						</div>
 					<div class="panel-body">
+						<div class="col-xs-4 col-xs-offset-8">
+									<button type="submit" 
+									        class="btn btn-success">
+									 <strong>Guardar</strong>
+								</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="btn btn-info" 
+								   href="{{ route('empleados.create') }}">
+								<strong>Agregar Nuevo</strong> </a>
+									
+							</div><br><br><br>
+							
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-xs-3">
 								<label class="control-label" for="telefono">Teléfono:</label>
@@ -133,8 +178,8 @@
 								<input type="text" class="form-control" name="referencia" id="referencia" value="{{ $empleado->referencia }}">
 							</div>
 						</div>
-						<button class="btn btn-success">Guardar</button>
-	  				<p><strong>*Campo requerido</strong></p>
+						
+	  				
 					</div>
 				</div>
 			</div>

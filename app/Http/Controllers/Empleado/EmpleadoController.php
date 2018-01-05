@@ -16,7 +16,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        $empleados = Empleado::sortable()->paginate(10);
+        $empleados = Empleado::sortable()->paginate(5);
         return view('empleado.index',['empleados'=>$empleados]);
 
     }
@@ -109,5 +109,27 @@ class EmpleadoController extends Controller
     public function consulta()
     {
         return view('empleado.consulta');
+    }
+
+    public function buscar(Request $request){
+    // dd($request);
+    $query = $request->input('busqueda');
+    $wordsquery = explode(' ',$query);
+    $empleados = Empleado::where(function($q) use($wordsquery){ 
+            foreach ($wordsquery as $word) {
+                # code...
+            $q->orWhere('nombre','LIKE',"%$word%")
+                ->orWhere('appaterno','LIKE',"%$word%")
+                ->orWhere('apmaterno','LIKE',"%$word%")
+                ->orWhere('rfc','LIKE',"%$word%")
+                ->orWhere('curp','LIKE',"%$word%");
+                // ->orWhere('rfc','LIKE',"%$word%");
+                // ->orWhere('alias','LIKE',"%$word%");
+                // ->orWhere('tipopersona','LIKE',"%$word%")
+            }
+        })->get();
+    return view('empleado.busqueda', ['empleados'=>$empleados]);
+        
+
     }
 }

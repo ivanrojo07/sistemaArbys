@@ -34,7 +34,7 @@
 					<th>@sortablelink('id', '#'){{-- Nombre --}}</th>
 					<th>@sortablelink('nombre', 'Nombre')</th>
 					<th>@sortablelink('abreviatura', 'Abreviatura')</th>
-					<th>Operacion</th> 
+					<th>Operacion</th>
 				</tr>
 			</thead>
 			@foreach($precargas as $precarga)

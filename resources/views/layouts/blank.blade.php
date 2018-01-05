@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}"> 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,33 +48,6 @@
 
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
-
-    {{-- <script type="text/javascript">
-        function formulario(elemento){
-            if (elemento.value == "Prospecto") {
-                document.getElementById('cliente').style.display='none';
-                document.getElementById('cliente1').style.display='none';
-                document.getElementById('cliente2').style.display='none';
-            }
-            if (elemento.value == "Cliente") {
-                document.getElementById('cliente').style.display='inline';
-                document.getElementById('cliente1').style.display='inline';
-                document.getElementById('cliente2').style.display='inline';
-            }
-        }
-        function persona(elemento){
-            if(elemento.value == "Fisica"){
-                document.getElementById('perfisica').style.display='inline';
-                document.getElementById('permoral').style.display='none';
-            }
-            if(elemento.value =="Moral"){
-                document.getElementById('perfisica').style.display='none';
-                document.getElementById('permoral').style.display='inline';
-            }
-        }
-    </script> --}}
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
 

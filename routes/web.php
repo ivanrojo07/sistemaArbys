@@ -28,10 +28,15 @@ Route::resource('personals.datosbeneficiario', 'Personal\PersonalBeneficiarioCon
 Route::resource('personals.producto','Personal\PersonalProductoController');
 Route::resource('personals.crm','Personal\PersonalCRMController');
 Route::resource('productos','Producto\ProductController');
+
 Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
+
 Route::get('producto', 'Producto\ProductController@search');
+Route::get('buscarcliente','Personal\PersonalController@buscar');
+Route::resource('productos','Producto\ProductoController');
+
 Route::resource('personals.products.transactions', 'Personal\PersonalProductTransactionController',['only'=>'store']);
 Route::resource('personals.product','Personal\PersonalProductController', ['only'=>'index']);
 // Route::resource('datoslaborales','DatosLabController');

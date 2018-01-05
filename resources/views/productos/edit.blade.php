@@ -7,20 +7,25 @@
 			<input type="hidden" name="_method" value="PUT">
 		<div role="application" class="panel panel-group">
 					<div class="panel-default">
-						<div class="panel-heading"><h4>Datos del Producto:</h4>
+						<div class="panel-heading"><h4>Datos del Producto:
+						&nbsp;&nbsp;&nbsp;&nbsp;		<strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong>
+						</h4>
 						</div>
 						<div class="panel-body">
 								<div class="form-group col-xs-2 col-xs-offset-10">
-										<button type="submit" class="btn btn-success">Guardar</button>
-										<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+										<button type="submit" class="btn btn-success">
+										<strong>Guardar</strong>
+									</button>
+										
 								</div>
 			  					<div class="form-group col-xs-3">
-			  						<label class="control-label" for="id">* ID:</label>
+			  						<label class="control-label" for="id"> ID: (Automático)
+			  						</label>
 			  						<input type="text" class="form-control" id="id_auto" name="identificador" required readonly="" value="{{$producto->identificador}}" maxlength="20">
 			  					</div>
 								{{-- {{dd($marcas)}} --}}
 			  					<div class="form-group col-xs-3">
-			  						<label class="control-label" for="marca">* Marca:</label>
+			  						<label class="control-label" for="marca"><i class="fa fa-asterisk" aria-hidden="true"></i> Marca:</label>
 			  						<select type="select" name="marca" class="form-control" id="marca" onchange="sub()">	
 			  							@foreach ($marcas as $marca)
 			  								<option id="{{$marca->id}}" value="{{$marca->abreviatura}}" @if($producto->marca == $marca->abreviatura) selected="selected" @endif>{{$marca->nombre}}</option>
@@ -28,11 +33,17 @@
 			  						</select>
 			  					</div>
 			  					<div class="form-group col-xs-3">
-			  						<label class="control-label" for="clave">* Clave:</label>
-			  						<input autofocus type="text" class="form-control" id="clave" name="clave" required onkeyup="sub()" value="{{$producto->clave}}">
+			  						<label class="control-label" for="clave"><i class="fa fa-asterisk" aria-hidden="true"></i> Clave:</label>
+			  						<input  type="text" 
+			  						        class="form-control" 
+			  						        id="clave" 
+			  						        name="clave" 
+			  						        required onkeyup="sub()" 
+			  						        value="{{$producto->clave}}"
+			  						        autofocus>
 			  					</div>
 			  					<div class="form-group col-xs-3">
-			  					<label class="control-label" for="familia">* Familia:</label>
+			  					<label class="control-label" for="familia"><i class="fa fa-asterisk" aria-hidden="true"></i> Familia:</label>
 
 			    					<select type="select" name="familia" class="form-control" id="familia_id" required onchange="f_corta()">
 
@@ -66,7 +77,7 @@
 			    				</select>
 			    				</div>
 			    				<div class="form-group col-xs-3">
-			  					<label class="control-label" for="presentacion">* Presentación(empaque):</label>
+			  					<label class="control-label" for="presentacion"><i class="fa fa-asterisk" aria-hidden="true"></i> Presentación(empaque):</label>
 			    					<select type="select" name="presentacion" class="form-control" id="presentacion" required onchange="f_corta()">
 			    					@foreach ($presentaciones as $presentacion)
 			    							{{-- expr --}}
@@ -75,7 +86,7 @@
 			    				</select>
 			    				</div>
 			    				
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-6">
 			  					<label class="control-label" for="calidad">Calidad:</label>
 
 			    					<select type="select" name="calidad" class="form-control" id="calidad" onchange="f_corta()">
@@ -85,7 +96,7 @@
 		    						@endforeach	
 			    				</select>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-6">
 			  					<label class="control-label" for="acabado">Acabado:</label>
 
 			    					<select type="select" name="acabado" class="form-control" id="acabado" onchange="f_corta()">
@@ -95,9 +106,8 @@
 		    						@endforeach	
 			    				</select>
 			    				</div>
-			    			<div class="row mt-3">
-			    				<div class="form-group col-xs-3">
-			  					<label class="control-label" for="medida1">Medida 1:</label>
+			    				<div class="form-group col-xs-4">
+			  					<label class="control-label" for="medida1"><i class="fa fa-asterisk" aria-hidden="true"></i>Medida 1:</label>
 			  					<input type="text" class="form-control" id="medida1" name="medida1" required onkeyup="f_corta()" value="{{$producto->medida1}}">
 			  					<label class="control-label" for="unidades">Unidades:</label>
 			    					<select type="select" {{-- value="{{$producto->unidad1}}" --}} name="unidad1" class="form-control" id="unidad1">
@@ -107,7 +117,7 @@
 			    						@endforeach
 				    				</select>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-4">
 			  					<label class="control-label" for="medida2">Medida 2:</label>
 			  					<input type="text" class="form-control" id="medida2" name="medida2" value="{{$producto->medida2}}">
 			  					<label class="control-label" for="unidades">Unidades</label>
@@ -119,7 +129,7 @@
 				    				</select>	
 			    				</select>
 			    				</div>
-			    				<div class="form-group col-xs-3">
+			    				<div class="form-group col-xs-4">
 			  					<label class="control-label" for="medida3">Medida 3:</label>
 			  					<input type="text" class="form-control" id="medida3" name="medida3" value="{{$producto->medida3}}">
 			  					<label class="control-label" for="unidades">Unidades</label>
@@ -131,22 +141,20 @@
 				    				</select>	
 			    				</select>
 			    				</div>	  					
-			    			</div>
-			    			<div class="row mt-3">
-			    				<div class="form-group col-xs-4">
-			  						<label class="control-label" for="corta">* Descripción corta:</label>
+			    				<div class="form-group col-xs-5">
+			  						<label class="control-label" for="corta"><i class="fa fa-asterisk" aria-hidden="true"></i> Descripción corta:</label>
 			  						<input type="text" class="form-control" id="corta_id" name="descripcion_short" required readonly="" value="{{$producto->descripcion_short}}">
 			  					</div>
-			    			<div class="form-group col-xs-4">
-			  						<label class="control-label" for="descripcion">* Descripción Larga:</label>
+			    				<div class="form-group col-xs-7">
+			  						<label class="control-label" for="descripcion"><i class="fa fa-asterisk" aria-hidden="true"></i> Descripción Larga:</label>
 			  						<textarea class="form-control" id="descripcion" name="descripcion_large" required readonly="">"{{$producto->descripcion_large}}"
 			  							</textarea>
 			  					</div>
-			  					<div class="form-group col-xs-3">
+			  					<div class="form-group col-xs-5">
 			  						<label class="control-label" for="sat">Clave Sat:</label>
 			  						<input type="text" class="form-control" id="sat" name="sat">
 			  					</div>
-			    			<div class="form-group col-xs-3">
+			    			<div class="form-group col-xs-7">
 			  						<label class="control-label" for="descripcion_sat">Descripción SAT:</label>
 			  						<textarea class="form-control" id="descripcion_sat" name="descripcion_sat" >
 			  							</textarea>

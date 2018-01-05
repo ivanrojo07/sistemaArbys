@@ -1,4 +1,4 @@
-@extends('layouts.infopersonal')
+@extends('layouts.infopersonal')  
   @section('personal')
   <ul role="tablist" class="nav nav-tabs">
     <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.show',['personal'=>$personal]) }}" class="">Dirección/Domicilio:</a></li>

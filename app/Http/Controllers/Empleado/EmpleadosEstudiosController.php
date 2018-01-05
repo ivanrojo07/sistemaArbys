@@ -91,7 +91,7 @@ class EmpleadosEstudiosController extends Controller
         }
         // dd($estudios);
         $estudios->save();
-        return redirect()->route('empleadoestudios.view',['empleado'=>$empleado,'estudios'=>$estudios]);
+        return redirect()->route('empleados.estudios.index',['empleado'=>$empleado,'estudios'=>$estudios]);
     }
 
     /**
@@ -168,7 +168,7 @@ class EmpleadosEstudiosController extends Controller
         }
         // dd($estudios);
         $estudios->save();
-        return redirect()->route('empleadoestudios.view',['empleado'=>$empleado,'estudios'=>$estudios]);
+        return redirect()->route('empleados.estudios.index',['empleado'=>$empleado,'estudios'=>$estudios]);
     }
 
     /**

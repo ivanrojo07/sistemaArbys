@@ -24,7 +24,7 @@ function closeNav() {
 function AgregarNuevoTab(url, nombre) {
     closeNav();
     var tabs = document.getElementById("tabsApp");
-    // console.log(tabs);
+    console.log(tabs);
     var obj = tabs.getElementsByTagName("li");
     for (var i = 0; i < obj.length; i++) {
         var anombre = obj[i].innerText.substring(0, obj[i].innerText.length - 2);
@@ -93,3 +93,4 @@ function autoCerrar(obj) {
         return 0;
     });
 }
+
