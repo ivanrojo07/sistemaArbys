@@ -22,10 +22,11 @@
 					<td>{{$empleado->apmaterno}}</td>
 					<td>{{$empleado->rfc}}</td>
 					<td>
-						<a class="btn btn-success btn-sm" href="{{ route('empleados.show',['empleado'=>$empleado]) }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
-						<a class="btn btn-info btn-sm" href="{{ route('empleados.edit',['empleado'=>$empleado]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+						<a class="btn btn-success btn-sm" href="{{ route('empleados.show',['empleado'=>$empleado]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
+						<a class="btn btn-info btn-sm" href="{{ route('empleados.edit',['empleado'=>$empleado]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Editar </strong></a>
 					</td>
 				</tr>
 			@endforeach
 		</table>
 		<script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
+		

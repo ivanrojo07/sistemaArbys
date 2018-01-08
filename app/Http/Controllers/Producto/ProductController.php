@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $productos = Product::sortable()->paginate(10);
+        $productos = Product::whereMonth('created_at', date("m"))->sortable()->paginate(10);
         return view('product.index',['productos'=>$productos]);
     }
 
@@ -90,7 +90,8 @@ class ProductController extends Controller
     }
 
     public function search(Request $request){
-        $query = $request->input('query');
+       // $query = $request->input('query');
+        $query = $request->input('busqueda');
         $wordsquery = explode(' ',$query);
 
         $productos = Product::where(function($q) use($wordsquery){
@@ -102,8 +103,10 @@ class ProductController extends Controller
                     ->orWhere('precio_lista','LIKE',"%$word%")
                     ->orWhere('apertura','LIKE',"%$word%")
                     ->orWhere('inicial','LIKE','%$word%');
+                    
             }
-        })->paginate(50);
-        return view('product.index',['productos'=>$productos]);
-    }
+
+        })->whereMonth('created_at', date("m"))->get();  
+        return view('product.busqueda',['productos'=>$productos]);
+    } 
 }

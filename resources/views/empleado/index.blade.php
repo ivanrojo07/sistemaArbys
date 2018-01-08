@@ -3,9 +3,8 @@
 <div class="container">
 	<div class="panel-body">
 		<div class="col-lg-6">
-			<form id="buscarempleado" 
-			      action="busqueda"
-		          onKeypress="if(event.keyCode == 13) event.returnValue = false;">
+			<form action="busqueda"
+			      id="buscarempleado">
 				<!-- {{ csrf_field() }} -->
 			
 				
@@ -13,11 +12,11 @@
 				     id="datos1">
 				     
 					<input type="text" 
-					       list='browsers' 
 					       id="empleado" 
 					       name="query" 
 					       class="form-control" 
-					       placeholder="Buscar..." 
+					       placeholder="Buscar..."
+					       onKeypress="if(event.keyCode == 13) event.returnValue = false;" 
 					       autofocus>
 
 
@@ -56,8 +55,8 @@
 					<td>{{$empleado->apmaterno}}</td>
 					<td>{{$empleado->rfc}}</td>
 					<td>
-						<a class="btn btn-success btn-sm" href="{{ route('empleados.show',['empleado'=>$empleado]) }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
-						<a class="btn btn-info btn-sm" href="{{ route('empleados.edit',['empleado'=>$empleado]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
+						<a class="btn btn-success btn-sm" href="{{ route('empleados.show',['empleado'=>$empleado]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
+						<a class="btn btn-info btn-sm" href="{{ route('empleados.edit',['empleado'=>$empleado]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong>Editar</strong></a>
 					</td>
 				</tr>
 			@endforeach
@@ -311,5 +310,5 @@
 
   			
 
-
+<script type="text/javascript" src="{{ asset('js/peticion.js') }}"></script>
 @endsection

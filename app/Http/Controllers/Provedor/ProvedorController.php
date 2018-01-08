@@ -115,13 +115,13 @@ class ProvedorController extends Controller{
     $provedores = Provedor::where(function($q) use($wordsquery){
             foreach ($wordsquery as $word) {
                 # code...
-            $q->orWhere('nombre','LIKE',"%$word%")
+            $q->orWhere('nombre','LIKE',           "%$word%")
                 ->orWhere('apellidopaterno','LIKE',"%$word%")
                 ->orWhere('apellidomaterno','LIKE',"%$word%")
-                ->orWhere('razonsocial','LIKE',"%$word%")
-                ->orWhere('rfc','LIKE',"%$word%")
-                ->orWhere('alias','LIKE',"%$word%")
-                ->orWhere('tipopersona','LIKE',"%$word%");
+                ->orWhere('razonsocial','LIKE',    "%$word%")
+                ->orWhere('rfc','LIKE',            "%$word%")
+                ->orWhere('alias','LIKE',          "%$word%")
+                ->orWhere('tipopersona','LIKE',    "%$word%");
             }
         })->get();
     return view('provedores.busqueda', ['provedores'=>$provedores]);

@@ -33,9 +33,8 @@ Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileCon
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
 
-Route::get('producto', 'Producto\ProductController@search');
+
 Route::get('buscarcliente','Personal\PersonalController@buscar');
-Route::resource('productos','Producto\ProductoController');
 
 Route::resource('personals.products.transactions', 'Personal\PersonalProductTransactionController',['only'=>'store']);
 Route::resource('personals.product','Personal\PersonalProductController', ['only'=>'index']);
@@ -52,6 +51,8 @@ Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController')
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::resource('contratos','Precargas\TipoContratoController');
 Route::resource('bajas','Precargas\TipoBajaController');
+
+Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
     
 //Añadido <Iyari> 5/dic/2017//
 Route::get('sucursales',function(){
@@ -94,3 +95,8 @@ Route::resource('provedores.contacto','Provedor\ProvedorContactoController');
 Route::resource('provedores.crm','Provedor\ProvedorCRMController');
 //----------------------------------------------------------
 Route::resource('giros','Giro\GiroController', ['except'=>'show']);
+//---------------------------------------------------------------------
+
+Route::get('producto', 'Producto\ProductController@search');
+//---------------------------------------------------------------------------
+

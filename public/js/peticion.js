@@ -9,7 +9,7 @@ function obtener_registros(busqueda, etiqueta)
 
 	// console.log(etiqueta);
 	if (etiqueta == 'query') {
-		
+		 
 		$.ajax({
 			//url : "http://localhost/clientes",
 			//poner if por cada etiqueta
@@ -24,7 +24,7 @@ function obtener_registros(busqueda, etiqueta)
 	}
 	if (etiqueta == 'producto') {
 		$.ajax({
-			url : "buscarproducto",
+			url : "producto",
 			type : "GET",
 			dataType : "html",
 			data :{busqueda:busqueda},

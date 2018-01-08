@@ -1,35 +1,4 @@
-@extends('layouts.blank')
-@section('content')
-	{{-- expr --}}
-	<div class="container clearfix">
-		<div class="row">
-			<div class="panel-body">
-				<div class="col-xs-6">
-					<form action="">
-						<div class="input-group">
 
-							<input type="text" 
-								   id="producto" 
-							       name="query" 
-							       class="form-control" 
-							       placeholder="Buscar..."
-							       autofocus
-					               onKeypress="if(event.keyCode == 13) event.returnValue = false;">
-
-							<!-- <span class="input-group-btn">
-								<button class="btn btn-default" type="submit"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-							</span> -->
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="container">
-
-	<div class="jumbotron" id="datos" name="datos">
 
 
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
@@ -63,12 +32,8 @@
 				</tbody>
 			@endforeach
 		</table><br>
-{{ $productos->links() }}
-	</div>
+
+	
 	
 
-</div>
-
-
-
-@endsection
+	<script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>

@@ -5,7 +5,9 @@
 		<div class="col-lg-6">
 			<form action="buscarprovedor">
 				<div class="input-group">
-					<input type="text" id="provedor" 
+
+					<input type="text" 
+					       id="provedor" 
 					       name="query" 
 					       class="form-control" 
 					       placeholder="Buscar..."

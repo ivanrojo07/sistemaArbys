@@ -16,6 +16,12 @@
 										<button type="submit" class="btn btn-success">
 										<strong>Guardar</strong>
 									</button>
+
+									<a class="btn btn-info" 
+							   href="{{ route('productos.create')}}">
+							        <strong>
+							   Agregar Nuevo</strong>
+							</a>
 										
 								</div>
 			  					<div class="form-group col-xs-3">
