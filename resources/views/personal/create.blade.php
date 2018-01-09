@@ -5,18 +5,18 @@
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group">
 					<div class="panel-default">
-						<div class="panel-heading"><h4>Datos del Personal:</h4></div>
+						<div class="panel-heading"><h4>Datos del Personal:&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h4></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="tipo">Tipo de Cliente:</label>
+			    					<label class="control-label" for="tipo"><i class="fa fa-asterisk" aria-hidden="true"></i>Tipo de Cliente:</label>
 			    					<select type="select" name="tipo" class="form-control" id="tipo" onchange="formulario(this)">
 			    						<option id="Prospecto" value="Prospecto" selected="selected">Prospecto</option>
 			    						<option id="Cliente" value="Cliente">Cliente</option>
 			    					</select>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
+			    					<label class="control-label" for="tipopersona"><i class="fa fa-asterisk" aria-hidden="true"></i>Tipo de Persona:</label>
 			    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
 			    						<option id="Fisica" value="Fisica">Fisica</option>
 			    						<option id="Moral" value="Moral">Moral</option>
@@ -48,11 +48,11 @@
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombre">* Nombre(s):</label>
+			  						<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
 			  						<input type="text" class="form-control" id="idnombre" name="nombre" required="">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="apellidopaterno">* Apellido Paterno:</label>
+			  						<label class="control-label" for="apellidopaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Paterno:</label>
 			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -63,25 +63,25 @@
 							<div class="col-md-12 offset-md-2 mt-3" id="permoral" style="display:none;">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
-			  						<label class="control-label" for="razonsocial">* Razon Social:</label>
+			  						<label class="control-label" for="razonsocial"><i class="fa fa-asterisk" aria-hidden="true"></i> Razon Social:</label>
 			  						<input type="text" class="form-control" id="razonsocial" name="razonsocial">
 			  					</div>
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="mail">* Correo:</label>
+									<label class="control-label" for="mail"><i class="fa fa-asterisk" aria-hidden="true"></i> Correo:</label>
 									<input type="email" class="form-control" id="mail" name="mail" required>
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="rfc">* RFC:</label>
+									<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i> RFC:</label>
 									<input type="text" class="form-control" id="varrfc" name="rfc" required minlength="12" maxlength="13" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" placeholder="Ingrese 13 caracteres" title="Siga el formato 4 letras seguidas por 6 digitos y 3 caracteres">
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="telefonofijo">* Número de Telefono:</label>
+									<label class="control-label" for="telefonofijo"><i class="fa fa-asterisk" aria-hidden="true"></i> Número de Telefono:</label>
 									<input type="text" class="form-control" id="telefonofijo" name="telefonofijo" required>
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<label class="control-label" for="telefonocel">* Número Celular:</label>
+									<label class="control-label" for="telefonocel"><i class="fa fa-asterisk" aria-hidden="true"></i> Número Celular:</label>
 									<input type="text" class="form-control" id="telefonocel" name="telefonocel" required>
 								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12" id="cliente2" style="display:none;">
@@ -105,11 +105,12 @@
 					<li class="disabled"  role="presentation"><a href="#" class="disabled">C.R.M.:</a></li>
 				</ul>
 				<div class="panel-default">
-					<div class="panel-heading">Dirección/Domicilio:</div>
+					<div class="panel-heading">Dirección/Domicilio:&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
 					<div class="panel-body">
 						<div class="col-xs-2 col-xs-offset-10">
-								<button type="submit" class="btn btn-success">Guardar</button>
-								<p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+								<button type="submit" class="btn btn-success">
+									<strong>Guardar</strong></button>
+								
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">	
@@ -125,23 +126,23 @@
 								<input type="text" class="form-control" id="numinter" name="numinter">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="cp" id="lbl_cp">* Código Postal:</label>
+								<label class="control-label" for="cp" id="lbl_cp"><i class="fa fa-asterisk" aria-hidden="true"></i> Código Postal:</label>
 								<input type="text" class="form-control" id="cp" name="cp" required="">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="colonia" id="lbl_colonia">Colonia:</label>
+								<label class="control-label" for="colonia" id="lbl_colonia"><i class="fa fa-asterisk" aria-hidden="true"></i>Colonia:</label>
 								<input type="text" class="form-control" id="colonia" name="colonia">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="municipio" id="lbl_municipio">Municipio/Delegación:</label>
+								<label class="control-label" for="municipio" id="lbl_municipio"><i class="fa fa-asterisk" aria-hidden="true"></i>Municipio/Delegación:</label>
 								<input type="text" class="form-control" id="municipio" name="municipio">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="ciudad" id="lbl_ciudad">Ciudad:</label>
+								<label class="control-label" for="ciudad" id="lbl_ciudad"><i class="fa fa-asterisk" aria-hidden="true"></i>Ciudad:</label>
 								<input type="text" class="form-control" id="ciudad" name="ciudad">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="estado" id="lbl_estado">Estado:</label>
+								<label class="control-label" for="estado" id="lbl_estado"><i class="fa fa-asterisk" aria-hidden="true"></i>Estado:</label>
 								<input type="text" class="form-control" id="estado" name="estado">
 							</div>
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
