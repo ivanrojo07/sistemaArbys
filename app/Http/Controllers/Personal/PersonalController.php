@@ -123,9 +123,10 @@ class PersonalController extends Controller
     }
 
     public function search(Request $request){
-
-        $query = $request->input('query');
-        if (($request->cliente == "on" && $request->prospecto == "on") || (!$request->cliente && !$request->prospecto)) {
+        //dd($request->input('pro'));
+        $query = $request->input('busqueda');
+        //dd($request->inpu('cli'));
+        if (($request->input('cli') == "true" && $request->input('pro') == "true") || (!$request->input('cli') && !$request->input('pro'))) {
             # code...
             $personals = Personal::sortable()->where('nombre','LIKE',"%$query%")
         ->orWhere('apellidopaterno','LIKE',"%$query%")
@@ -136,7 +137,7 @@ class PersonalController extends Controller
         ->paginate(10);
         } else {
             # code...
-        if ($request->cliente == "on") {
+        if ($request->input('cli') == "true") {
             # code...
             $personals = Personal::sortable()->where('tipo','=','Cliente')
             ->where(function($busqueda) use($query){
@@ -148,7 +149,7 @@ class PersonalController extends Controller
                 ->orWhere('mail','LIKE',"%$query%");
             })->paginate(10);
         }
-        elseif ($request->prospecto == 'on') {
+        elseif ($request->input('pro') == 'true') {
              # code...
             $personals = Personal::sortable()->where('tipo','=','Prospecto')
             ->where(function($busqueda) use($query){
@@ -166,7 +167,7 @@ class PersonalController extends Controller
                 // $personals = Personal::search($query)->get();
         
         // dd($personals);
-        return view('personal.index',['personals'=>$personals]);
+        return view('personal.busqueda',['personals'=>$personals]);
         //Base de datos$message = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
         //motor de busquedas
         // $message = Message::search($query)->get();
