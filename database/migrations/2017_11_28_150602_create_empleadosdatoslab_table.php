@@ -11,17 +11,23 @@ class CreateEmpleadosdatoslabTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up()  
     {
         Schema::create('empleadosdatoslab', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
             $table->foreign('empleado_id')->references('id')->on('empleados');
-            $table->date('fechacontratacion')->nullable();
+
+
             $table->integer('contrato_id')->unsigned();
             $table->foreign('contrato_id')->references('id')->on('tipocontrato');
-            $table->string('area')->nullable();
-            $table->string('puesto')->nullable();
+            $table->integer('area_id')->unsigned();
+            $table->foreign('area_id')->references('id')->on('areas');
+
+            $table->integer('puesto_id')->unsigned();
+            $table->foreign('puesto_id')->references('id')->on('puestos');
+
+            $table->date('fechacontratacion')->nullable();
             $table->decimal('salarionom',8,2)->nullable();
             $table->decimal('salariodia',8,2)->nullable();
             $table->string('puesto_inicio')->nullable();

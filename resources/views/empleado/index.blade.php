@@ -1,5 +1,6 @@
 @extends('layouts.blank')
 @section('content')
+
 <div class="container">
 	<div class="panel-body">
 		<div class="col-lg-6">
@@ -63,15 +64,13 @@
 		</table>
 		{{ $empleados->links() }}
 	</div>
-  </div>
-
-
-  			
+  </div>  			
 
 
 {{--   TABLA VISTA RÀPIDA  --}}
 @foreach ($empleados as $empleado)
 	{{-- expr --}}
+
 	<div class="persona" id="{{$empleado->id}}">
 		<div class="container" id="tab">
 			<div role="application" class="panel panel-group" >
@@ -159,9 +158,10 @@
 				<div class="panel-default pestana" id="tab2{{$empleado->id}}">
 
 					<div class="panel-heading">Datos Laborales:</div>
-					<div class="panel-body">
-						@if (count($empleado->datosLab) == 0 )
-							{{-- true expr --}}
+					<!-- <div class="panel-body">
+
+						@if (isset($empleado->datosLab))
+							
 							<h3>Aun no tiene Datos Laborales</h3>
 						@else
 							{{-- false expr --}}
@@ -210,7 +210,7 @@
 		  					
 						</div>
 						@endif
-					</div>
+					</div> -->
 				</div>
 				<div class="panel-default pestana" id="tab3{{$empleado->id}}">
 					<div class="panel-heading">

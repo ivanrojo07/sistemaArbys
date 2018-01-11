@@ -49,14 +49,47 @@
 							@endforeach
 						</select>
 					</div>
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="area">Área:</label>
-						<input class="form-control" type="text" id="area" name="area" value="{{ $datoslab->area }}">
+
+
+
+
+				<div class="form-group col-xs-3">
+						<label class="control-label" for="area_id">
+						Área:</label>
+						<select type="select" 
+						        class="form-control" 
+						        name="area_id">
+
+							@foreach ($areas as $area)
+								{{-- expr --}}
+								<option id="{{$area->id}}" value="{{$area->id}}" @if ($datoslab->area_id == $area->id)
+									{{-- expr --}}
+									selected="selected" 
+								@endif>{{$area->nombre}}</option>
+							@endforeach
+						</select>
 					</div>
+
+
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="puesto">Puesto:</label>
-						<input class="form-control" type="text" id="puesto" name="puesto" value="{{ $datoslab->puesto }}">
+						<label class="control-label" for="puesto_id">Puesto:</label>
+						<select type="select" 
+						        class="form-control" 
+						        name="puesto_id">
+
+							@foreach ($puestos as $puesto)
+								{{-- expr --}}
+								<option id="{{$puesto->id}}" value="{{$puesto->id}}" @if ($datoslab->puesto_id == $puesto->id)
+									{{-- expr --}}
+									selected="selected" 
+								@endif>{{$puesto->nombre}}</option>
+							@endforeach
+						</select>
 					</div>
+
+
+
+
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">

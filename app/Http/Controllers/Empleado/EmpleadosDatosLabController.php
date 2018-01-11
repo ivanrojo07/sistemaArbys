@@ -7,6 +7,8 @@ use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
 use App\TipoBaja;
 use App\TipoContrato;
+use App\Area;
+use App\Puesto;
 use Illuminate\Http\Request;
 
 class EmpleadosDatosLabController extends Controller
@@ -19,14 +21,19 @@ class EmpleadosDatosLabController extends Controller
     public function index(Empleado $empleado)
     {
         //
-        $datoslab = $empleado->datosLab;
-        // dd($datoslab);
-        if ($datoslab == null) {
-            # code...
-            return redirect()->route('empleados.datoslaborales.create',['empleado'=>$empleado]);
+        $datoslaborales = $empleado->datosLaborales;
+        //dd($datoslaborales);
+        if (count($datoslaborales) ==0) {
+
+          
+
+            return redirect()->route('empleados.datoslaborales.create',
+                ['empleado'=>$empleado]);
+
+
         } else {
             # code...
-            return view('empleadodatoslab.view',['empleado'=>$empleado,'datoslab'=>$datoslab]); 
+            return view('empleadodatoslab.index',['empleado'=>$empleado,'datoslaborales'=>$datoslaborales]); 
         }
         
     }
@@ -42,8 +49,17 @@ class EmpleadosDatosLabController extends Controller
         $datoslab = new EmpleadosDatosLab;
         $contratos = TipoContrato::get();
         $bajas = TipoBaja::get();
+        $areas =   Area::get();
+        $puestos = Puesto::get();
         $edit = false;
-        return view('empleadodatoslab.create',['empleado'=>$empleado,'bajas'=>$bajas,'contratos'=>$contratos,'datoslab'=>$datoslab,'edit'=>$edit]);
+        return view('empleadodatoslab.create',[
+            'empleado'=>$empleado,
+            'bajas'=>$bajas,
+            'contratos'=>$contratos,
+            'datoslab'=>$datoslab, 
+            'areas'=>$areas, 
+            'puestos'=>$puestos,
+            'edit'=>$edit]);
     }
 
     /**
@@ -58,8 +74,10 @@ class EmpleadosDatosLabController extends Controller
         $datoslab = new EmpleadosDatosLab;
         $datoslab->empleado_id = $request->empleado_id;
         $datoslab->fechacontratacion = $request->fechacontratacion;
-        $datoslab->area = $request->area;
-        $datoslab->puesto = $request->puesto;
+
+        $datoslab->area_id = $request->area_id;
+        $datoslab->puesto_id = $request->puesto_id;
+        
         $datoslab->salarionom = $request->salarionom;
         $datoslab->salariodia = $request->salariodia ;
         $datoslab->puesto_inicio = $request->puesto_inicio ;

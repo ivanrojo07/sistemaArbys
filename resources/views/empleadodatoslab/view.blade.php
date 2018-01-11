@@ -23,20 +23,26 @@
 			<div class="col-md-12 offset-md-2 mt-3">
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="fechacontratacion">Fecha de contratación:</label>
+					{{$datoslab}}
 					<dd>{{ $datoslab->fechacontratacion }}</dd>
 				</div>
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="contrato">Tipo de contrato:</label>
 					<dd>{{ $datoslab->contrato }}</dd>
 				</div>
+
+
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="area">Área:</label>
-					<dd>{{ $datoslab->area }}</dd>
+					<dd>{{ $datoslab->areas->nombre }}</dd>
 				</div>
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="puesto">Puesto:</label>
-					<dd>{{ $datoslab->puesto }}</dd>
+					<dd>{{ $datoslab->puestos->nombre }}</dd>
 				</div>
+
+
+
 			</div>
 			<div class="col-md-12 offset-md-2 mt-3">
 				<div class="form-group col-xs-3">

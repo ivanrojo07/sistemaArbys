@@ -99,4 +99,5 @@ Route::resource('giros','Giro\GiroController', ['except'=>'show']);
 
 Route::get('producto', 'Producto\ProductController@search');
 //---------------------------------------------------------------------------
-
+Route::resource('areas','Area\AreaController', ['except'=>'show']);
+Route::resource('puestos','Puesto\PuestoController', ['except'=>'show']);

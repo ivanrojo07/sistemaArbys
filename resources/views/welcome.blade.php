@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -107,6 +108,8 @@
                                 <a href="#" onclick="AgregarNuevoTab('{{url('empleados/create')}}','Nuevo Empleado')"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
                                 <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Buscar Empleado')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
 
+                               
+
                                  <a href="#"
                                    onclick="AgregarNuevoTab('{{ url('/sucursales')}}','Sucursales')">
                             <i class="fa fa-university" aria-hidden="true"></i> Sucursales
@@ -129,6 +132,12 @@
                                     <ul class="dropdown-menu">
                                       <li><a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('bajas') }}','Bajas')"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
                                       <li><a href="#" onclick="AgregarNuevoTab('{{ url('contratos') }}','Contratos')"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
+                                      <li>
+                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/areas') }}','Areas')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Areas</a>
+                                        </li>
+                                        <li>
+                                          <a href="#" onclick="AgregarNuevoTab('{{ url('/puestos') }}','Puestos')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Puestos</a>
+                                        </li>
                                     </ul>
                                   </li>
                             </li>                     
