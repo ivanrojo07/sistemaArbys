@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Empleado;
-
+use App\EmpleadosDatosLab;
 use App\Empleado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,9 +15,12 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        //
+        
         $empleados = Empleado::sortable()->paginate(5);
-        return view('empleado.index',['empleados'=>$empleados]);
+        // $datoslaborales = $empleados->datosLaborales;
+        return view('empleado.index',['empleados'=>$empleados
+                                      // 'datoslaborales'=>$datoslaborales
+    ]);
 
     }
 
@@ -62,7 +65,7 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        //
+        
         return view('empleado.view',['empleado'=>$empleado]);
     }
 

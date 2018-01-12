@@ -24,9 +24,9 @@ class EmpleadosDatosLabController extends Controller
         $datoslaborales = $empleado->datosLaborales;
         $areas =   Area::get();
         $puestos = Puesto::get();
-        //$puestos
+        
         //
-        if (isset($datoslaborales)) {
+        if (count($datoslaborales)==0) {
 
           
 
@@ -122,9 +122,26 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(Empleado $empleado)
+    public function show(Empleado $empleado,$datoslaborale)
     {
-        //
+       
+         
+        $datos = $empleado->datosLaborales()->where('id',$datoslaborale)->first();
+
+      
+      $areas=Area::where('id',$datos->area_id)->first();
+      $area=$areas->nombre;
+
+      $puestos=Puesto::where('id',$datos->puesto_id)->first();
+      $puesto=$puestos->nombre;
+     
+         return view('empleadodatoslab.view',[
+                'empleado'=>$empleado,
+                'datoslab'=>$datos,
+                'area'=>$area,
+                'puesto'=>$puesto
+                
+                ]);
     }
 
     /**
@@ -136,11 +153,16 @@ class EmpleadosDatosLabController extends Controller
     public function edit(Empleado $empleado,$datoslaborale)
     {
         //
-        $datoslab = $empleado->datosLab;
+        $datoslab = $empleado->datosLaborales()->where('id',$datoslaborale)->first();
+        // dd($datoslab);
         $contratos = TipoContrato::get();
         $bajas = TipoBaja::get();
+        $areas =   Area::get();
+        $puestos = Puesto::get();
         $edit = true;
-        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'bajas'=>$bajas,'contratos'=>$contratos,'empleado'=>$empleado,'edit'=>$edit]);
+        // dd($datoslab->id);
+        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'bajas'=>$bajas,'contratos'=>$contratos,'empleado'=>$empleado,'areas'=>$areas, 
+            'puestos'=>$puestos,'edit'=>$edit]);
 
     }
 
@@ -151,11 +173,46 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado, $datoslaborale)
+    public function update(Request $request, Empleado $empleado, 
+        $datoslaborale)
     {
-        //
-        $datoslab = EmpleadosDatosLab::findOrFail($datoslaborale);
-        $datoslab->update($request->all());
+
+       
+       
+$datos= 
+$empleado->datosLaborales()->where('id',$datoslaborale)->first();
+
+         $datoslab = new EmpleadosDatosLab;
+         $datoslab->empleado_id = $datos->empleado_id;
+
+        $datoslab->fechacontratacion = $datos->fechacontratacion;
+        $datoslab->fechaactualizacion = date("Y-m-d");
+
+        $datoslab->area_id = $request->area_id;
+        $datoslab->puesto_id = $request->puesto_id;
+        
+        $datoslab->salarionom = $request->salarionom;
+        $datoslab->salariodia = $request->salariodia ;
+        
+        $datoslab->periodopaga = $request->periodopaga ;
+        $datoslab->prestaciones = $request->prestaciones ;
+        $datoslab->regimen = $request->regimen ;
+        $datoslab->hentrada = $request->hentrada ;
+        $datoslab->hsalida = $request->hsalida ;
+        $datoslab->hcomida = $request->hcomida ;
+        $datoslab->lugartrabajo = $request->lugartrabajo ;
+        $datoslab->banco = $request->banco ;
+        $datoslab->cuenta = $request->cuenta ;
+        $datoslab->clabe = $request->clabe ;
+        $datoslab->fechabaja = $request->fechabaja ;
+        $datoslab->tipobaja_id = $request->tipobaja_id ;
+        $datoslab->comentariobaja = $request->comentariobaja ;
+        $datoslab->contrato_id = $request->contrato_id ;
+        ////////////////////////////////////////////////////////
+
+        //$datoslab = EmpleadosDatosLab::findOrFail($datoslaborale);
+
+        $datoslab->save($request->all());
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 

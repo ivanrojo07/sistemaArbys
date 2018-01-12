@@ -14,8 +14,14 @@
 			
 
 			<div class="panel panel-primary">
-      <div class="panel-heading" ><strong>Fecha de Contratación</strong></div>
-      <div class="panel-body" ><strong> {{$dato->fechacontratacion}}</strong></div>
+      <div class="panel-heading" align="center"><strong>Historial Laboral</strong></div>
+      <div class="panel-body" ><strong>Fecha de Contratación: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$dato->fechacontratacion}}</strong>
+        <div align="right">
+      	<a class="btn btn-info btn-md" href="{{ route('empleados.datoslaborales.edit',['empleado'=>$empleado,'datoslaborale'=>$dato]) }}">
+				<strong>Agregar</strong>
+			</a></div>
+
+      </div>
     </div><table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px;">
 				<thead>
 					<tr class="info">
@@ -41,7 +47,7 @@
 									{{-- expr --}}
 
 									
-								@endif>
+								@endif
 							@endforeach
 						
 
@@ -53,7 +59,7 @@
 									{{-- expr --}}
 
 									
-								@endif>
+								@endif
 							@endforeach
 						
 
@@ -65,7 +71,8 @@
 
 
 						<td>
-							<a class="btn btn-success btn-sm" href="{{ route('provedores.contacto.show',['provedore'=>$empleado,'contacto'=>$dato]) }}">
+
+							<a class="btn btn-success btn-sm" href="{{ route('empleados.datoslaborales.show',['empleado'=>$empleado,'datoslaborale'=>$dato]) }}">
 						<strong>Ver</strong>	</a>
 
 							

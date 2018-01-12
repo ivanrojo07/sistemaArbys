@@ -1,6 +1,6 @@
 @extends('layouts.infoempleado')
 @section('infoempleado')
-   {{$edit=true}}
+   
 	{{-- expr --}}
 	<div>
 		<ul class="nav nav-pills nav-justified">
@@ -24,7 +24,8 @@
 		<div class="panel-body">
 			@if ($edit == true)
 				{{-- true expr --}}
-			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.update',['datoslaborale'=>$datoslab,'empleado'=>$empleado]) }}">
+				{{--dd($datoslab->fechacontratacion)--}}
+			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.update',['empleado'=>$empleado,'datoslaborale'=>$datoslab->id]) }}">
 				<input type="hidden" name="_method" value="PUT">
 				{{ csrf_field() }}
 			@else
@@ -41,7 +42,8 @@
                        
                        @if ($edit==true)
 				       {{-- true expr --}}
-						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="{{ $datoslab->fechacontratacion }}" disabled>
+				        
+						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="{{ $datoslab->fechacontratacion }}" readonly>
                          {{ csrf_field() }}
                          @else
 				{{-- false expr --}}

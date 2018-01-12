@@ -161,12 +161,12 @@
 					<div class="panel-body">
 
 
-	@if (count($datoslaborales) == 0)
+	@if (isset($empleado->datosLaborales))
 			<h3>Aún no tienes historial laboral</h3>
 		@endif
-		@if (count($datoslaborales) !=0)
+		@if (!isset($empleado->datosLaborales))
             {{$fecha=''}}
-		     @foreach ($datoslaborales as $dato)
+		     @foreach ($empleado->datosLaborales as $dato)
 		     <?php $fecha=$dato->fechacontratacion ?>
 		     @endforeach
 			
