@@ -1,5 +1,6 @@
 @extends('layouts.infoempleado')
 @section('infoempleado')
+   {{$edit=true}}
 	{{-- expr --}}
 	<div>
 		<ul class="nav nav-pills nav-justified">
@@ -33,10 +34,25 @@
 			@endif
 				<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
 				<div class="col-md-12 offset-md-2 mt-3">
+
+
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="fechacontratacion">Fecha de contratación:</label>
-						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="{{ $datoslab->fechacontratacion }}">
+						<label class="control-label" for="fechacontratacion"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de contratación:</label>
+                       
+                       @if ($edit==true)
+				       {{-- true expr --}}
+						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="{{ $datoslab->fechacontratacion }}" disabled>
+                         {{ csrf_field() }}
+                         @else
+				{{-- false expr --}}
+				<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="" >
+				{{ csrf_field() }}
+
+			@endif
 					</div>
+
+
+
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="contrato">Tipo de contrato:</label>
 						<select type="select" class="form-control" name="contrato_id">
@@ -100,10 +116,9 @@
 						<label class="control-label" for="salariodia">Salario Diario:</label>
 						<input class="form-control" type="text" id="salariodia" name="salariodia" value="{{ $datoslab->salariodia }}">
 					</div>
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="puesto_inicio">Puesto Inicial:</label>
-						<input class="form-control" type="text" id="puesto_inicio" name="puesto_inicio" value="{{ $datoslab->puesto_inicio }}">
-					</div>
+
+					
+
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="periodopaga">Periodicidad de Pago:</label>
 						<select type="select" class="form-control" name="periodopaga" id="periodopaga">

@@ -22,8 +22,11 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslaborales = $empleado->datosLaborales;
-        //dd($datoslaborales);
-        if (count($datoslaborales) ==0) {
+        $areas =   Area::get();
+        $puestos = Puesto::get();
+        //$puestos
+        //
+        if (isset($datoslaborales)) {
 
           
 
@@ -33,7 +36,11 @@ class EmpleadosDatosLabController extends Controller
 
         } else {
             # code...
-            return view('empleadodatoslab.index',['empleado'=>$empleado,'datoslaborales'=>$datoslaborales]); 
+            return view('empleadodatoslab.index',[
+                'empleado'=>$empleado,
+                'datoslaborales'=>$datoslaborales,
+                'areas'=>$areas,
+                'puestos'=>$puestos]); 
         }
         
     }
@@ -73,7 +80,9 @@ class EmpleadosDatosLabController extends Controller
         //
         $datoslab = new EmpleadosDatosLab;
         $datoslab->empleado_id = $request->empleado_id;
+
         $datoslab->fechacontratacion = $request->fechacontratacion;
+        $datoslab->fechaactualizacion = date("Y-m-d");
 
         $datoslab->area_id = $request->area_id;
         $datoslab->puesto_id = $request->puesto_id;

@@ -75,7 +75,7 @@ class EmpleadoController extends Controller
     public function edit(Empleado $empleado)
     {
         //
-        $edit= true;
+        $edit=true;
         return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
     }
 

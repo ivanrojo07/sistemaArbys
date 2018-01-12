@@ -155,63 +155,96 @@
 
 
 
+				{{--   AQUÍ VA LO DEL NOTEPAD ++ --}}
 				<div class="panel-default pestana" id="tab2{{$empleado->id}}">
-
 					<div class="panel-heading">Datos Laborales:</div>
-					<!-- <div class="panel-body">
+					<div class="panel-body">
 
-						@if (isset($empleado->datosLab))
+
+	@if (count($datoslaborales) == 0)
+			<h3>Aún no tienes historial laboral</h3>
+		@endif
+		@if (count($datoslaborales) !=0)
+            {{$fecha=''}}
+		     @foreach ($datoslaborales as $dato)
+		     <?php $fecha=$dato->fechacontratacion ?>
+		     @endforeach
+			
+
+			<div class="panel panel-primary">
+      <div class="panel-heading" ><strong>Fecha de Contratación</strong></div>
+      <div class="panel-body" ><strong> {{$dato->fechacontratacion}}</strong></div>
+    </div><table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px;">
+				<thead>
+					<tr class="info">
+						<th>Área</th>
+						<th>Puesto</th>
+						<th>Salario Nominal</th>
+						<th>Fecha de Actualización</th>
+						<th>Lugar de Trabajo</th>
+
+
+						<th>Operaciones</th>
+					</tr>
+				</thead>
+                <tbody>
+				@foreach ($datoslaborales as $dato)
+					<tr class="active">
+
+@foreach ($areas as $area)
+								{{-- expr --}}
+
+								 @if ($dato->area_id == $area->id)
+								 <td>{{ $area->nombre }}</td>
+									{{-- expr --}}
+
+									
+								@endif>
+							@endforeach
+						
+
+@foreach ($puestos as $puesto)
+								{{-- expr --}}
+
+								 @if ($dato->puesto_id == $puesto->id)
+								 <td>{{ $puesto->nombre }}</td>
+									{{-- expr --}}
+
+									
+								@endif>
+							@endforeach
+						
+
+
+
+						<td>{{$dato->salarionom}}</td>
+						<td>{{$dato->fechaactualizacion}}</td>
+						<td>{{$dato->lugartrabajo}}</td>
+
+
+						<td>
+							<a class="btn btn-success btn-sm" href="{{ route('provedores.contacto.show',['provedore'=>$empleado,'contacto'=>$dato]) }}">
+						<strong>Ver</strong>	</a>
+
 							
-							<h3>Aun no tiene Datos Laborales</h3>
-						@else
-							{{-- false expr --}}
 
-						<div class="col-md-12 offset-md-2 mt-3">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="calle">ID Empleado:</label>
-		    					<dd>{{$empleado->datosLab->empleado_id}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numext">Número de Seguro Social (IMSS):</label>
-		    					<dd>{{$empleado->nss}}</dd>
-		  					</div>	
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numint">Número Infonavit:</label>
-		    					<dd>{{$empleado->infonavit}}</dd>
-		  					</div>		
-						</div>
-						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="colonia">Fecha de contratación:</label>
-		  						<dd>{{$empleado->datosLab->fechacontratacion}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="municipio">Puesto:</label>
-		  						<dd>{{$empleado->datosLab->puesto}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="ciudad">Área:</label>
-		  						<dd>{{ $empleado->datosLab->area }}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="estado">Fecha de la baja:</label>
-		  						<dd>{{$empleado->datosLab->fechabaja}}</dd>
-		  					</div>
-						</div>
-						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle1">Tipo de Baja:</label>
-		  						<dd>{{$empleado->datosLab->tipobaja_id}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle2">Comentarios (Baja):</label>
-		  						<dd>{{$empleado->datosLab->comentariobaja}}</dd>
-		  					</div>
-		  					
-						</div>
-						@endif
-					</div> -->
+					</tr>
+						</td>
+
+
+					</tbody>
+				@endforeach
+			</table>
+		@endif
+						
+					</div>
+				  </div>
+					
 				</div>
+		{{--   AQUÍ VA LO DEL NOTEPAD ++ --}}
+
+
+				
 				<div class="panel-default pestana" id="tab3{{$empleado->id}}">
 					<div class="panel-heading">
 						Estudios:

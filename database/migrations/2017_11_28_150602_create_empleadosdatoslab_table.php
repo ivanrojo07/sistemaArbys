@@ -27,7 +27,9 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->integer('puesto_id')->unsigned();
             $table->foreign('puesto_id')->references('id')->on('puestos');
 
-            $table->date('fechacontratacion')->nullable();
+            $table->date('fechacontratacion');
+            $table->date('fechaactualizacion');
+
             $table->decimal('salarionom',8,2)->nullable();
             $table->decimal('salariodia',8,2)->nullable();
             $table->string('puesto_inicio')->nullable();
@@ -41,6 +43,7 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->string('banco');
             $table->string('cuenta')->nullable();
             $table->string('clabe')->nullable();
+
             $table->timestampsTz();
         });
     }
