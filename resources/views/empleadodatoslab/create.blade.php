@@ -138,6 +138,27 @@
 							@endif>Mensual</option>
 						</select>
 					</div>
+
+
+
+					<div class="form-group col-xs-3">
+						<label class="control-label" for="puesto_id">Agregar a Sucursal:</label>
+						<select type="select" 
+						        class="form-control" 
+						        name="puesto_id">
+
+							<?php for($i=0;$i<5;$i++)
+								
+						echo"<option id='' value=''>Sucursal: ".$i."</option>";
+						
+							?>
+						</select>
+					</div>
+
+
+
+
+
 				</div>
 				<div class="col-md-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">
