@@ -36,6 +36,7 @@
 
 <div class="form-group col-xs-3">
 					<label class="control-label" for="area">Área:</label>
+					
 					<dd>{{ $area }}</dd>
 				</div>
 				<div class="form-group col-xs-3">

@@ -140,7 +140,9 @@
 							@endif
 						</div>
 					</div>
-					<a class="btn btn-info btn-md" href="{{ route('personals.edit', [$personal]) }}">Editar</a>
+					<a class="btn btn-info btn-md" href="{{ route('personals.edit', [$personal]) }}">
+					<strong>Editar</strong>
+				</a>
 				</div>
   				</div>
 		</div>

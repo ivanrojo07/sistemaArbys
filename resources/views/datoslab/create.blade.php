@@ -12,15 +12,16 @@
     <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}" class="">C.R.M.:</a></li>
   </ul>
   <div class="panel-default">
-    <div class="panel-heading">Datos Laborales</div>
+    <div class="panel-heading">Datos Laborales&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
     <div class="panel-body">
       <form role="form" method="POST" action="{{ route('personals.datoslaborales.store',$personal) }}" class="prs">
         <div class="panel-body">
           {{ csrf_field() }}
           <input type="hidden" name="personal_id" value="{{$personal->id}}">
           <div class="col-xs-2 col-xs-offset-10">
-              <button type="submit" class="btn btn-success">Guardar</button>
-              <p><strong><i class="fa fa-asterisk" aria-hidden="true"></i>Campo requerido</strong></p>
+              <button type="submit" class="btn btn-success">
+              <strong>Guardar</strong> </button>
+              
           </div>
             <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <label class="control-label" for="nombreempresa">Nombre de la empresa:</label>

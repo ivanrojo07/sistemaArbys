@@ -84,6 +84,8 @@ class EmpleadosDatosLabController extends Controller
         $datoslab->fechacontratacion = $request->fechacontratacion;
         $datoslab->fechaactualizacion = date("Y-m-d");
 
+        
+      
         $datoslab->area_id = $request->area_id;
         $datoslab->puesto_id = $request->puesto_id;
         
@@ -127,13 +129,22 @@ class EmpleadosDatosLabController extends Controller
        
          
         $datos = $empleado->datosLaborales()->where('id',$datoslaborale)->first();
-
-      
-      $areas=Area::where('id',$datos->area_id)->first();
+     $area='';
+      if($datos->area_id==null){
+        $area='NO DEFINIDO';
+      }else{
+        $areas=Area::where('id',$datos->area_id)->first();
       $area=$areas->nombre;
-
-      $puestos=Puesto::where('id',$datos->puesto_id)->first();
-      $puesto=$puestos->nombre;
+      }
+      
+      $puesto='';
+      if($datos->puesto_id==null){
+        $puesto='NO DEFINIDO';
+      }else{
+        $puestos=Puesto::where('id',$datos->puesto_id)->first();
+      $puesto=$areas->nombre;
+      }
+      
      
          return view('empleadodatoslab.view',[
                 'empleado'=>$empleado,
@@ -189,6 +200,7 @@ $empleado->datosLaborales()->where('id',$datoslaborale)->first();
         $datoslab->fechaactualizacion = date("Y-m-d");
 
         $datoslab->area_id = $request->area_id;
+         //dd($request->all());
         $datoslab->puesto_id = $request->puesto_id;
         
         $datoslab->salarionom = $request->salarionom;

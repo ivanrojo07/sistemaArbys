@@ -58,6 +58,9 @@
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="contrato">Tipo de contrato:</label>
 						<select type="select" class="form-control" name="contrato_id">
+
+							<option id="contrato_id" value="">Sin Definir</option>
+
 							@foreach ($contratos as $contrato)
 								{{-- expr --}}
 								<option id="{{$contrato->id}}" value="{{$contrato->id}}" @if ($datoslab->contrato_id == $contrato->id)
@@ -77,10 +80,13 @@
 						<select type="select" 
 						        class="form-control" 
 						        name="area_id">
-
+						        <option id="area_id" value="">Sin Definir</option>
+ 
 							@foreach ($areas as $area)
 								{{-- expr --}}
-								<option id="{{$area->id}}" value="{{$area->id}}" @if ($datoslab->area_id == $area->id)
+								<option id="{{$area->id}}" 
+									    value="{{$area->id}}" 
+							@if ($datoslab->area_id == $area->id)
 									{{-- expr --}}
 									selected="selected" 
 								@endif>{{$area->nombre}}</option>
@@ -90,16 +96,19 @@
 
 
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="puesto_id">Puesto:</label>
-						<select type="select" 
-						        class="form-control" 
-						        name="puesto_id">
+						<label class="control-label" for="puesto_id">
+						Puesto:</label>
+						<select type="select" name="puesto_id" id="puesto_id" class="form-control">
+							<option id="puesto_id" value="">Sin Definir</option>
 
 							@foreach ($puestos as $puesto)
 								{{-- expr --}}
-								<option id="{{$puesto->id}}" value="{{$puesto->id}}" @if ($datoslab->puesto_id == $puesto->id)
+								<option id="{{$puesto->id}}" 
+									    value="{{$puesto->id}}" 
+									    
+							@if ($datoslab->puesto_id == $puesto->id)
 									{{-- expr --}}
-									selected="selected" 
+									selected
 								@endif>{{$puesto->nombre}}</option>
 							@endforeach
 						</select>
@@ -142,10 +151,11 @@
 
 
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="puesto_id">Agregar a Sucursal:</label>
+						<label class="control-label" for="sucursal">Agregar a Sucursal:</label>
 						<select type="select" 
 						        class="form-control" 
-						        name="puesto_id">
+						        name="sucursal">
+						       <option id="0" value="0">Sin Definir</option>
 
 							<?php for($i=0;$i<5;$i++)
 								

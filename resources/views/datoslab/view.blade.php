@@ -12,7 +12,7 @@
     <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}" class="">C.R.M.:</a></li>
   </ul>
 		<div class="panel-default">
-      <div class="panel-heading">Datos Laborales</div>
+      <div class="panel-heading">Datos Laborales&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
 			<div class="panel-body">
 				<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
     					<label class="control-label" for="tipo">Nombre de la empresa:</label>
@@ -59,7 +59,7 @@
     					<dd>{{ $datoslab->telefonoempresa}}</dd>
           </div>
       </div>
-      <a class="btn btn-info btn-md" href="{{ route('personals.datoslaborales.edit', [$personal,$datoslab]) }}">Editar</a>
+      <a class="btn btn-info btn-md" href="{{ route('personals.datoslaborales.edit', [$personal,$datoslab]) }}"><strong>Editar</strong></a>
     </div>
 		</div>
 	@endsection

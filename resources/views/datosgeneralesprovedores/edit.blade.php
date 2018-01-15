@@ -23,6 +23,7 @@
 	 			<div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
 	 			<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i>Giro:</label>
 				<select type="select" name="giro_id" class="form-control" id="giro_id">
+					 <option id="giro_id'" value="">Sin Definir</option>
 					
 						@foreach ($giros as $giro)
 							<option id="'{{$giro->id}}'" value="{{$giro->id}}" @if ($datos->giro_id == $giro->id)
@@ -56,6 +57,9 @@
 	 			<div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
 	 			<label class="control-label" for="forma_contacto_id"><i class="fa fa-asterisk" aria-hidden="true"></i>Forma de contacto:</label>
 					<select type="select" name="forma_contacto_id" class="form-control" id="forma_contacto_id">
+
+					<option id="forma_contacto_id" value="">Sin Definir</option>
+
 						@foreach ($formaContactos as $formaContacto)
 							{{-- expr --}}
 							<option id="{{$formaContacto->id}}" value="{{ $formaContacto->id }}" @if ($datos->forma_contacto_id == $formaContacto->id)

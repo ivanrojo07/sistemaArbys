@@ -49,11 +49,11 @@
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
-			  						<input type="text" class="form-control" id="idnombre" name="nombre" required="">
+			  						<input type="text" class="form-control" id="idnombre" name="nombre" >
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidopaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Paterno:</label>
-			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" required>
+			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" >
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>

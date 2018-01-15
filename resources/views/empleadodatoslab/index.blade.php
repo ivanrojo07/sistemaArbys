@@ -38,7 +38,9 @@
                 <tbody>
 				@foreach ($datoslaborales as $dato)
 					<tr class="active">
-
+@if($areas==null)
+<td>NO DEFINIDO</td>
+@else
 @foreach ($areas as $area)
 								{{-- expr --}}
 
@@ -49,8 +51,10 @@
 									
 								@endif
 							@endforeach
-						
-
+						@endif
+@if($puestos==null)
+<td>NO DEFINIDO</td>
+@else
 @foreach ($puestos as $puesto)
 								{{-- expr --}}
 
@@ -61,7 +65,7 @@
 									
 								@endif
 							@endforeach
-						
+						@endif
 
 
 

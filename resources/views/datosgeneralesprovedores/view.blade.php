@@ -17,11 +17,15 @@
 	 			</div>
 	 			<div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
 	 				<label class="control-label" for="nombre">Giro de la empresa:</label>
-					<dd>{{$giro->nombre}}</dd>
+	 				
+					<dd>{{$giro}}</dd>
+				
 	 			</div>
 	 			<div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
 	 				<label class="control-label" for="nombre">Forma de contacto:</label>
-	 				<dd>{{$formaContacto->nombre}}</dd>
+	 				
+	 				<dd>{{$formaContacto}}</dd>
+	 				
 	 			</div>
 	 		</div>
 	 		<div class="col-md-12 offset-md-2 mt-3">
