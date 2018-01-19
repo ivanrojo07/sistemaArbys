@@ -21,6 +21,7 @@ class CreateEmpleadosdatoslabTable extends Migration
 
             $table->integer('contrato_id')->unsigned();
             $table->foreign('contrato_id')->references('id')->on('tipocontrato');
+            
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas');
 

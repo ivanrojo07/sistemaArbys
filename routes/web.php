@@ -101,3 +101,12 @@ Route::get('producto', 'Producto\ProductController@search');
 //---------------------------------------------------------------------------
 Route::resource('areas','Area\AreaController', ['except'=>'show']);
 Route::resource('puestos','Puesto\PuestoController', ['except'=>'show']);
+//--------------------------------------------------------------------
+Route::resource('gastos','Gasto\GastoController', ['except'=>'show']);
+// Route::resource('gastos.create','Gasto\GastoController@create');
+
+Route::resource('sucursales','Sucursal\SucursalController');
+Route::get('sucursales.create','Sucursal\SucursalController@create');
+Route::get('sucursales.index','Sucursal\SucursalController@index');
+
+Route::resource('sucursal','Empleado\EmpleadoSucursalController');

@@ -115,6 +115,7 @@ class EmpleadosDatosLabController extends Controller
             $datoslab->bonopuntualidad = false;
         }
         $datoslab->save();
+        Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
@@ -172,8 +173,14 @@ class EmpleadosDatosLabController extends Controller
         $puestos = Puesto::get();
         $edit = true;
         // dd($datoslab->id);
-        return view('empleadodatoslab.create',['datoslab'=>$datoslab,'bajas'=>$bajas,'contratos'=>$contratos,'empleado'=>$empleado,'areas'=>$areas, 
-            'puestos'=>$puestos,'edit'=>$edit]);
+        return view('empleadodatoslab.create',[
+            'datoslab'=>$datoslab,
+            'bajas'=>$bajas,
+            'contratos'=>$contratos,
+            'empleado'=>$empleado,
+            'areas'=>$areas, 
+            'puestos'=>$puestos,
+            'edit'=>$edit]);
 
     }
 
@@ -225,6 +232,7 @@ $empleado->datosLaborales()->where('id',$datoslaborale)->first();
         //$datoslab = EmpleadosDatosLab::findOrFail($datoslaborale);
 
         $datoslab->save($request->all());
+         Alert::success('Datos laborales actualizados');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
 
