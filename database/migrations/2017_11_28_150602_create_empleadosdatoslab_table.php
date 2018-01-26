@@ -19,13 +19,13 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->foreign('empleado_id')->references('id')->on('empleados');
 
 
-            $table->integer('contrato_id')->unsigned();
+            $table->integer('contrato_id')->unsigned()->nullable();
             $table->foreign('contrato_id')->references('id')->on('tipocontrato');
             
-            $table->integer('area_id')->unsigned();
+            $table->integer('area_id')->unsigned()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
 
-            $table->integer('puesto_id')->unsigned();
+            $table->integer('puesto_id')->unsigned()->nullable();
             $table->foreign('puesto_id')->references('id')->on('puestos');
 
             $table->date('fechacontratacion');
@@ -44,6 +44,9 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->string('banco');
             $table->string('cuenta')->nullable();
             $table->string('clabe')->nullable();
+
+            $table->integer('sucursal_id')->unsigned()->nullable();
+            $table->foreign('sucursal_id')->references('id')->on('sucursals');
 
             $table->timestampsTz();
         });

@@ -36,7 +36,8 @@ class EmpleadosDatosLab extends Model
      'comentariobaja',
      'bonopuntualidad',
      'area_id',
-     'puesto_id'];
+     'puesto_id',
+     'sucursal_id'];
 
     protected $hidden=['created_at','updated_at'];
 
@@ -56,6 +57,9 @@ class EmpleadosDatosLab extends Model
     }
     public function puestos(){ 
         return $this->hasOne('App\Puesto','puesto_id');
+    }
+      public function sucursal(){
+        return $this->belongsTo('App\Sucursal', 'sucursal_id');
     }
 
 }

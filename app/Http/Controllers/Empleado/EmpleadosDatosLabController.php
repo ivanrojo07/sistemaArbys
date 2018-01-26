@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
+use App\Sucursal;
 use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
 use App\TipoBaja;
@@ -10,6 +11,7 @@ use App\TipoContrato;
 use App\Area;
 use App\Puesto;
 use Illuminate\Http\Request;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class EmpleadosDatosLabController extends Controller
 {
@@ -24,6 +26,7 @@ class EmpleadosDatosLabController extends Controller
         $datoslaborales = $empleado->datosLaborales;
         $areas =   Area::get();
         $puestos = Puesto::get();
+        $sucursales =Sucursal::get();
         
         //
         if (count($datoslaborales)==0) {
@@ -40,7 +43,8 @@ class EmpleadosDatosLabController extends Controller
                 'empleado'=>$empleado,
                 'datoslaborales'=>$datoslaborales,
                 'areas'=>$areas,
-                'puestos'=>$puestos]); 
+                'puestos'=>$puestos,
+                'sucursales'=>$sucursales]); 
         }
         
     }
@@ -58,6 +62,7 @@ class EmpleadosDatosLabController extends Controller
         $bajas = TipoBaja::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
+        $sucursales =Sucursal::get();
         $edit = false;
         return view('empleadodatoslab.create',[
             'empleado'=>$empleado,
@@ -66,6 +71,7 @@ class EmpleadosDatosLabController extends Controller
             'datoslab'=>$datoslab, 
             'areas'=>$areas, 
             'puestos'=>$puestos,
+            'sucursales'=>$sucursales,
             'edit'=>$edit]);
     }
 
@@ -88,6 +94,8 @@ class EmpleadosDatosLabController extends Controller
       
         $datoslab->area_id = $request->area_id;
         $datoslab->puesto_id = $request->puesto_id;
+
+        $datoslab->sucursal_id = $request->sucursal_id;
         
         $datoslab->salarionom = $request->salarionom;
         $datoslab->salariodia = $request->salariodia ;
@@ -209,6 +217,9 @@ $empleado->datosLaborales()->where('id',$datoslaborale)->first();
         $datoslab->area_id = $request->area_id;
          //dd($request->all());
         $datoslab->puesto_id = $request->puesto_id;
+
+        $datoslab->sucursal_id = $request->sucursal_id;
+
         
         $datoslab->salarionom = $request->salarionom;
         $datoslab->salariodia = $request->salariodia ;

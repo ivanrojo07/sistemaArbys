@@ -47,7 +47,7 @@
                          {{ csrf_field() }}
                          @else
 				{{-- false expr --}}
-				<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="" >
+				<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" value="" required="">
 				{{ csrf_field() }}
 
 			@endif
@@ -283,7 +283,7 @@
 						<input class="form-control" type="text" id="cuenta" name="cuenta" value="{{ $datoslab->cuenta }}">
 					</div>
 					<div class="form-group col-xs-3">
-						<label class="control-label" for="clabe">CLABE(Clave Bancaria Estandarizada):</label>
+						<label class="control-label" for="clabe">CLABE:</label>
 						<input class="form-control" type="clabe" name="clabe" id="clabe" value="{{ $datoslab->clabe }}">
 					</div>
 					<div class="form-group col-xs-3">
@@ -292,6 +292,24 @@
 							{{-- expr --}}
 							checked="checked"
 						@endif>
+					</div>
+					<div class="form-group col-xs-3">
+						<label class="control-label" for="sucursal_id">
+						Sucursal:</label>
+						<select type="select" name="sucursal_id" id="sucursal_id" class="form-control">
+							<option id="sucursal_id" value="">Sin Definir</option>
+
+							@foreach ($sucursales as $sucursal)
+								{{-- expr --}}
+								<option id="{{$sucursal->id}}" 
+									    value="{{$sucursal->id}}" 
+									    
+							@if ($datoslab->sucursal_id == $sucursal->id)
+									{{-- expr --}}
+									selected
+								@endif>{{$sucursal->nombre}}</option>
+							@endforeach
+						</select>
 					</div>
 				</div>
 				<div class="panel">
