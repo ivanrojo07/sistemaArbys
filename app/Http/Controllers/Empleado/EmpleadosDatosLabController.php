@@ -24,6 +24,10 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslaborales = $empleado->datosLaborales;
+
+       
+        
+        
         $areas =   Area::get();
         $puestos = Puesto::get();
         $sucursales =Sucursal::get();
@@ -38,13 +42,24 @@ class EmpleadosDatosLabController extends Controller
 
 
         } else {
+
+        $datoslab=$empleado->datosLaborales()-> orderBy('created_at', 'desc')->first();
+        $area=Area::where('id',$datoslab->area_id)->first();
+        $puesto=Puesto::where('id',$datoslab->puesto_id)->first();
+        $contrato=TipoContrato::where('id',$datoslab->contrato_id)->first();
+        $sucursal=Sucursal::where('id',$datoslab->sucursal_id)->first();
             # code...
             return view('empleadodatoslab.index',[
                 'empleado'=>$empleado,
                 'datoslaborales'=>$datoslaborales,
                 'areas'=>$areas,
                 'puestos'=>$puestos,
-                'sucursales'=>$sucursales]); 
+                'sucursales'=>$sucursales,
+                'datoslab'=>$datoslab,
+                'area'=>$area,
+                'puesto'=>$puesto,
+                'contrato'=>$contrato,
+                'sucursal'=>$sucursal]); 
         }
         
     }
@@ -179,6 +194,7 @@ class EmpleadosDatosLabController extends Controller
         $bajas = TipoBaja::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
+        $sucursales =Sucursal::get();
         $edit = true;
         // dd($datoslab->id);
         return view('empleadodatoslab.create',[
@@ -188,6 +204,7 @@ class EmpleadosDatosLabController extends Controller
             'empleado'=>$empleado,
             'areas'=>$areas, 
             'puestos'=>$puestos,
+            'sucursales'=>$sucursales,
             'edit'=>$edit]);
 
     }

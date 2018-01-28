@@ -27,7 +27,7 @@
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="fechacontratacion">Fecha de contratación:</label>
 					
-					<dd>{{ $datoslab->fechacontratacion }}</dd>
+					<dd><strong> {{ $datoslab->fechacontratacion }}</strong></dd>
 				</div>
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="contrato">Tipo de contrato:</label>
@@ -102,7 +102,7 @@
 					<dd>{{ $datoslab->cuenta }}</dd>
 				</div>
 				<div class="form-group col-xs-3">
-					<label class="control-label" for="clabe">CLABE(Clave Bancaria Estandarizada):</label>
+					<label class="control-label" for="clabe">CLABE:</label>
 					<dd>{{ $datoslab->clabe }}</dd>
 				</div>
 			</div>

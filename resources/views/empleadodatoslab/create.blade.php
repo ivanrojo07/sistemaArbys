@@ -150,18 +150,22 @@
 
 
 
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="sucursal">Agregar a Sucursal:</label>
-						<select type="select" 
-						        class="form-control" 
-						        name="sucursal">
-						       <option id="0" value="0">Sin Definir</option>
+				<div class="form-group col-xs-3">
+						<label class="control-label" for="sucursal_id">
+						Sucursal:</label>
+						<select type="select" name="sucursal_id" id="sucursal_id" class="form-control">
+							<option id="sucursal_id" value="">Sin Definir</option>
 
-							<?php for($i=0;$i<5;$i++)
-								
-						echo"<option id='' value=''>Sucursal: ".$i."</option>";
-						
-							?>
+							@foreach ($sucursales as $sucursal)
+								{{-- expr --}}
+								<option id="{{$sucursal->id}}" 
+									    value="{{$sucursal->id}}" 
+									    
+							@if ($datoslab->sucursal_id == $sucursal->id)
+									{{-- expr --}}
+									selected
+								@endif>{{$sucursal->nombre}}</option>
+							@endforeach
 						</select>
 					</div>
 
@@ -293,24 +297,7 @@
 							checked="checked"
 						@endif>
 					</div>
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="sucursal_id">
-						Sucursal:</label>
-						<select type="select" name="sucursal_id" id="sucursal_id" class="form-control">
-							<option id="sucursal_id" value="">Sin Definir</option>
-
-							@foreach ($sucursales as $sucursal)
-								{{-- expr --}}
-								<option id="{{$sucursal->id}}" 
-									    value="{{$sucursal->id}}" 
-									    
-							@if ($datoslab->sucursal_id == $sucursal->id)
-									{{-- expr --}}
-									selected
-								@endif>{{$sucursal->nombre}}</option>
-							@endforeach
-						</select>
-					</div>
+					
 				</div>
 				<div class="panel">
 					<div class="panel-heading">Datos de Baja:</div>
