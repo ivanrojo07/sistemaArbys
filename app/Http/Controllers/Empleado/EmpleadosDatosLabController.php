@@ -10,6 +10,7 @@ use App\TipoBaja;
 use App\TipoContrato;
 use App\Area;
 use App\Puesto;
+use App\Banco;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -31,6 +32,7 @@ class EmpleadosDatosLabController extends Controller
         $areas =   Area::get();
         $puestos = Puesto::get();
         $sucursales =Sucursal::get();
+        $bancos= Banco::get();
         
         //
         if (count($datoslaborales)==0) {
@@ -59,7 +61,8 @@ class EmpleadosDatosLabController extends Controller
                 'area'=>$area,
                 'puesto'=>$puesto,
                 'contrato'=>$contrato,
-                'sucursal'=>$sucursal]); 
+                'sucursal'=>$sucursal,
+                'bancos'=>$bancos]); 
         }
         
     }
@@ -78,6 +81,7 @@ class EmpleadosDatosLabController extends Controller
         $areas =   Area::get();
         $puestos = Puesto::get();
         $sucursales =Sucursal::get();
+        $bancos= Banco::get();
         $edit = false;
         return view('empleadodatoslab.create',[
             'empleado'=>$empleado,
@@ -87,6 +91,7 @@ class EmpleadosDatosLabController extends Controller
             'areas'=>$areas, 
             'puestos'=>$puestos,
             'sucursales'=>$sucursales,
+            'bancos'=>$bancos,
             'edit'=>$edit]);
     }
 
@@ -152,7 +157,8 @@ class EmpleadosDatosLabController extends Controller
     {
        
          
-        $datos = $empleado->datosLaborales()->where('id',$datoslaborale)->first();
+        $datos = $empleado->datosLaborales()->where('id',$datoslaborale)->orderBy('created_at','desc')->first();
+
      $area='';
       if($datos->area_id==null){
         $area='NO DEFINIDO';

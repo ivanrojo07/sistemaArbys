@@ -165,6 +165,9 @@
                                         <li>
                                           <a href="#" onclick="AgregarNuevoTab('{{ url('/puestos') }}','Puestos')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Puestos</a>
                                         </li>
+                                         <li>
+                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/bancos') }}','Bancos')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Bancos</a>
+                                        </li>
                                     </ul>
                                   </li>
                             </li>                     

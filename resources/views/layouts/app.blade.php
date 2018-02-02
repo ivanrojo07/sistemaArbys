@@ -140,6 +140,9 @@
                                     <ul class="dropdown-menu">
                                       <li><a tabindex="-1" href="{{ url('bajas') }}"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
                                       <li><a href="{{ url('contratos') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
+                                       <li>
+                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/bancos') }}','Bancos')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Bancos</a>
+                                        </li>
                                     </ul>
                                   </li>
                             </li>                     

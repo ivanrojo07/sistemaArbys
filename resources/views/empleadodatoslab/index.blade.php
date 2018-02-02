@@ -39,23 +39,38 @@
 				</div>
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="contrato">Tipo de contrato:</label>
-
-					<dd>{{ $contrato->nombre }}</dd>
+					@if($contrato==null)
+					<dd>NO DEFINIDO</dd>
+					@else
+					<dd>{{ $contrato }}</dd>
+					@endif
 				</div>
 
                 <div class="form-group col-xs-3">
 					<label class="control-label" for="area">Área:</label>
+					@if($area==null)
+					<dd>NO DEFINIDO</dd>
+					@else
+					<dd>{{ $area }}</dd>
+					@endif
 					
-					<dd>{{ $area->nombre  }}</dd>
 				</div>
 				
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="puesto">Puesto:</label>
-					<dd>{{ $puesto->nombre  }}</dd>
+					@if($puesto==null)
+					<dd>NO DEFINIDO</dd>
+					@else
+					<dd>{{ $puesto }}</dd>
+					@endif
 				</div>
 				<div class="form-group col-xs-3">
 					<label class="control-label" for="sucursal">Sucursal:</label>
-					<dd>{{ $sucursal->nombre  }}</dd>
+					@if($sucursal==null)
+					<dd>NO DEFINIDO</dd>
+					@else
+					<dd>{{ $sucursal }}</dd>
+					@endif
 				</div>
 				
 

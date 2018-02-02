@@ -101,6 +101,7 @@ Route::get('producto', 'Producto\ProductController@search');
 //---------------------------------------------------------------------------
 Route::resource('areas','Area\AreaController', ['except'=>'show']);
 Route::resource('puestos','Puesto\PuestoController', ['except'=>'show']);
+Route::resource('bancos','Banco\BancoController', ['except'=>'show']);
 //--------------------------------------------------------------------
 Route::resource('gastos','Gasto\GastoController', ['except'=>'show']);
 // Route::resource('gastos.create','Gasto\GastoController@create');

@@ -41,7 +41,7 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->string('hsalida')->nullable();
             $table->string('hcomida');
             $table->string('lugartrabajo');
-            $table->string('banco');
+            $table->string('banco')->nullable();
             $table->string('cuenta')->nullable();
             $table->string('clabe')->nullable();
 

@@ -169,6 +169,20 @@
 						</select>
 					</div>
 
+					<div class="form-group col-xs-3">
+						<label class="control-label" for="lugartrabajo">Lugar de Trabajo:</label>
+						<select type="select" name="lugartrabajo" class="form-control" id="lugartrabajo" value="{{ $datoslab->lugartrabajo }}">
+							<option id="1" value="Oficinas" @if ($datoslab->lugartrabajo == "Oficinas")
+								{{-- expr --}}
+								selected="selected" 
+							@endif>Oficinas</option>
+							<option id="2" value="Campo" @if ($datoslab->lugartrabajo == "Campo")
+								{{-- expr --}}
+								selected="selected" 
+							@endif>Campo</option>
+						</select>
+					</div>
+
 
 
 
@@ -252,36 +266,29 @@
 							@endif>3 hrs.</option>
 						</select>
 					</div>
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="lugartrabajo">Lugar de Trabajo:</label>
-						<select type="select" name="lugartrabajo" class="form-control" id="lugartrabajo" value="{{ $datoslab->lugartrabajo }}">
-							<option id="1" value="Oficinas" @if ($datoslab->lugartrabajo == "Oficinas")
+					
+
+				
+				<div class="form-group col-xs-3">
+						<label class="control-label" for="banco">
+						BANCO:</label>
+						<select type="select" 
+						        class="form-control" 
+						        name="banco">
+						        <option id="banco" value="">Sin Definir</option>
+ 
+							@foreach ($bancos as $banco)
 								{{-- expr --}}
-								selected="selected" 
-							@endif>Oficinas</option>
-							<option id="2" value="Campo" @if ($datoslab->lugartrabajo == "Campo")
-								{{-- expr --}}
-								selected="selected" 
-							@endif>Campo</option>
+								<option id="{{$banco->nombre}}" 
+									    value="{{$banco->nombre}}" 
+							@if ($datoslab->banco == $banco->nombre)
+									{{-- expr --}}
+									selected="selected" 
+								@endif>{{$banco->nombre}}</option>
+							@endforeach
 						</select>
 					</div>
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="banco">Banco:</label>
-						<select class="form-control" type="select" name="banco" id="banco">
-							<option id="1" value="HSBC" @if ($datoslab->banco == "HSBC")
-								{{-- expr --}}
-								selected="selected" 
-							@endif>HSBC</option>
-							<option id="2" value="Banorte" @if ($datoslab->banco == "Banorte")
-								{{-- expr --}}
-								selected="selected" 
-							@endif>BANORTE</option>
-							<option id="3" value="Banamex" @if ($datoslab->banco == "Banamex")
-								{{-- expr --}}
-								selected="selected" 
-							@endif>BANAMEX</option>
-						</select>
-					</div>
+
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="cuenta">Cuenta:</label>
 						<input class="form-control" type="text" id="cuenta" name="cuenta" value="{{ $datoslab->cuenta }}">
