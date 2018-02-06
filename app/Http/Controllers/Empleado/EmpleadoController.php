@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Empleado;
 use App\EmpleadosDatosLab;
 use App\Empleado;
+use App\Area;
+use App\Puesto;
+use App\Sucursal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,11 +19,18 @@ class EmpleadoController extends Controller
     public function index()
     {
         
-        $empleados = Empleado::sortable()->paginate(5);
-        // $datoslaborales = $empleados->datosLaborales;
-        return view('empleado.index',['empleados'=>$empleados
-                                      // 'datoslaborales'=>$datoslaborales
-    ]);
+       $empleados = Empleado::sortable()->paginate(10);
+        $areas=Area::get();
+        $puestos=Puesto::get();
+        $sucursales=Sucursal::get();
+        
+        return view('empleado.index',[
+            'empleados' => $empleados,
+            'areas'     =>     $areas,
+            'puestos'   =>   $puestos,
+            'sucursales'=>$sucursales
+            ]);
+    
 
     }
 

@@ -16,6 +16,7 @@
 						<th>Puesto</th>
 						
 						
+						
 					</tr>
 
 				</thead>
@@ -26,24 +27,40 @@
 					 @foreach($empleado as $emplead)
 					
                    <tr>
-						<th>{{$emplead->identificador}}</th>
-						<th>{{$emplead->nombre}}</th>
-						<th>{{$emplead->appaterno}}</th>
-						<th>{{$emplead->apmaterno}}</th>
+						<td>{{$emplead->identificador}}</td>
+						<td>{{$emplead->nombre}}</td>
+						<td>{{$emplead->appaterno}}</td>
+						<td>{{$emplead->apmaterno}}</td>
 
-                         @foreach($areas as $area)
-                         @if($area->id==$emplead->datosLab->area_id)
-						<th>{{$area->nombre}}</th>
-
-						@endif
+							<?php $act;?>
+							@foreach($emplead->datosLaborales as $datos)
+							<?php $act=$datos;?>
 							@endforeach
 
+                         @foreach($areas as $area)
+                         @if($act->area_id==$area->id)
+						<td>{{$area->nombre}}</td>
+							
+						@endif
+							@endforeach
+							@if($act->area_id==null)
+							<td>No Definido</td>
+							@endif
+
+
 						@foreach($puestos as $puesto)
-						 @if($puesto->id==$emplead->datosLab->puesto_id)
-						<th>{{$puesto->nombre}}</th>
+						@if($act->puesto_id==$puesto->id)
+						
+						<td>{{$puesto->nombre}}</td>
+						
 						
 						@endif
 						@endforeach
+						@if($act->puesto_id==null)
+							<td>No Definido</td>
+							@endif
+
+
 
 					</tr>	
 					 @endforeach

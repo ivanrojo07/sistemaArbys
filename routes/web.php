@@ -80,7 +80,8 @@ Route::get('comision',function(){
 
 Route::resource('formacontactos','FormaContacto\FormaContactoController');
 
-Route::resource('clientes','Personal\PersonalController');
+//Route::resource('clientes','Personal\PersonalController');
+Route::resource('clientes','Cliente\ClienteController');
 Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
 Route::resource('clientes.contacto','Personal\PersonalContactoController');
 Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);

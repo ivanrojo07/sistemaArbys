@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Cliente;
 
 class ClienteController extends Controller
 {
@@ -24,7 +25,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        $clientes=Cliente::get();
+        return view('clientes.create',['clientes'=>$clientes]);
     }
 
     /**
