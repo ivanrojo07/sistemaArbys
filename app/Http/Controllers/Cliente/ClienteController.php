@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cliente;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class ClienteController extends Controller
 {
@@ -15,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        //$clientes=Cliente::get();
     }
 
     /**
@@ -25,8 +26,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $clientes=Cliente::get();
-        return view('clientes.create',['clientes'=>$clientes]);
+        
+        return view('clientes.create');
     }
 
     /**
@@ -37,7 +38,18 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $rfc = Cliente::where('rfc', $request->rfc)->get();
+        if (count($rfc)!=0) {
+            # code...
+            return redirect()->back()->with('errors','El RFC ya està registrado');                               
+        } else {
+            # code...
+
+            $cliente = Cliente::create($request->all());
+           Alert::success('Cliente creado con éxito', 'Siga agregando información');
+           return view('clientes.view',['cliente'=>$cliente]); 
+              
+        }
     }
 
     /**
@@ -59,7 +71,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
     /**

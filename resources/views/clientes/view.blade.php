@@ -1,5 +1,7 @@
-@extends('layouts.blank')
-	@section('content')
+{{-- @extends('layouts.blank')
+	@section('content') --}}
+	@extends('layouts.test')
+@section('content1')
 		<div class="container" id="tab">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
@@ -8,35 +10,32 @@
 							<div class="col-md-12 offset-md-2 mt-3">
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
-			    					<dd>{{ $personal->tipopersona }}</dd>
+			    					<dd>{{ $cliente->tipopersona }}</dd>
 			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="alias">Alias:</label>
-			  						<dd>{{ $personal->alias }}</dd>
-			  					</div>
+			  					
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="rfc">RFC:</label>
-			  						<dd>{{ $personal->rfc }}</dd>
+			  						<dd>{{ $cliente->rfc }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="vendedor">Vendedor:</label>
-			  						<dd>{{ $personal->vendedor }}</dd>
+			  						<label class="control-label" for="vendedor">ID:</label>
+			  						<dd>{{ $cliente->identificador }}</dd>
 			  					</div>
 							</div>
-						@if ($personal->tipopersona == "Fisica")
+						@if ($cliente->tipopersona == "Fisica")
 								{{-- true expr --}}
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="nombre">Nombre(s):</label>
-			  						<dd>{{ $personal->nombre }}</dd>
+			  						<dd>{{ $cliente->nombre }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-			  						<dd>{{ $personal->apellidopaterno }}</dd>
+			  						<dd>{{ $cliente->apellidopaterno }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-			  						<dd>{{ $personal->apellidomaterno }}</dd>
+			  						<dd>{{ $cliente->apellidomaterno }}</dd>
 			  					</div>
 							</div>
 						@else
@@ -45,74 +44,183 @@
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
 			  						<label class="control-label" for="razonsocial">Razon Social:</label>
-			  						<dd>{{ $personal->razonsocial }}</dd>
+			  						<dd>{{ $cliente->razonsocial }}</dd>
 			  					</div>
+			  					
 							</div>
 						@endif
+						<div class="col-md-12 offset-md-2 mt-3">
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="tipopersona">Correo:</label>
+			    					<dd>{{ $cliente->mail }}</dd>
+			  					</div>
+			  					
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="rfc">Telèfono:</label>
+			  						<dd>{{ $cliente->telefono }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="vendedor">Telèfono Celular:</label>
+			  						<dd>{{ $cliente->telefonocelular }}</dd>
+			  					</div>
+							</div>
 						</div>
 					</div>
-					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-						<li class="active"><a href="#tab1">Dirección Fiscal:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="{{ route('clientes.direccionfisica.index',['cliente'=>$personal]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección Fisica:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('clientes.contacto.index',['cliente'=>$personal]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('clientes.datosgenerales.index',['cliente'=>$personal]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a></li>
-					</ul>
+					
 					<div class="panel-default">
-						<div class="panel-heading">Dirección Fiscal:</div>
+						<div class="panel-heading">Dirección:</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="calle">Calle:</label>
-			    					<dd>{{ $personal->calle }}</dd>
+			    					<dd>{{ $cliente->calle }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="numext">Numero exterior:</label>
-			    					<dd>{{ $personal->numext }}</dd>
+			    					<dd>{{ $cliente->numext }}</dd>
 			  					</div>	
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="numinter">Numero interior:</label>
-			    					<dd>{{ $personal->numinter }}</dd>
+			    					<dd>{{ $cliente->numinter }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="cp">Código postal:</label>
-			    					<dd>{{ $personal->cp }}</dd>
+			    					<dd>{{ $cliente->cp }}</dd>
 			  					</div>		
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="colonia">Colonia:</label>
-			  						<dd>{{ $personal->colonia }}</dd>
+			  						<dd>{{ $cliente->colonia }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-			  						<dd>{{ $personal->municipio }}</dd>
+			  						<dd>{{ $cliente->municipio }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="ciudad">Ciudad:</label>
-			  						<dd>{{ $personal->ciudad }}</dd>
+			  						<dd>{{ $cliente->ciudad }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="estado">Estado:</label>
-			  						<dd>{{ $personal->estado }}</dd>
+			  						<dd>{{ $cliente->estado }}</dd>
 			  					</div>
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="calle1">Entre calle:</label>
-			  						<dd>{{ $personal->calle1 }}</dd>
+			  						<dd>{{ $cliente->calle1 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="calle2">Y calle:</label>
-			  						<dd>{{ $personal->calle2 }}</dd>
+			  						<dd>{{ $cliente->calle2 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="referencia">Referencia:</label>
-			  						<dd>{{ $personal->referencia }}</dd>
+			  						<dd>{{ $cliente->referencia }}</dd>
 			  					</div>
 							</div>
-							<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$personal]) }}"><strong>Editar</strong></a>
+
+							
 						</div>
 					</div>
+
+					<div class="panel-default">
+						<div class="panel-heading">Datos de Cotizaciòn:</div>
+						<div class="panel-body">
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calle">Folio:</label>
+			    					<dd>{{ $cliente->folio }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numext">Ingresos:</label>
+			    					<dd>{{ $cliente->ingresos }}</dd>
+			  					</div>	
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numinter">Canal de Venta:</label>
+			    					<dd>{{ $cliente->canalventa }}</dd>
+			  					</div>
+			  							
+							</div>
+							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="colonia">Promocion:</label>
+			  						<dd>{{ $cliente->promocion }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="municipio">Objetivo Mensual:</label>
+			  						<dd>{{ $cliente->objetivo }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="ciudad">Calificacion:</label>
+			  						<dd>{{ $cliente->calificacion }}</dd>
+			  					</div>
+			  					
+							</div>
+							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="calle1">Comentarios:</label>
+			  						<dd>{{ $cliente->comentarios }}</dd>
+			  					</div>
+			  					
+							</div>
+
+							<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a> 
+						</div>
+					</div>
+
+					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
+						<li class="active"><a href="#cot">Cotizaciones:</a></li>
+						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#crm" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">CRM:</a></li>
+						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#datos" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
+						
+					</ul> 
+
+					<div class="tab-content">
+<div id="datos" class="tab-pane fade in active">
+
+<div role="application" class="panel panel-group">
+				<div class="panel-default">
+
+					<div class="panel-heading"><h4>Datos:
+					
+					 
+				</h4></div>
+
+                  
+                   <div class="panel-body">
+                   </div>
+               </div>
+			</div>
+
+
+
+		</div>
+
+
+ <div id="crm" class="tab-pane fade ">
+    	<iframe src="{{route ('gastos.create')}}"
+    			height="500px" >
+    		
+    	</iframe>
+    </div>
+
+
+    <div id="cot" class="tab-pane fade ">
+    	<iframe src="{{route ('sucursal.index')}}"
+    			height="500px" >
+    		
+    	</iframe>
+    </div>
+
+
+
+
+       </div>
+
   				</div>
 		</div>
 	@endsection
+
+	

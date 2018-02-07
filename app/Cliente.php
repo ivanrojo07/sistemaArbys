@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\DatosLab;
+
 use App\Beneficiarios;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
@@ -14,14 +14,40 @@ class Cliente extends Model
     protected $table='clientes';
 
    protected $fillable = [
-     	'id',
-        'nombre',
-        'apellidopaterno',
-        'apellidomaterno',
-        'rfc',
-        'mail',
-        'telefono',
-        'identificador'];
+     	'tipopersona',//YA
+        'nombre',//YA
+        'apellidopaterno',//YA
+        'apellidomaterno',//YA
+        'calle',//YA
+        'numext',//YA
+        'numinter',//YA
+        'cp',//YA
+        'colonia',//YA
+        'municipio',//YA
+        'ciudad',//YA
+        'estado',//YA
+        'calle1',//YA
+        'calle2',//YA
+        'referencia',//YA
+        'mail',//YA
+        'rfc',//YA
+        'telefono',//YA
+        'telefonocel',//YA
+        //'prod',//YA
+        'ingresos',//YA
+        'canalventa',//YA
+        'promocion',//YA
+        //'seguimiento',//YA
+        'calificacion',//YA
+        'comentarios',//YA
+        //'listaprecios',//YA
+        //'cotizador',//YA
+        'identificador',//YA
+        'objetivo',//YA
+        'folio',//YA
+        'razonsocial',//YA
+        'solicitante_id'
+        ];
    /**
      * The attributes that are mass assignable.
      *
@@ -29,8 +55,9 @@ class Cliente extends Model
      */
     public $Sortable = [
     	'identificador',
-    	'nombre'
-
+    	'nombre',
+      'folio',
+      'tipopersona',
     ];
 
     /**
