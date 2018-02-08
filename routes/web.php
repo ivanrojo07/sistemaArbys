@@ -34,7 +34,7 @@ Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileContr
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
 
 
-Route::get('buscarcliente','Personal\PersonalController@buscar');
+
 
 Route::resource('personals.products.transactions', 'Personal\PersonalProductTransactionController',['only'=>'store']);
 Route::resource('personals.product','Personal\PersonalProductController', ['only'=>'index']);
@@ -55,17 +55,8 @@ Route::resource('bajas','Precargas\TipoBajaController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
     
 //Añadido <Iyari> 5/dic/2017//
-Route::get('sucursales',function(){
-	return View::make('Sucursales.index');
-});
-Route::get('gastos',function(){
 
-	return View::make('Gastos.formulario');
-});
-Route::get('consulta',function(){
 
-	return View::make('Empleadoconsulta.consulta');
-});
 Route::get('bonos',function(){
 
 	return View::make('Empleadobonos.bonos');
@@ -85,7 +76,8 @@ Route::resource('clientes','Cliente\ClienteController');
 Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
 Route::resource('clientes.contacto','Personal\PersonalContactoController');
 Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);
-
+Route::get('buscarcliente','Cliente\ClienteController@buscar');
+Route::resource('clientes.crm','Cliente\ClienteCRMController');
 
 //-----------------------------------------------------
 Route::resource('provedores','Provedor\ProvedorController');

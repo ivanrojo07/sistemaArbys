@@ -16,7 +16,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //$clientes=Cliente::get();
+        $clientes=Cliente::sortable()->get();
+        return view('clientes.index',['clientes'=>$clientes]);
     }
 
     /**
@@ -60,7 +61,10 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+       
+        $cliente=Cliente::where('id',$id)->first();
+        
+         return view('clientes.view',['cliente'=>$cliente]); 
     }
 
     /**
@@ -95,5 +99,27 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function buscar(Request $request){
+   
+   $query = $request->input('busqueda');
+        $wordsquery = explode(' ',$query);
+
+    $clientes = Cliente::where(function($q) use($wordsquery){
+            foreach ($wordsquery as $word) {
+                # code...
+              $q->orWhere('nombre','LIKE',         "%$word%")
+                ->orWhere('apellidopaterno','LIKE',"%$word%")
+                ->orWhere('apellidomaterno','LIKE',"%$word%")
+                ->orWhere('razonsocial','LIKE',    "%$word%")
+                ->orWhere('rfc','LIKE',            "%$word%")
+                ->orWhere('folio','LIKE',          "%$word%")
+                ->orWhere('identificador','LIKE',    "%$word%");
+            }
+        })->get();
+    return view('clientes.busqueda', ['clientes'=>$clientes]);
+        
+
     }
 }

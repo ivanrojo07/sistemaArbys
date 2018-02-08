@@ -1,7 +1,7 @@
-{{-- @extends('layouts.blank')
-	@section('content') --}}
-	@extends('layouts.test')
+
+@extends('layouts.test')
 @section('content1')
+
 		<div class="container" id="tab">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
@@ -63,12 +63,13 @@
 			  						<label class="control-label" for="vendedor">Telèfono Celular:</label>
 			  						<dd>{{ $cliente->telefonocelular }}</dd>
 			  					</div>
+			  					<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
 							</div>
 						</div>
 					</div>
 					
 					<div class="panel-default">
-						<div class="panel-heading">Dirección:</div>
+						<div class="panel-heading"><h4>Dirección:</h4></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -125,9 +126,39 @@
 						</div>
 					</div>
 
-					<div class="panel-default">
-						<div class="panel-heading">Datos de Cotizaciòn:</div>
-						<div class="panel-body">
+				
+
+	<ul class="nav nav-tabs nav-pills nav-justified">
+								<li class="active">
+    				<a data-toggle="tab" 
+    				   href="#dat" 
+    				   class="btn-info">Datos para Cotizaciòn</a>
+    							</li>
+								<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+    				<a data-toggle="tab" 
+    	   				href="#crm" 
+    	   				class="btn-info">CRM
+    		
+    				</a>
+								</li>
+
+                                 <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+    	           <a data-toggle="cot" 
+    	              href="#emp" 
+    	              class="btn-info">Cotizaciòn</a>
+   									</li>
+    
+  					</ul>
+
+  <div class="tab-content">
+<div id="dat" class="tab-pane fade in active">
+<div role="application" class="panel panel-group">
+				<div class="panel-default">
+
+					<div class="panel-heading"><h4>Datos para Cotizaciòn:</h4></div>
+
+                  
+                   	<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="calle">Folio:</label>
@@ -166,41 +197,15 @@
 			  					
 							</div>
 
-							<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a> 
+							 
 						</div>
-					</div>
-
-					<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-						<li class="active"><a href="#cot">Cotizaciones:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#crm" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">CRM:</a></li>
-						<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#datos" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
-						
-					</ul> 
-
-					<div class="tab-content">
-<div id="datos" class="tab-pane fade in active">
-
-<div role="application" class="panel panel-group">
-				<div class="panel-default">
-
-					<div class="panel-heading"><h4>Datos:
-					
-					 
-				</h4></div>
-
-                  
-                   <div class="panel-body">
-                   </div>
                </div>
 			</div>
-
-
-
 		</div>
 
 
  <div id="crm" class="tab-pane fade ">
-    	<iframe src="{{route ('gastos.create')}}"
+    	<iframe src="{{route ('clientes.crm.index',['cliente'=>$cliente])}}"
     			height="500px" >
     		
     	</iframe>

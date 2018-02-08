@@ -56,8 +56,11 @@ class Cliente extends Model
     public $Sortable = [
     	'identificador',
     	'nombre',
+        'razonsocial',
       'folio',
       'tipopersona',
+      'rfc',
+      'calificacion'
     ];
 
     /**
@@ -69,6 +72,9 @@ class Cliente extends Model
         'created_at'
     ];
 
+      public function crm(){
+        return $this->hasMany('App\ClienteCRM');
+    }
    // public function datosLab(){
    //      return $this->hasOne(DatosLab::class);
    //  }

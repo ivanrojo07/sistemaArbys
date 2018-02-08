@@ -3,6 +3,8 @@
 <div class="container">
 	<div class="panel-body">
 		<div class="col-lg-6">
+			<div class="row">
+				<div class="col-sm-4">
 			<form action="buscarprovedor">
 				<div class="input-group">
 
@@ -16,12 +18,17 @@
 
 
 				</div>
-				<a class="btn btn-info" 
+				
+			</form>
+		</div>
+		<div class="col-sm-4">
+		<a class="btn btn-info" 
 				   href="{{ route('provedores.create')}}">
 							        <strong>
 							   Agregar Proveedor</strong>
 							</a>
-			</form>
+						</div>
+		</div>
 		</div>
 	</div>
 
