@@ -152,9 +152,10 @@
 			  				<label class="control-label" for="canalventa">Canal de Venta:</label>
 									<select type="select" class="form-control" id="canalventa" name="canalventa">
 										<option value="" selected="selected">Seleccionar</option>
-			    						<option value="Canal de Venta1">Canal de Venta 1</option>
-			    						<option value="Canal de Venta2">Canal de Venta 2</option>
-			    						<option value="Canal de Venta3">Canal de Venta 3</option>
+										@foreach($canalventas as $canalventa)
+			    						<option value="{{$canalventa->nombre}}">{{$canalventa->nombre}}</option>
+			    						@endforeach
+			    						
 			    					</select>
 								
 								</div>

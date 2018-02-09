@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cliente;
+use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class ClienteController extends Controller
@@ -27,8 +28,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        
-        return view('clientes.create');
+        $canalventas=CanalVenta::get();
+        return view('clientes.create',['canalventas'=>$canalventas]);
     }
 
     /**
@@ -63,8 +64,9 @@ class ClienteController extends Controller
     {
        
         $cliente=Cliente::where('id',$id)->first();
-        
-         return view('clientes.view',['cliente'=>$cliente]); 
+       
+         return view('clientes.view',[
+            'cliente'=>$cliente]); 
     }
 
     /**
@@ -75,7 +77,11 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
+        $cliente=Cliente::where('id',$id)->first();
+        $canalventas=CanalVenta::get();
+        return view('clientes.edit',[
+            'cliente'=>$cliente,
+            'canalventas'=>$canalventas]); 
     }
 
     /**
@@ -87,7 +93,14 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $cliente=Cliente::where('id',$id)->first();
+
+       
+       $cliente->update($request->except('_method','_token'));
+       
+       Alert::success('Cliente modificado con éxito');
+        return view('clientes.view',[
+            'cliente'=>$cliente]);
     }
 
     /**

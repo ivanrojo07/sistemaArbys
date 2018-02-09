@@ -73,7 +73,7 @@
 							</strong></a>
 						</div>
 						<div class="col-sm-4">
-							<a class="btn btn-info btn-sm" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}">
+							<a class="btn btn-info btn-sm" href="{{ route('clientes.edit',['id'=>$cliente->id]) }}">
 								
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Editar</strong>
 							</a>

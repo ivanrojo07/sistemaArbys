@@ -87,15 +87,20 @@
                                       aria-hidden="true"></i> 
                                   Precargas:</a>
                                     <ul class="dropdown-menu">
-                                      <li>
+                                       <li>
+                                        <a href="#" 
+                                           onclick="AgregarNuevoTab('{{ url('/canalventas') }}','Canal de Ventas')">
+                                           <i class="fa fa-refresh" aria-hidden="true"></i> 
+                                       Canal de Ventas</a></li>
+                                     {{--  <li>
                                         <a href="#" 
                                            onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')">
                                            <i class="fa fa-refresh" aria-hidden="true"></i> 
-                                       Giros</a></li>
+                                       Giros</a></li> --}}
 
-                                      <li><a href="#" 
+                                      {{-- <li><a href="#" 
                                              onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')">
-                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li>
+                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li> --}}
                                     </ul>
                                   </li>
 

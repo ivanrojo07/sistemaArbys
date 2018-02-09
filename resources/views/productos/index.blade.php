@@ -1,21 +1,10 @@
-@extends('layouts.infopersonal')
-	@section('personal')
-	<ul role="tablist" class="nav nav-tabs">
-      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.show',['personal'=>$personal]) }}" class="">Dirección/Domicilio:</a></li>
-      @if ($personal->tipo == 'Cliente')
-      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datoslaborales.index',['personal'=>$personal]) }}" class="">Datos Laborales:</a></li>
-      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.referenciapersonales.index',['personal'=>$personal]) }}" class="">Referencias Personales:</a></li>
-      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.datosbeneficiario.index',['personal'=>$personal]) }}" class="">Datos de Beneficiarios:</a></li>
-      @endif
-      <li class="active"><a href="{{ route('personals.producto.index',['personal'=>$personal]) }}" class="">Productos:</a></li>
-      <li class=""><a href="{{ route('personals.product.index',['personal'=>$personal]) }}" class="">Productos seleccionados:</a></li>
-      <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('personals.crm.index',['personal'=>$personal]) }}" class="">C.R.M.:</a></li>
-  </ul>
+@extends('layouts.test')
+@section('content1')
     <div class="panel-default">
     	<div class="panel-heading">Productos:</div>
     	<div class="panel-body">
         <div class="container">
-          <form class="form-inline" id="search" action="{{ route('personals.producto.index',['personal'=>$personal]) }}">
+          <form class="form-inline" id="search" action="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}">
             <div class="container">
               <div class="panel-body">
                 <label class="control-label" for="costo1">Costo de:</label>
@@ -109,7 +98,7 @@
               <td>${{ number_format($producto->precio_lista,2)}}</td>
               <td>${{ number_format($producto->apertura,2)}}</td>
               <td>${{ number_format($producto->inicial,2)}}</td>
-              <td><form role="form" id="form-cliente" method="POST"  action="{{ route('personals.products.transactions.store',['personal'=>$personal,'product'=>$producto]) }}">
+              <td><form role="form" id="form-cliente" method="POST"  action="{{ route('clientes.products.transactions.store',['cliente'=>$cliente,'product'=>$producto]) }}">
                 {{ csrf_field() }}
                 <input class="btn btn-primary" type="submit" value="Agregar al cliente">
               </form></td>

@@ -8,7 +8,7 @@
 				<div class="panel-body">
 					<form role="form" method="POST" action="{{ route('clientes.crm.store',['cliente'=>$cliente]) }}">
 						{{ csrf_field() }}
-						<input type="hidden" name="provedor_id" value="{{ $cliente->id }}">
+						<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
 						<div class="col-xs-4 col-xs-offset-10">
 							<a class="btn btn-warning" id="limpiar" onclick="limpiar()"><strong>Limpiar</strong> </a>
 							<button id="submit" type="submit" class="btn btn-success">

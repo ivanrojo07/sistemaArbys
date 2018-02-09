@@ -45,8 +45,7 @@ class Cliente extends Model
         'identificador',//YA
         'objetivo',//YA
         'folio',//YA
-        'razonsocial',//YA
-        'solicitante_id'
+        'razonsocial'
         ];
    /**
      * The attributes that are mass assignable.
@@ -74,6 +73,12 @@ class Cliente extends Model
 
       public function crm(){
         return $this->hasMany('App\ClienteCRM');
+    }
+        public function product(){
+        return $this->hasMany('App\Product');
+    }
+    public function transactions(){
+        return $this->hasMany('App\Transaction');
     }
    // public function datosLab(){
    //      return $this->hasOne(DatosLab::class);

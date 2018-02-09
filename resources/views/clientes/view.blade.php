@@ -143,8 +143,8 @@
 								</li>
 
                                  <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-    	           <a data-toggle="cot" 
-    	              href="#emp" 
+    	           <a data-toggle="tab" 
+    	              href="#cot" 
     	              class="btn-info">Cotizaciòn</a>
    									</li>
     
@@ -213,7 +213,7 @@
 
 
     <div id="cot" class="tab-pane fade ">
-    	<iframe src="{{route ('sucursal.index')}}"
+    	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}"
     			height="500px" >
     		
     	</iframe>
