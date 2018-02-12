@@ -72,6 +72,21 @@ function obtener_registros(busqueda, etiqueta,cli,pro)
 		});
 	}
 
+	if (etiqueta == 'solicitante') {
+		
+		$.ajax({
+			url : "buscarsolicitante",
+			type : "GET",
+			dataType : "html",
+			data :{busqueda:busqueda,
+				   cli:cli,
+				   pro:pro},
+			}).done(function(resultado){
+			$("#datos").html(resultado);
+
+		});
+	}
+
 
 		
 

@@ -56,7 +56,7 @@ class Cliente extends Model
     public $Sortable = [
     	'identificador',
     	'nombre',
-        'razonsocial',
+      'razonsocial',
       'folio',
       'tipopersona',
       'rfc',

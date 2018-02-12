@@ -19,13 +19,8 @@ class ClienteController extends Controller
     public function index()
     {
 
-
-//         $clientes=Cliente::doesntHave('solicitante', function ($query) {
-//     $query->where('cliente_id', 1);
-// })->get();
-       // $cliente = Cliente::get()->first();
         $clientes=Cliente::doesntHave('solicitante')->get();
-        dd($clientes);
+        
         return view('clientes.index',['clientes'=>$clientes]);
     }
 

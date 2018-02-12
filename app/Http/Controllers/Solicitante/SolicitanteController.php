@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Solicitante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Solicitante;
+use App\Cliente;
 use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -17,8 +18,8 @@ class SolicitanteController extends Controller
      */
     public function index()
     {
-        $solicitantes=Solicitante::sortable()->get();
-        return view('solicitantes.index',['solicitantes'=>$solicitantes]);
+        $clientes=Cliente::has('solicitante')->get();
+        return view('solicitantes.index',['clientes'=>$clientes]);
     }
 
     /**
@@ -122,13 +123,9 @@ class SolicitanteController extends Controller
     $solicitantes = Solicitante::where(function($q) use($wordsquery){
             foreach ($wordsquery as $word) {
                 # code...
-              $q->orWhere('nombre','LIKE',         "%$word%")
-                ->orWhere('apellidopaterno','LIKE',"%$word%")
-                ->orWhere('apellidomaterno','LIKE',"%$word%")
-                ->orWhere('razonsocial','LIKE',    "%$word%")
-                ->orWhere('rfc','LIKE',            "%$word%")
+              $q->orWhere('numcontrato','LIKE',         "%$word%")
                 ->orWhere('folio','LIKE',          "%$word%")
-                ->orWhere('identificador','LIKE',    "%$word%");
+                ->orWhere('integrante','LIKE',    "%$word%");
             }
         })->get();
     return view('solicitantes.busqueda', ['solicitantes'=>$solicitantes]);
