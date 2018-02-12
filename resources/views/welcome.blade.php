@@ -87,15 +87,20 @@
                                       aria-hidden="true"></i> 
                                   Precargas:</a>
                                     <ul class="dropdown-menu">
-                                      <li>
+                                       <li>
+                                        <a href="#" 
+                                           onclick="AgregarNuevoTab('{{ url('/canalventas') }}','Canal de Ventas')">
+                                           <i class="fa fa-refresh" aria-hidden="true"></i> 
+                                       Canal de Ventas</a></li>
+                                     {{--  <li>
                                         <a href="#" 
                                            onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')">
                                            <i class="fa fa-refresh" aria-hidden="true"></i> 
-                                       Giros</a></li>
+                                       Giros</a></li> --}}
 
-                                      <li><a href="#" 
+                                      {{-- <li><a href="#" 
                                              onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')">
-                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li>
+                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li> --}}
                                     </ul>
                                   </li>
 
@@ -105,6 +110,50 @@
                         </ul>
                     </li>
 
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Solicitantes<span class="caret"></span> </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                {{-- <a href="#" onclick="AgregarNuevoTab('{{ url('/solicitantes/create')}}','Agrega Solicitante')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a> --}}
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/solicitantes') }}','Buscar Solicitante')"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
+
+
+                               <!--  <a href="#" onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')"><i class="fa fa-refresh" aria-hidden="true"></i>
+
+                                 Precargas Giros</a>
+
+                                <a href="#" onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Forma de contactos</a> -->
+
+                                 <li class="dropdown-submenu">
+                                <a tabindex="-1" 
+                                   href="#">
+                                   <i class="fa fa-refresh" 
+                                      aria-hidden="true"></i> 
+                                  Precargas:</a>
+                                    <ul class="dropdown-menu">
+                                       <li>
+                                        <a href="#" 
+                                           onclick="AgregarNuevoTab('{{ url('/canalventas') }}','Canal de Ventas')">
+                                           <i class="fa fa-refresh" aria-hidden="true"></i> 
+                                       Canal de Ventas</a></li>
+                                     {{--  <li>
+                                        <a href="#" 
+                                           onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')">
+                                           <i class="fa fa-refresh" aria-hidden="true"></i> 
+                                       Giros</a></li> --}}
+
+                                      {{-- <li><a href="#" 
+                                             onclick="AgregarNuevoTab('{{ url('/formacontactos') }}','Forma de Contacto')">
+                                             <i class="fa fa-refresh" aria-hidden="true"></i>Forma Contactos</a></li> --}}
+                                    </ul>
+                                  </li>
+
+
+
+                            </li>                     
+                        </ul>
+                    </li>
 
 
 

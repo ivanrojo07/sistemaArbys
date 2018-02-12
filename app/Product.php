@@ -21,8 +21,11 @@ class Product extends Model
     public function transactions(){
     	return $this->hasMany('App\Transaction');
     }
-    public function personals(){
-        return $this->belongsTo('App\Personal');
+    // public function personals(){
+    //     return $this->belongsTo('App\Personal');
+    // }
+    public function cliente(){
+         return $this->belongsTo('App\Cliente');
     }
     public function noestaDisponible(){
    		

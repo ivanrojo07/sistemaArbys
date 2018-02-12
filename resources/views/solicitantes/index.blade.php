@@ -5,16 +5,17 @@
 		<div class="col-lg-6">
 			<div class="row">
 				<div class="col-sm-4">
-			<form action="buscarprovedor">
+			<form action="">
 				<div class="input-group">
 
 					<input type="text" 
-					       id="provedor" 
+					       id="solicitante" 
 					       name="query" 
 					       class="form-control" 
 					       placeholder="Buscar..."
 					       autofocus
-					       onKeypress="if(event.keyCode == 13) event.returnValue = false;">
+					       onKeypress="if(event.keyCode == 13) event.returnValue = false;"
+					       > {{--   --}}
 
 
 				</div>
@@ -22,13 +23,14 @@
 			</form>
 		</div>
 		<div class="col-sm-4">
-		<a class="btn btn-info" 
-				   href="{{ route('provedores.create')}}">
+			{{-- <a class="btn btn-info" 
+				   href="{{ route('solicitantes.create')}}">
 							        <strong>
-							   Agregar Proveedor</strong>
-							</a>
+							   SOLICITANTES</strong>
+							</a> --}}
 						</div>
 		</div>
+			
 		</div>
 	</div>
 
@@ -37,49 +39,56 @@
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>
 				<tr class="info">
-					<th>@sortablelink('id', 'Identificador')</th>
-					<th>@sortablelink('nombre', 'Nombre/Razón Social'){{-- Nombre --}}</th>
-					<th>@sortablelink('tipopersona', 'Tipo de persona')</th>
-					<th>@sortablelink('alias', 'Alias')</th>
+					<th>@sortablelink('identificador', 'ID de Cliente')</th>
+					<th>@sortablelink('solicitante->folio', 'Folio de Solicitante')</th>
+					<th>@sortablelink('nombre', 'Nombre')</th>
 					<th>@sortablelink('rfc', 'RFC')</th>
-					<th>@sortablelink('vendedor', 'Vendedor') </th>
+					<th>@sortablelink('solicitante->numgrupo', 'Nùmero de Grupo')</th>
+					<th>@sortablelink('solicitante->integrante', 'Integrante') </th>
 					<th>Operacion</th>
 				</tr>
 			</thead>
-
-			@foreach($provedores as $provedore)
+			 <tbody>
+			@foreach($clientes as $cliente)
 				<tr class="active"
 				    title="Has Click Aquì para Ver"
 					style="cursor: pointer"
-					href="#{{$provedore->id}}">
-					<td>{{$provedore->id}}</td>
+					href="#{{$cliente->id}}">
+					<td>{{$cliente->identificador}}</td>
+					<td>{{$cliente->solicitante->folio }}</td>
 					<td>
-						@if ($provedore->tipopersona == "Fisica")
-						{{$provedore->nombre}} {{ $provedore->apellidopaterno }} {{ $provedore->apellidomaterno }}
-						@else
-						{{$provedore->razonsocial}}
-						@endif
+						
+						{{$cliente->nombre}} {{ $cliente->apellidopaterno }} {{ $cliente->apellidomaterno }}
+						
 					</td>
-					<td>{{ $provedore->tipopersona }}</td>
-					<td>{{ $provedore->alias }}</td>
-					<td>{{ strtoupper($provedore->rfc) }}</td>
-					<td>{{$provedore->vendedor}}</td>
+					<td>{{ strtoupper($cliente->rfc) }}</td>
+					<td>{{ $cliente->solicitante->numgrupo}}</td>
+					<td>{{ $cliente->solicitante->integrante}}</td>
+					
 					<td>
-							<a class="btn btn-success btn-sm" href="{{ route('provedores.show',['provedor'=>$provedore]) }}">
+						<div class="row">
+							<div class="col-sm-4">
+							<a class="btn btn-success btn-sm" href="{{ route('solicitantes.show',['id'=>$cliente->id]) }}">
 								<i class="fa fa-eye" aria-hidden="true"></i> 
 								<strong>Ver
 							</strong></a>
-
-							<a class="btn btn-info btn-sm" href="{{ route('provedores.edit',['provedor'=>$provedore]) }}">
+						</div>
+						<div class="col-sm-4">
+							<a class="btn btn-info btn-sm" href="{{ route('solicitantes.edit',['id'=>$cliente->id]) }}">
 								
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Editar</strong>
 							</a>
-				</tr>
+						</div>
+						</div>
+				
 				</td>
-			</tbody>
+				</tr>
+				@endforeach
+			 </tbody> 
+			</table>
 		</div>
-			@endforeach
-		</table>
+			
+		
 
 
 	</div>
@@ -87,152 +96,148 @@
 
 
 {{--   TABLA VISTA RÀPIDA  --}}
-@foreach ($provedores as $provedore)
-	{{-- expr --}}
-	<div class="persona" id="{{$provedore->id}}">
+{{-- @foreach ($clientes as $cliente)
+	
+	<div class="persona" id="{{$cliente->id}}">
 		<div class="container" id="tab">
 			<div role="application" class="panel panel-group" >
 				<div class="panel-default">
-					<div class="panel-heading"><h4>@if ($provedore->tipopersona == "Fisica")
-						{{-- true expr --}}
-						{{ucwords($provedore->nombre)." ".ucwords($provedore->apellidopaterno)." ".ucwords($provedore->apellidomaterno)}}
+					<div class="panel-heading"><h4>@if ($cliente->tipopersona == "Fisica")
+						
+						{{ucwords($cliente->nombre)." ".ucwords($cliente->apellidopaterno)." ".ucwords($cliente->apellidomaterno)}}
 					@else
-						{{-- false expr --}}
-						{{ucwords($provedore->razonsocial)}}
+						
+						{{ucwords($cliente->razonsocial)}}
 					@endif:</h4></div>
 					
 				</div>
 				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1{{$provedore->id}}" tabindex="-1">Dirección Fiscal:</a></li>
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2{{$provedore->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección Fisica:</a></li>
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3{{$provedore->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab4{{$provedore->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a></li>
+					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1{{$cliente->id}}" tabindex="-1">Dirección/Domicilio:</a></li>
+					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Datos para Cotización:</a></li>
+					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Cotizaciones:</a></li>
+					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab4{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">CRM:</a></li>
 				</ul>
-				<div class="panel-default pestana" aria-hidden="false" id="tab1{{$provedore->id}}" style="display: block;">
-					<div class="panel-heading">Dirección Fiscal:</div>
+				<div class="panel-default pestana" aria-hidden="false" id="tab1{{$cliente->id}}" style="display: block;">
+					<div class="panel-heading">Dirección</div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="calle">Calle:</label>
-		    					<dd>{{ $provedore->calle }}</dd>
+		    					<dd>{{ $cliente->calle }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="numext">Numero exterior:</label>
-		    					<dd>{{ $provedore->numext }}</dd>
+		    					<dd>{{ $cliente->numext }}</dd>
 		  					</div>	
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="numinter">Numero interior:</label>
-		    					<dd>{{ $provedore->numinter }}</dd>
+		    					<dd>{{ $cliente->numinter }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="cp">Código postal:</label>
-		    					<dd>{{ $provedore->cp }}</dd>
+		    					<dd>{{ $cliente->cp }}</dd>
 		  					</div>		
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="colonia">Colonia:</label>
-		  						<dd>{{ $provedore->colonia }}</dd>
+		  						<dd>{{ $cliente->colonia }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-		  						<dd>{{ $provedore->municipio }}</dd>
+		  						<dd>{{ $cliente->municipio }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="ciudad">Ciudad:</label>
-		  						<dd>{{ $provedore->ciudad }}</dd>
+		  						<dd>{{ $cliente->ciudad }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="estado">Estado:</label>
-		  						<dd>{{ $provedore->estado }}</dd>
+		  						<dd>{{ $cliente->estado }}</dd>
 		  					</div>
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="calle1">Entre calle:</label>
-		  						<dd>{{ $provedore->calle1 }}</dd>
+		  						<dd>{{ $cliente->calle1 }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="calle2">Y calle:</label>
-		  						<dd>{{ $provedore->calle2 }}</dd>
+		  						<dd>{{ $cliente->calle2 }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="referencia">Referencia:</label>
-		  						<dd>{{ $provedore->referencia }}</dd>
+		  						<dd>{{ $cliente->referencia }}</dd>
 		  					</div>
 						</div>
 					</div>
 				</div>
-				<div class="panel-default pestana" id="tab2{{$provedore->id}}">
+				<div class="panel-default pestana" id="tab2{{$cliente->id}}">
 
-					<div class="panel-heading">Dirección Fisica:</div>
+					<div class="panel-heading">Dirección/Domicilio:</div>
 					<div class="panel-body">
-						@if (count($provedore->direccionFisicaProvedor) == 0 )
-							{{-- true expr --}}
-							<h3>Aun no tiene direccion Fisica</h3>
-						@else
-							{{-- false expr --}}
+						
 
 						<div class="col-md-12 offset-md-2 mt-3">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="calle">Calle:</label>
-		    					<dd>{{$provedore->direccionFisicaProvedor->calle}}</dd>
+		    					<dd>{{$cliente->calle}}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="numext">Numero exterior:</label>
-		    					<dd>{{$provedore->direccionFisicaProvedor->numext}}</dd>
+		    					<dd>{{$cliente->numext}}</dd>
 		  					</div>	
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		    					<label class="control-label" for="numint">Numero interior:</label>
-		    					<dd>{{$provedore->direccionFisicaProvedor->numint}}</dd>
+		    					<dd>{{$cliente->numint}}</dd>
 		  					</div>		
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="colonia">Colonia:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->colonia}}</dd>
+		  						<dd>{{$cliente->colonia}}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->municipio}}</dd>
+		  						<dd>{{$cliente->municipio}}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="ciudad">Ciudad:</label>
-		  						<dd>{{ $provedore->direccionFisicaProvedor->ciudad }}</dd>
+		  						<dd>{{ $cliente->ciudad }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="estado">Estado:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->estado}}</dd>
+		  						<dd>{{$cliente->estado}}</dd>
 		  					</div>
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="calle1">Entre calle:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->calle1}}</dd>
+		  						<dd>{{$cliente->calle1}}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="calle2">Y calle:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->calle2}}</dd>
+		  						<dd>{{$cliente->calle2}}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		  						<label class="control-label" for="referencia">Referencia:</label>
-		  						<dd>{{$provedore->direccionFisicaProvedor->referencia}}</dd>
+		  						<dd>{{$cliente->referencia}}</dd>
 		  					</div>
 						</div>
-						@endif
+					
 					</div>
 				</div>
-				<div class="panel-default pestana" id="tab3{{$provedore->id}}">
+				<div class="panel-default pestana" id="tab3{{$cliente->id}}">
 					<div class="panel-heading">
 						contactosProvedor:
-					</div>
+					</div> --}}
 					
-					@if (count($provedore->contactosProvedor) == 0)
+					{{-- @if (count($cliente->contactosProvedor) == 0)
 					<div class="panel-body">
 						<h3>Aún no tienes contactosProvedor</h3>
 					</div>
 					@endif
-					@if (count($provedore->contactosProvedor) !=0)
+					@if (count($cliente->contactosProvedor) !=0)
 					<div class="panel-body">
 						<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 							<thead>
@@ -243,7 +248,8 @@
 									<th>Telèfono celular</th>
 								</tr>
 							</thead>
-							@foreach ($provedore->contactosProvedor as $contacto)
+							<tbody>
+							@foreach ($cliente->contactosProvedor as $contacto)
 								<tr class="active">
 									<td>{{ $contacto->nombre }} {{$contacto->apater}} {{$contacto->amater}}</td>
 
@@ -252,51 +258,52 @@
 									<td>{{$contacto->celular1}}</td>
 									
 								</tr>
-								</tbody>
+								
 							@endforeach
+							</tbody>
 						</table>
 					</div>
-					@endif
-				</div>
+					@endif --}}
+				{{-- </div>
 				
 							
-				<div class="panel-default pestana" id="tab4{{$provedore->id}}">
-				 	<div class="panel-heading">Datos Generales:</div>
-				 	@if (count($provedore->datosGeneralesProvedor) == 0)
+				<div class="panel-default pestana" id="tab4{{$cliente->id}}">
+				 	<div class="panel-heading">Datos Generales:</div> --}}
+				{{--  	@if (count($cliente->datosGeneralesProvedor) == 0)
 						<div class="panel-body">
 							<h3>Aún no tienes datos generales</h3>
 						</div>
 						@endif
-						@if (count($provedore->datosGeneralesProvedor) !=0)
+						@if (count($cliente->datosGeneralesProvedor) !=0)
 				 	<div class="panel-body">
 				 		<div class="col-md-12 offset-md-2 mt-3">
 				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				 			<label class="control-label" for="nombre">Tamaño de la empresa:</label>
-								<dd>{{$provedore->datosGeneralesProvedor->nombre}}</dd>
+								<dd>{{$cliente->datosGeneralesProvedor->nombre}}</dd>
 				 			</div>
 				 		</div>
 				 		<div class="col-md-12 offset-md-2 mt-3">
 				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				 				<label class="control-label" for="web">Sitio web:</label>
-				 				<dd>{{$provedore->datosGeneralesProvedor->web}}</dd>
+				 				<dd>{{$cliente->datosGeneralesProvedor->web}}</dd>
 				 			</div>
 
 				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				 				<label class="control-label" for="comentario">Comentarios:</label>
-				 				<dd>{{$provedore->datosGeneralesProvedor->comentario}}</dd>
+				 				<dd>{{$cliente->datosGeneralesProvedor->comentario}}</dd>
 				 			</div>
 				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				 				<label class="control-label" for="fechacontacto">Fecha de contacto:</label>
-				 				<dd>{{$provedore->datosGeneralesProvedor->fechacontacto}}</dd>
+				 				<dd>{{$cliente->datosGeneralesProvedor->fechacontacto}}</dd>
 				 			</div>
 				 		</div>
 				 	</div>
-				 	@endif
-				</div>
+				 	@endif --}}
+				{{-- </div>
 			</div>
 		</div>
 	</div>
-@endforeach
+@endforeach --}}
 					{{--   TABLA VISTA RÀPIDA  --}}
 
 
@@ -304,7 +311,7 @@
 
 
 	
-</div>
+{{-- </div> --}}
 
 
 @endsection

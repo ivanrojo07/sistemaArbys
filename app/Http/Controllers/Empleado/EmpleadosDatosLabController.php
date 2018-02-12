@@ -233,8 +233,7 @@ class EmpleadosDatosLabController extends Controller
 
        
        
-$datos= 
-$empleado->datosLaborales()->where('id',$datoslaborale)->first();
+$datos= $empleado->datosLaborales()->where('id',$datoslaborale)->first();
 
          $datoslab = new EmpleadosDatosLab;
          $datoslab->empleado_id = $datos->empleado_id;

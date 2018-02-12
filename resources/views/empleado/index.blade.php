@@ -4,6 +4,8 @@
 <div class="container">
 	<div class="panel-body">
 		<div class="col-lg-6">
+			<div class="row">
+				<div class="col-sm-4">
 			<form action="busqueda"
 			      id="buscarempleado">
 				<!-- {{ csrf_field() }} -->
@@ -21,13 +23,18 @@
 					       autofocus>
 
 
-				 <a class="btn btn-info" href="{{ route('empleados.create')}}">
-							        <strong>
-							   Agregar Empleado</strong>
-							</a>
+				
 					
 				</div>
-			</form>
+
+			</form></div>
+			<div class="col-sm-4">
+			 <a class="btn btn-info" href="{{ route('empleados.create')}}">
+							        <strong>
+							   Agregar Empleado</strong>
+							</a></div>
+		</div>
+			
 		</div>
 	</div>
                    {{-- TABLA AJAX DE CLIENTES --}}
