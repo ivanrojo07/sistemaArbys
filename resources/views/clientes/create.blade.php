@@ -179,7 +179,7 @@
 			  						<input type="text" class="form-control" id="objetivo" name="objetivo"  placeholder="Objetivo Mensual">
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  				<label class="control-label" for="calificacion">Calificaciòn:</label>
+			  				<label class="control-label" for="calificacion"><i class="fa fa-asterisk" aria-hidden="true"></i>Calificaciòn:</label>
 									<select type="select" class="form-control" id="calificacion" name="calificacion">
 										<option value="" selected="selected">Seleccionar</option>
 			    						<option value="30">30</option>

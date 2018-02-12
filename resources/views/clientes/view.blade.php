@@ -5,7 +5,18 @@
 		<div class="container" id="tab">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
-						<div class="panel-heading"><h4>Datos del cliente:</h4></div>
+						<div class="panel-heading">
+							
+							<div class="row" align="right">
+								<div class="col-sm-2"><h4>Datos del cliente:</h4></div>
+			  						<div class="col-sm-2">
+			  						<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
+			  					   </div>
+			  					   	<div class="col-sm-2">
+			  						<a class="btn btn-warning" href="{{ route('solicitantes.edit',['cliente'=>$cliente]) }}"><strong>Actualizar a Solicitante</strong></a>
+			  					   </div>
+			  					</div>
+						</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -61,10 +72,13 @@
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="vendedor">Telèfono Celular:</label>
-			  						<dd>{{ $cliente->telefonocelular }}</dd>
+			  						<dd>{{ $cliente->telefonocel }}</dd>
 			  					</div>
-			  					<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
+
+			  				
+
 							</div>
+							
 						</div>
 					</div>
 					

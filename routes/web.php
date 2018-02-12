@@ -109,3 +109,5 @@ Route::get('sucursales.create','Sucursal\SucursalController@create');
 Route::get('sucursales.index','Sucursal\SucursalController@index');
 
 Route::resource('sucursal','Empleado\EmpleadoSucursalController');
+//-------------------------------------------------------------------
+Route::resource('solicitantes','Solicitante\SolicitanteController');

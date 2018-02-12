@@ -60,7 +60,7 @@ class CreateClientesTable extends Migration
             $table->string('folio');
             
 
-            $table->integer('solicitante_id')->unsigned()->nullable();
+            
 
             $table->timestamps();
             $table->softDeletes();
