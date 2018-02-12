@@ -11,41 +11,39 @@ class Solicitante extends Model
 {
     use Sortable;
     //
-    protected $table='clientes';
+    protected $table='solicitantes';
 
    protected $fillable = [
-     	'tipopersona',//YA
-        'nombre',//YA
-        'apellidopaterno',//YA
-        'apellidomaterno',//YA
-        'calle',//YA
-        'numext',//YA
-        'numinter',//YA
-        'cp',//YA
-        'colonia',//YA
-        'municipio',//YA
-        'ciudad',//YA
-        'estado',//YA
-        'calle1',//YA
-        'calle2',//YA
-        'referencia',//YA
-        'mail',//YA
-        'rfc',//YA
-        'telefono',//YA
-        'telefonocel',//YA
-        //'prod',//YA
-        'ingresos',//YA
-        'canalventa',//YA
-        'promocion',//YA
-        //'seguimiento',//YA
-        'calificacion',//YA
-        'comentarios',//YA
-        //'listaprecios',//YA
-        //'cotizador',//YA
-        'identificador',//YA
-        'objetivo',//YA
-        'folio',//YA
-        'razonsocial'
+     	'cliente_id',
+        'tiemporesidir',
+        'tipovivienda',
+        'estadocivil',
+        'nombreempresa',
+        'giro',
+        'puesto',
+        'antiguedad',
+        'telefono1',
+        'telefono2',
+        'ingresos',
+        'nombre1',
+        'telefonoref1',
+        'parentesco1',
+        'nombre2',
+        'telefonoref2',
+        'parentesco2',
+        'folio',
+        'fechasolicitud',
+        'fechacontrato',
+        'fechapago',
+        'fechaentrega',
+        'refcontrato',
+        'refapertura',
+        'nombrebeneficiario',
+        'edadbeneficiario',
+        'telbeneficiario',
+        'numcontrato',
+        'numgrupo',
+        'integrante'
         ];
    /**
      * The attributes that are mass assignable.
@@ -53,13 +51,10 @@ class Solicitante extends Model
      * @var array
      */
     public $Sortable = [
-    	'identificador',
-    	'nombre',
-        'razonsocial',
-      'folio',
-      'tipopersona',
-      'rfc',
-      'calificacion'
+    	'cliente_id',
+    	'numgrupo',
+        'integrante',
+        'folio'
     ];
 
     /**
@@ -68,18 +63,13 @@ class Solicitante extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at'
+        
     ];
 
-      public function crm(){
-        return $this->hasMany('App\ClienteCRM');
+    public function cliente(){
+       return $this->belongsTo('App\Cliente');
     }
-        public function product(){
-        return $this->hasMany('App\Product');
-    }
-    public function transactions(){
-        return $this->hasMany('App\Transaction');
-    }
+    
    // public function datosLab(){
    //      return $this->hasOne(DatosLab::class);
    //  }

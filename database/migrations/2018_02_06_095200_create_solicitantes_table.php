@@ -15,8 +15,8 @@ class CreateSolicitantesTable extends Migration
     {
         Schema::create('solicitantes', function (Blueprint $table) {
             $table->increments('id');
-             $table->integer('cliente_id')->unsigned();
-            $table->foreign('cliente_id')->references('id')->on('tipocontrato');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             //----------------------
             $table->string('tiemporesidir')->nullable();
             $table->string('tipovivienda')->nullable();

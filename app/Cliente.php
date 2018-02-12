@@ -6,6 +6,7 @@ namespace App;
 use App\Beneficiarios;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use App\Solicitante;
 
 class Cliente extends Model
 {
@@ -71,7 +72,7 @@ class Cliente extends Model
         'created_at'
     ];
 
-      public function crm(){
+    public function crm(){
         return $this->hasMany('App\ClienteCRM');
     }
         public function product(){
@@ -80,9 +81,10 @@ class Cliente extends Model
     public function transactions(){
         return $this->hasMany('App\Transaction');
     }
-   // public function datosLab(){
-   //      return $this->hasOne(DatosLab::class);
-   //  }
+    public function solicitante(){
+        // return $this->hasOne(Solicitante::class, 'cliente_id');
+        return $this->hasOne('App\Solicitante', 'cliente_id', 'id');
+    }
    //  public function beneficiarios(){
    //      return $this->hasMany(Beneficiarios::class);
    //  }

@@ -82,6 +82,8 @@ Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
+//----------------------------------------------------------
+Route::resource('solicitantes','Solicitante\SolicitanteController');
 
 //-----------------------------------------------------
 Route::resource('provedores','Provedor\ProvedorController');

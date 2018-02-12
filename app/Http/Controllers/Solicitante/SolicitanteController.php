@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Solicitante;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Cliente;
 use App\Solicitante;
 use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
-class ClienteController extends Controller
+class SolicitanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +17,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-
-
-//         $clientes=Cliente::doesntHave('solicitante', function ($query) {
-//     $query->where('cliente_id', 1);
-// })->get();
-       // $cliente = Cliente::get()->first();
-        $clientes=Cliente::doesntHave('solicitante')->get();
-        dd($clientes);
-        return view('clientes.index',['clientes'=>$clientes]);
+        $solicitantes=Solicitante::sortable()->get();
+        return view('solicitantes.index',['solicitantes'=>$solicitantes]);
     }
 
     /**
@@ -37,7 +29,7 @@ class ClienteController extends Controller
     public function create()
     {
         $canalventas=CanalVenta::get();
-        return view('clientes.create',['canalventas'=>$canalventas]);
+        return view('solicitantes.create',['canalventas'=>$canalventas]);
     }
 
     /**
@@ -48,16 +40,16 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-         $rfc = Cliente::where('rfc', $request->rfc)->get();
+         $rfc = Solicitante::where('rfc', $request->rfc)->get();
         if (count($rfc)!=0) {
             # code...
             return redirect()->back()->with('errors','El RFC ya està registrado');                               
         } else {
             # code...
 
-            $cliente = Cliente::create($request->all());
-           Alert::success('Cliente creado con éxito', 'Siga agregando información');
-           return view('clientes.view',['cliente'=>$cliente]); 
+            $solicitante = Solicitante::create($request->all());
+           Alert::success('Solicitante creado con éxito', 'Siga agregando información');
+           return view('solicitantes.view',['solicitante'=>$solicitante]); 
               
         }
     }
@@ -71,10 +63,10 @@ class ClienteController extends Controller
     public function show($id)
     {
        
-        $cliente=Cliente::where('id',$id)->first();
+        $solicitante=Solicitante::where('id',$id)->first();
        
-         return view('clientes.view',[
-            'cliente'=>$cliente]); 
+         return view('solicitantes.view',[
+            'solicitante'=>$solicitante]); 
     }
 
     /**
@@ -85,10 +77,10 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $cliente=Cliente::where('id',$id)->first();
+        $solicitante=Solicitante::where('id',$id)->first();
         $canalventas=CanalVenta::get();
-        return view('clientes.edit',[
-            'cliente'=>$cliente,
+        return view('solicitantes.edit',[
+            'solicitante'=>$solicitante,
             'canalventas'=>$canalventas]); 
     }
 
@@ -101,14 +93,14 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $cliente=Cliente::where('id',$id)->first();
+       $solicitante=Solicitante::where('id',$id)->first();
 
        
-       $cliente->update($request->except('_method','_token'));
+       $solicitante->update($request->except('_method','_token'));
        
-       Alert::success('Cliente modificado con éxito');
-        return view('clientes.view',[
-            'cliente'=>$cliente]);
+       Alert::success('Solicitante modificado con éxito');
+        return view('solicitantes.view',[
+            'solicitante'=>$solicitante]);
     }
 
     /**
@@ -127,7 +119,7 @@ class ClienteController extends Controller
    $query = $request->input('busqueda');
         $wordsquery = explode(' ',$query);
 
-    $clientes = Cliente::where(function($q) use($wordsquery){
+    $solicitantes = Solicitante::where(function($q) use($wordsquery){
             foreach ($wordsquery as $word) {
                 # code...
               $q->orWhere('nombre','LIKE',         "%$word%")
@@ -139,7 +131,7 @@ class ClienteController extends Controller
                 ->orWhere('identificador','LIKE',    "%$word%");
             }
         })->get();
-    return view('clientes.busqueda', ['clientes'=>$clientes]);
+    return view('solicitantes.busqueda', ['solicitantes'=>$solicitantes]);
         
 
     }
