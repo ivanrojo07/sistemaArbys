@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Solicitante;
 use App\Cliente;
-use App\CanalVenta;
+//use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class SolicitanteController extends Controller
@@ -24,13 +24,14 @@ class SolicitanteController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * @param \App\Cliente $cliente
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cliente $cliente)
     {
-        $canalventas=CanalVenta::get();
-        return view('solicitantes.create',['canalventas'=>$canalventas]);
+        dd($cliente);
+        
+        return view('solicitantes.create',['cliente'=>$cliente]);
     }
 
     /**

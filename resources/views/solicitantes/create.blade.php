@@ -5,7 +5,7 @@
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
-						<div class="panel-heading"><h4><strong>Datos del cliente:</strong> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+						<div class="panel-heading"><h4><strong>Datos del Solicitante:</strong> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
 					Campos Requeridos</h4> 
 						</div>
 						<div class="panel-body">
@@ -148,17 +148,7 @@
 			  						<label class="control-label" for="ingresos"><i class="fa fa-asterisk" aria-hidden="true"></i>Ingresos:</label>
 			  						<input type="text" class="form-control" id="ingresos" name="ingresos" placeholder="$---" required>
 			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  				<label class="control-label" for="canalventa">Canal de Venta:</label>
-									<select type="select" class="form-control" id="canalventa" name="canalventa">
-										<option value="" selected="selected">Seleccionar</option>
-										@foreach($canalventas as $canalventa)
-			    						<option value="{{$canalventa->nombre}}">{{$canalventa->nombre}}</option>
-			    						@endforeach
-			    						
-			    					</select>
-								
-								</div>
+			  				
 
 			  				</div>
 			  				<div class="col-md-12 offset-md-2 mt-3">

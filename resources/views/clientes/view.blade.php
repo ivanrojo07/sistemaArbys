@@ -8,12 +8,15 @@
 						<div class="panel-heading">
 							
 							<div class="row" align="right">
-								<div class="col-sm-2"><h4>Datos del cliente:</h4></div>
+								<div class="col-sm-2"><h4>Datos del Cliente:</h4></div>
 			  						<div class="col-sm-2">
 			  						<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
 			  					   </div>
 			  					   	<div class="col-sm-2">
-			  						<a class="btn btn-warning" href="{{ route('solicitantes.edit',['cliente'=>$cliente]) }}"><strong>Actualizar a Solicitante</strong></a>
+			  						<a class="btn btn-warning" 
+			  						href="{{ route('solicitantes.create',['cliente'=>$cliente,'id'=>$cliente->id]) }}">
+
+			  						<strong>Actualizar a Solicitante</strong></a>
 			  					   </div>
 			  					</div>
 						</div>
