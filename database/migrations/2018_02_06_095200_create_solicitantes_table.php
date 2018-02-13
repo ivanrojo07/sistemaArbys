@@ -28,7 +28,7 @@ class CreateSolicitantesTable extends Migration
             $table->string('antiguedad')->nullable();
             $table->string('telefono1')->nullable();
             $table->string('telefono2')->nullable();
-            $table->string('ingresos')->nullable();
+           
             //---------------REFERENCIAS-------------------------
             $table->string('nombre1')->nullable();
             $table->string('telefonoref1')->nullable();
@@ -49,7 +49,7 @@ class CreateSolicitantesTable extends Migration
             $table->string('nombrebeneficiario')->nullable();
             $table->integer('edadbeneficiario')->nullable();
             $table->string('telbeneficiario')->nullable();
-            //-----------OTROS------------------------
+            //-----------DATOS DE CONTRATO------------------------
             $table->string('numcontrato')->nullable();
             $table->string('numgrupo')->nullable();
             $table->string('integrante')->nullable();

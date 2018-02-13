@@ -24,7 +24,6 @@ class Solicitante extends Model
         'antiguedad',
         'telefono1',
         'telefono2',
-        'ingresos',
         'nombre1',
         'telefonoref1',
         'parentesco1',

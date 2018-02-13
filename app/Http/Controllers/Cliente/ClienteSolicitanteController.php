@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Solicitante;
+namespace App\Http\Controllers\Cliente;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +9,7 @@ use App\Cliente;
 //use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
-class SolicitanteController extends Controller
+class ClienteSolicitanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class SolicitanteController extends Controller
      */
     public function create(Cliente $cliente)
     {
-        dd($cliente);
+        
         
         return view('solicitantes.create',['cliente'=>$cliente]);
     }
@@ -42,33 +42,30 @@ class SolicitanteController extends Controller
      */
     public function store(Request $request)
     {
-         $rfc = Solicitante::where('rfc', $request->rfc)->get();
-        if (count($rfc)!=0) {
-            # code...
-            return redirect()->back()->with('errors','El RFC ya està registrado');                               
-        } else {
-            # code...
+       
+       
 
             $solicitante = Solicitante::create($request->all());
+            $cliente=Cliente::where('id',$solicitante->cliente_id)->first();
            Alert::success('Solicitante creado con éxito', 'Siga agregando información');
-           return view('solicitantes.view',['solicitante'=>$solicitante]); 
+           return view('solicitantes.view',['solicitante'=>$solicitante,'cliente'=>$cliente]); 
               
         }
-    }
+    
 
+  
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $cliente,Solicitante $solicitante)
     {
        
-        $solicitante=Solicitante::where('id',$id)->first();
-       
-         return view('solicitantes.view',[
-            'solicitante'=>$solicitante]); 
+    // $solicitante=Solicitante::where('id',$id)->first();
+    //     $cliente=Cliente::where('id',$solicitante->cliente_id)->first();
+       return view('solicitantes.view',['solicitante'=>$solicitante,'cliente'=>$cliente]);
     }
 
     /**
@@ -77,13 +74,15 @@ class SolicitanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cliente $cliente,Solicitante $solicitante)
     {
-        $solicitante=Solicitante::where('id',$id)->first();
-        $canalventas=CanalVenta::get();
+
+        // $solicitante=Solicitante::where('id',$id)->first();
+        
         return view('solicitantes.edit',[
             'solicitante'=>$solicitante,
-            'canalventas'=>$canalventas]); 
+            'cliente'=>$cliente
+            ]); 
     }
 
     /**
@@ -95,14 +94,15 @@ class SolicitanteController extends Controller
      */
     public function update(Request $request, $id)
     {
+      
        $solicitante=Solicitante::where('id',$id)->first();
 
        
        $solicitante->update($request->except('_method','_token'));
+       $cliente=Cliente::where('id',$solicitante->cliente_id)->first();
        
        Alert::success('Solicitante modificado con éxito');
-        return view('solicitantes.view',[
-            'solicitante'=>$solicitante]);
+        return view('solicitantes.view',['solicitante'=>$solicitante,'cliente'=>$cliente]);
     }
 
     /**

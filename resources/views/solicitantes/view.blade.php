@@ -8,73 +8,70 @@
 						<div class="panel-heading">
 							
 							<div class="row" align="right">
-								<div class="col-sm-2"><h4>Datos del cliente:</h4></div>
+								<div class="col-sm-2"><h4>Datos del Solicitante:</h4></div>
 			  						<div class="col-sm-2">
-			  						<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
+			  						<a class="btn btn-info" href="{{ route('clientes.solicitantes.edit',['cliente'=>$cliente,'solicitante'=>$cliente->solicitante]) }}"><strong>Editar</strong></a>
 			  					   </div>
 			  					   	<div class="col-sm-2">
-			  						<a class="btn btn-warning" href="{{ route('solicitantes.edit',['cliente'=>$cliente]) }}"><strong>Actualizar a Solicitante</strong></a>
+			  						<a class="btn btn-warning" href="#"><strong>Actualizar a Integrante</strong></a>
+			  					   </div>
+			  					   	<div class="col-sm-2">
+			  					   		
+			  						<a class="btn btn-primary" 
+			  						href="{{ url('/solicitantes') }}">
+
+			  						<strong>Buscar Solicitantes</strong></a>
 			  					   </div>
 			  					</div>
 						</div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="tipopersona">Tipo de Persona:</label>
-			    					<dd>{{ $cliente->tipopersona }}</dd>
+			    					<label class="control-label" for="tipopersona">ID de Cliente:</label>
+			    					<dd>{{ strtoupper($cliente->identificador) }}</dd>
 			  					</div>
 			  					
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="rfc">RFC:</label>
-			  						<dd>{{ $cliente->rfc }}</dd>
+			  						<label class="control-label" for="rfc">Folio de Solicitante:</label>
+			  						<dd>{{ strtoupper($solicitante->folio) }}</dd>
 			  					</div>
+			  					@if ($cliente->tipopersona == "Fisica")
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="vendedor">ID:</label>
-			  						<dd>{{ $cliente->identificador }}</dd>
+			  						<label class="control-label" for="vendedor">Nombre:</label>
+			  						<dd>{{ $cliente->nombre }}&nbsp;&nbsp;{{ $cliente->apellidopaterno }}</dd>
 			  					</div>
-							</div>
-						@if ($cliente->tipopersona == "Fisica")
-								{{-- true expr --}}
-							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombre">Nombre(s):</label>
-			  						<dd>{{ $cliente->nombre }}</dd>
-			  					</div>
+			  					@else
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-			  						<dd>{{ $cliente->apellidopaterno }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-			  						<dd>{{ $cliente->apellidomaterno }}</dd>
-			  					</div>
-							</div>
-						@else
-								{{-- false expr --}}
-							<div class="col-md-12 offset-md-2 mt-3" id="permoral">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-			  						<label class="control-label" for="razonsocial">Razon Social:</label>
+			  						<label class="control-label" for="vendedor">Razòn Social:</label>
 			  						<dd>{{ $cliente->razonsocial }}</dd>
 			  					</div>
-			  					
-							</div>
-						@endif
-						<div class="col-md-12 offset-md-2 mt-3">
+			  					@endif
+
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="tipopersona">Correo:</label>
-			    					<dd>{{ $cliente->mail }}</dd>
+			  						<label class="control-label" for="vendedor">RFC:</label>
+			  						<dd>{{ strtoupper($cliente->rfc) }}</dd>
 			  					</div>
+							</div>
+						
+						<div class="col-md-12 offset-md-2 mt-3">
+			  					
 			  					
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="rfc">Telèfono:</label>
 			  						<dd>{{ $cliente->telefono }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="vendedor">Telèfono Celular:</label>
-			  						<dd>{{ $cliente->telefonocel }}</dd>
+			  						<label class="control-label" for="vendedor">Tiempo de Residir:</label>
+			  						<dd>{{ $solicitante->tiemporesidir }}</dd>
 			  					</div>
-
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="tipopersona">Tipo de Vivienda:</label>
+			    					<dd>{{ $solicitante->tipovivienda }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="tipopersona">Estado Civil:</label>
+			    					<dd>{{ $solicitante->estadocivil }}</dd>
+			  					</div>
 			  				
 
 							</div>
@@ -83,60 +80,171 @@
 					</div>
 					
 					<div class="panel-default">
-						<div class="panel-heading"><h4>Dirección:</h4></div>
+						<div class="panel-heading"><h4>Dato Laborales:</h4></div>
 						<div class="panel-body">
 							<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="calle">Calle:</label>
-			    					<dd>{{ $cliente->calle }}</dd>
+			    					<label class="control-label" for="calle">Nombre de Empresa:</label>
+			    					<dd>{{ $solicitante->nombreempresa }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numext">Numero exterior:</label>
-			    					<dd>{{ $cliente->numext }}</dd>
+			    					<label class="control-label" for="numext">Giro:</label>
+			    					<dd>{{ $solicitante->giro }}</dd>
 			  					</div>	
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numinter">Numero interior:</label>
-			    					<dd>{{ $cliente->numinter }}</dd>
+			    					<label class="control-label" for="numinter">Puesto:</label>
+			    					<dd>{{ $solicitante->puesto }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="cp">Código postal:</label>
-			    					<dd>{{ $cliente->cp }}</dd>
+			    					<label class="control-label" for="cp">Antiguedad:</label>
+			    					<dd>{{ $solicitante->antiguedad }}</dd>
 			  					</div>		
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="colonia">Colonia:</label>
-			  						<dd>{{ $cliente->colonia }}</dd>
+			  						<label class="control-label" for="colonia">Telèfono de Empresa:</label>
+			  						<dd>{{ $solicitante->telefono1 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-			  						<dd>{{ $cliente->municipio }}</dd>
+			  						<label class="control-label" for="municipio">Telèfono de Empresa::</label>
+			  						<dd>{{ $solicitante->telefono2 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="ciudad">Ciudad:</label>
-			  						<dd>{{ $cliente->ciudad }}</dd>
+			  						<label class="control-label" for="ciudad">Ingresos:</label>
+			  						<dd>{{ $solicitante->ingresos }}</dd>
+			  					</div>
+			  					
+							</div>
+							
+
+							
+						</div>
+					</div>
+
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Referencias Personales:</h4></div>
+						<div class="panel-body">
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calle">Nombre:</label>
+			    					<dd>{{ $solicitante->nombre1 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="estado">Estado:</label>
-			  						<dd>{{ $cliente->estado }}</dd>
+			    					<label class="control-label" for="numext">Telèfono:</label>
+			    					<dd>{{ $solicitante->telefonoref1 }}</dd>
+			  					</div>	
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numinter">Parentesco:</label>
+			    					<dd>{{ $solicitante->parentesco1 }}</dd>
 			  					</div>
+			  							
 							</div>
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="calle1">Entre calle:</label>
-			  						<dd>{{ $cliente->calle1 }}</dd>
+			  						<label class="control-label" for="colonia">Nombre:</label>
+			  						<dd>{{ $solicitante->nombre2 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="calle2">Y calle:</label>
-			  						<dd>{{ $cliente->calle2 }}</dd>
+			  						<label class="control-label" for="municipio">Telèfono:</label>
+			  						<dd>{{ $solicitante->telefonoref2 }}</dd>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="referencia">Referencia:</label>
-			  						<dd>{{ $cliente->referencia }}</dd>
+			  						<label class="control-label" for="ciudad">Parentesco:</label>
+			  						<dd>{{ $solicitante->parentesco2 }}</dd>
 			  					</div>
+			  					
 							</div>
+							
 
 							
+						</div>
+					</div>
+
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Datos de Solicitud:</h4></div>
+						<div class="panel-body">
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="rfc">Folio de Solicitante:</label>
+			  						<dd>{{ strtoupper($solicitante->folio) }}</dd>
+			  					</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calle">Referencia de Contrato:</label>
+			    					<dd>{{ $solicitante->refcontrato }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numext">Referencia de Apertura:</label>
+			    					<dd>{{ $solicitante->refapertura }}</dd>
+			  					</div>	
+			  					
+			  							
+							</div>
+							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="colonia">Fecha de Solicitud:</label>
+			  						<dd>{{ $solicitante->fechasolicitud }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="municipio">Fecha de Contrato:</label>
+			  						<dd>{{ $solicitante->fechacontrato }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="ciudad">Fecha de Pago:</label>
+			  						<dd>{{ $solicitante->fechapago }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numinter">Fecha de Entrega:</label>
+			    					<dd>{{ $solicitante->fechaentrega}}</dd>
+			  					</div>
+			  					
+							</div>
+							
+
+							
+						</div>
+					</div>
+
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Datos del Beneficiario:</h4></div>
+						<div class="panel-body">
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="rfc">Nombre:</label>
+			  						<dd>{{ strtoupper($solicitante->nombrebeneficiario) }}</dd>
+			  					</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calle">Edad:</label>
+			    					<dd>{{ $solicitante->edadbeneficiario }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numext">Telèfono:</label>
+			    					<dd>{{ $solicitante->telbeneficiario }}</dd>
+			  					</div>	
+			  					
+			  							
+							</div>
+						</div>
+					</div>
+
+					<div class="panel-default">
+						<div class="panel-heading"><h4>Datos del Contrato:</h4></div>
+						<div class="panel-body">
+							<div class="col-md-12 offset-md-2 mt-3">
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="rfc">Nùmero de Contrato:</label>
+			  						<dd>{{ strtoupper($solicitante->numcontrato) }}</dd>
+			  					</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="calle">Nùmero de Grupo:</label>
+			    					<dd>{{ $solicitante->numgrupo }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="numext">Integrante:</label>
+			    					<dd>{{ $solicitante->integrante }}</dd>
+			  					</div>	
+			  					
+			  							
+							</div>
 						</div>
 					</div>
 

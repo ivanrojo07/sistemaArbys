@@ -145,7 +145,7 @@
 			  					</div>
 			  					
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="ingresos"><i class="fa fa-asterisk" aria-hidden="true"></i>Ingresos:</label>
+			  						<label class="control-label" for="ingresos"><i class="fa fa-asterisk" aria-hidden="true"></i>Ingresos Mensuales:</label>
 			  						<input type="text" class="form-control" id="ingresos" name="ingresos" placeholder="$---" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">

@@ -140,7 +140,8 @@
 							<div class="form-group col-xs-3">
 								<label class="control-label" for="fnac">Fecha de nacimiento:</label>
 								<input type="date" class="form-control" name="fnac" id="fnac" value="{{ $empleado->fnac }}">
-							</div><div class="form-group col-xs-3">
+							</div>
+							<div class="form-group col-xs-3">
 								<label class="control-label" for="cp">Código Postal:</label>
 								<input type="text" class="form-control" name="cp" id="cp" value="{{ $empleado->cp }}">
 							</div>

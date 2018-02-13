@@ -68,13 +68,14 @@
 					<td>
 						<div class="row">
 							<div class="col-sm-4">
-							<a class="btn btn-success btn-sm" href="{{ route('solicitantes.show',['id'=>$cliente->id]) }}">
+							<a class="btn btn-success btn-sm" 
+					href="{{ route('clientes.solicitantes.show',['cliente'=>$cliente,'solicitante'=>$cliente->solicitante]) }}">
 								<i class="fa fa-eye" aria-hidden="true"></i> 
 								<strong>Ver
 							</strong></a>
 						</div>
 						<div class="col-sm-4">
-							<a class="btn btn-info btn-sm" href="{{ route('solicitantes.edit',['id'=>$cliente->id]) }}">
+							<a class="btn btn-info btn-sm" href="{{ route('clientes.solicitantes.edit',['cliente'=>$cliente,'solicitante'=>$cliente->solicitante]) }}">
 								
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Editar</strong>
 							</a>

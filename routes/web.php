@@ -82,10 +82,12 @@ Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
+Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);
+Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
 //----------------------------------------------------------
-Route::resource('solicitantes','Solicitante\SolicitanteController');
-Route::get('solicitantes.create/{$cliente}','Solicitante\SolicitanteController@create');
-Route::get('buscarsolicitante','Solicitante\SolicitanteController@buscar');
+
+
+//Route::get('buscarsolicitante','Solicitante\SolicitanteController@buscar');
 
 //-----------------------------------------------------
 Route::resource('provedores','Provedor\ProvedorController');
@@ -114,4 +116,3 @@ Route::get('sucursales.index','Sucursal\SucursalController@index');
 
 Route::resource('sucursal','Empleado\EmpleadoSucursalController');
 //-------------------------------------------------------------------
-Route::resource('solicitantes','Solicitante\SolicitanteController');
