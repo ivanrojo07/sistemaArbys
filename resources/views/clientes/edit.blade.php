@@ -188,9 +188,16 @@
 			  				<label class="control-label" for="promocion">Promociòn:</label>
 									<select type="select" class="form-control" id="promocion" name="promocion">
 										<option value="" selected="selected">Seleccionar</option>
-			    						<option value="Prom1">Promociòn 1</option>
-			    						<option value="Prom2">Promociòn 2</option>
-			    						<option value="Prom3">Promociòn 3</option>
+			    						<option value="Prom1"
+			    						@if($cliente->promocion=='Prom1')
+			    						selected="selected"
+			    						@endif>Promociòn 1</option>
+			    						<option value="Prom2"@if($cliente->promocion=='Prom2')
+			    						selected="selected"
+			    						@endif>Promociòn 2</option>
+			    						<option value="Prom3"@if($cliente->promocion=='Prom3')
+			    						selected="selected"
+			    						@endif>Promociòn 3</option>
 			    					</select>
 								
 								</div>

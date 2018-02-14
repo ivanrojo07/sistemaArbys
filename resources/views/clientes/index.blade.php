@@ -113,7 +113,7 @@
 				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
 					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1{{$cliente->id}}" tabindex="-1">Datos Generales:</a></li>
 					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Datos para Cotización:</a></li>
-					<!-- <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Cotizaciones:</a></li> -->
+					
 					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab4{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">CRM:</a></li>
 				</ul>
 				<div class="panel-default pestana" aria-hidden="false" id="tab1{{$cliente->id}}" style="display: block;">
@@ -196,35 +196,37 @@
 					
 					</div>
 				</div>
-				<div class="panel-default pestana" id="tab3{{$cliente->id}}">
+				<div class="panel-default pestana" id="tab4{{$cliente->id}}">
 					<div class="panel-heading">
-						contactosProvedor:
+						CRM:
 					</div> 
 					
-					 @if (count($cliente->contactosProvedor) == 0)
+					 @if (count($cliente->crm) == 0)
 					<div class="panel-body">
-						<h3>Aún no tienes contactosProvedor</h3>
+						<h3>Aún no tiene CRM</h3>
 					</div>
 					@endif
-					@if (count($cliente->contactosProvedor) !=0)
+					@if (count($cliente->crm) !=0)
 					<div class="panel-body">
 						<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 							<thead>
 								<tr class="info">
-									<th>Nombre del contacto</th>
-									<th>Telèfono Directo</th>
-									
-									<th>Telèfono celular</th>
+									<th>Fecha de Contacto</th>
+									<th>Fecha de Aviso</th>
+									<th>Tipo de Contacto</th>
+									<th>Estado</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($cliente->contactosProvedor as $contacto)
+							@foreach ($cliente->crm as $crm)
 								<tr class="active">
-									<td>{{ $contacto->nombre }} {{$contacto->apater}} {{$contacto->amater}}</td>
+									<td>{{$crm->fecha_cont }}</td>
 
-									<td>{{$contacto->telefono1}}</td>
+									<td>{{$crm->fecha_aviso}}</td>
 									
-									<td>{{$contacto->celular1}}</td>
+									<td>{{$crm->tipo_cont}}</td>
+
+									<td>{{$crm->status}}</td>
 									
 								</tr>
 								
@@ -236,39 +238,7 @@
 				 </div>
 				
 							
-				<div class="panel-default pestana" id="tab4{{$cliente->id}}">
-				 	<div class="panel-heading">Datos Generales:</div> 
-				  	@if (count($cliente->datosGeneralesProvedor) == 0)
-						<div class="panel-body">
-							<h3>Aún no tienes datos generales</h3>
-						</div>
-						@endif
-						@if (count($cliente->datosGeneralesProvedor) !=0)
-				 	<div class="panel-body">
-				 		<div class="col-md-12 offset-md-2 mt-3">
-				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				 			<label class="control-label" for="nombre">Tamaño de la empresa:</label>
-								<dd>{{$cliente->datosGeneralesProvedor->nombre}}</dd>
-				 			</div>
-				 		</div>
-				 		<div class="col-md-12 offset-md-2 mt-3">
-				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				 				<label class="control-label" for="web">Sitio web:</label>
-				 				<dd>{{$cliente->datosGeneralesProvedor->web}}</dd>
-				 			</div>
-
-				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				 				<label class="control-label" for="comentario">Comentarios:</label>
-				 				<dd>{{$cliente->datosGeneralesProvedor->comentario}}</dd>
-				 			</div>
-				 			<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				 				<label class="control-label" for="fechacontacto">Fecha de contacto:</label>
-				 				<dd>{{$cliente->datosGeneralesProvedor->fechacontacto}}</dd>
-				 			</div>
-				 		</div>
-				 	</div>
-				 	@endif 
-				 </div>
+			
 			</div>
 		</div>
 	</div>
