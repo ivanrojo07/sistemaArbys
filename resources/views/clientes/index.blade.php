@@ -95,7 +95,7 @@
 
 
 {{--   TABLA VISTA RÀPIDA  --}}
-{{-- @foreach ($clientes as $cliente)
+ @foreach ($clientes as $cliente)
 	
 	<div class="persona" id="{{$cliente->id}}">
 		<div class="container" id="tab">
@@ -111,127 +111,97 @@
 					
 				</div>
 				<ul role="tablist" class="nav nav-tabs nav-pills nav-justified">
-					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1{{$cliente->id}}" tabindex="-1">Dirección/Domicilio:</a></li>
+					<li role="tab" tabindex="0" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active active"><a href="#tab1{{$cliente->id}}" tabindex="-1">Datos Generales:</a></li>
 					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="#tab2{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Datos para Cotización:</a></li>
-					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Cotizaciones:</a></li>
+					<!-- <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab3{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Cotizaciones:</a></li> -->
 					<li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="#tab4{{$cliente->id}}" role="tab" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">CRM:</a></li>
 				</ul>
 				<div class="panel-default pestana" aria-hidden="false" id="tab1{{$cliente->id}}" style="display: block;">
-					<div class="panel-heading">Dirección</div>
+					<div class="panel-heading">Datos Generales</div>
 					<div class="panel-body">
 						<div class="col-md-12 offset-md-2 mt-3">
+							@if($cliente->tipopersona=='Fisica')
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="calle">Calle:</label>
-		    					<dd>{{ $cliente->calle }}</dd>
-		  					</div>
+
+		    					<label class="control-label" for="calle">Nombre Completo:</label>
+		    					
+		    					<dd>{{ $cliente->nombre }}&nbsp;&nbsp;{{ $cliente->apellidopaterno }}&nbsp;&nbsp;{{ $cliente->apellidomaterno }}</dd>
+		    				</div>
+		  					@else
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numext">Numero exterior:</label>
-		    					<dd>{{ $cliente->numext }}</dd>
+		  						<label class="control-label" for="calle">Razón Social:</label>
+		  						<dd>{{$cliente->razonsocial}}</dd>
+		  					</div>
+		  					@endif
+		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		    					<label class="control-label" for="numext">ID de Cliente:</label>
+		    					<dd>{{ $cliente->identificador }}</dd>
 		  					</div>	
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numinter">Numero interior:</label>
-		    					<dd>{{ $cliente->numinter }}</dd>
+		    					<label class="control-label" for="numinter">Folio de Cliente:</label>
+		    					<dd>{{ $cliente->folio }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="cp">Código postal:</label>
-		    					<dd>{{ $cliente->cp }}</dd>
+		    					<label class="control-label" for="cp">Tipo de Persona:</label>
+		    					<dd>{{ $cliente->tipopersona }}</dd>
 		  					</div>		
 						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="colonia">Colonia:</label>
-		  						<dd>{{ $cliente->colonia }}</dd>
+		  						<label class="control-label" for="colonia">RFC:</label>
+		  						<dd>{{ strtoupper($cliente->rfc) }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-		  						<dd>{{ $cliente->municipio }}</dd>
+		  						<label class="control-label" for="municipio">Teléfono:</label>
+		  						<dd>{{ $cliente->telefono }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="ciudad">Ciudad:</label>
-		  						<dd>{{ $cliente->ciudad }}</dd>
+		  						<label class="control-label" for="ciudad">Teléfono Celular:</label>
+		  						<dd>{{ $cliente->telefonocel }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="estado">Estado:</label>
-		  						<dd>{{ $cliente->estado }}</dd>
+		  						<label class="control-label" for="estado">Correo(E-mail):</label>
+		  						<dd>{{ $cliente->mail }}</dd>
 		  					</div>
 						</div>
-						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle1">Entre calle:</label>
-		  						<dd>{{ $cliente->calle1 }}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle2">Y calle:</label>
-		  						<dd>{{ $cliente->calle2 }}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="referencia">Referencia:</label>
-		  						<dd>{{ $cliente->referencia }}</dd>
-		  					</div>
-						</div>
+						
 					</div>
 				</div>
 				<div class="panel-default pestana" id="tab2{{$cliente->id}}">
 
-					<div class="panel-heading">Dirección/Domicilio:</div>
+					<div class="panel-heading">Datos para Cotización:</div>
 					<div class="panel-body">
 						
 
-						<div class="col-md-12 offset-md-2 mt-3">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="calle">Calle:</label>
-		    					<dd>{{$cliente->calle}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numext">Numero exterior:</label>
-		    					<dd>{{$cliente->numext}}</dd>
-		  					</div>	
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		    					<label class="control-label" for="numint">Numero interior:</label>
-		    					<dd>{{$cliente->numint}}</dd>
-		  					</div>		
-						</div>
 						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="colonia">Colonia:</label>
-		  						<dd>{{$cliente->colonia}}</dd>
+		  						<label class="control-label" for="calle1">Calificación:</label>
+		  						<dd>{{ $cliente->calificacion }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-		  						<dd>{{$cliente->municipio}}</dd>
+		  						<label class="control-label" for="calle2">Promoción:</label>
+		  						<dd>{{ $cliente->promocion }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="ciudad">Ciudad:</label>
-		  						<dd>{{ $cliente->ciudad }}</dd>
+		  						<label class="control-label" for="referencia">Canal de Venta:</label>
+		  						<dd>{{ $cliente->canalventa }}</dd>
 		  					</div>
 		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="estado">Estado:</label>
-		  						<dd>{{$cliente->estado}}</dd>
+		  						<label class="control-label" for="referencia">Ingresos Mensuales:</label>
+		  						<dd>{{ $cliente->ingresos }}</dd>
 		  					</div>
 						</div>
-						<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle1">Entre calle:</label>
-		  						<dd>{{$cliente->calle1}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="calle2">Y calle:</label>
-		  						<dd>{{$cliente->calle2}}</dd>
-		  					</div>
-		  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		  						<label class="control-label" for="referencia">Referencia:</label>
-		  						<dd>{{$cliente->referencia}}</dd>
-		  					</div>
-						</div>
+				
+					
 					
 					</div>
 				</div>
 				<div class="panel-default pestana" id="tab3{{$cliente->id}}">
 					<div class="panel-heading">
 						contactosProvedor:
-					</div> --}}
+					</div> 
 					
-					{{-- @if (count($cliente->contactosProvedor) == 0)
+					 @if (count($cliente->contactosProvedor) == 0)
 					<div class="panel-body">
 						<h3>Aún no tienes contactosProvedor</h3>
 					</div>
@@ -262,13 +232,13 @@
 							</tbody>
 						</table>
 					</div>
-					@endif --}}
-				{{-- </div>
+					@endif 
+				 </div>
 				
 							
 				<div class="panel-default pestana" id="tab4{{$cliente->id}}">
-				 	<div class="panel-heading">Datos Generales:</div> --}}
-				{{--  	@if (count($cliente->datosGeneralesProvedor) == 0)
+				 	<div class="panel-heading">Datos Generales:</div> 
+				  	@if (count($cliente->datosGeneralesProvedor) == 0)
 						<div class="panel-body">
 							<h3>Aún no tienes datos generales</h3>
 						</div>
@@ -297,12 +267,12 @@
 				 			</div>
 				 		</div>
 				 	</div>
-				 	@endif --}}
-				{{-- </div>
+				 	@endif 
+				 </div>
 			</div>
 		</div>
 	</div>
-@endforeach --}}
+@endforeach 
 					{{--   TABLA VISTA RÀPIDA  --}}
 
 
@@ -310,7 +280,7 @@
 
 
 	
-{{-- </div> --}}
+ </div> 
 
 
 @endsection
