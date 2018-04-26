@@ -1,7 +1,7 @@
 @extends('layouts.test')
 @section('content1')
 
-<div class="container" align="left">
+<div class="row" align="left">
 	<form>
 			 <div class="container-fluid well well">
 			 	<h4> <strong>Puntualidad</strong></h4>

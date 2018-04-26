@@ -1,3 +1,4 @@
+
 .navbar.navbar-default, .navbar.navbar-default.navbar-static-top{
     background: url('../img/header.jpg') no-repeat 0px 0px;
     background-size: 100% 100%;
@@ -7,6 +8,31 @@
     -o-background-size:cover;
     -ms-background-size:cover;*/
     min-height: 130px;
+}
+
+@media (max-width: 767px) {
+
+    .container>.navbar-header{
+        background: url('../img/header.jpg') no-repeat 0px 0px;
+        background-size: 100% 100%;
+        /*background-size: 170px, 50px;*/
+        /*-webkit-background-size:cover;
+        -moz-background-size:cover;
+        -o-background-size:cover;
+        -ms-background-size:cover;*/
+        min-height: 130px;
+    }
+    .navbar-default .navbar-toggle{
+        margin-top: 43px;
+        background: #F5F8FA;
+
+    }
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        padding-top: 0px !important;
+        background: #FEC456;
+        padding-right: 20px;
+        border-color: #762C8D;
+    }
 }
 
 iframe {
@@ -133,13 +159,17 @@ input:checked + .slider:before {
     color: #762c8d;
     background-color: transparent;
 }
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a {
     color: #762c8d;
-    background-color: transparent;
+    background-color: transparent !important;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
     color: #762c8d;
     background-color: transparent;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:focus{
+    background-color: transparent !important;
+    color: #555;
 }
 
 .dropdown-submenu {

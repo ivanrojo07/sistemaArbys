@@ -3,15 +3,16 @@
 	<div class="container">
 		<div class="panel-body">
 			<div class="col-lg-6">
-				<form action="{{ $buscar }}">
+				<form action="{{-- {{ $buscar }} --}}">
 					<div class="input-group">
 						<input type="text" 
 						       name="query" 
 						       class="form-control" 
 						       placeholder="Buscar..."
-						       autofocus="true">
+						       autofocus="true"
+						       onKeypress="if(event.keyCode == 13) event.returnValue = false;">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+							<button href="#"class="btn btn-default" {{-- type="submit" --}}><i class="fa fa-search" aria-hidden="true"></i>
 							</button>
 						</span>
 					</div>

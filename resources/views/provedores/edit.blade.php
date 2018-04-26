@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 	@section('content')
-		<div class="container" id="tab">
+		<div class="row" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.update',['provedore'=>$provedore]) }}" name="form">
 				{{ csrf_field() }}
 				<input type="hidden" name="_method" value="PUT">

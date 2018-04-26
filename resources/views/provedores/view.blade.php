@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 	@section('content')
-		<div class="container" id="tab">
+		<div class="row" id="tab">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
 						<div class="panel-heading"><h4>Datos del Proveedor:

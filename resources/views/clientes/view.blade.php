@@ -2,7 +2,7 @@
 @extends('layouts.test')
 @section('content1')
 
-		<div class="container" id="tab">
+		<div class="row" id="tab">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
 						<div class="panel-heading">

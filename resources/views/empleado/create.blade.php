@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="container">
+<div class="row">
 	@if ($edit == true)
 		{{-- true expr --}}
 

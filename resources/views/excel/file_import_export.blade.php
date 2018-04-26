@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 @section('content')
-<div class="container">
-	<div class="panel panel-primary">
+<div class="row">
+	<div class="panel panel-group panel-default">
 		<div class="panel-heading">Excel</div>
 		<div class="panel-body">
 			<div class="row">

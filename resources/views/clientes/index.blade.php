@@ -3,11 +3,8 @@
 <div class="container">
 	<div class="panel-body">
 		<div class="col-lg-6">
-			<div class="row">
-				<div class="col-sm-4">
 			<form action="">
 				<div class="input-group">
-
 					<input type="text" 
 					       id="cliente" 
 					       name="query" 
@@ -16,21 +13,19 @@
 					       autofocus
 					       onKeypress="if(event.keyCode == 13) event.returnValue = false;"
 					       > {{--   --}}
-
-
+					<span class="input-group-btn">
+						<a readonly class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
+					</span>
 				</div>
-				
 			</form>
 		</div>
-		<div class="col-sm-4"><a class="btn btn-info" 
-				   href="{{ route('clientes.create')}}">
-							        <strong>
-							   Agregar Cliente</strong>
-							</a></div>
-		</div>
-			
+		<div class="col-lg-6">
+			<a class="btn btn-info" 
+				href="{{ route('clientes.create')}}"><strong>Agregar Cliente</strong>
+			</a>
 		</div>
 	</div>
+			
 
 {{-- TABLA AJAX DE PROVEEDORES --}} 
 	<div id="datos" name="datos" class="jumbotron">

@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 	@section('content')
-		<div class="container" id="tab">
+		<div class="row" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.update',[
             'id'=>$cliente->id]) }}" >
             	<input type="hidden" name="_method" value="PUT">
