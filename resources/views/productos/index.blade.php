@@ -1,11 +1,13 @@
 @extends('layouts.test')
 @section('content1')
-    <div class="panel-default">
-    	<div class="panel-heading">Productos:</div>
+<div class="container" style="overflow-x: hidden;">
+    <div class="panel-default" >
+    	
     	<div class="panel-body">
         <div class="container">
           <form class="form-inline" id="search" action="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}">
             <div class="container">
+
               <div class="panel-body">
                 <label class="control-label" for="costo1">Costo de:</label>
                 <input type="number" class="form-control"  name="costo1" id="costo1" value="{{ $request->costo1 }}">  
@@ -14,10 +16,11 @@
               
             
                 <label class="control-label" for="mensualidad1">Mensualidades de:</label>
-                <input type="number" class="form-control" name="mensualidad1" id="mensualidad1" value="{{ $request->mensualidad1 }}"></input>
+                <input type="number" class="form-control" name="mensualidad1" id="mensualidad1" value="{{ $request->mensualidad1 }}">
                 <label class="control-label" for="mensualidad2">a:</label>
                 <input type="number" class="form-control" name="mensualidad2" id="mensualidad2" value="{{ $request->mensualidad2 }}">
               </div>
+
               <div class="panel-body">
                 <label class="control-label" for="marca">Marca:</label>
                 <select type="select" name="marca" class="form-control" id="marca">
@@ -76,6 +79,7 @@
                 <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i><strong>Buscar</strong> </button>
                 <a type="submit" class="btn btn-warning" onclick='limpiarBusqueda(this)'><strong>Borrar</strong></a>
               </div>
+
             </div>
           </form>
         </div>
@@ -92,7 +96,11 @@
     			</thead>
           @foreach ($productos as $producto)
             {{-- expr --}}
-            <tr class="active">
+            <tr class="active"
+                title="Has Click Aquì para Ver"
+                style="cursor: pointer"
+                data-toggle="modal" 
+                data-target="#cotizacion_modal{{$producto->id}}">
               <td>{{$producto->marca}}</td>
               <td>{{$producto->descripcion}}</td>
               <td>${{ number_format($producto->precio_lista,2)}}</td>
@@ -108,7 +116,123 @@
         </div>
         {{$productos->appends(Request::all())->links()}}
     	</div>
-    </div>			
+    </div>
+
+    @foreach($productos as $producto)
+                {{-- Modal Productos--}} 
+                <div class="modal fade"  id="cotizacion_modal{{$producto->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position: 0,0 !important; right: -200px;">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" style="background-color: gray;">
+                        <h5 class="modal-title" id="exampleModalLongTitle" style="color: white;"><strong>{{$producto->descripcion}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;{{$producto->marca}} </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        
+                          
+                           
+                            
+                            <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="contado" data-toggle="pill" href="#pills-Anual" role="tab" aria-controls="pills-Anual" aria-selected="true">Contado</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="12meses" data-toggle="pill" href="#pills-Semestral" role="tab" aria-controls="pills-Semestral" aria-selected="false">12 Meses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="36meses" data-toggle="pill" href="#pills-Trimestral" role="tab" aria-controls="pills-Trimestral" aria-selected="false">36 Meses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#pills-Mensual" role="tab" aria-controls="pills-Mensual" aria-selected="false">48 Meses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#60Meses" role="tab" aria-controls="pills-Mensual" aria-selected="false">60 Meses</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-Anual" role="tabpanel" aria-labelledby="contado">
+                                    <div class="card-deck">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
+                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
+                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-Trimestral" role="tabpanel" aria-labelledby="36meses">
+                                    <div class="card-deck">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
+                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica *2)}}</h4>
+                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-Mensual" role="tabpanel" aria-labelledby="48meses">
+                                   <div class="card-deck">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
+                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
+                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="tab-pane fade" id="pills-Semestral" role="tabpanel" aria-labelledby="12meses">
+                                   <div class="card-deck">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
+                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
+                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div class="tab-pane fade" id="60Meses" role="tabpanel" aria-labelledby="60meses">
+                                    <div class="card-deck">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
+                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
+                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
+                                                
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        
+                            
+                         
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"><strong>Mandar E-mail</strong></button>
+                        <button type="button" class="btn btn-warning"><strong>Imprimir</strong></button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><strong>Cerrar</strong></button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                {{-- Modal Productos --}} 
+                @endforeach
+
+
     <script type="text/javascript">
     function limpiarBusqueda(){
       document.getElementById('costo1').value = "";

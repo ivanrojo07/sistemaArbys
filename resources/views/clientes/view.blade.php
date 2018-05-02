@@ -2,7 +2,7 @@
 @extends('layouts.test')
 @section('content1')
 
-		<div class="row" id="tab">
+		<div class="row" id="tab" style="overflow-x: hidden;">
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -45,7 +45,11 @@
 			  						<label class="control-label" for="vendedor">ID:</label>
 			  						<dd>{{ $cliente->identificador }}</dd>
 			  					</div>
-							</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="vendedor">Fecha de Resgistro:</label>
+			  						<dd>{{ $cliente->created_at }}</dd>
+			  					</div>
+			  				</div>
 						@if ($cliente->tipopersona == "Fisica")
 								{{-- true expr --}}
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
@@ -60,6 +64,10 @@
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
 			  						<dd>{{ $cliente->apellidomaterno }}</dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="fecha_nacimiento">Fecha de Nacimiento:</label>
+			  						<dd>{{ $cliente->fecha_nacimiento }}</dd>
 			  					</div>
 							</div>
 						@else
@@ -91,91 +99,37 @@
 			  				
 
 							</div>
-							
+							<div class="col-md-12 offset-md-2 mt-3">
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="canal_ventas">Canal de Ventas:</label>
+			    					<dd>{{ $cliente->canal_ventas }}</dd>
+			  					</div>
+			  					
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="cp">Código Postal:</label>
+			  						<dd>{{ $cliente->cp }}</dd>
+			  					</div>
+			  					
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="vendedor">Comentarios:</label>
+			  						<dd>{{ $cliente->comentarios }}</dd>
+			  					</div>
+
+			  				
+
+							</div>
 						</div>
 					</div>
 					
-					<div class="panel-default">
-						<div class="panel-heading"><h4>Dirección:</h4></div>
-						<div class="panel-body">
-							<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="calle">Calle:</label>
-			    					<dd>{{ $cliente->calle }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numext">Numero exterior:</label>
-			    					<dd>{{ $cliente->numext }}</dd>
-			  					</div>	
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numinter">Numero interior:</label>
-			    					<dd>{{ $cliente->numinter }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="cp">Código postal:</label>
-			    					<dd>{{ $cliente->cp }}</dd>
-			  					</div>		
-							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="colonia">Colonia:</label>
-			  						<dd>{{ $cliente->colonia }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="municipio">Delegación o Municipio:</label>
-			  						<dd>{{ $cliente->municipio }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="ciudad">Ciudad:</label>
-			  						<dd>{{ $cliente->ciudad }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="estado">Estado:</label>
-			  						<dd>{{ $cliente->estado }}</dd>
-			  					</div>
-							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="calle1">Entre calle:</label>
-			  						<dd>{{ $cliente->calle1 }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="calle2">Y calle:</label>
-			  						<dd>{{ $cliente->calle2 }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="referencia">Referencia:</label>
-			  						<dd>{{ $cliente->referencia }}</dd>
-			  					</div>
-							</div>
-
-							
-						</div>
-					</div>
+				
 
 				
 
 	<ul class="nav nav-tabs nav-pills nav-justified">
-								<li class="active">
-    				<a data-toggle="tab" 
-    				   href="#dat" 
-    				   class="btn-info">Datos para Cotizaciòn</a>
-    							</li>
-								<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-    				<a data-toggle="tab" 
-    	   				href="#crm" 
-    	   				class="btn-info">CRM
-    		
-    				</a>
-								</li>
-
-                                 <li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-    	           <a data-toggle="tab" 
-    	              href="#cot" 
-    	              class="btn-info">Cotizaciòn</a>
-   									</li>
-    
-  					</ul>
+		<li class="active"><a data-toggle="tab" href="#dat" class="btn-info">Datos para Cotizaciòn</a></li>
+		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#crm" class="btn-info">CRM</a></li>
+		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#cot" class="btn-info">Cotizaciòn</a></li>
+    </ul>
 
   <div class="tab-content">
 <div id="dat" class="tab-pane fade in active">
@@ -239,9 +193,9 @@
     </div>
 
 
-    <div id="cot" class="tab-pane fade ">
+    <div id="cot" class="tab-pane fade " style="overflow-x: hidden;">
     	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}"
-    			height="500px" >
+    			height="500px" style="overflow-x: hidden;">
     		
     	</iframe>
     </div>

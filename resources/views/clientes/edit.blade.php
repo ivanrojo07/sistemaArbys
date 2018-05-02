@@ -41,7 +41,10 @@
 									<input type="text" class="form-control" id="varrfc" name="rfc" required minlength="12" maxlength="13" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" placeholder="Ingrese 13 caracteres" title="Siga el formato 4 letras seguidas por 6 digitos y 3 caracteres"
 									value="{{$cliente->rfc}}">
 								</div>
-								
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="fecha_nacimiento"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Nacimiento:</label>
+			  						<input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{$cliente->fecha_nacimiento}}">
+			  					</div>
 			  					
 							</div>
 
