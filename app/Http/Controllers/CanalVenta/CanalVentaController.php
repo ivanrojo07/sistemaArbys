@@ -111,4 +111,9 @@ class CanalVentaController extends Controller
         })->paginate(10);
         return view('canalventas.index',['canalventas'=>$canalventas]);
     }
+
+public function getCanales(){
+        $canales = CanalVenta::get();
+        return view('precargas.select',['precargas'=>$canales]);
+    }
 }

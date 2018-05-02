@@ -31,8 +31,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $canalventas=CanalVenta::get();
-        return view('clientes.create',['canalventas'=>$canalventas]);
+        $canal_ventas=CanalVenta::get();
+        return view('clientes.create',['canal_ventas'=>$canal_ventas]);
     }
 
     /**
@@ -43,6 +43,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+         //dd($request->all());
          $rfc = Cliente::where('rfc', $request->rfc)->get();
         if (count($rfc)!=0) {
             # code...

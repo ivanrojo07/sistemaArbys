@@ -17,51 +17,24 @@ class CreateClientesTable extends Migration
 
             $table->increments('id');
             $table->enum('tipopersona',['Fisica','Moral']);
+            $table->string('identificador');
             //Nombre Completo
             $table->string('nombre')->nullable();
             $table->string('apellidopaterno')->nullable();
             $table->string('apellidomaterno')->nullable();
+            $table->date('fecha_nacimiento');
             //Razon Social
+            $table->string('rfc')->nullable();
             $table->string('razonsocial')->nullable();
             //Domicilio
-            $table->string('calle')->nullable();
-            $table->string('numext')->nullable();
-            $table->string('numinter')->nullable();
-            $table->string('cp')->nullable();
-            $table->string('colonia')->nullable();
-            $table->string('municipio')->nullable();
-            $table->string('ciudad')->nullable();
-            $table->string('estado')->nullable();
-            //Referencia
-            $table->string('calle1')->nullable();
-            $table->string('calle2')->nullable();
-            $table->string('referencia')->nullable();
-            //
-            
-            $table->string('mail')->nullable();
-            $table->string('rfc')->nullable();
+            $table->string('cp');
+            $table->string('mail');
             $table->string('telefono')->nullable();
-            $table->string('telefonocel')->nullable();
-
-            //$table->enum('prod', ['Pack','Auto','Motocicleta']);
-            
-            $table->integer('ingresos')->nullable();
-            $table->string('canalventa')->nullable();
-            $table->string('promocion')->nullable();
-           // $table->string('seguimiento')->nullable();
-
-            $table->enum('calificacion', ['30','60','90']);
+            $table->string('telefonocel');
+            $table->string('canal_ventas')->nullable();
             $table->text('comentarios')->nullable();
-
-           // $table->string('listaprecios')->nullable();
-           // $table->string('cotizador')->nullable();
-            $table->string('identificador')->nullable();
-            $table->string('objetivo')->nullable();
-            $table->string('folio');
+           
             
-
-            
-
             $table->timestamps();
             $table->softDeletes();
         });
