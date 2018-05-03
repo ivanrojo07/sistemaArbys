@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Producto;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ProductController extends Controller
 {

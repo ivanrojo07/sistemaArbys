@@ -1,6 +1,6 @@
 @extends('layouts.test')
 @section('content1')
-<div class="container" style="overflow-x: hidden;">
+<div class="container" >
     <div class="panel-default" >
     	
     	<div class="panel-body">
@@ -118,8 +118,10 @@
     	</div>
     </div>
 
-    @foreach($productos as $producto)
+    {{--dd($productos)--}}
                 {{-- Modal Productos--}} 
+                @foreach($productos as $producto)
+
                 <div class="modal fade"  id="cotizacion_modal{{$producto->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position: 0,0 !important; right: -200px;">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -136,78 +138,78 @@
                             
                             <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="contado" data-toggle="pill" href="#pills-Anual" role="tab" aria-controls="pills-Anual" aria-selected="true">Contado</a>
+                                    <a class="nav-link active" id="contado" data-toggle="pill" href="#pills-contado{{$producto->id}}" role="tab" aria-controls="pills-Anual" aria-selected="true">Contado</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="12meses" data-toggle="pill" href="#pills-Semestral" role="tab" aria-controls="pills-Semestral" aria-selected="false">12 Meses</a>
+                                    <a class="nav-link" id="12meses" data-toggle="pill" href="#pills-doce{{$producto->id}}" role="tab" aria-controls="pills-Semestral" aria-selected="false">12 Meses</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="36meses" data-toggle="pill" href="#pills-Trimestral" role="tab" aria-controls="pills-Trimestral" aria-selected="false">36 Meses</a>
+                                    <a class="nav-link" id="36meses" data-toggle="pill" href="#pills-treinta{{$producto->id}}" role="tab" aria-controls="pills-Trimestral" aria-selected="false">36 Meses</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#pills-Mensual" role="tab" aria-controls="pills-Mensual" aria-selected="false">48 Meses</a>
+                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#pills-cuarenta{{$producto->id}}" role="tab" aria-controls="pills-Mensual" aria-selected="false">48 Meses</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#60Meses" role="tab" aria-controls="pills-Mensual" aria-selected="false">60 Meses</a>
+                                    <a class="nav-link" id="48meses" data-toggle="pill" href="#60Meses{{$producto->id}}" role="tab" aria-controls="pills-Mensual" aria-selected="false">60 Meses</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-Anual" role="tabpanel" aria-labelledby="contado">
+                                <div class="tab-pane fade show active" id="pills-contado{{$producto->id}}" role="tabpanel" aria-labelledby="contado">
                                     <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
-                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
-                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
-                                                
+                                                <h3>Contado</h3>
+                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
+                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
                                             </div>
                                         </div>
                                      </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-Trimestral" role="tabpanel" aria-labelledby="36meses">
+                                <div class="tab-pane fade" id="pills-doce{{$producto->id}}" role="tabpanel" aria-labelledby="36meses">
                                     <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
-                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica *2)}}</h4>
-                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
-                                                
+                                                <h3>12 Meses</h3>
+                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
+                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
                                             </div>
                                         </div>
                                      </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-Mensual" role="tabpanel" aria-labelledby="48meses">
+                                <div class="tab-pane fade" id="pills-treinta{{$producto->id}}" role="tabpanel" aria-labelledby="48meses">
                                    <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
-                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
-                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
-                                                
-                                            </div>
+                                                <h3>36 Meses</h3>
+                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
+                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                             </div>
                                         </div>
                                      </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-Semestral" role="tabpanel" aria-labelledby="12meses">
+                                <div class="tab-pane fade" id="pills-cuarenta{{$producto->id}}" role="tabpanel" aria-labelledby="12meses">
                                    <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
-                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
-                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
-                                                
+                                                <h3>48 Meses</h3>
+                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
+                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
                                             </div>
                                         </div>
                                      </div>
                                 </div>
-                                <div class="tab-pane fade" id="60Meses" role="tabpanel" aria-labelledby="60meses">
+                                <div class="tab-pane fade" id="60Meses{{$producto->id}}" role="tabpanel" aria-labelledby="60meses">
                                     <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h3 class="card-title">Pago Inicial:${{ number_format($producto->inicial,2)}}</h3>
-                                                <h4>Mensual: ${{ number_format($producto->mensualidad_p_fisica)}}</h4>
-                                                <h4>Apertura: ${{ number_format($producto->apertura,2)}}</h4>
-                                                
+                                                <h3>60 Meses</h3>
+                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
+                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
                                             </div>
                                         </div>
                                      </div>
@@ -228,9 +230,9 @@
                   </div>
                 </div>
 
-
-                {{-- Modal Productos --}} 
                 @endforeach
+                {{-- Modal Productos --}} 
+                
 
 
     <script type="text/javascript">

@@ -38,7 +38,7 @@
 
 </head>
 <body>
-    <div id="app" style="overflow-x: hidden;>
+    <div id="app" style="overflow-x: hidden;">
         @yield('content1')
 
     </div>

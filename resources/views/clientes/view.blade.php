@@ -2,7 +2,7 @@
 @extends('layouts.test')
 @section('content1')
 
-		<div class="row" id="tab" style="overflow-x: hidden;">
+		<div class="row" id="tab" >
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
 						<div class="panel-heading">
@@ -193,9 +193,8 @@
     </div>
 
 
-    <div id="cot" class="tab-pane fade " style="overflow-x: hidden;">
-    	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}"
-    			height="500px" style="overflow-x: hidden;">
+    <div id="cot" class="tab-pane fade " >
+    	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}" height="500px"  >
     		
     	</iframe>
     </div>
