@@ -25,7 +25,7 @@
 			  					</div>
 			  					<div class="col-sm-2">
 									<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i> RFC: (Automático)</label>
-									<input type="text" class="form-control" id="rfc" name="rfc"  >
+									<input type="text" class="form-control" id="rfc" name="rfc"  readonly>
 								</div>
 								<div class="col-sm-3">
 			  						<label class="control-label" for="fecha_nacimiento"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Nacimiento:</label>
@@ -118,6 +118,8 @@
 
 
 <script>
+
+
 		function sub(){
 			a=document.getElementById("ingresos").value;
 			b=document.getElementById("canalventa").value;
@@ -128,13 +130,32 @@
 		}
 //----------------------------------------------------------------
 	$(document).ready(function(){
+
     $("input").keyup(function(){
-      a=document.getElementById("varrfc").value;
-			b=document.getElementById("identificador").value;
-			b=b.toUpperCase(b);
-			a=a.toUpperCase(a);
-			document.getElementById("id_auto").value=a+b;
+    	
+    	var pat=document.getElementById("apellidopaterno").value;
+    	var mat=document.getElementById("apellidomaterno").value;
+    	var nom=document.getElementById("idnombre").value;
+    	var fecha=document.getElementById("fecha_nacimiento").value;
+
+    	var año=fecha.slice(2,4);
+    	var mes=fecha.slice(5,7);
+    	var dia=fecha.slice(8,10);
+
+    	var plp=pat.slice(0,1);
+    	var plm=mat.slice(0,1); if(plm==''){plm='X'}
+    	var pln=nom.slice(0,1);
+
+    	var voc='';
+    	var low=pat.toLowerCase();
+    	alert(low);
+
+    	pat.serach('');
+
+   		
     });
+
+   
 });
 //--------------------------------------------------------------
 function getCanales(){
@@ -174,6 +195,12 @@ function getCanales(){
 		// 	document.getElementById("descripcion").value=ar_familia[1]+", "+ar_tipo[1]+", "+ar_subtipo[1]+ ", "+ medida + ", "+modelo+ ", "+ar_presentacion[1]+ ", "+ar_calidad[1]+ ", "+ar_acabado[1];
 
 		// }
+
+		//    a=document.getElementById("varrfc").value;
+			// b=document.getElementById("identificador").value;
+			// b=b.toUpperCase(b);
+			// a=a.toUpperCase(a);
+			// document.getElementById("id_auto").value=a+b;
 	</script>
 
 
