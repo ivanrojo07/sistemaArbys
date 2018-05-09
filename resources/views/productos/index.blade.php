@@ -6,7 +6,7 @@
     	<div class="panel-body">
         <div class="container">
           <form class="form-inline" id="search" action="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}">
-            <div class="container">
+            
 
               <div class="panel-body">
                 <label class="control-label" for="costo1">Costo de:</label>
@@ -80,7 +80,7 @@
                 <a type="submit" class="btn btn-warning" onclick='limpiarBusqueda(this)'><strong>Borrar</strong></a>
               </div>
 
-            </div>
+           
           </form>
         </div>
     		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51);border-collapse: collapse;margin-bottom: 0px;">
@@ -106,10 +106,7 @@
               <td>${{ number_format($producto->precio_lista,2)}}</td>
               <td>${{ number_format($producto->apertura,2)}}</td>
               <td>${{ number_format($producto->inicial,2)}}</td>
-              <td><form role="form" id="form-cliente" method="POST"  action="{{ route('clientes.products.transactions.store',['cliente'=>$cliente,'product'=>$producto]) }}">
-                {{ csrf_field() }}
-                <input class="btn btn-primary" type="submit" value="Agregar al cliente">
-              </form></td>
+              <td><!--  --></td>
             </tr>
           @endforeach
     		</table>
@@ -153,15 +150,23 @@
                                     <a class="nav-link" id="48meses" data-toggle="pill" href="#60Meses{{$producto->id}}" role="tab" aria-controls="pills-Mensual" aria-selected="false">60 Meses</a>
                                 </li>
                             </ul>
-                            <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-content" id="pills-tabContent" style="color: black">
+                              <div class="row">
+                                <div class="col">
+                                <h4 class="card-title">Pago Inicial:&nbsp;&nbsp; ${{ number_format($producto->inicial,2)}}</h4></div>
+                                <div class="col">
+                                  <h4>Apertura:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${{ number_format($producto->apertura,2)}}</h4>
+                                </div>
+                              </div>
+                              
                                 <div class="tab-pane fade show active" id="pills-contado{{$producto->id}}" role="tabpanel" aria-labelledby="contado">
                                     <div class="card-deck">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h3>Contado</h3>
-                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
-                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
-                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                                
+                                                <h4>Mensual:&nbsp;&nbsp; ${{ number_format($producto->mensualidad_p_fisica,2)}}</h4>
+                                                
                                             </div>
                                         </div>
                                      </div>
@@ -171,9 +176,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h3>12 Meses</h3>
-                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
-                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
-                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                                
+                                                <h4>Mensual:&nbsp;&nbsp; ${{ number_format($producto->mensualidad_p_fisica,2)}}</h4>
+                                                
                                             </div>
                                         </div>
                                      </div>
@@ -183,9 +188,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h3>36 Meses</h3>
-                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
-                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
-                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                                
+                                                <h4>Mensual:&nbsp;&nbsp; ${{ number_format($producto->mensualidad_p_fisica,2)}}</h4>
+                                                
                                              </div>
                                         </div>
                                      </div>
@@ -195,9 +200,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h3>48 Meses</h3>
-                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
-                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
-                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                                
+                                                <h4>Mensual: &nbsp;&nbsp;${{ number_format($producto->mensualidad_p_fisica,2)}}</h4>
+                                                
                                             </div>
                                         </div>
                                      </div>
@@ -207,9 +212,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h3>60 Meses</h3>
-                                                <h4 class="card-title">Pago Inicial: ${{ $producto->inicial}}</h4>
-                                                <h4>Mensual: ${{ $producto->mensualidad_p_fisica}}</h4>
-                                                <h4>Apertura: ${{ $producto->apertura}}</h4>
+                                                
+                                                <h4>Mensual:&nbsp;&nbsp; ${{ $producto->mensualidad_p_fisica}}</h4>
+                                                
                                             </div>
                                         </div>
                                      </div>
@@ -220,11 +225,25 @@
                          
                       
                       </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"><strong>Mandar E-mail</strong></button>
-                        <button type="button" class="btn btn-warning"><strong>Imprimir</strong></button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><strong>Cerrar</strong></button>
+                      <div class="modal-footer ">
+                        <div class="row">
+                          <div class="col-sm-4">
+              <form role="form" id="form-cliente" method="POST"  action="{{ route('clientes.products.transactions.store',['cliente'=>$cliente,'product'=>$producto]) }}">
+                        {{ csrf_field() }}
+                <input type="hidden" name="cliente_id" value="{{$cliente->id}}">
+                <input type="hidden" name="product_id" value="{{$producto->id}}">
+                <input class="btn btn-success" type="submit" value="Agregar al cliente">
+              </form></div>
+                          <div class="col-sm-3"><button type="button" class="btn btn-primary"><strong>Mandar E-mail</strong></button></div>
+                          <div class="col-sm-3"> <button type="button" class="btn btn-warning"><strong>Imprimir</strong></button></div>
+                          <div class="col-sm-2"><button type="button" class="btn btn-danger" data-dismiss="modal"><strong>Cerrar</strong></button></div>
 
+              
+
+                        
+                       
+                        
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -235,6 +254,7 @@
                 
 
 
+  @endsection
     <script type="text/javascript">
     function limpiarBusqueda(){
       document.getElementById('costo1').value = "";
@@ -246,4 +266,3 @@
       document.getElementById('mensualidades').value = "";
     }
     </script>
-	@endsection

@@ -118,3 +118,4 @@ Route::get('sucursales.index','Sucursal\SucursalController@index');
 
 Route::resource('sucursal','Empleado\EmpleadoSucursalController');
 //-------------------------------------------------------------------
+Route::get('descargar-productos', 'ClienteProductoController@pdf')->name('products.pdf');

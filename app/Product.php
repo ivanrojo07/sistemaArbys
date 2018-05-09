@@ -13,7 +13,18 @@ class Product extends Model
     public $table='products';
     const PRODUCTO_DISPONIBLE = 'disponible';
     const PRODUCTO_NO_DISPONIBLE = 'no disponible';
-    protected $fillable=['id','clave','descripcion','precio_lista','mensualidad_p_fisica','mensualidad_p_moral','apertura','inicial','marca','tipo','status'];
+
+    protected $fillable=['id',
+                         'clave',
+                         'descripcion',
+                         'precio_lista',
+                         'mensualidad_p_fisica',
+                         'mensualidad_p_moral',
+                         'apertura','inicial',
+                         'marca',
+                         'tipo',
+                         'status'];
+                         
     public $sortable = ['clave','marca','descripcion','precio_lista','apertura','inicial'];
     protected $hidden = [
         'id','created_at', 'updated_at'

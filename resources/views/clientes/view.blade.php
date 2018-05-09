@@ -1,4 +1,3 @@
-
 @extends('layouts.test')
 @section('content1')
 
@@ -186,6 +185,7 @@
 
 
  <div id="crm" class="tab-pane fade ">
+ 	
     	<iframe src="{{route ('clientes.crm.index',['cliente'=>$cliente])}}"
     			height="500px" >
     		
@@ -194,6 +194,7 @@
 
 
     <div id="cot" class="tab-pane fade " >
+    	<!-- @yield('datos') -->
     	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}" height="500px"  >
     		
     	</iframe>

@@ -9,6 +9,7 @@ use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class ClienteProductTransactionController extends Controller
 {
 
@@ -20,16 +21,20 @@ class ClienteProductTransactionController extends Controller
      */
     public function store(Request $request, Cliente $cliente, Product $product)
     {
-        //
+        
         // $product->noestaDisponible;
 
         $product->status = Product::PRODUCTO_NO_DISPONIBLE;
         $product->save();
-        // dd($product);
-        $transaction = Transaction::create([
-            'cliente_id' => $cliente->id,
-            'product_id' => $product->id,
-        ]);
+        
+        //$transaction = Transaction::create($request->all());
+      $transaction =new Transaction;
+      $transaction->cliente_id=$request->cliente_id;
+      $transaction->product_id=$request->product_id;
+      $transaction->save();
+      
+      
+
         return redirect()->back()->with('success', 'Producto añadido con exito');
 
 

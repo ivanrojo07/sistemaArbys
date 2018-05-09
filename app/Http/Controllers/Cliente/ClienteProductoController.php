@@ -7,6 +7,7 @@ use App\Cliente;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ClienteProductoController extends Controller
 {
@@ -107,7 +108,10 @@ class ClienteProductoController extends Controller
                     $busqueda->where('tipo','=',$tipo);
                 }
             })->paginate(10);
-            return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
+
+            $pdf = PDF::loadView('productos.index', ['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
+            return $pdf->download('listado.pdf');
+            // return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
             // $productos = Product::sortable()->where(
             //     function($query) use())->get();
 
