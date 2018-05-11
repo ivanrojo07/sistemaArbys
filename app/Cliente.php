@@ -68,6 +68,11 @@ class Cliente extends Model
         // return $this->hasOne(Solicitante::class, 'cliente_id');
         return $this->hasOne('App\Solicitante', 'cliente_id', 'id');
     }
+
+    public function info(){
+        
+        return $this->hasOne('App\InfoCliente');
+    }
    //  public function beneficiarios(){
    //      return $this->hasMany(Beneficiarios::class);
    //  }

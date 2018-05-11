@@ -84,6 +84,8 @@ Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransac
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
 Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);
 Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
+
+Route::resource('clientes.info','Cliente\ClienteInfoController');
 //----------------------------------------------------------
 
 

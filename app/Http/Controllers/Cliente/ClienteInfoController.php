@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers\Cliente;
 
-use App\Http\Controllers\Controller;
 use App\Cliente;
-use App\Product;
-use App\Transaction;
+use App\InfoCliente;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
-
-class ClienteProductTransactionController extends Controller
+class ClienteInfoController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -20,27 +36,16 @@ class ClienteProductTransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Cliente $cliente, Product $product)
+    public function store(Request $request, Cliente $cliente)
     {
-        
-        // $product->noestaDisponible;
-
-        $product->status = Product::PRODUCTO_NO_DISPONIBLE;
-        $product->save();
-        
-        //$transaction = Transaction::create($request->all());
-      $transaction =new Transaction;
-      $transaction->cliente_id=$request->cliente_id;
-      $transaction->product_id=$request->product_id;
-      $transaction->save();
-      
-     
-      alert()->success('Success Message', 'Optional Title');
-
-      
-        return redirect()->back()->with('success', 'Producto añadido con exito');
-
-
+        $info=new InfoCliente;
+        $info->cliente_id=$cliente->id;
+        $info->ingreso=$request->ingreso;
+        $info->monto=$request->monto;
+        $info->calificacion=$request->calificacion;
+        $info->save();
+        Alert::success('Se ha agregdado la información con éxito');
+        return redirect()->back();
     }
 
     /**

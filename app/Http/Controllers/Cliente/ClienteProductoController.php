@@ -8,6 +8,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class ClienteProductoController extends Controller
 {

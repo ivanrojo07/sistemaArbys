@@ -4,7 +4,7 @@
 		<div class="row" id="tab" >
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
-						<div class="panel-heading">
+						<div class="panel-heading" style="background-color: lightgray !important;">
 							
 							<div class="row" align="right">
 								<div class="col-sm-2"><h4>Datos del Cliente:</h4></div>
@@ -118,6 +118,68 @@
 
 							</div>
 						</div>
+						<div class="panel-heading" style="background-color: lightgray !important; color: black;">
+							<div class="row" >
+								<div class="col-sm-2 col-sm-offset-1" >
+									<h4>Datos para Cotización:</h4>
+								</div>
+							</div>
+							
+						</div>
+							@if($cliente->info==null)
+			<form role="form" id="form-cliente" method="POST"  action="{{ route('clientes.info.store',['cliente'=>$cliente]) }}">
+                        {{ csrf_field() }}			
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-2 col-sm-offset-1">
+									<label class="control-label" for="ingreso">Ingreso Mensual</label>
+									<input type="number" step="any" name="ingreso" class="form-control" placeholder="$--">
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="monto">Monto a Pagar (Mensual)</label>
+									<input type="number" step="any" name="monto" class="form-control" placeholder="$--">
+								</div>
+								<div class="col-sm-2">
+								<label class="control-label" for="calificacion">Calificación</label>
+								<select name="calificacion" class="form-control">
+										<option value="">Seleccionar</option>
+										@for($i = 0; $i <= 10; $i++)
+										<option value="{{$i}}">{{$i}}</option>
+										@endfor
+									</select>
+								</div>
+								<div class="col-sm-2 col-sm-offset-1"><br>
+									<button type="submit" class="btn btn-success"><strong>Agregar</strong></button>
+								</div>
+							</div><br>
+						</div>
+			</form>
+			@else
+				<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-2 col-sm-offset-1">
+									<label class="control-label" for="ingreso">Ingreso Mensual</label>
+									<dd>{{$cliente->info->ingreso}}</dd>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="monto">Monto a Pagar (Mensual)</label>
+									<dd>{{$cliente->info->monto}}</dd>
+								</div>
+								<div class="col-sm-2">
+								<label class="control-label" for="calificacion">Calificación</label>
+								<dd>{{$cliente->info->calificacion}}</dd>
+								</div>
+								<div class="col-sm-2 col-sm-offset-1"><br>
+<form role="form" id="form-cliente" method="POST" 
+     action="{{ route('clientes.info.update',['cliente'=>$cliente,'info'=>$cliente->info]) }}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
+						<button type="submit" class="btn btn-warning"><strong>Editar</strong></button>
+								</form>
+								</div>
+							</div><br>
+						</div>
+				@endif
 					</div>
 					
 				
