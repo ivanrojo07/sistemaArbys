@@ -119,5 +119,19 @@ Route::get('sucursales.create','Sucursal\SucursalController@create');
 Route::get('sucursales.index','Sucursal\SucursalController@index');
 
 Route::resource('sucursal','Empleado\EmpleadoSucursalController');
+
+Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
+
+Route::get('pdf',function(){
+
+	//$pdf = PDF::loadView('clientes.aux_html');
+	
+
+	$clientes= App\Cliente::get();
+    $pdf=PDF::loadView('clientes.vista',['clientes'=>$clientes]);
+	return $pdf->download('archivo.pdf');
+});
+
+//Route::get('doc','Cliente\ClienteProductoController');
 //-------------------------------------------------------------------
-Route::get('descargar-productos', 'ClienteProductoController@pdf')->name('products.pdf');
+//->name('products.pdf')

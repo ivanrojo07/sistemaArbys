@@ -115,7 +115,7 @@
     	</div>
     </div>
 
-    {{--dd($productos)--}}
+    
                 {{-- Modal Productos--}} 
                 @foreach($productos as $producto)
 
@@ -153,9 +153,16 @@
                             <div class="tab-content" id="pills-tabContent" style="color: black">
                               <div class="row">
                                 <div class="col">
-                                <h4 class="card-title">Pago Inicial:&nbsp;&nbsp; ${{ number_format($producto->inicial,2)}}</h4></div>
+                                <h4 class="card-title">
+                                  <div class="row">
+                                    <div class="col-sm-3 col-sm-offset-1">Pago Inicial:<br><br>${{ number_format($producto->inicial,2)}}
+                                    </div>
+                                    <div class="col-sm-3">Apertura:<br><br> ${{ number_format($producto->apertura,2)}}</div>
+                                  </div>
+                                  
+                                </h4></div>
                                 <div class="col">
-                                  <h4>Apertura:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${{ number_format($producto->apertura,2)}}</h4>
+                                  
                                 </div>
                               </div>
                               
@@ -234,8 +241,18 @@
                 <input type="hidden" name="product_id" value="{{$producto->id}}">
                 <input class="btn btn-success" type="submit" value="Agregar al cliente">
               </form></div>
-                          <div class="col-sm-3"><button type="button" class="btn btn-primary"><strong>Mandar E-mail</strong></button></div>
-                          <div class="col-sm-3"> <button type="button" class="btn btn-warning"><strong>Imprimir</strong></button></div>
+                          <div class="col-sm-3">
+                            <a href="" class="btn btn-primary" >
+                              <strong>Enviar a Correo</strong>
+                            </a>
+                          </div>
+
+                          <div class="col-sm-3">
+                            <a href="{{ route('clientes.producto.show',['cliente'=>$cliente,'producto'=>$producto]) }}" class=" btn btn-warning" >
+                              <strong>Documento PDF</strong>
+                            </a>
+                          </div>
+
                           <div class="col-sm-2"><button type="button" class="btn btn-danger" data-dismiss="modal"><strong>Cerrar</strong></button></div>
 
               

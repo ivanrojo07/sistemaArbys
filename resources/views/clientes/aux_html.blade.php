@@ -129,12 +129,12 @@
 					</tr>
 				</thead>
                 <tbody>
-                	@foreach ($clientes as $clientes)
+                	
 					<tr  class="active"
 				    title="Has Click Aquì para Ver"
 					style="cursor: pointer"
 					data-toggle="modal" 
-					data-target="#{{$dato->id}}">
+					data-target="">
 
  				<td></td>
  				<td></td>
@@ -142,7 +142,7 @@
  				<td></td>
  				<td></td>
 						</tr>
-						@endforeach
+						
 
 					</tbody>
 					</table>

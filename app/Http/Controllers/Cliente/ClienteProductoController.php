@@ -110,11 +110,10 @@ class ClienteProductoController extends Controller
                 }
             })->paginate(10);
 
-            $pdf = PDF::loadView('productos.index', ['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
-            return $pdf->download('listado.pdf');
-            // return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
-            // $productos = Product::sortable()->where(
-            //     function($query) use())->get();
+            
+            return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos, 'request'=>$request]);
+
+            //$productos = Product::sortable()->where(function($query) use())->get();
 
         }
         
@@ -151,7 +150,9 @@ class ClienteProductoController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        // $clientes= App\Cliente::get();
+    $pdf=PDF::loadView('clientes.vista',['cliente'=>$cliente]);
+    return $pdf->download('archivo.pdf');
     }
 
     /**
@@ -187,4 +188,6 @@ class ClienteProductoController extends Controller
     {
         //
     }
+
+    
 }

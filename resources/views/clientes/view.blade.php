@@ -174,7 +174,7 @@
      action="{{ route('clientes.info.update',['cliente'=>$cliente,'info'=>$cliente->info]) }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
-						<button type="submit" class="btn btn-warning"><strong>Editar</strong></button>
+						<!-- <button type="submit" class="btn btn-warning"><strong>Editar</strong></button> -->
 								</form>
 								</div>
 							</div><br>

@@ -21,7 +21,8 @@ class Product extends Model
                          'precio_lista',
                          'mensualidad_p_fisica',
                          'mensualidad_p_moral',
-                         'apertura','inicial',
+                         'apertura',
+                         'inicial',
                          'marca',
                          'tipo',
                          'status'];

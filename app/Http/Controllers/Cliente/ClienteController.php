@@ -8,6 +8,7 @@ use App\Cliente;
 use App\Solicitante;
 use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ClienteController extends Controller
 {
@@ -138,5 +139,14 @@ class ClienteController extends Controller
     return view('clientes.busqueda', ['clientes'=>$clientes]);
         
 
+    }
+
+     public function pdf(Cliente $cliente){
+
+        
+
+    // $clientes= App\Cliente::get();
+    $pdf=PDF::loadView('clientes.vista',['cliente'=>$cliente]);
+    return $pdf->download('archivo.pdf');
     }
 }
