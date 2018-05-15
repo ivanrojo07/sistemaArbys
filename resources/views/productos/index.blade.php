@@ -248,7 +248,8 @@
                           </div>
 
                           <div class="col-sm-3">
-                            <a href="{{ route('clientes.producto.show',['cliente'=>$cliente,'producto'=>$producto]) }}" class=" btn btn-warning" >
+                            <a href="{{ route('clientes.producto.show',['cliente'=>$cliente,
+                              'producto'=>$producto]) }}" class="btn btn-warning" >
                               <strong>Documento PDF</strong>
                             </a>
                           </div>

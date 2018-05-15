@@ -5,60 +5,38 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container-fluid">
   <img src="img/header.jpg">
-  <h4> Cotización</h4>            
+  <h3> Cotización:&nbsp;&nbsp;&nbsp; <strong>{{$producto->descripcion}}&nbsp;&nbsp;&nbsp;{{$producto->marca}}</strong> </h3>            
   
-  <header>
+  <div class="container">
     <div class="row">
-      <div class="col-sm-2">
-      	<h4><strong>Cliente:</strong></h4>
-      	<label>{{$cliente->nombre}}&nbsp;&nbsp;&nbsp;{{$cliente->apellidopaterno}}&nbsp;&nbsp;&nbsp;{{$cliente->apellidomaterno}}</label>
+      <div class="col-sm-offset-2">
+        <h4><strong>Clave:</strong>&nbsp;&nbsp;&nbsp;<dd>{{$producto->clave}}</dd></h4>
+      </div>
+       <div class="col-sm-offset-2">
+        <h4><strong>Precio:</strong>&nbsp;&nbsp;&nbsp;<dd>${{number_format($producto->precio_lista,2)}}</dd></h4>
+      </div>
+       <div class="col-sm-offset-2">
+        <h4><strong>Precio de Apertura:</strong>&nbsp;&nbsp;&nbsp;<dd>${{number_format($producto->apertura,2)}}</dd></h4>
+      </div>
+       <div class="col-sm-offset-2">
+        <h4><strong>Pago Inicial:</strong>&nbsp;&nbsp;&nbsp;<dd>${{number_format($producto->inicial,2)}}</dd></h4>
+      </div>
+       <div class="col-sm-offset-2">
+        <h4><strong>Mensualidad:</strong>&nbsp;&nbsp;&nbsp;<dd>
+          @if($cliente->tipopersona=='Fisica')
+          ${{number_format($producto->mensualidad_p_fisica,2)}}
+          @else
+          ${{number_format($producto->mensualidad_p_moral,2)}}
+          @endif
+        </dd>
+        </h4>
       </div>
     </div>
-  </header>
-  <section>
-  	<div class="row">
-  		<div class="col-sm-4 col-sm-offset-6">
-  			<h4>Productos Elegidos:</h4>
-  		</div>
-  	</div>
-  	@foreach($cliente->transactions as $tr)
-  	<div class="row">
-  		<div class="col-sm-3">{{$tr->product->descripcion}}</div>
-  	</div>
-  	@endforeach
-  </section>
-  <section>
-  	<table class="table">
-  		<thead>
-  			<tr>
-  				<th>Clave</th>
-  				<th>Marca</th>
-  				<th>Descripción</th>
-  				<th>Precio</th>
-  				<th>Apertura</th>
-  				<th>Pago Inicial</th>
-  				<th>Mensualidad</th>
-  			</tr>
-  		</thead>
-  		<tbody>
-  		 @foreach($cliente->transactions as $tr)
-  			<td>{{$tr->product->clave}}</td>
-  			<td>{{$tr->product->marca}}</td>
-  			<td>{{$tr->product->descripcion}}</td>
-  			<td>{{$tr->product->precio}}</td>
-  			<td>{{$tr->product->apertura}}</td>
-  			<td>{{$tr->product->inicial}}</td>
-  			@if($cliente->tipopersona=='Fisica')
-  			<td>{{$tr->product->descripcion}}</td>
-  			@else
-  			<td>{{$tr->id}}</td>
-  			@endif
-  		@endforeach
-  		</tbody>
-  	</table>
-  </section>
+  </div>
+  
+  
 </div>
 
 
