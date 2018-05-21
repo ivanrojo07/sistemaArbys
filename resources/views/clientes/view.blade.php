@@ -8,10 +8,10 @@
 							
 							<div class="row" align="right">
 								<div class="col-sm-2"><h4>Datos del Cliente:</h4></div>
-			  						<!-- <div class="col-sm-2">
+			  					  <div class="col-sm-2">
 
 			  						<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
-			  					   </div> -->
+			  					   </div> 
 			  					   	<div class="col-sm-2">
 			  					   		<?php $solicitante=$cliente;?>
 			  						<a class="btn btn-warning" 
@@ -114,7 +114,10 @@
 			  						<dd>{{ $cliente->comentarios }}</dd>
 			  					</div>
 
-			  				
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			  						<label class="control-label" for="vendedor">Actualización:</label>
+			  						<dd>{{ $cliente->updated_at }}</dd>
+			  					</div>
 
 							</div>
 						</div>
@@ -197,14 +200,14 @@
 <div role="application" class="panel panel-group">
 				<div class="panel-default">
 
-					<div class="panel-heading"><h4>Productos Elejídos:</h4></div>
+					
 
                   
                    	<div class="panel-body">
-                   		@if($cliente->transactions==null)
+                   		@if($cliente->transactions->count()==0)
                    		<div class="col-md-12 offset-md-2 mt-3">
-							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<h4>Aún no se han Elegído Productos para este Cliente</h4>
+							<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<h4>Aún no se han Elegído Productos para este Cliente.</h4>
 							</div>
 						</div>
 						@else

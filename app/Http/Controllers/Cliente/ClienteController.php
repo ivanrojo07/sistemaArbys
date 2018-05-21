@@ -83,10 +83,10 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente=Cliente::where('id',$id)->first();
-        $canalventas=CanalVenta::get();
+        $canal_ventas=CanalVenta::get();
         return view('clientes.edit',[
             'cliente'=>$cliente,
-            'canalventas'=>$canalventas]); 
+            'canal_ventas'=>$canal_ventas]); 
     }
 
     /**

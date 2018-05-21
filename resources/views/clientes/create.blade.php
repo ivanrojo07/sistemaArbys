@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 	@section('content')
-		<div class="container" id="tab">
+		<div class="row" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.store') }}" >
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group" >
@@ -23,9 +23,13 @@
 			  						<label class="control-label" for="identificador"><i class="fa fa-asterisk" aria-hidden="true"></i>ID:</label>
 			  						<input type="text" class="form-control" id="identificador" name="identificador" placeholder="Identificador" required>
 			  					</div>
-			  					<div class="col-sm-2">
+			  					<div class="col-sm-2" id="rfcf">
 									<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i> RFC: (Automático)</label>
 									<input type="text" class="form-control" id="rfc" name="rfc"  readonly>
+								</div>
+								<div class="col-sm-2" id="rfcm" style="display: none;">
+									<label class="control-label" for="rfc2"><i class="fa fa-asterisk" aria-hidden="true"></i> RFC: (Persona Moral)</label>
+									<input type="text" class="form-control" id="rfc2" name="Moral">
 								</div>
 								<div class="col-sm-3">
 			  						<label class="control-label" for="fecha_nacimiento"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Nacimiento:</label>
@@ -57,6 +61,7 @@
 			  					</div>
 			  					
 							</div><br>
+
 							<div class="row">
 								<div class="col-sm-3">
 									<label class="control-label" for="mail"><i class="fa fa-asterisk" aria-hidden="true"></i> Correo:</label>
@@ -71,6 +76,7 @@
 			  						<input type="number" class="form-control" id="telefonocel" name="telefonocel" pattern="+[0-9]" required>
 			  					</div>
 							</div><br>
+
 							<div class="row">
 								<div class="col-sm-3">
 			    					<label class="control-label" for="canal_ventas"><i class="fa fa-asterisk" aria-hidden="true"></i>Canal de Ventas:</label>
@@ -97,6 +103,7 @@
 			  						<textarea class="form-control" name="comentarios"></textarea>
 			  					</div>
 							</div><br>
+
 							<div class="row" >
 							  <div class="col-sm-2">
 								<button  type="submit" class="btn btn-success"><strong>Guardar</strong></button>
@@ -120,131 +127,7 @@
 <script>
 
 
-		function sub(){
-			a=document.getElementById("ingresos").value;
-			b=document.getElementById("canalventa").value;
-			b=b.toUpperCase(b);
-			a=a.toUpperCase(a);
-			document.getElementById("id_auto").value=a;
-			
-		}
-//----------------------------------------------------------------
-	$(document).ready(function(){
-
-    $("input").keyup(function(){
-    	
-    	var pat=document.getElementById("apellidopaterno").value;
-    	var mat=document.getElementById("apellidomaterno").value;
-    	var nom=document.getElementById("idnombre").value;
-    	var fecha=document.getElementById("fecha_nacimiento").value;
-
-    	var año=fecha.slice(2,4);
-    	var mes=fecha.slice(5,7);
-    	var dia=fecha.slice(8,10);
-
-    	var plp=pat.slice(0,1);
-    	var plm=mat.slice(0,1); if(plm==''){plm='X'}
-    	var pln=nom.slice(0,1);
-
-    	
-    	var low=pat.toLowerCase();
-    	
-		var a=low.search('a');
-		var e=low.search('e');
-		var i=low.search('i');
-		var o=low.search('o');
-		var u=low.search('u');
-
-		var array=[a,e,i,o,u];
-		var int=10;
-		var voc='';
-		var array_voc=['a','e','i','o','u'];
-
-		for(i = 0; i < array.length; i++){
-
-			
-
-			if (array[i]!=-1 && array[i]!=0 && array[i]<int){
-
-				int=array[i];
-				
-				voc=array_voc[i];
-			}
-			
-		}
-		
-    	//alert(voc);
-    	var rfc=plp+voc+plm+pln+año+mes+dia;
-    	document.getElementById("rfc").value=rfc.toUpperCase();
-   		
-    });
-//-----------------------------------------
-$("#fecha_nacimiento").change(function(){
-    	
-    	var pat=document.getElementById("apellidopaterno").value;
-    	var mat=document.getElementById("apellidomaterno").value;
-    	var nom=document.getElementById("idnombre").value;
-    	var fecha=document.getElementById("fecha_nacimiento").value;
-
-    	var año=fecha.slice(2,4);
-    	var mes=fecha.slice(5,7);
-    	var dia=fecha.slice(8,10);
-
-    	var plp=pat.slice(0,1);
-    	var plm=mat.slice(0,1); if(plm==''){plm='X'}
-    	var pln=nom.slice(0,1);
-
-    	
-    	var low=pat.toLowerCase();
-    	
-		var a=low.search('a');
-		var e=low.search('e');
-		var i=low.search('i');
-		var o=low.search('o');
-		var u=low.search('u');
-
-		var array=[a,e,i,o,u];
-		var int=10;
-		var voc='';
-		var array_voc=['a','e','i','o','u'];
-
-		for(i = 0; i < array.length; i++){
-
-			
-
-			if (array[i]!=-1 && array[i]!=0 && array[i]<int){
-
-				int=array[i];
-				
-				voc=array_voc[i];
-			}
-			
-		}
-		
-    	//alert(voc);
-    	var rfc=plp+voc+plm+pln+año+mes+dia;
-    	document.getElementById("rfc").value=rfc.toUpperCase();
-   		
-    });
-
-//******************************************   
-});
-//--------------------------------------------------------------
-function getCanales(){
-			$.ajaxSetup({
-		    headers: {
-		      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		    }
-			});
-			$.ajax({
-				url: "{{ url('/getcanales') }}",
-			    type: "GET",
-			    dataType: "html",
-			}).done(function(resultado){
-			    $("#canal_ventas").html(resultado);
-			});
-		}
-//---------------------------------------------------------------
+// 		
 		
 		// function f_corta(){
 		// 	familia=document.getElementById("familia_id").value;

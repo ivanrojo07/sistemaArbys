@@ -12,18 +12,25 @@ function formulario(elemento){
         }
 function persona(elemento){
     if(elemento.value == "Fisica"){
-        document.getElementById('perfisica').style.display='inline';
+        document.getElementById('perfisica').style.display='block';
         document.getElementById('permoral').style.display='none';
-        document.getElementById('varrfc').pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}";
-        document.getElementById('varrfc').placeholder="Ingrese 13 caracteres";
-        document.getElementById('varrfc').title="Siga el formato 4 letras seguidas por 6 digitos y 3 caracteres";
+        $("#rfcm").hide();
+        $("#rfcf").show();
+        document.getElementById('rfc').name="rfc";
+        document.getElementById('rfc2').name="Moral";
+        $("#rfc2").prop('required')=false;
     }
     if(elemento.value =="Moral"){
         document.getElementById('perfisica').style.display='none';
-        document.getElementById('permoral').style.display='inline';
-        document.getElementById('varrfc').pattern="^[A-Za-z]{3}[0-9]{6}[A-Za-z0-9]{3}";
-        document.getElementById('varrfc').placeholder="Ingrese 12 caracteres";
-        document.getElementById('varrfc').title="Siga el formato 3 letras seguidas por 6 digitos y 3 caracteres";
+        document.getElementById('permoral').style.display='block';
+        $("#rfcm").show();
+        $("#rfcf").hide();
+        document.getElementById('rfc').name="Fisica";
+        document.getElementById('rfc2').name="rfc";
+        document.getElementById('rfc2').pattern="^[A-Za-z]{3}[0-9]{6}[A-Za-z0-9]{3}";
+        document.getElementById('rfc2').placeholder="Ingrese 12 caracteres";
+        document.getElementById('rfc2').title="Siga el formato 3 letras seguidas por 6 digitos y 3 caracteres";
+        $("#rfc2").prop('required')=true;
     }
 }
 // $('div#tab').remove();
