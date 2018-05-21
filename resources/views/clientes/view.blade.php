@@ -8,10 +8,10 @@
 							
 							<div class="row" align="right">
 								<div class="col-sm-2"><h4>Datos del Cliente:</h4></div>
-			  						<div class="col-sm-2">
+			  						<!-- <div class="col-sm-2">
 
 			  						<a class="btn btn-info" href="{{ route('clientes.edit',['cliente'=>$cliente]) }}"><strong>Editar</strong></a>
-			  					   </div>
+			  					   </div> -->
 			  					   	<div class="col-sm-2">
 			  					   		<?php $solicitante=$cliente;?>
 			  						<a class="btn btn-warning" 
@@ -187,7 +187,7 @@
 				
 
 	<ul class="nav nav-tabs nav-pills nav-justified">
-		<li class="active"><a data-toggle="tab" href="#dat" class="btn-info">Datos para Cotizaciòn</a></li>
+		<li class="active"><a data-toggle="tab" href="#dat" class="btn-info">Productos Elegídos</a></li>
 		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#crm" class="btn-info">CRM</a></li>
 		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#cot" class="btn-info">Cotizaciòn</a></li>
     </ul>
@@ -197,47 +197,41 @@
 <div role="application" class="panel panel-group">
 				<div class="panel-default">
 
-					<div class="panel-heading"><h4>Datos para Cotizaciòn:</h4></div>
+					<div class="panel-heading"><h4>Productos Elejídos:</h4></div>
 
                   
                    	<div class="panel-body">
-							<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="calle">Folio:</label>
-			    					<dd>{{ $cliente->folio }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numext">Ingresos:</label>
-			    					<dd>{{ $cliente->ingresos }}</dd>
-			  					</div>	
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="numinter">Canal de Venta:</label>
-			    					<dd>{{ $cliente->canalventa }}</dd>
-			  					</div>
-			  							
+                   		@if($cliente->transactions==null)
+                   		<div class="col-md-12 offset-md-2 mt-3">
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<h4>Aún no se han Elegído Productos para este Cliente</h4>
 							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+						</div>
+						@else
+						<div class="col-md-12 offset-md-2 mt-3">
+								@foreach($cliente->transactions as $trans)
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="colonia">Promocion:</label>
-			  						<dd>{{ $cliente->promocion }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="municipio">Objetivo Mensual:</label>
-			  						<dd>{{ $cliente->objetivo }}</dd>
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="ciudad">Calificacion:</label>
-			  						<dd>{{ $cliente->calificacion }}</dd>
-			  					</div>
-			  					
-							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
+									<label class="control-label" for="calle">Descripción:</label>
+								<dd>{{$trans->product->descripcion}}</dd>
+								</div>
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="calle1">Comentarios:</label>
-			  						<dd>{{ $cliente->comentarios }}</dd>
-			  					</div>
-			  					
-							</div>
+									<label class="control-label" for="calle">Marca:</label>
+								<dd>{{$trans->product->marca}}</dd>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="calle">Precio:</label>
+								<dd>${{number_format($trans->product->precio_lista,2)}}</dd>
+								</div>
+								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+									<label class="control-label" for="calle">Clave:</label>
+								<dd>{{$trans->product->clave}}</dd>
+								</div>
+								@endforeach
+			  				</div>
+						@endif
+						
+							
+							
 
 							 
 						</div>
