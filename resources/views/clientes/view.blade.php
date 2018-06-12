@@ -245,7 +245,7 @@
 
  <div id="crm" class="tab-pane fade ">
  	
-    	<iframe src="{{route ('clientes.crm.index',['cliente'=>$cliente])}}"
+    	<iframe src="{{route ('clientes.crm.create',['cliente'=>$cliente])}}"
     			height="500px" >
     		
     	</iframe>

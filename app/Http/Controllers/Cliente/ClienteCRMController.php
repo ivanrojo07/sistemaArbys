@@ -14,14 +14,27 @@ class ClienteCRMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cliente $cliente)
+    public function index()
     {
         //
+           //
         
-        $crms = $cliente->crm;
-        // dd($crms);
-        return view('crmclientes.index',['cliente'=>$cliente, 'crms'=>$crms]);
+           $crms = ClienteCRM ::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
+           // dd($crms);
+           return view('crm.index',['crms'=>$crms]);
+
+
+    }
+
+    public function index2()
+    {
+        //
+           //
         
+           $crms = ClienteCRM ::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
+           // dd($crms);
+           return view('crm.index',['crms'=>$crms]);
+
 
     }
 
@@ -30,9 +43,13 @@ class ClienteCRMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cliente $cliente)
     {
-        //
+        
+        $crms = $cliente->crm;
+        // dd($crms);
+        return view('crmclientes.index',['cliente'=>$cliente, 'crms'=>$crms]);
+        
     }
 
     /**
@@ -68,9 +85,9 @@ class ClienteCRMController extends Controller
      * @param  \App\Personal  $personal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit(Request $request)
     {
-        //
+        dd($cliente);
     }
 
     /**
@@ -94,5 +111,9 @@ class ClienteCRMController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function porFecha(Request $request){
+        
     }
 }

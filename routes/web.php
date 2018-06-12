@@ -78,6 +78,11 @@ Route::resource('clientes.contacto','Personal\PersonalContactoController');
 Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);
 Route::get('buscarcliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.crm','Cliente\ClienteCRMController');
+Route::resource('crm','Crm\CrmController');
+Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
+
+
+
 
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
@@ -97,7 +102,6 @@ Route::get('buscarprovedor','Provedor\ProvedorController@buscar');
 Route::resource('provedores.direccionfisica','Provedor\ProvedorDireccionFisicaController');
 Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesController', ['except'=>'show']);
 Route::resource('provedores.contacto','Provedor\ProvedorContactoController');
-Route::resource('provedores.crm','Provedor\ProvedorCRMController');
 //----------------------------------------------------------
 Route::resource('giros','Giro\GiroController', ['except'=>'show']);
 //---------------------------------------------------------------------
