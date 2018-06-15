@@ -37,7 +37,9 @@ class CrmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $crm = ClienteCRM::create($request->all());
+        return view('crm.index',['crms'=>$crms]); 
     }
 
     /**

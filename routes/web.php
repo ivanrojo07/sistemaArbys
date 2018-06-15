@@ -80,6 +80,7 @@ Route::get('buscarcliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('crm','Crm\CrmController');
 Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
+Route::post('crmstore','Crm\CrmController@store')->name('crmstore');
 
 
 
