@@ -23,13 +23,14 @@
 							<label class="control-label" for="fecha_act">Fecha Actual:</label>
 							<input type="date" class="form-control" id="fecha_act" name="fecha_act" value="{{ date('Y-m-d') }}" readonly>
 						</div>
-						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<label class="control-label" for="fecha_cont"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha siguiente contacto:</label>
-							<input type="date" class="form-control" id="fecha_cont" name="fecha_cont" required="required" value="">
-						</div>
+						
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label" for="fecha_aviso"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha Aviso:</label>
-							<input type="date" class="form-control" id="fecha_aviso" name="fecha_aviso" required="required" value="">
+							<input type="date" class="form-control" id="fecha_aviso" name="fecha_aviso" required="required" min="{{date('Y-m-d')}}" max="{{date('Y-m-d',strtotime('+2 Months'))}}">
+						</div>
+						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<label class="control-label" for="fecha_cont"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha siguiente contacto:</label>
+							<input type="date" class="form-control" id="fecha_cont" name="fecha_cont" required="required" min="{{date('Y-m-d',strtotime('+2 Days'))}}" max="{{date('Y-m-d')}}">
 						</div>
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<label class="control-label" for="hora">Hora:</label>
