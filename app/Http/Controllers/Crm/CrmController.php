@@ -15,7 +15,7 @@ class CrmController extends Controller
      */
     public function index()
     {
-        $crms = ClienteCrm::get();
+        $crms = ClienteCrm::orderBy('fecha_cont','asc')->get();
         return view('crm.index', ['crms'=>$crms]);
     }
 
@@ -56,7 +56,7 @@ class CrmController extends Controller
     public function porFecha(Request $request){
 
         //dd($request->fechaH);
-        $crms = ClienteCRM ::whereBetween('fecha_aviso', [$request->fechaD,$request->fechaH])->orderBy('fecha_aviso','desc')->get();
+        $crms = ClienteCRM ::whereBetween('fecha_cont', [$request->fechaD,$request->fechaH])->orderBy('fecha_cont','asc')->get();
 
         return view('crm.index',['crms'=>$crms]);
 

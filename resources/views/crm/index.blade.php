@@ -2,33 +2,51 @@
 @section('content')
 
                     @if ($crms->count()==0)
-						<p>Aun no tienes C.R.M.'s</p>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-warning">
+                        <strong> No hay C.R.M.'s Registrados con ese Rango de Fechas.</strong>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="alert alert-info">
+                        <strong> O bien No hay C.R.M.'s Registrados Aún.</strong>
+                   </div>
+                </div>
+                <div class="col-sm-4 col-sm-offset-5">
+                    <a  href="{{route('crm.index')}}" class="btn btn-warning">
+                        <strong> Regresar</strong>
+                   </a>
+                </div>
+            </div>
+        </div>
 					@endif
-					@if (count($crms)!=0)
+					@if ($crms->count()!=0)
 
                     <div class="panel-default">
                         <div class="panel-heading" style="background-color: lightgray !important;">
                             <div class="row">
                                 <br>
-                                <div class="col-sm-4 col-md-offset-2">
+                                <div class="col-sm-6 col-md-offset-2">
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-4">
                                         Desde
                                         </div>
                                         <div class="col-sm-1">
                                         
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-4">
                                         Hasta
                                         </div>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-4">
                                             <input name="fechaD" type="date" form="filtrado" class="form-control" id="fechafrom" required>
                                         </div>
                                         <div class="col-sm-1">
-                                            <strong>a</strong>
+                                            <strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                         </div>
-                                        <div class="col-sm-5">
-                                            <input name="fechaH" type="date" form="filtrado" class="form-control" id="fechato" required>
+                                        <div class="col-sm-4">
+                                            <input name="fechaH" type="date" form="filtrado" class="form-control" id="fechato" required disabled>
                                         </div>
                                     </div>
                                     <br>
@@ -39,7 +57,12 @@
                                     {{ csrf_field()}}
                                     
                                     <button type="submit" class="btn btn-primary">Buscar</button>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crear</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal-crm">Crear</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                                     
 
 
@@ -51,8 +74,8 @@
 <div class="modal fade" id="myModal" role="dialog">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal-header" style="background-color:#660066;color: white;  ">
+<button type="button" class="badge" data-dismiss="modal">&times;cerrar</button>
 <h4 class="modal-title">Modal Header</h4>
 </div>
 <div class="modal-body">
@@ -139,16 +162,12 @@
 </div>
 <div class="modal-footer">
 <div class="row">
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-block" data-dismiss="modal">Cerrar</button>
+    <div class="col-sm-6 col-md-offset-3">
+        <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
         
     </div>
-    <div class="col-sm-6">
-        <button id="nuevo" type="submit" class="btn btn-warning btn-block" form="enviadordecrm">Nuevo</button>
-    </div>
-    <div class="col-sm-6">
-        <button id="crear" type="submit" class="btn btn-success btn-block" style="display:none;" form="enviadordecrm">Crear</button>
-    </div>
+    
+    
 </div>
 </div>
 </div>
@@ -187,7 +206,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-8 col-md-offset-2">
+                                <!-- <div class="col-md-10 col-sm-offset-1"> -->
                                     <table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse;margin-bottom: 0px">
                                         <thead>
                                             <tr class="info">
@@ -245,7 +264,7 @@
                                             </tr>
                                         @endforeach
                                     </table>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -254,7 +273,110 @@
 
 
 
-
+{{-- Modal Nuevo CRM --}}
+<div class="modal fade" id="Modal-crm" role="dialog">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+    <div class="modal-header" style="background-color:#ff9900;color: white;  ">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title"><strong></strong></h4>
+    </div>
+<div class="modal-body">
+<form role="form" id="enviadordecrm" method="POST" action="{{ route('crmstore')}}">{{ csrf_field() }}</form>
+                                <div class="col-sm-12">
+                                <input type="hidden" name=id_cliente"" id="id_cliente" form="enviadordecrm" class="form-control" disabled>
+                                    <div class="form-group col-sm-4">
+                                        <label for="nombre" class="control-label">Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="text" name=nombre"" id="nombre" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="ap" class="control-label">Apellido paterno:</label>
+                                        <input type="text" name="ap" id="ap" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="am" class="control-label">Apellido materno:</label>
+                                        <input type="text" name="am" id="am" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="tipo_cont" class="control-label">Forma de contacto:</label><br>
+                                        <select type="select" name="tipo_cont" form="enviadordecrm" id="tipo_cont" class="form-control" disabled>
+                                            <option id="Mail" value="Mail">Email/Correo Electronico</option>
+                                            <option id="Telefono" value="Telefono">Telefono</option>
+                                            <option id="Cita" value="Cita">Cita</option>
+                                            <option id="Whatsapp" value="Whatsapp">Whatsapp</option>
+                                            <option id="Otro" value="Otro" selected="selected">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="status" class="control-label">Estado:</label><br>
+                                        <select type="select" name="status" form="enviadordecrm" id="status" class="form-control" disabled>
+                                            <option id="Pendiente" value="Pendiente">Pendiente</option>
+                                            <option id="Cotizando" value="Cotizando">En Cotización</option>
+                                            <option id="Cancelado" value="Cancelado">Cancelado</option>
+                                            <option id="Toma_decision" value="Toma_decision">Tomando decisión</option>
+                                            <option id="Espera" value="Espera">En espera</option>
+                                            <option id="Revisa_doc" value="Revisa_doc">Revisando documento</option>
+                                            <option id="Proceso_aceptar" value="Proceso_aceptar">Proceso de Aceptación</option>
+                                            <option id="Entrega" value="Entrega">Para entrega</option>
+                                            <option id="Otro" value="Otro" selected="selected">Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="correo" class="control-label">Correo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="email" name="correo" id="correo" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="telefono" class="control-label">Teléfono:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="number" name="telefono" id="telefono" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="celular" class="control-label">Celular:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="number" name="celular" id="celular" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="fecha_cont" class="control-label">Fecha Contacto:</label>
+                                        <input type="date" name="fecha_cont" id="fecha_cont" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="fecha_aviso" class="control-label">Fecha aviso:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="date" name=fecha_aviso"" id="fecha_aviso" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="hora" class="control-label">Hora:</label><br>
+                                        <input type="text" name=hora"" id="hora" form="enviadordecrm" class="form-control" disabled>
+                                    </div>
+                                    <div class="col-md-12 offset-md-2 mt-3">
+                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                            <label for="acuerdos" class="control-label">Acuerdos: </label>
+                                            <textarea rows="5" id="acuerdos" name="acuerdos" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                            <label for="comentarios" class="control-label">Comentarios: </label>
+                                            <textarea rows="5" id="comentarios" name="comentarios" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                            <label for="observaciones" class="control-label">Observaciones:</label>
+                                            <textarea rows="5" id="observaciones" name="observaciones" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
+                                        </div>
+                                        <input type="hidden" id="cliente_id" name="cliente_id">
+                                    </div>
+                                    
+                                </div>
+</div>
+<div class="modal-footer">
+<div class="row">
+    <div class="col-sm-6 col-md-offset-3">
+        <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
+        
+    </div>
+    
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+{{-- Modal NUevo CRM --}}
 
 
 
@@ -271,7 +393,7 @@
                                 a[b++] = e.innerHTML;
                                 //alert(a[b-1]);
                             });
-                               // alert($(this).find( "input[name$='fecha_cont']").val());
+                                //alert($(this).find( "input[name$='nombre']").val());
 
                             $('#id_cliente').val($(this).find( "input[name$='id_cliente']").val());
                             $('#nombre').val($(this).find( "input[name$='nombre']").val());
@@ -287,17 +409,13 @@
                             $('#status').val($(this).find( "input[name$='status']").val());
                         });
 
-                        $('#nuevo').click(function(){
-                            $(this).hide();
-                            $("#crear").show();
-
-                        });
-
-                        $('#crear').click(function(){
-                            $(this).hide();
-                            $("#nuevo").show();
-
-                        });
+                            $('#fechafrom').change(function(){
+                                
+                            var aviso = $('#fechafrom').val();
+                            $('#fechato').attr("min",aviso);
+                                                
+                            $('#fechato').prop('disabled',false);
+                                 });
                     });
                        
                     </script>
