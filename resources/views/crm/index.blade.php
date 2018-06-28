@@ -1,29 +1,33 @@
 @extends('layouts.blank')
 @section('content')
-
-                    @if ($crms->count()==0)
+<script src="{{asset('js/crm.js')}}"></script>
+                    @if($crms->count()==0)
         <div class="container">
             <div class="row">
+                         @isset($todos) 
                 <div class="col">
-                    <div class="alert alert-warning">
+                    <div class="alert alert-danger" style="text-align: center;">
                         <strong> No hay C.R.M.'s Registrados con ese Rango de Fechas.</strong>
                     </div>
                 </div>
+                         @else 
+
                 <div class="col">
-                    <div class="alert alert-info">
-                        <strong> O bien No hay C.R.M.'s Registrados Aún.</strong>
+                    <div class="alert alert-primary" style="background-color: darkgray;color: black;text-align: center;">
+                        <strong>No hay C.R.M.'s  Registrados Aún.</strong>
                    </div>
                 </div>
-                <div class="col-sm-4 col-sm-offset-5">
-                    <a  href="{{route('crm.index')}}" class="btn btn-warning">
-                        <strong> Regresar</strong>
-                   </a>
-                </div>
-            </div>
-        </div>
-					@endif
-					@if ($crms->count()!=0)
+                        @endisset 
 
+            </div>
+        </div><hr>
+					@endif
+
+
+
+        
+
+					
                     <div class="panel-default">
                         <div class="panel-heading" style="background-color: lightgray !important;">
                             <div class="row">
@@ -56,8 +60,8 @@
                                     <form role="form" id="filtrado" method="GET" action="{{ route('fecha')}}" name="form">
                                     {{ csrf_field()}}
                                     
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal-crm">Crear</button>
+                                    <button type="submit" class="btn btn-primary"><strong>Buscar</strong></button>
+                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal-crm"><strong>Crear C.R.M.</strong></button>
                                     </form>
                                 </div>
                             </div>
@@ -75,8 +79,8 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 <div class="modal-header" style="background-color:#660066;color: white;  ">
-<button type="button" class="badge" data-dismiss="modal">&times;cerrar</button>
-<h4 class="modal-title">Modal Header</h4>
+<button type="button" class="badge pull-right" data-dismiss="modal">Cerrar</button>
+<h4 class="modal-title">Detalles de C.R.M.</h4>
 </div>
 <div class="modal-body">
 <form role="form" id="enviadordecrm" method="POST" action="{{ route('crmstore')}}">{{ csrf_field() }}</form>
@@ -210,13 +214,13 @@
                                     <table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse;margin-bottom: 0px">
                                         <thead>
                                             <tr class="info">
-                                                <th>Fecha contacto</th>
-                                                <th>Fecha aviso</th>
+                                                <th>Cliente</th>
+                                                <th>Fecha de Contacto</th>
                                                 <th>Hora</th>
-                                                <th>Estado</th>
-                                                <th>Forma de contacto</th>
-                                                <th>Comentarios</th>
-                                                <th>Acuerdos</th>
+                                                <th>Teléfono Cel</th>
+                                                <th>Correo</th>
+                                                <th>Status</th>
+                                                <th>Fecha de Aviso</th>
                                                 <th>Observaciones</th>
                                                 
                                             </tr>
@@ -227,13 +231,13 @@
                                             <tr title="Has Click Aquì para ver o modificar"
                                             style="cursor: pointer" data-toggle="modal" data-target="#myModal" class="active tupla">
                                             
+                                                <td>{{$crm->clientes->nombre}}&nbsp;&nbsp;{{$crm->clientes->apellidopaterno}}</td>
                                                 <td>{{$crm->fecha_cont}}</td>
-                                                <td>{{$crm->fecha_aviso}}</td>
                                                 <td>{{$crm->hora}}</td>
+                                                <td>{{$crm->clientes->telefonocel}}</td>
+                                                <td>{{$crm->clientes->mail}}</td>
                                                 <td>{{$crm->status}}</td>
-                                                <td>{{$crm->tipo_cont}}</td>
-                                                <td>{{substr($crm->comentarios,0,50)}}...</td>
-                                                <td>{{substr($crm->acuerdos,0,50)}}...</td>
+                                                <td>{{$crm->fecha_aviso}}</td>
                                                 <td>{{substr($crm->observaciones,0,50)}}...</td>
                                                 
                                                 
@@ -278,90 +282,44 @@
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
     <div class="modal-header" style="background-color:#ff9900;color: white;  ">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title"><strong></strong></h4>
+    <button type="button" class="badge  pull-right" data-dismiss="modal" style="right:0px;">Cerrar</button>
+    <h4 class="modal-title"><strong>Nuevo Registro de C.R.M.</strong></h4>
     </div>
 <div class="modal-body">
-<form role="form" id="enviadordecrm" method="POST" action="{{ route('crmstore')}}">{{ csrf_field() }}</form>
-                                <div class="col-sm-12">
-                                <input type="hidden" name=id_cliente"" id="id_cliente" form="enviadordecrm" class="form-control" disabled>
-                                    <div class="form-group col-sm-4">
-                                        <label for="nombre" class="control-label">Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input type="text" name=nombre"" id="nombre" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="ap" class="control-label">Apellido paterno:</label>
-                                        <input type="text" name="ap" id="ap" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="am" class="control-label">Apellido materno:</label>
-                                        <input type="text" name="am" id="am" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="tipo_cont" class="control-label">Forma de contacto:</label><br>
-                                        <select type="select" name="tipo_cont" form="enviadordecrm" id="tipo_cont" class="form-control" disabled>
-                                            <option id="Mail" value="Mail">Email/Correo Electronico</option>
-                                            <option id="Telefono" value="Telefono">Telefono</option>
-                                            <option id="Cita" value="Cita">Cita</option>
-                                            <option id="Whatsapp" value="Whatsapp">Whatsapp</option>
-                                            <option id="Otro" value="Otro" selected="selected">Otro</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="status" class="control-label">Estado:</label><br>
-                                        <select type="select" name="status" form="enviadordecrm" id="status" class="form-control" disabled>
-                                            <option id="Pendiente" value="Pendiente">Pendiente</option>
-                                            <option id="Cotizando" value="Cotizando">En Cotización</option>
-                                            <option id="Cancelado" value="Cancelado">Cancelado</option>
-                                            <option id="Toma_decision" value="Toma_decision">Tomando decisión</option>
-                                            <option id="Espera" value="Espera">En espera</option>
-                                            <option id="Revisa_doc" value="Revisa_doc">Revisando documento</option>
-                                            <option id="Proceso_aceptar" value="Proceso_aceptar">Proceso de Aceptación</option>
-                                            <option id="Entrega" value="Entrega">Para entrega</option>
-                                            <option id="Otro" value="Otro" selected="selected">Otro</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="correo" class="control-label">Correo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input type="email" name="correo" id="correo" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="telefono" class="control-label">Teléfono:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input type="number" name="telefono" id="telefono" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="celular" class="control-label">Celular:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input type="number" name="celular" id="celular" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="fecha_cont" class="control-label">Fecha Contacto:</label>
-                                        <input type="date" name="fecha_cont" id="fecha_cont" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="fecha_aviso" class="control-label">Fecha aviso:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        <input type="date" name=fecha_aviso"" id="fecha_aviso" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="hora" class="control-label">Hora:</label><br>
-                                        <input type="text" name=hora"" id="hora" form="enviadordecrm" class="form-control" disabled>
-                                    </div>
-                                    <div class="col-md-12 offset-md-2 mt-3">
-                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                            <label for="acuerdos" class="control-label">Acuerdos: </label>
-                                            <textarea rows="5" id="acuerdos" name="acuerdos" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
-                                        </div>
-                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                            <label for="comentarios" class="control-label">Comentarios: </label>
-                                            <textarea rows="5" id="comentarios" name="comentarios" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
-                                        </div>
-                                        <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                            <label for="observaciones" class="control-label">Observaciones:</label>
-                                            <textarea rows="5" id="observaciones" name="observaciones" maxlength="500" class="form-control" form="enviadordecrm" disabled></textarea>
-                                        </div>
-                                        <input type="hidden" id="cliente_id" name="cliente_id">
-                                    </div>
-                                    
-                                </div>
+  <form role="form" id="enviadordecrm" method="POST" action="{{ route('crmstore')}}">
+    {{ csrf_field() }}
+    <div class="row">
+        <div class="col-sm-3 form-group">
+            <label class="control-label">Cliente:</label>
+            <select class="form-control" name="cliente_id" id="cliente_id_sel" required>
+                <option value="">Seleccionar Cliente</option>
+                @foreach($clientes as $cliente)
+                <option value="{{$cliente->id}}">{{$cliente->nombre}}&nbsp;{{$cliente->apellidopaterno}}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        {{----}}
+         @foreach($clientes as $cliente)
+    <div id="info{{$cliente->id}}" style="display: none;"> 
+        <div class="col-sm-3 form-group">
+            <label class="control-label">ID:</label>
+            <input type="text" name="" readonly value="{{$cliente->identificador}}"  class="form-control">
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="control-label">R.F.C:</label>
+            <input type="text" name="" readonly value="{{$cliente->rfc}}"  class="form-control">
+        </div>
+        <div class="col-sm-3 form-group">
+             <label class="control-label">Regimen Fiscal:</label>
+            <input type="text" name="" readonly value="{{$cliente->tipopersona}}"  class="form-control">
+        </div>
+    </div>
+    @endforeach
+        {{----}}
+    </div>
+  </form>
+                               
 </div>
 <div class="modal-footer">
 <div class="row">
@@ -379,52 +337,43 @@
 {{-- Modal NUevo CRM --}}
 
 
-
-
-                        
-                    <script>
-                    $(document).ready(function(){
-                        $('tr.tupla').click(function(){
-                          var a = $(this).children("td").toArray();
-                            
-                            var b = 0;
-
-                            a.forEach(function(e){
-                                a[b++] = e.innerHTML;
-                                //alert(a[b-1]);
-                            });
-                                //alert($(this).find( "input[name$='nombre']").val());
-
-                            $('#id_cliente').val($(this).find( "input[name$='id_cliente']").val());
-                            $('#nombre').val($(this).find( "input[name$='nombre']").val());
-                            $('#ap').val($(this).find( "input[name$='ap']").val());
-                            $('#am').val($(this).find( "input[name$='am']").val());
-                            $('#correo').val($(this).find( "input[name$='correo']").val());
-                            $('#telefono').val($(this).find( "input[name$='telefono']").val());
-                            $('#celular').val($(this).find( "input[name$='celular']").val());
-                            $('#fecha_cont').val($(this).find( "input[name$='fecha_cont']").val());
-                            $('#fecha_aviso').val($(this).find( "input[name$='fecha_aviso']").val());
-                            $('#hora').val($(this).find( "input[name$='hora']").val());
-                            $('#tipo_cont').val($(this).find( "input[name$='tipo_cont']").val());
-                            $('#status').val($(this).find( "input[name$='status']").val());
-                        });
-
-                            $('#fechafrom').change(function(){
-                                
-                            var aviso = $('#fechafrom').val();
-                            $('#fechato').attr("min",aviso);
-                                                
-                            $('#fechato').prop('disabled',false);
-                                 });
-                    });
-                       
-                    </script>
+     {{-- Values --}}
+        @foreach($clientes as $clientes)
+        <input type="hidden" id="{{$cliente->id}}" value="{{$cliente->identificador}}">
+        <!-- <input type="hidden" id="{{$cliente->id}}" value="{{$cliente->rfc}}">
+        <input type="hidden" id="{{$cliente->id}}" value="{{$cliente->tipopersona}}"> -->
+        @endforeach
+    {{-- Values --}}                        
+                
                             
 
+<script type="text/javascript">
+    $(document).ready(function(){
+            $("#cliente_id_sel").change(function(){
 
+                var id=$("#cliente_id_sel").val();
+                var x = document.getElementById("cliente_id_sel");
+
+                for (i = 1; i < x.length; i++) {
+
+                     var j=x.options[i].value;
+                     if(j!=null||j!=''){
+                        name="info"+j;
+                        document.getElementById(name).style.display='none';
+                     }
+                      
+                     
+            }
+                 nombre="info"+id;
+
+                 document.getElementById(nombre).style.display='block';
+
+        });
+    });
+</script>
 
 
 						
-					@endif	
+					
 
 @endsection

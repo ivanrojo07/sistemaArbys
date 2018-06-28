@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crm;
 
 use App\ClienteCRM;
+use App\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,9 @@ class CrmController extends Controller
     public function index()
     {
         $crms = ClienteCrm::orderBy('fecha_cont','asc')->get();
-        return view('crm.index', ['crms'=>$crms]);
+        $clientes=Cliente::orderBy('nombre','desc')->get();
+        return view('crm.index', ['crms'    =>$crms,
+                                  'clientes'=>$clientes]);
     }
 
     /**
@@ -56,9 +59,13 @@ class CrmController extends Controller
     public function porFecha(Request $request){
 
         //dd($request->fechaH);
-        $crms = ClienteCRM ::whereBetween('fecha_cont', [$request->fechaD,$request->fechaH])->orderBy('fecha_cont','asc')->get();
+        $crms =   ClienteCRM::whereBetween('fecha_cont', [$request->fechaD,$request->fechaH])->orderBy('fecha_cont','asc')->get();
+        $todos=   ClienteCRM::get();
+        $clientes=Cliente::orderBy('nombre','desc')->get();
 
-        return view('crm.index',['crms'=>$crms]);
+        return view('crm.index',['crms'    =>$crms,
+                                 'todos'   =>$todos,
+                                 'clientes'=>$clientes]);
 
     }
     /**
