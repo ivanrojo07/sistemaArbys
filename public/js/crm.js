@@ -22,6 +22,9 @@ $(document).ready(function(){
                             $('#hora').val($(this).find( "input[name$='hora']").val());
                             $('#tipo_cont').val($(this).find( "input[name$='tipo_cont']").val());
                             $('#status').val($(this).find( "input[name$='status']").val());
+                            $('#acuerdos').val($(this).find( "input[name$='acuerdos']").val());
+                            $('#comentarios').val($(this).find( "input[name$='comentarios']").val());
+                            $('#observaciones').val($(this).find( "input[name$='observaciones']").val());
                         });
 
                             $('#fechafrom').change(function(){
@@ -32,7 +35,13 @@ $(document).ready(function(){
                             $('#fechato').prop('disabled',false);
                                  });
 //-------------------------------------------------------------------------------------
-	
+	$('#fecha_uno').change(function(){
+                    
+                    var aviso = $('#fecha_uno').val();
+                    $('#fecha_dos').attr("min",aviso);
+                                        
+                    $('#fecha_dos').prop('disabled',false);
+                });
 //-------------------------------------------------------------------------------------
 });
                        

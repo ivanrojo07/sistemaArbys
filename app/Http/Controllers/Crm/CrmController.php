@@ -42,7 +42,7 @@ class CrmController extends Controller
     {
 
         $crm = ClienteCRM::create($request->all());
-        return view('crm.index',['crms'=>$crms]); 
+        return redirect()->route('crm.index'); 
     }
 
     /**

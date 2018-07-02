@@ -14,14 +14,13 @@ class ClienteCRMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Cliente $cliente)
     {
-        //
-           //
         
-           $crms = ClienteCRM ::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
+        
+           $crms = ClienteCRM::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
            // dd($crms);
-           return view('crm.index',['crms'=>$crms]);
+           return view('crmclientes.index',['crms'=>$crms]);
 
 
     }
@@ -31,7 +30,7 @@ class ClienteCRMController extends Controller
         //
            //
         
-           $crms = ClienteCRM ::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
+           $crms = ClienteCRM::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
            // dd($crms);
            return view('crm.index',['crms'=>$crms]);
 
@@ -60,10 +59,9 @@ class ClienteCRMController extends Controller
      */
     public function store(Request $request, Cliente $cliente)
     {
-        //
-        // dd($request->all());
+        
         $crm = ClienteCRM::create($request->all());
-        return redirect()->route('clientes.crm.index',['cliente'=>$cliente]);
+        return redirect()->route('clientes.crm.create',['cliente'=>$cliente]);
     }
 
     /**

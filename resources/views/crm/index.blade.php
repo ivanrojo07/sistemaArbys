@@ -98,7 +98,7 @@
                                         <label for="am" class="control-label">Apellido materno:</label>
                                         <input type="text" name="am" id="am" form="enviadordecrm" class="form-control" disabled>
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-4 col-sm-offset-2">
                                         <label for="tipo_cont" class="control-label">Forma de contacto:</label><br>
                                         <select type="select" name="tipo_cont" form="enviadordecrm" id="tipo_cont" class="form-control" disabled>
                                             <option id="Mail" value="Mail">Email/Correo Electronico</option>
@@ -108,7 +108,7 @@
                                             <option id="Otro" value="Otro" selected="selected">Otro</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-4">
                                         <label for="status" class="control-label">Estado:</label><br>
                                         <select type="select" name="status" form="enviadordecrm" id="status" class="form-control" disabled>
                                             <option id="Pendiente" value="Pendiente">Pendiente</option>
@@ -166,7 +166,7 @@
 </div>
 <div class="modal-footer">
 <div class="row">
-    <div class="col-sm-6 col-md-offset-3">
+    <div class="col-sm-4 col-md-offset-8">
         <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
         
     </div>
@@ -254,9 +254,9 @@
                                                 <input type="hidden" name="hora" value="{{$crm->hora}}">
                                                 <input type="hidden" name="status" value="{{$crm->status}}">
                                                 <input type="hidden" name="tipo_cont" value="{{$crm->tipo_cont}}">
-                                                <input type="hidden" name="comentarios" value="{{substr($crm->comentarios,0,50)}}...">
-                                                <input type="hidden" name="acuerdos" value="{{substr($crm->acuerdos,0,50)}}...">
-                                                <input type="hidden" name="observaciones" value="{{substr($crm->observaciones,0,50)}}...">
+                                                <input type="hidden" name="comentarios" value="{{$crm->comentarios}}...">
+                                                <input type="hidden" name="acuerdos" value="{{$crm->acuerdos}}...">
+                                                <input type="hidden" name="observaciones" value="{{$crm->observaciones}}...">
 
                                                 
 
@@ -317,13 +317,76 @@
     </div>
     @endforeach
         {{----}}
+    </div><hr>
+    <div class="row">
+        <div class="col-sm-3 form-group">
+            <label class="control-label" for="fecha_act">Fecha Actual:</label>
+            <input type="date" class="form-control" id="fecha_act" name="fecha_act" value="{{ date('Y-m-d') }}" readonly>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="control-label" for="fecha_aviso"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha Aviso:</label>
+<input type="date" class="form-control" id="fecha_uno" name="fecha_aviso" required="required" min="{{date('Y-m-d')}}" max="{{date('Y-m-d',strtotime('+2 Months'))}}">
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="control-label" for="fecha_cont"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha siguiente contacto:</label>
+<input type="date" class="form-control" id="fecha_dos" name="fecha_cont" required="required" min="{{date('Y-m-d',strtotime('+2 Days'))}}" max="{{date('Y-m-d',strtotime('+2 Months'))}}" disabled>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="control-label" for="hora">Hora:</label>
+            <input type="text" class="form-control" id="hora" name="hora" name="hora" value="">
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-3  col-sm-offset-3 form-group">
+            <label class="control-label" for="tipo_cont">Forma de contacto:</label>
+            <select class="form-control" type="select" name="tipo_cont" id="tipo_cont" >
+                <option id="Mail" value="Mail">Email/Correo Electronico</option>
+                <option id="Telefono" value="Telefono">Telefono</option>
+                <option id="Cita" value="Cita">Cita</option>
+                <option id="Whatsapp" value="Whatsapp">Whatsapp</option>
+                <option id="Otro" value="Otro" selected="selected">Otro</option>
+            </select>
+        </div>
+        <div class="col-sm-3 form-group">
+            <label class="control-label" for="status">Estado:</label>
+            <select class="form-control" type="select" name="status" id="status" >
+               <option id="Pendiente" value="Pendiente">Pendiente</option>
+               <option id="Cotizando" value="Cotizando">En Cotización</option>
+               <option id="Cancelado" value="Cancelado">Cancelado</option>
+               <option id="Toma_decision" value="Toma_decision">Tomando decisión</option>
+               <option id="Espera" value="Espera">En espera</option>
+               <option id="Revisa_doc" value="Revisa_doc">Revisando documento</option>
+               <option id="Proceso_aceptar" value="Proceso_aceptar">Proceso de Aceptación</option>
+               <option id="Entrega" value="Entrega">Para entrega</option>
+               <option id="Otro" value="Otro" selected="selected">Otro</option>
+            </select>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <label class="control-label" for="acuerdos">Acuerdos: </label>
+            <textarea class="form-control" rows="5" id="acuerdos" name="acuerdos" maxlength="500"></textarea>
+        </div>
+        <div class="col-sm-4 form-group">
+            <label class="control-label" for="comentarios">Comentarios: </label>
+            <textarea class="form-control" rows="5" id="comentarios" name="comentarios" maxlength="500"></textarea>
+        </div>
+        <div class="col-sm-4 form-group">
+            <label class="control-label" for="observaciones">Observaciones: </label>
+            <textarea class="form-control" rows="5" id="observaciones" name="observaciones" maxlength="500"></textarea>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-3 col-md-offset-5">
+            <input type="submit" name="submit" class="btn btn-success" value="Guardar">
+        </div>
     </div>
   </form>
                                
 </div>
 <div class="modal-footer">
 <div class="row">
-    <div class="col-sm-6 col-md-offset-3">
+    <div class="col-sm-4 col-md-offset-8">
         <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
         
     </div>

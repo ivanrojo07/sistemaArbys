@@ -252,9 +252,9 @@
     </div>
 
 
-    <div id="cot" class="tab-pane fade " >
+    <div id="cot" class="tab-pane fade">
     	<!-- @yield('datos') -->
-    	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}" height="500px"  >
+    	<iframe src="{{route('clientes.producto.index',['cliente'=>$cliente])}}" height="500px" >
     		
     	</iframe>
     </div>

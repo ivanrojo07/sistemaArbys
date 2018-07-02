@@ -36,9 +36,9 @@
 							<label class="control-label" for="hora">Hora:</label>
 							<input type="text" class="form-control" id="hora" name="hora" name="hora" value="">
 						</div>
-						<div class="form-group col-lg-6 col-md-3 col-sm-6 col-xs-12">
+						<div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="tipo_cont">Forma de contacto:</label>
-							<select class="form-control" type="select" name="tipo_cont" id="tipo_cont" >
+							<select class="form-control" type="select" name="tipo_cont" id="tipo_cont" required>
 								<option id="Mail" value="Mail">Email/Correo Electronico</option>
 								<option id="Telefono" value="Telefono">Telefono</option>
 								<option id="Cita" value="Cita">Cita</option>
@@ -46,9 +46,9 @@
 								<option id="Otro" value="Otro" selected="selected">Otro</option>
 							</select>
 						</div>
-						<div class="form-group col-lg-6 col-md-3 col-sm-6 col-xs-12">
+						<div class="form-group col-lg-6 col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="status">Estado:</label>
-							<select class="form-control" type="select" name="status" id="status" >
+							<select class="form-control" type="select" name="status" id="status" required>
 								<option id="Pendiente" value="Pendiente">Pendiente</option>
 								<option id="Cotizando" value="Cotizando">En Cotización</option>
 								<option id="Cancelado" value="Cancelado">Cancelado</option>
@@ -185,6 +185,8 @@
 										
 					$('#fecha_cont').prop('disabled',false);
 				});
+
+
 			});
 		</script>
 	@endsection

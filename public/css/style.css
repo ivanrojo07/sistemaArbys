@@ -36,9 +36,9 @@
 }
 
 iframe {
-    overflow: hidden;
+    /*overflow: hidden;*/
     border: none;
-    width: 100%;
+    width: 98%;
 }
 .nav-tabs {
     width: 100%;
