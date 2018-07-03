@@ -28,7 +28,7 @@
 			
 
 {{-- TABLA AJAX DE PROVEEDORES --}} 
-	<div id="datos" name="datos" class="jumbotron">
+	<div id="datos" name="datos" class="container-fluid ">
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>
 				<tr class="info">
@@ -66,13 +66,19 @@
 								<i class="fa fa-eye" aria-hidden="true"></i> 
 								<strong>Ver
 							</strong></a>
-						</div>
-						<div class="col-sm-4">
+							</div>
+							<div class="col-sm-4">
 							<a class="btn btn-info btn-sm" href="{{ route('clientes.edit',['id'=>$cliente->id]) }}">
 								
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Editar</strong>
 							</a>
-						</div>
+							</div>
+							<div class="col-sm-4">
+								<a class="btn btn-warning btn-sm">
+								
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Pagos</strong>
+							</a>
+							</div>
 						</div>
 				
 				</td>

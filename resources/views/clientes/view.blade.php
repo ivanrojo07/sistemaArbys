@@ -15,9 +15,9 @@
 			  					   	<div class="col-sm-2">
 			  					   		<?php $solicitante=$cliente;?>
 			  						<a class="btn btn-warning" 
-			  						href="{{ route('clientes.solicitantes.create',['cliente'=>$cliente]) }}">
+			  						>
 
-			  						<strong>Actualizar a Solicitante</strong></a>
+			  						<strong>Pago</strong></a>
 			  					   </div>
 
 			  					   	<div class="col-sm-2">
@@ -193,6 +193,7 @@
 		<li class="active"><a data-toggle="tab" href="#dat" class="btn-info">Productos Elegídos</a></li>
 		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#crm" class="btn-info">CRM</a></li>
 		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#cot" class="btn-info">Cotizaciòn</a></li>
+		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a data-toggle="tab" href="#cot" class="btn-info">Pagos</a></li>
     </ul>
 
   <div class="tab-content">

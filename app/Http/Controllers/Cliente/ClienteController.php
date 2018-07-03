@@ -132,7 +132,6 @@ class ClienteController extends Controller
                 ->orWhere('apellidomaterno','LIKE',"%$word%")
                 ->orWhere('razonsocial','LIKE',    "%$word%")
                 ->orWhere('rfc','LIKE',            "%$word%")
-                ->orWhere('folio','LIKE',          "%$word%")
                 ->orWhere('identificador','LIKE',    "%$word%");
             }
         })->get();

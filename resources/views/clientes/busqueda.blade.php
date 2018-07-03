@@ -41,7 +41,14 @@
 								
 								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Editar</strong>
 							</a>
-						</div></div>
+						</div>
+						<div class="col-sm-4">
+								<a class="btn btn-warning btn-sm">
+								
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Pagos</strong>
+							</a>
+							</div>
+					</div>
 				
 				</td>
 				</tr>
