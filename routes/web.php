@@ -92,6 +92,8 @@ Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController',
 Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
 
 Route::resource('clientes.info','Cliente\ClienteInfoController');
+
+Route::resource('clientes.pago','Cliente\ClientePagoController');
 //----------------------------------------------------------
 
 

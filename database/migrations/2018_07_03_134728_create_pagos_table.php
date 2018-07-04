@@ -20,10 +20,12 @@ class CreatePagosTable extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes');
             //-----------------------------------
             $table->integer('usuario_id')->unsigned();
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('usuario_id')->references('id')->on('users');
+            //-----------------------------------
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products');
             //-----------------------------------
             $table->string('identificacion');
-            $table->string('clave_producto');
             $table->string('comprobante');
             $table->string('forma_pago');
             $table->string('banco');
@@ -33,8 +35,10 @@ class CreatePagosTable extends Migration
             $table->decimal('monto', 8, 2);
             //------------- OPCIONALES ----------------
             $table->string('numero_cheque')->nullable();
+            $table->string('numero_deposito')->nullable();
             $table->string('numero_tarjeta')->nullable();
             $table->string('nombre_tarjetaHabiente')->nullable();
+
             //-----------------------------------
             $table->softDeletes();
             $table->timestamps();

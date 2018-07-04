@@ -44,4 +44,9 @@ class Product extends Model
    		
    		return $this->status = Product::PRODUCTO_NO_DISPONIBLE;
    	}
+
+    public function pagos(){
+
+        return $this->hasMany('App\Pago');
+    }
 }

@@ -73,7 +73,9 @@ class Cliente extends Model
         
         return $this->hasOne('App\InfoCliente');
     }
-   //  public function beneficiarios(){
-   //      return $this->hasMany(Beneficiarios::class);
-   //  }
+   
+   public function pagos(){
+
+        return $this->hasMany('App\Pago');
+   }
 }
