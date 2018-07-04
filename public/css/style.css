@@ -214,3 +214,10 @@ input:checked + .slider:before {
     display: block;
     
 }
+fieldset.fset{
+    border:solid;padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+
+}
+

@@ -14,10 +14,10 @@
 			  					   </div> 
 			  					   	<div class="col-sm-2">
 			  					   		<?php $solicitante=$cliente;?>
-			  						<a class="btn btn-warning" 
-			  						>
-
-			  						<strong>Pago</strong></a>
+			  						<a class="btn btn-warning btn-sm" href="{{ route('clientes.pago.create',['cliente'=>$cliente]) }}">
+								
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Pagos</strong>
+							</a>
 			  					   </div>
 
 			  					   	<div class="col-sm-2">

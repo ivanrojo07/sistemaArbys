@@ -2,13 +2,14 @@
 @section('content1')
 
 	<legend style="background-color:#730099;color: white;text-align: center;">
-	<strong> Pagos </strong>&nbsp;&nbsp; &nbsp;&nbsp;Cliente: &nbsp;&nbsp;{{$cliente->nombre}}&nbsp;&nbsp;{{$cliente->apellidopaterno}}&nbsp;&nbsp;{{$cliente->apellidomaterno}} &nbsp;&nbsp; &nbsp;&nbsp; ID: &nbsp;&nbsp;{{$cliente->identificador}}
+	<strong> Pagos </strong>&nbsp;&nbsp; &nbsp;&nbsp;Cliente:<strong> &nbsp;&nbsp;{{$cliente->nombre}}&nbsp;&nbsp;{{$cliente->apellidopaterno}}&nbsp;&nbsp;{{$cliente->apellidomaterno}}</strong> &nbsp;&nbsp; &nbsp;&nbsp; ID: &nbsp;&nbsp;<strong>{{$cliente->identificador}}</strong>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<strong>{{date('d-M-Y')}}</strong>
 </legend>
 <div class="container">
   <div class="row">	
   	<div class="col-sm-6">
-  		<fieldset style="border:solid;padding: 10px;">
-			<legend>&nbsp;&nbsp;Productos Elegídos:</legend>
+  		<legend>&nbsp;&nbsp;Productos Elegídos:</legend>
+  		<fieldset class="fset">
+			
 			@foreach($cliente->transactions as $tran)
 		    <nav aria-label="breadcrumb">
 			  <ol class="breadcrumb alert alert-info" id="{{$tran->product->descripcion}}">
@@ -21,11 +22,19 @@
 		</fieldset>
   	</div>
 	<div class="col-sm-6">
-  		<fieldset style="border:solid;padding: 10px;">
-			<legend>&nbsp;&nbsp;Producto a Pagar:</legend>
+		<legend>&nbsp;&nbsp;Producto a Pagar:</legend>
+  		<fieldset class="fset">
 			<nav aria-label="breadcrumb" id="seleccionados">
 			</nav>
 		</fieldset>
+  	</div>
+  </div><br>
+  <div class="row">
+  	<div class="col-sm-3 col-sm-offset-2 form-group">
+  		<label class="control-label"><strong>Tipo de Identificación</strong></label>
+  		<select class="form-control">
+  			<option>uno</option>
+  		</select>
   	</div>
   </div>
 </div>
