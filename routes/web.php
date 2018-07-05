@@ -117,6 +117,7 @@ Route::resource('bancos','Banco\BancoController', ['except'=>'show']);
 Route::resource('canalventas','CanalVenta\CanalVentaController', ['except'=>'show']);
 //--------------------------------------------------------------------
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
+Route::get('getbancos','Banco\BancoController@getBancos');
 //--------------------------------------------------------------
 Route::resource('gastos','Gasto\GastoController', ['except'=>'show']);
 // Route::resource('gastos.create','Gasto\GastoController@create');

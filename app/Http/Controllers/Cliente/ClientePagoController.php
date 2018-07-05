@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
 use App\Pago;
+use App\Banco;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use UxWeb\SweetAlert\SweetAlert as Alert;
@@ -28,8 +29,10 @@ class ClientePagoController extends Controller
      */
     public function create(Cliente $cliente)
     {
+       $bancos=Banco::orderBy('nombre')->get();
        
-        return view('pagos.create',['cliente'=>$cliente]);
+        return view('pagos.create',['cliente'=>$cliente,
+                                    'bancos' =>$bancos]);
     }
 
     /**
