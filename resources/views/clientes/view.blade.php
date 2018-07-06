@@ -210,6 +210,9 @@
 							<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<h4>Aún no se han Elegído Productos para este Cliente.</h4>
 							</div>
+							<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<button onclick="location.reload()" class="btn btn-primary"><strong>Recargar Página</strong></button>
+							</div>
 						</div>
 						@else
 						<div class="col-md-12 offset-md-2 mt-3">

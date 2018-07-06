@@ -13,8 +13,7 @@
 							<a class="btn btn-warning" id="limpiar" onclick="limpiar()"><strong>Limpiar</strong> </a>
 							<button id="submit" type="submit" class="btn btn-success">
 						<strong>Guardar</strong>	</button>
-							<a id="modificar" class="btn btn-primary" onclick="modificar()" style="display: none;">
-						<strong>Modificar</strong>	</a>
+							
 							
 
 						</div>
