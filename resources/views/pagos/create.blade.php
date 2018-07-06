@@ -30,7 +30,7 @@
   	</div>
   </div><br><br>
  {{-- FORMULARIO --}}
- <FORM id="thisform">
+ <FORM id="thisform" method="POST" action="{{route('clientes.pago.store',['cliente'=>$cliente])}}">{{ csrf_field() }}
  	<input type="hidden" name="cliente_id" id="cliente_id" value="{{$cliente->id}}">
  	<input type="hidden" name="usuario_id" id="usuario_id" value="1">
  	<input type="hidden" name="product_id" id="product_id" value="0">
@@ -102,8 +102,14 @@
 		<input type="number" name="numero_deposito" id="numero_deposito" class="form-control" placeholder="#--" min="0"></div>
 </div><br>
 <div class="row fset"><legend>&nbsp;&nbsp;Solicitud</legend>
-	<div class="col-sm-3 form-group">
+	<div class="col-sm-3 col-sm-offset-1 form-group">
 		<input type="submit" name="" class="btn btn-warning" value="Guardar" onclick="check()">
+	</div>
+	<div class="col-sm-3 form-group">
+		<a href="" onclick="event.preventDefault()" class="btn btn-success">Aprobado</a>
+	</div>
+	<div class="col-sm-3 form-group">
+		<a href="" onclick="event.preventDefault()" class="btn btn-danger">No Aprobado</a>
 	</div>
 </div>
 </FORM>
