@@ -94,6 +94,7 @@ Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
 Route::resource('clientes.info','Cliente\ClienteInfoController');
 
 Route::resource('clientes.pago','Cliente\ClientePagoController');
+Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 //----------------------------------------------------------
 
 

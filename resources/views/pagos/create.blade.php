@@ -34,6 +34,7 @@
  	<input type="hidden" name="cliente_id" id="cliente_id" value="{{$cliente->id}}">
  	<input type="hidden" name="usuario_id" id="usuario_id" value="1">
  	<input type="hidden" name="product_id" id="product_id" value="0">
+ 	<input type="hidden" name="status" id="status" value="Guardado">
   <div class="row fset">
   	<div class="col-sm-3 form-group">
   		<label class="control-label"><strong>Identificación</strong></label>
@@ -106,40 +107,18 @@
 		<input type="submit" name="" class="btn btn-warning" value="Guardar" onclick="check()">
 	</div>
 	<div class="col-sm-3 form-group">
-		<button data-toggle="modal" data-target="#ModalAp" onclick="event.preventDefault()" class="btn btn-success">Aprobado</button>
+		<button  onclick="checkDos()" class="btn btn-success">Aprobado</button>
 	</div>
 	<div class="col-sm-3 form-group">
-		<button data-toggle="modal" data-target="#ModalNo" onclick="event.preventDefault()" class="btn btn-danger">No Aprobado</button>
+		<button  onclick="alert()" class="btn btn-danger">No Aprobado</button>
 	</div>
 </div>
 </FORM>
 {{-- FORMULARIO --}}
 
 
-{{-- MODAL APROVADO --}}
-<div class="modal fade" id="ModalAp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-{{-- MODAL APROVADO --}}
 
-{{-- MODAL NO APROVADO --}}
-{{-- MODAL NO APROVADO --}}
+
 
 <script type="text/javascript">
 	function getBancos(){

@@ -86,12 +86,101 @@ function check(){
       
 
           if($("#product_id").prop('value')=='0'){
-
-        alert('Debe seleccionar un <Producto a Pagar> para poder Registar el Pago');
-        
-        
-          }else{
+ 
+            verificado();
+       
+        }else{
              
-            
+             
            }
 }
+//-------------------------------------------------------------------
+function deleteFunction() {
+
+//event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+swal({
+  title: "¿Estas seguro de generar un Solicitante?",
+  text: "Favor de verificar la información.",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "SI",
+  cancelButtonText: "¡NO!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},function(isConfirm){
+  if (!isConfirm) {
+    
+    swal("Cancelado", "", "error");
+
+  } else {
+    
+    if($("#product_id").prop('value')=='0'){
+ 
+            verificado();
+       
+        }else{
+            
+              $("#thisform").submit(function(event){
+       
+        
+                 }); 
+        }
+             
+  }
+});
+}
+//-----------------------------------------------------------------------------
+function verificado() {
+
+
+swal({
+  title: "Debe elegir un prodcuto a Pagar",
+  text: "Favor de verificar la información.",
+  type: "warning",
+  
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "OK",
+  //cancelButtonText: "¡NO!",
+  closeOnConfirm: true
+  //closeOnCancel: false
+},function(isConfirm){
+  
+
+});
+}
+//------------------------------------------------------------------------------------
+function checkDos(){
+$("#status").prop('value','Aprobado');
+  if($("#product_id").prop('value')=='0'){
+ 
+            verificado();
+       
+        }else{
+             
+              var form = event.target.form; // storing the form
+swal({
+  title: "¿Estas seguro de generar un Solicitante?",
+  text: "Favor de verificar la información.",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "SI",
+  cancelButtonText: "¡NO!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},function(isConfirm){
+  if (!isConfirm) {
+    
+    swal("Cancelado", "", "error");
+
+  } else {
+    
+    
+             
+        }
+});
+           }
+}
+//------------------------------------------------------------------------------------

@@ -43,6 +43,7 @@ class ClientePagoController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $pago=Pago::create($request->all());
         Alert::success('Pago registrado con éxito (No ha sido Aprovado aún)', 'Se redireccionará a la lista de Clientes');
         return redirect()->route('clientes.index');
@@ -91,5 +92,9 @@ class ClientePagoController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function store_dos(Cliente $cliente){
+
     }
 }
