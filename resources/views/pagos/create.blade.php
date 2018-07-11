@@ -110,7 +110,7 @@
 		<button  onclick="checkDos()" class="btn btn-success">Aprobado</button>
 	</div>
 	<div class="col-sm-3 form-group">
-		<button  onclick="alert()" class="btn btn-danger">No Aprobado</button>
+		<button  onclick="checkTres()" class="btn btn-danger">No Aprobado</button>
 	</div>
 </div>
 </FORM>

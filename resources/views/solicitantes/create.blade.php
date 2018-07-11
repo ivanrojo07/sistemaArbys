@@ -17,7 +17,22 @@
 			    					<label class="control-label" for="clienteid">ID del Cliente:</label>
 			    					<dd><strong> {{ $cliente->identificador }}</strong></dd>
 			  					</div>
-
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="clienteid">Nombre del Cliente:</label>
+			    					<dd><strong>
+			    						@if($cliente->tipopersona=='Fisica')
+			    					 {{ $cliente->nombre }}&nbsp;&nbsp;{{ $cliente->apellidopaterno }}
+			    					    @else
+			    					  {{ $cliente->razonsocial}}
+			    					    @endif
+			    					</strong></dd>
+			  					</div>
+			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+			    					<label class="control-label" for="clienteid">Tipo de Persona:</label>
+			    					<dd><strong> {{ $cliente->tipopersona }}</strong></dd>
+			  					</div>
+			  				</div>	
+			  				<div class="col-md-12 offset-md-2 mt-3">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			    					<label class="control-label" for="tiemporesidir"><i class="fa fa-asterisk" aria-hidden="true"></i>Tiempo de Residencia:</label>
 			    					<input type="text" class="form-control" id="tiemporesidir" name="tiemporesidir" placeholder="Tiempo de Residencia" required>
