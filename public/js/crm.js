@@ -30,9 +30,10 @@ $(document).ready(function(){
                             $('#fechafrom').change(function(){
                                 
                             var aviso = $('#fechafrom').val();
+                            $('#fechato').val('');
                             $('#fechato').attr("min",aviso);
-                                                
-                            $('#fechato').prop('disabled',false);
+                             $('#fechato').prop('disabled',false);
+
                                  });
 //-------------------------------------------------------------------------------------
 	$('#fecha_uno').change(function(){

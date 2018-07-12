@@ -11,6 +11,7 @@
 						<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
 						<div class="col-xs-4 col-xs-offset-10">
 							<a class="btn btn-warning" id="limpiar" onclick="limpiar()"><strong>Limpiar</strong> </a>
+							<a class="btn btn-info" id="nuevo" onclick="modificar()" style="display: none;"><strong>Nuevo</strong> </a>
 							<button id="submit" type="submit" class="btn btn-success">
 						<strong>Guardar</strong>	</button>
 							
@@ -138,9 +139,10 @@
 				document.getElementById('comentarios').disabled = true;
 				document.getElementById('observaciones').value = elemento.observaciones;
 				document.getElementById('observaciones').disabled = true;
-				document.getElementById('submit').disabled= true
-				document.getElementById('modificar').style.display = ''
-				document.getElementById('limpiar').style.display = 'none';
+				document.getElementById('submit').disabled= true;
+				
+				$('#limpiar').hide();
+				$('#nuevo').show();
 
 			}
 			function modificar(){
@@ -153,8 +155,12 @@
 				document.getElementById("comentarios").disabled = false;
 				document.getElementById("observaciones").disabled = false;
 				document.getElementById("submit").disabled = false;
-				document.getElementById('modificar').style.display = 'none'
-				document.getElementById('limpiar').style.display = '';
+				
+				$('#limpiar').show();
+				$('#nuevo').hide();
+				$("input").val('');
+				$("textarea").val('');
+				$('#fecha_cont').prop('disabled',true);
 			}
 			function limpiar(){
 				
@@ -180,6 +186,7 @@
 				$('#fecha_aviso').change(function(){
 
 					var aviso = $('#fecha_aviso').val();
+					$('#fecha_cont').val("");
 					$('#fecha_cont').attr("min",aviso);
 										
 					$('#fecha_cont').prop('disabled',false);
