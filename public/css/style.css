@@ -223,3 +223,4 @@ input:checked + .slider:before {
 .nondisp{
     display: none;
 }
+dd{color: black;}

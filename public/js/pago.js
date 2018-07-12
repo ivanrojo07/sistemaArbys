@@ -83,7 +83,7 @@ $(document).ready(function(){
 
 function check(){
 
-      
+   $("#status").prop('value','Guardado');   
 
           if($("#product_id").prop('value')=='0'){
  
@@ -132,7 +132,7 @@ function verificado() {
 
 swal({
   title: "Debe elegir un prodcuto a Pagar",
-  text: "Favor de verificar la información.",
+  text: "Favor de verificar toda la información.",
   type: "warning",
   
   confirmButtonColor: "#DD6B55",
@@ -157,3 +157,37 @@ function checkDos(){
              }
 }
 //------------------------------------------------------------------------------------
+function checkTres(){
+
+  $("#status").prop('value','No Aprobado');
+  if($("#product_id").prop('value')=='0'){
+ 
+            verificado();
+       
+        }else{
+             
+              var form = event.target.form; // storing the form
+swal({
+  title: "¿Estas seguro de Rechazar el Pago?",
+  text: "Favor de verificar la información.",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "SI",
+  cancelButtonText: "¡NO!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+},function(isConfirm){
+  if (!isConfirm) {
+    
+    swal("Cancelado", "", "error");
+
+  } else {
+    
+    
+             
+        }
+});
+           }
+
+}
