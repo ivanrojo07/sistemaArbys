@@ -222,7 +222,7 @@
                                                 <th>Correo</th>
                                                 <th>Status</th>
                                                 <th>Fecha de Aviso</th>
-                                                <th>Observaciones</th>
+                                                <th>Detalle de Cliente</th>
                                                 
                                             </tr>
                                         </thead>
@@ -239,7 +239,12 @@
                                                 <td>{{$crm->clientes->mail}}</td>
                                                 <td>{{$crm->status}}</td>
                                                 <td>{{$crm->fecha_aviso}}</td>
-                                                <td>{{substr($crm->observaciones,0,50)}}...</td>
+                                                <td>
+                                                    <a class="btn btn-success btn-sm" href="{{ route('clientes.show',['id'=>$crm->clientes->id]) }}">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i> 
+                                                    <strong>Crear Nuevo(Cliente Actual)
+                                                </strong></a>
+                                                </td>
                                                 
                                                 
                                                 <input type="hidden" name="id_cliente" value="{{$crm->clientes->id}}">
@@ -295,8 +300,12 @@
             <select class="form-control" name="cliente_id" id="cliente_id_sel" required>
                 <option value="">Seleccionar Cliente</option>
                 @foreach($clientes as $cliente)
+                 @isset($cliente->nombre)
                 <option value="{{$cliente->id}}">{{$cliente->nombre}}&nbsp;{{$cliente->apellidopaterno}}
                 </option>
+                @else
+                <option value="{{$cliente->id}}">{{$cliente->razonsocial}}</option>
+                @endisset
                 @endforeach
             </select>
         </div>
