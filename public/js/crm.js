@@ -25,6 +25,7 @@ $(document).ready(function(){
                             $('#acuerdos').val($(this).find( "input[name$='acuerdos']").val());
                             $('#comentarios').val($(this).find( "input[name$='comentarios']").val());
                             $('#observaciones').val($(this).find( "input[name$='observaciones']").val());
+                            $('#vinculo').attr('href',"{{ route('clientes.show',['id'=>"+$(this).find( "input[name$='id_cliente']").val()+"]) }}");
                         });
 
                             $('#fechafrom').change(function(){

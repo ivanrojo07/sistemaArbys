@@ -166,11 +166,12 @@
 </div>
 <div class="modal-footer">
 <div class="row">
-    <div class="col-sm-4 col-md-offset-8">
-        <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
-        
+    <div class="col-sm-4 col-md-offset-4">
+       <a href="" name="vinculo" id="vinculo" class="btn btn-block btn-success">Crear Nuevo</a>
     </div>
-    
+    <div class="col-sm-4">
+         <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
+    </div>
     
 </div>
 </div>

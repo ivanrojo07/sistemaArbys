@@ -64,7 +64,7 @@
 			<select type="select" name="banco" class="form-control" id="banco" required>
 				<option id="sin_definir" value="">Seleccione Uno</option>
 					@foreach($bancos as $banco)
-				<option id="{{$banco->id}}" value="{{$banco->id}}">{{$banco->nombre}}</option>
+				<option id="{{$banco->id}}" value="{{$banco->nombre}}">{{$banco->nombre}}</option>
 					@endforeach
 			</select>
 		</div>
