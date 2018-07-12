@@ -90,46 +90,41 @@ function check(){
             verificado();
        
         }else{
-             
-             
-           }
+             }
 }
 //-------------------------------------------------------------------
-function deleteFunction() {
+function alertD() {
 
-//event.preventDefault(); // prevent form submit
-var form = event.target.form; // storing the form
-swal({
-  title: "¿Estas seguro de generar un Solicitante?",
-  text: "Favor de verificar la información.",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "SI",
-  cancelButtonText: "¡NO!",
-  closeOnConfirm: false,
-  closeOnCancel: false
-},function(isConfirm){
-  if (!isConfirm) {
-    
-    swal("Cancelado", "", "error");
-
-  } else {
-    
-    if($("#product_id").prop('value')=='0'){
- 
-            verificado();
+          $("#status").prop('value','Aprobado');
+        if($("#product_id").prop('value')=='0'){
        
-        }else{
-            
-              $("#thisform").submit(function(event){
-       
-        
-                 }); 
-        }
+                  verificado();
              
-  }
-});
+              }else{
+                   
+                    //var form = event.target.form; // storing the form
+      swal({
+        title: "¿Estas seguro de generar un Solicitante?",
+        text: "Favor de verificar la información.",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "SI",
+        cancelButtonText: "¡NO!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },function(isConfirm){
+        if (!isConfirm) {
+          
+          swal("Cancelado", "", "error");
+
+        } else {
+          
+          
+                   
+              }
+      });
+                 }
 }
 //-----------------------------------------------------------------------------
 function verificado() {
@@ -152,35 +147,13 @@ swal({
 }
 //------------------------------------------------------------------------------------
 function checkDos(){
-$("#status").prop('value','Aprobado');
-  if($("#product_id").prop('value')=='0'){
+
+    if($("#product_id").prop('value')=='0'){
  
             verificado();
        
         }else{
-             
-              var form = event.target.form; // storing the form
-swal({
-  title: "¿Estas seguro de generar un Solicitante?",
-  text: "Favor de verificar la información.",
-  type: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#DD6B55",
-  confirmButtonText: "SI",
-  cancelButtonText: "¡NO!",
-  closeOnConfirm: false,
-  closeOnCancel: false
-},function(isConfirm){
-  if (!isConfirm) {
-    
-    swal("Cancelado", "", "error");
-
-  } else {
-    
-    
-             
-        }
-});
-           }
+                  alertD();
+             }
 }
 //------------------------------------------------------------------------------------
