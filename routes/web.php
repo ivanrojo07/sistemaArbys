@@ -131,6 +131,11 @@ Route::resource('sucursal','Empleado\EmpleadoSucursalController');
 
 Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
 
+Route::get('temporal', function () {
+    return view('temporal.tempo', ['name' => 'James']);
+});
+
+
 Route::get('pdf',function(){
 
 	//$pdf = PDF::loadView('clientes.aux_html');
