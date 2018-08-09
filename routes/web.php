@@ -43,6 +43,7 @@ Route::resource('personals.product','Personal\PersonalProductController', ['only
 // Route::resource('beneficiarios', 'BeneficiariosController');
 // Route::resource('prodpersonal','ProdUsuarioController');
 Route::get('pruebas','PruebasController@create');
+
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
@@ -149,3 +150,46 @@ Route::get('pdf',function(){
 //Route::get('doc','Cliente\ClienteProductoController');
 //-------------------------------------------------------------------
 //->name('products.pdf')
+
+
+/*
+ * Recursos Humanos (Cambio) y Oficinas (Nuevo)
+ * Armando 07/08/2018
+ */
+
+// <-- MENU OFICINAS --
+Route::get('test', function () {
+    return view('puntodeventa.index');
+});
+
+Route::get('test2', function () {
+    return view('oficina.index');
+});
+	
+Route::get('test3', function () {
+    return view('region.index');
+});
+
+Route::get('test4', function () {
+    return view('estado.index');
+});
+//-------------------------------------------------------------------
+
+
+Route::resource('empleadosC', 'EmpleadoComercial\EmpleadoComercialController');
+
+
+//----------------MENU RECURSOS HUMANOS -----------------------------
+Route::get('busqueda1', function () {
+    return view('empleadocomercial.index');
+});
+Route::get('busqueda2', function () {
+    return view('empleado.index');
+});
+Route::get('alta1', function () {
+    return view('empleadocomercial.create');
+});
+Route::get('alta2', function () {
+    return view('empleado.create');
+});
+//-------------------------------------------------------------------
