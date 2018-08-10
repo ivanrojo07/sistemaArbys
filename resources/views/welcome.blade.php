@@ -323,13 +323,13 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('test3')}}','Región')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
                                             <i class="fa fa-map" aria-hidden="true"></i> Región
                                         </a>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('test4') }}','Estado')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
                                             <i class="fa fa-flag" aria-hidden="true"></i> Estado
                                         </a>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('test2') }}','Oficina')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('oficina') }}','Oficina')">
                                             <i class="fa fa-briefcase" aria-hidden="true"></i> Oficina
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('test')}}','Punto de Venta')">

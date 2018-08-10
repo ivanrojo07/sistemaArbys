@@ -162,17 +162,13 @@ Route::get('test', function () {
     return view('puntodeventa.index');
 });
 
-Route::get('test2', function () {
-    return view('oficina.index');
-});
-	
-Route::get('test3', function () {
-    return view('region.index');
-});
+Route::get('region', 'Region\RegionController@index')->name('region.index');
+Route::get('region/{region}','Region\RegionController@estados');
 
-Route::get('test4', function () {
-    return view('estado.index');
-});
+Route::get('estado', 'Estado\EstadoController@index')->name('estado.index');
+Route::get('estado/{estado}','Estado\EstadoController@region');
+
+Route::resource('oficina', 'Oficina\OficinaController');
 //-------------------------------------------------------------------
 
 
@@ -192,4 +188,5 @@ Route::get('alta1', function () {
 Route::get('alta2', function () {
     return view('empleado.create');
 });
+
 //-------------------------------------------------------------------

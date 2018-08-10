@@ -7,14 +7,14 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Estado extends Model
 {
-    //
+
     use Sortable;
 
     protected $fillable = [
     	'id',
-    	'nombre',
-    	'abreviatura',
-    	'id_region'
+    	'region_id',
+        'nombre',
+        'abreviatura'
     ];
 
     public $sortable = [ 'id', 'nombre' ];
@@ -23,6 +23,10 @@ class Estado extends Model
 
     public function region() {
         return $this->belongsTo('App\Region');
+    }
+
+    public function oficinas() {
+        return $this->hasMany('App\Oficina');
     }
 
 }

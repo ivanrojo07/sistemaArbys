@@ -87,5 +87,6 @@
     @include('sweet::alert')
     <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
      <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
+     @yield('scripts')
 </body>
 </html>
