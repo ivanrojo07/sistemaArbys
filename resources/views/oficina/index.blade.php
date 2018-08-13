@@ -10,7 +10,7 @@
 						<h4>Oficinas:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('oficina.create') }}"><button class="btn btn-primary">Agregar Nueva</button></a>
+						<a href="{{ route('oficina.create') }}"><button class="btn btn-success">Agregar Nueva</button></a>
 					</div>
 				</div>
 			</div>
@@ -32,10 +32,10 @@
 								<td>{{ $oficina->abreviatura }}</td>
 								<td>{{ $oficina->responsable }}</td>
 								<td class="text-center">
-									<a class="btn btn-success btn-sm" href="#">
+									<a class="btn btn-primary btn-sm" href="{{ route('oficina.show', ['id' => $oficina->id]) }}">
 										<i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong>
 									</a>
-									<a class="btn btn-info btn-sm" href="#">
+									<a class="btn btn-danger btn-sm" href="{{ route('oficina.edit', ['id' => $oficina->id]) }}">
 										<i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Editar</strong>
 									</a>
 								</td>

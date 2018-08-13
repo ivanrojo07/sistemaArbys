@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Oficina;
+namespace App\Http\Controllers\PuntoDeVenta;
 
+use App\PuntoDeVenta;
 use App\Oficina;
-use App\Estado;
 use Illuminate\Http\Request;
-use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Http\Controllers\Controller;
 
-class OficinaController extends Controller
+class PuntoDeVentaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,9 @@ class OficinaController extends Controller
      */
     public function index()
     {
-        $oficinas = Oficina::get();
-        return view('oficina.index', ['oficinas' => $oficinas]);
+        //
+        $puntosDeVenta = PuntoDeVenta::get();
+        return view('puntodeventa.index', ['puntosDeVenta' => $puntosDeVenta]);
     }
 
     /**
@@ -28,8 +28,8 @@ class OficinaController extends Controller
      */
     public function create()
     {
-        $estados = Estado::get();
-        return view('oficina.create', ['estados' => $estados]);
+        $oficinas = Oficina::get();
+        return view('puntodeventa.create', ['oficinas' => $oficinas]);
     }
 
     /**
@@ -40,8 +40,8 @@ class OficinaController extends Controller
      */
     public function store(Request $request)
     {
-        $oficina = Oficina::create($request->all());
-        return view('oficina.view', ['oficina' => $oficina]);
+        $punto = PuntoDeVenta::create($request->all());
+        return view('puntodeventa.view', ['punto' => $punto]);
     }
 
     /**
@@ -52,8 +52,7 @@ class OficinaController extends Controller
      */
     public function show($id)
     {
-        $oficina = Oficina::find($id);
-        return view('oficina.view', ['oficina' => $oficina]);
+        //
     }
 
     /**
@@ -64,9 +63,7 @@ class OficinaController extends Controller
      */
     public function edit($id)
     {
-        $oficina = Oficina::find($id);
-        $estados = Estado::get();
-        return view('oficina.edit', ['oficina' => $oficina, 'estados' => $estados]);
+        //
     }
 
     /**
@@ -78,9 +75,7 @@ class OficinaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $oficina = Oficina::find($id);
-        $oficina->update($request->except('_method', '_token'));
-        return view('oficina.view', ['oficina' => $oficina]);
+        //
     }
 
     /**

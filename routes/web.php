@@ -169,6 +169,8 @@ Route::get('estado', 'Estado\EstadoController@index')->name('estado.index');
 Route::get('estado/{estado}','Estado\EstadoController@region');
 
 Route::resource('oficina', 'Oficina\OficinaController');
+
+Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 //-------------------------------------------------------------------
 
 

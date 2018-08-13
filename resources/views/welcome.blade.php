@@ -332,7 +332,7 @@
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('oficina') }}','Oficina')">
                                             <i class="fa fa-briefcase" aria-hidden="true"></i> Oficina
                                         </a>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('test')}}','Punto de Venta')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('puntoDeVenta')}}','Punto de Venta')">
                                             <i class="fa fa-building-o" aria-hidden="true"></i> Punto de venta
                                         </a>
                                     </li>                     

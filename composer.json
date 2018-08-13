@@ -15,6 +15,7 @@
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "maatwebsite/excel": "^2.1",
+        "nesbot/carbon": "^1.33",
         "uxweb/sweet-alert": "^1.4"
     },
     "require-dev": {

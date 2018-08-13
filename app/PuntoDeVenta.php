@@ -5,36 +5,38 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
-class Oficina extends Model
+class PuntoDeVenta extends Model
 {
 
     use Sortable;
 
     protected $fillable = [
     	'id',
-    	'estado_id',
+    	'oficina_id',
         'nombre',
         'abreviatura',
         'responsable',
         'descripcion',
+        'tipo',
         'calle',
         'numext',
         'numint',
+        'colonia',
         'cp',
-        'delegacion',
-        'ciudad'
+        'ciudad',
+        'nombre_plaza',
+        'numero_stand',
+        'ubicacion',
+        'fecha_inicio',
+        'fecha_fin'
     ];
 
-    public $sortable = [ 'id', 'nombre', 'abreviatura', 'responsable' ];
+    public $sortable = [ 'id', 'nombre', 'abreviatura', 'nombre_plaza', 'numero_stand' ];
 
     protected $hidden=[ 'created_at', 'updated_at' ];
 
-    public function estado() {
-        return $this->belongsTo('App\Estado');
-    }
-
-    public function puntosDeVenta() {
-        return $this->hasMany('App\PuntoDeVenta');
+    public function oficina() {
+        return $this->belongsTo('App\Oficina');
     }
 
 }
