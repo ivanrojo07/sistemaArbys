@@ -7,7 +7,7 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-sm-4">
-						<h4>Puntos de Venta::</h4>
+						<h4>Puntos de Venta:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('puntoDeVenta.create') }}"><button class="btn btn-success">Agregar Nuevo</button></a>
@@ -26,7 +26,7 @@
 								<th># Stand</th>
 								<th class="text-center">Acciones</th>
 							</tr>
-							@foreach($puntosDeVenta as $punto)
+							@foreach($puntos as $punto)
 							<tr>
 								<td>{{ $punto->id }}</td>
 								<td>{{ $punto->nombre }}</td>

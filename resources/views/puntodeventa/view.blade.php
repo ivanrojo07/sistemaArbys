@@ -11,7 +11,7 @@
 						<h4>Datos del Punto de Venta:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary">Ver Oficinas</button></a>
+						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary">Ver Puntos</button></a>
 						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}"><button class="btn btn-danger">Editar</button></a>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 						<div class="row">
 							<div class="form-group col-sm-12">
 								<label for="fin" class="control-label">Fecha de fin:</label>
-								<input type="date" name="fecha_fin" class="form-control" id="fin" value="{{ $punto->fecha_inicio }}" readonly="">
+								<input type="date" name="fecha_fin" class="form-control" id="fin" value="{{ $punto->fecha_fin }}" readonly="">
 							</div>
 						</div>
 					</div>
@@ -150,11 +150,6 @@
 								<textarea class="form-control" maxlength="500" rows="4" name="ubicacion" readonly="">{{ $punto->ubicacion }}</textarea>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 col-sm-offset-4 text-center">
-						<button class="btn btn-success">Guardar</button>
 					</div>
 				</div>
 			</div>

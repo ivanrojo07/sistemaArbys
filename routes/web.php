@@ -174,7 +174,7 @@ Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 //-------------------------------------------------------------------
 
 
-Route::resource('empleadosC', 'EmpleadoComercial\EmpleadoComercialController');
+Route::resource('empleadoc', 'EmpleadoComercial\EmpleadoComercialController');
 
 
 //----------------MENU RECURSOS HUMANOS -----------------------------

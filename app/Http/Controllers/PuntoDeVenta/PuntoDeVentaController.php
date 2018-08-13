@@ -17,8 +17,8 @@ class PuntoDeVentaController extends Controller
     public function index()
     {
         //
-        $puntosDeVenta = PuntoDeVenta::get();
-        return view('puntodeventa.index', ['puntosDeVenta' => $puntosDeVenta]);
+        $puntos = PuntoDeVenta::get();
+        return view('puntodeventa.index', ['puntos' => $puntos]);
     }
 
     /**
@@ -52,7 +52,8 @@ class PuntoDeVentaController extends Controller
      */
     public function show($id)
     {
-        //
+        $punto = PuntoDeVenta::find($id);
+        return view('puntodeventa.view', ['punto' => $punto]);
     }
 
     /**
@@ -63,7 +64,9 @@ class PuntoDeVentaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $punto = PuntoDeVenta::find($id);
+        $oficinas = Oficina::get();
+        return view('puntodeventa.edit', ['punto' => $punto, 'oficinas' => $oficinas]);
     }
 
     /**
@@ -75,7 +78,9 @@ class PuntoDeVentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $punto = PuntoDeVenta::find($id);
+        $punto->update($request->except('_method', '_token'));
+        return view('puntodeventa.view', ['punto' => $punto]);
     }
 
     /**

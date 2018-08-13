@@ -184,12 +184,12 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleadosC/create') }}','Alta')">
+                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleadoc/create') }}','Alta')">
                                                         <i class="fa fa-plus" aria-hidden="true"></i> Alta
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleadosC') }}','Búsqueda')">
+                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleadoc') }}','Búsqueda')">
                                                         <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                                     </a>
                                                 </li>

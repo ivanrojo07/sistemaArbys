@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\EmpleadoComercial;
 
+use App\EmpleadoComercial;
+use App\Oficina;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,8 +16,8 @@ class EmpleadoComercialController extends Controller
      */
     public function index()
     {
-        //
-        return view('empleadocomercial.index');
+        $empleados = EmpleadoComercial::get();
+        return view('empleadocomercial.index', ['empleados' => $empleados]);
     }
 
     /**
@@ -25,8 +27,8 @@ class EmpleadoComercialController extends Controller
      */
     public function create()
     {
-        //
-        return view('empleadocomercial.create', ['edit' => false]);
+        $oficinas = Oficina::get();
+        return view('empleadocomercial.create', ['oficinas' => $oficinas]);
     }
 
     /**
@@ -37,7 +39,11 @@ class EmpleadoComercialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $oficina = Oficina::find($request->input('oficina_id'));
+        $identificador = $oficina->abreviatura . $request->input('appaterno')[0];
+        $request->merge(['identificador' => $identificador]);
+        $empleado = EmpleadoComercial::create($request->all());
+        return view('empleadocomercial.view', ['empleado' => $empleado]);
     }
 
     /**
@@ -48,7 +54,8 @@ class EmpleadoComercialController extends Controller
      */
     public function show($id)
     {
-        //
+        $empleado = EmpleadoComercial::find($id);
+        return view('empleadocomercial.view', ['empleado' => $empleado]);
     }
 
     /**
@@ -59,7 +66,9 @@ class EmpleadoComercialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empleado = EmpleadoComercial::find($id);
+        $oficinas = Oficina::get();
+        return view('empleadocomercial.edit', ['empleado' => $empleado, 'oficinas' => $oficinas]);
     }
 
     /**
@@ -71,7 +80,13 @@ class EmpleadoComercialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $oficina = Oficina::find($request->input('oficina_id'));
+        $identificador = $oficina->abreviatura . $request->input('appaterno')[0];
+        $request->merge(['identificador' => $identificador]);
+        $empleado = EmpleadoComercial::find($id)->update($request->all());
+        $empleado = EmpleadoComercial::find($id);
+        return view('empleadocomercial.view', ['empleado' => $empleado]);
+
     }
 
     /**
