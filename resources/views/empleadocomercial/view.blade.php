@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
 	<div role="application" class="panel panel-group">
 		<div class="panel-default">
 			<div class="panel-heading">
@@ -13,7 +13,6 @@
 					</div>
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('empleadoc.index') }}"><button class="btn btn-primary">Ver Empleados</button></a>
-						<a href="{{ route('empleadoc.edit', ['id' => $empleado->id]) }}"><button class="btn btn-primary">Editar</button></a>
 					</div>
 				</div>
 			</div>
@@ -45,6 +44,12 @@
 			</div>
 			<div>
 				<ul class="nav nav-pills nav-justified">
+					<li class="active"><a href="#" class="ui-tabs-anchor">Generales:</a></li>
+					<li role="presentation"><a href="{{ route('empleadoc.datosLaborales.index', ['id' => $empleado->id]) }}" class="ui-tabs-anchor">Laborales:</a></li>
+					<li role="presentation"><a class="ui-tabs-anchor">Estudios:</a></li>
+					<li role="presentation"><a class="ui-tabs-anchor">Emergencias:</a></li>
+					<li role="presentation"><a class="ui-tabs-anchor">Vacaciones:</a></li>
+					<li role="presentation"><a class="ui-tabs-anchor">Administrativo:</a></li>
 				</ul>
 			</div>
 			<div class="panel-heading">
@@ -149,6 +154,11 @@
 							else if($empleado->experto == 7)
 								echo('Autos, Motos y Casas');
 						?>" readonly="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-4 text-center">
+						<a href="{{ route('empleadoc.edit', ['id' => $empleado->id]) }}"><button class="btn btn-primary">Editar</button></a>
 					</div>
 				</div>
 			</div>

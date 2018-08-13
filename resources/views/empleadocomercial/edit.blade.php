@@ -13,7 +13,6 @@
 					</div>
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('empleadoc.index') }}"><button class="btn btn-primary">Ver Empleados</button></a>
-						<a href="{{ route('empleadoc.edit', ['id' => $empleado->id]) }}"><button class="btn btn-primary" disabled="">Editar</button></a>
 					</div>
 				</div>
 			</div>

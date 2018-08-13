@@ -175,20 +175,4 @@ Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 
 
 Route::resource('empleadoc', 'EmpleadoComercial\EmpleadoComercialController');
-
-
-//----------------MENU RECURSOS HUMANOS -----------------------------
-Route::get('busqueda1', function () {
-    return view('empleadocomercial.index');
-});
-Route::get('busqueda2', function () {
-    return view('empleado.index');
-});
-Route::get('alta1', function () {
-    return view('empleadocomercial.create');
-});
-Route::get('alta2', function () {
-    return view('empleado.create');
-});
-
-//-------------------------------------------------------------------
+Route::resource('empleadoc.datosLaborales', 'EmpleadoComercial\DatosLaboralesController');
