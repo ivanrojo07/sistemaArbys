@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
-class EmpleadoCDatosLaborales extends Model
-
+class EmpleadoComDatosLab extends Model
+{
     //
     use Sortable; 
 
-    protected $table='empleadosdatoslab';
+    protected $table='empleado_com_datos_labs';
 
     protected $fillable=[
      'id',
-     'empleado_id',
+     'empleado_comercial_id',
      'fechacontratacion',
      'fechaactualizacion',
      'contrato_id',
@@ -44,7 +44,7 @@ class EmpleadoCDatosLaborales extends Model
     public $sortable=['id'];
 
     public function empleado(){
-    	return $this->belongsTo('App\EmpleadoComercial');
+    	return $this->belongsTo('App\EmpleadoComercial', 'empleado_comercial_id');
     }
     public function tipocontrato(){
     	return $this->hasOne('App\TipoContrato', 'contrato_id');

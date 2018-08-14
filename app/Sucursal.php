@@ -48,5 +48,9 @@ class Sucursal extends Model
     public function datosLab(){
         return $this->hasMany('App\EmpleadosDatosLab');
     }
+
+    public function datosLabCom(){
+        return $this->belongsTo('App\EmpleadoComDatosLab');
+    }
    
 }

@@ -158,10 +158,6 @@ Route::get('pdf',function(){
  */
 
 // <-- MENU OFICINAS --
-Route::get('test', function () {
-    return view('puntodeventa.index');
-});
-
 Route::get('region', 'Region\RegionController@index')->name('region.index');
 Route::get('region/{region}','Region\RegionController@estados');
 
@@ -175,4 +171,4 @@ Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 
 
 Route::resource('empleadoc', 'EmpleadoComercial\EmpleadoComercialController');
-Route::resource('empleadoc.datosLaborales', 'EmpleadoComercial\DatosLaboralesController');
+Route::resource('empleadoc.datoslaborales', 'EmpleadoComercial\EmpleadoComDatosLabController');

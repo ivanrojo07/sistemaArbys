@@ -49,4 +49,7 @@ class EmpleadoComercial extends Model
         return $this->belongsTo('App\Oficina');
     }
     
+    public function datosLaborales(){
+        return $this->hasMany('App\EmpleadoComDatosLab');
+    }
 }

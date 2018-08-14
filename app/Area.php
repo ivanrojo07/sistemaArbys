@@ -19,4 +19,8 @@ class Area extends Model
     public function datosLab(){
     	return $this->belongsTo('App\EmpleadosDatosLab');
     }
+
+    public function datosLabCom(){
+    	return $this->belongsTo('App\EmpleadoComDatosLab');
+    }
 }

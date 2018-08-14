@@ -14,7 +14,12 @@ class TipoBaja extends Model
     protected $fillable=['id','nombre','descripcion'];
     protected $hidden=['created_at','updated_at'];
     public $sortable=['id','nombre','descripcion'];
+    
     public function datosLab(){
     	return $this->belongsTo('App\EmpleadosDatosLab');
+    }
+
+    public function datosLabCom(){
+    	return $this->belongsTo('App\EmpleadoComDatosLab');
     }
 }
