@@ -24,9 +24,10 @@ class EmpleadoComDatosLabController extends Controller
     {
         $empleado = EmpleadoComercial::find($id);
         if(count($empleado->datosLaborales) == 0)
-            return redirect()->route('empleadoc.datoslaborales.create', ['id' => $empleado->id]);
+            return $this->create($id);
         else
-            return redirect()->route('empleadoc.datoslaborales.show', ['id' => $empleado->id]);
+            return $this->show($id);
+
     }
 
     /**
@@ -129,33 +130,31 @@ class EmpleadoComDatosLabController extends Controller
     public function show($id)
     {
         $empleado = EmpleadoComercial::find($id);
-         // dd($empleado);
-        $areas =   Area::get();
+        $areas = Area::get();
         $puestos = Puesto::get();
-        $sucursales =Sucursal::get();
+        $sucursales = Sucursal::get();
         $bancos= Banco::get();
-        $contratos=TipoContrato::get();
+        $contratos = TipoContrato::get();
 
-        $datoslab = EmpleadoComDatosLab::where('empleado_comercial_id', $empleado->id);
-        dd($datoslab->id);
-        $area= Area::where('id', $datoslab->area_id);
-        $puesto=Puesto::where('id',$datoslab->puesto_id)->first();
-        $contrato=TipoContrato::where('id',$datoslab->contrato_id)->first();
-        $sucursal=Sucursal::where('id',$datoslab->sucursal_id)->first();
-            # code...
-            return view('empleadocomercial.laborales.view',[
-                'empleado'=>$empleado,
-                'datoslaborales'=>$datoslaborales,
-                'areas'=>$areas,
-                'puestos'=>$puestos,
-                'sucursales'=>$sucursales,
-                'datoslab'=>$datoslab,
-                'area'=>$area,
-                'puesto'=>$puesto,
-                'contrato'=>$contrato,
-                'contratos'=>$contratos,
-                'sucursal'=>$sucursal,
-                'bancos'=>$bancos]); 
+        $datoslab = $empleado->datosLaborales()->first();
+        $area = Area::where('id', $datoslab->area_id)->first();
+        $puesto = Puesto::where('id', $datoslab->puesto_id)->first();
+        $contrato = TipoContrato::where('id', $datoslab->contrato_id)->first();
+        $sucursal = Sucursal::where('id', $datoslab->sucursal_id)->first();
+
+        return view('empleadocomercial.laborales.view',[
+            'empleado' => $empleado,
+            'areas' => $areas,
+            'puestos' => $puestos,
+            'sucursales' => $sucursales,
+            'datoslab' => $datoslab,
+            'area' => $area,
+            'puesto' => $puesto,
+            'contrato' => $contrato,
+            'contratos' => $contratos,
+            'sucursal' => $sucursal,
+            'bancos' => $bancos
+        ]); 
     }
 
     /**

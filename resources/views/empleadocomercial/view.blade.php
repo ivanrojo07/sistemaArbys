@@ -49,7 +49,7 @@
 						<a href="#" class="ui-tabs-anchor">Generales:</a>
 					</li>
 					<li role="presentation" class="">
-						<a href="{{ url('empleadoc/'.$empleado->id.'/datoslaborales', ['id' => $empleado->id]) }}" class="ui-tabs-anchor">Laborales:</a>
+						<a href="{{ route('empleadoc.datoslaborales.index', ['id' => $empleado->id]) }}" class="ui-tabs-anchor">Laborales:</a>
 					</li>
 				</ul>
 			</div>

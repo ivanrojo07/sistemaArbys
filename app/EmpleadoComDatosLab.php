@@ -44,19 +44,19 @@ class EmpleadoComDatosLab extends Model
     public $sortable=['id'];
 
     public function empleado(){
-    	return $this->belongsTo('App\EmpleadoComercial', 'empleado_comercial_id');
+    	return $this->belongsTo('App\EmpleadoComercial');
     }
     public function tipocontrato(){
-    	return $this->hasOne('App\TipoContrato', 'contrato_id');
+    	return $this->hasOne('App\TipoContrato', 'id');
     }
     public function tipobaja(){
     	return $this->hasOne('App\TipoBaja','tipobaja_id');
     }
     public function areas(){
-        return $this->hasOne('App\Area','area_id');
+        return $this->hasOne('App\Area', 'id');
     }
     public function puestos(){ 
-        return $this->hasOne('App\Puesto','puesto_id');
+        return $this->hasOne('App\Puesto','id');
     }
       public function sucursal(){
         return $this->belongsTo('App\Sucursal', 'sucursal_id');
