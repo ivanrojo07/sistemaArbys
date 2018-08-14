@@ -16,13 +16,13 @@ class CreateDatoslabTable extends Migration
         Schema::create('datoslab', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
-            $table->foreign('empleado_id')->references('id')->on('empleado_comercials');
+            $table->foreign('empleado_id')->references('id')->on('personals');
             $table->integer('contrato_id')->unsigned()->nullable();
             $table->foreign('contrato_id')->references('id')->on('tipocontrato');
             $table->integer('area_id')->unsigned()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
             $table->integer('puesto_id')->unsigned()->nullable();
-            $table->foreign('puesto_id')->references('id')->on('puestos')
+            $table->foreign('puesto_id')->references('id')->on('puestos');
             $table->date('fechacontratacion');
             $table->date('fechaactualizacion');
             $table->decimal('salarionom',8,2)->nullable();
