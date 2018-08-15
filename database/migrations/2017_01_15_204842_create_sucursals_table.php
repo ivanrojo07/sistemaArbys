@@ -14,27 +14,21 @@ class CreateSucursalsTable extends Migration
     public function up()
     {
         Schema::create('sucursals', function (Blueprint $table) {
-
             $table->increments('id');
+            $table->integer('estado_id')->unsigned();
+            $table->foreign('estado_id')->references('id')->on('estados');
             $table->string('nombre');
-
             $table->string('responsable');
             $table->string('claveid');
-            
-
-            $table->string('region');
-
             $table->string('calle');
             $table->string('numext');
             $table->string('numint')->nullable();
             $table->string('colonia');
             $table->string('delegacion');
             $table->string('ciudad');
-            $table->string('estado');
             $table->string('calle1')->nullable();
             $table->string('calle2')->nullable();
             $table->string('referencia')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
         });

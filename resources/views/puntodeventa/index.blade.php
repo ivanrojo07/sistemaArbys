@@ -10,7 +10,7 @@
 						<h4>Puntos de Venta:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('puntoDeVenta.create') }}"><button class="btn btn-success">Agregar Nuevo</button></a>
+						<a class="btn btn-success" href="{{ route('puntoDeVenta.create') }}"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Punto</strong></a>
 					</div>
 				</div>
 			</div>
@@ -19,18 +19,18 @@
 					<div class="col-sm-12">
 						<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px;">
 							<tr class="info">
-								<th>#</th>
-								<th>Nombre</th>
-								<th>Abreviatura</th>
-								<th>Plaza</th>
-								<th># Stand</th>
-								<th class="text-center">Acciones</th>
+								<th class="col-sm-1">#</th>
+								<th class="col-sm-1">Abreviatura</th>
+								<th class="col-sm-2">Nombre</th>
+								<th class="col-sm-2">Plaza</th>
+								<th class="col-sm-1"># Stand</th>
+								<th class="text-center col-sm-2">Acciones</th>
 							</tr>
 							@foreach($puntos as $punto)
 							<tr>
 								<td>{{ $punto->id }}</td>
-								<td>{{ $punto->nombre }}</td>
 								<td>{{ $punto->abreviatura }}</td>
+								<td>{{ $punto->nombre }}</td>
 								<td>{{ $punto->nombre_plaza }}</td>
 								<td>{{ $punto->numero_stand }}</td>
 								<td class="text-center">

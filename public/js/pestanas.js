@@ -44,7 +44,7 @@ function AgregarNuevoTab(url, nombre) {
     var heigh = parseInt($(window).height()) - 150;
     titulo.setAttribute("data-toggle", "tab");
     titulo.setAttribute("href", "#tab" + numTab);
-    titulo.innerHTML = nombre + "  <span class='close alignright' onclick='CerrarTab(this);'><i class='fa fa-times-circle' aria-hidden='true'></i></span>";
+    titulo.innerHTML = nombre + "&nbsp;<span class='close alignright' onclick='CerrarTab(this);'><i class='fa fa-times-circle' aria-hidden='true'></i></span>";
     lblTab.appendChild(titulo);
     tabs.appendChild(lblTab);
     CambiarAtributoElementosTag("li", "tabsApp", "class", "");

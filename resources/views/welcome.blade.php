@@ -68,8 +68,8 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#" onclick="AgregarNuevoTab('{{url ('crm')}}','CRMS')">
-                                            <i class="fa fa-search" aria-hidden="true"></i> Busqueda
+                                        <a href="#" onclick="AgregarNuevoTab('{{url ('crm')}}','CRMs ')">
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
                                     </li>                 
                                 </ul>
@@ -83,7 +83,7 @@
                                             <i class="fa fa-user-plus" aria-hidden="true"></i> Alta
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/clientes') }}','Buscar Cliente')">
-                                            <i class="fa fa-search" aria-hidden="true"></i> Busqueda
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
                                          <li class="dropdown-submenu">
                                             <a tabindex="-1" href="#">
@@ -121,7 +121,7 @@
                                             <i class="fa fa-user-plus" aria-hidden="true"></i> Alta
                                         </a> --}}
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/solicitantes') }}','Buscar Solicitante')">
-                                            <i class="fa fa-search" aria-hidden="true"></i> Busqueda
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
 
                                         <!--  <a href="#" onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')"><i class="fa fa-refresh" aria-hidden="true"></i>
@@ -166,7 +166,7 @@
                                             <i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('productos') }}','Buqueda de Productos')">
-                                            <i class="fa fa-search" aria-hidden="true"></i> Busqueda
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>  
                                     </li>                     
                                 </ul>
@@ -174,7 +174,7 @@
                             {{-- RECURSOS HUMANOS --}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span>
+                                    <i class="fa fa-male" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
@@ -184,12 +184,12 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleadoc/create') }}','Alta')">
+                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleadoc/create') }}','Comercial')">
                                                         <i class="fa fa-plus" aria-hidden="true"></i> Alta
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleadoc') }}','Búsqueda')">
+                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleadoc') }}','Comercial')">
                                                         <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                                     </a>
                                                 </li>
@@ -203,12 +203,12 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Alta')">
+                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Administrativo')">
                                                         <i class="fa fa-plus" aria-hidden="true"></i> Alta
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Búsqueda')">
+                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Administrativo')">
                                                         <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                                     </a>
                                                 </li>
@@ -290,15 +290,15 @@
                             </li> -->
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/provedores/create')}}','Agrega Proveedor')"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/provedores') }}','Buscar Proveedor')">
-                                            <i class="fa fa-search" aria-hidden="true"></i> Busqueda
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
                                         <li class="dropdown-submenu">
-                                            <a tabindex="-1" href="#"> <i class="fa fa-refresh" aria-hidden="true"></i>Precargas:</a>
+                                            <a tabindex="-1" href="#"> <i class="fa fa-refresh" aria-hidden="true"></i> Precargas:</a>
                                             <ul class="dropdown-menu">
                                                 <li>
                                                     <a href="#" onclick="AgregarNuevoTab('{{ url('/giros') }}','Giros')">
@@ -319,18 +319,18 @@
                             {{-- OFICINAS --}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="fa fa-users" aria-hidden="true"></i> Oficinas<span class="caret"></span>
+                                    <i class="fa fa-briefcase" aria-hidden="true"></i> Oficinas<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
-                                            <i class="fa fa-map" aria-hidden="true"></i> Región
+                                            <i class="fa fa-globe" aria-hidden="true"></i> Región
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
-                                            <i class="fa fa-flag" aria-hidden="true"></i> Estado
+                                            <i class="fa fa-map" aria-hidden="true"></i> Estado
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('oficina') }}','Oficina')">
-                                            <i class="fa fa-briefcase" aria-hidden="true"></i> Oficina
+                                            <i class="fa fa-building" aria-hidden="true"></i> Oficina
                                         </a>
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('puntoDeVenta')}}','Punto de Venta')">
                                             <i class="fa fa-building-o" aria-hidden="true"></i> Punto de venta

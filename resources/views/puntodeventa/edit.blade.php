@@ -11,8 +11,7 @@
 						<h4>Datos del Punto de Venta:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary">Ver Puntos</button></a>
-						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}"><button class="btn btn-danger" disabled="">Editar</button></a>
+						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Puntos de Venta</strong></button></a>
 					</div>
 				</div>
 			</div>
@@ -167,7 +166,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4 col-sm-offset-4 text-center">
-								<button type="submit" class="btn btn-success">Guardar</button>
+								<button type="submit" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Guardar</button>
 							</div>
 						</div>
 					</div>

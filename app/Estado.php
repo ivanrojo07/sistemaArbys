@@ -29,4 +29,8 @@ class Estado extends Model
         return $this->hasMany('App\Oficina');
     }
 
+    public function sucursales() {
+        return $this->hasMany('App\Sucursal');
+    }
+
 }

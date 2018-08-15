@@ -11,8 +11,7 @@
 						<h4>Datos del Punto de Venta:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary">Ver Puntos</button></a>
-						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}"><button class="btn btn-danger">Editar</button></a>
+						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Puntos de Venta</strong></button></a>
 					</div>
 				</div>
 			</div>
@@ -150,6 +149,11 @@
 								<textarea class="form-control" maxlength="500" rows="4" name="ubicacion" readonly="">{{ $punto->ubicacion }}</textarea>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-4 text-center">
+						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}"><button class="btn btn-danger"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button></a>
 					</div>
 				</div>
 			</div>

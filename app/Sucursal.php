@@ -8,22 +8,21 @@ use Kyslik\ColumnSortable\Sortable;
 class Sucursal extends Model
 {
 	use Sortable;
-    //
+
     protected $table = 'sucursals';
 
     protected $fillable = [
     	'id',
+        'estado_id',
         'claveid',
         'nombre',
         'responsable',
-        'region',
         'calle',
         'numext',
         'numint',
         'colonia',
         'delegacion',
         'ciudad',
-        'estado',
         'calle1',
         'calle2',
         'referencia'
@@ -31,13 +30,17 @@ class Sucursal extends Model
 
     ];
     public $sortable = [
-    	'id','nombre','region','claveid'
+    	'id','nombre','estado_id','claveid'
     ];
 
     protected $hidden=[
     	'created_at','updated_at'
     ];
     
+    public function estado() {
+        return $this->belongsTo('App\Estado');
+    }
+
     public function gastos(){
         return $this->hasMany('App\Gasto');
     }
@@ -45,6 +48,7 @@ class Sucursal extends Model
     public function empleados(){
         return $this->hasMany('App\empleados');
     }
+
     public function datosLab(){
         return $this->hasMany('App\EmpleadosDatosLab');
     }
@@ -52,5 +56,4 @@ class Sucursal extends Model
     public function datosLabCom(){
         return $this->belongsTo('App\EmpleadoComDatosLab');
     }
-   
 }

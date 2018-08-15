@@ -10,8 +10,7 @@
 						<h4>Datos de la Oficina:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('oficina.index') }}"><button class="btn btn-primary">Ver Oficinas</button></a>
-						<a href="{{ route('oficina.edit', ['id' => $oficina->id]) }}"><button class="btn btn-danger" disabled="">Editar</button></a>
+						<a href="{{ route('oficina.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
 					</div>
 				</div>
 			</div>
@@ -102,7 +101,7 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4 col-sm-offset-4 text-center">
-								<button type="submit" class="btn btn-success">Guardar</button>
+								<button type="submit" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Guardar</button>
 							</div>
 						</div>
 					</div>

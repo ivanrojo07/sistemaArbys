@@ -10,7 +10,7 @@
 						<h4>Oficinas:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('oficina.create') }}"><button class="btn btn-success">Agregar Nueva</button></a>
+						<a class="btn btn-success" href="{{ route('oficina.create') }}"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Oficina</strong></a>
 					</div>
 				</div>
 			</div>
@@ -19,24 +19,24 @@
 					<div class="col-sm-12">
 						<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px;">
 							<tr class="info">
-								<th>#</th>
-								<th>Nombre</th>
-								<th>Abreviatura</th>
-								<th>Responsable</th>
-								<th class="text-center">Acciones</th>
+								<th class="col-sm-1">#</th>
+								<th class="col-sm-1">Abreviatura</th>
+								<th class="col-sm-2">Nombre</th>
+								<th class="col-sm-2">Responsable</th>
+								<th class="text-center col-sm-2">Acciones</th>
 							</tr>
 							@foreach($oficinas as $oficina)
 							<tr>
 								<td>{{ $oficina->id }}</td>
-								<td>{{ $oficina->nombre }}</td>
 								<td>{{ $oficina->abreviatura }}</td>
+								<td>{{ $oficina->nombre }}</td>
 								<td>{{ $oficina->responsable }}</td>
 								<td class="text-center">
 									<a class="btn btn-primary btn-sm" href="{{ route('oficina.show', ['id' => $oficina->id]) }}">
 										<i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong>
 									</a>
 									<a class="btn btn-danger btn-sm" href="{{ route('oficina.edit', ['id' => $oficina->id]) }}">
-										<i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Editar</strong>
+										<i class="fa fa-pencil" aria-hidden="true"></i><strong> Editar</strong>
 									</a>
 								</td>
 							</tr>
