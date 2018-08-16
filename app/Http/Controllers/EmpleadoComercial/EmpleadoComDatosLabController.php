@@ -137,10 +137,15 @@ class EmpleadoComDatosLabController extends Controller
         $contratos = TipoContrato::get();
 
         $datoslab = $empleado->datosLaborales()->first();
-        $area = Area::where('id', $datoslab->area_id)->first();
-        $puesto = Puesto::where('id', $datoslab->puesto_id)->first();
-        $contrato = TipoContrato::where('id', $datoslab->contrato_id)->first();
-        $sucursal = Sucursal::where('id', $datoslab->sucursal_id)->first();
+        $area = $datoslab->areas;
+        $puesto = $datoslab->puestos;
+        $contrato = $datoslab->tipocontrato;
+        $sucursal = $datoslab->sucursal;
+
+        // $area = Area::where('id', $datoslab->area_id)->first();
+        // $puesto = Puesto::where('id', $datoslab->puesto_id)->first();
+        // $contrato = TipoContrato::where('id', $datoslab->contrato_id)->first();
+        // $sucursal = Sucursal::where('id', $datoslab->sucursal_id)->first();
 
         return view('empleadocomercial.laborales.view',[
             'empleado' => $empleado,

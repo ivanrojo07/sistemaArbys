@@ -50,16 +50,16 @@ class EmpleadoComDatosLab extends Model
     	return $this->hasOne('App\TipoContrato', 'id');
     }
     public function tipobaja(){
-    	return $this->hasOne('App\TipoBaja','tipobaja_id');
+    	return $this->hasOne('App\TipoBaja', 'id');
     }
     public function areas(){
         return $this->hasOne('App\Area', 'id');
     }
     public function puestos(){ 
-        return $this->hasOne('App\Puesto','id');
+        return $this->hasOne('App\Puesto', 'id');
     }
       public function sucursal(){
-        return $this->belongsTo('App\Sucursal', 'sucursal_id');
+        return $this->belongsTo('App\Sucursal', 'id');
     }
 
 }

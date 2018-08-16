@@ -157,7 +157,10 @@ Route::get('pdf',function(){
  * Armando 07/08/2018
  */
 
-// <-- MENU OFICINAS --
+/*
+ * MENU OFICINAS
+ */
+
 Route::get('region', 'Region\RegionController@index')->name('region.index');
 Route::get('region/{region}','Region\RegionController@estados');
 
@@ -167,8 +170,20 @@ Route::get('estado/{estado}','Estado\EstadoController@region');
 Route::resource('oficina', 'Oficina\OficinaController');
 
 Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
-//-------------------------------------------------------------------
 
+/*
+ * MENU RECURSOS HUMANOS += EMPLEADO COMERCIAL
+ */
 
 Route::resource('empleadoc', 'EmpleadoComercial\EmpleadoComercialController');
 Route::resource('empleadoc.datoslaborales', 'EmpleadoComercial\EmpleadoComDatosLabController');
+
+/*
+ * SEGURIDAD -> Armando 16/08/2018
+ */
+
+Route::get('seguridad', function () {
+    return view('seguridad.index');
+});
+
+Route::resource('perfil', 'Perfil\PerfilController');

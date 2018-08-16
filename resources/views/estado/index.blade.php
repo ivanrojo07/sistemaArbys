@@ -27,23 +27,22 @@
 							@endforeach
 						</table>
 					</div>
-						<div class="form-group col-sm-3">
-							<label for="nombre" class="control-label">Estado:</label>
-							<select class="form-control" name="estado" id="estado" onChange="abre(this.value)">
-								<option selected="" value="0">Seleccionar</option>
-								@foreach($estados as $estado)
-								<option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="form-group col-sm-1">
-							<label for="abreviatura" class="control-label">Abreviatura:</label>
-							<input type="text" maxlength="2" class="form-control" id="abreviatura" value="" readonly="">
-						</div>
-						<div class="form-group col-sm-3">
-							<label for="region" class="control-label">Región:</label>
-							<input type="text" maxlength="2" class="form-control" id="region" value="" readonly="">
-						</div>
+					<div class="form-group col-sm-3">
+						<label for="nombre" class="control-label">Estado:</label>
+						<select class="form-control" name="estado" id="estado" onChange="abre(this.value)">
+							<option selected="" value="0">Seleccionar</option>
+							@foreach($estados as $estado)
+							<option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group col-sm-1">
+						<label for="abreviatura" class="control-label">Abreviatura:</label>
+						<input type="text" maxlength="2" class="form-control" id="abreviatura" value="" readonly="">
+					</div>
+					<div class="form-group col-sm-3">
+						<label for="region" class="control-label">Región:</label>
+						<input type="text" maxlength="2" class="form-control" id="region" value="" readonly="">
 					</div>
 				</div>
 			</div>
