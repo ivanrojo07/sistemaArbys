@@ -187,3 +187,4 @@ Route::get('seguridad', function () {
 });
 
 Route::resource('perfil', 'Perfil\PerfilController');
+Route::resource('usuario', 'Usuario\UsuarioController');

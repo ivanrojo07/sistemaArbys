@@ -18,4 +18,8 @@ class Perfil extends Model
     public function modulos() {
     	return $this->belongsToMany('App\Modulo');
     }
+
+    public function usuarios() {
+    	return $this->hasMany('App\Usuario');
+    }
 }

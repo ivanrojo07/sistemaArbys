@@ -61,6 +61,24 @@
                             @endif
                             </li> -->
 
+                            {{-- SEGURIDAD --}}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-lock" aria-hidden="true"></i> Seguridad<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#" onclick="AgregarNuevoTab('{{url ('perfil')}}','Perfiles')">
+                                            <i class="fa fa-universal-access" aria-hidden="true"></i> Perfiles
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="AgregarNuevoTab('{{url ('usuario')}}','Usuarios')">
+                                            <i class="fa fa-user-circle" aria-hidden="true"></i> Usuarios
+                                        </a>
+                                    </li>            
+                                </ul>
+                            </li>
                             {{-- CRM --}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -68,7 +86,7 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#" onclick="AgregarNuevoTab('{{url ('crm')}}','CRMs ')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{url ('crm')}}','CRMs')">
                                             <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
                                     </li>                 
@@ -288,7 +306,7 @@
                                 </ul>
                               </li>
                             </li> -->
-
+                            {{-- PROVEEDORES --}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
