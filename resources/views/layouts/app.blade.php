@@ -41,41 +41,34 @@
          
 
     </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" {{-- style="background: #55688a;" --}}>
-            <div class="container">
-                <div class="navbar-header">
+    <body>
+        <div id="app">
+            <nav class="navbar navbar-default navbar-static-top" {{-- style="background: #55688a;" --}}>
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Collapsed Hamburger -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- Branding Image -->
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{-- <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70"> --}}
+                            {{-- {{ config('app.name', 'Laravel') }} --}}
+                        </a>
+                    </div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{-- <img src="{{ asset('img/logo.jpeg') }}" height="32" width="70"> --}}
-                        {{-- {{ config('app.name', 'Laravel') }} --}}
-                    </a>
-                </div>
-
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                            <li><a href="{{ route('register') }}"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</a></li>
-                        @else
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="nav navbar-nav">
+                            &nbsp;
+                        </ul>
+                        <!-- Right Side Of Navbar -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Authentication Links -->
+                            @auth
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -95,119 +88,54 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endguest
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ url('/clientes/create')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="{{ url('/clientes') }}"><i class="fa fa-search" aria-hidden="true"></i> Busquedases</a>
-                                <a href="{{ url('/giros') }}"><i class="fa fa-location-arrow" aria-hidden="true"></i> Precargas Giros</a>
-                                <a href="{{ url('/formacontactos') }}"><i class="fa fa-location-arrow" aria-hidden="true"></i> Precargas Forma de contactos</a>
-                            </li>                     
+                            @endauth
                         </ul>
-                    </li>
-
-
-
-
-
-
-
-                            <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ url('import-export-csv-excel') }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Alta por excel</a>
-                                <a href="{{ url('productos') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>  
-                            </li>                     
-                        </ul>
-                    </li>
-
-
-
-
-
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-briefcase" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{url('empleados/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a>
-                                <a href="{{ url('empleados') }}"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>    
-                                <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas:</a>
-                                    <ul class="dropdown-menu">
-                                      <li><a tabindex="-1" href="{{ url('bajas') }}"><i class="fa fa-level-down" aria-hidden="true"></i> Bajas</a></li>
-                                      <li><a href="{{ url('contratos') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos</a></li>
-                                       <li>
-                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/bancos') }}','Bancos')"><i class="fa fa-refresh" aria-hidden="true"></i> Precargas Bancos</a>
-                                        </li>
-                                    </ul>
-                                  </li>
-                            </li>                     
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-money" aria-hidden="true"></i> Cotizaciones <span class="caret"></span> </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ url('/cotizaciones/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nueva cotización(Blueprint)</a>
-                                {{-- <a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>     --}}
-                            </li>                     
-                        </ul>
-                    </li>
-                    </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        {{-- <example id="app"></example> --}}
-        @yield('content')
-    </div>
+            </nav>
+            {{-- <example id="app"></example> --}}
+            @yield('content')
+        </div>
 
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
-
-    {{-- <script type="text/javascript">
-        function formulario(elemento){
-            if (elemento.value == "Prospecto") {
-                document.getElementById('cliente').style.display='none';
-                document.getElementById('cliente1').style.display='none';
-                document.getElementById('cliente2').style.display='none';
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
+        {{-- <script type="text/javascript">
+            function formulario(elemento){
+                if (elemento.value == "Prospecto") {
+                    document.getElementById('cliente').style.display='none';
+                    document.getElementById('cliente1').style.display='none';
+                    document.getElementById('cliente2').style.display='none';
+                }
+                if (elemento.value == "Cliente") {
+                    document.getElementById('cliente').style.display='inline';
+                    document.getElementById('cliente1').style.display='inline';
+                    document.getElementById('cliente2').style.display='inline';
+                }
             }
-            if (elemento.value == "Cliente") {
-                document.getElementById('cliente').style.display='inline';
-                document.getElementById('cliente1').style.display='inline';
-                document.getElementById('cliente2').style.display='inline';
+            function persona(elemento){
+                if(elemento.value == "Fisica"){
+                    document.getElementById('perfisica').style.display='inline';
+                    document.getElementById('permoral').style.display='none';
+                }
+                if(elemento.value =="Moral"){
+                    document.getElementById('perfisica').style.display='none';
+                    document.getElementById('permoral').style.display='inline';
+                }
             }
-        }
-        function persona(elemento){
-            if(elemento.value == "Fisica"){
-                document.getElementById('perfisica').style.display='inline';
-                document.getElementById('permoral').style.display='none';
-            }
-            if(elemento.value =="Moral"){
-                document.getElementById('perfisica').style.display='none';
-                document.getElementById('permoral').style.display='inline';
-            }
-        }
-    </script> --}}
-    
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#myTable').DataTable();
-        });
-    </script>
-    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
-{{-- 
-    Include this after the sweet alert js file --}}
-    @include('sweet::alert')
-    <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
-     <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
-</body>
+        </script> --}}
+        <script src="{{ asset('js/sweetalert.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#myTable').DataTable();
+            });
+        </script>
+        {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+        {{-- Include this after the sweet alert js file --}}
+        @include('sweet::alert')
+        <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
+        <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
+    </body>
 </html>

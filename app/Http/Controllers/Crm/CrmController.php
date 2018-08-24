@@ -4,11 +4,26 @@ namespace App\Http\Controllers\Crm;
 
 use App\ClienteCRM;
 use App\Cliente;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CrmController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            if(Auth::check()) {
+                $user = Auth::user();
+                $modulos = $user->perfil->modulos;
+                foreach ($modulos as $modulo) {
+                    if($modulo->nombre == "crm")
+                        return $next($request);
+                }
+                return redirect()->route('denegado');
+            } else
+                return redirect()->route('login');
+        });
+    }
     /**
      * Display a listing of the resource.
      *

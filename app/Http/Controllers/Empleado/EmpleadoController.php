@@ -7,10 +7,25 @@ use App\Area;
 use App\Puesto;
 use App\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class EmpleadoController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            if(Auth::check()) {
+                $user = Auth::user();
+                $modulos = $user->perfil->modulos;
+                foreach ($modulos as $modulo) {
+                    if($modulo->nombre == "rh")
+                        return $next($request);
+                }
+                return redirect()->route('denegado');
+            } else
+                return redirect()->route('login');
+        });
+    }
     /**
      * Display a listing of the resource.
      *

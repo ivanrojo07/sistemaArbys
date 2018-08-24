@@ -5,11 +5,26 @@ namespace App\Http\Controllers\Oficina;
 use App\Oficina;
 use App\Estado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Http\Controllers\Controller;
 
 class OficinaController extends Controller
 {
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            if(Auth::check()) {
+                $user = Auth::user();
+                $modulos = $user->perfil->modulos;
+                foreach ($modulos as $modulo) {
+                    if($modulo->nombre == "oficinas")
+                        return $next($request);
+                }
+                return redirect()->route('denegado');
+            } else
+                return redirect()->route('login');
+        });
+    }
     /**
      * Display a listing of the resource.
      *

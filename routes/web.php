@@ -10,12 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=>"web"],function(){
+	Route::resource('perfil', 'Perfil\PerfilController');
+});
+Route::get('/denegado',function(){
+	return view('errors.denegado');
+})->name('denegado');
 
 Route::get('/', function () {
-    return view('welcome');
+	return redirect()->route('login');
 });
-
-Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('personal', 'Personal\PersonalController@search');
@@ -186,5 +190,30 @@ Route::get('seguridad', function () {
     return view('seguridad.index');
 });
 
-Route::resource('perfil', 'Perfil\PerfilController');
+
 Route::resource('usuario', 'Usuario\UsuarioController');
+
+
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+// Route::get('/home', 'UsuarioController@index')->name('home');
+
+Route::get('/home', function () {
+	if(Auth::check()){
+    	return view('welcome');
+
+	}else{
+		return redirect()->route('login');
+	}
+})->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

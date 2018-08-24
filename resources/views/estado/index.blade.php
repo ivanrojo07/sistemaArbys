@@ -13,7 +13,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-sm-4 col-sm-offset-2">
+					<div class="col-sm-4 col-sm-offset-2" style="max-height: 200px; overflow-y: auto;">
 						<table class="table table-sm table-striped table-bordered table-hover">
 							<tr class="info">
 								<th class="col-sm-2">#</th>

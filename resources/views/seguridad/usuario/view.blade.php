@@ -18,15 +18,11 @@
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label class="control-label">Nombre de Usuario:</label>
-                        <input type="text" name="usuario" class="form-control" value="{{ $usuario->usuario }}" readonly="">
+                        <input type="text" name="usuario" class="form-control" value="{{ $usuario->name }}" readonly="">
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="control-label">Correo:</label>
-                        <input type="text" name="mail" class="form-control" value="{{ $usuario->mail }}" readonly="">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="control-label">Contraseña:</label>
-                        <input type="text" name="text" class="form-control" value="{{ $usuario->password }}" readonly="">
+                        <input type="text" name="mail" class="form-control" value="{{ $usuario->email }}" readonly="">
                     </div>
                 </div>
                 <div class="row">

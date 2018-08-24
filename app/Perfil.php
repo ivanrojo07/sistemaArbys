@@ -20,6 +20,6 @@ class Perfil extends Model
     }
 
     public function usuarios() {
-    	return $this->hasMany('App\Usuario');
+    	return $this->hasMany('App\User');
     }
 }

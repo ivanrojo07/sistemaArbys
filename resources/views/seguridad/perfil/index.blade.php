@@ -19,6 +19,16 @@
                     <div class="col-sm-12">
                         <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
                             @foreach($perfiles as $perfil)
+                            @if($perfil->id == 1)
+                            @else
+                            <?php $seguridad = false; ?>
+                            @foreach($perfil->modulos as $modulo)
+                            @if($modulo->nombre == "seguridad")
+                            <?php $seguridad = true; ?>
+                            @endif
+                            @endforeach
+                            @if(Auth::user()->perfil->id != 1 && $seguridad)
+                            @else
                             <tr>
                                 <td class="col-sm-9">{{ $perfil->nombre }}</td>
                                 <td class="text-center col-sm-3">
@@ -31,6 +41,8 @@
                                     </form>
                                 </td>
                             </tr>
+                            @endif
+                            @endif
                             @endforeach
                         </table>
                     </div>

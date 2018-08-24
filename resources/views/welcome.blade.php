@@ -44,24 +44,27 @@
                         </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
+                    @auth
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-
-                            <!--  @if (Route::has('login'))
-                            <li>
-                                @if (Auth::check())
-                                <a href="{{ url('/home') }}">Home</a>
+                            {{-- LOGOUT --}}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>Logout
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
-                            @else
-                            <li>
-                                <a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/register') }}"><i class="fa fa-clipboard" aria-hidden="true"></i> Register</a>
-                            @endif
-                            </li> -->
-
                             {{-- SEGURIDAD --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "seguridad")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-lock" aria-hidden="true"></i> Seguridad<span class="caret"></span>
@@ -79,7 +82,11 @@
                                     </li>            
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- CRM --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "crm")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> CRM<span class="caret"></span>
@@ -92,7 +99,11 @@
                                     </li>                 
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- CLIENTES --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "clientes")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -128,7 +139,11 @@
                                     </li>                     
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- SOLICITANTES --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "solicitantes")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-users" aria-hidden="true"></i> Solicitantes<span class="caret"></span>
@@ -173,7 +188,11 @@
                                     </li>                     
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- PRODUCTOS --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "productos")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span>
@@ -189,7 +208,11 @@
                                     </li>                     
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- RECURSOS HUMANOS --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "rh")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-male" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span>
@@ -284,29 +307,11 @@
                                     </li>                     
                                 </ul>
                             </li>
-
-                             <!-- <li class="dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span> </a>
-                            <ul class="dropdown-menu">
-                              <li class="dropdown-submenu">
-                                <a class="test" href="#"><i class="fa fa-car" aria-hidden="true"></i> Vehiculos <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
-                                  <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
-                                </ul>
-                                <a class="test" href="#"><i class="fa fa-motorcycle" aria-hidden="true"></i> Motocicletas <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
-                                  <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
-                                </ul>
-                                 <a class="test" href="#"><i class="fa fa-home" aria-hidden="true"></i>Casas <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Alta</a></li>
-                                  <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i> Busqueda</a></li>
-                                </ul>
-                              </li>
-                            </li> -->
+                            @endif
+                            @endforeach
                             {{-- PROVEEDORES --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "proveedores")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -334,7 +339,11 @@
                                     </li>                     
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                             {{-- OFICINAS --}}
+                            @foreach(Auth::user()->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "oficinas")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-briefcase" aria-hidden="true"></i> Oficinas<span class="caret"></span>
@@ -356,9 +365,11 @@
                                     </li>                     
                                 </ul>
                             </li>
+                            @endif
+                            @endforeach
                         </ul> 
                     </div>
-                    @endif
+                    @endauth
                     <!-- /.navbar-collapse -->
                 </div>
                 <!-- /.container -->

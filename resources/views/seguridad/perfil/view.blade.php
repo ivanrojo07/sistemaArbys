@@ -24,8 +24,9 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <label class="control-label">Modulos:</label>
-                        <?php $i = 1; ?>
                         @foreach($modulos as $modulo)
+                        @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
+                        @else
                         <div class="row">
                             <div class="col-sm-5 text-right">
                                 {{ $modulo->nombre }}
@@ -40,6 +41,7 @@
                                 disabled="">
                             </div>
                         </div>
+                        @endif
                         @endforeach
                     </div>
                 </div>

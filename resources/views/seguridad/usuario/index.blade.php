@@ -25,7 +25,17 @@
                                 <th>Puesto</th>
                                 <th class="text-center col-sm-3">Acciones</th>
                             </tr>
-                            @foreach($usuarios as $usuario)
+                            @forelse($usuarios as $usuario)
+                            @if($usuario->perfil->id == 1)
+                            @else
+                            <?php $seguridad = false; ?>
+                            @foreach($usuario->perfil->modulos as $modulo)
+                            @if($modulo->nombre == "seguridad")
+                            <?php $seguridad = true; ?>
+                            @endif
+                            @endforeach
+                            @if(Auth::user()->perfil->id != 1 && $seguridad)
+                            @else
                             <tr>
                                 <td>{{ $usuario->perfil->nombre }}</td>
                                 <td>{{ $usuario->nombre . ' ' . $usuario->appaterno . ' ' . $usuario->apmaterno }}</td>
@@ -41,7 +51,11 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            @endif
+                            @endif
+                            @empty
+                            <p>Nada</p>
+                            @endforelse
                         </table>
                     </div>
 				</div>

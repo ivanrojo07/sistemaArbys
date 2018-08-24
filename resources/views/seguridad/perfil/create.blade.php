@@ -20,21 +20,24 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label class="control-label">Nombre:</label>
-                            <input type="text" name="nombre" class="form-control">
+                            <input type="text" name="nombre" class="form-control" required="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <label class="control-label">Modulos:</label>
                             @foreach($modulos as $modulo)
+                            @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
+                            @else
                             <div class="row">
                                 <div class="col-sm-5 text-right">
-                                    {{ $modulo->nombre }}
+                                    {{ $modulo->nombre}}
                                 </div>
                                 <div class="col-sm-4 text-left">
                                     <input type="checkbox" name="modulo_id[]" value="{{ $modulo->id }}">
                                 </div>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>
