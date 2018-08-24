@@ -12,16 +12,16 @@ class PuestosTableSeeder extends Seeder
      */
     public function run()
     {
-    	$puestos = [
-    		['nombre' => 'Administrador', 'etiqueta' => 'admin'],
-    		['nombre' => 'Director General', 'etiqueta' => 'dg'],
-    		['nombre' => 'Director Regional', 'etiqueta' => 'dr'],
-    		['nombre' => 'Director Estatal', 'etiqueta' => 'de'],
-    		['nombre' => 'Gerente', 'etiqueta' => 'gte'],
-    		['nombre' => 'Subgerente', 'etiqueta' => 'sgte'],
-    		['nombre' => 'Vendedor', 'etiqueta' => 'ven']
-    	];
+    	$puestos = array(
+    		array('nombre' => 'Administrador', 'etiqueta' => 'admin'),
+    		array('nombre' => 'Director General', 'etiqueta' => 'dg'),
+    		array('nombre' => 'Director Regional', 'etiqueta' => 'dr'),
+    		array('nombre' => 'Director Estatal', 'etiqueta' => 'de'),
+    		array('nombre' => 'Gerente', 'etiqueta' => 'gte'),
+    		array('nombre' => 'Subgerente', 'etiqueta' => 'sgte'),
+    		array('nombre' => 'Vendedor', 'etiqueta' => 'ven')
+    	);
 
-    	Puesto::create($puestos);
+    	Puesto::insert($puestos);
     }
 }

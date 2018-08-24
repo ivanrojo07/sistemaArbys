@@ -13,13 +13,13 @@ class RegionsTableSeeder extends Seeder
      */
     public function run()
     {
-    	$regiones = [
-    		['nombre' => 'Centro', 'abreviatura' => 'CT', 'created_at' => Carbon::now()],
-    		['nombre' => 'Sureste', 'abreviatura' => 'SE', 'created_at' => Carbon::now()],
-    		['nombre' => 'Occidente', 'abreviatura' => 'OC','created_at' => Carbon::now()],
-    		['nombre' => 'Noreste', 'abreviatura' => 'NE', 'created_at' => Carbon::now()],
-    		['nombre' => 'Noroeste', 'abreviatura' => 'NO', 'created_at' => Carbon::now()]
-    	];
+    	$regiones = array(
+    		array('nombre' => 'Centro', 'abreviatura' => 'CT', 'created_at' => Carbon::now()),
+    		array('nombre' => 'Sureste', 'abreviatura' => 'SE', 'created_at' => Carbon::now()),
+    		array('nombre' => 'Occidente', 'abreviatura' => 'OC','created_at' => Carbon::now()),
+    		array('nombre' => 'Noreste', 'abreviatura' => 'NE', 'created_at' => Carbon::now()),
+    		array('nombre' => 'Noroeste', 'abreviatura' => 'NO', 'created_at' => Carbon::now())
+    	);
     	
         Region::insert($regiones);
     }

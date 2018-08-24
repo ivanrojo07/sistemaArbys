@@ -12,9 +12,7 @@ class PerfilsTableSeeder extends Seeder
      */
     public function run()
     {
-    	$perfiles = [
-    		['nombre' => 'Admin']
-    	];
+    	$perfiles = ['nombre' => 'Admin'];
 
     	Perfil::create($perfiles);
     }
