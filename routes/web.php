@@ -214,6 +214,9 @@ Route::get('/home', function () {
 		return redirect()->route('login');
 	}
 })->name('home');
+
+
+Route::get('rhh', 'Empleado\EmpleadoController@index')->name('rhh');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

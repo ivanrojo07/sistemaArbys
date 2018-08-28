@@ -144,15 +144,17 @@ class PerfilController extends Controller
             return redirect()->route('denegado');
         else {
             $rules = [
-                'nombre'=>'required|string|unique:perfils',
+                'nombre'=>'required|string',
                 'modulo_id'=>'nullable|array'
             ];
             $this->validate($request, $rules);
-            $perfil->update($request->all());
+            $perfil->nombre = $request->input('nombre');
             $modulos = Modulo::get();
             $mods = Modulo::find($request->input('modulo_id'));
             $perfil->modulos()->detach();
             $perfil->modulos()->attach($mods);
+            $perfil->save();
+            $perfil = $perfil->fresh();
             return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
         }
     }

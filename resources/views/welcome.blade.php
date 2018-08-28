@@ -60,6 +60,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li>
+                                        <a href="{{route('rhh')}}">
+                                            <i class="fa fa-universal-access" aria-hidden="true"></i> rh
+                                        </a>
+                                    </li>   
                                 </ul>
                             </li>
                             {{-- SEGURIDAD --}}
