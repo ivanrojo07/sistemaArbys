@@ -4,6 +4,7 @@ namespace App\Http\Controllers\EmpleadoComercial;
 
 use App\EmpleadoComercial;
 use App\Oficina;
+use App\Estado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,8 @@ class EmpleadoComercialController extends Controller
     public function create()
     {
         $oficinas = Oficina::get();
-        return view('empleadocomercial.create', ['oficinas' => $oficinas]);
+        $estados = Estado::get();
+        return view('empleadocomercial.create', ['oficinas' => $oficinas, 'estados' => $estados]);
     }
 
     /**

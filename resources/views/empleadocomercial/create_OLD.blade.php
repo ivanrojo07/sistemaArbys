@@ -21,6 +21,14 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-3">
+							<label class="control-label" for="identificador">
+								<i class="fa fa-asterisk" aria-hidden="true"></i> ID de empleado:
+							</label>
+							<input class="form-control" id="identificador" type="text" name="identificador" value="" autofocus disabled="">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-3">
 							<label class="control-label" for="appaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Paterno:</label>
 							<input type="text" class="form-control" id="appaterno" name="appaterno" required="required" value="">
 						</div>
@@ -66,22 +74,22 @@
 								<label class="control-label" for="email">Correo electrónico:</label>
 								<input type="text" class="form-control" name="email" id="email" value="">
 							</div><div class="form-group col-sm-3">
-								<label class="control-label" for="nss">IMMS:</label>
+								<label class="control-label" for="nss">Número de Seguro Social (IMSS):</label>
 								<input type="text" class="form-control" name="nss" id="nss" value="">
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-3">
-								<label class="control-label" for="curp">CURP:</label>
+								<label class="control-label" for="curp">C.U.R.P.:</label>
 								<input type="text" class="form-control" name="curp" id="curp" value="">
 							</div>
 							<div class="form-group col-sm-3">
-								<label class="control-label" for="infonavit">INFONAVIT:</label>
+								<label class="control-label" for="infonavit">Número Infonavit:</label>
 								<input type="text" class="form-control" name="infonavit" id="infonavit" value="">
 							</div>
 							<div class="form-group col-sm-3">
 								<label class="control-label" for="fnac">Fecha de nacimiento:</label>
-								<input type="date" class="form-control" name="fnac" id="fnac" value="" disabled="">
+								<input type="date" class="form-control" name="fnac" id="fnac" value="">
 							</div>
 							<div class="form-group col-sm-3">
 								<label class="control-label" for="cp">Código Postal:</label>
@@ -107,21 +115,43 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-3">
-								<label class="control-label" for="municipio">Municipio:</label>
+								<label class="control-label" for="municipio">Delegación/Municipio:</label>
 								<input type="text" class="form-control" name="municipio" id="municipio" value="">
 							</div>
 							<div class="form-group col-sm-3">
 								<label class="control-label" for="estado">Estado:</label>
-								<select class="form-control" name="estado" id="estado">
-									<option selected="">Seleccionar</option>
-									@foreach($estados as $estado)
-									<option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
+								<input type="text" class="form-control" name="estado" id="estado" value="">
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="control-label" for="calles">Entre calles:</label>
+								<input type="text" class="form-control" name="calles" id="calles" placeholder="calle y calle" value="">
+							</div><div class="form-group col-sm-3">
+								<label class="control-label" for="referencia">Referencia:</label>
+								<input type="text" class="form-control" name="referencia" id="referencia" value="">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-3">
+								<label class="control-label" for="oficina">Oficina:</label>
+								<select class="form-control" name="oficina_id" id="oficina">
+									<option selected="" value="0">Seleccionar</option>
+									@foreach($oficinas as $oficina)
+									<option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
 									@endforeach
 								</select>
 							</div>
-							<div class="form-group col-sm-6">
-								<label class="control-label" for="referencia">Referencia:</label>
-								<textarea class="form-control" name="referencia" id="referencia" rows="4"></textarea> 
+							<div class="form-group col-sm-3">
+								<label class="control-label" for="experto">Experto en:</label>
+								<select class="form-control" name="experto" id="experto">
+									<option selected="" value="0">Seleccionar</option>
+									<option value="1">Autos</option>
+									<option value="2">Motos</option>
+									<option value="3">Casas</option>
+									<option value="4">Autos y Motos</option>
+									<option value="5">Autos y Casas</option>
+									<option value="6">Motos y Casas</option>
+									<option value="7">Autos, Motos y Casas</option>
+								</select>
 							</div>
 						</div>
 						<div class="row">
@@ -137,5 +167,4 @@
 		</div>
 	</div>
 </div>
-
 @endsection

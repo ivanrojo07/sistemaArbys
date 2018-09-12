@@ -19,10 +19,10 @@
                     <div class="col-sm-12">
                         <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
                             <tr class="info">
-                                <th>Perfil</th>
+                                <th class="col-sm-1" >Perfil</th>
                                 <th class="col-sm-3">Nombre</th>
-                                <th>Area</th>
-                                <th>Puesto</th>
+                                <th class="col-sm-2">Correo</th>
+                                <th class="col-sm-3">Puesto</th>
                                 <th class="text-center col-sm-3">Acciones</th>
                             </tr>
                             @forelse($usuarios as $usuario)
@@ -38,9 +38,9 @@
                             @else
                             <tr>
                                 <td>{{ $usuario->perfil->nombre }}</td>
-                                <td>{{ $usuario->nombre . ' ' . $usuario->appaterno . ' ' . $usuario->apmaterno }}</td>
-                                <td>{{ $usuario->area->nombre }}</td>
-                                <td>{{ $usuario->puesto->nombre }}</td>
+                                <td>{{ $usuario->empleado->nombre . ' ' . $usuario->empleado->appaterno . ' ' . $usuario->empleado->apmaterno }}</td>
+                                <td>{{ $usuario->email }}</td>
+                                <td>{{ $usuario->empleado->rfc }}</td>
                                 <td class="text-center">
                                     <form method="post" action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" style="">
                                         <a class="btn btn-primary btn-sm" href="{{ route('usuario.show', ['id' => $usuario->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>

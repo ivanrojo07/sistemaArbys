@@ -18,10 +18,10 @@ class CreateEmpleadosTable extends Migration
             $table->string('nombre');
             $table->string('appaterno');
             $table->string('apmaterno');
+            $table->string('email');
             $table->string('rfc')->nullable();
             $table->string('telefono')->nullable();
             $table->string('movil')->nullable();
-            $table->string('email')->nullable();
             $table->string('nss')->nullable();
             $table->string('curp')->nullable();
             $table->string('infonavit')->nullable();
@@ -33,7 +33,6 @@ class CreateEmpleadosTable extends Migration
             $table->string('colonia')->nullable();
             $table->string('municipio')->nullable();
             $table->string('estado')->nullable();
-            $table->string('calles')->nullable();
             $table->string('referencia')->nullable();
             $table->timestampsTz();
         });

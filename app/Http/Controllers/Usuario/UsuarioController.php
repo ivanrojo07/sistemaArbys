@@ -6,6 +6,7 @@ use App\User;
 use App\Perfil;
 use App\Puesto;
 use App\Area;
+use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -71,9 +72,8 @@ class UsuarioController extends Controller
     public function create()
     {
         $perfiles = Perfil::get();
-        $puestos = Puesto::get();
-        $areas = Area::get();
-        return view('seguridad.usuario.create', ['perfiles' => $perfiles, 'puestos' => $puestos, 'areas' => $areas]);
+        $empleados = Empleado::get();
+        return view('seguridad.usuario.create', ['perfiles' => $perfiles, 'empleados' => $empleados]);
     }
 
     /**
@@ -91,27 +91,19 @@ class UsuarioController extends Controller
         else {
             $rules = [
                 'perfil_id'=>'required|integer',
-                'puesto_id'=>'required|integer',
-                'area_id'=>'required|integer',
+                'empleado_id'=>'required|integer',
                 'name'=>'required|alpha',
-                'email' => 'required|string|email|unique:users',
-                'password' => 'required|string',
-                'nombre'=>'required|alpha',
-                'appaterno'=>'required|alpha',
-                'apmaterno'=>"nullable|alpha"
+                'password' => 'required|string'
             ];
             $this->validate($request, $rules);
             $inputs = $request->all();
+            $empleado = Empleado::where('id', $inputs['empleado_id'])->first();
             $usuario = User::create([
-                'name'=> $inputs['name'],
-                'email'=>$inputs['email'],
-                'password'=>bcrypt($inputs['password']),
-                'nombre'=>$inputs['nombre'],
-                'appaterno'=>$inputs['appaterno'],
-                'apmaterno'=>$inputs['apmaterno'],
-                'area_id'=>$inputs['area_id'],
-                'perfil_id'=>$inputs['perfil_id'],
-                'puesto_id'=>$inputs['puesto_id'],
+                'name' => $inputs['name'],
+                'email' => $empleado->email,
+                'password' => bcrypt($inputs['password']),
+                'perfil_id' => $inputs['perfil_id'],
+                'empleado_id' => $inputs['empleado_id']
             ]);
             return view('seguridad.usuario.view', ['usuario' => $usuario]);
         }
@@ -150,9 +142,8 @@ class UsuarioController extends Controller
             return redirect()->route('denegado');
         else {
             $perfiles = Perfil::get();
-            $puestos = Puesto::get();
-            $areas = Area::get();
-            return view('seguridad.usuario.edit', ['usuario' => $usuario, 'perfiles' => $perfiles, 'puestos' => $puestos, 'areas' => $areas]);
+            $empleados = Empleado::get();
+            return view('seguridad.usuario.edit', ['usuario' => $usuario, 'perfiles' => $perfiles, 'empleados' => $empleados]);
         }
     }
 
@@ -172,27 +163,27 @@ class UsuarioController extends Controller
             return redirect()->route('denegado');
         else {
             $rules = [
-                'perfil_id'=>'required|integer',
-                'puesto_id'=>'required|integer',
-                'area_id'=>'required|integer',
-                'name'=>'required|',
-                'email' => 'required|string|email',
-                'password' => 'nullable|string',
-                'nombre'=>'required|alpha',
-                'appaterno'=>'required|alpha',
-                'apmaterno'=>"nullable|alpha"
+                'perfil_id' => 'required|integer',
+                'empleado_id' => 'required|integer',
+                'name' => 'required',
+                'email' => 'nullable|email',
+                'password' => 'nullable|string'
             ];
             $this->validate($request, $rules);
+            $empleado = Empleado::where('id', $request->input('empleado_id'))->first();
             $usuario->name = $request->input('name');
-            $usuario->email = $request->input('email');
+            if($request->input('email') != null) {
+                $empleado->email = $request->input('email');
+                $empleado->save();
+                $empleado = $empleado->fresh();
+                $usuario->email = $empleado->email;
+            } else {
+                $usuario->email = $empleado->email;
+            }
             if($request->input('password') != null)
                 $usuario->password = bcrypt($request->input('password'));
-            $usuario->nombre = $request->input('nombre');
-            $usuario->appaterno = $request->input('appaterno');
-            $usuario->apmaterno = $request->input('apmaterno');
-            $usuario->area_id = $request->input('area_id');
             $usuario->perfil_id = $request->input('perfil_id');
-            $usuario->puesto_id = $request->input('puesto_id');
+            $usuario->empleado_id = $request->input('empleado_id');
             $usuario->save();
             $usuario = $usuario->fresh();
             return view('seguridad.usuario.view', ['usuario' => $usuario]);

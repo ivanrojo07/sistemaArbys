@@ -17,6 +17,10 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="form-group col-sm-4">
+                        <label class="control-label">Empleado:</label>
+                        <input type="text" name="nombre" class="form-control" value="{{ $usuario->empleado->nombre . ' ' . $usuario->empleado->appaterno . ' ' . $usuario->empleado->apmaterno }}" readonly="">
+                    </div>
+                    <div class="form-group col-sm-4">
                         <label class="control-label">Nombre de Usuario:</label>
                         <input type="text" name="usuario" class="form-control" value="{{ $usuario->name }}" readonly="">
                     </div>
@@ -27,30 +31,12 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Nombre:</label>
-                        <input type="text" name="nombre" class="form-control" value="{{ $usuario->nombre }}" readonly="">
+                        <label class="control-label">RFC:</label>
+                        <input type="text" name="appaterno" class="form-control" value="{{ $usuario->empleado->rfc }}" readonly="">
                     </div>
-                    <div class="form-group col-sm-4">
-                        <label class="control-label">Apellido Paterno:</label>
-                        <input type="text" name="appaterno" class="form-control" value="{{ $usuario->appaterno }}" readonly="">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="control-label">Apellido Materno:</label>
-                        <input type="text" name="apmaterno" class="form-control" value="{{ $usuario->apmaterno }}" readonly="">
-                    </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-sm-4">
                         <label class="control-label">Perfil:</label>
                         <input type="text" name="perfil" class="form-control" value="{{ $usuario->perfil->nombre }}" readonly="">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="control-label">Puesto:</label>
-                        <input type="text" name="puesto" class="form-control" value="{{ $usuario->puesto->nombre }}" readonly="">
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="control-label">Area:</label>
-                        <input type="text" name="area" class="form-control" value="{{ $usuario->area->nombre }}" readonly="">
                     </div>
                 </div>
                 <div class="row">

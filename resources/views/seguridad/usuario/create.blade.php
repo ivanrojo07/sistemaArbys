@@ -21,30 +21,23 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="form-group col-sm-4">
+                            <label class="control-label">*Empleado:</label>
+                            <select class="form-control" name="empleado_id" required="">
+                                <option selected="">Seleccionar</option>
+                                @foreach($empleados as $empleado)
+                                @if($empleado->user == null)
+                                <option value="{{ $empleado->id }}">{{ $empleado->nombre . " " . $empleado->appaterno . " - " . $empleado->rfc }}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
                             <label class="control-label">*Nombre de Usuario:</label>
                             <input type="text" name="name" class="form-control" required="">
                         </div>
                         <div class="form-group col-sm-4">
-                            <label class="control-label">*Correo:</label>
-                            <input type="text" name="email" class="form-control" required="">
-                        </div>
-                        <div class="form-group col-sm-4">
                             <label class="control-label">*Contraseña:</label>
                             <input type="text" name="password" class="form-control" required="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-4">
-                            <label class="control-label">*Nombre:</label>
-                            <input type="text" name="nombre" class="form-control" required="">
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label class="control-label">*Apellido Paterno:</label>
-                            <input type="text" name="appaterno" class="form-control" required="">
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label class="control-label">Apellido Materno:</label>
-                            <input type="text" name="apmaterno" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -66,24 +59,6 @@
                                 <option value="{{ $perfil->id }}">{{ $perfil->nombre }}</option>
                                 @endif
                                 @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label class="control-label">*Puesto:</label>
-                            <select class="form-control" name="puesto_id" required="">
-                                <option selected="">Seleccionar</option>
-                                @foreach($puestos as $puesto)
-                                <option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-4">
-                            <label class="control-label">*Area:</label>
-                            <select class="form-control" name="area_id" required="">
-                                <option selected="">Seleccionar</option>
-                                @foreach($areas as $area)
-                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

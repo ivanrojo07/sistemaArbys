@@ -18,14 +18,10 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'perfil_id',
-        'puesto_id',
-        'area_id',
+        'empleado_id',
         'name',
         'email',
-        'password',
-        'nombre',
-        'appaterno',
-        'apmaterno'
+        'password'
     ];
 
     /**
@@ -37,21 +33,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-   public function pagos(){
-
+   public function pagos() {
         return $this->hasMany('App\Pago');
-    }
-    
-    public function puesto() {
-        return $this->belongsTo('App\Puesto');
-    }
-
-    public function area() {
-        return $this->belongsTo('App\Area');
     }
 
     public function perfil() {
         return $this->belongsTo('App\Perfil');
+    }
+
+    public function empleado() {
+        return $this->belongsTo('App\Empleado');
     }
 }
 

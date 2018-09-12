@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             PuestosTableSeeder::class,
             RegionsTableSeeder::class,
             EstadosTableSeeder::class,
+            EmpleadosTableSeeder::class,
             UsersTableSeeder::class
         ]);
     }
