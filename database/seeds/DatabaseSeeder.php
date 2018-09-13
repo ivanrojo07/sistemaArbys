@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PerfilsTableSeeder::class,
             ModulosTableSeeder::class,
-            ModuloPerfilTableSeeder::class,
+            ComponentesTableSeeder::class,
+            ComponentePerfilTableSeeder::class,
             AreasTableSeeder::class,
             PuestosTableSeeder::class,
             RegionsTableSeeder::class,

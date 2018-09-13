@@ -1,8 +1,4 @@
-$(document).ready(function () {
-        $('.collapse').collapse({
-        toggle: false,
-    });
-});
+
 $(window).resize(function () {
     var heigh = parseInt($(window).height()) - 150;
     $("iframe").height(heigh);

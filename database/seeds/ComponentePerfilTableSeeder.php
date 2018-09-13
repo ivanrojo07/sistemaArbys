@@ -1,10 +1,10 @@
 <?php
 
-use App\Modulo;
+use App\Componente;
 use App\Perfil;
 use Illuminate\Database\Seeder;
 
-class ModuloPerfilTableSeeder extends Seeder
+class ComponentePerfilTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class ModuloPerfilTableSeeder extends Seeder
      */
     public function run()
     {
-    	Perfil::find(1)->modulos()->attach(Modulo::get());
+    	Perfil::find(1)->componentes()->attach(Componente::get());
     }
 }

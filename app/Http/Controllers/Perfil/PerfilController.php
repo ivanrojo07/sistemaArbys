@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Perfil;
 
 use App\Perfil;
 use App\Modulo;
+use App\Componente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,9 +17,9 @@ class PerfilController extends Controller
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
                 $user = Auth::user();
-                $modulos = $user->perfil->modulos;
-                foreach ($modulos as $modulo) {
-                    if($modulo->nombre == "seguridad")
+                $componentes = $user->perfil->componentes;
+                foreach ($componentes as $componente) {
+                    if($componente->modulo->nombre == "seguridad")
                         return $next($request);
                 }
                 return redirect()->route('denegado');
@@ -66,8 +67,8 @@ class PerfilController extends Controller
     {
         $seguridad = false;
         if($request->input('modulo_id') != null)
-            foreach ($request->input('modulo_id') as $id)
-                if(Modulo::find($id)->nombre == 'seguridad')
+            foreach ($request->input('componente_id') as $id)
+                if(Componente::find($id)->modulo->nombre == 'seguridad')
                     $seguridad = true;
 
         if(Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad)
@@ -75,12 +76,12 @@ class PerfilController extends Controller
         else {
             $rules = [
                 'nombre'=>'required|string|unique:perfils',
-                'modulo_id'=>'nullable|array'
+                'componente_id'=>'nullable|array'
             ];
             $this->validate($request, $rules);
             $perfil = Perfil::create($request->all());
-            $modulos = Modulo::find($request->input('modulo_id'));
-            $perfil->modulos()->attach($modulos);
+            $componentes = Componente::find($request->input('componente_id'));
+            $perfil->componentes()->attach($componentes);
             $modulos = Modulo::get();
             return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
         }

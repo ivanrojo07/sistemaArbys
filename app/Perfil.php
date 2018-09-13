@@ -15,8 +15,8 @@ class Perfil extends Model
 
     protected $hidden = [ 'created_at', 'updated_at'];
 
-    public function modulos() {
-    	return $this->belongsToMany('App\Modulo');
+    public function componentes() {
+    	return $this->belongsToMany('App\Componente');
     }
 
     public function usuarios() {

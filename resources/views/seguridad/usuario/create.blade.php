@@ -49,8 +49,8 @@
                                 @if($perfil->id == 1)
                                 @else
                                 <?php $seguridad = false; ?>
-                                @foreach($perfil->modulos as $modulo)
-                                @if($modulo->nombre == "seguridad")
+                                @foreach($perfil->componentes as $componente)
+                                @if($componente->modulo->nombre == "seguridad")
                                 <?php $seguridad = true; ?>
                                 @endif
                                 @endforeach

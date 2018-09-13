@@ -29,9 +29,9 @@ class UsuarioController extends Controller
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
                 $user = Auth::user();
-                $modulos = $user->perfil->modulos;
-                foreach ($modulos as $modulo) {
-                    if($modulo->nombre == "seguridad")
+                $componentes = $user->perfil->componentes;
+                foreach ($componentes as $componente) {
+                    if($componente->modulo->nombre == "seguridad")
                         return $next($request);
                 }
                 return redirect()->route('denegado');
@@ -47,8 +47,8 @@ class UsuarioController extends Controller
      * @return boolean
      */
     public function hasSecurity($perfil) {
-        foreach ($perfil->modulos as $modulo)
-            if($modulo->nombre == 'seguridad')
+        foreach ($perfil->componentes as $componente)
+            if($componente->modulo->nombre == 'seguridad')
                 return true;
         return false;
     }

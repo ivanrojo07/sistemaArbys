@@ -25,20 +25,39 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label class="control-label">Modulos:</label>
-                            @foreach($modulos as $modulo)
-                            @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
-                            @else
-                            <div class="row">
-                                <div class="col-sm-5 text-right">
-                                    {{ $modulo->nombre}}
-                                </div>
-                                <div class="col-sm-4 text-left">
-                                    <input type="checkbox" name="modulo_id[]" value="{{ $modulo->id }}">
-                                </div>
-                            </div>
-                            @endif
-                            @endforeach
+                            <table class="table table-hover table-bordered">
+                                <tr>
+                                    <th class="info" colspan="2">
+                                        <label class="control-label">Modulos:</label>
+                                    </th>
+                                </tr>
+                                <?php $j = 0 ?>
+                                @foreach($modulos as $modulo)
+                                    <?php $j++; ?>
+                                    @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
+                                    @else
+                                        <tr style="background: #f4f4f4;">
+                                            <td>
+                                                {{ $modulo->nombre}}
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" id="mod{{ $j }}">
+                                            </td>
+                                        </tr>
+                                        <?php $i = 0; ?>
+                                        @foreach($modulo->componentes as $componente)
+                                            <tr>
+                                                <td>
+                                                    {{ $componente->nombre}}
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </table>
                         </div>
                     </div>
                     <div class="row">
@@ -52,4 +71,53 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        <?php $j = 0; ?>
+        @foreach($modulos as $modulo)
+            <?php $j++; ?>
+            <?php $i = 0; ?>
+            $('#mod{{ $j }}').change(function() {;
+                if($('#mod{{ $j }}').prop('checked')) {
+                    <?php $i = 0; ?>
+                    @foreach($modulo->componentes as $componente)
+                        $('#cmp{{ ++$i }}mod{{ $j }}').prop('checked', true);
+                        console.log('cmp{{ $i }}');
+                    @endforeach
+                } else {
+                    <?php $i = 0; ?>    
+                    @foreach($modulo->componentes as $componente)
+                        $('#cmp{{ ++$i }}mod{{ $j }}').prop('checked', false);
+                        console.log('cmp{{ $i }}');
+                    @endforeach
+                }
+            });
+        @endforeach
+
+        <?php $j = 0; ?>
+        @foreach($modulos as $modulo)
+            <?php $j++; ?>
+            <?php $i = 0; ?>
+            @foreach($modulo->componentes as $componente)
+                $('#cmp{{ ++$i }}mod{{ $j }}').change(function() {
+                    if($('#cmp1mod{{ $j }}').prop('checked')
+                    <?php $k = 0; ?>
+                    @foreach($modulo->componentes as $componente)
+                        @if($k == 0)
+                            <?php $k++; ?>
+                        @else
+                            && $('#cmp{{ ++$k }}mod{{ $j }}').prop('checked')
+                        @endif
+                    @endforeach
+                    ) {
+                        $('#mod{{ $j }}').prop('checked', true);
+                    } else {
+                        $('#mod{{ $j }}').prop('checked', false);
+                    }
+                });
+            @endforeach
+        @endforeach
+    });
+</script>
 @endsection

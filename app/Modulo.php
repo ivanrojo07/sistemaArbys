@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Modulo extends Model
 {
+    
     protected $table = 'modulos';
 
     protected $fillable = [
@@ -15,7 +16,8 @@ class Modulo extends Model
     
     protected $hidden=[ 'created_at', 'updated_at'];
 
-    public function perfils() {
-    	return $this->belongsToMany('App\Perfil');
+    public function componentes() {
+    	return $this->hasMany('App\Componente');
     }
+
 }
