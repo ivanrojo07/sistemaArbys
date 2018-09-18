@@ -17,7 +17,7 @@ class TipoContrato extends Model
     public $sortable=['id','nombre','descripcion'];
     
     public function datosLab(){
-    	return $this->belongsTo('App\EmpleadosDatosLab');
+    	return $this->hasMany('App\EmpleadosDatosLab');
     }
 
     public function datosLabCom(){

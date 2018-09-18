@@ -296,21 +296,32 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        @foreach(Auth::user()->perfil->componentes as $c)
+                                        @if($c->nombre == "indice regiones")
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
                                             <i class="fa fa-globe" aria-hidden="true"></i> Región
                                         </a>
+                                        @endif
+                                        @if($c->nombre == "indice estados")
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
                                             <i class="fa fa-map" aria-hidden="true"></i> Estado
                                         </a>
+                                        @endif
+                                        @if($c->nombre == "indice oficinas")
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('oficina') }}','Oficina')">
                                             <i class="fa fa-building" aria-hidden="true"></i> Oficina
                                         </a>
+                                        @endif
+                                        @if($c->nombre == "indice puntos")
                                         <a href="#" onclick="AgregarNuevoTab('{{ url('puntoDeVenta')}}','Punto de Venta')">
                                             <i class="fa fa-building-o" aria-hidden="true"></i> Punto de venta
                                         </a>
+                                        @endif
+                                        @endforeach
                                     </li>                     
                                 </ul>
                             </li>
+                            @break
                             @endif
                             @endforeach
                         </ul> 

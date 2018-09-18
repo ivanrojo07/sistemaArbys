@@ -49,23 +49,23 @@ class EmpleadosDatosLab extends Model
     public $sortable=['id'];
 
     public function empleado() {
-    	return $this->belongsTo('App\Empleado', 'empleado_id');
+    	return $this->belongsTo('App\Empleado');
     }
     
-    public function tipocontrato() {
-    	return $this->hasOne('App\TipoContrato', 'contrato_id');
+    public function contrato() {
+    	return $this->belongsTo('App\TipoContrato');
     }
     
     // public function tipobaja(){
     // 	return $this->hasOne('App\TipoBaja','tipobaja_id');
     // }
     
-    public function areas() {
-        return $this->hasOne('App\Area','area_id');
+    public function area() {
+        return $this->belongsTo('App\Area');
     }
     
-    public function puestos() { 
-        return $this->hasOne('App\Puesto','puesto_id');
+    public function puesto() { 
+        return $this->belongsTo('App\Puesto');
     }
 
     //   public function sucursal(){

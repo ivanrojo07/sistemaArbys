@@ -24,7 +24,7 @@ class FileController extends Controller
             $data = \Excel::load($path,null,null,true,null)->get();
     		if ($data->count()) {
     			# code...
-                // dd($data);
+                //dd($data);
     			foreach ($data as $key => $value) {
     				# code...
     				$arr[]=['clave'=>$value->clave,'descripcion'=>$value->descripcion, 'precio_lista'=>$value->precio_de_lista,'mensualidad_p_fisica'=>$value->pago_mensual_p_fisica,'mensualidad_p_moral'=>$value->p_moral,'apertura'=>$value->apertura,'inicial'=>$value->inicial,'marca'=>$value->marca, 'tipo'=>$value->tipo,'created_at'=>date('Y-m-d H:i:s')];

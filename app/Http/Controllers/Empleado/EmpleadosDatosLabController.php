@@ -13,6 +13,7 @@ use App\Puesto;
 use App\Banco;
 use App\Region;
 use App\Estado;
+use App\Oficina;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -25,49 +26,19 @@ class EmpleadosDatosLabController extends Controller
      */
     public function index(Empleado $empleado)
     {
-        //
         $datoslaborales = $empleado->datosLaborales;
-
-       
-        
-        
-        $areas =   Area::get();
-        $puestos = Puesto::get();
-        $sucursales =Sucursal::get();
-        $bancos= Banco::get();
-        $contratos=TipoContrato::get();
-        
-        //
-        if (count($datoslaborales)==0) {
-
-          
-
-            return redirect()->route('empleados.datoslaborales.create',
-                ['empleado'=>$empleado]);
-
-
-        } else {
-
-       
-        $datoslab=$empleado->datosLaborales()-> orderBy('created_at', 'desc')->first();
-        $area=Area::where('id',$datoslab->area_id)->first();
-        $puesto=Puesto::where('id',$datoslab->puesto_id)->first();
-        $contrato=TipoContrato::where('id',$datoslab->contrato_id)->first();
-        $sucursal=Sucursal::where('id',$datoslab->sucursal_id)->first();
-            # code...
-            return view('empleadodatoslab.index',[
-                'empleado'=>$empleado,
-                'datoslaborales'=>$datoslaborales,
-                'areas'=>$areas,
-                'puestos'=>$puestos,
-                'sucursales'=>$sucursales,
-                'datoslab'=>$datoslab,
-                'area'=>$area,
-                'puesto'=>$puesto,
-                'contrato'=>$contrato,
-                'contratos'=>$contratos,
-                'sucursal'=>$sucursal,
-                'bancos'=>$bancos]); 
+        if (count($datoslaborales) == 0)
+            return redirect()->route('empleados.datoslaborales.create', ['empleado' => $empleado]);
+        else {
+          $subg = Empleado::find($datoslaborales->first()->subgerente);
+          $datoslab=$empleado->datosLaborales()-> orderBy('created_at', 'desc')->first();
+          return view('empleadodatoslab.index', [
+              'empleado' => $empleado,
+              'datoslaborales' => $datoslaborales,
+              'datoslab' => $datoslab,
+              'subgerente' => $subg,
+            ]
+          ); 
         }
         
     }
@@ -80,6 +51,11 @@ class EmpleadosDatosLabController extends Controller
     public function oficinas(Estado $estado) {
         if($estado->id !=0)
             return view('empleadodatoslab.oficinas', ['estado' => $estado]);
+    }
+
+    public function subgerentes(Oficina $oficina) {
+        if($oficina->id !=0)
+            return view('empleadodatoslab.subgerentes', ['oficina' => $oficina]);
     }
 
     /**
@@ -107,16 +83,7 @@ class EmpleadosDatosLabController extends Controller
     {
         //
         $datoslab = new EmpleadosDatosLab;
-        $datoslab->empleado_id = $request->empleado_id;
-        $datoslab->contrato_id = $request->contrato_id ;
-        $datoslab->area_id = $request->area_id;
-        $datoslab->puesto_id = $request->puesto_id;
-        $datoslab->region_id = $request->region_id;
-        $datoslab->estado_id = $request->estado_id;
-        $datoslab->oficina_id = $request->oficina_id;
-        $datoslab->subgerente = $request->subgerente;
-        
-        $datoslab->fechacontratacion = $request->fechacontratacion;
+        $datoslab->create($request->all());
 
         
         
@@ -147,7 +114,7 @@ class EmpleadosDatosLabController extends Controller
         //     # code...
         //     $datoslab->bonopuntualidad = false;
         // }
-        $datoslab->save();
+        // $datoslab->save();
         Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }

@@ -21,10 +21,11 @@
 		<h5>Laborales:&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h5></div>
 		<div class="panel-body">
 			@if($edit)
-			<form role="form" method="get">
+			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.store',['empleado'=>$empleado]) }}">
 				{{ csrf_field() }}
 			@else
-			<form role="form" method="get">
+				{{-- false expr --}}
+			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.store',['empleado'=>$empleado]) }}">
 				{{ csrf_field() }}
 			@endif
 				<input type="hidden" name="empleado_id" value="{{ $empleado->id }}">
@@ -102,7 +103,7 @@
 					</div>
 					<div class="col-sm-3" id="subgerente" style="display: none;">
 						<label class="control-label">Subgerente:</label>
-						<select id="subgetentes" class="form-control">
+						<select id="subgerentes" class="form-control">
 						</select>
 					</div>
 				</div>
@@ -159,7 +160,8 @@
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
       				document.getElementById('subgerente').style.display = 'block';
-					$("#subgetentes").prop('name', 'subgetente_id');
+					$("#oficinas").prop('name', 'oficina_id');
+					$("#subgerentes").prop('name', 'subgerente');
     				break;
     		}
 
@@ -189,6 +191,21 @@
 					},
 					error: function (){
 						$('#oficinas').html('');
+					}
+				});
+			});
+
+			$('#oficinas').change(function() {
+				var id = $('#oficinas').val();
+				$.ajax({
+					url: '../../../../oficina2/' + id,
+					type: "GET",
+					dataType: "html",
+					success: function(res){
+						$('#subgerentes').html(res);
+					},
+					error: function (){
+						$('#subgerentes').html('');
 					}
 				});
 			});

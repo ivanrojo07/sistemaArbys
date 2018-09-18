@@ -23,15 +23,21 @@ class OficinaController extends Controller
                 return redirect()->route('login');
         });
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private function hasComponent($nombre) {
+        foreach (Auth::user()->perfil->componentes as $componente)
+            if($componente->nombre == $nombre)
+                return true;
+        return false;
+    }
+
     public function index()
     {
-        $oficinas = Oficina::get();
-        return view('oficina.index', ['oficinas' => $oficinas]);
+        if($this->hasComponent('indice oficinas')) {
+            $oficinas = Oficina::get();
+            return view('oficina.index', ['oficinas' => $oficinas]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -41,8 +47,11 @@ class OficinaController extends Controller
      */
     public function create()
     {
-        $estados = Estado::get();
-        return view('oficina.create', ['estados' => $estados]);
+        if($this->hasComponent('crear oficina')) {
+            $estados = Estado::get();
+            return view('oficina.create', ['estados' => $estados]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -53,8 +62,11 @@ class OficinaController extends Controller
      */
     public function store(Request $request)
     {
-        $oficina = Oficina::create($request->all());
-        return view('oficina.view', ['oficina' => $oficina]);
+        if($this->hasComponent('crear oficina')) {
+            $oficina = Oficina::create($request->all());
+            return view('oficina.view', ['oficina' => $oficina]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -65,8 +77,11 @@ class OficinaController extends Controller
      */
     public function show($id)
     {
-        $oficina = Oficina::find($id);
-        return view('oficina.view', ['oficina' => $oficina]);
+        if($this->hasComponent('ver oficina')) {
+            $oficina = Oficina::find($id);
+            return view('oficina.view', ['oficina' => $oficina]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -77,9 +92,12 @@ class OficinaController extends Controller
      */
     public function edit($id)
     {
-        $oficina = Oficina::find($id);
-        $estados = Estado::get();
-        return view('oficina.edit', ['oficina' => $oficina, 'estados' => $estados]);
+        if($this->hasComponent('editar oficina')) {
+            $oficina = Oficina::find($id);
+            $estados = Estado::get();
+            return view('oficina.edit', ['oficina' => $oficina, 'estados' => $estados]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -91,9 +109,12 @@ class OficinaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $oficina = Oficina::find($id);
-        $oficina->update($request->except('_method', '_token'));
-        return view('oficina.view', ['oficina' => $oficina]);
+        if($this->hasComponent('editar oficina')) {
+            $oficina = Oficina::find($id);
+            $oficina->update($request->except('_method', '_token'));
+            return view('oficina.view', ['oficina' => $oficina]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
