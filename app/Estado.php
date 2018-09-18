@@ -33,4 +33,8 @@ class Estado extends Model
         return $this->hasMany('App\Sucursal');
     }
 
+    public function datosLab() {
+        return $this->hasMany('App\EmpleadosDatosLab');
+    }
+
 }

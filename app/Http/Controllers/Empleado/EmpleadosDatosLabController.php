@@ -11,6 +11,8 @@ use App\TipoContrato;
 use App\Area;
 use App\Puesto;
 use App\Banco;
+use App\Region;
+use App\Estado;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -70,6 +72,16 @@ class EmpleadosDatosLabController extends Controller
         
     }
 
+    public function estados(Region $region) {
+        if($region->id !=0)
+            return view('empleadodatoslab.estados', ['region' => $region]);
+    }
+
+    public function oficinas(Estado $estado) {
+        if($estado->id !=0)
+            return view('empleadodatoslab.oficinas', ['estado' => $estado]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -81,7 +93,8 @@ class EmpleadosDatosLabController extends Controller
         $contratos = TipoContrato::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
-        return view('empleadodatoslab.create', ['empleado' => $empleado, 'contratos' => $contratos, 'datoslab' => $datoslab, 'areas' => $areas, 'puestos' => $puestos, 'edit' => false]);
+        $regiones = Region::get();
+        return view('empleadodatoslab.create', ['empleado' => $empleado, 'contratos' => $contratos, 'datoslab' => $datoslab, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones, 'edit' => false]);
     }
 
     /**
@@ -95,42 +108,45 @@ class EmpleadosDatosLabController extends Controller
         //
         $datoslab = new EmpleadosDatosLab;
         $datoslab->empleado_id = $request->empleado_id;
-
-        $datoslab->fechacontratacion = $request->fechacontratacion;
-        $datoslab->fechaactualizacion = date("Y-m-d");
-
-        
-      
+        $datoslab->contrato_id = $request->contrato_id ;
         $datoslab->area_id = $request->area_id;
         $datoslab->puesto_id = $request->puesto_id;
-
-        $datoslab->sucursal_id = $request->sucursal_id;
+        $datoslab->region_id = $request->region_id;
+        $datoslab->estado_id = $request->estado_id;
+        $datoslab->oficina_id = $request->oficina_id;
+        $datoslab->subgerente = $request->subgerente;
         
-        $datoslab->salarionom = $request->salarionom;
-        $datoslab->salariodia = $request->salariodia ;
-        $datoslab->puesto_inicio = $request->puesto_inicio ;
-        $datoslab->periodopaga = $request->periodopaga ;
-        $datoslab->prestaciones = $request->prestaciones ;
-        $datoslab->regimen = $request->regimen ;
-        $datoslab->hentrada = $request->hentrada ;
-        $datoslab->hsalida = $request->hsalida ;
-        $datoslab->hcomida = $request->hcomida ;
-        $datoslab->lugartrabajo = $request->lugartrabajo ;
-        $datoslab->banco = $request->banco ;
-        $datoslab->cuenta = $request->cuenta ;
-        $datoslab->clabe = $request->clabe ;
-        $datoslab->fechabaja = $request->fechabaja ;
-        $datoslab->tipobaja_id = $request->tipobaja_id ;
-        $datoslab->comentariobaja = $request->comentariobaja ;
-        $datoslab->contrato_id = $request->contrato_id ;
-        if ($request->bonopuntualidad == 'on') {
-            # code...
-            $datoslab->bonopuntualidad = true;
-            // dd($request->all());
-        } else {
-            # code...
-            $datoslab->bonopuntualidad = false;
-        }
+        $datoslab->fechacontratacion = $request->fechacontratacion;
+
+        
+        
+        // $datoslab->sucursal_id = $request->sucursal_id;
+        // $datoslab->fechaactualizacion = date("Y-m-d");
+        // $datoslab->salarionom = $request->salarionom;
+        // $datoslab->salariodia = $request->salariodia ;
+        // $datoslab->puesto_inicio = $request->puesto_inicio ;
+        // $datoslab->periodopaga = $request->periodopaga ;
+        // $datoslab->prestaciones = $request->prestaciones ;
+        // $datoslab->regimen = $request->regimen ;
+        // $datoslab->hentrada = $request->hentrada ;
+        // $datoslab->hsalida = $request->hsalida ;
+        // $datoslab->hcomida = $request->hcomida ;
+        // $datoslab->lugartrabajo = $request->lugartrabajo ;
+        // $datoslab->banco = $request->banco ;
+        // $datoslab->cuenta = $request->cuenta ;
+        // $datoslab->clabe = $request->clabe ;
+        // $datoslab->fechabaja = $request->fechabaja ;
+        // $datoslab->tipobaja_id = $request->tipobaja_id ;
+        // $datoslab->comentariobaja = $request->comentariobaja ;
+
+        // if ($request->bonopuntualidad == 'on') {
+        //     # code...
+        //     $datoslab->bonopuntualidad = true;
+        //     // dd($request->all());
+        // } else {
+        //     # code...
+        //     $datoslab->bonopuntualidad = false;
+        // }
         $datoslab->save();
         Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);

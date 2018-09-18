@@ -41,4 +41,8 @@ class Oficina extends Model
         return $this->hasMany('App\EmpleadoComercial');
     }
 
+    public function datosLab() {
+        return $this->hasMany('App\EmpleadosDatosLab');
+    }
+
 }

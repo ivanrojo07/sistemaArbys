@@ -27,6 +27,17 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->integer('puesto_id')->unsigned()->nullable();
             $table->foreign('puesto_id')->references('id')->on('puestos');
             
+            $table->integer('region_id')->unsigned()->nullable();
+            $table->foreign('region_id')->references('id')->on('regions');
+            
+            $table->integer('estado_id')->unsigned()->nullable();
+            $table->foreign('estado_id')->references('id')->on('estados');
+            
+            $table->integer('oficina_id')->unsigned()->nullable();
+            $table->foreign('oficina_id')->references('id')->on('oficinas');
+
+            $table->integer('subgerente')->unsigned()->nullable();
+            
             // $table->integer('sucursal_id')->unsigned()->nullable();
             // $table->foreign('sucursal_id')->references('id')->on('sucursals');
             

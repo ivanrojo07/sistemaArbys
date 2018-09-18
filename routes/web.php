@@ -39,6 +39,8 @@ Route::get('pruebas','PruebasController@create');
 
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
+Route::get('region2/{region}','Empleado\EmpleadosDatosLabController@estados');
+Route::get('estado2/{estado}','Empleado\EmpleadosDatosLabController@oficinas');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');

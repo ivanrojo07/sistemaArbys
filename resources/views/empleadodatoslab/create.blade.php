@@ -21,10 +21,10 @@
 		<h5>Laborales:&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h5></div>
 		<div class="panel-body">
 			@if($edit)
-			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.store',['empleado'=>$empleado]) }}">
+			<form role="form" method="get">
 				{{ csrf_field() }}
 			@else
-			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.store',['empleado'=>$empleado]) }}">
+			<form role="form" method="get">
 				{{ csrf_field() }}
 			@endif
 				<input type="hidden" name="empleado_id" value="{{ $empleado->id }}">
@@ -79,226 +79,32 @@
 						</select>
 					</div>
 				</div>
-				<!-- <div class="row">
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="contrato">Sucursal:</label>
-						<select type="select" class="form-control" name="sucursal_id" >
-							<option id="sucursal_id" value="">Sin Definir</option>
-							@foreach ($sucursales as $sucursal)
-							<option id="{{$sucursal->id}}" value="{{$sucursal->id}}"
-							<?php
-								// if($datoslab->sucursal_id == $sucursal->id) echo ' selected';
-							?>
-							>{{ $sucursal->nombre }}</option>
+				<div class="row">
+					<div class="col-sm-3" id="region" style="display: none;">
+						<label class="control-label">Región:</label>
+						<select id="regiones" class="form-control">
+							<option>No Definido</option>
+							@foreach($regiones as $region)
+							<option value="{{ $region->id }}">{{ $region->nombre }}</option>
 							@endforeach
 						</select>
+						<br>
 					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="lugartrabajo">Lugar de Trabajo:</label>
-						<select type="select" name="lugartrabajo" class="form-control" id="lugartrabajo" value="{{ $datoslab->lugartrabajo }}">
-							<option id="1" value="Oficinas"
-							<?php
-								// if($datoslab->lugartrabajo == "Oficinas") echo ' selected';
-							?>
-							>Oficinas</option>
-							<option id="2" value="Campo"
-							<?php
-								// if($datoslab->lugartrabajo == "Campo") echo ' selected';
-							?>
-							>Campo</option>
+					<div class="col-sm-3" id="estado" style="display: none;">
+						<label class="control-label">Estado:</label>
+						<select id="estados" class="form-control">
 						</select>
 					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="salarionom"><i class="fa fa-asterisk" aria-hidden="true"></i>Salario Nóminal:</label>
-						<input class="form-control" type="text" id="salarionom" name="salarionom" value="{{ $datoslab->salarionom }}" required>
-					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="periodopaga">Periodicidad de Pago:</label>
-						<select type="select" class="form-control" name="periodopaga" id="periodopaga">
-							<option id="1" value="Semanal"
-							<?php
-								// if($datoslab->periodopaga == "Semanal") echo ' selected';
-							?>
-							>Semanal</option>
-							<option id="2" value="Quincenal"
-							<?php
-								// if($datoslab->periodopaga == "Quincenal") echo ' selected';
-							?>
-							>Quincenal</option>
-							<option id="3" value="Mensual"
-							<?php
-								// if($datoslab->periodopaga == "Mensual") echo ' selected';
-							?>
-							>Mensual</option>
+					<div class="col-sm-3" id="oficina" style="display: none;">
+						<label class="control-label">Oficina:</label>
+						<select id="oficinas" class="form-control">
 						</select>
 					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="prestaciones">Prestaciones:</label>
-						<select class="form-control" type="select" name="prestaciones" id="prestaciones">
-							<option id="1" value="De Ley"
-							<?php
-								// if($datoslab->prestaciones == "De Ley") echo ' selected';
-							?>
-							>De Ley</option>
+					<div class="col-sm-3" id="subgerente" style="display: none;">
+						<label class="control-label">Subgerente:</label>
+						<select id="subgetentes" class="form-control">
 						</select>
 					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="regimen">Régimen de Contratación:</label>
-						<select class="form-control" type="select" name="regimen" id="regimen" value="{{ $datoslab->regimen }}">
-							<option id="1" value="Sueldos y Salarios"
-							<?php
-								// if($datoslab->regimen == "Sueldos y Salarios") echo ' selected';
-							?>
-							>Sueldos y Salarios</option>
-							<option id="2" value="Jubilados"
-							<?php
-								// if($datoslab->regimen == "Jubilados") echo ' selected';
-							?>
-							>Jubilados</option>
-							<option id="3" value="Pensionados"
-							<?php
-								// if($datoslab->regimen == "Pensionados") echo ' selected';
-							?>
-							>Pensionados</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="hentrada">Hora de Entrada:</label>
-						<input class="form-control" type="text" id="hentrada" name="hentrada" value="{{ $datoslab->hentrada }}">
-					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="hsalida">Hora de Salida:</label>
-						<input class="form-control" type="text" id="hsalida" name="hsalida" value="{{ $datoslab->hsalida }}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="banco">Banco:</label>
-						<select class="form-control" type="select" name="banco" id="banco">
-							<option id="banco" value="">Sin Definir</option>
-							@foreach ($bancos as $banco)
-							<option id="{{$banco->nombre}}" value="{{$banco->nombre}}" @if ($datoslab->banco == $banco->nombre)
-								{{-- expr --}}
-								selected="selected" 
-								@endif>{{$banco->nombre}}</option>
-								@endforeach
-						</select>
-					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="cuenta">Cuenta:</label>
-						<input class="form-control" type="text" id="cuenta" name="cuenta" value="{{ $datoslab->cuenta }}">
-					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="clabe">CLABE:</label>
-						<input class="form-control" type="clabe" name="clabe" id="clabe" value="{{ $datoslab->clabe }}">
-					</div>
-				</div> -->
-				<div id="regional" style="display: none">
-					<div class="row">
-						<div class="col-sm-3">
-							<label class="control-label">Región:</label>
-							<select name="region_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-					</div>
-					<br>
-				</div>
-				<div id="estatal" style="display: none">
-					<div class="row">
-						<div class="col-sm-3">
-							<label class="control-label">Región:</label>
-							<select id="region_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Estado:</label>
-							<select name="estado_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-					</div>
-					<br>
-				</div>
-				<div id="gerente" style="display: none">
-					<div class="row">
-						<div class="col-sm-3">
-							<label class="control-label">Región:</label>
-							<select id="region_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Estado:</label>
-							<select id="estado_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Oficina:</label>
-							<select name="oficina_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-					</div>
-					<br>
-				</div>
-				<div id="subgerente" style="display: none">
-					<div class="row">
-						<div class="col-sm-3">
-							<label class="control-label">Región:</label>
-							<select id="region_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Estado:</label>
-							<select id="estado_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Oficina:</label>
-							<select name="oficina_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-					</div>
-					<br>
-				</div>
-				<div id="vendedor" style="display: none">
-					<div class="row">
-						<div class="col-sm-3">
-							<label class="control-label">Región:</label>
-							<select id="region_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Estado:</label>
-							<select id="estado_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Oficina:</label>
-							<select id="oficina_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label">Subgerente:</label>
-							<select name="subgetente_id" class="form-control">
-								<option>No Definido</option>
-							</select>
-						</div>
-					</div>
-					<br>
 				</div>
 				<div class="row text-center">
 					<div class="col-sm-12">
@@ -315,31 +121,80 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
     	$('#puesto_id').change(function() {
     		var val = parseInt(document.getElementById("puesto_id").value);
-      		document.getElementById('regional').style.display = 'none';
-      		document.getElementById('estatal').style.display = 'none';
-      		document.getElementById('gerente').style.display = 'none';
+      		document.getElementById('region').style.display = 'none';
+			$("#regiones").prop('name', '');
+      		document.getElementById('estado').style.display = 'none';
+			$("#estados").prop('name', '');
+      		document.getElementById('oficina').style.display = 'none';
+			$("#oficinas").prop('name', '');
       		document.getElementById('subgerente').style.display = 'none';
-      		document.getElementById('vendedor').style.display = 'none';
+			$("#subgetentes").prop('name', '');
     		switch(val) {
     			case 3:
-      				document.getElementById('regional').style.display = 'block';
+      				document.getElementById('region').style.display = 'block';
+      				$("#regiones").prop('name', 'region_id');
     				break;
     			case 4:
-      				document.getElementById('estatal').style.display = 'block';
+      				document.getElementById('region').style.display = 'block';
+      				document.getElementById('estado').style.display = 'block';
+					$("#estados").prop('name', 'estado_id');
     				break;
     			case 5:
-      				document.getElementById('gerente').style.display = 'block';
+      				document.getElementById('region').style.display = 'block';
+      				document.getElementById('estado').style.display = 'block';
+      				document.getElementById('oficina').style.display = 'block';
+					$("#oficinas").prop('name', 'oficina_id');
     				break;
     			case 6:
-      				document.getElementById('subgerente').style.display = 'block';
+      				document.getElementById('region').style.display = 'block';
+      				document.getElementById('estado').style.display = 'block';
+      				document.getElementById('oficina').style.display = 'block';
+					$("#oficinas").prop('name', 'oficina_id');
     				break;
     			case 7:
-      				document.getElementById('vendedor').style.display = 'block';
+      				document.getElementById('region').style.display = 'block';
+      				document.getElementById('estado').style.display = 'block';
+      				document.getElementById('oficina').style.display = 'block';
+      				document.getElementById('subgerente').style.display = 'block';
+					$("#subgetentes").prop('name', 'subgetente_id');
     				break;
     		}
+
+			$('#regiones').change(function() {
+				var id = $('#regiones').val();
+				$.ajax({
+					url: '../../../../region2/' + id,
+					type: "GET",
+					dataType: "html",
+					success: function(res){
+						$('#estados').html(res);
+					},
+					error: function (){
+						$('#estados').html('');
+					}
+				});
+			});
+
+			$('#estados').change(function() {
+				var id = $('#estados').val();
+				$.ajax({
+					url: '../../../../estado2/' + id,
+					type: "GET",
+					dataType: "html",
+					success: function(res){
+						$('#oficinas').html(res);
+					},
+					error: function (){
+						$('#oficinas').html('');
+					}
+				});
+			});
+
     	});
+
     });
 </script>
 

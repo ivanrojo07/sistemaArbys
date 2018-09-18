@@ -24,4 +24,8 @@ class Region extends Model
         return $this->hasMany('App\Estado');
     }
 
+    public function datosLab() {
+        return $this->hasMany('App\EmpleadosDatosLab');
+    }
+
 }

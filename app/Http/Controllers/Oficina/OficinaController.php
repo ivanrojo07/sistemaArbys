@@ -11,15 +11,13 @@ use App\Http\Controllers\Controller;
 
 class OficinaController extends Controller
 {
+
     public function __construct() {
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
-                $user = Auth::user();
-                $modulos = $user->perfil->modulos;
-                foreach ($modulos as $modulo) {
-                    if($modulo->nombre == "oficinas")
+                foreach (Auth::user()->perfil->componentes as $componente)
+                    if($componente->modulo->nombre == "oficinas")
                         return $next($request);
-                }
                 return redirect()->route('denegado');
             } else
                 return redirect()->route('login');

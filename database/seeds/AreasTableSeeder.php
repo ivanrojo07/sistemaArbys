@@ -13,11 +13,8 @@ class AreasTableSeeder extends Seeder
     public function run()
     {
         $areas = array(
-        	array('nombre' => 'Administración', 'etiqueta' => 'ADMIN'),
-        	array('nombre' => 'Tecnologías de la Información', 'etiqueta' => 'TI'),
-        	array('nombre' => 'Recursos Humanos', 'etiqueta' => 'RH'),
-        	array('nombre' => 'Ventas', 'etiqueta' => 'VTAS'),
-        	array('nombre' => 'Proveedores', 'etiqueta' => 'PROV')
+            array('nombre' => 'Administración', 'etiqueta' => 'ADMIN'),
+            array('nombre' => 'Comercial', 'etiqueta' => 'COMER'),
         );
 
         Area::insert($areas);
