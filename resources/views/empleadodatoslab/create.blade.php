@@ -183,7 +183,7 @@
 			$('#estados').change(function() {
 				var id = $('#estados').val();
 				$.ajax({
-					url: '../../../../estado2/' + id,
+					url: '../../../estado2/' + id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
@@ -198,7 +198,7 @@
 			$('#oficinas').change(function() {
 				var id = $('#oficinas').val();
 				$.ajax({
-					url: '../../../../oficina2/' + id,
+					url: '../../../oficina2/' + id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
