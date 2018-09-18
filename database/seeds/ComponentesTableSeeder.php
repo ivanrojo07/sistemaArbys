@@ -14,14 +14,23 @@ class ComponentesTableSeeder extends Seeder
     {
         //
     	$componentes = array(
-    		array('nombre' => 'cmp1', 'modulo_id' => 1),
-    		array('nombre' => 'cmp2', 'modulo_id' => 2),
-    		array('nombre' => 'cmp3', 'modulo_id' => 3),
-    		array('nombre' => 'cmp4', 'modulo_id' => 4),
-    		array('nombre' => 'cmp5', 'modulo_id' => 5),
-    		array('nombre' => 'cmp6', 'modulo_id' => 6),
-    		array('nombre' => 'cmp7', 'modulo_id' => 7),
-    		array('nombre' => 'cmp8', 'modulo_id' => 8),
+            // perfil
+            array('nombre' => 'indice perfiles', 'modulo_id' => 1),
+            array('nombre' => 'ver perfil', 'modulo_id' => 1),
+            array('nombre' => 'crear perfil', 'modulo_id' => 1),
+            array('nombre' => 'editar perfil', 'modulo_id' => 1),
+            array('nombre' => 'eliminar perfil', 'modulo_id' => 1),
+            // usuario
+            array('nombre' => 'indice usuarios', 'modulo_id' => 1),
+            array('nombre' => 'ver usuario', 'modulo_id' => 1),
+            array('nombre' => 'crear usuario', 'modulo_id' => 1),
+            array('nombre' => 'editar usuario', 'modulo_id' => 1),
+            array('nombre' => 'eliminar usuario', 'modulo_id' => 1),
+            // empleado
+            array('nombre' => 'indice empleados', 'modulo_id' => 2),
+            array('nombre' => 'ver empleado', 'modulo_id' => 2),
+            array('nombre' => 'crear empleado', 'modulo_id' => 2),
+            array('nombre' => 'editar empleado', 'modulo_id' => 2),
     	);
 
     	Componente::insert($componentes);

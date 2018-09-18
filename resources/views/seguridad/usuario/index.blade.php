@@ -9,9 +9,13 @@
 					<div class="col-sm-4">
 						<h4>Usuarios:</h4>
 					</div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'crear usuario')
                     <div class="col-sm-4 text-center">
                         <a class="btn btn-success" href="{{ route('usuario.create') }}"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Usuario</strong></a>
                     </div>
+                    @endif
+                    @endforeach
 				</div>
 			</div>
 			<div class="panel-body">
@@ -29,8 +33,8 @@
                             @if($usuario->perfil->id == 1)
                             @else
                             <?php $seguridad = false; ?>
-                            @foreach($usuario->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "seguridad")
+                            @foreach($usuario->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "seguridad")
                             <?php $seguridad = true; ?>
                             @endif
                             @endforeach
@@ -43,11 +47,19 @@
                                 <td>{{ $usuario->empleado->rfc }}</td>
                                 <td class="text-center">
                                     <form method="post" action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" style="">
+                                        @foreach(Auth::user()->perfil->componentes as $componente)
+                                        @if($componente->nombre == 'ver usuario')
                                         <a class="btn btn-primary btn-sm" href="{{ route('usuario.show', ['id' => $usuario->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
+                                        @endif
+                                        @if($componente->nombre == 'editar usuario')
                                         <a class="btn btn-warning btn-sm" href="{{ route('usuario.edit', ['id' => $usuario->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i><strong> Editar</strong></a>
+                                        @endif
+                                        @if($componente->nombre == 'eliminar usuario')
                                         <input type="hidden" name="_method" value="DELETE">
                                         {{ csrf_field() }}
                                         <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash" aria-hidden="true"></i><strong> Borrar</strong></button>
+                                        @endif
+                                        @endforeach
                                     </form>
                                 </td>
                             </tr>

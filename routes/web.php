@@ -10,20 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware'=>"web"],function(){
-	Route::resource('perfil', 'Perfil\PerfilController');
-});
-Route::get('/denegado',function(){
-	return view('errors.denegado');
-})->name('denegado');
 
 Route::get('/', function () {
 	return redirect()->route('login');
 });
 
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('personal', 'Personal\PersonalController@search');
-
 // Route::get('prospectos', 'Personal\PersonalController@prospectos');
 Route::resource('personals', 'Personal\PersonalController');
 Route::resource('personals.datoslaborales', 'Personal\PersonalDatosLabController');
@@ -36,9 +28,6 @@ Route::resource('productos','Producto\ProductController');
 Route::get('import-export-csv-excel',array('as'=>'excel.import','uses'=>'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel',array('as'=>'import-csv-excel','uses'=>'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as'=>'excel-file','uses'=>'FileController@downloadExcelFile'));
-
-
-
 
 Route::resource('personals.products.transactions', 'Personal\PersonalProductTransactionController',['only'=>'store']);
 Route::resource('personals.product','Personal\PersonalProductController', ['only'=>'index']);
@@ -140,12 +129,8 @@ Route::get('temporal', function () {
     return view('temporal.tempo', ['name' => 'James']);
 });
 
-
-Route::get('pdf',function(){
-
+Route::get('pdf',function() {
 	//$pdf = PDF::loadView('clientes.aux_html');
-	
-
 	$clientes= App\Cliente::get();
     $pdf=PDF::loadView('clientes.vista',['clientes'=>$clientes]);
 	return $pdf->download('archivo.pdf');
@@ -155,24 +140,15 @@ Route::get('pdf',function(){
 //-------------------------------------------------------------------
 //->name('products.pdf')
 
-
 /*
- * Recursos Humanos (Cambio) y Oficinas (Nuevo)
- * Armando 07/08/2018
- */
-
-/*
- * MENU OFICINAS
+ * OFICINAS
  */
 
 Route::get('region', 'Region\RegionController@index')->name('region.index');
 Route::get('region/{region}','Region\RegionController@estados');
-
 Route::get('estado', 'Estado\EstadoController@index')->name('estado.index');
 Route::get('estado/{estado}','Estado\EstadoController@region');
-
 Route::resource('oficina', 'Oficina\OficinaController');
-
 Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 
 /*
@@ -186,37 +162,31 @@ Route::resource('empleadoc.datoslaborales', 'EmpleadoComercial\EmpleadoComDatosL
  * SEGURIDAD -> Armando 16/08/2018
  */
 
-Route::get('seguridad', function () {
-    return view('seguridad.index');
-});
-
-
 Route::resource('usuario', 'Usuario\UsuarioController');
+Route::resource('perfil', 'Perfil\PerfilController');
 
+/*
+ * AUTENTICACION
+ */
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-// Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-// Route::get('/home', 'UsuarioController@index')->name('home');
+Route::get('/denegado',function(){
+	return view('errors.denegado');
+})->name('denegado');
 
 Route::get('/home', function () {
 	if(Auth::check()){
     	return view('welcome');
-
 	}else{
 		return redirect()->route('login');
 	}
 })->name('home');
 
-
-Route::get('rhh', 'Empleado\EmpleadoController@index')->name('rhh');
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

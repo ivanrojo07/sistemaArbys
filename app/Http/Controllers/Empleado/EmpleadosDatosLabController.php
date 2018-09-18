@@ -77,25 +77,11 @@ class EmpleadosDatosLabController extends Controller
      */
     public function create(Empleado $empleado)
     {
-        //
         $datoslab = new EmpleadosDatosLab;
         $contratos = TipoContrato::get();
-        $bajas = TipoBaja::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
-        $sucursales =Sucursal::get();
-        $bancos= Banco::get();
-        $edit = false;
-        return view('empleadodatoslab.create',[
-            'empleado'=>$empleado,
-            'bajas'=>$bajas,
-            'contratos'=>$contratos,
-            'datoslab'=>$datoslab, 
-            'areas'=>$areas, 
-            'puestos'=>$puestos,
-            'sucursales'=>$sucursales,
-            'bancos'=>$bancos,
-            'edit'=>$edit]);
+        return view('empleadodatoslab.create', ['empleado' => $empleado, 'contratos' => $contratos, 'datoslab' => $datoslab, 'areas' => $areas, 'puestos' => $puestos, 'edit' => false]);
     }
 
     /**

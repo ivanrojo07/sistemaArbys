@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 @section('content')
-<div class="row">
+<div class="container">
 	<div role="application" class="panel panel-group">
 		<div class="panel-default">
 			<div class="panel-heading"><h4>Datos del Empleado:</h4>
@@ -8,11 +8,6 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-xs-12 offset-md-2 mt-3">
-					<div class="form-group col-xs-3">
-						<label class="control-label" for="identificador">ID de empleado:</label>
-						<dd>{{$empleado->identificador}}</dd>
-					</div>
-				</div>
 				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">
 						<label class="control-label" for="appaterno">Apellido Paterno:</label>
@@ -65,17 +60,17 @@
 							<dd>{{$empleado->email}}</dd>
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="nss">Número de Seguro Social (IMSS):</label>
+							<label class="control-label" for="nss">NSS (IMSS):</label>
 							<dd>{{$empleado->nss}}</dd>
 						</div>
 					</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="curp">C.U.R.P.:</label>
+							<label class="control-label" for="curp">CURP:</label>
 							<dd>{{$empleado->curp}}</dd>
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="infonavit">Número Infonavit:</label>
+							<label class="control-label" for="infonavit">INFONAVIT:</label>
 							<dd>{{$empleado->infonavit}}</dd>
 						</div>
 						<div class="form-group col-xs-3">
@@ -106,16 +101,12 @@
 					</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="municipio">Delegación/Municipio:</label>
+							<label class="control-label" for="municipio">Municipio:</label>
 							<dd>{{$empleado->municipio}}</dd>
 						</div>
 						<div class="form-group col-xs-3">
 							<label class="control-label" for="estado">Estado:</label>
 							<dd>{{$empleado->estado}}</dd>
-						</div>
-						<div class="form-group col-xs-3">
-							<label class="control-label" for="calles">Entre calles:</label>
-							<dd>{{$empleado->calles}}</dd>
 						</div>
 						<div class="form-group col-xs-3">
 							<label class="control-label" for="referencia">Referencia:</label>

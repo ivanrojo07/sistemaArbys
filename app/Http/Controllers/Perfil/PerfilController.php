@@ -28,22 +28,27 @@ class PerfilController extends Controller
         });
     }
 
-    public function hasSecurity($perfil) {
-        foreach ($perfil->modulos as $modulo)
-            if($modulo->nombre == 'seguridad')
+    private function hasSecurity($perfil) {
+        foreach ($perfil->componentes as $componente)
+            if($componente->modulo->nombre == 'seguridad')
                 return true;
         return false;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private function hasComponent($nombre) {
+        foreach (Auth::user()->perfil->componentes as $componente)
+            if($componente->nombre == $nombre)
+                return true;
+        return false;
+    }
+    
     public function index()
     {
-        $perfiles = Perfil::get();
-        return view('seguridad.perfil.index', ['perfiles' => $perfiles]);
+        if($this->hasComponent('indice perfiles')) {
+            $perfiles = Perfil::get();
+            return view('seguridad.perfil.index', ['perfiles' => $perfiles]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -53,8 +58,11 @@ class PerfilController extends Controller
      */
     public function create()
     {
-        $modulos = Modulo::get();
-        return view('seguridad.perfil.create', ['modulos' => $modulos]);
+        if($this->hasComponent('crear perfil')) {
+            $modulos = Modulo::get();
+            return view('seguridad.perfil.create', ['modulos' => $modulos]);
+        }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -65,26 +73,29 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        $seguridad = false;
-        if($request->input('modulo_id') != null)
-            foreach ($request->input('componente_id') as $id)
-                if(Componente::find($id)->modulo->nombre == 'seguridad')
-                    $seguridad = true;
+        if($this->hasComponent('crear perfil')) {
+            $seguridad = false;
+            if($request->input('componente_id') != null)
+                foreach ($request->input('componente_id') as $id)
+                    if(Componente::find($id)->modulo->nombre == 'seguridad')
+                        $seguridad = true;
 
-        if(Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad)
-            return redirect()->route('denegado');
-        else {
-            $rules = [
-                'nombre'=>'required|string|unique:perfils',
-                'componente_id'=>'nullable|array'
-            ];
-            $this->validate($request, $rules);
-            $perfil = Perfil::create($request->all());
-            $componentes = Componente::find($request->input('componente_id'));
-            $perfil->componentes()->attach($componentes);
-            $modulos = Modulo::get();
-            return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            if(Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad)
+                return redirect()->route('denegado');
+            else {
+                $rules = [
+                    'nombre'=>'required|string|unique:perfils',
+                    'componente_id'=>'nullable|array'
+                ];
+                $this->validate($request, $rules);
+                $perfil = Perfil::create($request->all());
+                $componentes = Componente::find($request->input('componente_id'));
+                $perfil->componentes()->attach($componentes);
+                $modulos = Modulo::get();
+                return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            }
         }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -95,15 +106,18 @@ class PerfilController extends Controller
      */
     public function show($id)
     {
-        $perfil = Perfil::find($id);
-        $seguridad = $this->hasSecurity($perfil);
+        if($this->hasComponent('ver perfil')) {
+            $perfil = Perfil::find($id);
+            $seguridad = $this->hasSecurity($perfil);
 
-        if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
-            return redirect()->route('denegado');
-        else {
-            $modulos = Modulo::get();
-            return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
+                return redirect()->route('denegado');
+            else {
+                $modulos = Modulo::get();
+                return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            }
         }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -114,15 +128,18 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        $perfil = Perfil::find($id);
-        $seguridad = $this->hasSecurity($perfil);
+        if($this->hasComponent('editar perfil')) {
+            $perfil = Perfil::find($id);
+            $seguridad = $this->hasSecurity($perfil);
 
-        if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
-            return redirect()->route('denegado');
-        else {
-            $modulos = Modulo::get();
-            return view('seguridad.perfil.edit', ['perfil' => $perfil, 'modulos' => $modulos]);
+            if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
+                return redirect()->route('denegado');
+            else {
+                $modulos = Modulo::get();
+                return view('seguridad.perfil.edit', ['perfil' => $perfil, 'modulos' => $modulos]);
+            }
         }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -134,30 +151,34 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $perfil = Perfil::find($id);
-        $seguridad = false;
-        if($request->input('modulo_id') != null)
-            foreach ($request->input('modulo_id') as $id)
-                if(Modulo::find($id)->nombre == 'seguridad')
-                    $seguridad = true;
+        if($this->hasComponent('editar perfil')) {
+            $perfil = Perfil::find($id);
+            $seguridad = false;
+            if($request->input('componente_id') != null)
+                foreach ($request->input('componente_id') as $id)
+                    if(Componente::find($id)->modulo->nombre == 'seguridad')
+                        $seguridad = true;
 
-        if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
-            return redirect()->route('denegado');
-        else {
-            $rules = [
-                'nombre'=>'required|string',
-                'modulo_id'=>'nullable|array'
-            ];
-            $this->validate($request, $rules);
-            $perfil->nombre = $request->input('nombre');
-            $modulos = Modulo::get();
-            $mods = Modulo::find($request->input('modulo_id'));
-            $perfil->modulos()->detach();
-            $perfil->modulos()->attach($mods);
-            $perfil->save();
-            $perfil = $perfil->fresh();
-            return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
+                return redirect()->route('denegado');
+            else {
+                $rules = [
+                    'nombre'=>'required|string',
+                    'componente_id'=>'nullable|array'
+                ];
+                $this->validate($request, $rules);
+                $perfil->nombre = $request->input('nombre');
+                $componentes = Componente::get();
+                $cmps = Componente::find($request->input('componente_id'));
+                $perfil->componentes()->detach();
+                $perfil->componentes()->attach($cmps);
+                $perfil->save();
+                $perfil = $perfil->fresh();
+                $modulos = Modulo::get();
+                return view('seguridad.perfil.view', ['perfil' => $perfil, 'modulos' => $modulos]);
+            }
         }
+        return redirect()->route('denegado');
     }
 
     /**
@@ -168,16 +189,19 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        $perfil = Perfil::find($id);
-        $seguridad = $this->hasSecurity($perfil);
+        if($this->hasComponent('eliminar perfil')) {
+            $perfil = Perfil::find($id);
+            $seguridad = $this->hasSecurity($perfil);
 
-        if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
-            return redirect()->route('denegado');
-        else {
-            $perfil->modulos()->detach();
-            $perfil->delete();
-            $perfiles = Perfil::get();
-            return view('seguridad.perfil.index', ['perfiles' => $perfiles]);
+            if($perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
+                return redirect()->route('denegado');
+            else {
+                $perfil->modulos()->detach();
+                $perfil->delete();
+                $perfiles = Perfil::get();
+                return view('seguridad.perfil.index', ['perfiles' => $perfiles]);
+            }
         }
+        return redirect()->route('denegado');
     }
 }

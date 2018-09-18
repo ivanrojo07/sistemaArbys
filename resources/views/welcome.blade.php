@@ -60,38 +60,40 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-                                    <li>
-                                        <a href="{{route('rhh')}}">
-                                            <i class="fa fa-universal-access" aria-hidden="true"></i> rh
-                                        </a>
-                                    </li>   
                                 </ul>
                             </li>
                             {{-- SEGURIDAD --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "seguridad")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "seguridad")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-lock" aria-hidden="true"></i> Seguridad<span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
+                                    @foreach(Auth::user()->perfil->componentes as $c)
+                                    @if($c->nombre == "indice perfiles")
                                     <li>
                                         <a href="#" onclick="AgregarNuevoTab('{{url ('perfil')}}','Perfiles')">
                                             <i class="fa fa-universal-access" aria-hidden="true"></i> Perfiles
                                         </a>
                                     </li>
+                                    @endif
+                                    @if($c->nombre == "indice usuarios")
                                     <li>
                                         <a href="#" onclick="AgregarNuevoTab('{{url ('usuario')}}','Usuarios')">
                                             <i class="fa fa-user-circle" aria-hidden="true"></i> Usuarios
                                         </a>
-                                    </li>            
+                                    </li>
+                                    @endif
+                                    @endforeach
                                 </ul>
                             </li>
+                            @break
                             @endif
                             @endforeach
                             {{-- CRM --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "crm")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "crm")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> CRM<span class="caret"></span>
@@ -107,8 +109,8 @@
                             @endif
                             @endforeach
                             {{-- CLIENTES --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "clientes")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "clientes")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -147,8 +149,8 @@
                             @endif
                             @endforeach
                             {{-- SOLICITANTES --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "solicitantes")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "solicitantes")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-users" aria-hidden="true"></i> Solicitantes<span class="caret"></span>
@@ -196,8 +198,8 @@
                             @endif
                             @endforeach
                             {{-- PRODUCTOS --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "productos")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "productos")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i> Productos <span class="caret"></span>
@@ -216,50 +218,22 @@
                             @endif
                             @endforeach
                             {{-- RECURSOS HUMANOS --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "rh")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "rh")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-male" aria-hidden="true"></i> Recursos Humanos <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <li class="dropdown-submenu">
-                                            <a tabindex="-1" href="#">
-                                                <i class="fa fa-address-card" aria-hidden="true"></i> Comercial:
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleadoc/create') }}','Comercial')">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i> Alta
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleadoc') }}','Comercial')">
-                                                        <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Empleado')">
+                                            <i class="fa fa-plus" aria-hidden="true"></i> Alta
+                                        </a>
                                     </li>
                                     <li>
-                                        <li class="dropdown-submenu">
-                                            <a tabindex="-1" href="#">
-                                                <i class="fa fa-address-card-o" aria-hidden="true"></i> Administrativo:
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Administrativo')">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i> Alta
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Administrativo')">
-                                                        <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Empleado')">
+                                            <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
+                                        </a>
                                     </li>
                                     <li>
                                          <a href="#" onclick="AgregarNuevoTab('{{ url('/sucursales')}}','Sucursales')">
@@ -275,48 +249,15 @@
                                          <a href="#" onclick="AgregarNuevoTab('{{ url('/comision')}}','Comisiones')">
                                             <i class="fa fa-money" aria-hidden="true"></i> Comisiones
                                         </a>
-                                    </li>
-                                    <li>
-                                        <li class="dropdown-submenu">
-                                            <a tabindex="-1" href="#">
-                                                <i class="fa fa-refresh" aria-hidden="true"></i> Precargas:
-                                            </a><!--
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('bajas') }}','Bajas')">
-                                                        <i class="fa fa-level-down" aria-hidden="true"></i> Bajas
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('contratos') }}','Contratos')">
-                                                        <i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('/areas') }}','Areas')">
-                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Precargas Areas
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('/puestos') }}','Puestos')">
-                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Precargas Puestos
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('/bancos') }}','Bancos')">
-                                                        <i class="fa fa-refresh" aria-hidden="true"></i> Precargas Bancos
-                                                    </a>
-                                                </li>
-                                            </ul>-->
-                                        </li>
-                                    </li>                     
+                                    </li>      
                                 </ul>
                             </li>
+                            @break
                             @endif
                             @endforeach
                             {{-- PROVEEDORES --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "proveedores")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "proveedores")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-truck" aria-hidden="true"></i> Proveedores<span class="caret"></span> </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -347,8 +288,8 @@
                             @endif
                             @endforeach
                             {{-- OFICINAS --}}
-                            @foreach(Auth::user()->perfil->modulos as $modulo)
-                            @if($modulo->nombre == "oficinas")
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                            @if($componente->modulo->nombre == "oficinas")
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-briefcase" aria-hidden="true"></i> Oficinas<span class="caret"></span>

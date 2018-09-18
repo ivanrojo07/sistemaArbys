@@ -5,157 +5,116 @@ use App\EmpleadosDatosLab;
 use App\Empleado;
 use App\Area;
 use App\Puesto;
-use App\Sucursal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class EmpleadoController extends Controller
 {
+
     public function __construct() {
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
-                $user = Auth::user();
-                $modulos = $user->perfil->modulos;
-                foreach ($modulos as $modulo) {
-                    if($modulo->nombre == "rh")
+                foreach (Auth::user()->perfil->componentes as $componente)
+                    if($componente->modulo->nombre == "rh")
                         return $next($request);
-                }
                 return redirect()->route('denegado');
             } else
                 return redirect()->route('login');
         });
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private function hasComponent($nombre) {
+        foreach (Auth::user()->perfil->componentes as $componente)
+            if($componente->nombre == $nombre)
+                return true;
+        return false;
+    }
+
     public function index()
     {
-        
-       $empleados = Empleado::sortable()->paginate(10);
-        $areas=Area::get();
-        $puestos=Puesto::get();
-        $sucursales=Sucursal::get();
-        
-        return view('empleado.index',[
-            'empleados' => $empleados,
-            'areas'     =>     $areas,
-            'puestos'   =>   $puestos,
-            'sucursales'=>$sucursales
-            ]);
-    
-
+        if($this->hasComponent('indice empleados')) {
+            $empleados = Empleado::sortable()->paginate(10);
+            return view('empleado.index', ['empleados' => $empleados]);
+        }
+        return redirect()->route('denegado');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
-        $empleado = new Empleado;
-        $edit = false;
-        return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
+        if($this->hasComponent('crear empleado')) {
+            $empleado = new Empleado;
+            $edit = false;
+            return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
+        }
+        return redirect()->route('denegado');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-        $rfc = Empleado::where('rfc',$request->rfc)->get();
-        if (count($rfc)!=0) {
-            # code...
-            return redirect()->back()->with('errors','El RFC ya existe');
+        if($this->hasComponent('crear empleado')) {
+            if(Empleado::where('rfc', $request->input('rfc'))->first())
+                return redirect()->back()->with('errors','El RFC ya existe.');
+            else if (Empleado::where('email', $request->input('email'))->first())
+                return redirect()->back()->with('errors','El email ya existe.');
+            else {
+                $empleado = Empleado::create($request->all());
+                return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success','Empleado Creado');
+            }
         }
-        else {
-            $empleado = Empleado::create($request->all());
-            return redirect()->route('empleados.show',['empleado'=>$empleado])->with('success','Empleado Creado');
-        }
+        return redirect()->route('denegado');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Empleado  $empleado
-     * @return \Illuminate\Http\Response
-     */
     public function show(Empleado $empleado)
     {
-        
-        return view('empleado.view',['empleado'=>$empleado]);
+        if($this->hasComponent('ver empleado')) {
+            return view('empleado.view', ['empleado' => $empleado]);
+        }
+        return redirect()->route('denegado');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Empleado  $empleado
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Empleado $empleado)
     {
-        //
-        $edit=true;
-        return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
+        if($this->hasComponent('editar empleado')) {
+            return view('empleado.create', ['empleado' => $empleado, 'edit' => true]);
+        }
+        return redirect()->route('denegado');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Empleado  $empleado
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Empleado $empleado)
     {
-        //
-        $empleado->update($request->all());
-        return redirect()->route('empleados.show',['empleado'=>$empleado])->with('success','Empleado Actualizado');
+        if($this->hasComponent('editar empleado')) {
+            $empleado->update($request->all());
+            if($empleado->user) {
+                $empleado->user->email = $empleado->email;
+                $empleado->user->save();
+            }
+            return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success', 'Empleado Actualizado');
+        }
+        return redirect()->route('denegado');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Empleado  $empleado
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Empleado $empleado)
-    {
-        //
-    }
+    public function destroy(Empleado $empleado) {}
 
-//Añadido : Iyari 05/Dic/2017
+    // Añadido : Iyari 05/Dic/2017
     public function consulta()
     {
         return view('empleado.consulta');
     } 
 
-    public function buscar(Request $request){
-    
-    $query = $request->input('busqueda');
-    $wordsquery = explode(' ',$query);
-    $empleados = Empleado::where(function($q) use($wordsquery){ 
+    public function buscar(Request $request) {
+        $query = $request->input('busqueda');
+        $wordsquery = explode(' ', $query);
+        $empleados = Empleado::where(function($q) use($wordsquery) {
             foreach ($wordsquery as $word) {
-                # code...
-            $q->orWhere('nombre','LIKE',      "%$word%")
-                ->orWhere('appaterno','LIKE', "%$word%")
-                ->orWhere('apmaterno','LIKE', "%$word%")
-                ->orWhere('rfc','LIKE',     "%$word%");
-               
+                $q->orWhere('nombre', 'LIKE',"%$word%")
+                  ->orWhere('appaterno', 'LIKE', "%$word%")
+                  ->orWhere('apmaterno', 'LIKE', "%$word%")
+                  ->orWhere('rfc', 'LIKE', "%$word%");
             }
-
         })->get();
-    return view('empleado.busqueda', ['empleados'=>$empleados]);
-        
-
+        return view('empleado.busqueda', ['empleados'=>$empleados]);
     }
+
 }

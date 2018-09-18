@@ -2,18 +2,22 @@
 @section('content')
 
 <div class="container">
-	<div class="panel panel-group">
-		<div class="panel-default">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-sm-4">
-						<h4>Datos del Perfil:</h4>
-					</div>
+    <div class="panel panel-group">
+        <div class="panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4>Datos del Perfil:</h4>
+                    </div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'indice perfiles')
                     <div class="col-sm-4 text-center">
                         <a href="{{ route('perfil.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Perfiles</strong></button></a>
                     </div>
-				</div>
-			</div>
+                    @endif
+                    @endforeach
+                </div>
+            </div>
             <form action="{{ route('perfil.store') }}" method="post">    
             {{ csrf_field() }}
                 <div class="panel-body">
@@ -24,40 +28,28 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <table class="table table-hover table-bordered">
-                                <tr>
-                                    <th class="info" colspan="2">
-                                        <label class="control-label">Modulos:</label>
-                                    </th>
-                                </tr>
-                                <?php $j = 0 ?>
-                                @foreach($modulos as $modulo)
-                                    <?php $j++; ?>
-                                    @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
-                                    @else
-                                        <tr style="background: #f4f4f4;">
-                                            <td>
-                                                {{ $modulo->nombre}}
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" id="mod{{ $j }}">
-                                            </td>
-                                        </tr>
-                                        <?php $i = 0; ?>
-                                        @foreach($modulo->componentes as $componente)
-                                            <tr>
-                                                <td>
-                                                    {{ $componente->nombre}}
-                                                </td>
-                                                <td>
-                                                    <input type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </table>
+                        <div class="col-sm-12">
+                            <?php $j = 0 ?>
+                            @foreach($modulos as $modulo)
+                                <?php if($j % 3 == 0) { ?>
+                                    <div class="row">
+                                <?php } ?>
+                                <?php $j++; ?>
+                                <div class="col-sm-4">
+                                    <label class="control-label">{{ $modulo->nombre}}</label>
+                                    <input type="checkbox" id="mod{{ $j }}">
+                                    <?php $i = 0; ?>
+                                    @foreach($modulo->componentes as $componente)
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-offset-2 col-sm-7">{{ $componente->nombre}}</div>
+                                            <input class="col-sm-1" type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <?php if($j % 3 == 0) { ?>
+                                    </div>
+                                <?php } ?>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row">
@@ -67,8 +59,8 @@
                     </div>
                 </div>
             </form>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -78,7 +70,7 @@
         @foreach($modulos as $modulo)
             <?php $j++; ?>
             <?php $i = 0; ?>
-            $('#mod{{ $j }}').change(function() {;
+            $('#mod{{ $j }}').change(function() {
                 if($('#mod{{ $j }}').prop('checked')) {
                     <?php $i = 0; ?>
                     @foreach($modulo->componentes as $componente)
@@ -120,4 +112,5 @@
         @endforeach
     });
 </script>
+
 @endsection

@@ -64,12 +64,11 @@
 		}
 	}
 
-
 	$(document).ready(function() {
 		$( "#region" ).on('change', function() {
-			region =$('#region').val();
+			region = $('#region').val();
 			$.ajax({
-				url: 'region/'+region,
+				url: 'region/' + region,
 				type: "GET",
 				dataType: "html",
 				success: function(res){
