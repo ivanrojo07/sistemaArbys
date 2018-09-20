@@ -33,6 +33,7 @@ class GastoController extends Controller
     {
 
         $sucursal = Sucursal::find($request->sucursal);
+        dd($sucursal);
         //$almacen = Almacen::find($request->almacen);
        
         $gasto= new Gasto; 

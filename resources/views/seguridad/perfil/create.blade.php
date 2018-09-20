@@ -29,28 +29,48 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php $j = 0 ?>
-                            @foreach($modulos as $modulo)
-                                <?php if($j % 3 == 0) { ?>
-                                    <div class="row">
-                                <?php } ?>
-                                <?php $j++; ?>
-                                <div class="col-sm-4">
-                                    <label class="control-label">{{ $modulo->nombre}}</label>
-                                    <input type="checkbox" id="mod{{ $j }}">
-                                    <?php $i = 0; ?>
-                                    @foreach($modulo->componentes as $componente)
-                                        <div class="col-sm-12">
-                                            <div class="col-sm-offset-2 col-sm-7">{{ $componente->nombre}}</div>
-                                            <input class="col-sm-1" type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <?php if($j % 3 == 0) { ?>
-                                    </div>
-                                <?php } ?>
-                            @endforeach
+                            <table class="table">
+                                @php($j = 0)
+                                @foreach($modulos as $modulo)
+                                    @if($j % 3 == 0)
+                                        <tr class="info">
+                                    @endif
+                                            <td>{{ $modulo->nombre }}</td>
+                                            <td>
+                                                <table>
+                                                    <tr>
+                                                        <td>gg</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            @php($j++)
+                                     @if($j % 3 == 0)
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </table>
                         </div>
+                        <!-- <?php $j = 0 ?>
+                        @foreach($modulos as $modulo)
+                            <?php if($j % 3 == 0) { ?>
+                                <div class="row">
+                            <?php } ?>
+                            <?php $j++; ?>
+                            <div class="col-sm-4">
+                                <label class="control-label">{{ $modulo->nombre}}</label>
+                                <input type="checkbox" id="mod{{ $j }}">
+                                <?php $i = 0; ?>
+                                @foreach($modulo->componentes as $componente)
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-offset-2 col-sm-7">{{ $componente->nombre}}</div>
+                                        <input class="col-sm-1" type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <?php if($j % 3 == 0) { ?>
+                                </div>
+                            <?php } ?>
+                        @endforeach -->
                     </div>
                     <div class="row">
                         <div class="col-sm-4 col-sm-offset-4 text-center">
