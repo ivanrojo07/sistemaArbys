@@ -1,41 +1,46 @@
 @extends('layouts.infoprovedor')
-	@section('cliente')
+@section('cliente')
 		<ul role="tablist" class="nav nav-tabs">
-			<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fiscal:
-				
-			</a></li>
-			<li class="active"><a href="{{ route('provedores.direccionfisica.index',['provedore'=>$provedore]) }}">Dirección Fisica:</a></li>
-			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.contacto.index',['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
-			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.datosgenerales.index', ['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a></li>
-			
+			<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+				<a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fìsica:</a>
+			</li>
+			<li class="active">
+				<a href="{{ route('provedores.direccionfisica.index',['provedore'=>$provedore]) }}">Dirección Fiscal:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.contacto.index',['cliente'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.datosgenerales.index',['cliente'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.datosbancarios.index', ['cliente' => $provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">Datos Bancarios:</a>
+			</li>
 		</ul>
 			<div class="panel panel-default">
 			<form role="form" name="domicilio" id="form-cliente" method="POST" action="{{ route('provedores.direccionfisica.store', ['provedore'=>$provedore]) }}" name="form">
 			{{ csrf_field() }}
 			 <input type="hidden" name="provedor_id" value="{{$provedore->id}}">
 			 <div class="panel-default">
-				<div class="panel-heading">Dirección Fisica:
+				<div class="panel-heading">Dirección Fiscal:
 				&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</div>
 				<div class="panel-body">
-						<div class="col-lg-offset-10">
+					<div class="row">
+						<div class="col-lg-3">
 							<button type="submit" class="btn btn-success">
 								<strong> Guardar
 							</strong></button>
-							
 						</div>
-						<div class="col-lg-3">
-							
+						<br>
+						<div class="toogle-group">
 							<label>
-
-								<input type="checkbox" 
-								       data-toggle="toggle" 
-								       onchange="datosFiscal();"
-								       id="#boton-toggle">
-								¿Usar datos de dirección fiscal?.
-							</label>
+							<input id="dirfiscal" type="checkbox" data-toggle="toggle" data-on="Sí" data-off="No"  onchange="datosFiscal()">¿Usar datos de Dirección Física? .
+		                    </label>
+						</div>
+						
+					</div>
 						
 
-						</div>
 					<div class="col-md-12 offset-md-2 mt-3">
 						<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	    					<label class="control-label" for="calle"><i class="fa fa-asterisk" aria-hidden="true"></i> Calle:</label>
@@ -91,9 +96,12 @@
 			</div>
 	</form>
 </div>
-<script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script type="text/javascript">
+
+
 	function datosFiscal(){
-                if($(':checkbox').prop('checked') == true){
+                if($('#dirfiscal').prop('checked') == true){
                 	document.domicilio.calle.defaultValue = "{{$provedore->calle}}";
                		document.domicilio.numext.defaultValue = "{{$provedore->numext}}";
                 	document.domicilio.numint.defaultValue = "{{$provedore->numinter}}";
@@ -105,7 +113,7 @@
                 	document.domicilio.calle2.defaultValue = "{{$provedore->calle2}}";
                 	document.domicilio.referencia.defaultValue = "{{$provedore->referencia}}";
 				}
-				else if($(':checkbox').prop('checked') == false){
+				else{
                     document.domicilio.calle.defaultValue = "";
                     document.domicilio.numext.defaultValue = "";
                     document.domicilio.numint.defaultValue = "";

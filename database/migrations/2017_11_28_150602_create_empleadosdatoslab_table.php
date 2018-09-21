@@ -42,6 +42,11 @@ class CreateEmpleadosdatoslabTable extends Migration
             // $table->foreign('sucursal_id')->references('id')->on('sucursals');
             
             $table->date('fechacontratacion');
+            // $table->date('fechabaja')->nullable();
+            // $table->integer('tipobaja_id')->nullable()->unsigned();
+            // $table->foreign('tipobaja_id')->references('id')->on('tipobaja');
+            // $table->text('comentariobaja')->nullable();
+            // $table->boolean('bonopuntualidad')->default(false);
             // $table->date('fechaactualizacion')->nullable();
             // $table->decimal('salarionom',8,2)->nullable();
             // $table->decimal('salariodia',8,2)->nullable();

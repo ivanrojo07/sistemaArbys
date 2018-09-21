@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-use App\Beneficiarios;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
@@ -71,8 +69,5 @@ class Solicitante extends Model
     
    // public function datosLab(){
    //      return $this->hasOne(DatosLab::class);
-   //  }
-   //  public function beneficiarios(){
-   //      return $this->hasMany(Beneficiarios::class);
    //  }
 }

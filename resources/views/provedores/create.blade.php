@@ -1,12 +1,12 @@
 @extends('layouts.blank')
 	@section('content')
-		<div class="row" id="tab">
+		<div class="container" id="tab">
 			<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.store') }}" name="form">
 				{{ csrf_field() }}
 				<div role="application" class="panel panel-group" >
 					<div class="panel-default">
 						<div class="panel-heading"><h4>Datos del Proveedor:
-						&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h4> 
+						&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h4>
 						</div>
 						<div class="panel-body">
 							<div class="col-xs-4 col-xs-offset-8">
@@ -49,11 +49,11 @@
 							<div class="col-md-12 offset-md-2 mt-3" id="perfisica">
 								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
-			  						<input type="text" class="form-control" id="nombre" name="nombre">
+			  						<input type="text" class="form-control" id="nombre" name="nombre" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidopaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Paterno:</label>
-			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno">
+			  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" required>
 			  					</div>
 			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
@@ -76,7 +76,7 @@
 						<li role="presentation" class="disabled"><a>Dirección Fiscal:</a></li>
 						<li role="presentation" class="disabled"><a>Contacto:</a></li>
 						<li role="presentation" class="disabled"><a>Datos Generales:</a></li>
-						
+						<li role="presentation" class="disabled"><a>Datos Bancarios:</a></li>
 					</ul>
 
 					<div class="panel panel-default">

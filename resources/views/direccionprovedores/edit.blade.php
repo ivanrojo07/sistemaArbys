@@ -1,12 +1,22 @@
 @extends('layouts.infoprovedor')
 	@section('cliente')
-	<ul role="tablist" class="nav nav-tabs">
-		<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab"><a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fiscal:</a></li>
-		<li class="active"><a href="{{ route('provedores.direccionfisica.index',['provedore'=>$provedore]) }}">Dirección Fisica:</a></li>
-		<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.contacto.index',['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a></li>
-		<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="{{ route('provedores.datosgenerales.index', ['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a></li>
-		
-	</ul>
+		<ul role="tablist" class="nav nav-tabs">
+			<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+				<a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fìsica:</a>
+			</li>
+			<li class="active">
+				<a href="{{ route('provedores.direccionfisica.index',['provedore'=>$provedore]) }}">Dirección Fiscal:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.contacto.index',['cliente'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Contacto:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.datosgenerales.index',['cliente'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Datos Generales:</a>
+			</li>
+			<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-3" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false">
+				<a href="{{ route('provedores.datosbancarios.index', ['cliente' => $provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">Datos Bancarios:</a>
+			</li>
+		</ul>
 	<div class="panel panel-default">
 					<div class="panel-heading">Dirección Fiscal:
 						&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos
@@ -23,12 +33,12 @@
 								</button>
 									
 								</div>
-								<div class="col-lg-3">
+								<div class="boton checkbox-disabled">
 									
 									<label>
 
-										<input type="checkbox" checked data-toggle="toggle" onchange="datosFiscal();">
-										¿Usar datos de dirección fiscal?.
+										<input id="boton-toggle" type="checkbox" checked data-toggle="toggle" data-on="Sí" data-off="No" data-style="ios" onchange="datosFiscal();">
+										¿Usar datos de dirección fìsica?.
 									</label>
 								</div>
 							<div class="col-md-12 offset-md-2 mt-3">
@@ -83,6 +93,8 @@
 			</form>
 		</div>
 	</div>
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script>
 		<script type="text/javascript">
 			function datosFiscal(){
 				document.domicilio.calle.defaultValue = "{{$provedore->calle}}";

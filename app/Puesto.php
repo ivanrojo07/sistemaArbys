@@ -20,8 +20,4 @@ class Puesto extends Model
     	return $this->belongsTo('App\EmpleadosDatosLab');
     }
 
-    public function datosLabCom(){
-    	return $this->belongsTo('App\EmpleadoComDatosLab');
-    }
-    
 }

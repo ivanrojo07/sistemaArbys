@@ -7,7 +7,7 @@
 					<th>@sortablelink('alias', 'Alias')</th>
 					<th>@sortablelink('rfc', 'RFC')</th>
 					<th>@sortablelink('vendedor', 'Vendedor') </th>
-					<th>Operacion</th> 
+					<th>Operacion</th>
 				</tr>
 			</thead>
 

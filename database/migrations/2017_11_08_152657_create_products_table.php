@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -24,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('inicial');
             $table->string('marca');
             $table->string('tipo');
+            $table->string('status')->default(Product::PRODUCTO_DISPONIBLE);
             $table->timestamps();
         });
     }

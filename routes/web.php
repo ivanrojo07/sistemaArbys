@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +13,9 @@
 Route::get('/', function () {
 	return redirect()->route('login');
 });
-
 Route::get('/denegado',function(){
 	return view('errors.denegado');
 })->name('denegado');
-
 Route::get('/home', function () {
 	if(Auth::check()){
     	return view('welcome');
@@ -63,8 +60,6 @@ Route::resource('giros','Giro\GiroController', ['except'=>'show']);
 // CLIENTES
 Route::resource('clientes','Cliente\ClienteController');
 Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
-Route::resource('clientes.contacto','Personal\PersonalContactoController');
-Route::resource('clientes.datosgenerales','Personal\PersonalDatosGeneralesController', ['except'=>'show']);
 Route::get('buscarcliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('crm','Crm\CrmController');
@@ -82,10 +77,12 @@ Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name(
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');
-Route::get('buscarprovedor','Provedor\ProvedorController@buscar');
+Route::get('provedores.create','Provedor\ProvedorController@create');
+Route::get('provedores.datosgenerales.show', 'Provedor\ProvedorDatosGeneralesController@show');
 Route::resource('provedores.direccionfisica','Provedor\ProvedorDireccionFisicaController');
-Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesController', ['except'=>'show']);
+Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesController');
 Route::resource('provedores.contacto','Provedor\ProvedorContactoController');
+Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosController');
 
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
@@ -115,10 +112,6 @@ Route::get('estado/{estado}','Estado\EstadoController@region');
 Route::resource('oficina', 'Oficina\OficinaController');
 Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 
-// RECURSOS HUMANOS
-Route::resource('empleadoc', 'EmpleadoComercial\EmpleadoComercialController');
-Route::resource('empleadoc.datoslaborales', 'EmpleadoComercial\EmpleadoComDatosLabController');
-
 // SEGURIDAD
 Route::resource('usuario', 'Usuario\UsuarioController');
 Route::resource('perfil', 'Perfil\PerfilController');
@@ -127,7 +120,7 @@ Route::resource('perfil', 'Perfil\PerfilController');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-// Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-// Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-// Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');

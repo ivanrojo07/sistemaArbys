@@ -2,8 +2,6 @@
 
 namespace App;
 
-
-use App\Beneficiarios;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use App\Solicitante;
@@ -11,10 +9,10 @@ use App\Solicitante;
 class Cliente extends Model
 {
     use Sortable;
-    //
+
     protected $table='clientes';
 
-   protected $fillable = [
+    protected $fillable = [
         'identificador',
      	'tipopersona',//YA
         'nombre',//YA
@@ -29,12 +27,8 @@ class Cliente extends Model
         'razonsocial',
         'fecha_nacimiento',
         'canal_ventas'
-        ];
-   /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    ];
+
     public $Sortable = [
     	'identificador',
     	'nombre',
@@ -46,36 +40,32 @@ class Cliente extends Model
       'created_at'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'deleted_at'
     ];
 
-    public function crm(){
+    public function crm() {
         return $this->hasMany('App\ClienteCRM');
     }
-        public function product(){
+
+    public function product() {
         return $this->hasMany('App\Product');
     }
-    public function transactions(){
+
+    public function transactions() {
         return $this->hasMany('App\Transaction');
     }
-    public function solicitante(){
-        // return $this->hasOne(Solicitante::class, 'cliente_id');
+    
+    public function solicitante() {
         return $this->hasOne('App\Solicitante', 'cliente_id', 'id');
     }
 
-    public function info(){
-        
+    public function info() {
         return $this->hasOne('App\InfoCliente');
     }
    
-   public function pagos(){
-
+   public function pagos() {
         return $this->hasMany('App\Pago');
    }
+
 }

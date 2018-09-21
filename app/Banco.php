@@ -16,5 +16,7 @@ class Banco extends Model
     protected $hidden=[ 'created_at', 'updated_at','deleted_at'];
     public $sortable=['id','nombre', 'etiqueta'];
 
-    
+    public function datoBancario() {
+    	return $this->hasOne('App\DatosBancariosProveedor');
+    }
 }

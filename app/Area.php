@@ -20,10 +20,6 @@ class Area extends Model
     	return $this->belongsTo('App\EmpleadosDatosLab');
     }
 
-    public function datosLabCom(){
-    	return $this->belongsTo('App\EmpleadoComDatosLab');
-    }
-
     public function usuarios() {
         return $this->hasMany('App\Usuario');
     }
