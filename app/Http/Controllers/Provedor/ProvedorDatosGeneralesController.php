@@ -30,7 +30,7 @@ class ProvedorDatosGeneralesController extends Controller
             $giro = Giro::find($datos->giro_id);
             $formaContacto = FormaContacto::find($datos->forma_contacto_id);
             // dd($giro);
-            return view('datosgeneralesprovedores.view',['datos'=>$datos, 'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
+            return view('provedores.generales.view',['datos'=>$datos, 'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
             
         }
     }
@@ -46,7 +46,7 @@ class ProvedorDatosGeneralesController extends Controller
         $giros = Giro::get();
         $formaContactos = FormaContacto::get();
         // dd($giros);}
-        return view('datosgeneralesprovedores.create',['provedore'=>$provedore, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
+        return view('provedores.generales.create',['provedore'=>$provedore, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
     }
 
     /**
@@ -97,7 +97,7 @@ class ProvedorDatosGeneralesController extends Controller
 
         
        
-        return view('datosgeneralesprovedores.view',
+        return view('provedores.generales.view',
         ['datos'=>$datos, 'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
 
     }
@@ -116,7 +116,7 @@ class ProvedorDatosGeneralesController extends Controller
         $giros = Giro::get();
         
         $formaContactos = FormaContacto::get();
-        return view('datosgeneralesprovedores.edit',
+        return view('provedores.generales.edit',
         ['provedore'=>$provedore, 'datos'=>$datos, 'giros'=>$giros, 'formaContactos'=>$formaContactos]);
     }
 
@@ -156,7 +156,7 @@ class ProvedorDatosGeneralesController extends Controller
       }
           
         Alert::success('Datos generales actualizados con éxito');
-        return view('datosgeneralesprovedores.view',['datos'=>$datosgenerale,'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
+        return view('provedores.generales.view',['datos'=>$datosgenerale,'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
 
     }
 

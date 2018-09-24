@@ -3,7 +3,7 @@
 <div class="container" id="tab">
 	<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.datosbancarios.update', ['provedore' => $provedore, 'bancario' => $provedore->datosBancarios->first()]) }}" name="form">
 		{{ csrf_field() }}
-		<input type="hiddem" name="_method" value="PUT">
+		<input type="hidden" name="_method" value="PUT">
 		<div role="application" class="panel panel-group" >
 			<div class="panel-default">
 				<div class="panel-heading">

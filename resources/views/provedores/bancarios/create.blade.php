@@ -1,5 +1,6 @@
 @extends('layouts.blank')
 @section('content')
+
 <div class="container" id="tab">
 	<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.datosbancarios.store', ['provedore' => $provedore]) }}" name="form">
 		{{ csrf_field() }}

@@ -21,14 +21,14 @@ class ProvedorContactoController extends Controller
         //
         $contactos = $provedore->contactosProvedor;
         // dd($contactos);
-        return view('contactoprovedores.index', ['provedore'=>$provedore, 'contactos'=>$contactos]);
+        return view('provedores.contacto.index', ['provedore'=>$provedore, 'contactos'=>$contactos]);
 
     }
 
     public function busqueda(){
         $contactos = $provedore->contactosProvedor;
         // dd($contactos);
-        return view('contactoprovedores.busqueda', ['provedore'=>$provedore, 'contactos'=>$contactos]);
+        return view('provedores.contacto.busqueda', ['provedore'=>$provedore, 'contactos'=>$contactos]);
     }
 
     /**
@@ -39,7 +39,7 @@ class ProvedorContactoController extends Controller
     public function create(Provedor $provedore)
     {
         //
-        return view('contactoprovedores.create',['provedore'=>$provedore]);
+        return view('provedores.contacto.create',['provedore'=>$provedore]);
     }
 
     /**
@@ -67,7 +67,7 @@ class ProvedorContactoController extends Controller
     {
         //
         $contacto = ContactoProvedor::findOrFail($contacto);
-        return view('contactoprovedores.view',['provedore'=>$provedore, 'contacto'=>$contacto]);
+        return view('provedores.contacto.view',['provedore'=>$provedore, 'contacto'=>$contacto]);
     }
 
     /**
@@ -80,7 +80,7 @@ class ProvedorContactoController extends Controller
     {
         //
         $contacto = ContactoProvedor::findOrFail($contacto);
-        return view('contactoprovedores.edit',['provedore'=>$provedore, 'contacto'=>$contacto]);
+        return view('provedores.contacto.edit',['provedore'=>$provedore, 'contacto'=>$contacto]);
     }
 
     /**

@@ -53,6 +53,6 @@ class Provedor extends Model
     }
 
     public function datosBancarios(){
-        return $this->hasMany('App\DatosBancariosProveedor');
+        return $this->hasOne('App\DatosBancariosProveedor');
     }
 }

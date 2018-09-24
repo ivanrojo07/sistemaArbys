@@ -278,19 +278,19 @@
 				 		<div class="row">
 				 			<div class="form-group col-sm-3">
 				 				<label class="control-label" for="nombre">Banco:</label>
-								<dd>{{ $provedore->datosBancarios->first()->banco->nombre }}</dd>
+								<dd>{{ $provedore->datosBancarios->banco->nombre }}</dd>
 				 			</div>
 				 			<div class="form-group col-sm-3">
 				 				<label class="control-label" for="nombre">Número de Cuenta:</label>
-								<dd>{{ $provedore->datosBancarios->first()->cuenta }}</dd>
+								<dd>{{ $provedore->datosBancarios->cuenta }}</dd>
 				 			</div>
 				 			<div class="form-group col-sm-3">
 				 				<label class="control-label" for="nombre">CLABE:</label>
-								<dd>{{ $provedore->datosBancarios->first()->clabe }}</dd>
+								<dd>{{ $provedore->datosBancarios->clabe }}</dd>
 				 			</div>
 				 			<div class="form-group col-sm-3">
 				 				<label class="control-label" for="nombre">Beneficiario:</label>
-								<dd>{{ $provedore->datosBancarios->first()->beneficiario }}</dd>
+								<dd>{{ $provedore->datosBancarios->beneficiario }}</dd>
 				 			</div>
 				 		</div>
 				 	</div>
