@@ -46,12 +46,16 @@
 							@endforeach
 						</select>
 					</div>
+					@php($p = Auth::user()->empleado->datosLaborales->last()->puesto_id)
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="puesto_id"><i class="fa fa-asterisk" aria-hidden="true"></i>Puesto:</label>
 						<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
 							<option>Sin Definir</option>
 							@foreach ($puestos as $puesto)
-							@if($puesto->id != 1)
+							@if($p != 1 && $puesto->id == 1)
+							@elseif($p != 1 && $puesto->id == 2)
+							@elseif(($p != 1 || $p != 2) && $puesto->id == 3)
+							@else
 							<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
 							@endif
 							@endforeach
@@ -164,7 +168,7 @@
 			$('#regiones').change(function() {
 				var id = $('#regiones').val();
 				$.ajax({
-					url: '../../../../region2/' + id,
+					url: "{{ url('/region2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
@@ -179,7 +183,7 @@
 			$('#estados').change(function() {
 				var id = $('#estados').val();
 				$.ajax({
-					url: '../../../estado2/' + id,
+					url: "{{ url('/estado2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
@@ -194,7 +198,7 @@
 			$('#oficinas').change(function() {
 				var id = $('#oficinas').val();
 				$.ajax({
-					url: '../../../oficina2/' + id,
+					url: "{{ url('/oficina2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){

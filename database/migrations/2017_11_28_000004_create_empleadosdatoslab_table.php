@@ -34,7 +34,7 @@ class CreateEmpleadosdatoslabTable extends Migration
             $table->double('sal_inicial');
             $table->double('sal_actual');
             $table->string('puesto_orig');
-            $table->enum('experto', ['Autos', 'Motos', 'Casas', 'Autos y Motos', 'Autos y Casas', 'Motos y Casas', 'Autos, Motos y Casas']);
+            $table->enum('experto', ['Autos', 'Motos', 'Casas', 'Autos y Motos', 'Autos y Casas', 'Motos y Casas', 'Autos, Motos y Casas'])->nullable();
             $table->timestampsTz();
         });
     }

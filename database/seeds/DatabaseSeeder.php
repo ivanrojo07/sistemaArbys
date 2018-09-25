@@ -18,9 +18,11 @@ class DatabaseSeeder extends Seeder
             ComponentePerfilTableSeeder::class,
             AreasTableSeeder::class,
             PuestosTableSeeder::class,
+            ContratosTableSeeder::class,
             RegionsTableSeeder::class,
             EstadosTableSeeder::class,
             EmpleadosTableSeeder::class,
+            DatosLaboralesTableSeeder::class,
             UsersTableSeeder::class
         ]);
     }

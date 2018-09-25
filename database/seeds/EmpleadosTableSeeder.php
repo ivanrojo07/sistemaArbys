@@ -12,6 +12,7 @@ class EmpleadosTableSeeder extends Seeder
      */
     public function run()
     {
+        
         $empleado = [
         	'nombre' => 'Dummy',
             'appaterno' => 'Dummy',
@@ -20,5 +21,6 @@ class EmpleadosTableSeeder extends Seeder
         ];
 
         Empleado::create($empleado);
+
     }
 }
