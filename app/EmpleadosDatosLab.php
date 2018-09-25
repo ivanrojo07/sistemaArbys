@@ -15,32 +15,12 @@ class EmpleadosDatosLab extends Model
     protected $fillable=[
         'id',
         'empleado_id',
-        // 'fechaactualizacion',
         'contrato_id',
-        // 'salarionom',
-        // 'salariodia',
-        // 'puesto_inicio',
-        // 'periodopaga',
-        // 'prestaciones',
-        // 'regimen',
-        // 'hentrada',
-        // 'hsalida',
-        // 'hcomida',
-        // 'lugartrabajo',
-        // 'banco',
-        // 'cuenta',
-        // 'clabe',
-        // 'fechabaja',
-        // 'tipobaja_id',
-        // 'comentariobaja',
-        // 'bonopuntualidad',
         'area_id',
         'puesto_id',
-        // 'sucursal_id',
         'region_id',
         'estado_id',
         'oficina_id',
-        'subgerente',
         'fechacontratacion',
     ];
 
@@ -56,10 +36,6 @@ class EmpleadosDatosLab extends Model
     	return $this->belongsTo('App\TipoContrato');
     }
     
-    // public function tipobaja(){
-    // 	return $this->hasOne('App\TipoBaja','tipobaja_id');
-    // }
-    
     public function area() {
         return $this->belongsTo('App\Area');
     }
@@ -67,10 +43,6 @@ class EmpleadosDatosLab extends Model
     public function puesto() { 
         return $this->belongsTo('App\Puesto');
     }
-
-    //   public function sucursal(){
-    //     return $this->belongsTo('App\Sucursal', 'sucursal_id');
-    // }
 
     public function region() { 
         return $this->belongsTo('App\Region');
@@ -82,6 +54,14 @@ class EmpleadosDatosLab extends Model
 
     public function oficina() { 
         return $this->belongsTo('App\Oficina');
+    }
+
+    public function grupos() { 
+        return $this->hasMany('App\Grupo', 'subgerente_id');
+    }
+
+    public function vendedor() { 
+        return $this->hasOne('App\Vendedor', 'vendedor_id');
     }
 
 }

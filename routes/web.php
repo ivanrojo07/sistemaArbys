@@ -39,12 +39,9 @@ Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
-Route::get('bonos', function() {
-	return View::make('Empleadobonos.bonos');
-});
-Route::get('comision', function() {
-	return View::make('Empleadobonos.comision');
-});
+
+// GRUPOS
+Route::resource('grupos', 'Grupo\GrupoController');
 
 // PRECARGAS
 Route::resource('contratos','Precargas\TipoContratoController');
@@ -89,7 +86,7 @@ Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
 Route::get('getbancos','Banco\BancoController@getBancos');
 Route::get('region2/{region}','Empleado\EmpleadosDatosLabController@estados');
 Route::get('estado2/{estado}','Empleado\EmpleadosDatosLabController@oficinas');
-Route::get('oficina2/{oficina}','Empleado\EmpleadosDatosLabController@subgerentes');
+Route::get('oficina2/{oficina}','Empleado\EmpleadosDatosLabController@grupos');
 
 // SUCURSALES
 Route::resource('sucursales','Sucursal\SucursalController');

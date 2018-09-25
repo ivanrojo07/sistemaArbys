@@ -226,30 +226,40 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Empleado')">
+                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('empleados/create') }}','Alta Empleado')">
                                             <i class="fa fa-plus" aria-hidden="true"></i> Alta
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Empleado')">
+                                        <a href="#" onclick="AgregarNuevoTab('{{ url('empleados') }}','Buscar Empleado')">
                                             <i class="fa fa-search" aria-hidden="true"></i> Búsqueda
                                         </a>
                                     </li>
                                     <li>
-                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/sucursales')}}','Sucursales')">
-                                            <i class="fa fa-university" aria-hidden="true"></i> Sucursales
+                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/grupos')}}','Grupos')">
+                                            <i class="fa fa-users" aria-hidden="true"></i> Grupos
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/bonos')}}','Bonos')">
-                                            <i class="fa fa-gift" aria-hidden="true"></i> Bonos
-                                        </a>
+                                    <li class="dropdown-submenu">
+                                        <a tabindex="-1" href="#"> <i class="fa fa-refresh" aria-hidden="true"></i> Precargas:</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/bancos') }}','Bancos')">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Bancos
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/contratos') }}','Contratos')">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Contratos
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/puestos') }}','Puestos')">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i> Puestos
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li>
-                                         <a href="#" onclick="AgregarNuevoTab('{{ url('/comision')}}','Comisiones')">
-                                            <i class="fa fa-money" aria-hidden="true"></i> Comisiones
-                                        </a>
-                                    </li>      
                                 </ul>
                             </li>
                             @break

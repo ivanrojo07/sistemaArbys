@@ -29,33 +29,36 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <table class="table table-hover table-bordered">
-                                <tr>
-                                    <th class="info" colspan="2">
+                        <div class="col-sm-12">
+                            <table class="table">
+                                <tr class="info">
+                                    <th colspan="3">
                                         <label class="control-label">Modulos:</label>
                                     </th>
                                 </tr>
-                                <?php $j = 0 ?>
+                                @php($j = 0)
                                 @foreach($modulos as $modulo)
-                                    <?php $j++; ?>
+                                @if($j % 3 == 0)
+                                <tr>
+                                @endif
+                                    @php($j++)
                                     @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
                                     @else
-                                        <tr style="background: #f4f4f4;">
-                                            <td>
-                                                {{ $modulo->nombre}}
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" id="mod{{ $j }}">
-                                            </td>
-                                        </tr>
-                                        <?php $i = 0; ?>
-                                        @foreach($modulo->componentes as $componente)
-                                            <tr>
-                                                <td>
-                                                    {{ $componente->nombre}}
+                                    <td class="col-sm-4" style="border: none; padding: 0px;">
+                                        <table class="table table-hover table-bordered" style="margin-bottom: 0px; background: #fff;">
+                                            <tr style="background: #f4f4f4;">
+                                                <th class="col-sm-10">
+                                                    <label class="control-label">{{ $modulo->nombre}}</label>
+                                                </th>
+                                                <td class="col-sm-2 text-center">
+                                                    <input type="checkbox" id="mod{{ $j }}">
                                                 </td>
-                                                <td>
+                                            </tr>
+                                            @php($i = 0)
+                                            @foreach($modulo->componentes as $componente)
+                                            <tr>
+                                                <td class="col-sm-10">{{ $componente->nombre }}</td>
+                                                <td class="col-sm-2 text-center">
                                                     <input type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}"
                                                     <?php
                                                         foreach($perfil->componentes as $cmp)
@@ -65,8 +68,13 @@
                                                     >
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                            @endforeach
+                                        </table>
+                                    </td>
                                     @endif
+                                 @if($j % 3 == 0)
+                                </tr>
+                                @endif
                                 @endforeach
                             </table>
                         </div>

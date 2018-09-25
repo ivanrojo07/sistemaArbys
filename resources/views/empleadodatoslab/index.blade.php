@@ -75,8 +75,8 @@
 			@endif
 			@if($datoslab->puesto->nombre == 'Vendedor')
 			<div class="form-group col-sm-3">
-				<label class="control-label">Subgerente:</label>
-				<dd>{{ $subgerente->nombre }}</dd>
+				<label class="control-label">Grupo:</label>
+				<dd>{{ $datoslab->vendedor->grupo->nombre }}</dd>
 			</div>
 			@endif
 		</div>

@@ -101,9 +101,9 @@
 						<select id="oficinas" class="form-control">
 						</select>
 					</div>
-					<div class="col-sm-3" id="subgerente" style="display: none;">
-						<label class="control-label">Subgerente:</label>
-						<select id="subgerentes" class="form-control">
+					<div class="col-sm-3" id="grupo" style="display: none;">
+						<label class="control-label">Grupo:</label>
+						<select id="grupos" class="form-control">
 						</select>
 					</div>
 				</div>
@@ -131,8 +131,8 @@
 			$("#estados").prop('name', '');
       		document.getElementById('oficina').style.display = 'none';
 			$("#oficinas").prop('name', '');
-      		document.getElementById('subgerente').style.display = 'none';
-			$("#subgetentes").prop('name', '');
+      		document.getElementById('grupo').style.display = 'none';
+			$("#grupos").prop('name', '');
     		switch(val) {
     			case 3:
       				document.getElementById('region').style.display = 'block';
@@ -159,9 +159,9 @@
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
-      				document.getElementById('subgerente').style.display = 'block';
+      				document.getElementById('grupo').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
-					$("#subgerentes").prop('name', 'subgerente');
+					$("#grupos").prop('name', 'grupo_id');
     				break;
     		}
 
@@ -202,10 +202,10 @@
 					type: "GET",
 					dataType: "html",
 					success: function(res){
-						$('#subgerentes').html(res);
+						$('#grupos').html(res);
 					},
 					error: function (){
-						$('#subgerentes').html('');
+						$('#grupos').html('');
 					}
 				});
 			});

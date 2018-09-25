@@ -14,6 +14,8 @@ use App\Banco;
 use App\Region;
 use App\Estado;
 use App\Oficina;
+use App\Vendedor;
+use App\Grupo;
 use Illuminate\Http\Request;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -30,15 +32,15 @@ class EmpleadosDatosLabController extends Controller
         if (count($datoslaborales) == 0)
             return redirect()->route('empleados.datoslaborales.create', ['empleado' => $empleado]);
         else {
-          $subg = Empleado::find($datoslaborales->first()->subgerente);
-          $datoslab=$empleado->datosLaborales()-> orderBy('created_at', 'desc')->first();
-          return view('empleadodatoslab.index', [
-              'empleado' => $empleado,
-              'datoslaborales' => $datoslaborales,
-              'datoslab' => $datoslab,
-              'subgerente' => $subg,
-            ]
-          ); 
+            $subg = Empleado::find($datoslaborales->first()->subgerente);
+            $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
+            // dd($datoslab);
+            return view('empleadodatoslab.index', [
+                'empleado' => $empleado,
+                'datoslaborales' => $datoslaborales,
+                'datoslab' => $datoslab,
+                'subgerente' => $subg,
+            ]); 
         }
         
     }
@@ -53,9 +55,10 @@ class EmpleadosDatosLabController extends Controller
             return view('empleadodatoslab.oficinas', ['estado' => $estado]);
     }
 
-    public function subgerentes(Oficina $oficina) {
+    public function grupos(Oficina $oficina) {
+        // dd($oficina->datoslab->first()->grupos);
         if($oficina->id !=0)
-            return view('empleadodatoslab.subgerentes', ['oficina' => $oficina]);
+            return view('empleadodatoslab.grupos', ['oficina' => $oficina]);
     }
 
     /**
@@ -81,40 +84,12 @@ class EmpleadosDatosLabController extends Controller
      */
     public function store(Request $request, Empleado $empleado)
     {
-        //
         $datoslab = new EmpleadosDatosLab;
         $datoslab->create($request->all());
-
-        
-        
-        // $datoslab->sucursal_id = $request->sucursal_id;
-        // $datoslab->fechaactualizacion = date("Y-m-d");
-        // $datoslab->salarionom = $request->salarionom;
-        // $datoslab->salariodia = $request->salariodia ;
-        // $datoslab->puesto_inicio = $request->puesto_inicio ;
-        // $datoslab->periodopaga = $request->periodopaga ;
-        // $datoslab->prestaciones = $request->prestaciones ;
-        // $datoslab->regimen = $request->regimen ;
-        // $datoslab->hentrada = $request->hentrada ;
-        // $datoslab->hsalida = $request->hsalida ;
-        // $datoslab->hcomida = $request->hcomida ;
-        // $datoslab->lugartrabajo = $request->lugartrabajo ;
-        // $datoslab->banco = $request->banco ;
-        // $datoslab->cuenta = $request->cuenta ;
-        // $datoslab->clabe = $request->clabe ;
-        // $datoslab->fechabaja = $request->fechabaja ;
-        // $datoslab->tipobaja_id = $request->tipobaja_id ;
-        // $datoslab->comentariobaja = $request->comentariobaja ;
-
-        // if ($request->bonopuntualidad == 'on') {
-        //     # code...
-        //     $datoslab->bonopuntualidad = true;
-        //     // dd($request->all());
-        // } else {
-        //     # code...
-        //     $datoslab->bonopuntualidad = false;
-        // }
-        // $datoslab->save();
+        $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
+        if($request->puesto_id == 7) {
+            Vendedor::create(['vendedor_id' => $datoslab->id, 'grupo_id' => $request->grupo_id]);
+        }
         Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
     }
