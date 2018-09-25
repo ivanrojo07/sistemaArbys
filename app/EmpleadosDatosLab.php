@@ -22,6 +22,11 @@ class EmpleadosDatosLab extends Model
         'estado_id',
         'oficina_id',
         'fechacontratacion',
+        'fechaactualizacion',
+        'sal_inicial',
+        'sal_actual',
+        'experto',
+        'puesto_orig'
     ];
 
     protected $hidden=['created_at','updated_at'];

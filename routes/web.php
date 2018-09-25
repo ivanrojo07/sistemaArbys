@@ -84,9 +84,9 @@ Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosCon
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
 Route::get('getbancos','Banco\BancoController@getBancos');
-Route::get('region2/{region}','Empleado\EmpleadosDatosLabController@estados');
-Route::get('estado2/{estado}','Empleado\EmpleadosDatosLabController@oficinas');
-Route::get('oficina2/{oficina}','Empleado\EmpleadosDatosLabController@grupos');
+Route::get('region2/{region}','Empleado\EmpleadosDatosLabController@estados')->name('getregion');
+Route::get('estado2/{estado}','Empleado\EmpleadosDatosLabController@oficinas')->name('getestado');
+Route::get('oficina2/{oficina}','Empleado\EmpleadosDatosLabController@grupos')->name('getoficina');
 
 // SUCURSALES
 Route::resource('sucursales','Sucursal\SucursalController');

@@ -31,7 +31,7 @@
 						</div>
 						<div class="form-group col-xs-3">
 							<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i>RFC:</label>
-							<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $empleado->rfc }}">
+							<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $empleado->rfc }}" required="">
 						</div>
 					</div>
 				</div>
@@ -77,8 +77,8 @@
 							<input type="text" class="form-control" name="movil" id="movil" value="{{ $empleado->movil }}">
 						</div>
 						<div class="form-group col-xs-3">
-							<label class="control-label" for="email">Correo electrónico:</label>
-							<input type="text" class="form-control" name="email" id="email" value="{{ $empleado->email }}">
+							<label class="control-label" for="email"><i class="fa fa-asterisk" aria-hidden="true"></i>Correo electrónico:</label>
+							<input type="text" class="form-control" name="email" id="email" value="{{ $empleado->email }}" required="">
 						</div><div class="form-group col-xs-3">
 							<label class="control-label" for="nss">NSS (IMSS):</label>
 							<input type="text" class="form-control" name="nss" id="nss" value="{{ $empleado->nss }}">

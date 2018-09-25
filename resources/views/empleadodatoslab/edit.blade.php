@@ -20,20 +20,29 @@
 	<div class="panel-heading">
 		<h5>Laborales: <i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</h5></div>
 		<div class="panel-body">
-			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.store',['empleado'=>$empleado]) }}">
+			<form role="form" method="POST" action="{{ route('empleados.datoslaborales.update',['empleado'=>$empleado, 'id' => $datoslab]) }}">
+				<input type="hidden" name="_method" value="PUT">
 				{{ csrf_field() }}
 				<input type="hidden" name="empleado_id" value="{{ $empleado->id }}">
 				<div class="row">
 					<div class="form-group col-sm-3">
-						<label class="control-label" for="fechacontratacion"><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de contratación:</label>
-						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" required>
+						<label class="control-label" for="fechacontratacion">Fecha de Contratación:</label>
+						<input class="form-control" type="date" id="fechacontratacion" name="fechacontratacion" readonly="" value="{{ $datoslab->fechacontratacion }}">
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label" for=""><i class="fa fa-asterisk" aria-hidden="true"></i>Fecha de Actualización:</label>
+						<input class="form-control" type="date" id="" name="fechaactualizacion" required>
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="contrato"><i class="fa fa-asterisk" aria-hidden="true"></i>Tipo de contrato:</label>
 						<select type="select" class="form-control" name="contrato_id" id="contrato_id" required="">
 							<option>Sin Definir</option>
 							@foreach ($contratos as $contrato)
+							@if($datoslab->contrato->id == $contrato->id)
+							<option value="{{ $contrato->id }}" selected="">{{ $contrato->nombre }}</option>
+							@else
 							<option value="{{ $contrato->id }}">{{ $contrato->nombre }}</option>
+							@endif
 							@endforeach
 						</select>
 					</div>
@@ -42,9 +51,17 @@
 						<select type="select" class="form-control" name="area_id" id="area_id" required="">
 							<option>Sin Definir</option>
 							@foreach ($areas as $area)
+							@if($datoslab->area->id == $area->id)
+							<option value="{{ $area->id }}" selected="">{{ $area->nombre }}</option>
+							@else
 							<option value="{{ $area->id }}">{{ $area->nombre }}</option>
+							@endif
 							@endforeach
 						</select>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label">Puesto Inicial:</label>
+						<input class="form-control" type="text" name="puesto_orig" readonly="" value="{{ $datoslab->puesto_orig }}">
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="puesto_id"><i class="fa fa-asterisk" aria-hidden="true"></i>Puesto:</label>
@@ -87,7 +104,11 @@
 				<div class="row">
 					<div class="form-group col-sm-3">
 						<label class="control-label"><i class="fa fa-asterisk" aria-hidden="true"></i>Salario Nominal:</label>
-						<input class="form-control" type="text" id="sal_inicial" name="sal_inicial" required>
+						<input class="form-control" type="text" id="sal_actual" name="sal_actual" required>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label">Salario Inicial:</label>
+						<input class="form-control" type="text" id="sal_inicial" name="sal_inicial" readonly="" value="{{ $datoslab->sal_inicial}}">
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label"><i class="fa fa-asterisk" aria-hidden="true"></i>Experto en:</label>
@@ -164,7 +185,7 @@
 			$('#regiones').change(function() {
 				var id = $('#regiones').val();
 				$.ajax({
-					url: '../../../../region2/' + id,
+					url: "{{ url('/region2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
@@ -179,7 +200,7 @@
 			$('#estados').change(function() {
 				var id = $('#estados').val();
 				$.ajax({
-					url: '../../../estado2/' + id,
+					url: "{{ url('/estado2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
@@ -194,7 +215,7 @@
 			$('#oficinas').change(function() {
 				var id = $('#oficinas').val();
 				$.ajax({
-					url: '../../../oficina2/' + id,
+					url: "{{ url('/oficina2') }}/"+id,
 					type: "GET",
 					dataType: "html",
 					success: function(res){
