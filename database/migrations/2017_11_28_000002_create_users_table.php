@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->integer('perfil_id')->unsigned()->nullable();
             $table->foreign('perfil_id')->references('id')->on('perfils');
-            $table->integer('puesto_id')->unsigned()->nullable();
             $table->integer('empleado_id')->unique()->unsigned()->nullable();
             $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->string('name');

@@ -74,8 +74,6 @@ Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name(
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');
-Route::get('provedores.create','Provedor\ProvedorController@create');
-Route::get('provedores.datosgenerales.show', 'Provedor\ProvedorDatosGeneralesController@show');
 Route::resource('provedores.direccionfisica','Provedor\ProvedorDireccionFisicaController');
 Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesController');
 Route::resource('provedores.contacto','Provedor\ProvedorContactoController');

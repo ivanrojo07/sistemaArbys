@@ -17,10 +17,6 @@ class Area extends Model
     public $sortable=['id','nombre', 'etiqueta'];
 
     public function datosLab(){
-    	return $this->belongsTo('App\EmpleadosDatosLab');
-    }
-
-    public function usuarios() {
-        return $this->hasMany('App\Usuario');
+    	return $this->hasMany('App\EmpleadosDatosLab');
     }
 }

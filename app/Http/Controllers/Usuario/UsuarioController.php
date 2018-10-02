@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Usuario;
 
 use App\User;
 use App\Perfil;
-use App\Puesto;
-use App\Area;
 use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
