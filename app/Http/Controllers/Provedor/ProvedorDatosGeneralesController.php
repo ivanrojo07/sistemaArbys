@@ -82,7 +82,7 @@ class ProvedorDatosGeneralesController extends Controller
       if($datos->giro_id==null){
         $giro='NO DEFINIDO';
       }else{
-        $giros=Giro::where('id',$datos->giro_id);
+        $giros=Giro::where('id',$datos->giro_id)->first();
       $giro=$giros->nombre;
       }
 
@@ -140,7 +140,7 @@ class ProvedorDatosGeneralesController extends Controller
       if($request->giro_id==null){
         $giro='NO DEFINIDO';
       }else{
-        $giros=Giro::where('id',$datosgenerale->giro_id);
+        $giros=Giro::where('id',$datosgenerale->giro_id)->first();
       $giro=$giros->nombre;
       }
  
@@ -151,12 +151,12 @@ class ProvedorDatosGeneralesController extends Controller
       if($request->forma_contacto_id==null){
         $formaContacto='NO DEFINIDO';
       }else{
-        $formaContactos=FormaContacto::where('id',$datosgenerale->forma_contacto_id);
+        $formaContactos=FormaContacto::where('id',$datosgenerale->forma_contacto_id)->first();
       $formaContacto=$formaContactos->nombre;
       }
           
         Alert::success('Datos generales actualizados con éxito');
-        return view('provedores.generales.view',['datos'=>$datosgenerale,'provedore'=>$provedore, 'giro'=>$giro, 'formaContacto'=>$formaContacto]);
+        return view('provedores.generales.view',['datos'=>$datosgenerale,'provedore'=>$provedore, 'giro'=>$giros, 'formaContacto'=>$formaContactos]);
 
     }
 

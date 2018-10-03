@@ -1,73 +1,12 @@
 @extends('layouts.blank')
 @section('content')
+
 <div class="container" id="tab">
 	<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.update', ['provedore' => $provedore]) }}" name="form">
 		{{ csrf_field() }}
 		<input type="hidden" name="_method" value="PUT">
 		<div role="application" class="panel panel-group" >
-			<div class="panel-default">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-sm-4">
-							<h4>Datos del Proveedor:&nbsp;<small><small><i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</small></small></h4>
-						</div>
-						<div class="col-sm-4 text-center">
-							<a class="btn btn-success" href="{{ route('provedores.create')}}">
-								<strong>Agregar Proveedor</strong>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-	  					<div class="form-group col-sm-3">
-	    					<label class="control-label" for="tipopersona"><i class="fa fa-asterisk" aria-hidden="true"></i>Tipo de Persona:</label>
-	    					<select type="select" name="tipopersona" class="form-control" id="tipopersona" onchange="persona(this)">
-	    						<option id="Fisica" value="Fisica" @if ($provedore->tipopersona == "Fisica")
-	    							{{-- expr --}}
-	    							selected="selected" 
-	    						@endif>Fisica</option>
-	    						<option id="Moral" value="Moral" @if ($provedore->tipopersona == "Moral")
-	    							{{-- expr --}}
-	    							selected="selected" 
-	    						@endif>Moral</option>
-	    					</select>
-	  					</div>
-	  					<div class="form-group col-sm-3">
-	  						<label class="control-label" for="alias"><small><small><i class="fa fa-asterisk" aria-hidden="true"></i></small></small> Alias:</label>
-	  						<input type="text" class="form-control" id="alias" name="alias" value="{{ $provedore->alias }}" required autofocus>
-	  					</div>
-	  					<div class="form-group col-sm-3">
-	  						<label class="control-label" for="rfc"><small><small><i class="fa fa-asterisk" aria-hidden="true"></i></small></small> RFC:</label>
-	  						<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $provedore->rfc }}" required>
-	  					</div>
-	  					<div class="form-group col-sm-3">
-	  						<label class="control-label" for="vendedor">Vendedor:</label>
-	  						<input type="text" class="form-control" id="vendedor" name="vendedor" value="{{ $provedore->vendedor }}">
-	  					</div>
-					</div>
-					<div class="row" id="perfisica">
-						<div class="form-group col-sm-3">
-	  						<label class="control-label" for="nombre"><small><small><i class="fa fa-asterisk" aria-hidden="true"></i></small></small> Nombre(s):</label>
-	  						<input type="text" class="form-control" id="nombre" name="nombre" value="{{ $provedore->nombre }}">
-	  					</div>
-	  					<div class="form-group col-sm-3">
-	  						<label class="control-label" for="apellidopaterno"><small><small><i class="fa fa-asterisk" aria-hidden="true"></i></small></small> Apellido Paterno:</label>
-	  						<input type="text" class="form-control" id="apellidopaterno" name="apellidopaterno" value="{{ $provedore->apellidomaterno }}">
-	  					</div>
-	  					<div class="form-group col-sm-3">
-	  						<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-	  						<input type="text" class="form-control" id="apellidomaterno" name="apellidomaterno" value="{{ $provedore->apellidomaterno }}">
-	  					</div>
-					</div>
-					<div class="row" id="permoral" style="display:none;">
-						<div class="form-group col-sm-3">
-	  						<label class="control-label" for="razonsocial"><small><small><i class="fa fa-asterisk" aria-hidden="true"></i></small></small> Razon Social:</label>
-	  						<input type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{ $provedore->razonsocial }}">
-	  					</div>
-					</div>
-				</div>
-			</div>
+			@include('provedores.head')
 			<ul role="tablist" class="nav nav-tabs">
 				<li class="active">
 					<a href="#tab1">Dirección Fìsica:</a>
@@ -89,7 +28,7 @@
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-sm-4">
-							<h5>Dirección Física:&nbsp;<small><small><i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</small></small></h5>
+							<h5>Dirección Física: <small><i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</small></h5>
 						</div>
 					</div>
 				</div>
