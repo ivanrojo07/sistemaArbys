@@ -37,7 +37,7 @@
                                 <td class="col-sm-9">{{ $perfil->nombre }}</td>
                                 <td class="text-center col-sm-3">
                                     <form method="post" action="{{ route('perfil.destroy', ['id' => $perfil->id]) }}" style="">
-                                    @foreach(Auth::user()->perfil->componentes as $componente)
+                                        @foreach(Auth::user()->perfil->componentes as $componente)
                                         @if($componente->nombre == 'indice perfiles')
                                         <a class="btn btn-primary btn-sm" href="{{ route('perfil.show', ['id' => $perfil->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
                                         @endif
@@ -49,7 +49,7 @@
                                         {{ csrf_field() }}
                                         <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash" aria-hidden="true"></i><strong> Borrar</strong></button>
                                         @endif
-                                    @endforeach
+                                        @endforeach
                                     </form>
                                 </td>
                             </tr>

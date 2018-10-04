@@ -9,9 +9,13 @@
 					<div class="col-sm-4">
 						<h4>Datos del Usuario:</h4>
 					</div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'indice usuarios')
                     <div class="col-sm-4 text-center">
                         <a href="{{ route('usuario.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Usuarios</strong></button></a>
                     </div>
+                    @endif
+                    @endforeach
 				</div>
 			</div>
         </div>

@@ -36,6 +36,12 @@
                                         <label class="control-label">Modulos:</label>
                                     </th>
                                 </tr>
+                                @php($size = 0)
+                                @foreach($modulos as $modulo)
+                                @if(count($modulo->componentes) > $size)
+                                @php($size = count($modulo->componentes))
+                                @endif
+                                @endforeach
                                 @php($j = 0)
                                 @foreach($modulos as $modulo)
                                 @if($j % 3 == 0)
@@ -69,6 +75,12 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+                                            @if($size > count($modulo->componentes))
+                                            <tr>
+                                                <td colspan="2" style="height: {{ 40*($size - count($modulo->componentes)) }}px; opacity: 1.0; box-shadow: none;">
+                                                </td>
+                                            </tr>
+                                            @endif
                                         </table>
                                     </td>
                                     @endif
