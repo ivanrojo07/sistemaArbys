@@ -1,7 +1,6 @@
 @extends('layouts.blank')
 @section('content')
 
-
 <div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
@@ -10,9 +9,13 @@
 					<div class="col-sm-4 col-4">
 						<h4>Datos del Punto de Venta:</h4>
 					</div>
+					@foreach(Auth::user()->perfil->componentes as $componente)
+					@if($componente->nombre == "indice puntos")
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Puntos de Venta</strong></button></a>
 					</div>
+					@endif
+					@endforeach
 				</div>
 			</div>
 			<form action="{{ route('puntoDeVenta.store') }}" method="post">

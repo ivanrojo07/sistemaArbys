@@ -4,16 +4,22 @@
 			<div class="col-sm-4">
 				<h4>Datos del Proveedor:</h4>
 			</div>
+			@foreach(Auth::user()->perfil->componentes as $cmp)
+			@if($cmp->nombre == "crear proveedor")
 			<div class="col-sm-4 text-center">
 				<a class="btn btn-success" href="{{ route('provedores.create') }}">
 					<strong>Agregar Proveedor</strong>
 				</a>
 			</div>
+			@endif
+			@if($cmp->nombre == "indice proveedores")
 			<div class="col-sm-4 text-center">
-				<a class="btn btn-primary" href="{{ route('provedores.index') }}">
+				<a href="{{ route('provedores.index') }}" class="btn btn-primary">
 					<strong>Lista de Proveedores</strong>
 				</a>
 			</div>
+			@endif
+			@endforeach
 		</div>
 	</div>
 	<div class="panel-body">

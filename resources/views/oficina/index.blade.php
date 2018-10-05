@@ -9,14 +9,21 @@
 					<div class="col-sm-4">
 						<h4>Oficinas:</h4>
 					</div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'crear oficina')
 					<div class="col-sm-4 text-center">
 						<a class="btn btn-success" href="{{ route('oficina.create') }}"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Oficina</strong></a>
 					</div>
+					@endif
+					@endforeach
 				</div>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-12">
+						@if(count($oficinas) == 0)
+						<h4>Aún no hay oficinas agregadas.</h4>
+						@else
 						<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px;">
 							<tr class="info">
 								<th class="col-sm-1">#</th>
@@ -32,16 +39,23 @@
 								<td>{{ $oficina->nombre }}</td>
 								<td>{{ $oficina->responsable }}</td>
 								<td class="text-center">
+                                    @foreach(Auth::user()->perfil->componentes as $componente)
+                                    @if($componente->nombre == 'ver oficina')
 									<a class="btn btn-primary btn-sm" href="{{ route('oficina.show', ['id' => $oficina->id]) }}">
 										<i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong>
 									</a>
-									<a class="btn btn-danger btn-sm" href="{{ route('oficina.edit', ['id' => $oficina->id]) }}">
+									@endif
+									@if($componente->nombre == 'editar oficina')
+									<a class="btn btn-warning btn-sm" href="{{ route('oficina.edit', ['id' => $oficina->id]) }}">
 										<i class="fa fa-pencil" aria-hidden="true"></i><strong> Editar</strong>
 									</a>
+									@endif
+									@endforeach
 								</td>
 							</tr>
 							@endforeach
 						</table>
+						@endif
 					</div>
 				</div>
 			</div>

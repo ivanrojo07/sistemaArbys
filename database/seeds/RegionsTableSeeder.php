@@ -1,7 +1,6 @@
 <?php
 
 use App\Region;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class RegionsTableSeeder extends Seeder
@@ -14,11 +13,11 @@ class RegionsTableSeeder extends Seeder
     public function run()
     {
     	$regiones = array(
-    		array('nombre' => 'Centro', 'abreviatura' => 'CT', 'created_at' => Carbon::now()),
-    		array('nombre' => 'Sureste', 'abreviatura' => 'SE', 'created_at' => Carbon::now()),
-    		array('nombre' => 'Occidente', 'abreviatura' => 'OC','created_at' => Carbon::now()),
-    		array('nombre' => 'Noreste', 'abreviatura' => 'NE', 'created_at' => Carbon::now()),
-    		array('nombre' => 'Noroeste', 'abreviatura' => 'NO', 'created_at' => Carbon::now())
+    		array('nombre' => 'Región 1', 'abreviatura' => 'R1'),
+    		array('nombre' => 'Región 2', 'abreviatura' => 'R2'),
+    		array('nombre' => 'Región 3', 'abreviatura' => 'R3'),
+    		array('nombre' => 'Región 4', 'abreviatura' => 'R4'),
+    		array('nombre' => 'Región 5', 'abreviatura' => 'R5')
     	);
     	
         Region::insert($regiones);

@@ -1,5 +1,6 @@
 @extends('layouts.blank')
 @section('content')
+
 <div class="container" id="tab">
 	<form role="form" id="form-cliente" method="POST" action="{{ route('provedores.datosbancarios.update', ['provedore' => $provedore, 'bancario' => $provedore->datosBancarios->first()]) }}" name="form">
 		{{ csrf_field() }}
@@ -7,9 +8,13 @@
 		<div role="application" class="panel panel-group" >
 			@include('provedores.head')
 			<ul role="tablist" class="nav nav-tabs">
+				@foreach(Auth::user()->perfil->componentes as $cmp)
+				@if($cmp->nombre == 'ver proveedor')
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a href="{{ route('provedores.show',['provedore'=>$provedore]) }}">Dirección Fìsica:</a>
 				</li>
+				@endif
+				@if($cmp->nombre == 'ver datos proveedor')
 				<li role="presentation" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
 					<a href="{{ route('provedores.direccionfisica.index', ['provedore'=>$provedore]) }}" role="presentation" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Dirección Fiscal:</a>
 				</li>
@@ -22,12 +27,14 @@
 				<li class="active">
 					<a href="#tab4">Datos Bancarios:</a>
 				</li>
+				@endif
+				@endforeach
 			</ul>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-sm-4">
-							<h5>Datos Bancarios:&nbsp;<small><small><i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</small></small></h5>
+							<h5>Datos Bancarios: <small><i class="fa fa-asterisk" aria-hidden="true"></i>Campos Requeridos</small></h5>
 						</div>
 					</div>
 				</div>
@@ -67,4 +74,5 @@
 		</div>
 	</form>
 </div>
+
 @endsection

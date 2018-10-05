@@ -10,9 +10,13 @@
 					<div class="col-sm-4 col-4">
 						<h4>Datos del Punto de Venta:</h4>
 					</div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'indice puntos')
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('puntoDeVenta.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Puntos de Venta</strong></button></a>
 					</div>
+					@endif
+					@endforeach
 				</div>
 			</div>
 			<div class="panel-body">
@@ -151,11 +155,17 @@
 						</div>
 					</div>
 				</div>
+				@foreach(Auth::user()->perfil->componentes as $componente)
+				@if($componente->nombre == "editar punto")
 				<div class="row">
 					<div class="col-sm-4 col-sm-offset-4 text-center">
-						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}"><button class="btn btn-danger"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button></a>
+						<a href="{{ route('puntoDeVenta.edit', ['id' => $punto->id]) }}">
+							<button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+						</a>
 					</div>
 				</div>
+				@endif
+				@endforeach
 			</div>
 		</div>
 	</div>

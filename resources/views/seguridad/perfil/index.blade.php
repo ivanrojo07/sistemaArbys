@@ -21,6 +21,9 @@
 			<div class="panel-body">
 				<div class="row">
                     <div class="col-sm-12">
+                        @if($perfiles->last()->id == 1)
+                        <h4>Aún no hay perfiles agregados.</h4>
+                        @else
                         <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
                             @foreach($perfiles as $perfil)
                             @if($perfil->id == 1)
@@ -38,7 +41,7 @@
                                 <td class="text-center col-sm-3">
                                     <form method="post" action="{{ route('perfil.destroy', ['id' => $perfil->id]) }}" style="">
                                         @foreach(Auth::user()->perfil->componentes as $componente)
-                                        @if($componente->nombre == 'indice perfiles')
+                                        @if($componente->nombre == 'ver perfil')
                                         <a class="btn btn-primary btn-sm" href="{{ route('perfil.show', ['id' => $perfil->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
                                         @endif
                                         @if($componente->nombre == 'editar perfil')
@@ -57,6 +60,7 @@
                             @endif
                             @endforeach
                         </table>
+                        @endif
                     </div>
 				</div>
 			</div>

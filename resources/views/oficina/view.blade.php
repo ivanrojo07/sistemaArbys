@@ -9,9 +9,13 @@
 					<div class="col-sm-4">
 						<h4>Datos de la Oficina:</h4>
 					</div>
+                    @foreach(Auth::user()->perfil->componentes as $componente)
+                    @if($componente->nombre == 'indice oficinas')
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('oficina.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
 					</div>
+					@endif
+					@endforeach
 				</div>
 			</div>
 			<div class="panel-body">
@@ -86,11 +90,17 @@
 						<input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $oficina->ciudad }}" readonly="">
 					</div>
 				</div>
+				@foreach(Auth::user()->perfil->componentes as $componente)
+                @if($componente->nombre == 'editar oficina')
 				<div class="row">
 					<div class="col-sm-4 col-sm-offset-4 text-center">
-						<a href="{{ route('oficina.edit', ['id' => $oficina->id]) }}"><button class="btn btn-danger"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button></a>
+						<a href="{{ route('oficina.edit', ['id' => $oficina->id]) }}">
+							<button class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+						</a>
 					</div>
 				</div>
+				@endif
+				@endforeach
 			</div>
 		</div>
 	</div>
