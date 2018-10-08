@@ -42,17 +42,17 @@
 					<dd>{{ $bancario->banco->nombre }}</dd>
 				</div>
 				<div class="form-group col-sm-3">
-						<label class="control-label" for="cuenta">Número de Cuenta:</label>
+					<label class="control-label" for="cuenta">Número de Cuenta:</label>
 					<dd>{{ $bancario->cuenta }}</dd>
-					</div>
+				</div>
 				<div class="form-group col-sm-3">
-						<label class="control-label" for="clabe">CLABE:</label>
+					<label class="control-label" for="clabe">CLABE:</label>
 					<dd>{{ $bancario->clabe }}</dd>
-					</div>
+				</div>
 				<div class="form-group col-sm-3">
-						<label class="control-label" for="beneficiario">Beneficiario:</label>
+					<label class="control-label" for="beneficiario">Beneficiario:</label>
 					<dd>{{ $bancario->beneficiario }}</dd>
-					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12 text-center">

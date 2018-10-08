@@ -19,37 +19,28 @@ class FileController extends Controller
     	if($request->hasFile('sample_file')) {
     		$path = $request->file('sample_file')->getPathName();
             $data = \Excel::load($path, null, null, true, null)->get();
-            // dd($data);
     		if($data->count()) {
-    			foreach ($data as $key => $value) {
-                    $arr[] = [
-                        'clave' => $value->clave,
-                        'descripcion' => $value->descripcion,
-                        'precio_lista' => $value->precio_de_lista,
-                        'm60' => $value->m60,
-                        'm48' => $value->m48,
-                        'm36' => $value->m36,
-                        'm24' => $value->m24,
-                        'm12' => $value->m12 ,
-                        'apertura' => $value->apertura,
-                        'marca' => $value->marca,
-                    ];
-    				// $arr = [
-        //                 'clave' => $value->clave,
-        //                 'descripcion' => $value->descripcion,
-        //                 'precio_lista' => $value->precio_de_lista,
-        //                 'mensualidad_p_fisica' => $value->pago_mensual_p_fisica,
-        //                 'mensualidad_p_moral' => $value->p_moral,
-        //                 'apertura' => $value->apertura,
-        //                 'inicial' => $value->inicial,
-        //                 'marca' => $value->marca,
-        //                 'tipo' => $value->tipo,
-        //                 'created_at' => date('Y-m-d H:i:s')
-        //             ];
+                foreach ($data as $sheet) {
+        			foreach ($sheet as $key => $value) {
+                        $arr[] = [
+                            'clave' => $value->clave,
+                            'descripcion' => $value->descripcion,
+                            'precio_lista' => $value->precio_de_lista,
+                            'm60' => $value['60'],
+                            'm48' => $value['48'],
+                            'm36' => $value['36'],
+                            'm24' => $value['24'],
+                            'm12' => $value['12'],
+                            'apertura' => $value->apertura,
+                            'marca' => $value->marca,
+                            'created_at' => date('Y-m-d h:m:s'),
+                            'updated_at' => date('Y-m-d h:m:s'),
+                        ];
+                    }
                 }
     			if (!empty($arr)) {
-                    dd($arr);
-    				// DB::table('products')->insert($arr);
+                    // dd($arr);
+                    Product::insert($arr);
     				return redirect()->back()->with('success', 'Archivo subido correctamente.');
     			} else
     				return redirect()->back()->with('error', 'Error al subir el archivo.');

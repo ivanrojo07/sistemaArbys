@@ -19,13 +19,13 @@ class CreateProductsTable extends Migration
             $table->string('clave');
             $table->string('descripcion');
             $table->string('precio_lista');
-            $table->string('mensualidad_p_fisica');
-            $table->string('mensualidad_p_moral')->nullable();
-            $table->string('apertura');
-            $table->string('inicial');
+            $table->string('m60')->nullable();
+            $table->string('m48')->nullable();
+            $table->string('m36')->nullable();
+            $table->string('m24')->nullable();
+            $table->string('m12')->nullable();
+            $table->string('apertura')->nullable();
             $table->string('marca');
-            $table->string('tipo');
-            $table->string('status')->default(Product::PRODUCTO_DISPONIBLE);
             $table->timestamps();
         });
     }
@@ -39,4 +39,5 @@ class CreateProductsTable extends Migration
     {
         Schema::dropIfExists('products');
     }
+
 }

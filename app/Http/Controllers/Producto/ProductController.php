@@ -27,9 +27,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        $productos = Product::whereMonth('created_at', date("m"))->sortable()->paginate(10);
-        return view('product.index',['productos'=>$productos]);
+        $productos = Product::whereMonth('created_at', date('m'))->sortable()->paginate(10);
+        return view('product.index', ['productos' => $productos]);
     }
 
     /**
@@ -61,9 +60,10 @@ class ProductController extends Controller
      */
     public function show($product)
     {
-        //
-        $producto = Product::findOrFail($product);
+        $producto = Product::find($product);
         // dd($producto);
+        // dd($producto->all());
+        // dd($producto['36']);
         return view('product.view',['producto'=>$producto]);
     }
 
@@ -101,23 +101,17 @@ class ProductController extends Controller
         //
     }
 
-    public function search(Request $request){
-       // $query = $request->input('query');
+    public function search(Request $request) {
         $query = $request->input('busqueda');
         $wordsquery = explode(' ',$query);
-
         $productos = Product::where(function($q) use($wordsquery){
             foreach ($wordsquery as $word) {
-                # code...
                 $q->orWhere('clave','LIKE',"%$word%")
                     ->orWhere('marca','LIKE',"%$word%")
                     ->orWhere('descripcion','LIKE',"%$word%")
                     ->orWhere('precio_lista','LIKE',"%$word%")
-                    ->orWhere('apertura','LIKE',"%$word%")
-                    ->orWhere('inicial','LIKE','%$word%');
-                    
+                    ->orWhere('apertura','LIKE',"%$word%");
             }
-
         })->whereMonth('created_at', date("m"))->get();  
         return view('product.busqueda',['productos'=>$productos]);
     } 

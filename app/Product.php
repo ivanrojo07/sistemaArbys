@@ -9,44 +9,48 @@ use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class Product extends Model
 {
-    //
-    use Sortable;
-    public $table='products';
-    const PRODUCTO_DISPONIBLE = 'disponible';
-    const PRODUCTO_NO_DISPONIBLE = 'no disponible';
 
-    protected $fillable=['id',
-                         'clave',
-                         'descripcion',
-                         'precio_lista',
-                         'mensualidad_p_fisica',
-                         'mensualidad_p_moral',
-                         'apertura',
-                         'inicial',
-                         'marca',
-                         'tipo',
-                         'status'];
-                         
-    public $sortable = ['clave','marca','descripcion','precio_lista','apertura','inicial'];
-    protected $hidden = [
-        'id','created_at', 'updated_at'
+    use Sortable;
+
+    public $table = 'products';
+
+    protected $fillable = [
+        'id',
+        'clave',
+        'descripcion',
+        'precio_lista',
+        'm60',
+        'm48',
+        'm36',
+        'm24',
+        'm12',
+        'apertura',
+        'marca',
     ];
-    public function transactions(){
+                         
+    public $sortable = [
+        'clave',
+        'marca',
+        'descripcion',
+        'precio_lista',
+    ];
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
+
+    public function transactions() {
     	return $this->hasMany('App\Transaction');
     }
-    // public function personals(){
-    //     return $this->belongsTo('App\Personal');
-    // }
-    public function cliente(){
+
+    public function cliente() {
          return $this->belongsTo('App\Cliente');
     }
-    public function noestaDisponible(){
-   		
-   		return $this->status = Product::PRODUCTO_NO_DISPONIBLE;
-   	}
 
-    public function pagos(){
-
+    public function pagos() {
         return $this->hasMany('App\Pago');
     }
+
 }
