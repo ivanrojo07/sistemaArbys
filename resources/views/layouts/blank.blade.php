@@ -39,50 +39,50 @@
          
 
     </head>
-<body>
-    <div id="app">
-        @yield('content')
-    </div>
+    <body>
+        <div id="app">
+            @yield('content')
+        </div>
 
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/forms.js') }}"></script>
 
-    {{-- <script type="text/javascript">
-        function formulario(elemento){
-            if (elemento.value == "Prospecto") {
-                document.getElementById('cliente').style.display='none';
-                document.getElementById('cliente1').style.display='none';
-                document.getElementById('cliente2').style.display='none';
+        {{-- <script type="text/javascript">
+            function formulario(elemento){
+                if (elemento.value == "Prospecto") {
+                    document.getElementById('cliente').style.display='none';
+                    document.getElementById('cliente1').style.display='none';
+                    document.getElementById('cliente2').style.display='none';
+                }
+                if (elemento.value == "Cliente") {
+                    document.getElementById('cliente').style.display='inline';
+                    document.getElementById('cliente1').style.display='inline';
+                    document.getElementById('cliente2').style.display='inline';
+                }
             }
-            if (elemento.value == "Cliente") {
-                document.getElementById('cliente').style.display='inline';
-                document.getElementById('cliente1').style.display='inline';
-                document.getElementById('cliente2').style.display='inline';
+            function persona(elemento){
+                if(elemento.value == "Fisica"){
+                    document.getElementById('perfisica').style.display='inline';
+                    document.getElementById('permoral').style.display='none';
+                }
+                if(elemento.value =="Moral"){
+                    document.getElementById('perfisica').style.display='none';
+                    document.getElementById('permoral').style.display='inline';
+                }
             }
-        }
-        function persona(elemento){
-            if(elemento.value == "Fisica"){
-                document.getElementById('perfisica').style.display='inline';
-                document.getElementById('permoral').style.display='none';
-            }
-            if(elemento.value =="Moral"){
-                document.getElementById('perfisica').style.display='none';
-                document.getElementById('permoral').style.display='inline';
-            }
-        }
-    </script> --}}
-    <script src="{{ asset('js/sweetalert.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="{{ asset('js/pestanas.js') }}"></script>
-    <script src="{{ asset('bootstrap-toggle/js/bootstrap-toggle.js') }}"></script>
-    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
-{{-- 
-    Include this after the sweet alert js file --}}
-    @include('sweet::alert')
-    <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
-     <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
-     @yield('scripts')
-</body>
+        </script> --}}
+        <script src="{{ asset('js/sweetalert.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="{{ asset('js/pestanas.js') }}"></script>
+        <script src="{{ asset('bootstrap-toggle/js/bootstrap-toggle.js') }}"></script>
+        {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+    {{-- 
+        Include this after the sweet alert js file --}}
+        @include('sweet::alert')
+        <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
+         <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
+         @yield('scripts')
+    </body>
 </html>

@@ -27,7 +27,7 @@ function obtener_registros(busqueda, etiqueta,cli,pro)
 			url : "producto",
 			type : "GET",
 			dataType : "html",
-			data :{busqueda:busqueda},
+			data :{query:busqueda},
 			}).done(function(resultado){
 			$("#datos").html(resultado);
 

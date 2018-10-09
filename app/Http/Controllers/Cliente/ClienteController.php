@@ -78,12 +78,17 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-       
         $cliente=Cliente::where('id',$id)->first();
-       
-         return view('clientes.view',[
-            'cliente'=>$cliente]); 
+        // dd($cliente);
+        return view('clientes.view', ['cliente' => $cliente]); 
     }
+
+    
+    public function legacy($id)
+    {
+        $cliente = Cliente::find($id);
+        return view('clientes.legacy.view', ['cliente' => $cliente]); 
+    }    
 
     /**
      * Show the form for editing the specified resource.

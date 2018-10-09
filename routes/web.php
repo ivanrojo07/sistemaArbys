@@ -24,6 +24,9 @@ Route::get('/home', function () {
 	}
 })->name('home');
 
+//legacy
+Route::get('clientes/legacy/{id}', 'Cliente\ClienteController@legacy');
+
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');
 Route::get('producto', 'Producto\ProductController@search');

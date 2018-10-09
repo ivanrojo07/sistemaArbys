@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="container-fluid">
+<div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
 			<div class="panel-heading">
