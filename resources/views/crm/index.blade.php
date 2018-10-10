@@ -85,10 +85,11 @@
                                     <div class="modal-body">
                                         <form role="form" id="enviadordecrm" method="POST" action="{{ route('crmstore')}}">{{ csrf_field() }}</form>
                                             <div class="col-sm-12">
-                                                <input type="hidden" name=id_cliente"" id="id_cliente" form="enviadordecrm" class="form-control" disabled>
+                                                <input type="hidden" name="cliente_id" id="id_cliente" form="enviadordecrm" class="form-control">
+                                                <input type="hidden" name="fecha_act" id="fecha_act" form="enviadordecrm" value="{{date('Y-m-d')}}">
                                                 <div class="form-group col-sm-4">
                                                     <label for="nombre" class="control-label">Nombre:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                                    <input type="text" name=nombre"" id="nombre" form="enviadordecrm" class="form-control" disabled>
+                                                    <input type="text" name="nombre" id="nombre" form="enviadordecrm" class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label for="ap" class="control-label">Apellido paterno:</label>
@@ -140,11 +141,11 @@
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label for="fecha_aviso" class="control-label">Fecha aviso:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                                    <input type="date" name=fecha_aviso"" id="fecha_aviso" form="enviadordecrm" class="form-control" disabled>
+                                                    <input type="date" name="fecha_aviso" id="fecha_aviso" form="enviadordecrm" class="form-control" disabled>
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label for="hora" class="control-label">Hora:</label><br>
-                                                    <input type="text" name=hora"" id="hora" form="enviadordecrm" class="form-control" disabled>
+                                                    <input type="text" name="hora" id="hora" form="enviadordecrm" class="form-control" disabled>
                                                 </div>
                                                 <div class="col-md-12 offset-md-2 mt-3">
                                                     <div class="form-group col-lg-4 col-md-3 col-sm-6 col-xs-12">
@@ -166,7 +167,8 @@
                                     <div class="modal-footer">
                                         <div class="row">
                                             <div class="col-sm-4 col-md-offset-4">
-                                            <a href="" name="vinculo" id="vinculo" class="btn btn-block btn-success">Crear Nuevo</a>
+                                            <button name="vinculo" id="vinculo" class="btn btn-block btn-success">Crear Nuevo</button>
+                                            <button type="submit" form="enviadordecrm" name="enviador" id="enviador" style="display: none;" class="btn btn-block btn-success">Crear Nueasduhasdhvo</button>
                                             </div>
                                             <div class="col-sm-4">
                                                 <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
@@ -177,11 +179,8 @@
                             </div>
                         </div>
 
-                                    
-                                    </form >
                                 </div>
-                                
-
+                              
                                 
                             </div>  
                         </div>
@@ -409,6 +408,31 @@
 
                  document.getElementById(nombre).style.display='block';
 
+        });
+
+        $('#vinculo').click(function(){
+            $('#tipo_cont').removeAttr('disabled');
+            $('#status').removeAttr('disabled');
+            $('#fecha_cont').removeAttr('disabled');
+            $('#fecha_aviso').removeAttr('disabled');
+            $('#comentarios').removeAttr('disabled');
+            $('#observaciones').removeAttr('disabled');
+            $('#acuerdos').removeAttr('disabled');
+            $('#hora').removeAttr('disabled');
+
+            $('#tipo_cont').attr('required', true);
+            $('#status').attr('required', true);
+            $('#fecha_cont').attr('required', true);
+            $('#fecha_aviso').attr('required', true);
+            $('#comentarios').attr('required', true);
+            $('#observaciones').attr('required', true);
+            $('#acuerdos').attr('required', true);
+            $('#hora').attr('required', true);
+            $('#vinculo').hide(function(){
+                $('#enviador').show();
+                $('#enviadordecrm').trigger('reset');
+            });
+            
         });
     });
 </script>

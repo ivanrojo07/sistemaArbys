@@ -27,7 +27,7 @@ class CrmController extends Controller
      */
     public function index()
     {
-        $crms = ClienteCrm::orderBy('fecha_cont','asc')->get();
+        $crms = ClienteCrm::select('cliente_id','fecha_cont','fecha_aviso', 'fecha_act', 'hora', 'status', 'comentarios', 'acuerdos', 'observaciones','tipo_cont')->groupBy('cliente_id')->get();
         $clientes=Cliente::orderBy('nombre','desc')->get();
         return view('crm.index', ['crms'    =>$crms,
                                   'clientes'=>$clientes]);
