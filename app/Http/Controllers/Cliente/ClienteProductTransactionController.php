@@ -25,8 +25,6 @@ class ClienteProductTransactionController extends Controller
         
         // $product->noestaDisponible;
 
-        $product->status = Product::PRODUCTO_NO_DISPONIBLE;
-        $product->save();
         
         //$transaction = Transaction::create($request->all());
       $transaction =new Transaction;

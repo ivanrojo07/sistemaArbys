@@ -22,15 +22,15 @@ class ClienteProductoController extends Controller
         // dd(Request::only($request));
         // dd($cliente->transactions()->with('product')->get()->pluck('product'));
         $marcas = DB::select('select distinct marca from products');
-        $tipos = DB::select('select distinct tipo from products');
+        // $tipos = DB::select('select distinct tipo from products');
         // dd($marcas[0]);
         if (count($request->all()) == 0 ||$request==null){
             # code...
             //
             // if ($cliente->tipo == 'Cliente') {
             //     # code...
-            $productos = Product::where('status','=','disponible')->sortable()->paginate(10);
-            return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos,'request'=>$request]);
+            $productos = Product::sortable()->paginate(10);
+            return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas,'request'=>$request]);
             // } else {
             //     # code...
             //     return redirect('Clientes');
