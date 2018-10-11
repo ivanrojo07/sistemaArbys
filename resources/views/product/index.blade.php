@@ -15,7 +15,6 @@
 					        <span class="input-group-btn">
 								<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
 							</span>
-							{{-- <input type="submit" name=""> --}}
 						</div>
 					</div>
 				</div>
