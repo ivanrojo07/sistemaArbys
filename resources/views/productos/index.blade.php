@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="panel-default" >
-	<div class="panel panel-group">
+	<div class="panel panel-group" style="margin-bottom: 0px;">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-sm-offset-4 col-sm-4 text-center form-group">

@@ -202,146 +202,38 @@
 					</div>
 				</div>
 				<div id="crm" class="tab-pane fade ">
-					<iframe src="{{ route ('clientes.crm.create',['cliente'=>$cliente]) }}" style="width: 100%;">
+					<iframe src="{{ route ('clientes.crm.create',['cliente'=>$cliente]) }}" style="width: 100%; height: 600px;">
 					</iframe>
 				</div>
 				<div id="cot" class="tab-pane fade">
-					<iframe src="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}" style="width: 100%;">
+					<iframe src="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}" style="width: 100%; height: 600px;">
 					</iframe>
 				</div>
 				<div id="pagos" class="tab-pane fade">
-					<div role="application" class="panel panel-group">
-						<div class="container pull-right row"><br>
-							<div class="col-sm-4">
-								<button onclick="location.reload()" class="btn btn-warning"><strong>Recargar Página</strong></button>
-							</div>
-							<div class="col-sm-4">
-								<a class="btn btn-primary" href="{{ route('clientes.pago.create',['cliente'=>$cliente]) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Registrar Pagos</strong></a>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-12 text-center form-group">
+								<a class="btn btn-success" href="{{ route('clientes.pago.create', ['cliente' => $cliente]) }}">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Registrar Pagos</strong>
+								</a>
 							</div>
 						</div>
-						<div class="panel-default">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="list-group" id="list-tab" role="tablist">
-											<a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="profile">
-												Estado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de Registro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monto del Pago
-											</a>
-											@foreach($cliente->pagos as $pago)
-											<a class="list-group-item list-group-item-action list-group-item-info" id="list-profile-list" data-toggle="list" onclick="viewPago({{ $pago->id }})" role="tab" aria-controls="profile" style="cursor: pointer;">
-												{{ $pago->status }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												{{ $pago->created_at }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												${{ number_format($pago->monto,2) }}
-											</a>
-											@endforeach
-										</div>
-									</div>
-									<div class="col-sm-8">
-										@foreach($cliente->pagos as $pago)
-										<div class="container-fluid esconder" id="{{ $pago->id }}" style="border:solid;display: none;border-color: #ccccff;border-radius: 2px;padding: 20px; ">
-
-											<div class="row">
-												<div class="col-sm-2 col-sm-offset-4">
-													<label class="form-label">Vendedor/Usuario:</label>
-												</div>
-												<div class="col-sm-4">
-													<strong>{{ $pago->usuario->name }}</strong>
-												</div>
-											</div><br>
-											<div class="row">
-												<div class="col-sm-1">
-													<label class="form-label">Banco:</label>
-												</div>
-												<div class="col-sm-4">
-													<dd>{{ $pago->banco }}</dd>
-												</div>
-												<div class="col-sm-1">
-													<label class="form-label">Monto:</label>
-												</div>
-												<div class="col-sm-4">
-													<dd>${{ number_format($pago->monto,2) }}</dd>
-												</div>
-											</div><br>
-											<div class="row">
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Forma de Pago:</label>
-													<dd>{{ $pago->forma_pago }}</dd>
-												</div>
-
-												@switch($pago->forma_pago)
-												@case('Cheque')
-												<div class="col-sm-3 form-group">
-													<label class="form-label">Número de Cheque:</label>
-													<dd>{{ $pago->numero_cheque }}</dd>
-												</div>
-
-												@break
-												@case('Tarjeta de Crédito')
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Número de Tarjeta:</label>
-													<dd>{{ $pago->numero_tarjeta }}</dd>
-												</div>
-
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Tarjetahabiente:</label>
-													<dd>{{ $pago->nombre_tarjetaHabiente }}</dd>
-												</div>
-
-												@break
-												@case('Tarjeta de Débito')
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Número de Tarjeta:</label>
-													<dd>{{ $pago->numero_tarjeta }}</dd>
-												</div>
-
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Tarjetahabiente:</label>
-													<dd>{{ $pago->nombre_tarjetaHabiente }}</dd>
-												</div>
-
-												@break
-												@case('Depósito')
-												<div class="col-sm-4 form-group">
-													<label class="form-label">Número/Fólio de Depósito:</label>
-													<dd>{{ $pago->numero_deposito }}</dd>
-												</div>
-
-
-												@break
-
-												@default
-
-												@endswitch
-											</div><br>
-											<div class="row">
-												<div class="col-sm-4 form-group">
-													<label class="control-label">Identificación:</label>
-													<dd>{{ $pago->identificacion }}</dd>
-												</div>
-												<div class="col-sm-4 form-group">
-													<label class="control-label">Comprobante:</label>
-													<dd>{{ $pago->comprobante }}</dd>
-												</div>
-											</div><hr>
-											<legend>Producto</legend>
-											<div class="row">
-												<div class="col-sm-4 form-group">
-													<label class="control-label">Marca:</label>
-													<dd>{{ $pago->product->marca }}</dd>
-												</div>
-												<div class="col-sm-4 form-group">
-													<label class="control-label">Descripción:</label>
-													<dd>{{ $pago->product->descripcion }}</dd>
-												</div>
-												<div class="col-sm-4 form-group">
-													<label class="control-label">Precio:</label>
-													<dd>${{ number_format($pago->product->precio_lista,2) }}</dd>
-												</div>
-											</div>
-										</div>
-										@endforeach
-									</div>
-								</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<table class="table table-bordered table-stripped table-hover">
+									<tr class="info">
+										<td class="col-sm-4">Estado de Pago</td>
+										<td class="col-sm-4">Fecha de Registro</td>
+										<td class="col-sm-4">Monto del Pago</td>
+									</tr>
+									@foreach($cliente->pagos as $pago)
+									<tr>
+										<td>{{ $pago->status }}</td>
+										<td>{{ $pago->created_at }}</td>
+										<td>{{ number_format($pago->monto, 2) }}</td>
+									</tr>
+									@endforeach
+								</table>
 							</div>
 						</div>
 					</div>
