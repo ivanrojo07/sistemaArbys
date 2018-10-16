@@ -19,4 +19,8 @@ class Grupo extends Model
     public function subgerente() {
         return $this->belongsTo('App\EmpleadosDatosLab');
     }
+
+    public function vendedores() {
+        return $this->hasMany('App\Vendedor');
+    }
 }

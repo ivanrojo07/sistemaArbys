@@ -170,15 +170,25 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado, 
-        $datoslaborale)
+    public function update(Request $request, Empleado $empleado, $datoslaborale)
     {
-
         $datoslab = new EmpleadosDatosLab;
         $datoslab->create($request->all());
         $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
         if($request->puesto_id == 7) {
             Vendedor::create(['vendedor_id' => $datoslab->id, 'grupo_id' => $request->grupo_id]);
+        } else {
+            $datos = EmpleadosDatosLab::where('empleado_id', $empleado->id)->get();
+            foreach ($datos as $dato) {
+                $arr[] = $dato->id;
+            }
+            foreach ($arr as $val) {
+                $vend = Vendedor::where('vendedor_id', $val)->first();
+                if($vend != null) {
+                    Vendedor::where('vendedor_id', $val)->delete();
+                    break;
+                }
+            }
         }
         Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
         return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);

@@ -54,7 +54,7 @@
 							@foreach ($puestos as $puesto)
 							@if($p != 1 && $puesto->id == 1)
 							@elseif($p != 1 && $puesto->id == 2)
-							@elseif(($p != 1 || $p != 2) && $puesto->id == 3)
+							@elseif($puesto->id == 3 && ($p != 1 || $p != 2))
 							@else
 							<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
 							@endif

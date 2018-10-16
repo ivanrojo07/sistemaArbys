@@ -53,6 +53,7 @@ class GrupoController extends Controller
     public function show($id)
     {
         $grupo = Grupo::find($id);
+        // dd($grupo->vendedores->last());
         return view('grupos.view', ['grupo' => $grupo]);
     }
 

@@ -20,6 +20,6 @@ class Vendedor extends Model
     }
 
     public function datosLaborales() {
-        return $this->belongsTo('App\EmpleadoDatosLab');
+        return $this->belongsTo('App\EmpleadosDatosLab', 'vendedor_id');
     }
 }
