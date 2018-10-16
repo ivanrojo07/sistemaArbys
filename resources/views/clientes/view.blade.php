@@ -170,7 +170,10 @@
 				</li>
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#pagos" class="ui-tabs-anchor">Pagos</a>
-				</li>				
+				</li>
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+					<a href="{{ route('crm.index') }}" class="ui-tabs-anchor">CRM General</a>
+				</li>
 			</ul>
 			<div class="tab-content">
 				<div id="dat" class="tab-pane fade in active">

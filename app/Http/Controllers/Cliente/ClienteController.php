@@ -79,7 +79,6 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente=Cliente::where('id',$id)->first();
-        // dd($cliente);
         return view('clientes.view', ['cliente' => $cliente]); 
     }
 

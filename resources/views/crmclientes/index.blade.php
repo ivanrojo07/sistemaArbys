@@ -7,7 +7,7 @@
 			<form role="form" method="POST" action="{{ route('clientes.crm.store', ['cliente' => $cliente]) }}">
 				{{ csrf_field() }}
 				<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
-				<div class="col-sm-12 text-right">
+				<div class="col-sm-12 form-group text-center">
 					<a class="btn btn-warning" id="limpiar" onclick="limpiar()">
 						<strong>Limpiar</strong>
 					</a>
