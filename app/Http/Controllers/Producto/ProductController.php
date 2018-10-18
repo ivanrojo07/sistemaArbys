@@ -60,11 +60,7 @@ class ProductController extends Controller
      */
     public function show($product)
     {
-        $producto = Product::find($product);
-        // dd($producto);
-        // dd($producto->all());
-        // dd($producto['36']);
-        return view('product.view',['producto'=>$producto]);
+        //
     }
 
     /**
@@ -116,7 +112,6 @@ class ProductController extends Controller
             }
         })->whereMonth('created_at', date("m"))->sortable()->paginate(10);  
         $productos->withPath('producto?query=' . $query);
-        // dd($productos);
-        return view('product.busqueda',['productos'=>$productos]);
+        return view('product.busqueda', ['productos' => $productos]);
     } 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 @section('content')
-	{{-- expr --}}
+
 <div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
@@ -39,7 +39,7 @@
 								<td>${{ number_format($product->precio_lista, 2) }}</td>
 								<td>${{ number_format($product->apertura, 2) }}</td>
 								<td class="text-center">
-									<a class="btn btn-primary btn-sm" href="{{ route('productos.show', ['product' => $product]) }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+									<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal{{ $product->id }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
 								</td>
 							</tr>
 							@endforeach
@@ -54,11 +54,80 @@
 	</div>
 </div>
 
+@foreach($productos as $producto)
+<div class="modal fade" id="myModal{{ $producto->id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="modal-title"><strong>Datos del Producto</strong></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+				<div class="row">
+					<div class="form-group col-sm-2 col-sm-offset-1">
+						<label class="control-label">Clave:</label>
+						<dd>{{ $producto->clave }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">Marca:</label>
+						<dd>{{ $producto->marca }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">Descripción:</label>
+						<dd>{{ $producto->descripcion }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">Precio de Lista:</label>
+						<dd>${{ number_format($producto->precio_lista, 2) }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">Apertura:</label>
+						<dd>${{ number_format($producto->apertura, 2) }}</dd>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-2 col-sm-offset-1">
+						<label class="control-label">60 Meses:</label>
+						<dd>{{ $producto['m60'] > 0 ? '$' . number_format($producto['m60'], 2) : 'N/A' }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">48 Meses:</label>
+						<dd>{{ $producto['m48'] > 0 ? '$' . number_format($producto['m48'], 2) : 'N/A' }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">36 Meses:</label>
+						<dd>{{ $producto['m36'] > 0 ? '$' . number_format($producto['m36'], 2) : 'N/A' }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">24 Meses:</label>
+						<dd>{{ $producto['m24'] > 0 ? '$' . number_format($producto['m24'], 2) : 'N/A' }}</dd>
+					</div>
+					<div class="form-group col-sm-2">
+						<label class="control-label">12 Meses:</label>
+						<dd>{{ $producto['m12'] > 0 ? '$' . number_format($producto['m12'], 2) : 'N/A' }}</dd>
+					</div>
+				</div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-2 col-sm-offset-10">
+                        <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#trigger").click('change', function() {
 			query = $('#producto').val();
-			// console.log(query);
+			console.log(query);
 			$.ajax({
 				url: "producto?query=" + query,
 				type: "GET",

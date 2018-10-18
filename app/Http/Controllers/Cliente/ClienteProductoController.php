@@ -190,5 +190,22 @@ class ClienteProductoController extends Controller
         //
     }
 
+    public function search(Request $request) {
+        // dd($request);
+        $query = $request->input('query');
+        // dd($query);
+        $wordsquery = explode(' ',$query);
+        $productos = Product::where(function($q) use($wordsquery){
+            foreach ($wordsquery as $word) {
+                $q->orWhere('clave', 'LIKE', "%$word%")
+                    ->orWhere('marca', 'LIKE', "%$word%")
+                    ->orWhere('descripcion', 'LIKE', "%$word%")
+                    ->orWhere('precio_lista', 'LIKE', "%$word%")
+                    ->orWhere('apertura', 'LIKE', "%$word%");
+            }
+        })->whereMonth('created_at', date("m"))->sortable()->paginate(10);  
+        $productos->withPath('producto2?query=' . $query);
+        return view('productos.busqueda', ['productos' => $productos]);
+    }
     
 }

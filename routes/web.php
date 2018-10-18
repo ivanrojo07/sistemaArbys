@@ -30,6 +30,7 @@ Route::get('clientes/legacy/{id}', 'Cliente\ClienteController@legacy');
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');
 Route::get('producto', 'Producto\ProductController@search');
+Route::get('producto2', 'Producto\ClienteProductoController@search');
 Route::get('import-export-csv-excel', array('as' => 'excel.import', 'uses' => 'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel', array('as' => 'import-csv-excel', 'uses' => 'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => 'FileController@downloadExcelFile'));
