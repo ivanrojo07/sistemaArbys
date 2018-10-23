@@ -19,63 +19,30 @@ class ClienteProductoController extends Controller
      */
     public function index(Cliente $cliente, Request $request)
     {
-        // dd(Request::only($request));
-        // dd($cliente->transactions()->with('product')->get()->pluck('product'));
         $marcas = DB::select('select distinct marca from products');
-        // $tipos = DB::select('select distinct tipo from products');
-        // dd($marcas[0]);
-        if (count($request->all()) == 0 ||$request==null){
-            # code...
-            //
-            // if ($cliente->tipo == 'Cliente') {
-            //     # code...
+        if(count($request->all()) == 0 || $request == null) {
             $productos = Product::sortable()->paginate(10);
-            return view('productos.index',['cliente'=>$cliente,'productos'=>$productos,'marcas'=>$marcas,'request'=>$request]);
-            // } else {
-            //     # code...
-            //     return redirect('Clientes');
-            // }
+            return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'marcas' => $marcas, 'request' => $request]);
         } else {
-            # code...
-            // dd($request->all());
             $precio1 = (int)$request->costo1;
             $precio2 = (int)$request->costo2;
             $mensual1 = $request->mensualidad1;
             $mensual2 = $request->mensualidad2;
             $marca = $request->marca;
             $tipo = $request->tipo;
-            $productos = Product::sortable()->where('status','=','disponible')
-            ->where(function($busqueda) use($precio1, $precio2){
-                if ($precio1 != null || $precio1 != 0) {
-                    # code...
-                    // dd($precio2);
-                    if ($precio2 == 0 || $precio2 == null) {
-                        # code...
-                        // dd($busqueda);
-                        $busqueda->where('precio_lista','>=',$precio1);
-                    }
-                    elseif ($precio2 != null || $precio2 <$precio1 || $precio2 != 0) {
-                        # code...
+            $productos = Product::sortable()->where('status', '=', 'disponible')
+            ->where(function($busqueda) use($precio1, $precio2) {
+                if($precio1 != null || $precio1 != 0) {
+                    if($precio2 == 0 || $precio2 == null)
+                        $busqueda->where('precio_lista', '>=', $precio1);
+                    else if($precio2 != null || $precio2 < $precio1 || $precio2 != 0)
                         $busqueda->whereBetween('precio_lista',[$precio1,$precio2]);
-                    } 
-                    // dd($precio1);
-                    
-                    
                 } 
-                elseif ($precio1 == null || $precio1 == 0) {
-                    # code...
-                    if ($precio2 != 0 || $precio2 != null) {
-                        # code...
-                        $busqueda->where('precio_lista','<=',$precio2);
-
-                    }
-
-                }
-                
+                else if($precio1 == null || $precio1 == 0)
+                    if ($precio2 != 0 || $precio2 != null)
+                        $busqueda->where('precio_lista', '<=', $precio2);
             })->where(function($busqueda) use($mensual1, $mensual2){
-                if ($mensual1 != null || $mensual1 != 0) {
-                    # code...
-                    
+                if($mensual1 != null || $mensual1 != 0) {  
                     if ($mensual2 == 0 || $mensual2 == null) {
                         # code...
                         // dd($busqueda);

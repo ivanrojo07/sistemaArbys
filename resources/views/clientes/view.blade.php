@@ -10,7 +10,7 @@
 						<h4>Datos del Cliente:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a href="{{ route('clientes.pago.create', ['id' => $cliente->id]) }}" class="btn btn-info">
+						<a href="{{ route('clientes.pagos.create', ['id' => $cliente->id]) }}" class="btn btn-info">
 							<strong>Pagos</strong>
 						</a>
 					</div>
@@ -159,7 +159,7 @@
 				@endif
 			</div>
 			<ul class="nav nav-tabs">
-				<li class="active">
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#dat" class="ui-tabs-anchor">Productos Elegídos</a>
 				</li>
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
@@ -176,67 +176,47 @@
 				</li>
 			</ul>
 			<div class="tab-content">
-				<div id="dat" class="tab-pane fade in active">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-sm-12">
-								@if(count($cliente->transactions) > 0)
-								<table class="table table-bordered table-stripped table-hover" style="margin-bottom: 0">
-									<tr class="info">
-										<th>Clave</th>
-										<th>Descripción</th>
-										<th>Marca</th>
-										<th>Precio</th>
-									</tr>
-									@foreach($cliente->transactions as $transation)
-									<tr>
-										<td>{{ $transation->product->clave }}</td>
-										<td>{{ $transation->product->descripcion }}</td>
-										<td>{{ $transation->product->marca }}</td>
-										<td>${{ number_format($transation->product->precio_lista, 2) }}</td>
-									</tr>
-									@endforeach	
-								</table>
-								@else
-								<h4>No has elegido productos.</h4>
-								@endif
-							</div>
-						</div>
-					</div>
+				<div id="dat" class="tab-pane fade">
+					<iframe src="{{ route ('seleccion', ['cliente' => $cliente]) }}" style="width: 100%;">
+					</iframe>
 				</div>
-				<div id="crm" class="tab-pane fade ">
-					<iframe src="{{ route ('clientes.crm.create',['cliente'=>$cliente]) }}" style="width: 100%; height: 600px;">
+				<div id="crm" class="tab-pane fade">
+					<iframe src="{{ route ('clientes.crm.create', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;">
 					</iframe>
 				</div>
 				<div id="cot" class="tab-pane fade">
-					<iframe src="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}" style="width: 100%; height: 600px;">
+					<iframe src="{{ route('clientes.producto.index', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;">
 					</iframe>
 				</div>
 				<div id="pagos" class="tab-pane fade">
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-sm-12 text-center form-group">
-								<a class="btn btn-success" href="{{ route('clientes.pago.create', ['cliente' => $cliente]) }}">
+								<a class="btn btn-success" href="{{ route('clientes.pagos.create', ['cliente' => $cliente]) }}">
 									<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Registrar Pagos</strong>
 								</a>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<table class="table table-bordered table-stripped table-hover">
-									<tr class="info">
-										<td class="col-sm-4">Estado de Pago</td>
-										<td class="col-sm-4">Fecha de Registro</td>
-										<td class="col-sm-4">Monto del Pago</td>
-									</tr>
-									@foreach($cliente->pagos as $pago)
-									<tr>
-										<td>{{ $pago->status }}</td>
-										<td>{{ $pago->created_at }}</td>
-										<td>{{ number_format($pago->monto, 2) }}</td>
-									</tr>
-									@endforeach
-								</table>
+								@if(count($cliente->pagos) > 0)
+									<table class="table table-bordered table-stripped table-hover">
+										<tr class="info">
+											<td class="col-sm-4">Estado de Pago</td>
+											<td class="col-sm-4">Fecha de Registro</td>
+											<td class="col-sm-4">Monto del Pago</td>
+										</tr>
+										@foreach($cliente->pagos as $pago)
+											<tr>
+												<td>{{ $pago->status }}</td>
+												<td>{{ $pago->created_at }}</td>
+												<td>{{ number_format($pago->monto, 2) }}</td>
+											</tr>
+										@endforeach
+									</table>
+								@else
+									<h4>Aún no tienes pagos registrados.</h4>
+								@endif
 							</div>
 						</div>
 					</div>

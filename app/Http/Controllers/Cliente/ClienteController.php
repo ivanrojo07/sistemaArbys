@@ -134,33 +134,29 @@ class ClienteController extends Controller
         //
     }
 
-    public function buscar(Request $request){
-   
-   $query = $request->input('busqueda');
-        $wordsquery = explode(' ',$query);
-
-    $clientes = Cliente::where(function($q) use($wordsquery){
-            foreach ($wordsquery as $word) {
-                # code...
-              $q->orWhere('nombre','LIKE',         "%$word%")
-                ->orWhere('apellidopaterno','LIKE',"%$word%")
-                ->orWhere('apellidomaterno','LIKE',"%$word%")
-                ->orWhere('razonsocial','LIKE',    "%$word%")
-                ->orWhere('rfc','LIKE',            "%$word%")
-                ->orWhere('identificador','LIKE',    "%$word%");
-            }
-        })->get();
-    return view('clientes.busqueda', ['clientes'=>$clientes]);
-        
-
+    public function getSeleccion($id) {
+        $cliente = Cliente::find($id);
+        return view('clientes.productos.selected', ['cliente' => $cliente]);
     }
 
-     public function pdf(Cliente $cliente){
+    public function buscar(Request $request) {
+        $query = $request->input('busqueda');
+        $wordsquery = explode(' ', $query);
+        $clientes = Cliente::where(function($q) use($wordsquery) {
+            foreach ($wordsquery as $word) {
+              $q->orWhere('nombre', 'LIKE', "%$word%")
+                ->orWhere('apellidopaterno', 'LIKE', "%$word%")
+                ->orWhere('apellidomaterno', 'LIKE', "%$word%")
+                ->orWhere('razonsocial', 'LIKE', "%$word%")
+                ->orWhere('rfc', 'LIKE', "%$word%")
+                ->orWhere('identificador', 'LIKE', "%$word%");
+            }
+        })->get();
+        return view('clientes.busqueda', ['clientes' => $clientes]);
+    }
 
-        
-
-    // $clientes= App\Cliente::get();
-    $pdf=PDF::loadView('clientes.vista',['cliente'=>$cliente]);
-    return $pdf->download('archivo.pdf');
+     public function pdf(Cliente $cliente) {
+        $pdf = PDF::loadView('clientes.vista', ['cliente' => $cliente]);
+        return $pdf->download('archivo.pdf');
     }
 }

@@ -29,10 +29,8 @@ class ClientePagoController extends Controller
      */
     public function create(Cliente $cliente)
     {
-       $bancos=Banco::orderBy('nombre')->get();
-       
-        return view('pagos.create',['cliente'=>$cliente,
-                                    'bancos' =>$bancos]);
+        $bancos = Banco::orderBy('nombre')->get();
+        return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
     }
 
     /**

@@ -24,8 +24,10 @@ Route::get('/home', function () {
 	}
 })->name('home');
 
-//legacy
+// LEGACY
 Route::get('clientes/legacy/{id}', 'Cliente\ClienteController@legacy');
+
+// MISC
 
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');
@@ -70,9 +72,10 @@ Route::resource('clientes.producto','Cliente\ClienteProductoController');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
 Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);
+Route::get('clientes/{id}/seleccion', 'Cliente\ClienteController@getSeleccion')->name('seleccion');
 Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
 Route::resource('clientes.info','Cliente\ClienteInfoController');
-Route::resource('clientes.pago','Cliente\ClientePagoController');
+Route::resource('clientes.pagos','Cliente\ClientePagoController');
 Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
 
