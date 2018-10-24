@@ -113,5 +113,11 @@ class ProductController extends Controller
         })->whereMonth('created_at', date("m"))->sortable()->paginate(10);  
         $productos->withPath('producto?query=' . $query);
         return view('product.busqueda', ['productos' => $productos]);
-    } 
+    }
+
+    public function getProduct($id) {
+        $producto = Product::find($id);
+        // dd($producto);
+        return view('product.getProduct', ['producto' => $producto]);
+    }
 }

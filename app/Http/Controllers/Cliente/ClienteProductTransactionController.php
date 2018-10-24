@@ -22,23 +22,14 @@ class ClienteProductTransactionController extends Controller
      */
     public function store(Request $request, Cliente $cliente, Product $product)
     {
-        
         // $product->noestaDisponible;
-
-        
         //$transaction = Transaction::create($request->all());
-      $transaction =new Transaction;
-      $transaction->cliente_id=$request->cliente_id;
-      $transaction->product_id=$request->product_id;
-      $transaction->save();
-      
-     
-      alert()->success('Success Message', 'Optional Title');
-
-      
+        $transaction = new Transaction;
+        $transaction->cliente_id = $request->cliente_id;
+        $transaction->product_id = $request->product_id;
+        $transaction->save();
+        alert()->success('Success Message', 'Optional Title'); 
         return redirect()->back()->with('success', 'Producto añadido con exito');
-
-
     }
 
     /**
@@ -85,4 +76,5 @@ class ClienteProductTransactionController extends Controller
     {
         //
     }
+    
 }

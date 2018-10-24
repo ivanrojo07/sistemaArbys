@@ -28,6 +28,7 @@ Route::get('/home', function () {
 Route::get('clientes/legacy/{id}', 'Cliente\ClienteController@legacy');
 
 // MISC
+Route::get('getProduct/{id}', 'Producto\ProductController@getProduct');
 
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');
