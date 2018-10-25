@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 @section('content')
-
+<div id="test"></div>
 <div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
@@ -29,8 +29,8 @@
 											<td>{{ $transaccion->product->descripcion }}</td>
 											<td>${{ number_format($transaccion->product->precio_lista, 2) }}</td>
 											<td class="text-center">
-												<a class="btn btn-sm btn-success" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
-												<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}" style="display: none;">Seleccionar</a>
+												<a class="btn btn-sm btn-success" id="product{{ $transaccion->product->id }}" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
+												<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}d" style="display: none;">Seleccionar</a>
 											</td>
 										</tr>
 										@endforeach
@@ -221,13 +221,27 @@
 		});
 	});
 
+	function destroy() {
+		$("#producto").html('');
+		$('#test').html('');
+		@foreach($cliente->transactions as $transaccion)
+            document.getElementById('product{{ $transaccion->product->id }}').style.display = 'inline-block';
+            document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'none';
+		@endforeach
+	}
+
 	function getProduct(id) {
+		@foreach($cliente->transactions as $transaccion)
+            document.getElementById('product{{ $transaccion->product->id }}').style.display = 'none';
+            document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'inline-block';
+		@endforeach
 		$.ajax({
 			url: "{{ url('/getProduct') }}/" + id,
 			type: "GET",
 			dataType: "html",
 		}).done(function(resultado) {
 			$("#producto").html(resultado);
+			$('#test').html('<p>' + $('#precio').val() + '</p>');
 		});
 	}
 
