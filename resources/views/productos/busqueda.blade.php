@@ -8,7 +8,7 @@
 
 <div class="panel panel-group" style="margin-bottom: 0px;">
 	<div class="panel-default">
-		<div class="panel-heading">
+		{{-- <div class="panel-heading">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-4 text-center">
 					<div class="input-group">
@@ -19,7 +19,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		<div id="productos">
 			<div class="panel-body">
 				<div class="col-sm-12">

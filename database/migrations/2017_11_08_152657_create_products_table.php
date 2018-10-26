@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->string('m12')->nullable();
             $table->string('apertura')->nullable();
             $table->string('marca');
+            $table->string('tipo');
+            $table->string('categoria')->nullable();
             $table->timestamps();
         });
     }

@@ -26,6 +26,8 @@ class Product extends Model
         'm12',
         'apertura',
         'marca',
+        'tipo',
+        'categoria'
     ];
                          
     public $sortable = [

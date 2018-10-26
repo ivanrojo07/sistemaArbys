@@ -33,7 +33,6 @@ Route::get('getProduct/{id}', 'Producto\ProductController@getProduct');
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');
 Route::get('producto', 'Producto\ProductController@search');
-Route::get('producto2', 'Producto\ClienteProductoController@search');
 Route::get('import-export-csv-excel', array('as' => 'excel.import', 'uses' => 'FileController@importExportExcelORCSV'));
 Route::post('import-csv-excel', array('as' => 'import-csv-excel', 'uses' => 'FileController@importFileIntoDB'));
 Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => 'FileController@downloadExcelFile'));
@@ -70,6 +69,9 @@ Route::resource('crm','Crm\CrmController');
 Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
 Route::post('crmstore','Crm\CrmController@store')->name('crmstore');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
+Route::get('clientes/{id}/producto2', 'Cliente\ClienteProductoController@search');
+Route::get('clientes/{id}/producto3', 'Cliente\ClienteProductoController@search2');
+Route::get('clientes/{id}/producto4', 'Cliente\ClienteProductoController@search3');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
 Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);

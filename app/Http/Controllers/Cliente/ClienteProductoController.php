@@ -53,7 +53,6 @@ class ClienteProductoController extends Controller
     public function show(Cliente $cliente,Product $producto)
     {
         $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto]);
-        // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto]);
         return $pdf->download('archivo.pdf');
     }
 
@@ -91,12 +90,11 @@ class ClienteProductoController extends Controller
         //
     }
 
-    public function search(Request $request) {
-        // dd($request);
+    public function search(Request $request, $id) {
+        $cliente = Cliente::find($id);
         $query = $request->input('query');
-        // dd($query);
         $wordsquery = explode(' ',$query);
-        $productos = Product::where(function($q) use($wordsquery){
+        $productos = Product::where(function($q) use($wordsquery) {
             foreach ($wordsquery as $word) {
                 $q->orWhere('clave', 'LIKE', "%$word%")
                     ->orWhere('marca', 'LIKE', "%$word%")
@@ -104,9 +102,44 @@ class ClienteProductoController extends Controller
                     ->orWhere('precio_lista', 'LIKE', "%$word%")
                     ->orWhere('apertura', 'LIKE', "%$word%");
             }
-        })->whereMonth('created_at', date("m"))->sortable()->paginate(10);  
+        })->whereMonth('created_at', date("m"))->sortable()->paginate(10);
         $productos->withPath('producto2?query=' . $query);
-        return view('productos.busqueda', ['productos' => $productos]);
+        return view('productos.busqueda', ['productos' => $productos, 'cliente' => $cliente]);
+    }
+
+    public function search2(Request $request, $id) {
+        $cliente = Cliente::find($id);
+        $min = $request->min;
+        $max = $request->max;
+        if(isset($min) && isset($max)) {
+            $productos = Product::whereBetween('precio_lista', [$min, $max])->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos->withPath('producto3?min=' . $min . '&max=' . $max);
+        }
+        else if(isset($min) && !isset($max)){
+            $productos = Product::where('precio_lista', '>', $min)->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos->withPath('producto3?min=' . $min);
+        }
+        else if(!isset($min) && isset($max)) {
+            $productos = Product::where('precio_lista', '<', $max)->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos->withPath('producto3?max=' . $max);
+        }
+        else {
+            $productos = Product::whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos->withPath('producto3');
+        }
+        return view('productos.busqueda', ['productos' => $productos, 'cliente' => $cliente]);
+    }
+
+    public function search3(Request $request, $id) {
+        $cliente = Cliente::find($id);
+        // dd($cliente);
+        $query = $request->input('query');
+        // dd($query);
+        // dd($query);
+        $productos = Product::where('tipo', $query)->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+        // dd($productos);
+        $productos->withPath('producto4?query=' . $query);
+        return view('productos.busqueda', ['productos' => $productos, 'cliente' => $cliente]);
     }
     
 }

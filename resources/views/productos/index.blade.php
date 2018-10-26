@@ -4,13 +4,34 @@
 <div class="panel panel-group" style="margin-bottom: 0px;">
 	<div class="panel-default">
 		<div class="panel-heading">
-			<div class="row">
-				<div class="col-sm-4 col-sm-offset-4 text-center">
+			<div class="row form-group">
+				<div class="col-sm-4 text-center">
+					<div class="input-group">
+						<input type="number" id="min" name="min" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
+						<input type="number" id="max" name="max" class="form-control" placeholder="Precio Máximo" style="width: 152px">
+				        <span class="input-group-btn">
+							<a class="btn btn-default" id="range"><i class="fa fa-search" aria-hidden="true"></i></a>
+						</span>
+					</div>
+				</div>
+				<div class="col-sm-4 text-center">
 					<div class="input-group">
 						<input type="text" id="producto" name="kword" class="form-control" placeholder="Buscar..." autofocus>
 				        <span class="input-group-btn">
 							<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
 						</span>
+					</div>
+				</div>
+				<div class="col-sm-2 text-center">
+					<label class="control-label">Carros:</label>
+					<div class="row">
+						<input type="radio" name="type" id="carro" value="CARRO">
+					</div>
+				</div>
+				<div class="col-sm-2 text-center">
+					<label class="control-label">Motos:</label>
+					<div class="row">
+						<input type="radio" name="type" id="moto" value="MOTO">
 					</div>
 				</div>
 			</div>
@@ -140,6 +161,67 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#min").change(function() {
+			var val = $('#min').val();
+			$("#max").prop('min', val);
+		});
+
+		$("#range").click('change', function() {
+			var min = $('#min').val();
+			var max = $('#max').val();
+			var link = 'producto3'
+			if(min == '' && max == '')
+				link += ''
+			else if(min != '' && max == '')
+				link += '?min=' + min;
+			else if(min == '' && max != '')
+				link += '?max=' + max;
+			else if(min != '' && max != '')
+				link += '?min=' + min + '&max=' + max;
+			$.ajax({
+				url: link,
+				type: "GET",
+				dataType: "html",
+				success: function(res){
+					$('#productos').html(res);
+				},
+				error: function (){
+					$('#productos').html('');
+				}
+			});
+		});
+
+		$("#carro").click(function() {
+			var val = $('#carro').val();
+			$.ajax({
+				url: "producto4?query=" + val,
+				type: "GET",
+				dataType: "html",
+				success: function(res){
+					$('#productos').html(res);
+				},
+				error: function (){
+					$('#productos').html('');
+				}
+			});
+		});
+
+		$("#moto").click(function() {
+			var val = $('#moto').val();
+			alert(val);
+			$.ajax({
+				url: "producto4?query=" + val,
+				type: "GET",
+				dataType: "html",
+				success: function(res){
+					$('#productos').html(res);
+				},
+				error: function (){
+					$('#productos').html('');
+				}
+			});
+		});
+
 		$("#trigger").click('change', function() {
 			query = $('#producto').val();
 			console.log(query);

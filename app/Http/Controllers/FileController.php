@@ -33,13 +33,15 @@ class FileController extends Controller
                             'm12' => $value['12'],
                             'apertura' => $value->apertura,
                             'marca' => $value->marca,
+                            'tipo' => $value->tipo,
+                            'categoria' => $value->categoria,
                             'created_at' => date('Y-m-d h:m:s'),
                             'updated_at' => date('Y-m-d h:m:s'),
                         ];
                     }
                 }
     			if (!empty($arr)) {
-                    // dd($arr);
+                    // dd($arr[0]);
                     Product::insert($arr);
     				return redirect()->back()->with('success', 'Archivo subido correctamente.');
     			} else
