@@ -32,11 +32,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-   public function pagos() {
-        return $this->hasMany('App\Pago');
-    }
-
+    
     public function perfil() {
         return $this->belongsTo('App\Perfil');
     }

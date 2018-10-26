@@ -11,7 +11,8 @@
 					</div>
 				</div>
 			</div>
-			<form action="" method="post">
+			<form action="{{ route('clientes.pagos.store', ['cliente' => $cliente]) }}" method="post">
+				{{ csrf_field() }}
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-6">
@@ -26,6 +27,7 @@
 										</tr>
 										@foreach($cliente->transactions as $transaccion)
 										<tr>
+											<input type="hidden" name="product_id" value="{{ $transaccion->product->id }}">
 											<td>{{ $transaccion->product->descripcion }}</td>
 											<td>${{ number_format($transaccion->product->precio_lista, 2) }}</td>
 											<td class="text-center">

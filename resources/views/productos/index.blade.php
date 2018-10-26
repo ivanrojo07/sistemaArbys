@@ -178,6 +178,7 @@
 				link += '?max=' + max;
 			else if(min != '' && max != '')
 				link += '?min=' + min + '&max=' + max;
+			// alert(link);
 			$.ajax({
 				url: link,
 				type: "GET",

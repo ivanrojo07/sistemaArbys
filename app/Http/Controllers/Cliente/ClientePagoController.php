@@ -39,41 +39,14 @@ class ClientePagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $cliente)
     {
-        $status=$request->status;
-       
-        $pago=Pago::create($request->all());
-        $cliente=Cliente::where('id',$request->cliente_id)->first();
-
-        switch ($status) {
-
-            case 'Guardado':
-                
-                Alert::success('Pago registrado con éxito (No ha sido Aprobado aún)', 'Se redireccionará a sección del Cliente');
-                return redirect()->route('clientes.show',['id'=>$request->cliente_id]);
-
-                break;
-
-            case 'Aprobado':
-                
-                 Alert::success('Pago Aprobado, se actualiza a Solicitante', 'Se redireccionará al registro de Solicitantes');
-                 return redirect()->route('clientes.solicitantes.create',['cliente'=>$cliente]);
-
-                break;
-
-            case 'No Aprobado':
-                dd($status);
-                 Alert::warning('Pago No Aprobado', 'Se redireccionará a sección del Cliente');
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-
-       
-        return redirect()->route('clientes.index');
+        $request['cliente_id'] = $cliente;
+        // dd($request->all());
+        $pago = Pago::create($request->all());
+        // $cliente = Cliente::find($cliente);
+        Alert::success('Pago registrado con éxito (No ha sido Aprobado aún)', 'Se redireccionará a sección del Cliente');
+        return redirect()->route('clientes.show', ['id' => $request->cliente_id]);
     }
 
     /**
