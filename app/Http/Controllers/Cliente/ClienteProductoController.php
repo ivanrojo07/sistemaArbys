@@ -112,20 +112,29 @@ class ClienteProductoController extends Controller
         $min = $request->min;
         $max = $request->max;
         if(isset($min) && isset($max)) {
-            $productos = Product::whereBetween('precio_lista', [$min, $max])->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos = Product::whereBetween('precio_lista', [$min, $max])->sortable()->paginate(10);
             $productos->withPath('producto3?min=' . $min . '&max=' . $max);
+            // dd(1);
+            // dd($productos);
         }
         else if(isset($min) && !isset($max)){
-            $productos = Product::where('precio_lista', '>', $min)->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos = Product::whereBetween('precio_lista', [$min, 10000000])->sortable()->paginate(10);
             $productos->withPath('producto3?min=' . $min);
+            // dd(2);
+            // dd($productos);
         }
         else if(!isset($min) && isset($max)) {
-            $productos = Product::where('precio_lista', '<', $max)->whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos = Product::whereBetween('precio_lista', [0, $max])->sortable()->paginate(10);
             $productos->withPath('producto3?max=' . $max);
+            // dd(3);
+            // dd($productos);
         }
         else {
-            $productos = Product::whereMonth('created_at', date("m"))->sortable()->paginate(10);
+            $productos = Product::sortable()->paginate(10);
             $productos->withPath('producto3');
+            // dd($productos);
+            // dd(4);
+            // dd($productos);
         }
         return view('productos.busqueda', ['productos' => $productos, 'cliente' => $cliente]);
     }

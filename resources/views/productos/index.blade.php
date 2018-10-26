@@ -208,7 +208,6 @@
 
 		$("#moto").click(function() {
 			var val = $('#moto').val();
-			alert(val);
 			$.ajax({
 				url: "producto4?query=" + val,
 				type: "GET",
