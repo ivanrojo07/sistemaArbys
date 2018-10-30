@@ -15,14 +15,18 @@ class Oficina extends Model
     	'estado_id',
         'nombre',
         'abreviatura',
-        'responsable',
+        'responsable_com',
+        'responsable_adm',
         'descripcion',
         'calle',
         'numext',
         'numint',
         'cp',
         'delegacion',
-        'ciudad'
+        'ciudad',
+        'telefono1',
+        'telefono2',
+        'telefono3',
     ];
 
     public $sortable = [ 'id', 'nombre', 'abreviatura', 'responsable' ];

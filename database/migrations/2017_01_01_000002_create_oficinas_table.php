@@ -19,14 +19,18 @@ class CreateOficinasTable extends Migration
             $table->foreign('estado_id')->references('id')->on('estados');
             $table->string('nombre');
             $table->string('abreviatura', 3);
-            $table->string('responsable');
-            $table->string('descripcion', 500);
+            $table->string('responsable_com');
+            $table->string('responsable_adm');
+            $table->string('descripcion', 500)->nullable();
             $table->string('calle');
-            $table->string('numext');
-            $table->string('numint')->nullable();
-            $table->string('cp');
+            $table->integer('numext');
+            $table->integer('numint')->nullable();
+            $table->integer('cp');
             $table->string('delegacion');
             $table->string('ciudad');
+            $table->integer('telefono1');
+            $table->integer('telefono2')->nullable();
+            $table->integer('telefono3')->nullable();
             $table->timestamps();
         });
     }

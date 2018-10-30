@@ -29,7 +29,7 @@
 								<th class="col-sm-1">#</th>
 								<th class="col-sm-1">Abreviatura</th>
 								<th class="col-sm-2">Nombre</th>
-								<th class="col-sm-2">Responsable</th>
+								<th class="col-sm-2">Teléfono</th>
 								<th class="text-center col-sm-2">Acciones</th>
 							</tr>
 							@foreach($oficinas as $oficina)
@@ -37,7 +37,7 @@
 								<td>{{ $oficina->id }}</td>
 								<td>{{ $oficina->abreviatura }}</td>
 								<td>{{ $oficina->nombre }}</td>
-								<td>{{ $oficina->responsable }}</td>
+								<td>{{ $oficina->telefono1 }}</td>
 								<td class="text-center">
                                     @foreach(Auth::user()->perfil->componentes as $componente)
                                     @if($componente->nombre == 'ver oficina')

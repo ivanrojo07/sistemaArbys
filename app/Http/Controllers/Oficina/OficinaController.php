@@ -111,7 +111,7 @@ class OficinaController extends Controller
     {
         if($this->hasComponent('editar oficina')) {
             $oficina = Oficina::find($id);
-            $oficina->update($request->except('_method', '_token'));
+            $oficina->update($request->all());
             return view('oficina.view', ['oficina' => $oficina]);
         }
         return redirect()->route('denegado');
