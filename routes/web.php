@@ -69,6 +69,7 @@ Route::resource('crm','Crm\CrmController');
 Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
 Route::post('crmstore','Crm\CrmController@store')->name('crmstore');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
+Route::get('clientes/{id}/searchProducts', 'Cliente\ClienteProductoController@busqueda');
 Route::get('clientes/{id}/producto2', 'Cliente\ClienteProductoController@search');
 Route::get('clientes/{id}/producto3', 'Cliente\ClienteProductoController@search2');
 Route::get('clientes/{id}/producto4', 'Cliente\ClienteProductoController@search3');

@@ -4,37 +4,41 @@
 <div class="panel panel-group" style="margin-bottom: 0px;">
 	<div class="panel-default">
 		<div class="panel-heading">
-			<div class="row form-group">
-				<div class="col-sm-4 text-center">
-					<div class="input-group">
-						<input type="number" id="min" name="min" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
-						<input type="number" id="max" name="max" class="form-control" placeholder="Precio Máximo" style="width: 152px">
-				        <span class="input-group-btn">
-							<a class="btn btn-default" id="range"><i class="fa fa-search" aria-hidden="true"></i></a>
-						</span>
+			<form id="search-form">
+				<div class="row form-group">
+					<div class="col-sm-4 text-center">
+						<div class="input-group">
+							<input type="number" id="min" name="min" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
+							<input type="number" id="max" name="max" class="form-control" placeholder="Precio Máximo" style="width: 152px">
+						</div>
+					</div>
+					<div class="col-sm-4 text-center">
+						{{-- <div class="input-group"> --}}
+							<input type="text" id="producto" name="kword" class="form-control" placeholder="Buscar..." autofocus>
+					        {{-- <span class="input-group-btn">
+								<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
+							</span> --}}
+						{{-- </div> --}}
+					</div>
+					<div class="col-sm-2 text-center">
+						<label class="control-label">Carros:</label>
+						<div class="row">
+							<input type="radio" name="type" id="carro" value="CARRO">
+						</div>
+					</div>
+					<div class="col-sm-2 text-center">
+						<label class="control-label">Motos:</label>
+						<div class="row">
+							<input type="radio" name="type" id="moto" value="MOTO">
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-4 text-center">
-					<div class="input-group">
-						<input type="text" id="producto" name="kword" class="form-control" placeholder="Buscar..." autofocus>
-				        <span class="input-group-btn">
-							<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
-						</span>
+				<div class="row form-group">
+					<div class="col-sm-12 text-center">
+						<button type="button" id="search" class="btn btn-success"><i class="fa fa-search"  aria-hidden="true"></i> Buscar</button>
 					</div>
 				</div>
-				<div class="col-sm-2 text-center">
-					<label class="control-label">Carros:</label>
-					<div class="row">
-						<input type="radio" name="type" id="carro" value="CARRO">
-					</div>
-				</div>
-				<div class="col-sm-2 text-center">
-					<label class="control-label">Motos:</label>
-					<div class="row">
-						<input type="radio" name="type" id="moto" value="MOTO">
-					</div>
-				</div>
-			</div>
+			</form>
 		</div>
 		<div id="productos">
 			<div class="panel-body">
@@ -160,6 +164,38 @@
 @endforeach
 
 <script type="text/javascript">
+$(document).ready(function() {
+	$("#search").click(function(e){
+		var form = $("#search-form").serializeArray();
+		if(form[3]){
+			var tipo = form[3].value;
+		}
+		else{
+			var tipo = "";
+		}
+		var params = {
+			'min': form[0].value,
+			'max': form[1].value,
+			'desc': form[2].value,
+			'tipo': tipo,
+		};
+		$.ajax({
+			url:'searchProducts',
+			data: {params:params},
+			type: 'GET',
+			dataType: 'html',
+			success: function(res){
+				$('#productos').html(res);
+			},
+			error: function (){
+				$('#productos').html('');
+			}
+		})
+
+	})
+	
+});
+
 	$(document).ready(function() {
 		$("#min").change(function() {
 			var val = $('#min').val();
