@@ -25,13 +25,20 @@ class FileController extends Controller
                         $arr[] = [
                             'clave' => $value->clave,
                             'descripcion' => $value->descripcion,
-                            'precio_lista' => $value->precio_de_lista,
-                            'm60' => $value['60'],
-                            'm48' => $value['48'],
-                            'm36' => $value['36'],
-                            'm24' => $value['24'],
-                            'm12' => $value['12'],
-                            'apertura' => $value->apertura,
+                            'precio_lista' => number_format($value->precio_de_lista, 2, '.', ''),
+                            'm60' => number_format($value['60'], 2, '.', ''),
+                            'm48' => number_format($value['48'], 2, '.', ''),
+                            'm36' => number_format($value['36'], 2, '.', ''),
+                            'm24' => number_format($value['24'], 2, '.', ''),
+                            'm12' => number_format($value['12'], 2, '.', ''),
+                            'apertura' => number_format($value->apertura, 2, '.', ''),
+                            // 'precio_lista' => $value->precio_de_lista,
+                            // 'm60' => $value['60'],
+                            // 'm48' => $value['48'],
+                            // 'm36' => $value['36'],
+                            // 'm24' => $value['24'],
+                            // 'm12' => $value['12'],
+                            // 'apertura' => $value->apertura,
                             'marca' => $value->marca,
                             'tipo' => $value->tipo,
                             'categoria' => $value->categoria,
@@ -41,7 +48,7 @@ class FileController extends Controller
                     }
                 }
     			if (!empty($arr)) {
-                    // dd($arr[0]);
+                    // dd($arr);
                     Product::insert($arr);
     				return redirect()->back()->with('success', 'Archivo subido correctamente.');
     			} else

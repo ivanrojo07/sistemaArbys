@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 @section('content')
-<div id="test"></div>
+
 <div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
@@ -21,15 +21,17 @@
 								<div class="col-sm-12">
 									<table class="table table-sm table-bordered table-stripped table-hover">
 										<tr class="info">
-											<td>Descripción</td>
-											<td>Precio</td>
-											<td>Acción</td>
+											<th>Descripción</th>
+											<th>Precio</th>
+											<th>Apertura</th>
+											<th>Acción</th>
 										</tr>
 										@foreach($cliente->transactions as $transaccion)
 										<tr>
 											<input type="hidden" name="product_id" value="{{ $transaccion->product->id }}">
 											<td>{{ $transaccion->product->descripcion }}</td>
-											<td>${{ number_format($transaccion->product->precio_lista, 2) }}</td>
+											<td>${{ number_format($transaccion->product->precio_lista, 1) }}</td>
+											<td>${{ number_format($transaccion->product->apertura, 1) }}</td>
 											<td class="text-center">
 												<a class="btn btn-sm btn-success" id="product{{ $transaccion->product->id }}" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
 												<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}d" style="display: none;">Seleccionar</a>
@@ -54,7 +56,7 @@
 							<select class="form-control" name="identificacion" id="identificacion" required>
 								<option value="">Sin definir</option>
 								<option value="INE">INE</option>
-								<option value="IFE">IFE.</option>
+								<option value="IFE">IFE</option>
 								<option value="Pasaporte">Pasaporte</option>
 								<option value="Cédula Profesional">Cédula Profesional</option>
 								<option value="Cartilla">Cartilla</option>
@@ -111,6 +113,12 @@
 						<div class="col-sm-3 form-group" id="montos" style="display: none;">
 							<label class="control-label">Monto del Pago:</label>
 							<input type="number" name="monto" class="form-control" min="0" required id="monto">
+						</div>
+					</div>
+					<div class="row" id="pago">
+						<div class="col-sm-3 col-sm-offset-9 form-group">
+							<label class="control-label">Total a Pagar:</label>
+							<input type="text" name="total" id="total" class="form-control" readonly="" required="">
 						</div>
 					</div>
 					<div class="row">
@@ -213,7 +221,6 @@
             	monto = tarjeta = cheque = deposito = true;
             }
         });
-
 	}
 
 	$(document).ready(function() {
@@ -222,15 +229,6 @@
 			change();
 		});
 	});
-
-	function destroy() {
-		$("#producto").html('');
-		$('#test').html('');
-		@foreach($cliente->transactions as $transaccion)
-            document.getElementById('product{{ $transaccion->product->id }}').style.display = 'inline-block';
-            document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'none';
-		@endforeach
-	}
 
 	function getProduct(id) {
 		@foreach($cliente->transactions as $transaccion)
@@ -243,8 +241,17 @@
 			dataType: "html",
 		}).done(function(resultado) {
 			$("#producto").html(resultado);
-			$('#test').html('<p>' + $('#precio').val() + '</p>');
 		});
+	}
+
+	function destroy() {
+		$("#producto").html('');
+		$('#test').html('');
+		$('#total').val('');
+		@foreach($cliente->transactions as $transaccion)
+            document.getElementById('product{{ $transaccion->product->id }}').style.display = 'inline-block';
+            document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'none';
+		@endforeach
 	}
 
 	function getBancos(){
