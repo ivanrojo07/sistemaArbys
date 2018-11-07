@@ -11,34 +11,35 @@
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('clientes.pagos.store', ['cliente' => $cliente]) }}" method="post">
-				{{ csrf_field() }}
+			<form action="{{-- {{ route('clientes.pagos.store', ['cliente' => $cliente]) }} --}}" method="get" id="form">
+				{{-- {{ csrf_field() }} --}}
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-6">
 							<h5>Productos Elegidos</h5>
 							<div class="row">
 								<div class="col-sm-12">
-									<table class="table table-sm table-bordered table-stripped table-hover">
-										<tr class="info">
-											<th>Descripción</th>
-											<th>Precio</th>
-											<th>Apertura</th>
-											<th>Acción</th>
-										</tr>
-										@foreach($cliente->transactions as $transaccion)
-										<tr>
-											<input type="hidden" name="product_id" value="{{ $transaccion->product->id }}">
-											<td>{{ $transaccion->product->descripcion }}</td>
-											<td>${{ number_format($transaccion->product->precio_lista, 1) }}</td>
-											<td>${{ number_format($transaccion->product->apertura, 1) }}</td>
-											<td class="text-center">
-												<a class="btn btn-sm btn-success" id="product{{ $transaccion->product->id }}" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
-												<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}d" style="display: none;">Seleccionar</a>
-											</td>
-										</tr>
-										@endforeach
-									</table>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered table-stripped table-hover">
+											<tr class="info">
+												<th>Descripción</th>
+												<th>Precio</th>
+												<th>Apertura</th>
+												<th>Acción</th>
+											</tr>
+											@foreach($cliente->transactions as $transaccion)
+											<tr>
+												<td>{{ $transaccion->product->descripcion }}</td>
+												<td>${{ number_format($transaccion->product->precio_lista, 2) }}</td>
+												<td>${{ number_format($transaccion->product->apertura, 2) }}</td>
+												<td class="text-center">
+													<a class="btn btn-sm btn-success" id="product{{ $transaccion->product->id }}" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
+													<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}d" style="display: none;">Seleccionar</a>
+												</td>
+											</tr>
+											@endforeach
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -46,86 +47,101 @@
 							<h5>Producto a Pagar</h5>
 							<div class="row">
 								<div class="col-sm-12" id="producto">
+									<h4>Seleccione un producto.</h4>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Identificación:</label>
-							<select class="form-control" name="identificacion" id="identificacion" required>
-								<option value="">Sin definir</option>
-								<option value="INE">INE</option>
-								<option value="IFE">IFE</option>
-								<option value="Pasaporte">Pasaporte</option>
-								<option value="Cédula Profesional">Cédula Profesional</option>
-								<option value="Cartilla">Cartilla</option>
-							</select>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Comprobante de Domicilio:</label>
-							<select class="form-control" name="comprobante" id="comprobante" required>
-								<option value="">Sin definir</option>
-								<option value="Luz">Luz</option>
-								<option value="Agua">Agua</option>
-								<option value="Teléfono">Teléfono</option>
-								<option value="Predial">Predial</option>
-							</select>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Forma de Pago:</label>
-							<select class="form-control" name="forma_pago" id="forma" required>
-								<option value="">Sin definir</option>
-								<option value="Efectivo">Efectivo</option>
-								<option value="Cheque">Cheque</option>
-								<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-								<option value="Tarjeta de Débito">Tarjeta de Débito</option>
-								<option value="Depósito">Depósito</option>
-							</select>
-						</div>
-						<div class="col-sm-3 form-group" id="bancos" style="display: none;">
-							<label onclick="getBancos()" class="control-label">Banco:</label>
-							<select type="select" name="banco" class="form-control" id="banco">
-								<option id="sin_definir" value="">Seleccione Uno</option>
-								@foreach($bancos as $banco)
-								<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="col-sm-3 form-group" id="cheques" style="display: none;">
-							<label class="control-label">Número de Cheque:</label>
-							<input type="number" name="numero_cheque" class="form-control" min="0" id="cheque">
-						</div>
-						<div id="tarjetas" style="display: none;">
+					<div id="seleccion" style="display: none;">
+						<div class="row">
 							<div class="col-sm-3 form-group">
-								<label class="control-label">Número de Tarjeta:</label>
-								<input type="number" name="numero_tarjeta" class="form-control" min="0" id="tarjeta">
+								<label class="control-label">Identificación:</label>
+								<select class="form-control" name="identificacion" id="identificacion" required>
+									<option value="">Sin definir</option>
+									<option value="INE">INE</option>
+									<option value="IFE">IFE</option>
+									<option value="Pasaporte">Pasaporte</option>
+									<option value="Cédula Profesional">Cédula Profesional</option>
+									<option value="Cartilla">Cartilla</option>
+								</select>
 							</div>
 							<div class="col-sm-3 form-group">
-								<label class="control-label">Nombre de Tarjetahabiente:</label>
-								<input type="text" name="nombre_tarjetaHabiente" class="form-control" id="tarjetah">
+								<label class="control-label">Comprobante de Domicilio:</label>
+								<select class="form-control" name="comprobante" id="comprobante" required>
+									<option value="">Sin definir</option>
+									<option value="Luz">Luz</option>
+									<option value="Agua">Agua</option>
+									<option value="Teléfono">Teléfono</option>
+									<option value="Predial">Predial</option>
+								</select>
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Forma de Pago:</label>
+								<select class="form-control" name="forma_pago" id="forma" required>
+									<option value="">Sin definir</option>
+									<option value="Efectivo">Efectivo</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+									<option value="Tarjeta de Débito">Tarjeta de Débito</option>
+									<option value="Depósito">Depósito</option>
+								</select>
+							</div>
+							<div class="col-sm-3 form-group" id="bancos" style="display: none;">
+								<label onclick="getBancos()" class="control-label">Banco:</label>
+								<select type="select" name="banco" class="form-control" id="banco">
+									<option id="sin_definir" value="">Seleccione Uno</option>
+									@foreach($bancos as $banco)
+									<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="col-sm-3 form-group" id="cheques" style="display: none;">
+								<label class="control-label">Número de Cheque:</label>
+								<input type="number" name="numero_cheque" class="form-control" min="0" id="cheque">
+							</div>
+							<div id="tarjetas" style="display: none;">
+								<div class="col-sm-3 form-group">
+									<label class="control-label">Número de Tarjeta:</label>
+									<input type="number" name="numero_tarjeta" class="form-control" min="0" id="tarjeta">
+								</div>
+								<div class="col-sm-3 form-group">
+									<label class="control-label">Nombre de Tarjetahabiente:</label>
+									<input type="text" name="nombre_tarjetaHabiente" class="form-control" id="tarjetah">
+								</div>
+							</div>
+							<div class="col-sm-3 form-group" id="depositos" style="display: none;">
+								<label class="control-label">Folio de Depósito:</label>
+								<input type="number" name="numero_deposito" class="form-control" min="0" id="deposito">
+							</div>
+							<div class="col-sm-3 form-group" id="montos" style="display: none;">
+								<label class="control-label">Monto del Pago:</label>
+								<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
 							</div>
 						</div>
-						<div class="col-sm-3 form-group" id="depositos" style="display: none;">
-							<label class="control-label">Folio de Depósito:</label>
-							<input type="number" name="numero_deposito" class="form-control" min="0" id="deposito">
+						<div class="row">
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Número de Referencia:</label>
+								<input type="text" name="referencia" id="referencia" class="form-control" required="">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Número de Fólio:</label>
+								<input type="text" name="folio" id="folio" class="form-control" required="">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Total a Pagar:</label>
+								<input type="text" name="total" id="total" class="form-control" required readonly="">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Restante:</label>
+								<input type="text" id="restante" class="form-control" readonly="">
+							</div>
 						</div>
-						<div class="col-sm-3 form-group" id="montos" style="display: none;">
-							<label class="control-label">Monto del Pago:</label>
-							<input type="number" name="monto" class="form-control" min="0" required id="monto">
-						</div>
-					</div>
-					<div class="row" id="pago">
-						<div class="col-sm-3 col-sm-offset-9 form-group">
-							<label class="control-label">Total a Pagar:</label>
-							<input type="text" name="total" id="total" class="form-control" readonly="" required="">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12 text-center">
-							<input type="submit" name="" class="btn btn-warning" value="Guardar" onclick="">
-							<button onclick="" class="btn btn-success">Aprobado</button>
-							<button onclick="" class="btn btn-danger">No Aprobado</button>
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<input type="submit" id="guardar" class="btn btn-warning" value="Guardar">
+								<input type="hidden" name="status" value="No Aprobado">
+								<input type="submit" id="aprobar" class="btn btn-success" value="Aprobar Pago" style="display: none;">
+							</div>
 						</div>
 					</div>
 				</div>	
@@ -227,6 +243,21 @@
 		change();
 		$(document).change(function() {
 			change();
+			var monto$ = document.getElementById('monto').value;
+			var total$ = document.getElementById('total').value;
+			if(total$ !== '') {
+				document.getElementById('monto').max = total$;
+				if(total$ != 0 && monto$ > total$) {
+					alert('El monto del pago no puede ser mayor al total a pagar.\nEl monto ha sido cambiado al total a pagar.')
+					monto$ = total$;
+					document.getElementById('monto').value = monto$;
+				}
+			}
+			var restante$ = total$ !== '' && monto$ !== '' ? total$ - monto$ : '';
+			document.getElementById('restante').value = total$ !== '' && monto$ !== '' && restante$ >= 0 ? restante$.toFixed(2) : '';
+			document.getElementById('aprobar').style.display = restante$ === 0 ? 'inline-block' : 'none';
+			document.getElementById('guardar').style.display = restante$ === 0 ? 'none' : 'inline-block';
+			document.getElementById('status').value = restante$ === 0 ? 'Aprobado' : 'No Aprobado';
 		});
 	});
 
@@ -235,6 +266,7 @@
             document.getElementById('product{{ $transaccion->product->id }}').style.display = 'none';
             document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'inline-block';
 		@endforeach
+		document.getElementById('seleccion').style.display = 'block';
 		$.ajax({
 			url: "{{ url('/getProduct') }}/" + id,
 			type: "GET",
@@ -245,13 +277,27 @@
 	}
 
 	function destroy() {
-		$("#producto").html('');
-		$('#test').html('');
+		$("#producto").html('<h4>Seleccione un producto.</h4>');
 		$('#total').val('');
+		$('#restante').val('');
 		@foreach($cliente->transactions as $transaccion)
             document.getElementById('product{{ $transaccion->product->id }}').style.display = 'inline-block';
             document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'none';
 		@endforeach
+		reset();
+	}
+
+	function reset() {
+		document.getElementById('seleccion').style.display = 'none';
+		document.getElementById('aprobar').style.display = 'none';
+		document.getElementById('guardar').style.display = 'inline-block';
+		tipo = banco = monto = true;
+		$("#forma").prop('value', '');
+		$("#comprobante").prop('value', '');
+		$("#identificacion").prop('value', '');
+		$("#referencia").prop('value', '');
+		$("#folio").prop('value', '');
+		change();
 	}
 
 	function getBancos(){

@@ -105,59 +105,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-sm-4">
-						<h4>
-							Datos para Cotización:
-						</h4>
-					</div>
-				</div>
-			</div>
-			<div class="panel-body">
-				@if($cliente->info == null)
-				<form role="form" id="form-cliente" method="POST"  action="{{ route('clientes.info.store', ['cliente' => $cliente]) }}">
-                    {{ csrf_field() }}
-					<div class="row">
-						<div class="col-sm-3 form-group">
-							<label for="" class="control-label">Ingreso Mensual:</label>
-							<input type="text" class="form-control" name="ingreso">
-						</div>
-						<div class="col-sm-3 form-group">
-							<label for="" class="control-label">Monto a Pagar:</label>
-							<input type="text" class="form-control" name="monto">
-						</div>
-						<div class="col-sm-3 form-group">
-							<label for="" class="control-label">Calificación:</label>
-							<select name="calificacion" id="" class="form-control">
-								<option value="" selected="">Seleccionar</option>
-								@for($i = 0; $i <= 10; $i++)
-								<option value="{{ $i }}">{{ $i }}</option>
-								@endfor
-							</select>
-						</div>
-						<div class="col-sm-3 form-group text-center">
-							<a class="btn btn-success" style="margin-top: 27px"><strong>Agregar</strong></a>
-						</div>
-					</div>
-				</form>
-				@else
-				<div class="row">
-					<div class="col-sm-3 form-group">
-						<label for="" class="control-label">Ingreso Mensual:</label>
-						<input type="text" class="form-control" name="ingreso" value="{{ $cliente->info->ingreso }}" readonly="">
-					</div>
-					<div class="col-sm-3 form-group">
-						<label for="" class="control-label">Monto a Pagar:</label>
-						<input type="text" class="form-control" name="monto" value="{{ $cliente->info->monto }}" readonly="">
-					</div>
-					<div class="col-sm-3 form-group">
-						<label for="" class="control-label">Calificación:</label>
-						<input type="text" class="form-control" name="calificacion" value="{{ $cliente->info->monto }}" readonly="">
-					</div>
-				</div>
-				@endif
-			</div>
 			<ul class="nav nav-tabs">
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#dat" class="ui-tabs-anchor">Productos Elegídos</a>
