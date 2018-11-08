@@ -4,17 +4,17 @@
 <div class="panel panel-group" style="margin-bottom: 0px;">
 	<div class="panel-default">
 		<div class="panel-heading">
-			<form id="search-form">
+			<form id="search-form" action="{{ route('clientes.producto.index',['cliente'=>$cliente]) }}">
 				<div class="row form-group">
 					<div class="col-sm-4 text-center">
 						<div class="input-group">
-							<input type="number" id="min" name="min" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
-							<input type="number" id="max" name="max" class="form-control" placeholder="Precio Máximo" style="width: 152px">
+							<input type="number" id="min" name="min" value="{{$request->min}}" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
+							<input type="number" id="max" name="max" value="{{$request->max}}" class="form-control" placeholder="Precio Máximo" style="width: 152px">
 						</div>
 					</div>
 					<div class="col-sm-4 text-center">
 						{{-- <div class="input-group"> --}}
-							<input type="text" id="producto" name="kword" class="form-control" placeholder="Buscar..." autofocus>
+							<input type="text" id="producto" name="kword" value="{{$request->kword}}" class="form-control" placeholder="Buscar..." autofocus>
 					        {{-- <span class="input-group-btn">
 								<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
 							</span> --}}
@@ -23,19 +23,25 @@
 					<div class="col-sm-2 text-center">
 						<label class="control-label">Carros:</label>
 						<div class="row">
-							<input type="radio" name="type" id="carro" value="CARRO">
+							<input type="radio" @if ($request->type == "CARRO")
+								{{-- expr --}}
+								checked
+							@endif name="type" id="carro" value="CARRO">
 						</div>
 					</div>
 					<div class="col-sm-2 text-center">
 						<label class="control-label">Motos:</label>
 						<div class="row">
-							<input type="radio" name="type" id="moto" value="MOTO">
+							<input type="radio" name="type" @if ($request->type == "MOTO")
+								{{-- expr --}}
+								checked
+							@endif id="moto" value="MOTO">
 						</div>
 					</div>
 				</div>
 				<div class="row form-group">
 					<div class="col-sm-12 text-center">
-						<button type="button" id="search" class="btn btn-success"><i class="fa fa-search"  aria-hidden="true"></i> Buscar</button>
+						<button type="submit" class="btn btn-success"><i class="fa fa-search"  aria-hidden="true"></i> Buscar</button>
 					</div>
 				</div>
 			</form>
@@ -52,6 +58,12 @@
 							<th class="col-sm-2">Precio de Apertura</th>
 							<th class="col-sm-1">Acción</th>
 						</tr>
+						@if (isset($request) && count($productos) == 0)
+							{{-- expr --}}
+							<div class="alert alert-danger" role="alert">
+							  La busqueda no dio resultado
+							</div>
+						@endif
 						@foreach($productos as $product)
 						<tr class="active">
 							<td>{{ $product->clave }}</td>
@@ -162,118 +174,4 @@
     </div>
 </div>
 @endforeach
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#search").click(function(e){
-		var form = $("#search-form").serializeArray();
-		if(form[3]){
-			var tipo = form[3].value;
-		}
-		else{
-			var tipo = "";
-		}
-		var params = {
-			'min': form[0].value,
-			'max': form[1].value,
-			'desc': form[2].value,
-			'tipo': tipo,
-		};
-		$.ajax({
-			url:'searchProducts',
-			data: {params:params},
-			type: 'GET',
-			dataType: 'html',
-			success: function(res){
-				$('#productos').html(res);
-			},
-			error: function (){
-				$('#productos').html('');
-			}
-		})
-
-	})
-	
-});
-
-	$(document).ready(function() {
-		$("#min").change(function() {
-			var val = $('#min').val();
-			$("#max").prop('min', val);
-		});
-
-		$("#range").click('change', function() {
-			var min = $('#min').val();
-			var max = $('#max').val();
-			var link = 'producto3'
-			if(min == '' && max == '')
-				link += ''
-			else if(min != '' && max == '')
-				link += '?min=' + min;
-			else if(min == '' && max != '')
-				link += '?max=' + max;
-			else if(min != '' && max != '')
-				link += '?min=' + min + '&max=' + max;
-			// alert(link);
-			$.ajax({
-				url: link,
-				type: "GET",
-				dataType: "html",
-				success: function(res){
-					$('#productos').html(res);
-				},
-				error: function (){
-					$('#productos').html('');
-				}
-			});
-		});
-
-		$("#carro").click(function() {
-			var val = $('#carro').val();
-			$.ajax({
-				url: "producto4?query=" + val,
-				type: "GET",
-				dataType: "html",
-				success: function(res){
-					$('#productos').html(res);
-				},
-				error: function (){
-					$('#productos').html('');
-				}
-			});
-		});
-
-		$("#moto").click(function() {
-			var val = $('#moto').val();
-			$.ajax({
-				url: "producto4?query=" + val,
-				type: "GET",
-				dataType: "html",
-				success: function(res){
-					$('#productos').html(res);
-				},
-				error: function (){
-					$('#productos').html('');
-				}
-			});
-		});
-
-		$("#trigger").click('change', function() {
-			query = $('#producto').val();
-			console.log(query);
-			$.ajax({
-				url: "producto2?query=" + query,
-				type: "GET",
-				dataType: "html",
-				success: function(res){
-					$('#productos').html(res);
-				},
-				error: function (){
-					$('#productos').html('');
-				}
-			});
-		});
-	});
-</script>
-
 @endsection
