@@ -3,33 +3,37 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Cliente;
-use App\Product;
 use Kyslik\ColumnSortable\Sortable;
 
 class Transaction extends Model
 {
-    //
-   	use Sortable;
 
-   	public $table = 'transactions';
-   	
-      protected $fillable = [
-         'personal_id',
-         'product_id'
-      ];
-   	
-      protected $hidden = [
-         'created_at',
-         'updated_at'
-      ];
+	use Sortable;
 
-   	public function cliente() {
-   		return $this->belongsTo('App\Cliente');
-   	}
+	protected $table = 'transactions';
+	
+	protected $fillable = [
+		'id',
+		'cliente_id',
+		'product_id',
+		'status',
+	];
+	
+	protected $hidden = [
+		'created_at',
+		'updated_at'
+	];
 
-   	public function product() {
-   		return $this->belongsTo('App\Product');
-   	}
+	public function cliente() {
+		return $this->belongsTo('App\Cliente');
+	}
+
+	public function product() {
+		return $this->belongsTo('App\Product');
+	}
+
+	public function pagos() {
+		return $this->hasMany('App\Pago');
+	}
 
 }

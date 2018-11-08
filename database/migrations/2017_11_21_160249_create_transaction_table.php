@@ -14,12 +14,13 @@ class CreateTransactionTable extends Migration
     public function up()
     {
         //
-        Schema::create('transactions', function(Blueprint $table){
+        Schema::create('transactions', function(Blueprint $table) {
+            $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->primary(['cliente_id', 'product_id']);
+            $table->string('status');
             $table->timestampsTz();
         });
     }

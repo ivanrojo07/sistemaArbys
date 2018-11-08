@@ -9,8 +9,8 @@ class Pago extends Model
      protected $table = 'pagos';
 
      protected $fillable = [
-     	'cliente_id',
-		'product_id',
+     	'id',
+     	'transaction_id',
 	    'identificacion',
 	    'comprobante',
 	    'forma_pago',
@@ -20,18 +20,16 @@ class Pago extends Model
 	    'numero_cheque',
 	    'numero_deposito',
 	    'numero_tarjeta',
-	    'nombre_tarjetaHabiente'
+	    'nombre_tarjetaHabiente',
+	    'meses',
+	    'referencia',
+	    'folio',
+	    'total',
+	    'restante',
 	];
 
- 	protected $hidden = ['deleted_at'];
-
- 	public function cliente(){
-
- 		return $this->belongsTo('App\Cliente');
+ 	public function transaction() {
+ 		return $this->belongsTo('App\Transaction');
  	}
-
- 	public function product(){
-
- 		return $this->belongsTo('App\Product');
- 	}
+ 	
 }

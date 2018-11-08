@@ -15,27 +15,23 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id')->unsigned();
-            $table->foreign('cliente_id')->references('id')->on('clientes');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
-            //-----------------------------------
+            $table->integer('transaction_id')->unsigned();
+            $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->string('identificacion');
             $table->string('comprobante');
             $table->string('forma_pago');
-            //-----------------------------------
-            $table->enum('status', ['Guardado', 'Aprobado','No Aprobado']);
-            //-----------------------------------
-            $table->decimal('monto', 8, 2);
-            //------------- OPCIONALES ----------------
             $table->string('banco')->nullable();
+            $table->string('status');
+            $table->decimal('monto');
             $table->string('numero_cheque')->nullable();
             $table->string('numero_deposito')->nullable();
             $table->string('numero_tarjeta')->nullable();
             $table->string('nombre_tarjetaHabiente')->nullable();
-
-            //-----------------------------------
-            $table->softDeletes();
+            $table->integer('meses');
+            $table->string('referencia');
+            $table->string('folio');
+            $table->decimal('total');
+            $table->decimal('restante');
             $table->timestamps();
         });
     }

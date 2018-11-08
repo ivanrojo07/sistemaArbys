@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
 use App\Pago;
+use App\Transaction;
 use App\Banco;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,20 +34,26 @@ class ClientePagoController extends Controller
         return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
     }
 
+    public function follow(Cliente $cliente, Pago $pago) {
+        $bancos = Banco::get();
+        return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $cliente)
+    public function store(Request $request, Cliente $cliente)
     {
-        $request['cliente_id'] = $cliente;
-        // dd($request->all());
-        $pago = Pago::create($request->all());
-        // $cliente = Cliente::find($cliente);
-        Alert::success('Pago registrado con éxito (No ha sido Aprobado aún)', 'Se redireccionará a sección del Cliente');
-        return redirect()->route('clientes.show', ['id' => $request->cliente_id]);
+        $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
+        $request['transaction_id'] = "" . $transaction->id;
+        $request['restante'] = ($request->total - $request->monto) . "";
+        $pago = new Pago($request->all());
+        $transaction->pagos()->save($pago);
+
+        return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
     /**

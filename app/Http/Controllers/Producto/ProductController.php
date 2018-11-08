@@ -117,7 +117,6 @@ class ProductController extends Controller
 
     public function getProduct($id) {
         $producto = Product::find($id);
-        // dd($producto);
         return view('product.getProduct', ['producto' => $producto]);
     }
 }

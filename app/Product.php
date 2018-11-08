@@ -47,12 +47,4 @@ class Product extends Model
     	return $this->hasMany('App\Transaction');
     }
 
-    public function cliente() {
-         return $this->belongsTo('App\Cliente');
-    }
-
-    public function pagos() {
-        return $this->hasMany('App\Pago');
-    }
-
 }

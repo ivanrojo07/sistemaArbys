@@ -7,7 +7,7 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-sm-4">
-						<h4>Datos del Empleado: <small><i class="fa fa-asterisk" aria-hidden="true"></i> Campos Requeridos</small></h4>
+						<h4>Datos del Empleado:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
 						<a href="{{ route('empleados.index') }}" class="btn btn-primary">
@@ -28,113 +28,105 @@
 			<div class="panel-default">
 				<div class="panel-body">
 					<div class="row">
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="appaterno"><i class="fa fa-asterisk text-danger" style="font-size: 10px;"></i> Apellido Paterno:</label>
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
+							<label class="control-label" for="appaterno">✱Apellido Paterno:</label>
 							<input type="text" class="form-control" id="appaterno" name="appaterno" required="required" value="{{ $empleado->appaterno }}">
 						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="apmaterno"><i class="fa fa-asterisk" aria-hidden="true"></i> Apellido Materno:</label>
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
+							<label class="control-label" for="apmaterno">✱Apellido Materno:</label>
 							<input type="text" id="apmaterno" class="form-control" name="apmaterno" required="required" value="{{ $empleado->apmaterno }}">
 						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="nombre"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre(s):</label>
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
+							<label class="control-label" for="nombre">✱Nombre(s):</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" required="required" value="{{ $empleado->nombre }}">
 						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="rfc"><i class="fa fa-asterisk" aria-hidden="true"></i>RFC:</label>
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
+							<label class="control-label" for="rfc">✱RFC:</label>
 							<input type="text" class="form-control" id="rfc" name="rfc" value="{{ $empleado->rfc }}" required="">
 						</div>
 					</div>
 				</div>
-				@if($edit)
-				<ul class="nav nav-pills nav-justified">
-					<li role="presentation" class="active"><a href="{{ route('empleados.show', ['empleado' => $empleado]) }}"  class="ui-tabs-anchor">Generales:</a></li>
-					<li role="presentation" class=""><a href="{{ route('empleados.datoslaborales.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Laborales:</a></li>
-					<li role="presentation" class=""><a href="{{ route('empleados.estudios.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Estudios:</a></li>
-					<li role="presentation" class=""><a href="{{ route('empleados.emergencias.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Emergencias:</a></li>
-					<li role="presentation" class=""><a href="{{ route('empleados.vacaciones.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Vacaciones:</a></li>
-					<li role="presentation" class=""><a href="{{ route('empleados.faltas.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Administrativo:</a></li>
+			</div>
+			@if($edit)
+				<ul class="nav nav-tabs nav-justified">
+					<li class="active"><a href="{{ route('empleados.show', ['empleado' => $empleado]) }}">Generales:</a></li>
+					<li class=""><a href="{{ route('empleados.datoslaborales.index', ['empleado' => $empleado]) }}">Laborales:</a></li>
+					<li class=""><a href="{{ route('empleados.estudios.index', ['empleado' => $empleado]) }}">Estudios:</a></li>
+					<li class=""><a href="{{ route('empleados.emergencias.index', ['empleado' => $empleado]) }}">Emergencias:</a></li>
+					<li class=""><a href="{{ route('empleados.vacaciones.index', ['empleado' => $empleado]) }}">Vacaciones:</a></li>
+					<li class=""><a href="{{ route('empleados.faltas.index', ['empleado' => $empleado]) }}">Administrativo:</a></li>
 				</ul>
-				@endif
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-sm-4">
-							<h5>Datos Generales: *	Campos Requeridos</h5>
-						</div>
-					</div>
-				</div>
+			@endif
+			<div class="panel-default">
 				<div class="panel-body">
 					<div class="row">
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="telefono">Teléfono:</label>
 							<input type="text" class="form-control" name="telefono" id="telefono" value="{{ $empleado->telefono }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="movil">Celular:</label>
 							<input type="text" class="form-control" name="movil" id="movil" value="{{ $empleado->movil }}">
 						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="email"><i class="fa fa-asterisk" aria-hidden="true"></i>Correo electrónico:</label>
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
+							<label class="control-label" for="email">✱Correo electrónico:</label>
 							<input type="text" class="form-control" name="email" id="email" value="{{ $empleado->email }}" required="">
-						</div><div class="form-group col-sm-3">
+						</div><div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="nss">NSS (IMSS):</label>
 							<input type="text" class="form-control" name="nss" id="nss" value="{{ $empleado->nss }}">
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="curp">CURP:</label>
 							<input type="text" class="form-control" name="curp" id="curp" value="{{ $empleado->curp }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="infonavit">INFONAVIT:</label>
 							<input type="text" class="form-control" name="infonavit" id="infonavit" value="{{ $empleado->infonavit }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="fnac">Fecha de nacimiento:</label>
 							<input type="date" class="form-control" name="fnac" id="fnac" value="{{ $empleado->fnac }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="cp">Código Postal:</label>
 							<input type="text" class="form-control" name="cp" id="cp" value="{{ $empleado->cp }}">
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="calle">Calle:</label>
 							<input type="text" class="form-control" name="calle" id="calle" value="{{ $empleado->calle }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="numext">Número Exterior:</label>
 							<input type="text" class="form-control" name="numext" id="numext" value="{{ $empleado->numext }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="numint">Número Interior:</label>
 							<input type="text" class="form-control" name="numint" id="numint" value="{{ $empleado->numint }}">
-						</div><div class="form-group col-sm-3">
+						</div><div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="colonia">Colonia:</label>
 							<input type="text" class="form-control" name="colonia" id="colonia" value="{{ $empleado->colonia }}">
 						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="municipio">Municipio:</label>
 							<input type="text" class="form-control" name="municipio" id="municipio" value="{{ $empleado->municipio }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="estado">Estado:</label>
 							<input type="text" class="form-control" name="estado" id="estado" value="{{ $empleado->estado }}">
 						</div>
-						<div class="form-group col-sm-3">
+						<div class="form-group col-md-3 col-sm-4 col-xs-12">
 							<label class="control-label" for="referencia">Referencia:</label>
 							<input type="text" class="form-control" name="referencia" id="referencia" value="{{ $empleado->referencia }}">
 						</div>
 					</div>
+				</div>
+				<div class="panel-footer">
 					<div class="row">
-						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-success">
-								<strong>Guardar</strong>
-							</button>
+						<div class="col-sm-4 col-sm-offset-4 text-center form-group">
+							<button type="submit" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Guardar</button>
+						</div>
+						<div class="col-sm-4 text-right text-danger">
+							<h5>✱Campos Requeridos</h5>
 						</div>
 					</div>
 				</div>
