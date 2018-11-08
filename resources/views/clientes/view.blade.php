@@ -146,23 +146,47 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								@if(count($cliente->pagos) > 0)
-									<table class="table table-bordered table-stripped table-hover">
-										<tr class="info">
-											<td class="col-sm-4">Estado de Pago</td>
-											<td class="col-sm-4">Fecha de Registro</td>
-											<td class="col-sm-4">Monto del Pago</td>
-										</tr>
-										@foreach($cliente->pagos as $pago)
-											<tr>
-												<td>{{ $pago->status }}</td>
-												<td>{{ $pago->created_at }}</td>
-												<td>{{ number_format($pago->monto, 2) }}</td>
+								@php($pagoss = 0)
+								@foreach($cliente->transactions as $transaction)
+									@php($pagoss += count($transaction->pagos))
+								@endforeach
+								@if($pagoss > 0)
+									<div class="table-responsive">
+										<table class="table table-bordered table-stripped table-hover">
+											<tr class="info">
+												<td>Producto</td>
+												<td>Fecha de Pago</td>
+												<td>Forma de Pago</td>
+												<td>Meses</td>
+												<td>Monto del Pago</td>
+												<td>Restante a Pagar</td>
+												<td>Estado del Pago</td>
+												<td>Acción</td>
 											</tr>
-										@endforeach
-									</table>
+											@foreach($cliente->transactions as $transaction)
+												@foreach($transaction->pagos as $pago)
+													<tr>
+														<td>{{ $pago->transaction->product->descripcion }}</td>
+														<td>{{ $pago->created_at }}</td>
+														<td>{{ $pago->forma_pago }}</td>
+														<td>{{ $pago->meses }}</td>
+														<td>{{ number_format($pago->monto, 2) }}</td>
+														<td>{{ number_format($pago->restante, 2) }}</td>
+														<td>{{ $pago->status }}</td>
+														<td>
+															@if($pago == $transaction->pagos->last() && $pago->status != "Aprobado")
+																<a class="btn btn-success" href="{{ route('clientes.pagos.follow', ['cliente' => $cliente, 'pago' => $pago]) }}">
+																	<i class="fa fa-plus" aria-hidden="true"></i> <strong>Continuar Pago</strong>
+																</a>
+															@endif
+														</td>
+													</tr>
+												@endforeach
+											@endforeach
+										</table>
+									</div>
 								@else
-									<h4>Aún no tienes pagos registrados.</h4>
+									<h4>Aún no hay pagos registrados.</h4>
 								@endif
 							</div>
 						</div>

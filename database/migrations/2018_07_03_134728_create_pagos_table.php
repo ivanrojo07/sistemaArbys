@@ -15,10 +15,8 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('product_id')->on('transactions');
-            $table->integer('cliente_id')->unsigned();
-            $table->foreign('cliente_id')->references('cliente_id')->on('transactions');
+            $table->integer('transaction_id')->unsigned();
+            $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->string('identificacion');
             $table->string('comprobante');
             $table->string('forma_pago');
