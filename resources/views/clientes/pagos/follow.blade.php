@@ -232,7 +232,7 @@
 			var total$ = document.getElementById('total').value;
 			if(total$ !== '') {
 				document.getElementById('monto').max = total$;
-				if(total$ != 0 && monto$ > total$) {
+				if(total$ != 0 && parseInt(monto$) > parseInt(total$)) {
 					alert('El monto del pago no puede ser mayor al total a pagar.\nEl monto ha sido cambiado al total a pagar.')
 					monto$ = total$;
 					document.getElementById('monto').value = monto$;
