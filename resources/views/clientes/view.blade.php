@@ -140,7 +140,7 @@
 						<div class="row">
 							<div class="col-sm-12 text-center form-group">
 								<a class="btn btn-success" href="{{ route('clientes.pagos.create', ['cliente' => $cliente]) }}">
-									<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Registrar Pagos</strong>
+									<i class="fa fa-plus" aria-hidden="true"></i> <strong>Registrar Pago</strong>
 								</a>
 							</div>
 						</div>
@@ -154,31 +154,36 @@
 									<div class="table-responsive">
 										<table class="table table-bordered table-stripped table-hover">
 											<tr class="info">
-												<td>Producto</td>
-												<td>Fecha de Pago</td>
-												<td>Forma de Pago</td>
-												<td>Meses</td>
-												<td>Monto del Pago</td>
-												<td>Restante a Pagar</td>
-												<td>Estado del Pago</td>
-												<td>Acción</td>
+												<th>Producto</th>
+												<th>Fecha de Pago</th>
+												<th>Forma de Pago</th>
+												<th>Meses</th>
+												<th>Total a Pagar</th>
+												<th>Monto del Pago</th>
+												<th>Restante a Pagar</th>
+												<th>Estado del Pago</th>
+												<th>Acción</th>
 											</tr>
 											@foreach($cliente->transactions as $transaction)
 												@foreach($transaction->pagos as $pago)
 													<tr>
 														<td>{{ $pago->transaction->product->descripcion }}</td>
-														<td>{{ $pago->created_at }}</td>
+														<td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
 														<td>{{ $pago->forma_pago }}</td>
 														<td>{{ $pago->meses }}</td>
-														<td>{{ number_format($pago->monto, 2) }}</td>
-														<td>{{ number_format($pago->restante, 2) }}</td>
+														<td>${{ number_format($pago->total, 2) }}</td>
+														<td>${{ number_format($pago->monto, 2) }}</td>
+														<td>${{ number_format($pago->restante, 2) }}</td>
 														<td>{{ $pago->status }}</td>
-														<td>
+														<td class="text-center">
 															@if($pago == $transaction->pagos->last() && $pago->status != "Aprobado")
-																<a class="btn btn-success" href="{{ route('clientes.pagos.follow', ['cliente' => $cliente, 'pago' => $pago]) }}">
-																	<i class="fa fa-plus" aria-hidden="true"></i> <strong>Continuar Pago</strong>
+																<a class="btn btn-warning btn-sm" href="{{ route('clientes.pagos.follow', ['cliente' => $cliente, 'pago' => $pago]) }}">
+																	<i class="fa fa-usd" aria-hidden="true"></i> <strong>Pagar</strong>
 																</a>
 															@endif
+															<a class="btn btn-primary btn-sm" href="{{ route('clientes.pagos.show', ['cliente' => $cliente, 'pago' => $pago]) }}">
+																<i class="fa fa-eye" aria-hidden="true"></i> <strong>Ver</strong>
+															</a>
 														</td>
 													</tr>
 												@endforeach

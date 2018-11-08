@@ -30,7 +30,7 @@ class ClientePagoController extends Controller
      */
     public function create(Cliente $cliente)
     {
-        $bancos = Banco::orderBy('nombre')->get();
+        $bancos = Banco::get();
         return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
     }
 
@@ -49,7 +49,10 @@ class ClientePagoController extends Controller
     {
         $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
         $request['transaction_id'] = "" . $transaction->id;
-        $request['restante'] = ($request->total - $request->monto) . "";
+        if($request->restante == null)
+            $request['restante'] = ($request->total - $request->monto) . "";
+        else
+            $request['restante'] = ($request->restante - $request->monto) . "";
         $pago = new Pago($request->all());
         $transaction->pagos()->save($pago);
 
@@ -62,9 +65,9 @@ class ClientePagoController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show(Cliente $cliente, Pago $pago)
     {
-        //
+        return view('clientes.pagos.view', ['cliente' => $cliente, 'pago' => $pago]);
     }
 
     /**
@@ -101,7 +104,4 @@ class ClientePagoController extends Controller
         //
     }
 
-    public function store_dos(Cliente $cliente){
-
-    }
 }

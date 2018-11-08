@@ -141,7 +141,7 @@
 						<div class="row">
 							<div class="col-sm-12 text-center">
 								<input type="submit" id="guardar" class="btn btn-warning" value="Guardar">
-								<input type="hidden" name="status" value="No Aprobado">
+								<input type="hidden" name="status" id="status" value="No Aprobado">
 								<input type="submit" id="aprobar" class="btn btn-success" value="Aprobar Pago" style="display: none;">
 							</div>
 						</div>
