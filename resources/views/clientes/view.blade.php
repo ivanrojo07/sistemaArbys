@@ -119,6 +119,9 @@
 					<a data-toggle="tab" href="#pagos" class="ui-tabs-anchor">Pagos</a>
 				</li>
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+					<a data-toggle="tab" href="#prestamos" class="ui-tabs-anchor">Préstamos</a>
+				</li>
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a href="{{ route('crm.index') }}" class="ui-tabs-anchor">CRM General</a>
 				</li>
 			</ul>
@@ -192,6 +195,49 @@
 									</div>
 								@else
 									<h4>Aún no hay pagos registrados.</h4>
+								@endif
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="prestamos" class="tab-pane fade">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-12 text-center form-group">
+								<a class="btn btn-success" href="{{ route('clientes.prestamos.create', ['cliente' => $cliente]) }}">
+									<i class="fa fa-plus" aria-hidden="true"></i> <strong>Registrar Préstamo</strong>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								@if(count($cliente->prestamos) > 0)
+									<div class="table-responsive">
+										<table class="table table-bordered table-stripped table-hover" style="margin-bottom: 0px;">
+											<tr class="info">
+												<th>Fecha</th>
+												<th>Monto</th>
+												<th>Meses</th>
+												<th>Garantía</th>
+												<th>Acción</th>
+											</tr>
+											@foreach($cliente->prestamos as $prestamo)
+												<tr>
+													<td>{{ $prestamo->created_at }}</td>
+													<td>${{ number_format($prestamo->monto, 2) }}</td>
+													<td>{{ $prestamo->meses }}</td>
+													<td>{{ $prestamo->garantia }}</td>
+													<td class="text-center">
+														<a class="btn btn-primary btn-sm" href="{{ route('clientes.prestamos.show', ['cliente' => $cliente, 'prestamo' => $prestamo]) }}">
+															<i class="fa fa-eye" aria-hidden="true"></i> <strong>Ver</strong>
+														</a>
+													</td>
+												</tr>
+											@endforeach
+										</table>
+									</div>
+								@else
+									<h4>Aún no hay préstamos registrados.</h4>
 								@endif
 							</div>
 						</div>
