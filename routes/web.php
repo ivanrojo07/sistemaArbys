@@ -62,8 +62,8 @@ Route::resource('giros','Giro\GiroController', ['except'=>'show']);
 
 // CLIENTES
 Route::resource('clientes','Cliente\ClienteController');
+Route::get('buscarCliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
-Route::get('buscarcliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('crm','Crm\CrmController');
 Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');

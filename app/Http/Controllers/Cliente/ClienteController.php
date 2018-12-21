@@ -11,8 +11,8 @@ use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Barryvdh\DomPDF\Facade as PDF;
 
-class ClienteController extends Controller
-{
+class ClienteController extends Controller {
+
     public function __construct() {
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
@@ -23,6 +23,7 @@ class ClienteController extends Controller
                 return redirect()->route('login');
         });
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,10 +31,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-
-        $clientes=Cliente::doesntHave('solicitante')->get();
-        
-        return view('clientes.index',['clientes'=>$clientes]);
+        $clientes = Cliente::doesntHave('solicitante')->get();   
+        return view('clientes.index', ['clientes' => $clientes]);
     }
 
     /**
@@ -43,8 +42,8 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $canal_ventas=CanalVenta::get();
-        return view('clientes.create',['canal_ventas'=>$canal_ventas]);
+        $canal_ventas = CanalVenta::get();
+        return view('clientes.create', ['canal_ventas' => $canal_ventas]);
     }
 
     /**
@@ -55,19 +54,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-         //dd($request->all());
-         $rfc = Cliente::where('rfc', $request->rfc)->get();
-        if (count($rfc)!=0) {
-            # code...
-            return redirect()->back()->with('errors','El RFC ya està registrado');                               
-        } else {
-            # code...
-
-            $cliente = Cliente::create($request->all());
-           Alert::success('Cliente creado con éxito', 'Siga agregando información');
-           return view('clientes.view',['cliente'=>$cliente]); 
-              
-        }
+        $rfc = Cliente::where('rfc', $request->rfc)->get();
+        if (count($rfc) > 0)
+            return redirect()->back()->with('errors','El RFC ya está registrado.');
+        $cliente = Cliente::create($request->all());
+        return view('clientes.view', ['cliente' => $cliente]);
     }
 
     /**
@@ -76,16 +67,14 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $cliente)
     {
-        $cliente=Cliente::where('id',$id)->first();
         return view('clientes.view', ['cliente' => $cliente]); 
     }
 
     
-    public function legacy($id)
+    public function legacy(Cliente $cliente)
     {
-        $cliente = Cliente::find($id);
         return view('clientes.legacy.view', ['cliente' => $cliente]); 
     }    
 
@@ -95,13 +84,10 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cliente $cliente)
     {
-        $cliente=Cliente::where('id',$id)->first();
-        $canal_ventas=CanalVenta::get();
-        return view('clientes.edit',[
-            'cliente'=>$cliente,
-            'canal_ventas'=>$canal_ventas]); 
+        $canal_ventas = CanalVenta::get();
+        return view('clientes.edit', ['cliente' => $cliente, 'canal_ventas' => $canal_ventas]); 
     }
 
     /**
@@ -111,36 +97,18 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cliente $cliente)
     {
-       $cliente=Cliente::where('id',$id)->first();
-
-       
-       $cliente->update($request->except('_method','_token'));
-       
-       Alert::success('Cliente modificado con éxito');
-        return view('clientes.view',[
-            'cliente'=>$cliente]);
+        $cliente->update($request->except('_method','_token'));
+        return view('clientes.view', ['cliente' => $cliente]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function getSeleccion($id) {
-        $cliente = Cliente::find($id);
+    public function getSeleccion(Cliente $cliente) {
         return view('clientes.productos.selected', ['cliente' => $cliente]);
     }
 
     public function buscar(Request $request) {
-        $query = $request->input('busqueda');
+        $query = $request->input('query');
         $wordsquery = explode(' ', $query);
         $clientes = Cliente::where(function($q) use($wordsquery) {
             foreach ($wordsquery as $word) {
@@ -155,7 +123,7 @@ class ClienteController extends Controller
         return view('clientes.busqueda', ['clientes' => $clientes]);
     }
 
-     public function pdf(Cliente $cliente) {
+    public function pdf(Cliente $cliente) {
         $pdf = PDF::loadView('clientes.vista', ['cliente' => $cliente]);
         return $pdf->download('archivo.pdf');
     }

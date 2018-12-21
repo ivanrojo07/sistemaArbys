@@ -72,7 +72,7 @@
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Identificación:</label>
 								<select class="form-control" name="identificacion" id="identificacion" required>
-									<option value="">Sin definir</option>
+									<option value="">Seleccionar</option>
 									<option value="INE">INE</option>
 									<option value="IFE">IFE</option>
 									<option value="Pasaporte">Pasaporte</option>
@@ -83,7 +83,7 @@
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Comprobante de Domicilio:</label>
 								<select class="form-control" name="comprobante" id="comprobante" required>
-									<option value="">Sin definir</option>
+									<option value="">Seleccionar</option>
 									<option value="Luz">Luz</option>
 									<option value="Agua">Agua</option>
 									<option value="Teléfono">Teléfono</option>
@@ -93,7 +93,7 @@
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Forma de Pago:</label>
 								<select class="form-control" name="forma_pago" id="forma" required>
-									<option value="">Sin definir</option>
+									<option value="">Seleccionar</option>
 									<option value="Efectivo">Efectivo</option>
 									<option value="Cheque">Cheque</option>
 									<option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
@@ -104,9 +104,9 @@
 							<div class="col-sm-3 form-group" id="bancos" style="display: none;">
 								<label onclick="getBancos()" class="control-label">Banco:</label>
 								<select type="select" name="banco" class="form-control" id="banco">
-									<option id="sin_definir" value="">Seleccione Uno</option>
+									<option id="sin_definir" value="">Seleccionar</option>
 									@foreach($bancos as $banco)
-									<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}</option>
+										<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -132,8 +132,6 @@
 								<label class="control-label">Monto del Pago:</label>
 								<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Número de Referencia:</label>
 								<input type="text" name="referencia" id="referencia" class="form-control" required="">
@@ -143,6 +141,16 @@
 								<input type="text" name="folio" id="folio" class="form-control" required="">
 							</div>
 							<div class="col-sm-3 form-group">
+								<label class="control-label">Plan de Pago:</label>
+								<select name="plan" class="form-control">
+									<option value="">Seleccionar</option>
+									<option value="A">A</option>
+									<option value="B">B</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3 col-sm-offset-6 form-group">
 								<label class="control-label">Total a Pagar:</label>
 								<input type="text" name="total" id="total" class="form-control" required readonly="">
 							</div>
