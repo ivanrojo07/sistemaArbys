@@ -14,29 +14,23 @@ class CreateClientesTable extends Migration
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {
-
             $table->increments('id');
-            $table->enum('tipopersona',['Fisica','Moral']);
+            $table->integer('vendedor_id')->unsigned();
+            $table->foreign('vendedor_id')->references('id')->on('vendedors');
+            $table->string('tipo');
             $table->string('identificador');
-            //Nombre Completo
             $table->string('nombre')->nullable();
-            $table->string('apellidopaterno')->nullable();
-            $table->string('apellidomaterno')->nullable();
-            $table->date('fecha_nacimiento');
-            //Razon Social
-            $table->string('rfc')->nullable();
-            $table->string('razonsocial')->nullable();
-            //Domicilio
-            $table->string('cp');
-            $table->string('mail');
+            $table->string('appaterno')->nullable();
+            $table->string('apmaterno')->nullable();
+            $table->string('razon')->nullable();
+            $table->date('nacimiento')->nullable();
+            $table->string('rfc');
+            $table->string('email')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('telefonocel');
-            $table->string('canal_ventas')->nullable();
+            $table->string('movil')->nullable();
+            $table->string('canal')->nullable();
             $table->text('comentarios')->nullable();
-           
-            
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

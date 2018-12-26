@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGruposTable extends Migration
+class CreateSubgerentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('subgerentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('subgerente_id')->unsigned();
-            $table->foreign('subgerente_id')->references('id')->on('empleadosdatoslab');
-            $table->string('nombre');
+            $table->integer('empleado_id')->unsigned();
+            $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateGruposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupos');
+        Schema::dropIfExists('subgerentes');
     }
 }

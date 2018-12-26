@@ -7,12 +7,11 @@ use Kyslik\ColumnSortable\Sortable;
 
 class EmpleadosDatosLab extends Model
 {
-    //
-    use Sortable; 
+    use Sortable;
 
-    protected $table='empleadosdatoslab';
+    protected $table = 'laborals';
 
-    protected $fillable=[
+    protected $fillable = [
         'id',
         'empleado_id',
         'contrato_id',
@@ -21,17 +20,14 @@ class EmpleadosDatosLab extends Model
         'region_id',
         'estado_id',
         'oficina_id',
-        'fechacontratacion',
-        'fechaactualizacion',
-        'sal_inicial',
-        'sal_actual',
-        'experto',
-        'puesto_orig'
+        'contratacion',
+        'actualizacion',
+        'inicial',
+        'actual',
+        'original'
     ];
 
-    protected $hidden=['created_at','updated_at'];
-
-    public $sortable=['id'];
+    public $sortable = ['id'];
 
     public function empleado() {
     	return $this->belongsTo('App\Empleado');
@@ -59,14 +55,6 @@ class EmpleadosDatosLab extends Model
 
     public function oficina() { 
         return $this->belongsTo('App\Oficina');
-    }
-
-    public function grupos() { 
-        return $this->hasMany('App\Grupo', 'subgerente_id');
-    }
-
-    public function vendedor() { 
-        return $this->hasOne('App\Vendedor', 'vendedor_id');
     }
 
 }

@@ -9,17 +9,22 @@ class Vendedor extends Model
 	protected $table = 'vendedors';
 
     protected $fillable = [
-    	'vendedor_id',
-    	'grupo_id'
+        'id',
+    	'empleado_id',
+    	'grupo_id',
+        'experto'
     ];
 
-    protected $hidden=[ 'created_at', 'updated_at' ];
+    public function clientes() {
+        return $this->hasMany('App\Cliente');
+    }
 
     public function grupo() {
         return $this->belongsTo('App\Grupo');
     }
 
-    public function datosLaborales() {
-        return $this->belongsTo('App\EmpleadosDatosLab', 'vendedor_id');
+    public function empleado() {
+        return $this->belongsTo('App\Empleados');
     }
+
 }

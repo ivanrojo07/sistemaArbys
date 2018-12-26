@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Grupo;
 
 use App\Grupo;
-use App\EmpleadosDatosLab as Subgerente;
+use App\Subgerente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

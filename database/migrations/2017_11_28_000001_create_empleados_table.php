@@ -17,24 +17,16 @@ class CreateEmpleadosTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('appaterno');
-            $table->string('apmaterno');
+            $table->string('apmaterno')->nullable();
             $table->string('email');
-            $table->string('rfc')->nullable();
+            $table->string('rfc');
             $table->string('telefono')->nullable();
             $table->string('movil')->nullable();
             $table->string('nss')->nullable();
             $table->string('curp')->nullable();
             $table->string('infonavit')->nullable();
-            $table->date('fnac')->nullable();
-            $table->string('cp')->nullable();
-            $table->string('calle')->nullable();
-            $table->string('numext')->nullable();
-            $table->string('numint')->nullable();
-            $table->string('colonia')->nullable();
-            $table->string('municipio')->nullable();
-            $table->string('estado')->nullable();
-            $table->string('referencia')->nullable();
-            $table->timestampsTz();
+            $table->date('nacimiento');
+            $table->timestamps();
         });
     }
 

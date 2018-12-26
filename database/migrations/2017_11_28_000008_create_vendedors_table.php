@@ -14,11 +14,12 @@ class CreateVendedorsTable extends Migration
     public function up()
     {
         Schema::create('vendedors', function (Blueprint $table) {
-            $table->integer('vendedor_id')->unsigned();
-            $table->foreign('vendedor_id')->references('id')->on('empleadosdatoslab');
+            $table->increments('id');
+            $table->integer('empleado_id')->unsigned();
+            $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->integer('grupo_id')->unsigned();
             $table->foreign('grupo_id')->references('id')->on('grupos');
-            $table->primary(['vendedor_id', 'grupo_id']);
+            $table->string('experto');
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             RegionsTableSeeder::class,
             EstadosTableSeeder::class,
             EmpleadosTableSeeder::class,
-            DatosLaboralesTableSeeder::class,
+            LaboralsTableSeeder::class,
             UsersTableSeeder::class
         ]);
     }

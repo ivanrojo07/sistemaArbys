@@ -14,13 +14,12 @@ class Grupo extends Model
         'nombre'
     ];
 
-    protected $hidden=[ 'created_at', 'updated_at' ];
-
     public function subgerente() {
-        return $this->belongsTo('App\EmpleadosDatosLab');
+        return $this->belongsTo('App\Subgerente');
     }
 
     public function vendedores() {
         return $this->hasMany('App\Vendedor');
     }
+
 }

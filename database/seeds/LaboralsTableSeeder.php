@@ -4,7 +4,7 @@ use App\Empleado;
 use App\EmpleadosDatosLab;
 use Illuminate\Database\Seeder;
 
-class DatosLaboralesTableSeeder extends Seeder
+class LaboralsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,11 +21,11 @@ class DatosLaboralesTableSeeder extends Seeder
     		'contrato_id' => 1,
     		'area_id' => 1,
     		'puesto_id' => 1,
-	        'fechacontratacion' => date("Y-m-d"),
-	        'fechaactualizacion' => date("Y-m-d"),
-	        'sal_inicial' => 0,
-	        'sal_actual' => 0,
-	        'puesto_orig' => 'Administrador'
+	        'contratacion' => date("Y-m-d"),
+	        'actualizacion' => date("Y-m-d"),
+	        'inicial' => 0,
+	        'actual' => 0,
+	        'original' => 'Administrador'
     	];
 
     	EmpleadosDatosLab::create($datos);

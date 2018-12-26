@@ -12,36 +12,29 @@ class Cliente extends Model
     protected $table = 'clientes';
 
     protected $fillable = [
+        'id',
+        'vendedor_id',
         'identificador',
-     	'tipopersona',
+     	'tipo',
         'nombre',
-        'apellidopaterno',
-        'apellidomaterno',
-        'cp',
-        'mail',
+        'appaterno',
+        'apmaterno',
+        'razon',
+        'nacimiento',
         'rfc',
+        'email',
         'telefono',
-        'telefonocel',
+        'movil',
+        'canal',
         'comentarios',
-        'razonsocial',
-        'fecha_nacimiento',
-        'canal_ventas'
     ];
-
-    public $Sortable = [
-        'identificador',
-        'nombre',
-        'razonsocial',
-        'apellidopaterno',
-        'tipopersona',
-        'rfc',
-        'canal_ventas',
-        'created_at'
-    ];
-
 
     public function crm() {
         return $this->hasMany('App\ClienteCRM');
+    }
+
+    public function vendedor() {
+        return $this->belongsTo('App\Vendedor');
     }
 
     public function transactions() {

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Empleado;
+
 use App\EmpleadosDatosLab;
 use App\Empleado;
 use App\Area;
@@ -33,73 +34,67 @@ class EmpleadoController extends Controller
 
     public function index()
     {
-        if($this->hasComponent('indice empleados')) {
-            $empleados = Empleado::sortable()->paginate(10);
-            return view('empleado.index', ['empleados' => $empleados]);
-        }
-        return redirect()->route('denegado');
+        // if($this->hasComponent('indice empleados')) {
+        $empleados = Empleado::sortable()->paginate(10);
+        return view('empleado.index', ['empleados' => $empleados]);
+        // }
+        // return redirect()->route('denegado');
     }
 
     public function create()
     {
-        if($this->hasComponent('crear empleado')) {
-            $empleado = new Empleado;
-            $edit = false;
-            return view('empleado.create',['empleado'=>$empleado,'edit'=>$edit]);
-        }
-        return redirect()->route('denegado');
+        // if($this->hasComponent('crear empleado')) {
+        return view('empleado.create');
+        // }
+        // return redirect()->route('denegado');
     }
 
     public function store(Request $request)
     {
-        if($this->hasComponent('crear empleado')) {
-            if(Empleado::where('rfc', $request->input('rfc'))->first())
-                return redirect()->back()->with('errors','El RFC ya existe.');
-            else if (Empleado::where('email', $request->input('email'))->first())
-                return redirect()->back()->with('errors','El email ya existe.');
-            else {
-                $empleado = Empleado::create($request->all());
-                return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success','Empleado Creado');
-            }
+        // if($this->hasComponent('crear empleado')) {
+        if(Empleado::where('rfc', $request->input('rfc'))->first())
+            return redirect()->back()->with('errors','El RFC ya existe.');
+        else if (Empleado::where('email', $request->input('email'))->first())
+            return redirect()->back()->with('errors','El email ya existe.');
+        else {
+            $empleado = Empleado::create($request->all());
+            return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success','Empleado Creado');
         }
-        return redirect()->route('denegado');
+        // }
+        // return redirect()->route('denegado');
     }
 
     public function show(Empleado $empleado)
     {
-        if($this->hasComponent('ver empleado')) {
-            return view('empleado.view', ['empleado' => $empleado]);
-        }
-        return redirect()->route('denegado');
+        // if($this->hasComponent('ver empleado')) {
+        return view('empleado.view', ['empleado' => $empleado]);
+        // }
+        // return redirect()->route('denegado');
     }
 
     public function edit(Empleado $empleado)
     {
-        if($this->hasComponent('editar empleado')) {
-            return view('empleado.create', ['empleado' => $empleado, 'edit' => true]);
-        }
-        return redirect()->route('denegado');
+        // if($this->hasComponent('editar empleado')) {
+        return view('empleado.edit', ['empleado' => $empleado]);
+        // }
+        // return redirect()->route('denegado');
     }
 
     public function update(Request $request, Empleado $empleado)
     {
-        if($this->hasComponent('editar empleado')) {
-            $empleado->update($request->all());
-            if($empleado->user) {
-                $empleado->user->email = $empleado->email;
-                $empleado->user->save();
-            }
-            return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success', 'Empleado Actualizado');
+        // if($this->hasComponent('editar empleado')) {
+        $empleado->update($request->all());
+        if($empleado->user) {
+            $empleado->user->email = $empleado->email;
+            $empleado->user->save();
         }
-        return redirect()->route('denegado');
+        return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success', 'Empleado Actualizado');
+        // }
+        // return redirect()->route('denegado');
 
     }
-
-    public function destroy(Empleado $empleado) {}
-
-    // Añadido : Iyari 05/Dic/2017
-    public function consulta()
-    {
+    
+    public function consulta() {
         return view('empleado.consulta');
     } 
 

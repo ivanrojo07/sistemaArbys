@@ -16,8 +16,9 @@ class EmpleadosTableSeeder extends Seeder
         $empleado = [
         	'nombre' => 'Dummy',
             'appaterno' => 'Dummy',
-            'apmaterno' => 'Dummy',
             'email' => 'admin@arbys.com',
+            'rfc' => 'ADMN000000ADM',
+            'nacimiento' => date("Y-m-d"),
         ];
 
         Empleado::create($empleado);

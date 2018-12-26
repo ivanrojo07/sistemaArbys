@@ -39,7 +39,7 @@ Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => '
 
 // EMPLEADOS
 Route::resource('empleados','Empleado\EmpleadoController');
-Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
+Route::resource('empleados.laborals','Empleado\EmpleadosDatosLabController');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');

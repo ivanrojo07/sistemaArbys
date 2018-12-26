@@ -18,21 +18,31 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="form-group col-md-3 col-sm-4 col-xs-12">
-				<label class="control-label" for="appaterno">Apellido Paterno:</label>
-				<dd>{{ $empleado->appaterno }}</dd>
-			</div>
-			<div class="form-group col-md-3 col-sm-4 col-xs-12">
-				<label class="control-label" for="apmaterno">Apellido Materno:</label>
-				<dd>{{ $empleado->apmaterno }}</dd>
-			</div>
-			<div class="form-group col-md-3 col-sm-4 col-xs-12">
-				<label class="control-label" for="nombre">Nombre(s):</label>
+			<div class="form-group col-sm-3">
+				<label class="control-label">Nombre:</label>
 				<dd>{{ $empleado->nombre }}</dd>
 			</div>
-			<div class="form-group col-md-3 col-sm-4 col-xs-12">
-				<label class="control-label" for="rfc">RFC:</label>
+			<div class="form-group col-sm-3">
+				<label class="control-label">Apellido Paterno:</label>
+				<dd>{{ $empleado->appaterno }}</dd>
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label">Apellido Materno:</label>
+				<dd>{{ $empleado->apmaterno ? $empleado->apmaterno : 'N/A' }}</dd>
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label">Fecha de nacimiento:</label>
+				<dd>{{ $empleado->nacimiento }}</dd>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label class="control-label">RFC:</label>
 				<dd>{{ $empleado->rfc }}</dd>
+			</div>
+			<div class="form-group col-sm-3">
+				<label class="control-label">Correo electrónico:</label>
+				<dd>{{ $empleado->email }}</dd>
 			</div>
 		</div>
 	</div>

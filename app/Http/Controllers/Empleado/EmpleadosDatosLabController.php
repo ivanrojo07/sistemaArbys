@@ -28,37 +28,28 @@ class EmpleadosDatosLabController extends Controller
      */
     public function index(Empleado $empleado)
     {
-        $datoslaborales = $empleado->datosLaborales;
-        if (count($datoslaborales) == 0)
-            return redirect()->route('empleados.datoslaborales.create', ['empleado' => $empleado]);
-        else {
-            $subg = Empleado::find($datoslaborales->first()->subgerente);
-            $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
-            // dd($datoslab);
-            return view('empleadodatoslab.index', [
-                'empleado' => $empleado,
-                'datoslaborales' => $datoslaborales,
-                'datoslab' => $datoslab,
-                'subgerente' => $subg,
-            ]); 
-        }
-        
+        $laborales = $empleado->laborales;
+        if (count($laborales) > 0) {
+            $subg = Empleado::find($laborales->first()->subgerente);
+            $datoslab = $empleado->laborales->last();
+            return view('empleado.laborales.index', ['empleado' => $empleado, 'laborales' => $laborales, 'datoslab' => $datoslab, 'subgerente' => $subg]); 
+        } else
+            return redirect()->route('empleados.laborals.create', ['empleado' => $empleado]);
     }
 
     public function estados(Region $region) {
         if($region->id !=0)
-            return view('empleadodatoslab.estados', ['region' => $region]);
+            return view('empleado.laborales.estados', ['region' => $region]);
     }
 
     public function oficinas(Estado $estado) {
         if($estado->id !=0)
-            return view('empleadodatoslab.oficinas', ['estado' => $estado]);
+            return view('empleado.laborales.oficinas', ['estado' => $estado]);
     }
 
     public function grupos(Oficina $oficina) {
-        // dd($oficina->datoslab->first()->grupos);
         if($oficina->id !=0)
-            return view('empleadodatoslab.grupos', ['oficina' => $oficina]);
+            return view('empleado.laborales.grupos', ['oficina' => $oficina]);
     }
 
     /**
@@ -68,12 +59,11 @@ class EmpleadosDatosLabController extends Controller
      */
     public function create(Empleado $empleado)
     {
-        $datoslab = new EmpleadosDatosLab;
         $contratos = TipoContrato::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
         $regiones = Region::get();
-        return view('empleadodatoslab.create', ['empleado' => $empleado, 'contratos' => $contratos, 'datoslab' => $datoslab, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones, 'edit' => false]);
+        return view('empleado.laborales.create', ['empleado' => $empleado, 'contratos' => $contratos, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
     }
 
     /**
@@ -84,55 +74,15 @@ class EmpleadosDatosLabController extends Controller
      */
     public function store(Request $request, Empleado $empleado)
     {
-        $datoslab = new EmpleadosDatosLab;
-        $request['fechaactualizacion'] = $request->fechacontratacion;
-        $request['sal_actual'] = $request->sal_inicial;
-        $request['puesto_orig'] = Puesto::find($request->puesto_id)->nombre;
-        $datoslab->create($request->all());
-        $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
+        $request['actualizacion'] = $request->contratacion;
+        $request['actual'] = $request->inicial;
+        $request['original'] = Puesto::find($request->puesto_id)->nombre;
+        $laborales = new EmpleadosDatosLab($request->all());
+        $empleado->laborales()->save($laborales);
         if($request->puesto_id == 7) {
-            Vendedor::create(['vendedor_id' => $datoslab->id, 'grupo_id' => $request->grupo_id]);
+            Vendedor::create(['vendedor_id' => $empleado->id, 'grupo_id' => $request->grupo_id]);
         }
-        Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
-        return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Empleado  $empleado
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Empleado $empleado,$datoslaborale)
-    {
-       
-         
-     //    $datos = $empleado->datosLaborales()->where('id',$datoslaborale)->orderBy('created_at','desc')->first();
-
-     // $area='';
-     //  if($datos->area_id==null){
-     //    $area='NO DEFINIDO';
-     //  }else{
-     //    $areas=Area::where('id',$datos->area_id)->first();
-     //  $area=$areas->nombre;
-     //  }
-      
-     //  $puesto='';
-     //  if($datos->puesto_id==null){
-     //    $puesto='NO DEFINIDO';
-     //  }else{
-     //    $puestos=Puesto::where('id',$datos->puesto_id)->first();
-     //  $puesto=$areas->nombre;
-     //  }
-      
-     
-     //     return view('empleadodatoslab.view',[
-     //            'empleado'=>$empleado,
-     //            'datoslab'=>$datos,
-     //            'area'=>$area,
-     //            'puesto'=>$puesto
-                
-     //            ]);
+        return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 
     /**
@@ -141,26 +91,14 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado,$datoslaborale)
+    public function edit(Empleado $empleado, EmpleadosDatosLab $laboral)
     {
-        //
-        $datoslab = $empleado->datosLaborales()->where('id',$datoslaborale)->first();
-        // dd($datoslab);
         $contratos = TipoContrato::get();
         $areas =   Area::get();
         $puestos = Puesto::get();
         $regiones = Region::get();
         $contratos = TipoContrato::get();
-        // dd($datoslab->id);
-        return view('empleadodatoslab.edit', [
-            'datoslab' => $datoslab,
-            'contratos' => $contratos,
-            'empleado' => $empleado,
-            'areas' => $areas, 
-            'puestos' => $puestos,
-            'regiones' => $regiones
-        ]);
-
+        return view('empleado.laborales.edit', ['datoslab' => $laboral, 'contratos' => $contratos, 'empleado' => $empleado, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
     }
 
     /**
@@ -170,28 +108,13 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado, $datoslaborale)
+    public function update(Request $request, Empleado $empleado)
     {
-        $datoslab = new EmpleadosDatosLab;
-        $datoslab->create($request->all());
-        $datoslab = $empleado->datosLaborales()->orderBy('created_at', 'desc')->first();
-        if($request->puesto_id == 7) {
-            Vendedor::create(['vendedor_id' => $datoslab->id, 'grupo_id' => $request->grupo_id]);
-        } else {
-            $datos = EmpleadosDatosLab::where('empleado_id', $empleado->id)->get();
-            foreach ($datos as $dato) {
-                $arr[] = $dato->id;
-            }
-            foreach ($arr as $val) {
-                $vend = Vendedor::where('vendedor_id', $val)->first();
-                if($vend != null) {
-                    Vendedor::where('vendedor_id', $val)->delete();
-                    break;
-                }
-            }
-        }
-        Alert::success('Datos laborales creado', 'Siga agregando información al empleado');
-        return redirect()->route('empleados.datoslaborales.index',['empleado'=>$empleado,'datoslab'=>$datoslab]);
+        $laborales = new EmpleadosDatosLab($request->all());
+        $empleado->laborales()->save($laborales);
+        if($request->puesto_id == 7)
+            Vendedor::create(['vendedor_id' => $empleado->id, 'grupo_id' => $request->grupo_id]);
+        return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 
     /**

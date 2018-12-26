@@ -27,8 +27,8 @@
 							<select class="form-control" name="subgerente_id" id="subgerente">
 								<option selected="selected">Seleccionar</option>
 								@foreach($subgerentes as $subgerente)
-								@php($empleado = $subgerente->empleado)
-								<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
+									@php($empleado = $subgerente->empleado)
+									<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
 								@endforeach
 							</select>
 						</div>
