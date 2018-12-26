@@ -80,6 +80,7 @@ Route::get('clientes/{cliente}/pagos/{pago}/follow', 'Cliente\ClientePagoControl
 Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
 Route::resource('clientes.prestamos', 'Cliente\ClientePrestamoController');
+Route::get('asignarClientes', 'Cliente\ClienteController@asignar');
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');

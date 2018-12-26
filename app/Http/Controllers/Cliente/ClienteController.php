@@ -129,4 +129,10 @@ class ClienteController extends Controller {
         $pdf = PDF::loadView('clientes.vista', ['cliente' => $cliente]);
         return $pdf->download('archivo.pdf');
     }
+
+    public function asignar() {
+        $clientes = Cliente::get();
+        return view('clientes.asignar.index', ['clientes' => $clientes]);
+    }
+
 }
