@@ -1,8 +1,8 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="panel-default">
-	<div class="panel panel-group" style="margin-bottom: 0px;">
+<div class="panel panel-default" style="margin-bottom: 0px; height: 500px;">
+	<div class="panel-group">
 		<div class="panel-body">
 			<form role="form" method="POST" action="{{ route('clientes.crm.store', ['cliente' => $cliente]) }}">
 				{{ csrf_field() }}
@@ -19,11 +19,11 @@
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="fecha_aviso"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha Aviso:</label>
-						<input type="date" class="form-control" id="fecha_aviso" name="fecha_aviso" required="required" min="{{date('Y-m-d')}}" max="{{date('Y-m-d',strtotime('+2 Months'))}}">
+						<input type="date" class="form-control" id="fecha_aviso" name="fecha_aviso" required="required" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d',strtotime('+2 Months')) }}">
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="fecha_cont"><i class="fa fa-asterisk" aria-hidden="true"></i> Fecha siguiente contacto:</label>
-						<input type="date" class="form-control" id="fecha_cont" name="fecha_cont" required="required" min="{{date('Y-m-d',strtotime('+2 Days'))}}" max="{{date('Y-m-d',strtotime('+2 Months'))}}" disabled>
+						<input type="date" class="form-control" id="fecha_cont" name="fecha_cont" required="required" min="{{ date('Y-m-d',strtotime('+2 Days')) }}" max="{{ date('Y-m-d',strtotime('+2 Months')) }}" disabled>
 					</div>
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="hora">Hora:</label>
@@ -97,14 +97,14 @@
 							<th>Observaciones</th>
 						</tr>
 						@foreach($crms as $crm)
-						<tr onclick="crm({{$crm}})" title="Has Click Aquì para ver o modificar" style="cursor: pointer">
-							<td>{{$crm->fecha_cont}}</td>
-							<td>{{$crm->fecha_aviso}}</td>
-							<td>{{$crm->hora}}</td>
-							<td>{{$crm->tipo_cont}}</td>
-							<td>{{$crm->status}}</td>
-							<td>{{substr($crm->acuerdos,0,50)}}...</td>
-							<td>{{substr($crm->observaciones,0,50)}}...</td>
+						<tr onclick="crm({{ $crm }})" title="Has Click Aquì para ver o modificar" style="cursor: pointer">
+							<td>{{ $crm->fecha_cont }}</td>
+							<td>{{ $crm->fecha_aviso }}</td>
+							<td>{{ $crm->hora }}</td>
+							<td>{{ $crm->tipo_cont }}</td>
+							<td>{{ $crm->status }}</td>
+							<td>{{ substr($crm->acuerdos,0,50) }}...</td>
+							<td>{{ substr($crm->observaciones,0,50) }}...</td>
 						</tr>
 						@endforeach
 					</table>

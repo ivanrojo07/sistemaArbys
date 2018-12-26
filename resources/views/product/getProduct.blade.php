@@ -46,28 +46,39 @@
 
 <script type="text/javascript">
 
-	function pago(meses) {
-		prec = {{ $producto->apertura }};
+	var mensualidades = '';
 
-		switch(meses) {
-			case 60:
-				prec += {{ $producto->m60 }};
-				break;
-			case 48:
-				prec += {{ $producto->m48 }};
-				break;
-			case 36:
-				prec += {{ $producto->m36 }};
-				break;
-			case 24:
-				prec += {{ $producto->m24 }};
-				break;
-			case 12:
-				prec += {{ $producto->m12 }};
-				break;
+	function pago(meses) {
+		mensualidades = meses;
+		var plan = $('#plan').val();
+		var prec = {{ $producto->precio_lista }} * 0.3;
+		var entrega = '';
+		if(plan == 'A') {
+			switch(meses) {
+				case 60:
+					entrega += Math.ceil(prec / {{ $producto->m60 }}) + ' meses';
+					break;
+				case 48:
+					entrega += Math.ceil(prec / {{ $producto->m48 }}) + ' meses';
+					break;
+				case 36:
+					entrega += Math.ceil(prec / {{ $producto->m36 }}) + ' meses';
+					break;
+				case 24:
+					entrega += Math.ceil(prec / {{ $producto->m24 }}) + ' meses';
+					break;
+				case 12:
+					entrega += Math.ceil(prec / {{ $producto->m12 }}) + ' meses';
+					break;
+			}
+		} else {
+			entrega += '1 mes';
 		}
 		
+		prec += {{ $producto->apertura }};
+
 		$("#total").val(prec.toFixed(2));
+		$("#entrega").val(entrega);
 	}
 
 </script>

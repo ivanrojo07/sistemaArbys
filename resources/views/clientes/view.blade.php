@@ -127,11 +127,11 @@
 			</ul>
 			<div class="tab-content">
 				<div id="dat" class="tab-pane fade">
-					<iframe src="{{ route ('seleccion', ['cliente' => $cliente]) }}" style="width: 100%;">
+					<iframe src="{{ route ('seleccion', ['cliente' => $cliente]) }}" style="width: 100%; height: 500px;">
 					</iframe>
 				</div>
 				<div id="crm" class="tab-pane fade">
-					<iframe src="{{ route ('clientes.crm.create', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;">
+					<iframe src="{{ route ('clientes.crm.create', ['cliente' => $cliente]) }}" style="width: 100%; height: 500px;">
 					</iframe>
 				</div>
 				<div id="cot" class="tab-pane fade">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Solicitante;
+use App\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
@@ -103,7 +104,8 @@ class ClienteController extends Controller {
         return view('clientes.view', ['cliente' => $cliente]);
     }
 
-    public function getSeleccion(Cliente $cliente) {
+    public function getSeleccion($cliente) {
+        $cliente = Cliente::find($cliente);
         return view('clientes.productos.selected', ['cliente' => $cliente]);
     }
 

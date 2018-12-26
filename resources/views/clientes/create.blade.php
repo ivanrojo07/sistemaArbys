@@ -117,7 +117,17 @@
 </div>
 
 <script>
-	
+
+	function getCanales() {
+		$.ajax({
+			url: "{{ url('/getcanales') }}",
+			type: "GET",
+			dataType: "html",
+		}).done(function(resultado) {
+			$("#canal_ventas").html(resultado);
+		});
+	}
+
 	function reset() {
 
 	}

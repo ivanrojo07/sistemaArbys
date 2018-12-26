@@ -142,11 +142,14 @@
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Plan de Pago:</label>
-								<select name="plan" class="form-control">
-									<option value="">Seleccionar</option>
-									<option value="A">A</option>
+								<select name="plan" class="form-control" id="plan">
+									<option value="A" selected="">A</option>
 									<option value="B">B</option>
 								</select>
+							</div>
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Tiempo de entrega:</label>
+								<input type="text" id="entrega" class="form-control" readonly="">
 							</div>
 						</div>
 						<div class="row">
@@ -268,6 +271,7 @@
 			change();
 			var monto$ = document.getElementById('monto').value;
 			var total$ = document.getElementById('total').value;
+			pago(mensualidades);
 			if(total$ !== '') {
 				document.getElementById('monto').max = total$;
 				if(total$ != 0 && parseInt(monto$) > parseInt(total$)) {

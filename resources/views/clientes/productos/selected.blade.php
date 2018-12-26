@@ -1,7 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="panel panel-group" style="margin-bottom: 0px;">
+<div class="panel panel-group" style="margin-bottom: 0px; height: 500px;">
 	<div class="panel-default">
 		<div class="panel-body">
 			<div class="row">
