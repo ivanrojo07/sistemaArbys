@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Empleado;
 
-use App\Empleado;
-use App\Sucursal;
-use App\EmpleadosDatosLab;
 use App\Http\Controllers\Controller;
+use App\Sucursal;
 use App\TipoBaja;
 use App\TipoContrato;
 use App\Area;
@@ -14,6 +12,10 @@ use App\Banco;
 use App\Region;
 use App\Estado;
 use App\Oficina;
+use App\Empleado;
+use App\EmpleadosDatosLab;
+use App\Gerente;
+use App\Subgerente;
 use App\Vendedor;
 use App\Grupo;
 use Illuminate\Http\Request;
@@ -38,17 +40,17 @@ class EmpleadosDatosLabController extends Controller
     }
 
     public function estados(Region $region) {
-        if($region->id !=0)
+        if($region->id != 0)
             return view('empleado.laborales.estados', ['region' => $region]);
     }
 
     public function oficinas(Estado $estado) {
-        if($estado->id !=0)
+        if($estado->id != 0)
             return view('empleado.laborales.oficinas', ['estado' => $estado]);
     }
 
     public function grupos(Oficina $oficina) {
-        if($oficina->id !=0)
+        if($oficina->id != 0)
             return view('empleado.laborales.grupos', ['oficina' => $oficina]);
     }
 
@@ -79,8 +81,15 @@ class EmpleadosDatosLabController extends Controller
         $request['original'] = Puesto::find($request->puesto_id)->nombre;
         $laborales = new EmpleadosDatosLab($request->all());
         $empleado->laborales()->save($laborales);
-        if($request->puesto_id == 7) {
-            Vendedor::create(['vendedor_id' => $empleado->id, 'grupo_id' => $request->grupo_id]);
+        if($request->puesto_id == 5) {
+            $gerente = new Gerente();
+            $empleado->gerente()->save($gerente);
+        } else if($request->puesto_id == 6) {
+            $subgerente = new Subgerente();
+            $empleado->subgerente()->save($subgerente);
+        } else if($request->puesto_id == 7) {
+            $vendedor = new Vendedor(['experto' => $request->experto]);
+            $empleado->vendedor()->save($vendedor);
         }
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
@@ -112,8 +121,36 @@ class EmpleadosDatosLabController extends Controller
     {
         $laborales = new EmpleadosDatosLab($request->all());
         $empleado->laborales()->save($laborales);
-        if($request->puesto_id == 7)
-            Vendedor::create(['vendedor_id' => $empleado->id, 'grupo_id' => $request->grupo_id]);
+        if($request->puesto_id == 5) {
+            if(!$empleado->gerente) {
+                if($empleado->subgerente)
+                    $empleado->subgerente->delete();
+                if($empleado->vendedor)
+                    $empleado->vendedor->delete();
+                $gerente = new Gerente();
+                $empleado->gerente()->save($gerente);
+            }
+        } else if($request->puesto_id == 6) {
+            if(!$empleado->subgerente) {
+                if($empleado->gerente)
+                    $empleado->gerente->delete();
+                if($empleado->vendedor)
+                    $empleado->vendedor->delete();
+                $subgerente = new Subgerente();
+                $empleado->subgerente()->save($subgerente);
+            }
+        } else if($request->puesto_id == 7) {
+            if($empleado->vendedor)
+                $empleado->vendedor()->update(['experto' => $request->experto]);
+            else {
+                if($empleado->gerente)
+                    $empleado->gerente->delete();
+                if($empleado->subgerente)
+                    $empleado->subgerente->delete();
+                $vendedor = new Vendedor(['experto' => $request->experto]);
+                $empleado->vendedor()->save($vendedor);
+            }
+        }
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 

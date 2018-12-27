@@ -5,10 +5,22 @@ namespace App\Http\Controllers\Grupo;
 use App\Grupo;
 use App\Subgerente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class GrupoController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware(function ($request, $next) {
+            if(Auth::check()) {
+                if(Auth::user()->empleado->gerente)
+                    return $next($request);
+                return redirect()->route('denegado');
+            } else
+                return redirect()->route('login');
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +39,19 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        $subgerentes = Subgerente::where('puesto_id', 6)->get();
+        $empleado = Auth::user()->empleado;
+        $laborales = $empleado->laborales->last()->oficina->laborales;
+        // dd($laborales);
+        $arr = [];
+        foreach ($laborales as $laboral) {
+            $arr[] = $laboral->empleado;
+        }
+        $arr = array_unique($arr);
+        $subgerentes = [];
+        foreach ($arr as $emp) {
+            $subgerentes[] = $emp->subgerente;
+        }
+        $subgerentes = array_filter($subgerentes);
         return view('grupos.create', ['subgerentes' => $subgerentes]);
     }
 
@@ -39,9 +63,8 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        $grupos = Grupo::get();
         $grupo = Grupo::create($request->all());
-        return view('grupos.index', ['grupos' => $grupos]);
+        return redirect()->route('grupos.index');
     }
 
     /**

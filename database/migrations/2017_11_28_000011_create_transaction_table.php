@@ -36,3 +36,11 @@ class CreateTransactionTable extends Migration
         Schema::dropIfExists('transactions');
     }
 }
+
+
+
+// suponiendo que tienes una relacion en App\Proveedor llamada direccion que utiliza App\Direccion
+
+// $proveedor = Proveedor::create($request->all());
+// $direccion = new Direccion(['dato1' => $dato1, 'dato2' => $dato2, ..., 'datoN' => $datoN]);
+// $proveedor->direccion()->save($direccion);

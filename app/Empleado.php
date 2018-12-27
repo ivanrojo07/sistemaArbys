@@ -42,6 +42,10 @@ class Empleado extends Model
         return $this->hasMany('App\EmpleadosDatosLab');
     }
     
+    public function gerente() {
+        return $this->hasOne('App\Gerente');
+    }
+    
     public function subgerente() {
         return $this->hasOne('App\Subgerente');
     }

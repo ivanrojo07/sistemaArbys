@@ -86,9 +86,17 @@
 								<select class="form-control" id="oficinas">
 								</select>
 							</div>
-							<div class="form-group col-sm-3" style="display: none;" id="grupo">
-								<label class="control-label">Grupo:</label>
-								<select class="form-control" id="grupos">
+							<div class="form-group col-sm-3" id="experto" style="display: none;">
+								<label class="control-label">✱Experto en:</label>
+								<select id="expertos" class="form-control">
+									<option value="">Seleccionar</option>
+									<option value="Autos" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Autos" ? 'selected' : '') : '' }}>Autos</option>
+									<option value="Motos" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Motos" ? 'selected' : '') : '' }}>Motos</option>
+									<option value="Casas" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Casas" ? 'selected' : '') : '' }}>Casas</option>
+									<option value="Autos y Motos" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Autos y Motos" ? 'selected' : '') : '' }}>Autos y Motos</option>
+									<option value="Autos y Casas" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Autos y Casas" ? 'selected' : '') : '' }}>Autos y Casas</option>
+									<option value="Motos y Casas" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Motos y Casas" ? 'selected' : '') : '' }}>Motos y Casas</option>
+									<option value="Autos, Motos y Casas" {{ $datoslab->empleado->vendedor ? ($datoslab->empleado->vendedor->experto == "Autos, Motos y Casas" ? 'selected' : '') : '' }}>Autos, Motos y Casas</option>
 								</select>
 							</div>
 							<div class="form-group col-sm-3">
@@ -123,44 +131,63 @@
     $(document).ready(function() {
 
     	$('#puesto_id').change(function() {
+    		
     		var val = parseInt(document.getElementById("puesto_id").value);
       		document.getElementById('region').style.display = 'none';
-			$("#regiones").prop('name', '');
       		document.getElementById('estado').style.display = 'none';
-			$("#estados").prop('name', '');
       		document.getElementById('oficina').style.display = 'none';
+      		document.getElementById('experto').style.display = 'none';
+			$("#regiones").prop('name', '');
+			$("#estados").prop('name', '');
 			$("#oficinas").prop('name', '');
-      		document.getElementById('grupo').style.display = 'none';
-			$("#grupos").prop('name', '');
+			$("#expertos").prop('name', '');
+			$("#regiones").prop('required', false);
+			$("#estados").prop('required', false);
+			$("#oficinas").prop('required', false);
+			$("#expertos").prop('required', false);
+
     		switch(val) {
     			case 3:
       				document.getElementById('region').style.display = 'block';
       				$("#regiones").prop('name', 'region_id');
+					$("#regiones").prop('required', true);
     				break;
     			case 4:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
 					$("#estados").prop('name', 'estado_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
     				break;
     			case 5:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
     				break;
     			case 6:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
     				break;
     			case 7:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
-      				document.getElementById('grupo').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
-					$("#grupos").prop('name', 'grupo_id');
+					$("#expertos").prop('name', 'experto');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
+					$("#expertos").prop('required', true);
     				break;
     		}
 

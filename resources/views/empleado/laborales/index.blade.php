@@ -99,7 +99,11 @@
 					@if($datoslab->puesto->nombre == 'Vendedor')
 					<div class="form-group col-sm-3">
 						<label class="control-label">Grupo:</label>
-						<dd>{{ $datoslab->vendedor->grupo->nombre }}</dd>
+						<dd>{{ $datoslab->empleado->vendedor->grupo ? $datoslab->empleado->vendedor->grupo->nombre : 'No Asignado.' }}</dd>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label">Experto en:</label>
+						<dd>{{ $datoslab->empleado->vendedor->experto }}</dd>
 					</div>
 					@endif
 				</div>

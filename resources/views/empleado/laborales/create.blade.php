@@ -33,7 +33,7 @@
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Tipo de contrato:</label>
 							<select type="select" class="form-control" name="contrato_id" id="contrato_id" required="">
-								<option>Sin Definir</option>
+								<option value="">Seleccionar</option>
 								@foreach ($contratos as $contrato)
 									<option value="{{ $contrato->id }}">{{ $contrato->nombre }}</option>
 								@endforeach
@@ -42,7 +42,7 @@
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Área:</label>
 							<select type="select" class="form-control" name="area_id" id="area_id" required="">
-								<option>Sin Definir</option>
+								<option value="">Seleccionar</option>
 								@foreach ($areas as $area)
 									<option value="{{ $area->id }}">{{ $area->nombre }}</option>
 								@endforeach
@@ -52,7 +52,7 @@
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Puesto:</label>
 							<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
-								<option>Sin Definir</option>
+								<option value="">Seleccionar</option>
 								@foreach ($puestos as $puesto)
 									@if($p != 1 && $puesto->id == 1)
 									@elseif($p != 1 && $puesto->id == 2)
@@ -64,27 +64,35 @@
 							</select>
 						</div>
 						<div class="form-group col-sm-3" id="region" style="display: none;">
-							<label class="control-label">Región:</label>
+							<label class="control-label">✱Región:</label>
 							<select id="regiones" class="form-control">
-								<option>No Definido</option>
+								<option value="">Seleccionar</option>
 								@foreach($regiones as $region)
 									<option value="{{ $region->id }}">{{ $region->nombre }}</option>
 								@endforeach
 							</select>
 						</div>
 						<div class="form-group col-sm-3" id="estado" style="display: none;">
-							<label class="control-label">Estado:</label>
+							<label class="control-label">✱Estado:</label>
 							<select id="estados" class="form-control">
 							</select>
 						</div>
 						<div class="form-group col-sm-3" id="oficina" style="display: none;">
-							<label class="control-label">Oficina:</label>
+							<label class="control-label">✱Oficina:</label>
 							<select id="oficinas" class="form-control">
 							</select>
 						</div>
-						<div class="form-group col-sm-3" id="grupo" style="display: none;">
-							<label class="control-label">Grupo:</label>
-							<select id="grupos" class="form-control">
+						<div class="form-group col-sm-3" id="experto" style="display: none;">
+							<label class="control-label">✱Experto en:</label>
+							<select id="expertos" class="form-control">
+								<option value="">Seleccionar</option>
+								<option value="Autos">Autos</option>
+								<option value="Motos">Motos</option>
+								<option value="Casas">Casas</option>
+								<option value="Autos y Motos">Autos y Motos</option>
+								<option value="Autos y Casas">Autos y Casas</option>
+								<option value="Motos y Casas">Motos y Casas</option>
+								<option value="Autos, Motos y Casas">Autos, Motos y Casas</option>
 							</select>
 						</div>
 						<div class="form-group col-sm-3">
@@ -111,48 +119,67 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 <script type="text/javascript">
+
     $(document).ready(function() {
 
     	$('#puesto_id').change(function() {
+
     		var val = parseInt(document.getElementById("puesto_id").value);
       		document.getElementById('region').style.display = 'none';
-			$("#regiones").prop('name', '');
       		document.getElementById('estado').style.display = 'none';
-			$("#estados").prop('name', '');
       		document.getElementById('oficina').style.display = 'none';
+      		document.getElementById('experto').style.display = 'none';
+			$("#regiones").prop('name', '');
+			$("#estados").prop('name', '');
 			$("#oficinas").prop('name', '');
-      		document.getElementById('grupo').style.display = 'none';
-			$("#grupos").prop('name', '');
+			$("#expertos").prop('name', '');
+			$("#regiones").prop('required', false);
+			$("#estados").prop('required', false);
+			$("#oficinas").prop('required', false);
+			$("#expertos").prop('required', false);
 
     		switch(val) {
     			case 3:
       				document.getElementById('region').style.display = 'block';
       				$("#regiones").prop('name', 'region_id');
+					$("#regiones").prop('required', true);
     				break;
     			case 4:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
 					$("#estados").prop('name', 'estado_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
     				break;
     			case 5:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
     				break;
     			case 6:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
     				break;
     			case 7:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
-      				document.getElementById('grupo').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
-					$("#grupos").prop('name', 'grupo_id');
+					$("#expertos").prop('name', 'experto');
+					$("#estados").prop('required', true);
+					$("#regiones").prop('required', true);
+					$("#oficinas").prop('required', true);
+					$("#expertos").prop('required', true);
     				break;
     		}
 
