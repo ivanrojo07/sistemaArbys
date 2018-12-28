@@ -13,15 +13,16 @@ use App\Region;
 use App\Estado;
 use App\Oficina;
 use App\Empleado;
-use App\EmpleadosDatosLab;
+use App\Laboral;
 use App\Gerente;
 use App\Subgerente;
 use App\Vendedor;
 use App\Grupo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
-class EmpleadosDatosLabController extends Controller
+class LaboralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -63,7 +64,10 @@ class EmpleadosDatosLabController extends Controller
     {
         $contratos = TipoContrato::get();
         $areas =   Area::get();
-        $puestos = Puesto::get();
+        if(Auth::user()->perfil->id == 1)
+            $puestos = Puesto::whereBetween('id', [2, 7])->get();
+        else
+            $puestos = Puesto::whereBetween('id', [3, 7])->get();
         $regiones = Region::get();
         return view('empleado.laborales.create', ['empleado' => $empleado, 'contratos' => $contratos, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
     }
@@ -79,7 +83,7 @@ class EmpleadosDatosLabController extends Controller
         $request['actualizacion'] = $request->contratacion;
         $request['actual'] = $request->inicial;
         $request['original'] = Puesto::find($request->puesto_id)->nombre;
-        $laborales = new EmpleadosDatosLab($request->all());
+        $laborales = new Laboral($request->all());
         $empleado->laborales()->save($laborales);
         if($request->puesto_id == 5) {
             $gerente = new Gerente();
@@ -100,11 +104,14 @@ class EmpleadosDatosLabController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado, EmpleadosDatosLab $laboral)
+    public function edit(Empleado $empleado, Laboral $laboral)
     {
         $contratos = TipoContrato::get();
         $areas =   Area::get();
-        $puestos = Puesto::get();
+        if(Auth::user()->perfil->id == 1)
+            $puestos = Puesto::whereBetween('id', [2, 7])->get();
+        else
+            $puestos = Puesto::whereBetween('id', [3, 7])->get();
         $regiones = Region::get();
         $contratos = TipoContrato::get();
         return view('empleado.laborales.edit', ['datoslab' => $laboral, 'contratos' => $contratos, 'empleado' => $empleado, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
@@ -119,7 +126,7 @@ class EmpleadosDatosLabController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        $laborales = new EmpleadosDatosLab($request->all());
+        $laborales = new Laboral($request->all());
         $empleado->laborales()->save($laborales);
         if($request->puesto_id == 5) {
             if(!$empleado->gerente) {

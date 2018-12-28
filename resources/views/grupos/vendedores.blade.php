@@ -44,35 +44,38 @@
 					<div class="col-sm-4">
 						<h4>Vendedores:</h4>
 					</div>
-					<div class="col-sm-4 text-center">
-						<a href="{{ route('grupos.vendedores', ['grupo' => $grupo ]) }}" class="btn btn-success">
-							<i class="fa fa-plus"></i><strong> Agregar Vendedores</strong>
-						</a>
-					</div>
 				</div>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-12">
-						@if(count($grupo->vendedores) == 0)
-						<h4>No hay vendedores en el grupo.</h4>
+						@if(count($vendedores) > 0)
+							<table class="table table-bordered table-hover table-stripped">
+								<tr class="info">
+									<th>Nombre</th>
+									<th>Apellido Paterno</th>
+									<th>Apellido Materno</th>
+									<th>Correo</th>
+									<th>Acción</th>
+								</tr>
+								@foreach($vendedores as $vendedor)
+									<tr>
+										<td>{{ $vendedor->empleado->nombre }}</td>
+										<td>{{ $vendedor->empleado->appaterno }}</td>
+										<td>{{ $vendedor->empleado->apmaterno ? $vendedor->empleado->apmaterno : 'N/A'}}</td>
+										<td>{{ $vendedor->empleado->email }}</td>
+										<td class="text-center">
+											<form action="{{ route('grupos.bind', ['grupo' => $grupo]) }}" method="post">
+												{{ csrf_field() }}
+												<input type="hidden" name="vendedor_id" value="{{ $vendedor->id }}">
+												<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Agregar</button>
+											</form>
+										</td>
+									</tr>
+								@endforeach
+							</table>
 						@else
-						<table class="table table-bordered table-hover table-stripped">
-							<tr class="info">
-								<th>Nombre</th>
-								<th>Apellido Paterno</th>
-								<th>Apellido Materno</th>
-								<th>Correo</th>
-							</tr>
-							@foreach($grupo->vendedores as $vendedor)
-							<tr>
-								<td>{{ $vendedor->empleado->nombre }}</td>
-								<td>{{ $vendedor->empleado->appaterno }}</td>
-								<td>{{ $vendedor->empleado->apmaterno ? $vendedor->empleado->apmaterno : 'N/A' }}</td>
-								<td>{{ $vendedor->empleado->email }}</td>
-							</tr>
-							@endforeach
-						</table>
+							<h4>No hay vendedores disponibles.</h4>
 						@endif
 					</div>
 				</div>

@@ -17,9 +17,9 @@ class Estado extends Model
         'abreviatura'
     ];
 
-    public $sortable = [ 'id', 'nombre' ];
+    public $sortable = ['id', 'nombre'];
 
-    protected $hidden=[ 'created_at', 'updated_at' ];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function region() {
         return $this->belongsTo('App\Region');
@@ -34,7 +34,7 @@ class Estado extends Model
     }
 
     public function datosLab() {
-        return $this->hasMany('App\EmpleadosDatosLab');
+        return $this->hasMany('App\Laboral');
     }
 
 }

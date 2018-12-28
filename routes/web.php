@@ -39,7 +39,7 @@ Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => '
 
 // EMPLEADOS
 Route::resource('empleados','Empleado\EmpleadoController');
-Route::resource('empleados.laborals','Empleado\EmpleadosDatosLabController');
+Route::resource('empleados.laborals','Empleado\LaboralController');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');
 Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController');
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
@@ -48,6 +48,8 @@ Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
 
 // GRUPOS
 Route::resource('grupos', 'Grupo\GrupoController');
+Route::get('grupos/{grupo}/vendedores', 'Grupo\GrupoController@vendedores')->name('grupos.vendedores');
+Route::post('grupos/{grupo}/vendedores', 'Grupo\GrupoController@bind')->name('grupos.bind');
 
 // PRECARGAS
 Route::resource('contratos','Precargas\TipoContratoController');
@@ -92,9 +94,9 @@ Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosCon
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
 Route::get('getbancos','Banco\BancoController@getBancos');
-Route::get('region2/{region}','Empleado\EmpleadosDatosLabController@estados')->name('getregion');
-Route::get('estado2/{estado}','Empleado\EmpleadosDatosLabController@oficinas')->name('getestado');
-Route::get('oficina2/{oficina}','Empleado\EmpleadosDatosLabController@grupos')->name('getoficina');
+Route::get('region2/{region}','Empleado\LaboralController@estados')->name('getregion');
+Route::get('estado2/{estado}','Empleado\LaboralController@oficinas')->name('getestado');
+Route::get('oficina2/{oficina}','Empleado\LaboralController@grupos')->name('getoficina');
 
 // SUCURSALES
 Route::resource('sucursales','Sucursal\SucursalController');

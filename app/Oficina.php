@@ -29,9 +29,9 @@ class Oficina extends Model
         'telefono3',
     ];
 
-    public $sortable = [ 'id', 'nombre', 'abreviatura', 'responsable' ];
+    public $sortable = ['id', 'nombre', 'abreviatura', 'responsable'];
 
-    protected $hidden=[ 'created_at', 'updated_at' ];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function estado() {
         return $this->belongsTo('App\Estado');
@@ -42,7 +42,7 @@ class Oficina extends Model
     }
 
     public function laborales() {
-        return $this->hasMany('App\EmpleadosDatosLab');
+        return $this->hasMany('App\Laboral');
     }
 
 }

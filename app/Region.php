@@ -7,7 +7,7 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Region extends Model
 {
-    //
+    
     use Sortable;
 
     protected $fillable = [
@@ -16,16 +16,16 @@ class Region extends Model
 		'abreviatura'
 	];
 
-    public $sortable = [ 'id', 'nombre' ];
+    public $sortable = ['id', 'nombre'];
 
-    protected $hidden=[ 'created_at', 'updated_at' ];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function estados() {
         return $this->hasMany('App\Estado');
     }
 
     public function datosLab() {
-        return $this->hasMany('App\EmpleadosDatosLab');
+        return $this->hasMany('App\Laboral');
     }
 
 }

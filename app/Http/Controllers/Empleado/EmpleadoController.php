@@ -51,17 +51,14 @@ class EmpleadoController extends Controller
 
     public function store(Request $request)
     {
-        // if($this->hasComponent('crear empleado')) {
         if(Empleado::where('rfc', $request->input('rfc'))->first())
             return redirect()->back()->with('errors','El RFC ya existe.');
         else if (Empleado::where('email', $request->input('email'))->first())
             return redirect()->back()->with('errors','El email ya existe.');
         else {
             $empleado = Empleado::create($request->all());
-            return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success','Empleado Creado');
+            return redirect()->route('empleados.show', ['empleado' => $empleado]);
         }
-        // }
-        // return redirect()->route('denegado');
     }
 
     public function show(Empleado $empleado)
@@ -88,7 +85,7 @@ class EmpleadoController extends Controller
             $empleado->user->email = $empleado->email;
             $empleado->user->save();
         }
-        return redirect()->route('empleados.show', ['empleado' => $empleado])->with('success', 'Empleado Actualizado');
+        return redirect()->route('empleados.show', ['empleado' => $empleado]);
         // }
         // return redirect()->route('denegado');
 
@@ -109,7 +106,7 @@ class EmpleadoController extends Controller
                   ->orWhere('rfc', 'LIKE', "%$word%");
             }
         })->get();
-        return view('empleado.busqueda', ['empleados'=>$empleados]);
+        return view('empleado.busqueda', ['empleados' => $empleados]);
     }
 
 }

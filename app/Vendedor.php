@@ -24,7 +24,7 @@ class Vendedor extends Model
     }
 
     public function empleado() {
-        return $this->belongsTo('App\Empleados');
+        return $this->belongsTo('App\Empleado');
     }
 
 }

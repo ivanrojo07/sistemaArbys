@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Grupo;
 
 use App\Grupo;
 use App\Subgerente;
+use App\Vendedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,7 @@ class GrupoController extends Controller
                 return redirect()->route('login');
         });
     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +43,6 @@ class GrupoController extends Controller
     {
         $empleado = Auth::user()->empleado;
         $laborales = $empleado->laborales->last()->oficina->laborales;
-        // dd($laborales);
         $arr = [];
         foreach ($laborales as $laboral) {
             $arr[] = $laboral->empleado;
@@ -73,10 +74,8 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Grupo $grupo)
     {
-        $grupo = Grupo::find($id);
-        // dd($grupo->vendedores->last());
         return view('grupos.view', ['grupo' => $grupo]);
     }
 
@@ -86,10 +85,20 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Grupo $grupo)
     {
-        $grupo = Grupo::find($id);
-        $subgerentes = Subgerente::where('puesto_id', 6)->get();
+        $empleado = Auth::user()->empleado;
+        $laborales = $empleado->laborales->last()->oficina->laborales;
+        $arr = [];
+        foreach ($laborales as $laboral) {
+            $arr[] = $laboral->empleado;
+        }
+        $arr = array_unique($arr);
+        $subgerentes = [];
+        foreach ($arr as $emp) {
+            $subgerentes[] = $emp->subgerente;
+        }
+        $subgerentes = array_filter($subgerentes);
         return view('grupos.edit', ['grupo' => $grupo, 'subgerentes' => $subgerentes]);
     }
 
@@ -100,21 +109,33 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Grupo $grupo)
     {
-        $grupo = Grupo::find($id);
         $grupo->update($request->all());
         return view('grupos.view', ['grupo' => $grupo]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function vendedores(Grupo $grupo) {
+        $empleado = Auth::user()->empleado;
+        $laborales = $empleado->laborales->last()->oficina->laborales;
+        $arr = [];
+        foreach ($laborales as $laboral) {
+            $arr[] = $laboral->empleado;
+        }
+        $arr = array_unique($arr);
+        $vendedores = [];
+        foreach ($arr as $emp) {
+            if(isset($emp->vendedor) and !$emp->vendedor->grupo)
+                $vendedores[] = $emp->vendedor;
+        }
+        return view('grupos.vendedores', ['grupo' => $grupo, 'vendedores' => $vendedores]);
     }
+
+    public function bind(Request $request, Grupo $grupo) {
+        $vendedor = Vendedor::find($request->vendedor_id);
+        $vendedor->grupo_id = $grupo->id;
+        $vendedor->save();
+        return redirect()->route('grupos.show', ['grupo' => $grupo]);
+    }
+
 }

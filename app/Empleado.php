@@ -39,7 +39,7 @@ class Empleado extends Model
     }
     
     public function laborales() {
-        return $this->hasMany('App\EmpleadosDatosLab');
+        return $this->hasMany('App\Laboral');
     }
     
     public function gerente() {

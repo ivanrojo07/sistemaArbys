@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Solicitante;
 use App\Transaction;
+use App\Vendedor;
 use Illuminate\Support\Facades\Auth;
 use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
@@ -58,6 +59,8 @@ class ClienteController extends Controller {
         $rfc = Cliente::where('rfc', $request->rfc)->get();
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
+        $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
+        $request['identificador'] = strtoupper(substr($request->razon, 0, 2) . substr($request->nombre, 0, 2) . substr($request->appaterno, 0, 2) . substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente = Cliente::create($request->all());
         return view('clientes.view', ['cliente' => $cliente]);
     }
@@ -132,7 +135,19 @@ class ClienteController extends Controller {
 
     public function asignar() {
         $clientes = Cliente::get();
-        return view('clientes.asignar.index', ['clientes' => $clientes]);
+        $empleado = Auth::user()->empleado;
+        $laborales = $empleado->laborales->last()->oficina->laborales;
+        $arr = [];
+        foreach ($laborales as $laboral) {
+            $arr[] = $laboral->empleado;
+        }
+        $arr = array_unique($arr);
+        $vendedores = [];
+        foreach ($arr as $emp) {
+            if(isset($emp->vendedor))
+                $vendedores[] = $emp->vendedor;
+        }
+        return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }
 
 }

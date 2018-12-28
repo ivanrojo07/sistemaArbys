@@ -48,18 +48,13 @@
 								@endforeach
 							</select>
 						</div>
-						@php($p = Auth::user()->empleado->laborales->last()->puesto_id)
+						@php($p = count(Auth::user()->empleado->laborales) > 0 ? Auth::user()->empleado->laborales->last()->puesto_id : 0)
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Puesto:</label>
 							<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
 								<option value="">Seleccionar</option>
-								@foreach ($puestos as $puesto)
-									@if($p != 1 && $puesto->id == 1)
-									@elseif($p != 1 && $puesto->id == 2)
-									@elseif($puesto->id == 3 && ($p != 1 || $p != 2))
-									@else
-										<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
-									@endif
+								@foreach($puestos as $puesto)
+									<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>f
 								@endforeach
 							</select>
 						</div>

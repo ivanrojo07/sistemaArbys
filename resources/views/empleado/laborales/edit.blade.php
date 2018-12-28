@@ -61,9 +61,7 @@
 								<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
 									<option>Sin Definir</option>
 									@foreach ($puestos as $puesto)
-										@if($puesto->id != 1)
-											<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
-										@endif
+										<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
 									@endforeach
 								</select>
 							</div>

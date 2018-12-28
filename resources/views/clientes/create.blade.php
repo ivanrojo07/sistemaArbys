@@ -22,14 +22,10 @@
 					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Tipo de Persona:</label>
-							<select type="select" name="tipopersona" class="form-control" onchange="persona(this)">
+							<select type="select" name="tipo" class="form-control" onchange="persona(this)">
 								<option value="Fisica">Fisica</option>
-								<option value="Moral">Moral</option>
+								{{-- <option value="Moral">Moral</option> --}}
 							</select>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">✱ID:</label>
-							<input type="text" class="form-control" name="identificador" readonly="">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱RFC:</label>
@@ -37,10 +33,8 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Fecha de Nacimiento:</label>
-							<input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+							<input type="date" class="form-control" id="fecha_nacimiento" name="nacimiento" required>
 						</div>
-					</div>
-					<div class="row">
 						<div id="fisica">
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Nombre</label>
@@ -48,40 +42,36 @@
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Apellido Paterno:</label>
-								<input type="text" class="form-control" name="apellidopaterno" id="appaterno">
+								<input type="text" class="form-control" name="appaterno" id="appaterno">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Apellido Materno:</label>
-								<input type="text" class="form-control" name="apellidomaterno">
+								<input type="text" class="form-control" name="apmaterno">
 							</div>
 						</div>
 						<div id="moral" style="display: none;">
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Razon Social:</label>
-								<input type="text" class="form-control" name="razonsocial" id="razonsocial">
+								<input type="text" class="form-control" name="razon" id="razonsocial">
 							</div>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Correo Electrónico:</label>
-							<input type="email" class="form-control" name="mail"  placeholder="E-mail" required>
+							<input type="email" class="form-control" name="email" required>
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">Telèfono:</label>
+							<label class="control-label">Teléfono:</label>
 							<input type="number" class="form-control" name="telefono" pattern="+[0-9]">
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Telèfono Celular:</label>
-							<input type="number" class="form-control" name="telefonocel" pattern="+[0-9]" required>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Código Postal:</label>
-							<input type="number" class="form-control" name="cp" pattern="+[0-9]" required>
+							<label class="control-label">Teléfono Celular:</label>
+							<input type="number" class="form-control" name="movil" pattern="+[0-9]">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Canal de Ventas:</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'><i class="fa fa-refresh"></i></span>
-		    					<select type="select" name="canal_ventas" class="form-control" id="canal_ventas" required>
+		    					<select type="select" name="canal" class="form-control" id="canal_ventas" required>
 		    						<option  value="">Seleccionar</option>
 		    						@foreach($canal_ventas as $canal)
 		    							<option  value="{{ $canal->nombre }}">{{ $canal->nombre }}</option>
@@ -90,11 +80,7 @@
 						   </div>
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Fecha Actual:</label>
-							<input type="date" class="form-control" id="fecha_actual" name="fecha_actual" value="{{ date('Y-m-d') }}" readonly>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Comentarios:</label>
+							<label class="control-label">Comentarios:</label>
 							<textarea class="form-control" name="comentarios"></textarea>
 						</div>
 					</div>
