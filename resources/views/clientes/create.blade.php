@@ -79,7 +79,7 @@
 		    					</select>
 						   </div>
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 form-group">
 							<label class="control-label">Comentarios:</label>
 							<textarea class="form-control" name="comentarios"></textarea>
 						</div>

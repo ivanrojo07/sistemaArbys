@@ -1,7 +1,7 @@
 <?php
 
 use App\Empleado;
-use App\EmpleadosDatosLab;
+use App\Laboral;
 use Illuminate\Database\Seeder;
 
 class LaboralsTableSeeder extends Seeder
@@ -28,7 +28,7 @@ class LaboralsTableSeeder extends Seeder
 	        'original' => 'Administrador'
     	];
 
-    	EmpleadosDatosLab::create($datos);
+    	Laboral::create($datos);
 
     }
 }

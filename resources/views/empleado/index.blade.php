@@ -19,8 +19,8 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-12">
-						@if($empleados->last()->id != 1)
-							<table class="table table-striped table-bordered table-hover" style="color: rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px;">
+						@if(count($empleados) > 0)
+							<table class="table table-striped table-bordered table-hover" style=" margin-bottom: 0px;">
 								<tr class="info">
 									<th>ID</th>
 									<th>Nombre</th>
@@ -51,7 +51,7 @@
 							</table>
 							{{ $empleados->links() }}
 						@else
-							<h4>No hay empleados agregados.</h4>
+							<h4>No hay empleados disponibles.</h4>
 						@endif
 					</div>
 				</div>

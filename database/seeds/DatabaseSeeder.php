@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             EstadosTableSeeder::class,
             EmpleadosTableSeeder::class,
             LaboralsTableSeeder::class,
+            DefaultSeeder::class,
             UsersTableSeeder::class
         ]);
     }

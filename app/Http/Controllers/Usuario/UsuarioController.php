@@ -43,7 +43,7 @@ class UsuarioController extends Controller
     public function index()
     {
         if($this->hasComponent('indice usuarios')) {
-            $usuarios = User::get();
+            $usuarios = User::whereNotIn('id', [1])->get();
             return view('seguridad.usuario.index', ['usuarios' => $usuarios]);
         }
         return redirect()->route('denegado');
@@ -52,8 +52,12 @@ class UsuarioController extends Controller
     public function create()
     {
         if($this->hasComponent('crear usuario')) {
-            $perfiles = Perfil::get();
-            $empleados = Empleado::get();
+            $perfiles = Perfil::whereNotIn('id', [1])->get();
+            $arrs = Empleado::get();
+            $empleados = [];
+            foreach ($arrs as $arr)
+                if(!$arr->user)
+                    $empleados[] = $arr;
             return view('seguridad.usuario.create', ['perfiles' => $perfiles, 'empleados' => $empleados]);
         }
         return redirect()->route('denegado');
@@ -83,94 +87,84 @@ class UsuarioController extends Controller
                     'perfil_id' => $inputs['perfil_id'],
                     'empleado_id' => $inputs['empleado_id']
                 ]);
-                return view('seguridad.usuario.view', ['usuario' => $usuario]);
+                return redirect()->route('usuarios.show', ['usuario' => $usuario]);
             }
         }
         return redirect()->route('denegado');
     }
 
-    public function show($id)
+    public function show(User $usuario)
     {
         if($this->hasComponent('ver usuario')) {
-            $usuario = User::find($id);
             $seguridad = $this->hasSecurity($usuario->perfil);
-
             if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
-            else {
-                return view('seguridad.usuario.view', ['usuario' => $usuario]);
-            }
+            return view('seguridad.usuario.view', ['usuario' => $usuario]);
         }
         return redirect()->route('denegado');
     }
 
-    public function edit($id)
+    public function edit(User $usuario)
     {
         if($this->hasComponent('editar usuario')) {
-            $usuario = User::find($id);
             $seguridad = $this->hasSecurity($usuario->perfil);
-
             if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
-            else {
-                $perfiles = Perfil::get();
-                $empleados = Empleado::get();
-                return view('seguridad.usuario.edit', ['usuario' => $usuario, 'perfiles' => $perfiles, 'empleados' => $empleados]);
-            }
+            $perfiles = Perfil::whereNotIn('id', [1])->get();
+            $arrs = Empleado::get();
+            $empleados = [];
+            foreach ($arrs as $arr)
+                if(!$arr->user || $arr->user->id == $usuario->id)
+                    $empleados[] = $arr;
+            return view('seguridad.usuario.edit', ['usuario' => $usuario, 'perfiles' => $perfiles, 'empleados' => $empleados]);
         }
         return redirect()->route('denegado');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
         if($this->hasComponent('editar usuario')) {
-            $usuario = User::find($id);
             $seguridad = $this->hasSecurity($usuario->perfil);
-
             if($request->input('perfil_id') == self::PERFIL_ID_ADMIN || $usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
-            else {
-                $rules = [
-                    'perfil_id' => 'required|integer',
-                    'empleado_id' => 'required|integer',
-                    'name' => 'required',
-                    'email' => 'nullable|email',
-                    'password' => 'nullable|string'
-                ];
-                $this->validate($request, $rules);
-                $empleado = Empleado::where('id', $request->input('empleado_id'))->first();
-                $usuario->name = $request->input('name');
-                if($request->input('email') != null) {
-                    $empleado->email = $request->input('email');
-                    $empleado->save();
-                    $empleado = $empleado->fresh();
-                    $usuario->email = $empleado->email;
-                } else {
-                    $usuario->email = $empleado->email;
-                }
-                if($request->input('password') != null)
-                    $usuario->password = bcrypt($request->input('password'));
-                $usuario->perfil_id = $request->input('perfil_id');
-                $usuario->empleado_id = $request->input('empleado_id');
-                $usuario->save();
-                $usuario = $usuario->fresh();
-                return view('seguridad.usuario.view', ['usuario' => $usuario]);
+            $rules = [
+                'perfil_id' => 'required|integer',
+                'empleado_id' => 'required|integer',
+                'name' => 'required',
+                'email' => 'nullable|email',
+                'password' => 'nullable|string'
+            ];
+            $this->validate($request, $rules);
+            $empleado = Empleado::where('id', $request->input('empleado_id'))->first();
+            $usuario->name = $request->input('name');
+            if($request->input('email') != null) {
+                $empleado->email = $request->input('email');
+                $empleado->save();
+                $empleado = $empleado->fresh();
+                $usuario->email = $empleado->email;
+            } else {
+                $usuario->email = $empleado->email;
             }
+            if($request->input('password') != null)
+                $usuario->password = bcrypt($request->input('password'));
+            $usuario->perfil_id = $request->input('perfil_id');
+            $usuario->empleado_id = $request->input('empleado_id');
+            $usuario->save();
+            $usuario = $usuario->fresh();
+            return redirect()->route('usuarios.show', ['usuario' => $usuario]);
         }
         return redirect()->route('denegado');
     }
 
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
         if($this->hasComponent('eliminar usuario')) {
             $usuario = User::find($id);
             $seguridad = $this->hasSecurity($usuario->perfil);
-
             if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
-            else
-                $usuario->delete();
-                return $this->index();
+            $usuario->delete();
+            return redirect()->route('usuarios.index');
         }
         return redirect()->route('denegado');
     }

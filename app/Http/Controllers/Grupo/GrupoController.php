@@ -138,4 +138,11 @@ class GrupoController extends Controller
         return redirect()->route('grupos.show', ['grupo' => $grupo]);
     }
 
+    public function unbind(Request $request, Grupo $grupo) {
+        $vendedor = Vendedor::find($request->vendedor_id);
+        $vendedor->grupo_id = null;
+        $vendedor->save();
+        return redirect()->route('grupos.show', ['grupo' => $grupo]);
+    }
+
 }

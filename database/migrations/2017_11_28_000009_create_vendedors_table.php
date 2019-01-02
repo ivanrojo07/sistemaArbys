@@ -20,6 +20,7 @@ class CreateVendedorsTable extends Migration
             $table->integer('grupo_id')->unsigned()->nullable();
             $table->foreign('grupo_id')->references('id')->on('grupos');
             $table->string('experto')->nullable();
+            $table->string('status')->default('Activo');
             $table->timestamps();
         });
     }

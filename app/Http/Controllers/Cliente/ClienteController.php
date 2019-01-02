@@ -60,9 +60,9 @@ class ClienteController extends Controller {
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
         $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
-        $request['identificador'] = strtoupper(substr($request->razon, 0, 2) . substr($request->nombre, 0, 2) . substr($request->appaterno, 0, 2) . substr($request->apmaterno, 0, 2) . $request->nacimiento);
+        $request['identificador'] = mb_strtoupper(mb_substr($request->razon, 0, 2) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente = Cliente::create($request->all());
-        return view('clientes.view', ['cliente' => $cliente]);
+        return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
     /**
@@ -104,7 +104,7 @@ class ClienteController extends Controller {
     public function update(Request $request, Cliente $cliente)
     {
         $cliente->update($request->except('_method','_token'));
-        return view('clientes.view', ['cliente' => $cliente]);
+        return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
     public function getSeleccion($cliente) {

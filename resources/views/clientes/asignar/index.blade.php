@@ -53,7 +53,7 @@
 										<td>{{ $vendedor->empleado->appaterno }}</td>
 										<td>{{ $vendedor->empleado->apmaterno ? $vendedor->empleado->apmaterno : 'N/A' }}</td>
 										<td>{{ $vendedor->empleado->laborales->last()->oficina->nombre }}</td>
-										<td></td>
+										<td>{{ $vendedor->status }}</td>
 									</tr>
 								@endforeach
 							</table>

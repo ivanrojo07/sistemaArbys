@@ -12,7 +12,8 @@ class Vendedor extends Model
         'id',
     	'empleado_id',
     	'grupo_id',
-        'experto'
+        'experto',
+        'status'
     ];
 
     public function clientes() {

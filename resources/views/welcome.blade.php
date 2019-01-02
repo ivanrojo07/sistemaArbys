@@ -66,14 +66,14 @@
                                             @foreach(Auth::user()->perfil->componentes as $c)
                                                 @if($c->nombre == "indice perfiles")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{url ('perfil')}}','Perfiles')">
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('perfils.index')}}','Perfiles')">
                                                             <i class="fa fa-universal-access"></i> Perfiles
                                                         </a>
                                                     </li>
                                                 @endif
                                                 @if($c->nombre == "indice usuarios")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{url ('usuario')}}','Usuarios')">
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('usuarios.index')}}','Usuarios')">
                                                             <i class="fa fa-user-circle"></i> Usuarios
                                                         </a>
                                                     </li>
@@ -259,7 +259,7 @@
                                                 @endif
                                                 @if($c->nombre == "indice oficinas")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('oficina') }}','Oficina')">
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('oficinas.index') }}','Oficina')">
                                                             <i class="fa fa-building"></i> Oficina
                                                         </a>
                                                     </li>

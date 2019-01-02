@@ -12,13 +12,13 @@
                     @foreach(Auth::user()->perfil->componentes as $componente)
 	                    @if($componente->nombre == 'indice oficinas')
 							<div class="col-sm-4 text-center">
-								<a href="{{ route('oficina.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
+								<a href="{{ route('oficinas.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
 							</div>
 						@endif
 					@endforeach
 				</div>
 			</div>
-			<form action="{{ route('oficina.store') }}" method="post">
+			<form action="{{ route('oficinas.store') }}" method="post">
 				{{ csrf_field() }}
 				<div class="panel-body">
 					<div class="row">

@@ -10,15 +10,15 @@
 						<h4>Datos de la Oficina:</h4>
 					</div>
                     @foreach(Auth::user()->perfil->componentes as $componente)
-                    @if($componente->nombre == 'indice oficinas')
-					<div class="col-sm-4 text-center">
-						<a href="{{ route('oficina.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
-					</div>
-					@endif
+	                    @if($componente->nombre == 'indice oficinas')
+							<div class="col-sm-4 text-center">
+								<a href="{{ route('oficinas.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Oficinas</strong></button></a>
+							</div>
+						@endif
 					@endforeach
 				</div>
 			</div>
-			<form method="post" action="{{ route('oficina.update', ['id' => $oficina->id]) }}">
+			<form method="post" action="{{ route('oficinas.update', ['id' => $oficina->id]) }}">
 			{{ csrf_field() }}
 			<input type="hidden" name="_method" value="PUT">
 				<div class="panel-body">
@@ -50,11 +50,7 @@
 									<select class="form-control" name="estado_id" id="estado">
 										<option value="0">Seleccionar</option>
 										@foreach($estados as $estado)
-										@if($estado->id == $oficina->estado_id)
-										<option value="{{ $estado->id }}" selected="">{{ $estado->nombre }}</option>
-										@else
-										<option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
-										@endif
+											<option value="{{ $estado->id }}" {{ $estado->id == $oficina->estado_id ? 'selected' : '' }}>{{ $estado->nombre }}</option>
 										@endforeach
 									</select>
 								</div>

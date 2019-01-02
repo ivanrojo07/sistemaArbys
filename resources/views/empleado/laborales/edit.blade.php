@@ -109,7 +109,7 @@
 					</div>
 					<div class="panel-footer">
 						<div class="row">
-							<div class="col-sm-4 col-sm-offset-4 text-center form-group">
+							<div class="col-sm-4 col-sm-offset-4 text-center">
 								<button type="submit" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Guardar</button>
 							</div>
 							<div class="col-sm-4 text-right text-danger">

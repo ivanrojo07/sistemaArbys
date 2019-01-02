@@ -10,11 +10,20 @@
 						<h4>Datos del Usuario:</h4>
 					</div>
                     @foreach(Auth::user()->perfil->componentes as $componente)
-                    @if($componente->nombre == 'indice usuarios')
-                    <div class="col-sm-4 text-center">
-                        <a href="{{ route('usuario.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Usuarios</strong></button></a>
-                    </div>
-                    @endif
+                        @if($componente->nombre == 'indice usuarios')
+                            <div class="col-sm-4 text-center">
+                                <a href="{{ route('usuarios.index') }}" class="btn btn-primary">
+                                    <i class="fa fa-bars"></i><strong> Lista de Usuarios</strong>
+                                </a>
+                            </div>
+                        @endif
+                        @if($componente->nombre == 'editar usuario')
+                            <div class="col-sm-4 text-center">
+                                <a href="{{ route('usuarios.edit', ['usuario' => $usuario]) }}" class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i> Editar
+                                </a>
+                            </div>
+                        @endif
                     @endforeach
 				</div>
 			</div>
@@ -43,15 +52,6 @@
                         <input type="text" name="perfil" class="form-control" value="{{ $usuario->perfil->nombre }}" readonly="">
                     </div>
                 </div>
-                @foreach(Auth::user()->perfil->componentes as $componente)
-                @if($componente->nombre == 'editar usuario')
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4 text-center">
-                        <a href="{{ route('usuario.edit', ['id' => $usuario->id]) }}"><button class="btn btn-warning"><i class="fa fa-check-pencil" aria-hidden="true"></i> Editar</button></a>
-                    </div>
-                </div>
-                @endif
-                @endforeach
             </div>
 		</div>
 	</div>

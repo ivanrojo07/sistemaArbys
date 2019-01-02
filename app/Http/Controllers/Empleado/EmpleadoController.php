@@ -35,7 +35,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         // if($this->hasComponent('indice empleados')) {
-        $empleados = Empleado::sortable()->paginate(10);
+        $empleados = Empleado::whereNotIn('id', [1])->sortable()->paginate(10);
         return view('empleado.index', ['empleados' => $empleados]);
         // }
         // return redirect()->route('denegado');

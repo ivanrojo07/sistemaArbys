@@ -50,6 +50,7 @@ Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
 Route::resource('grupos', 'Grupo\GrupoController');
 Route::get('grupos/{grupo}/vendedores', 'Grupo\GrupoController@vendedores')->name('grupos.vendedores');
 Route::post('grupos/{grupo}/vendedores', 'Grupo\GrupoController@bind')->name('grupos.bind');
+Route::delete('grupos/{grupo}/vendedores', 'Grupo\GrupoController@unbind')->name('grupos.unbind');
 
 // PRECARGAS
 Route::resource('contratos','Precargas\TipoContratoController');
@@ -116,12 +117,12 @@ Route::get('region', 'Region\RegionController@index')->name('region.index');
 Route::get('region/{region}','Region\RegionController@estados');
 Route::get('estado', 'Estado\EstadoController@index')->name('estado.index');
 Route::get('estado/{estado}','Estado\EstadoController@region');
-Route::resource('oficina', 'Oficina\OficinaController');
+Route::resource('oficinas', 'Oficina\OficinaController');
 Route::resource('puntoDeVenta', 'PuntoDeVenta\PuntoDeVentaController');
 
 // SEGURIDAD
-Route::resource('usuario', 'Usuario\UsuarioController');
-Route::resource('perfil', 'Perfil\PerfilController');
+Route::resource('usuarios', 'Usuario\UsuarioController');
+Route::resource('perfils', 'Perfil\PerfilController');
 
 // AUTH
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

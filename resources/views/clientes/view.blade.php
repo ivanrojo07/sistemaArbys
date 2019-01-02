@@ -6,17 +6,22 @@
 		<div class="panel-default">
 			<div class="panel-heading">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<h4>Datos del Cliente:</h4>
 					</div>
-					<div class="col-sm-4 text-center">
-						<a href="{{ route('clientes.pagos.create', ['id' => $cliente->id]) }}" class="btn btn-info">
-							<strong>Pagos</strong>
+					<div class="col-sm-3 text-center">
+						<a href="{{ route('clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-warning">
+							<i class="fa fa-pencil"></i><strong> Editar Cliente</strong>
 						</a>
 					</div>
-					<div class="col-sm-4 text-center">
+					<div class="col-sm-3 text-center">
+						<a href="{{ route('clientes.create') }}" class="btn btn-success">
+							<i class="fa fa-plus"></i><strong> Agregar Cliente</strong>
+						</a>
+					</div>
+					<div class="col-sm-3 text-center">
 						<a href="{{ route('clientes.index') }}" class="btn btn-primary">
-							<strong>Lista de Clientes</strong>
+							<i class="fa fa-bars"></i><strong> Lista de Clientes</strong>
 						</a>
 					</div>
 				</div>
@@ -25,7 +30,7 @@
 				<div class="row">
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Tipo de Persona:</label>
-						<input type="text" name="tipopersona" class="form-control" value="{{ $cliente->tipopersona }}" readonly="">
+						<input type="text" name="tipopersona" class="form-control" value="{{ $cliente->tipo }}" readonly="">
 					</div>
 					<div class="col-sm-3 form-group">
 						<label class="control-label">ID:</label>
@@ -42,33 +47,33 @@
 				</div>
 				<div class="row">
 					@if($cliente->tipopersona != 'Moral')
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Nombre:</label>
-						<input type="text" name="nombre" class="form-control" value="{{ $cliente->nombre }}" readonly="">
-					</div>
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Apellido Paterno:</label>
-						<input type="text" name="apellidopaterno" class="form-control" value="{{ $cliente->apellidopaterno }}" readonly="">
-					</div>
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Apellido Materno:</label>
-						<input type="text" name="apellidomaterno" class="form-control" value="{{ $cliente->apellidomaterno ? $cliente->apellidomaterno  : 'N/A' }}" readonly="">
-					</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Nombre:</label>
+							<input type="text" name="nombre" class="form-control" value="{{ $cliente->nombre }}" readonly="">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Apellido Paterno:</label>
+							<input type="text" name="apellidopaterno" class="form-control" value="{{ $cliente->appaterno }}" readonly="">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Apellido Materno:</label>
+							<input type="text" name="apellidomaterno" class="form-control" value="{{ $cliente->apmaterno ? $cliente->apmaterno  : 'N/A' }}" readonly="">
+						</div>
 					@else
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Razón Social:</label>
-						<input type="text" name="razonsocial" class="form-control" value="{{ $cliente->razonsocial }}" readonly="">
-					</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Razón Social:</label>
+							<input type="text" name="razonsocial" class="form-control" value="{{ $cliente->razon }}" readonly="">
+						</div>
 					@endif
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Fecha de Nacimiento:</label>
-						<input type="date" name="fecha_nacimiento" class="form-control" value="{{ $cliente->fecha_nacimiento }}" readonly="">
+						<input type="date" name="fecha_nacimiento" class="form-control" value="{{ $cliente->nacimiento }}" readonly="">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Correo Electrónico:</label>
-						<input type="text" name="mail" class="form-control" value="{{ $cliente->mail }}" readonly="">
+						<input type="text" name="mail" class="form-control" value="{{ $cliente->email }}" readonly="">
 					</div>
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Teléfono:</label>
@@ -76,32 +81,21 @@
 					</div>
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Teléfono Celular:</label>
-						<input type="text" name="telefonocel" class="form-control" value="{{ $cliente->telefonocel }}" readonly="">
+						<input type="text" name="telefonocel" class="form-control" value="{{ $cliente->movil ? $cliente->movil : 'N/A' }}" readonly="">
 					</div>
 					<div class="col-sm-3 form-group">
-						<label class="control-label">Código Postal:</label>
-						<input type="text" name="cp" class="form-control" value="{{ $cliente->cp }}" readonly="">
+						<label class="control-label">Canal de Ventas:</label>
+						<input type="text" name="canal_ventas" class="form-control" value="{{ $cliente->canal }}" readonly="">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Canal de Ventas:</label>
-						<input type="text" name="canal_ventas" class="form-control" value="{{ $cliente->canal_ventas }}" readonly="">
-					</div>
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Fecha de Actualización:</label>
 						<input type="text" name="updated_at" class="form-control" value="{{ substr($cliente->updated_at, 0, 10) }}" readonly="">
 					</div>
 					<div class="col-sm-6 form-group">
 						<label class="control-label">Comentarios:</label>
-						<textarea name="comentarios" class="form-control" readonly="">{{ $cliente->comentarios }}</textarea>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12 text-center">
-						<a href="{{ route('clientes.edit', ['id' => $cliente->id]) }}" class="btn btn-warning">
-							<strong>Editar</strong>
-						</a>
+						<textarea name="comentarios" class="form-control" readonly="">{{ $cliente->comentarios ? $cliente->comentarios : 'N/A' }}</textarea>
 					</div>
 				</div>
 			</div>
