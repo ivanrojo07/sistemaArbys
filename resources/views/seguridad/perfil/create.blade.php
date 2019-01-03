@@ -1,6 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
+
 <div class="container">
     <div class="panel panel-group">
         <div class="panel-default">
@@ -10,16 +11,18 @@
                         <h4>Datos del Perfil:</h4>
                     </div>
                     @foreach(Auth::user()->perfil->componentes as $componente)
-                    @if($componente->nombre == 'indice perfiles')
-                    <div class="col-sm-4 text-center">
-                        <a href="{{ route('perfil.index') }}"><button class="btn btn-primary"><strong><i class="fa fa-eye" aria-hidden="true"></i> Ver Perfiles</strong></button></a>
-                    </div>
-                    @endif
+                        @if($componente->nombre == 'crear perfil')
+                            <div class="col-sm-4 text-center">
+                                <a class="btn btn-primary" href="{{ route('perfils.index') }}">
+                                    <i class="fa fa-bars"></i><strong> Lista de Perfiles</strong>
+                                </a>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
-            <form action="{{ route('perfil.store') }}" method="post">    
-            {{ csrf_field() }}
+            <form action="{{ route('perfils.store') }}" method="post">    
+                {{ csrf_field() }}
                 <div class="panel-body">
                     <div class="row">
                         <div class="form-group col-sm-4">
@@ -29,64 +32,86 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table">
+                            <table class="table" style="margin-bottom: 0px;">
                                 <tr class="info">
                                     <th colspan="3">
                                         <label class="control-label">Modulos:</label>
                                     </th>
                                 </tr>
-                                @php($size = 0)
+                                @php($size = [])
+                                @php($l = 0)
+                                @php($p = 0)
                                 @foreach($modulos as $modulo)
-                                @if(count($modulo->componentes) > $size)
-                                @php($size = count($modulo->componentes))
-                                @endif
+                                    @if($p % 3 == 0)
+                                        @php($size[$l++] = 0)
+                                    @endif
+                                    @php($p++)
+                                @endforeach
+                                @php($l = 0)
+                                @php($p = 0)
+                                @foreach($modulos as $modulo)
+                                    @if($p % 3 == 0)
+                                        @php($l++)
+                                    @endif
+                                    @if(count($modulo->componentes) > $size[$l-1])
+                                        @php($size[$l-1] = count($modulo->componentes))
+                                    @endif
+                                    @php($p++)
                                 @endforeach
                                 @php($j = 0)
+                                @php($q = 0)
                                 @foreach($modulos as $modulo)
-                                @if($j % 3 == 0)
-                                <tr>
-                                @endif
+                                    @if($j % 3 == 0)
+                                        @php($q++)
+                                        <tr>
+                                    @endif
                                     @php($j++)
                                     @if(Auth::user()->perfil->id != 1 && $modulo->nombre == 'seguridad')
                                     @else
-                                    <td class="col-sm-4" style="border: none; padding: 0px;">
-                                        <table class="table table-hover table-bordered" style="margin-bottom: 0px; background: #fff;">
-                                            <tr style="background: #f4f4f4;">
-                                                <th class="col-sm-10">
-                                                    <label class="control-label">{{ $modulo->nombre}}</label>
-                                                </th>
-                                                <td class="col-sm-2 text-center">
-                                                    <input type="checkbox" id="mod{{ $j }}">
-                                                </td>
-                                            </tr>
-                                            @php($i = 0)
-                                            @foreach($modulo->componentes as $componente)
-                                            <tr>
-                                                <td class="col-sm-10">{{ $componente->nombre }}</td>
-                                                <td class="col-sm-2 text-center">
-                                                    <input type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            @if($size > count($modulo->componentes))
-                                            <tr>
-                                                <td colspan="2" style="height: {{ 40*($size - count($modulo->componentes)) }}px; opacity: 1.0; box-shadow: none;">
-                                                </td>
-                                            </tr>
-                                            @endif
-                                        </table>
-                                    </td>
+                                        <td class="col-sm-4" style="border: none; padding: 0px;">
+                                            <table class="table table-sm table-hover table-bordered" style="margin-bottom: 0px; background: #fff;">
+                                                <tr style="background: #f4f4f4;">
+                                                    <th class="col-sm-10">
+                                                        <label class="control-label">{{ $modulo->nombre}}</label>
+                                                    </th>
+                                                    <td class="col-sm-2 text-center">
+                                                        <input type="checkbox" id="mod{{ $j }}">
+                                                    </td>
+                                                </tr>
+                                                @php($i = 0)
+                                                @foreach($modulo->componentes as $componente)
+                                                    <tr>
+                                                        <td class="col-sm-10">{{ $componente->nombre }}</td>
+                                                        <td class="col-sm-2 text-center">
+                                                            <input type="checkbox" id="cmp{{ ++$i }}mod{{ $j }}" name="componente_id[]" value="{{ $componente->id }}">
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @if($size[$q-1] > count($modulo->componentes))
+                                                    <tr>
+                                                        <td colspan="2" style="height: {{ 40*($size[$q-1] - count($modulo->componentes)) }}px; opacity: 1.0; box-shadow: none;"></td>
+                                                    </tr>
+                                                @endif
+                                            </table>
+                                        </td>
                                     @endif
-                                 @if($j % 3 == 0)
-                                </tr>
-                                @endif
+                                    @if($j % 3 == 0)
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="panel-footer">
                     <div class="row">
                         <div class="col-sm-4 col-sm-offset-4 text-center">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Guardar</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-check"></i> Guardar
+                            </button>
+                        </div>
+                        <div class="col-sm-4 text-right text-danger">
+                            <h5>✱Campos Requeridos</h5>
                         </div>
                     </div>
                 </div>
@@ -94,6 +119,12 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    td {
+        height: 20px;
+    }
+</style>
 
 <script type="text/javascript">
 

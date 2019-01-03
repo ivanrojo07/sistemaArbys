@@ -134,18 +134,24 @@ class ClienteController extends Controller {
     }
 
     public function asignar() {
-        $clientes = Cliente::get();
         $empleado = Auth::user()->empleado;
-        $laborales = $empleado->laborales->last()->oficina->laborales;
-        $arr = [];
-        foreach ($laborales as $laboral) {
-            $arr[] = $laboral->empleado;
-        }
-        $arr = array_unique($arr);
-        $vendedores = [];
-        foreach ($arr as $emp) {
-            if(isset($emp->vendedor))
-                $vendedores[] = $emp->vendedor;
+        if($empleado->id == 1) {
+            $clientes = Cliente::get();
+            $vendedores = Vendedor::whereNotIn('id', [1])->get();
+        } else {
+            $laborales = $empleado->laborales->last()->oficina->laborales;
+            $arr = [];
+            foreach ($laborales as $laboral)
+                $arr[] = $laboral->empleado;
+            $arr = array_unique($arr);
+            $vendedores = [];
+            foreach ($arr as $emp)
+                if(isset($emp->vendedor))
+                    $vendedores[] = $emp->vendedor;
+            $arr = [];
+            foreach ($vendedores as $vendedor)
+                $arr[] = $vendedor->id;
+            $clientes = Cliente::where('vendedor_id', $arr)->get();
         }
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }

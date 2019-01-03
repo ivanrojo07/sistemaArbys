@@ -10,56 +10,80 @@
 						<h4>Perfiles:</h4>
 					</div>
                     @foreach(Auth::user()->perfil->componentes as $componente)
-                    @if($componente->nombre == 'crear perfil')
-                    <div class="col-sm-4 text-center">
-                        <a class="btn btn-success" href="{{ route('perfil.create') }}"><strong><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Perfil</strong></a>
-                    </div>
-                    @endif
+                        @if($componente->nombre == 'crear perfil')
+                            <div class="col-sm-4 text-center">
+                                <a class="btn btn-success" href="{{ route('perfils.create') }}">
+                                    <i class="fa fa-plus"></i><strong> Agregar Perfil</strong>
+                                </a>
+                            </div>
+                        @endif
                     @endforeach
 				</div>
 			</div>
 			<div class="panel-body">
 				<div class="row">
                     <div class="col-sm-12">
-                        @if($perfiles->last()->id == 1)
-                        <h4>Aún no hay perfiles agregados.</h4>
+                        @if(count($perfiles) > 0)
+                            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
+                                <tr class="info">
+                                    <th class="col-sm-3">Nombre</th>
+                                    <th class="col-sm-6">Módulos</th>
+                                    <th class="col-sm-3">Acciones</th>
+                                </tr>
+                                @foreach($perfiles as $perfil)
+                                    <tr>
+                                        <td>{{ $perfil->nombre }}</td>
+                                        <td>
+                                            @php($arr = [])
+                                            @php($i = 0)
+                                            @foreach($perfil->componentes as $componente)
+                                                @php($flag = true)
+                                                @if($i == 0)
+                                                    @php($arr[] = $componente->modulo->nombre)
+                                                    @php($i++)
+                                                @else
+                                                    @foreach($arr as $modulo)
+                                                        @if($modulo == $componente->modulo->nombre)
+                                                            @php($flag = false)
+                                                        @endif
+                                                    @endforeach
+                                                    @if($flag)
+                                                        @php($arr[] = $componente->modulo->nombre)
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                            @foreach($arr as $modulo)
+                                                {{ $modulo }}.
+                                            @endforeach
+                                        </td>
+                                        <td class="text-center">
+                                            @foreach(Auth::user()->perfil->componentes as $componente)
+                                                @if($componente->nombre == 'ver perfil')
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('perfils.show', ['perfil' => $perfil]) }}">
+                                                        <i class="fa fa-eye"></i> Ver
+                                                    </a>
+                                                @endif
+                                                @if($componente->nombre == 'editar perfil')
+                                                    <a class="btn btn-warning btn-sm" href="{{ route('perfils.edit', ['perfil' => $perfil]) }}">
+                                                        <i class="fa fa-pencil"></i> Editar
+                                                    </a>
+                                                @endif
+                                                @if($componente->nombre == 'eliminar perfil')
+                                                    <form method="post" action="{{ route('perfils.destroy', ['perfil' => $perfil]) }}" style="display: inline;">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        {{ csrf_field() }}
+                                                        <button class="btn btn-danger btn-sm" type="submit">
+                                                            <i class="fa fa-times"></i> Borrar
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
                         @else
-                        <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
-                            @foreach($perfiles as $perfil)
-                            @if($perfil->id == 1)
-                            @else
-                            <?php $seguridad = false; ?>
-                            @foreach($perfil->componentes as $componente)
-                            @if($componente->modulo->nombre == "seguridad")
-                            <?php $seguridad = true; ?>
-                            @endif
-                            @endforeach
-                            @if(Auth::user()->perfil->id != 1 && $seguridad)
-                            @else
-                            <tr>
-                                <td class="col-sm-9">{{ $perfil->nombre }}</td>
-                                <td class="text-center col-sm-3">
-                                    <form method="post" action="{{ route('perfil.destroy', ['id' => $perfil->id]) }}" style="">
-                                        @foreach(Auth::user()->perfil->componentes as $componente)
-                                        @if($componente->nombre == 'ver perfil')
-                                        <a class="btn btn-primary btn-sm" href="{{ route('perfil.show', ['id' => $perfil->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i><strong> Ver</strong></a>
-                                        @endif
-                                        @if($componente->nombre == 'editar perfil')
-                                        <a class="btn btn-warning btn-sm" href="{{ route('perfil.edit', ['id' => $perfil->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i><strong> Editar</strong></a>
-                                        @endif
-                                        @if($componente->nombre == 'eliminar perfil')
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        {{ csrf_field() }}
-                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash" aria-hidden="true"></i><strong> Borrar</strong></button>
-                                        @endif
-                                        @endforeach
-                                    </form>
-                                </td>
-                            </tr>
-                            @endif
-                            @endif
-                            @endforeach
-                        </table>
+                            <h4>No hay perfiles disponibles.</h4>
                         @endif
                     </div>
 				</div>
