@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Vendedor;
 
+use App\Vendedor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,62 +15,20 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        //
+        $vendedores = Vendedor::whereNotIn('id', [1])->get();
+        return view('vendedores.index', ['vendedores' => $vendedores]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function activar(Vendedor $vendedor) {
+        $vendedor->status = 'Activo';
+        $vendedor->save();
+        return redirect()->route('vendedors.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function bajar(Vendedor $vendedor) {
+        $vendedor->status = 'Baja';
+        $vendedor->save();
+        return redirect()->route('vendedors.index');
     }
 
     /**
@@ -78,8 +37,11 @@ class VendedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vendedor $vendedor)
     {
-        //
+        if($vendedor->status == 'Activo' || count($vendedor->clientes) > 0 || $vendedor->grupo) {
+            dd('¡Error, vendedor no puede ser eliminado, todavía persisten relaciones!');
+            return redirect()->route('vendedors.index');
+        }
     }
 }

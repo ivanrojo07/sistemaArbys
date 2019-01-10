@@ -45,39 +45,35 @@
 					</div>	
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="numinter">Numero interior:</label>
-						<dd>{{ $provedore->numinter }}</dd>
-					</div>	
-				</div>
-				<div class="row" id="perfisica">
-					<div class="form-group col-sm-3">
-							<label class="control-label" for="colonia">Colonia:</label>
-							<dd>{{ $provedore->colonia }}</dd>
-						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="municipio">Delegación o Municipio:</label>
-							<dd>{{ $provedore->municipio }}</dd>
-						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="ciudad">Ciudad:</label>
-							<dd>{{ $provedore->ciudad }}</dd>
-						</div>
-						<div class="form-group col-sm-3">
-							<label class="control-label" for="estado">Estado:</label>
-							<dd>{{ $provedore->estado }}</dd>
-						</div>
-				</div>
-				<div class="row" id="perfisica">
-					<div class="form-group col-sm-3">
-						<label class="control-label" for="calle1">Entre calle:</label>
-						<dd>{{ $provedore->calle1 }}</dd>
+						<dd>{{ $provedore->numinter ? $provedore->numinter : 'N/A' }}</dd>
 					</div>
 					<div class="form-group col-sm-3">
-						<label class="control-label" for="calle2">Y calle:</label>
-						<dd>{{ $provedore->calle2 }}</dd>
+						<label class="control-label" for="colonia">Colonia:</label>
+						<dd>{{ $provedore->colonia }}</dd>
 					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-3">
+						<label class="control-label" for="estado">Estado:</label>
+						<dd>{{ $provedore->estado }}</dd>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label" for="ciudad">Ciudad:</label>
+						<dd>{{ $provedore->ciudad }}</dd>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label" for="municipio">Municipio:</label>
+						<dd>{{ $provedore->municipio }}</dd>
+					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label" for="calle1">Entre calles:</label>
+						<dd>{{ $provedore->calle1 ? $provedore->calle1 : 'N/A' }}</dd>
+					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-sm-3">
 						<label class="control-label" for="referencia">Referencia:</label>
-						<dd>{{ $provedore->referencia }}</dd>
+						<dd>{{ $provedore->referencia ? $provedore->referencia : 'N/A' }}</dd>
 					</div>
 				</div>
 				<div class="row">

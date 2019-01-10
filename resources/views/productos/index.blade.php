@@ -13,18 +13,12 @@
 						</div>
 					</div>
 					<div class="col-sm-4 text-center">
-						{{-- <div class="input-group"> --}}
-							<input type="text" id="producto" name="kword" value="{{$request->kword}}" class="form-control" placeholder="Buscar..." autofocus>
-					        {{-- <span class="input-group-btn">
-								<a class="btn btn-default" id="trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
-							</span> --}}
-						{{-- </div> --}}
+						<input type="text" id="producto" name="kword" value="{{$request->kword}}" class="form-control" placeholder="Buscar..." autofocus>
 					</div>
 					<div class="col-sm-2 text-center">
 						<label class="control-label">Carros:</label>
 						<div class="row">
 							<input type="radio" @if ($request->type == "CARRO")
-								{{-- expr --}}
 								checked
 							@endif name="type" id="carro" value="CARRO">
 						</div>

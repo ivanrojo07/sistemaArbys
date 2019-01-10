@@ -45,6 +45,9 @@ Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
+Route::resource('vendedors','Vendedor\VendedorController');
+Route::get('vendedors/{vendedor}/baja','Vendedor\VendedorController@bajar')->name('vendedors.baja');
+Route::get('vendedors/{vendedor}/alta','Vendedor\VendedorController@activar')->name('vendedors.alta');
 
 // GRUPOS
 Route::resource('grupos', 'Grupo\GrupoController');
@@ -83,7 +86,8 @@ Route::get('clientes/{cliente}/pagos/{pago}/follow', 'Cliente\ClientePagoControl
 Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
 Route::resource('clientes.prestamos', 'Cliente\ClientePrestamoController');
-Route::get('asignarClientes', 'Cliente\ClienteController@asignar');
+Route::get('asignarClientes', 'Cliente\ClienteController@asignar')->name('clientes.asignar');
+Route::post('unirCliente', 'Cliente\ClienteController@unir')->name('clientes.unir');
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');

@@ -151,9 +151,16 @@ class ClienteController extends Controller {
             $arr = [];
             foreach ($vendedores as $vendedor)
                 $arr[] = $vendedor->id;
-            $clientes = Cliente::where('vendedor_id', $arr)->get();
+            $clientes = Cliente::whereIn('vendedor_id', $arr)->get();
         }
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
+    }
+
+    public function unir(Request $request) {
+        $cliente = Cliente::find($request->cliente_id);
+        $cliente->vendedor_id = $request->vendedor_id;
+        $cliente->save();
+        return redirect()->route('clientes.asignar');
     }
 
 }

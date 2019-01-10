@@ -29,40 +29,36 @@
 				<dd>{{ $provedore->tipopersona }}</dd>
 			</div>
 			<div class="form-group col-sm-3">
-				<label class="control-label" for="alias">Alias:</label>
-				<dd>{{ $provedore->alias }}</dd>
-			</div>
-			<div class="form-group col-sm-3">
 				<label class="control-label" for="rfc">RFC:</label>
 				<dd>{{ $provedore->rfc }}</dd>
 			</div>
+			@if ($provedore->tipopersona == "Fisica")
+			<div id="perfisica">
+				<div class="col-sm-3">
+					<label class="control-label" for="nombre">Nombre(s):</label>
+					<dd>{{ $provedore->nombre }}</dd>
+				</div>
+				<div class="col-sm-3">
+					<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
+					<dd>{{ $provedore->apellidopaterno }}</dd>
+				</div>
+				<div class="col-sm-3">
+					<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
+					<dd>{{ $provedore->apellidomaterno }}</dd>
+				</div>
+			</div>
+			@else
+				<div id="permoral">
+					<div class="col-sm-3">
+						<label class="control-label" for="razonsocial">Razon Social:</label>
+						<dd>{{ $provedore->razonsocial }}</dd>
+					</div>
+				</div>
+			@endif
 			<div class="form-group col-sm-3">
-				<label class="control-label" for="vendedor">Vendedor:</label>
-				<dd>{{ $provedore->vendedor }}</dd>
+				<label class="control-label" for="alias">Alias:</label>
+				<dd>{{ $provedore->alias }}</dd>
 			</div>
 		</div>
-		@if ($provedore->tipopersona == "Fisica")
-		<div class="row" id="perfisica">
-			<div class="col-sm-3">
-				<label class="control-label" for="nombre">Nombre(s):</label>
-				<dd>{{ $provedore->nombre }}</dd>
-			</div>
-			<div class="col-sm-3">
-				<label class="control-label" for="apellidopaterno">Apellido Paterno:</label>
-				<dd>{{ $provedore->apellidopaterno }}</dd>
-			</div>
-			<div class="col-sm-3">
-				<label class="control-label" for="apellidomaterno">Apellido Materno:</label>
-				<dd>{{ $provedore->apellidomaterno }}</dd>
-			</div>
-		</div>
-		@else
-		<div class="row" id="permoral">
-			<div class="col-sm-3">
-				<label class="control-label" for="razonsocial">Razon Social:</label>
-				<dd>{{ $provedore->razonsocial }}</dd>
-			</div>
-		</div>
-		@endif
 	</div>
 </div>

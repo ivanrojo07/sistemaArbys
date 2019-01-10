@@ -42,17 +42,21 @@ class GrupoController extends Controller
     public function create()
     {
         $empleado = Auth::user()->empleado;
-        $laborales = $empleado->laborales->last()->oficina->laborales;
-        $arr = [];
-        foreach ($laborales as $laboral) {
-            $arr[] = $laboral->empleado;
+        if($empleado->id == 1) {
+            $subgerentes = Subgerente::get();
+        } else {
+            $laborales = $empleado->laborales->last()->oficina->laborales;
+            $arr = [];
+            foreach ($laborales as $laboral) {
+                $arr[] = $laboral->empleado;
+            }
+            $arr = array_unique($arr);
+            $subgerentes = [];
+            foreach ($arr as $emp) {
+                $subgerentes[] = $emp->subgerente;
+            }
+            $subgerentes = array_filter($subgerentes);
         }
-        $arr = array_unique($arr);
-        $subgerentes = [];
-        foreach ($arr as $emp) {
-            $subgerentes[] = $emp->subgerente;
-        }
-        $subgerentes = array_filter($subgerentes);
         return view('grupos.create', ['subgerentes' => $subgerentes]);
     }
 

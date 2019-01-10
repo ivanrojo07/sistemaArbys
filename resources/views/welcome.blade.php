@@ -173,6 +173,11 @@
                                                             @endforeach
                                                         </ul>
                                                     </li>
+                                                    <li>
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index') }}','Buscar Empleado')">
+                                                            <i class="fa fa-user-o"></i> Vendedores
+                                                        </a>
+                                                    </li>
                                                     @break
                                                 @endif
                                             @endforeach

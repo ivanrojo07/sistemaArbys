@@ -19,12 +19,10 @@ class ClienteProductoController extends Controller
      */
     public function index(Cliente $cliente, Request $request)
     {
-        // dd($request->min);
         $min = $request->min;
         $max = $request->max;
         $desc = $request->kword;
         $tipo = $request->type;
-        // dd($min);
         $productos = new Product();
         if(isset($desc)){
             $wordsquery = explode(' ',$desc);
@@ -46,14 +44,10 @@ class ClienteProductoController extends Controller
         }
         if(isset($min) && !isset($max)){
             $productos = $productos->whereBetween('precio_lista', [intval($min), 10000000]);
-            // dd(2);
-            // dd($productos);
         }
 
         if(!isset($min) && isset($max)) {
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
-            // dd(3);
-            // dd($productos);
         }
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request'=>$request]);
