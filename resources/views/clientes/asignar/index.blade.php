@@ -7,7 +7,7 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-sm-4">
-						<h4>Vendedores de la oficina {{ Auth::user()->empleado->laborales->last()->oficina->nombre }}:</h4>
+						<h4>Vendedores:</h4>
 					</div>
 				</div>
 			</div>
