@@ -42,12 +42,12 @@
 									@foreach($clientes as $cliente)
 										<tr class="active">
 											<td>{{ $cliente->identificador }}</td>
-											<td>{{ $cliente->tipopersona }}</td>
+											<td>{{ $cliente->tipo }}</td>
 											<td>
-												@if ($cliente->tipopersona == "Fisica")
-													{{ $cliente->nombre }} {{ $cliente->apellidopaterno }} {{ $cliente->apellidomaterno }}
+												@if ($cliente->tipo == "Física")
+													{{ $cliente->nombre }} {{ $cliente->appaterno }} {{ $cliente->apmaterno }}
 												@else
-													{{ $cliente->razonsocial }}
+													{{ $cliente->razon }}
 												@endif
 											</td>
 											<td>{{ strtoupper($cliente->rfc) }}</td>

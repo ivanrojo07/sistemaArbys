@@ -88,7 +88,7 @@
 									</tr>
 									@foreach($clientes as $cliente)
 										<tr>
-											<td>{{ $cliente->nombre }} {{ $cliente->appaterno }}</td>
+											<td>{{ $cliente->razon }}{{ $cliente->nombre }} {{ $cliente->appaterno }}</td>
 											<td>{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}</td>
 											<td class="text-center">
 												<input type="radio" name="cliente_id" value="{{ $cliente->id }}" required="">

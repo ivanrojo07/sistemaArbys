@@ -60,7 +60,7 @@ class ClienteController extends Controller {
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
         $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
-        $request['identificador'] = mb_strtoupper(mb_substr($request->razon, 0, 2) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
+        $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente = Cliente::create($request->all());
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
@@ -103,6 +103,8 @@ class ClienteController extends Controller {
      */
     public function update(Request $request, Cliente $cliente)
     {
+        $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
+        $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente->update($request->except('_method','_token'));
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }

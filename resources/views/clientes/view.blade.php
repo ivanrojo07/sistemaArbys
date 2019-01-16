@@ -44,9 +44,7 @@
 						<label class="control-label">Fecha de Registro:</label>
 						<input type="date" name="created_at" class="form-control" value="{{ substr($cliente->created_at, 0, 10) }}" readonly="">
 					</div>
-				</div>
-				<div class="row">
-					@if($cliente->tipopersona != 'Moral')
+					@if($cliente->tipo != 'Moral')
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Nombre:</label>
 							<input type="text" name="nombre" class="form-control" value="{{ $cliente->nombre }}" readonly="">
@@ -59,18 +57,16 @@
 							<label class="control-label">Apellido Materno:</label>
 							<input type="text" name="apellidomaterno" class="form-control" value="{{ $cliente->apmaterno ? $cliente->apmaterno  : 'N/A' }}" readonly="">
 						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Fecha de Nacimiento:</label>
+							<input type="date" name="fecha_nacimiento" class="form-control" value="{{ $cliente->nacimiento }}" readonly="">
+						</div>
 					@else
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Razón Social:</label>
 							<input type="text" name="razonsocial" class="form-control" value="{{ $cliente->razon }}" readonly="">
 						</div>
 					@endif
-					<div class="col-sm-3 form-group">
-						<label class="control-label">Fecha de Nacimiento:</label>
-						<input type="date" name="fecha_nacimiento" class="form-control" value="{{ $cliente->nacimiento }}" readonly="">
-					</div>
-				</div>
-				<div class="row">
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Correo Electrónico:</label>
 						<input type="text" name="mail" class="form-control" value="{{ $cliente->email }}" readonly="">
@@ -87,15 +83,17 @@
 						<label class="control-label">Canal de Ventas:</label>
 						<input type="text" name="canal_ventas" class="form-control" value="{{ $cliente->canal }}" readonly="">
 					</div>
-				</div>
-				<div class="row">
 					<div class="col-sm-3 form-group">
 						<label class="control-label">Fecha de Actualización:</label>
 						<input type="text" name="updated_at" class="form-control" value="{{ substr($cliente->updated_at, 0, 10) }}" readonly="">
 					</div>
-					<div class="col-sm-6 form-group">
+					<div class="col-sm-3 form-group">
 						<label class="control-label">Comentarios:</label>
 						<textarea name="comentarios" class="form-control" readonly="">{{ $cliente->comentarios ? $cliente->comentarios : 'N/A' }}</textarea>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label class="control-label">Vendedor:</label>
+						<input type="text" class="form-control" value="{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}" readonly="">
 					</div>
 				</div>
 			</div>

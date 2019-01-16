@@ -49,30 +49,36 @@
 	var mensualidades = '';
 
 	function pago(meses) {
+		$('#plan_col').show();
 		mensualidades = meses;
 		var plan = $('#plan').val();
 		var prec = {{ $producto->precio_lista }} * 0.3;
 		var entrega = '';
-		if(plan == 'A') {
+		if(plan == 'Plan Ahorro') {
 			switch(meses) {
 				case 60:
 					entrega += Math.ceil(prec / {{ $producto->m60 }}) + ' meses';
+					prec = {{ $producto->m60 }};
 					break;
 				case 48:
 					entrega += Math.ceil(prec / {{ $producto->m48 }}) + ' meses';
+					prec = {{ $producto->m48 }};
 					break;
 				case 36:
 					entrega += Math.ceil(prec / {{ $producto->m36 }}) + ' meses';
+					prec = {{ $producto->m36 }};
 					break;
 				case 24:
 					entrega += Math.ceil(prec / {{ $producto->m24 }}) + ' meses';
+					prec = {{ $producto->m24 }};
 					break;
 				case 12:
 					entrega += Math.ceil(prec / {{ $producto->m12 }}) + ' meses';
+					prec = {{ $producto->m12 }};
 					break;
 			}
 		} else {
-			entrega += '1 mes';
+			entrega += 'Inmediato';
 		}
 		
 		prec += {{ $producto->apertura }};

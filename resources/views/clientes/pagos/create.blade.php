@@ -140,11 +140,11 @@
 								<label class="control-label">Número de Fólio:</label>
 								<input type="text" name="folio" id="folio" class="form-control" required="">
 							</div>
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-3 form-group" id="plan_col" style="display: none;">
 								<label class="control-label">Plan de Pago:</label>
 								<select name="plan" class="form-control" id="plan">
-									<option value="A" selected="">A</option>
-									<option value="B">B</option>
+									<option value="Plan Ahorro" selected="">Plan Ahorro</option>
+									<option value="Plan Inmediato">Plan Inmediato</option>
 								</select>
 							</div>
 							<div class="col-sm-3 form-group">
