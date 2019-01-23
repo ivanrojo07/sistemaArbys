@@ -223,6 +223,9 @@
 														<a class="btn btn-primary btn-sm" href="{{ route('clientes.prestamos.show', ['cliente' => $cliente, 'prestamo' => $prestamo]) }}">
 															<i class="fa fa-eye" aria-hidden="true"></i> <strong>Ver</strong>
 														</a>
+														<a class="btn btn-warning btn-sm" href="{{ route('clientes.prestamos.pdf', ['cliente' => $cliente, 'prestamo' => $prestamo]) }}">
+															<strong>Descargar PDF</strong>
+														</a>
 													</td>
 												</tr>
 											@endforeach

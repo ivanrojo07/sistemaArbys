@@ -86,6 +86,7 @@ Route::get('clientes/{cliente}/pagos/{pago}/follow', 'Cliente\ClientePagoControl
 Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 // Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');
 Route::resource('clientes.prestamos', 'Cliente\ClientePrestamoController');
+Route::get('clientes/{cliente}/prestamos/{prestamo}/pdf','Cliente\ClientePrestamoController@pdf')->name('clientes.prestamos.pdf');
 Route::get('asignarClientes', 'Cliente\ClienteController@asignar')->name('clientes.asignar');
 Route::post('unirCliente', 'Cliente\ClienteController@unir')->name('clientes.unir');
 

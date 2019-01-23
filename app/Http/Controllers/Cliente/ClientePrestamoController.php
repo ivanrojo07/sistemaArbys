@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use App\Prestamo;
 use App\Cliente;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class ClientePrestamoController extends Controller
@@ -62,6 +63,13 @@ class ClientePrestamoController extends Controller
     public function edit(Prestamo $prestamo)
     {
         //
+    }
+
+    public function pdf(Cliente $cliente, Prestamo $prestamo, Request $request)
+    {
+        // dd($cliente);
+         $pdf = PDF::loadView('clientes.prestamos.pdf', ['cliente' => $cliente, 'prestamo' => $prestamo, "empleado"=>$request->user()->empleado]);
+            return $pdf->download('cotización.pdf');
     }
 
     /**

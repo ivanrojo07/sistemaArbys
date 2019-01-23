@@ -626,7 +626,7 @@ table th[class*="col-"] {
 			  <div class="panel-heading">Cotización para {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}} &nbsp;&nbsp;&nbsp; Fecha: {{date('d-m-Y')}}</div>
 			  <div class="panel-body">
 			    <p>Estimado {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}}:  </p>
-			    <p>Se adjunta la información requerida para la cotización de {{ $producto->marca }} {{ $producto->descripcion }}. Asi mismo informarle que esta cotización esta vigente solo por el mes en el que se imprimio este documento. </p>
+			    <p>Se adjunta la información requerida para la cotización para la cantidad de ${{ $prestamo->monto }} a {{$prestamo->meses}} meses. Asi mismo informarle que esta cotización esta vigente solo por el mes en el que se imprimio este documento. </p>
 			    <div class="row">
 			    	<div class="panel panel-default">
 			    		<div class="panel-heading">
@@ -636,183 +636,41 @@ table th[class*="col-"] {
 			    	<div class="panel-body">
 				    	<div class="row">
 				    		<div class="col-xs-6">
-								<strong>Producto:</strong> {{ $producto->descripcion }}
+								<strong>Cantidad a prestas:</strong> ${{ $prestamo->monto }}
 							</div>
 							<div class="col-xs-4">
-								<strong>Marca:</strong> {{ $producto->marca }}
+								<strong>Meses:</strong> {{ $prestamo->meses }} meses
 							</div>
 							
 				    	</div>
-				    	<br>
-				    	<div class="row">
-				    		<div class="col-xs-4">
-								<strong>Clave: </strong>{{ $producto->clave }}
-							</div>
-							<div class="col-xs-6">
-								<strong>Precio de lista: </strong>${{ $producto->precio_lista }}
-							</div>
-				    	</div>
 			    	</div>
-			    	<table class="table table-bordered">
-			    		<thead>
-			    			<tr>
-			    				<th></th>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<th colspan="2">60 Meses</th>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<th colspan="2">48 Meses</th>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<th colspan="2">36 Meses</th>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<th colspan="2">24 Meses</th>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<th colspan="2">12 Meses</th>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<th>Concepto</th>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    			</tr>
-			    		</thead>
-			    		<tbody>
-			    			<tr>
-			    				<td>
-			    					Mensualidad
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->m60}}</td>
-			    					<td>$ {{$producto->m60}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->m48}}</td>
-			    					<td>$ {{$producto->m48}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->m36}}</td>
-			    					<td>$ {{$producto->m36}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->m24}}</td>
-			    					<td>$ {{$producto->m24}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->m12}}</td>
-			    					<td>$ {{$producto->m12}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Apertura
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Pago Inicial
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->m60+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->m48+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->m36+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->m24+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->m12+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Meses de entrega
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m60)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m48)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m36)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m24)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m12)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    			</tr>
-			    		</tbody>
-			    	</table>
-			    	<div class="panel-heading">
-		              <div class="col-xs-3">
-		                <p>Quedo a sus ordenes: </p>
-		              </div>
-		              <div class="col-xs-offset-3 col-xs-6">
-		                <p>
-		                  <strong>{{$empleado->nombre." ".$empleado->appaterno." ".$empleado->apmaterno}}</strong>
-		                </p>
-		                <p>
-		                  <strong>Ventas</strong>
-		                </p>
-		              </div>
-		            </div>
+			    	<table class="table table-bordered" style="margin-bottom: 0px;">
+              <tr>
+                <th>Mes</th>
+                <th>Pago Inicial</th>
+                <th>Mensualidad</th>
+              </tr>
+              @for($i = 1; $i <= $prestamo->meses; $i++)
+                <tr>
+                  <td>{{ $i }}</td>
+                  <td>{{ $i == 1 ? number_format($prestamo->monto * 0.1, 2) : number_format(0, 2) }}</td>
+                  <td>{{ number_format($prestamo->monto / 12, 2) }}</td>
+                </tr>
+              @endfor
+            </table>
+            <div class="panel-heading">
+              <div class="col-xs-3">
+                <p>Quedo a sus ordenes: </p>
+              </div>
+              <div class="col-xs-offset-3 col-xs-6">
+                <p>
+                  <strong>{{$empleado->nombre." ".$empleado->appaterno." ".$empleado->apmaterno}}</strong>
+                </p>
+                <p>
+                  <strong>Ventas</strong>
+                </p>
+              </div>
+            </div>
 			    </div>
 			  </div>
 			</div>

@@ -83,9 +83,15 @@ class ClienteProductoController extends Controller
     public function show(Request $request, Cliente $cliente,Product $producto)
     {
         // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
-        $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
+        if($request->all()){
+            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$request->user()->empleado]);
+            return $pdf->download('cotizacion.pdf');
+            
+        }
+        else{
+            return back();
+        }
         // return $pdf->stream();
-        return $pdf->download('archivo.pdf');
     }
 
     /**
