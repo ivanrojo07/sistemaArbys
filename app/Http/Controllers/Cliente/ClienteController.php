@@ -130,10 +130,11 @@ class ClienteController extends Controller {
         return view('clientes.busqueda', ['clientes' => $clientes]);
     }
 
-    public function pdf(Cliente $cliente) {
-        $pdf = PDF::loadView('clientes.vista', ['cliente' => $cliente]);
-        return $pdf->download('archivo.pdf');
-    }
+    // public function pdf(Request $request, Cliente $cliente) {
+    //     dd($cliente);
+    //     $pdf = PDF::loadView('clientes.vista', ['cliente' => $cliente]);
+    //     return $pdf->download('archivo.pdf');
+    // }
 
     public function asignar() {
         $empleado = Auth::user()->empleado;

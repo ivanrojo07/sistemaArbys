@@ -115,26 +115,53 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-sm-2 col-sm-offset-1">
-						<label class="control-label">60 Meses:</label>
-						<dd>{{ $producto['m60'] > 0 ? '$' . number_format($producto['m60'], 2) : 'N/A' }}</dd>
-					</div>
-					<div class="form-group col-sm-2">
-						<label class="control-label">48 Meses:</label>
-						<dd>{{ $producto['m48'] > 0 ? '$' . number_format($producto['m48'], 2) : 'N/A' }}</dd>
-					</div>
-					<div class="form-group col-sm-2">
-						<label class="control-label">36 Meses:</label>
-						<dd>{{ $producto['m36'] > 0 ? '$' . number_format($producto['m36'], 2) : 'N/A' }}</dd>
-					</div>
-					<div class="form-group col-sm-2">
-						<label class="control-label">24 Meses:</label>
-						<dd>{{ $producto['m24'] > 0 ? '$' . number_format($producto['m24'], 2) : 'N/A' }}</dd>
-					</div>
-					<div class="form-group col-sm-2">
-						<label class="control-label">12 Meses:</label>
-						<dd>{{ $producto['m12'] > 0 ? '$' . number_format($producto['m12'], 2) : 'N/A' }}</dd>
-					</div>
+					<form id="meses_{{$producto->id}}" method="GET" action="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}">
+						<div class="form-group col-sm-2 col-sm-offset-1">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" name="60 meses" aria-label="60 meses">
+									<label class="control-label">60 Meses:</label>
+									<dd>{{ $producto['m60'] > 0 ? '$' . number_format($producto['m60'], 2) : 'N/A' }}</dd>
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-sm-2">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" name="48 meses" aria-label="48 meses">
+									<label class="control-label">48 Meses:</label>
+									<dd>{{ $producto['m48'] > 0 ? '$' . number_format($producto['m48'], 2) : 'N/A' }}</dd>
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-sm-2">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" name="36 meses" aria-label="36 meses">
+									<label class="control-label">36 Meses:</label>
+									<dd>{{ $producto['m36'] > 0 ? '$' . number_format($producto['m36'], 2) : 'N/A' }}</dd>
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-sm-2">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" name="24 meses" aria-label="24 meses">
+									<label class="control-label">24 Meses:</label>
+									<dd>{{ $producto['m24'] > 0 ? '$' . number_format($producto['m24'], 2) : 'N/A' }}</dd>
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-sm-2">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="checkbox" name="12 meses" aria-label="12 meses">
+									<label class="control-label">12 Meses:</label>
+									<dd>{{ $producto['m12'] > 0 ? '$' . number_format($producto['m12'], 2) : 'N/A' }}</dd>
+								</span>
+							</div>
+						</div>
+					</form>
 				</div>
             </div>
             <div class="modal-footer">
@@ -153,9 +180,10 @@
 						</a>
 					</div>
 					<div class="col-sm-3">
-						<a href="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}" class="btn btn-warning">
+						{{-- <a href="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}" class="btn btn-warning">
 							Descargar PDF
-						</a>
+						</a> --}}
+						<button form="meses_{{$producto->id}}" type="submit" class="btn btn-warning">Descargar PDF</button>
 					</div>
                     <div class="col-sm-3">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">

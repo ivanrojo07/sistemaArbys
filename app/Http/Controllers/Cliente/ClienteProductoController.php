@@ -80,9 +80,11 @@ class ClienteProductoController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente,Product $producto)
+    public function show(Request $request, Cliente $cliente,Product $producto)
     {
-        $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto]);
+        // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
+        $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
+        // return $pdf->stream();
         return $pdf->download('archivo.pdf');
     }
 
