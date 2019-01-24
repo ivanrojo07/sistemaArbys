@@ -618,7 +618,7 @@ table th[class*="col-"] {
 		<div class="row-fluid">
 			<div class="row">
 				<div class="col-sm-12">
-					<img class="img" src="{{ asset('img/header.jpg') }}">
+					<img class="img" src="img/header.jpg">
 					
 				</div>
 			</div>
