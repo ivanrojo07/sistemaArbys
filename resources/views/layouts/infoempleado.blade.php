@@ -3,7 +3,12 @@
 <div class="container">
 	<div role="application" class="panel panel-group">
 		<div class="panel-default">
-			<div class="panel-heading"><h4>Datos del Empleado:</h4><a class="btn btn-info" href="{{ route('empleados.create') }}"><strong>Nuevo Empleado</strong></a></div>
+			<div class="panel-heading">
+				<h4>Datos del Empleado:</h4>
+				<a class="btn btn-success" href="{{ route('empleados.create') }}">
+					<i class="fa fa-plus"></i><strong>Nuevo Empleado</strong>
+				</a>
+			</div>
 			<div class="panel-body">
 				<div class="col-xs-12 offset-md-2 mt-3">
 					<div class="form-group col-xs-3">

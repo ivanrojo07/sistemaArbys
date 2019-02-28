@@ -31,24 +31,23 @@ class ClienteProductoController extends Controller
                     $q->orWhere('clave', 'LIKE', "%$word%")
                         ->orWhere('marca', 'LIKE', "%$word%")
                         ->orWhere('descripcion', 'LIKE', "%$word%")
-                        ->orWhere('precio_lista', 'LIKE', "%$word%")
                         ->orWhere('apertura', 'LIKE', "%$word%");
+                        //->orWhere('precio_lista', 'LIKE', "%$word%")
                 }
-            })->whereMonth('created_at', date("m"));
+            });//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
         }
-        if(isset($tipo)){
-            $productos = $productos->where('tipo', $tipo)->whereMonth('created_at', date("m"));
-        }
-        if(isset($min) && isset($max)){
-            $productos = $productos->whereBetween('precio_lista', [intval($min), intval($max)]);
-        }
-        if(isset($min) && !isset($max)){
-            $productos = $productos->whereBetween('precio_lista', [intval($min), 10000000]);
-        }
+        if(isset($tipo))
+            $productos = $productos->where('tipo', $tipo);//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
 
-        if(!isset($min) && isset($max)) {
+        if(isset($min) && isset($max))
+            $productos = $productos->whereBetween('precio_lista', [intval($min), intval($max)]);
+
+        if(isset($min) && !isset($max))
+            $productos = $productos->whereBetween('precio_lista', [intval($min), 10000000]);
+
+        if(!isset($min) && isset($max)) 
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
-        }
+
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request'=>$request]);
     }
