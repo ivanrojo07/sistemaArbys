@@ -16,12 +16,12 @@ class ClienteNuevoController extends Controller
     public function guardarClienteNuevo(Request $req){
         $cliente = Cliente::create($req->all());
         $cliente->crm()->create([
-            'fecha_act' => '',
-            'fecha_aviso' => '',
-            'fecha_cont' => '',
-            'hora' => '',
-            'status' => '',
-            'tipo_comt' => '',
+            'fecha_act' => date('Y-m-d'),
+            'fecha_aviso' => date('Y-m-d'),
+            'fecha_cont' => date('Y-m-d'),
+            'hora' => '12:00',
+            'status' => 'Correo enviado',
+            'tipo_comt' => 'correo',
         ]);
         event(new ProspectoNuevo($cliente));
         return redirect()->route('cliente.nuevo',['alert'=>['status'=>"success",'message'=>"Muy pronto un asesor se comunicará contigo"]]);

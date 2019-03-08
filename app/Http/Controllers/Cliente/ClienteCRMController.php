@@ -29,10 +29,10 @@ class ClienteCRMController extends Controller
     {
         //
            //
-        
-           $crms = ClienteCRM::where('status','Pendiente')->orderBy('fecha_cont','desc')->get();
+            $clientes = Cliente::get();
+           $crms = ClienteCRM::orderBy('fecha_cont','desc')->get();
            // dd($crms);
-           return view('crm.index',['crms'=>$crms]);
+           return view('crm.index',['crms'=>$crms, 'clientes'=>$clientes]);
 
 
     }

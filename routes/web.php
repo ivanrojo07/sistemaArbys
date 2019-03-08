@@ -72,6 +72,7 @@ Route::get('buscarCliente','Cliente\ClienteController@buscar');
 Route::resource('clientes.direccionfisica','Provedor\ProvedorDireccionFisicaController');
 Route::resource('clientes.crm','Cliente\ClienteCRMController');
 Route::resource('crm','Crm\CrmController');
+Route::get('crm.general', 'Cliente\ClienteCRMController@index2')->name('crmgeneral2');
 Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
 Route::post('crmstore','Crm\CrmController@store')->name('crmstore');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');

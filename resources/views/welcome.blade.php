@@ -380,16 +380,14 @@
                 let nombre = "";
                 if(data){
                 if(data.tipo == 'Moral'){
-                    alert('entra moral');
                     nombre = data.razon;
                 }else{
-                    alert('entra fisico');
                     nombre = data.nombre;
                 }
                 let noti = `
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Un nuevo cliente require aprobación! </strong> <a href="#" class="alert-link">${data.cliente.nombre ? data.cliente.nombre: data.cliente.razon}</a>
+                    <strong>Un nuevo cliente require aprobación! </strong> <dd onclick="AgregarNuevoTab('{{route('crmgeneral2')}} ','CRM')">${data.cliente.nombre ? data.cliente.nombre: data.cliente.razon}</dd>
                 </div>
                 `;
                 $('#contenedor_notificaciones').append(noti);
