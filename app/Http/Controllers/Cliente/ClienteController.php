@@ -59,7 +59,6 @@ class ClienteController extends Controller {
         $rfc = Cliente::where('rfc', $request->rfc)->get();
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
-        $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente = Cliente::create($request->all());
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
@@ -90,8 +89,9 @@ class ClienteController extends Controller {
      */
     public function edit(Cliente $cliente)
     {
+        $vendedores = Vendedor::get();
         $canal_ventas = CanalVenta::get();
-        return view('clientes.edit', ['cliente' => $cliente, 'canal_ventas' => $canal_ventas]); 
+        return view('clientes.edit', ['cliente' => $cliente, 'canal_ventas' => $canal_ventas, 'vendedores'=>$vendedores]); 
     }
 
     /**
@@ -103,7 +103,7 @@ class ClienteController extends Controller {
      */
     public function update(Request $request, Cliente $cliente)
     {
-        $request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
+        //$request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente->update($request->except('_method','_token'));
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
@@ -136,6 +136,7 @@ class ClienteController extends Controller {
     //     return $pdf->download('archivo.pdf');
     // }
 
+
     public function asignar() {
         $empleado = Auth::user()->empleado;
         if($empleado->id == 1) {
@@ -156,6 +157,12 @@ class ClienteController extends Controller {
                 $arr[] = $vendedor->id;
             $clientes = Cliente::whereIn('vendedor_id', $arr)->get();
         }
+        return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
+    }
+
+    public function asignarPorNotificacion(Cliente $cliente){
+        $vendedores = Vendedor::whereNotIn('id', [1])->get();
+        $clientes = array($cliente);
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }
 

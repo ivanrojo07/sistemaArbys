@@ -89,7 +89,11 @@
 									@foreach($clientes as $cliente)
 										<tr>
 											<td>{{ $cliente->razon }}{{ $cliente->nombre }} {{ $cliente->appaterno }}</td>
+											@if($cliente->vendedor)
 											<td>{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}</td>
+											@else
+											<td>No asignado</td>
+											@endif
 											<td class="text-center">
 												<input type="radio" name="cliente_id" value="{{ $cliente->id }}" required="">
 											</td>

@@ -44,4 +44,9 @@ class VendedorController extends Controller
             return redirect()->route('vendedors.index');
         }
     }
+
+    public function getVendedores(){
+        $vendedores = Vendedor::whereNotIn('id', [1])->get();
+        return view('vendedores.select',['vendedores'=>$vendedores]);
+    }
 }

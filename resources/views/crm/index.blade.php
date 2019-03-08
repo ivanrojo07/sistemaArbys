@@ -228,11 +228,11 @@
                             <select class="form-control" name="cliente_id" id="cliente_id_sel" required>
                                 <option value="">Seleccionar Cliente</option>
                                 @foreach($clientes as $cliente)
-                                @isset($cliente->nombre)
-                                <option value="{{ $cliente->id }}">{{ $cliente->nombre }} {{ $cliente->apellidopaterno }}</option>
-                                @else
-                                <option value="{{ $cliente->id }}">{{ $cliente->razonsocial }}</option>
-                                @endisset
+                                    @if($cliente->tipo == 'Moral')
+                                    <option value="{{ $cliente->id }}">{{ $cliente->razon }}</option>
+                                    @else
+                                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }}{{$cliente->apaterno}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

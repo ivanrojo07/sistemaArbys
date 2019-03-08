@@ -76,6 +76,7 @@ Route::get('fecha','Crm\CrmController@porFecha')->name('fecha');
 Route::post('crmstore','Crm\CrmController@store')->name('crmstore');
 Route::resource('clientes.producto','Cliente\ClienteProductoController');
 Route::resource('clientes.products.transactions', 'Cliente\ClienteProductTransactionController',['only'=>'store']);
+Route::post('clientes/{cliente}/producto/{producto}/correo','Cliente\ClienteProductTransactionController@enviarCorreo')->name('enviarCorreo');
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
 Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);
 Route::get('clientes/{id}/seleccion', 'Cliente\ClienteController@getSeleccion')->name('seleccion');
@@ -89,6 +90,8 @@ Route::resource('clientes.prestamos', 'Cliente\ClientePrestamoController');
 Route::get('clientes/{cliente}/prestamos/{prestamo}/pdf','Cliente\ClientePrestamoController@pdf')->name('clientes.prestamos.pdf');
 Route::get('asignarClientes', 'Cliente\ClienteController@asignar')->name('clientes.asignar');
 Route::post('unirCliente', 'Cliente\ClienteController@unir')->name('clientes.unir');
+Route::get('cliente.nuevo', 'Cliente\ClienteNuevoController@vistaNuevoCliente')->name('cliente.nuevo');
+Route::post('cliente.nuevo.store', 'Cliente\ClienteNuevoController@guardarClienteNuevo')->name('cliente.nuevo.store');
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');
@@ -99,6 +102,7 @@ Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosCon
 
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
+Route::get('getvendedores','Vendedor\VendedorController@getVendedores');
 Route::get('getbancos','Banco\BancoController@getBancos');
 Route::get('region2/{region}','Empleado\LaboralController@estados')->name('getregion');
 Route::get('estado2/{estado}','Empleado\LaboralController@oficinas')->name('getestado');

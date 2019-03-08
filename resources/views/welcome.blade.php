@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <!-- CSRF Token -->
+        <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Styles -->
@@ -13,14 +13,20 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
-         <!-- Custom Fonts -->
+        <!-- Custom Fonts -->
         <link href="{{asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
         {{-- <link href="{{asset('font-awesome5.0.1/css/fontawesome.min.css')}}" rel="stylesheet" type="text/css"> --}}
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="{{ asset('js/peticion.js') }}"></script>
+        <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
     </head>
     <body>
+        <div id="contenedor_notificaciones" style="width: 300px; height:auto; margin:0; top:200px; right:0; position: absolute;">
+
+        </div>
+
+        </div>
         <!-- Navigation -->
         <div id="app">
             <nav class="navbar navbar-default navbar-static-top">
@@ -355,11 +361,42 @@
     <script src="{{ asset('js/pestanas.js') }}"></script>
     <script src="{{ asset('js/forms.js') }}"></script>
     <script>
-        $(document).ready(function(){
-            $('.dropdown-submenu a.test').on("click", function(e) {
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
                 $(this).next('ul').toggle();
                 e.stopPropagation();
                 e.preventDefault();
+            });
+            Pusher.logToConsole = false;
+
+            var pusher = new Pusher('eb78253de16c261f78b7', {
+                cluster: 'us2',
+            encrypted: false,
+            forceTLS: false
+            });
+
+            var channel = pusher.subscribe('prospectos');
+            channel.bind('prospecto-creado', function(data) {
+                let nombre = "";
+                if(data){
+                if(data.tipo == 'Moral'){
+                    alert('entra moral');
+                    nombre = data.razon;
+                }else{
+                    alert('entra fisico');
+                    nombre = data.nombre;
+                }
+                let noti = `
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Un nuevo cliente require aprobación! </strong> <a href="#" class="alert-link">${data.cliente.nombre ? data.cliente.nombre: data.cliente.razon}</a>
+                </div>
+                `;
+                $('#contenedor_notificaciones').append(noti);
+
+                }
+                
+            //alert(JSON.stringify(data));
             });
         });
     </script>

@@ -92,8 +92,12 @@
 						<textarea name="comentarios" class="form-control" readonly="">{{ $cliente->comentarios ? $cliente->comentarios : 'N/A' }}</textarea>
 					</div>
 					<div class="col-sm-3 form-group">
+						@if($cliente->vendedor)
 						<label class="control-label">Vendedor:</label>
 						<input type="text" class="form-control" value="{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}" readonly="">
+						@else
+						<dd>Edite cliente para asigar vendedor</dd>
+						@endif
 					</div>
 				</div>
 			</div>

@@ -8,6 +8,7 @@ use App\Product;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 
@@ -75,6 +76,24 @@ class ClienteProductTransactionController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function enviarCorreo(Request $request, Cliente $cliente,Product $producto){
+        if($request->all()){
+            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
+            $transaction = new Transaction;
+            $transaction->cliente_id = $request->cliente_id;
+            $transaction->product_id = $request->product_id;
+            $transaction->status = 'enviada';
+            $transaction->enviarTransaccion($cliente->email, $pdf);
+            Alert::success('Se ha enviado un correo con la cotización correspondiente ');
+            return redirect()->route('clientes.producto.index', ['cliente' => $cliente]);
+            
+        }
+        else{
+
+            return redirect()->route('clientes.producto.index', ['cliente' => $cliente]);
+        }
     }
     
 }

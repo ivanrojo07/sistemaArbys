@@ -175,14 +175,14 @@
 						</form>
                 	</div>
 					<div class="col-sm-3">
-						<a href="" class="btn btn-default disabled">
-							Enviar a Correo
-						</a>
+						<form role="form" id="form-cliente" method="POST" action="{{ route('enviarCorreo', ['cliente' => $cliente,'producto' => $producto]) }}">
+							{{ csrf_field() }}
+							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+							<input type="hidden" name="product_id" value="{{ $producto->id }}">
+							<input class="btn btn-success" type="submit" value="Enviar a Correo">
+						</form>
 					</div>
 					<div class="col-sm-3">
-						{{-- <a href="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}" class="btn btn-warning">
-							Descargar PDF
-						</a> --}}
 						<button form="meses_{{$producto->id}}" type="submit" class="btn btn-warning">Descargar PDF</button>
 					</div>
                     <div class="col-sm-3">

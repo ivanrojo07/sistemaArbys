@@ -1,36 +1,32 @@
-@extends('layouts.blank')
+@extends('layouts.app')
 @section('content')
 
 <div class="container">
 	<div class="panel panel-group">
 		<div class="panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading" style="background-color: #FEC456">
 				<div class="row">
 					<div class="col-sm-4">
-						<h4>Datos del Cliente:</h4>
-					</div>
-					<div class="col-sm-4 text-center">
-						<a href="{{ route('clientes.index') }}" class="btn btn-primary">
-							<i class="fa fa-bars"></i><strong> Lista de Clientes</strong>
-						</a>
+						<h4>Bienvenido a Arbys</h4>
 					</div>
 				</div>
 			</div>
-			<form method="POST" action="{{ route('clientes.store') }}">
+			<form method="POST" action="{{ url('cliente.nuevo.store') }}">
 				{{ csrf_field() }}
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Tipo de Persona:</label>
-							<select type="select" name="tipo" class="form-control" onchange="persona(this)">
-								<option value="Física">Física</option>
+							<select type="select" name="tipo" class="form-control" onchange="persona(this)" required>
+                                <option value="">Elige</option>
+                                <option value="Física">Física</option>
 								<option value="Moral">Moral</option>
 							</select>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱RFC:</label>
 							<input type="text" class="form-control" name="rfc" required="" id="rfc"
-								placeholder="13 Caracteres" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}">
+								placeholder="13 Caracteres" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}" required="required">
 						</div>
 						<div id="fisica">
 							<div class="col-sm-3 form-group">
@@ -68,23 +64,6 @@
 							<label class="control-label">Teléfono Celular:</label>
 							<input type="number" class="form-control" name="movil" pattern="+[0-9]" id="movil">
 						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Canal de Ventas:</label>
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'><i
-										class="fa fa-refresh"></i></span>
-								<select type="select" name="canal" class="form-control" id="canal" required>
-									<option value="">Seleccionar</option>
-									@foreach($canal_ventas as $canal)
-									<option value="{{ $canal->nombre }}">{{ $canal->nombre }}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Comentarios:</label>
-							<textarea class="form-control" name="comentarios"></textarea>
-						</div>
 					</div>
 				</div>
 				<div class="panel-footer">
@@ -105,16 +84,6 @@
 </div>
 
 <script>
-
-	function getCanales() {
-		$.ajax({
-			url: "{{ url('/getcanales') }}",
-			type: "GET",
-			dataType: "html",
-		}).done(function (resultado) {
-			$("#canal").html(resultado);
-		});
-	}
 
 	function reset() {
 		$('#rfc').val('');

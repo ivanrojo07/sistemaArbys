@@ -83,7 +83,8 @@ class ClienteProductoController extends Controller
     {
         // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
         if($request->all()){
-            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$request->user()->empleado]);
+            dd($cliente);
+            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
             return $pdf->download('cotizacion.pdf');
             
         }
@@ -92,6 +93,8 @@ class ClienteProductoController extends Controller
         }
         // return $pdf->stream();
     }
+
+   
 
     /**
      * Show the form for editing the specified resource.

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Support\Facades\Mail;
 
 class Producto extends Model
 {
@@ -35,5 +36,9 @@ class Producto extends Model
     public $sortable=['identificador','marca','clave','descripcion_short','descripcion_large','familia','tipo'];
     public function cotizacion(){
     	return $this->belongsTo('App\Cotizacion');
-    }
+	}
+
+	
+	
+	
 }

@@ -90,6 +90,22 @@
 		  					<textarea class="form-control" name="comentarios" id="comentarios">{{ $cliente->comentarios }}</textarea>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4 form-group">
+						<label class="control-label" for="canal_ventas">Vendedor asignado:</label>
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'>
+									<i class="fa fa-refresh"></i>
+								</span>
+		    					<select type="select" name="vendedor_id" class="form-control" id="vendedores">
+		    						<option  value="">Seleccionar</option>
+		    						@foreach($vendedores as $vendedor)
+		    							<option value="{{ $vendedor->id }}" {{ $cliente->vendedor ? $cliente->vendedor->id == $vendedor->id ? ' selected' : '' : ''}}>{{ $vendedor->empleado->nombre }} {{$vendedor->empleado->apaterno}}</option>
+		    						@endforeach
+		    					</select>
+						   </div>
+						</div>
+					</div>
 				</div>
 				<div class="panel-footer">
 					<div class="row">
@@ -117,6 +133,16 @@
 			dataType: "html",
 		}).done(function(resultado) {
 			$("#canal").html(resultado);
+		});
+	}
+
+	function getVendedores(){
+		$.ajax({
+			url: "{{ url('/getVendedores') }}",
+			type: "GET",
+			dataType: "html",
+		}).done(function(resultado) {
+			$("#vendedores").html(resultado);
 		});
 	}
 

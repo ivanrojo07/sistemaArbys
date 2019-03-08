@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Mail\MailCotizacion;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Support\Facades\Mail;
 
 class Transaction extends Model
 {
@@ -35,5 +37,11 @@ class Transaction extends Model
 	public function pagos() {
 		return $this->hasMany('App\Pago');
 	}
+
+	public function enviarTransaccion($email,$pdf)
+    {
+        $transaccion = $this;
+        Mail::to($email)->send(new MailCotizacion($transaccion,$pdf));
+    }
 
 }
