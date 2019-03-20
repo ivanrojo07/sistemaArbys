@@ -79,6 +79,7 @@ class ClienteProductTransactionController extends Controller
     }
 
     public function enviarCorreo(Request $request, Cliente $cliente,Product $producto){
+        //anie@maiasdas.com
         if($request->all()){
             $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
             $transaction = new Transaction;
@@ -86,6 +87,7 @@ class ClienteProductTransactionController extends Controller
             $transaction->product_id = $request->product_id;
             $transaction->status = 'enviada';
             $transaction->enviarTransaccion($cliente->email, $pdf);
+            $transaction->save();
             Alert::success('Se ha enviado un correo con la cotización correspondiente ');
             return redirect()->route('clientes.producto.index', ['cliente' => $cliente]);
             

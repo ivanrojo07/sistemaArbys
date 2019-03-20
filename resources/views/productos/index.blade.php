@@ -166,15 +166,15 @@
             </div>
             <div class="modal-footer">
                 <div class="row text-center">
-                	<div class="col-sm-3">
+                	{{-- <div class="col-sm-3">
 						<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.products.transactions.store', ['cliente' => $cliente,'product' => $producto]) }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
 							<input type="hidden" name="product_id" value="{{ $producto->id }}">
 							<input class="btn btn-success" type="submit" value="Agregar al cliente">
 						</form>
-                	</div>
-					<div class="col-sm-3">
+                	</div>--}}
+					<div class="col-sm-4">
 						<form role="form" id="form-cliente" method="POST" action="{{ route('enviarCorreo', ['cliente' => $cliente,'producto' => $producto]) }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
@@ -182,10 +182,10 @@
 							<input class="btn btn-success" type="submit" value="Enviar a Correo">
 						</form>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-4">
 						<button form="meses_{{$producto->id}}" type="submit" class="btn btn-warning">Descargar PDF</button>
 					</div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">
                         	Cerrar
                         </button>

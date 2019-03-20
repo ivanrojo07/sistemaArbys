@@ -34,7 +34,7 @@ class MailCotizacion extends Mailable
     {
         return $this->from($this->transaction->cliente->vendedor->empleado->email)
                     ->markdown('mail.transaction')
-                    ->attachData($this->pdf->output(), 'cotizacion'.date('d-m-Y')." ". $this->transaction->cliente->tipo == 'Moral' ? $this->transaction->cliente->razon:$this->transaction->cliente->nombre.'.pdf', [
+                    ->attachData($this->pdf->output(), 'cotizacion'.date('d-m-Y')." ". $this->transaction->cliente->tipo == "Moral" ? $this->transaction->cliente->razon:$this->transaction->cliente->nombre.'.pdf', [
                         'mime' => 'application/pdf',
                     ]);
     }

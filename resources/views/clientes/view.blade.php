@@ -120,6 +120,9 @@
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a href="{{ route('crm.index') }}" class="ui-tabs-anchor">CRM General</a>
 				</li>
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor">Integrante</a>
+				</li>
 			</ul>
 			<div class="tab-content">
 				<div id="dat" class="tab-pane fade">
@@ -241,6 +244,10 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div id="integrante" class="tab-pane fade">
+					<iframe src="{{ route('clientes.integrante.index', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;">
+					</iframe>
 				</div>
 			</div>
 
