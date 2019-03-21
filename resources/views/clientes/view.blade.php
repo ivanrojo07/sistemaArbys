@@ -246,7 +246,7 @@
 					</div>
 				</div>
 				<div id="integrante" class="tab-pane fade">
-					<iframe src="{{ route('clientes.integrante.index', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;">
+					<iframe id="fintegrante" src="{{ route('clientes.integrante.create', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;" name="integrante">
 					</iframe>
 				</div>
 			</div>

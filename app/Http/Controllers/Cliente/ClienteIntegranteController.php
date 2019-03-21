@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
+use App\Integrante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,7 +37,7 @@ class ClienteIntegranteController extends Controller
      */
     public function create()
     {
-        //
+         return view('clientes.integrantes.create');
     }
 
     /**
@@ -45,9 +46,11 @@ class ClienteIntegranteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Cliente $cliente)
     {
-        //
+        $integrante = Integrante::create($request->all());
+        Alert::success('Se han guardado correctamente los datos');
+        return "ok";
     }
 
     /**
