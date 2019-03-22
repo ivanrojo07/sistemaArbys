@@ -12,7 +12,8 @@ class Solicitante extends Model
     protected $table='solicitantes';
 
    protected $fillable = [
-     	'cliente_id',
+     	'integrante',
+        'cliente_id',
         'tiemporesidir',
         'tipovivienda',
         'estadocivil',

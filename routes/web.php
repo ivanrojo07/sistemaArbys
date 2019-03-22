@@ -81,7 +81,7 @@ Route::post('clientes/{cliente}/producto/{producto}/correo','Cliente\ClienteProd
 Route::resource('clientes.product','Cliente\ClienteProductController', ['only'=>'index']);
 Route::resource('clientes.solicitantes', 'Cliente\ClienteSolicitanteController', ['except'=>'index']);
 Route::get('clientes/{id}/seleccion', 'Cliente\ClienteController@getSeleccion')->name('seleccion');
-Route::get('solicitantes', 'Cliente\ClienteSolicitanteController@index');
+Route::get('solicitantes/{id}', 'Cliente\ClienteSolicitanteController@index');
 Route::resource('clientes.info','Cliente\ClienteInfoController');
 Route::resource('clientes.pagos','Cliente\ClientePagoController');
 Route::get('clientes/{cliente}/pagos/{pago}/follow', 'Cliente\ClientePagoController@follow')->name('clientes.pagos.follow');

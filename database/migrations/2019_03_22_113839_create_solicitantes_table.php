@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyIntegrantesTable extends Migration
+class CreateSolicitantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class ModifyIntegrantesTable extends Migration
      */
     public function up()
     {
-        Schema::table('integrantes', function (Blueprint $table) {
-            // Datos generales
+        Schema::create('solicitantes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->string('integrante')->nullable();
+            
             $table->string('clave_unidad')->nullable();
             $table->string('tipo_unidad')->nullable();
             $table->string('costo')->nullable();
@@ -84,7 +89,6 @@ class ModifyIntegrantesTable extends Migration
             $table->string('edad_benef')->nullable();
             $table->string('parentesco')->nullable();
             $table->string('telefono_benef')->nullable();
-
         });
     }
 
@@ -95,8 +99,6 @@ class ModifyIntegrantesTable extends Migration
      */
     public function down()
     {
-        Schema::table('integrantes', function (Blueprint $table) {
-            $table->dropColumn(['votes', 'avatar', 'location']);
-        });
+        Schema::dropIfExists('solicitantes');
     }
 }

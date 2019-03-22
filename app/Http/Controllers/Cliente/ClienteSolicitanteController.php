@@ -16,10 +16,10 @@ class ClienteSolicitanteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $clientes=Cliente::has('solicitante')->get();
-        return view('solicitantes.index',['clientes'=>$clientes]);
+        $clientes=Cliente::find($id);
+        return view('solicitantes.index',['cliente'=>$clientes]);
     }
 
     /**
@@ -30,8 +30,8 @@ class ClienteSolicitanteController extends Controller
     public function create(Cliente $cliente)
     {
         
-        
-        return view('solicitantes.create',['cliente'=>$cliente]);
+        return view('clientes.integrantes.create',['cliente'=>$cliente]);
+        //return view('solicitantes.create',['cliente'=>$cliente]);
     }
 
     /**

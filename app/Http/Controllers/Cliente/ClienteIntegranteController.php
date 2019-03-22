@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Cliente;
 
-use App\Cliente;
-use App\Integrante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Cliente;
+use App\Integrante;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class ClienteIntegranteController extends Controller
 {
@@ -14,9 +15,8 @@ class ClienteIntegranteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cliente $cliente, Request $request)
+    public function index()
     {
-        //
         $aprobados = Array();
         foreach ($cliente->transactions as $transaction) {
             foreach ($transaction->pagos as $pago) {
@@ -27,7 +27,6 @@ class ClienteIntegranteController extends Controller
         }
         return dd($aprobados[0]->transaction);
         return dd($aprobados);
-
     }
 
     /**
@@ -35,9 +34,9 @@ class ClienteIntegranteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Cliente $cliente)
     {
-         return view('clientes.integrantes.create');
+        return view('clientes.integrantes.create', ['cliente' => $cliente]);
     }
 
     /**
@@ -46,20 +45,21 @@ class ClienteIntegranteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Cliente $cliente)
+    public function store(Request $request)
     {
         $integrante = Integrante::create($request->all());
+        $cliente = Cliente::find(json_decode($request->cliente)->id);
         Alert::success('Se han guardado correctamente los datos');
-        return "ok";
+        return view('clientes.integrantes.create', ['cliente' => $cliente]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
         //
     }
@@ -67,10 +67,10 @@ class ClienteIntegranteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +79,10 @@ class ClienteIntegranteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,10 +90,10 @@ class ClienteIntegranteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cliente  $cliente
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
         //
     }

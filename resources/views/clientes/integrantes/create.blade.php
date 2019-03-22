@@ -10,8 +10,9 @@
 				</div>
 			</div>
 		</div>
-		<form method="POST" action="{{ route('clientes.store') }}">
+		<form method="POST" action="{{ route('clientes.integrante.store',['cliente' => $cliente]) }}">
 				{{ csrf_field() }}
+				<input type="hidden" name="cliente" value="{{ $cliente }}">
 				<div class="panel-body">
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS GENERALES</h4>
 					<div class="row">
@@ -319,7 +320,7 @@
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-sm-4 col-sm-offset-4 text-center">
-							<button type="submit" class="btn btn-success" disabled="">
+							<button type="submit" class="btn btn-success">
 								<i class="fa fa-check"></i> Guardar
 							</button>
 						</div>
