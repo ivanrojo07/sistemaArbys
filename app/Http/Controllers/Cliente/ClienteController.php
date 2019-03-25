@@ -33,7 +33,7 @@ class ClienteController extends Controller {
      */
     public function index()
     {
-        $clientes = Cliente::doesntHave('solicitante')->get();   
+        $clientes = Cliente::get();   
         return view('clientes.index', ['clientes' => $clientes]);
     }
 

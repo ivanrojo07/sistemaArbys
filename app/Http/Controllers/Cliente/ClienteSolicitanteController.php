@@ -19,7 +19,8 @@ class ClienteSolicitanteController extends Controller
     public function index($id)
     {
         $clientes=Cliente::find($id);
-        return view('solicitantes.index',['cliente'=>$clientes]);
+        $solicitantes = $clientes->solicitante;
+        return view('solicitantes.index',['cliente'=>$clientes, 'solicitante' => $solicitantes]);
     }
 
     /**
@@ -43,14 +44,15 @@ class ClienteSolicitanteController extends Controller
     public function store(Request $request)
     {
        
-       
-
-            $solicitante = Solicitante::create($request->all());
-            $cliente=Cliente::where('id',$solicitante->cliente_id)->first();
-           Alert::success('Solicitante creado con éxito', 'Siga agregando información');
-           return view('solicitantes.view',['solicitante'=>$solicitante,'cliente'=>$cliente]); 
+        $cliente = json_decode($request->cliente);
+        $cliente = Cliente::find($cliente->id);
+        $solicitante = Solicitante::create($request->all());
+        $solicitante->cliente_id = $cliente->id;
+        $solicitante->save();
+        Alert::success('Solicitante creado con éxito');
+        return view('solicitantes.index',['solicitante'=>$solicitante,'cliente'=>$cliente]); 
               
-        }
+    }
     
 
   

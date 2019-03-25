@@ -10,7 +10,7 @@
 				</div>
 			</div>
 		</div>
-		<form method="POST" action="{{ route('clientes.integrante.store',['cliente' => $cliente]) }}">
+		<form method="POST" action="{{ route('clientes.solicitantes.store',['cliente' => $cliente]) }}">
 				{{ csrf_field() }}
 				<input type="hidden" name="cliente" value="{{ $cliente }}">
 				<div class="panel-body">
@@ -57,7 +57,7 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Calle:</label>
-							<input type="text" class="form-control" name="calle" required>
+							<input type="text" class="form-control" name="calle">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Número ext.:</label>

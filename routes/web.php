@@ -94,6 +94,7 @@ Route::post('unirCliente', 'Cliente\ClienteController@unir')->name('clientes.uni
 Route::get('cliente.nuevo', 'Cliente\ClienteNuevoController@vistaNuevoCliente')->name('cliente.nuevo');
 Route::post('cliente.nuevo.store', 'Cliente\ClienteNuevoController@guardarClienteNuevo')->name('cliente.nuevo.store');
 Route::resource('clientes.integrante','Cliente\ClienteIntegranteController');
+Route::get('integrantes/{cliente}','Cliente\ClienteIntegranteController@checkList')->name('integrantes');
 
 // PRODVEEDORES
 Route::resource('provedores','Provedor\ProvedorController');

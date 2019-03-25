@@ -97,4 +97,9 @@ class ClienteIntegranteController extends Controller
     {
         //
     }
+
+    public function checkList(Cliente $cliente)
+    {
+        return view('clientes.integrantes.checkList', ['cliente' => $cliente]);
+    }
 }

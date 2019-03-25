@@ -17,7 +17,6 @@ class CreateSolicitantesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('cliente_id')->unsigned();
-            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->string('integrante')->nullable();
             
             $table->string('clave_unidad')->nullable();
