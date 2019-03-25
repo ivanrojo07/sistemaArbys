@@ -33,7 +33,7 @@ class ClienteController extends Controller {
      */
     public function index()
     {
-        $clientes = Cliente::doesntHave('solicitante')->get();   
+        $clientes = Cliente::get();   
         return view('clientes.index', ['clientes' => $clientes]);
     }
 
@@ -72,7 +72,15 @@ class ClienteController extends Controller {
      */
     public function show(Cliente $cliente)
     {
-        return view('clientes.view', ['cliente' => $cliente]); 
+        $aprobado = false;
+        foreach ($cliente->transactions as $transaction) {
+            foreach ($transaction->pagos as $pago) {
+                if ($pago->status == "Aprobado") {
+                    $aprobado = true;
+                }
+            }
+        }
+        return view('clientes.view', ['cliente' => $cliente, 'aprobado' => $aprobado]); 
     }
 
     

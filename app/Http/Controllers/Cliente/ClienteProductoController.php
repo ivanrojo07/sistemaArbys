@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Product;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -84,7 +85,14 @@ class ClienteProductoController extends Controller
         // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
         if($request->all()){
             // dd($cliente);
+
             $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
+            $transaction = new Transaction;
+            $transaction->cliente_id = $cliente->id;
+            $transaction->product_id = $producto->id;
+            $transaction->save();
+            alert()->success('Success', 'Producto añadido con exito'); 
+            //return redirect()->back()->with('success', 'Producto añadido con exito');
             return $pdf->download('cotizacion.pdf');
             
         }

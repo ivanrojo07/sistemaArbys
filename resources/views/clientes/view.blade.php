@@ -120,6 +120,16 @@
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a href="{{ route('crm.index') }}" class="ui-tabs-anchor">CRM General</a>
 				</li>
+				@if($aprobado === true)
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+					<a data-toggle="tab" href="#solicitante" class="ui-tabs-anchor">Solicitante</a>
+				</li>
+				@endif
+				@if(count($cliente->solicitante)>0)
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
+					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor">Integrante</a>
+				</li>
+				@endif
 			</ul>
 			<div class="tab-content">
 				<div id="dat" class="tab-pane fade">
@@ -242,6 +252,18 @@
 						</div>
 					</div>
 				</div>
+				@if($aprobado === true)
+					<div id="solicitante" class="tab-pane fade">
+						<iframe id="fintegrante" src="{{ url('solicitantes', ['id' => $cliente->id]) }}" style="width: 100%; height: 600px;" name="integrante">
+						</iframe>
+					</div>
+				@endif
+				@if(count($cliente->solicitante) > 0)
+					<div id="integrante" class="tab-pane fade">
+						<iframe id="fintegrante" src="{{ url('integrantes', ['cliente' => $cliente]) }}" style="width: 100%; height: 600px;" name="integrante">
+						</iframe>
+					</div>
+				@endif
 			</div>
 
 @endsection

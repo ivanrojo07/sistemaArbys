@@ -1,29 +1,60 @@
 @extends('layouts.blank')
 @section('content')
-<div class="container">
-	<div class="panel-body">
-		<div class="col-lg-6">
-			<form action="">
-				<div class="input-group">
-					<input type="text" 
-					       id="solicitante" 
-					       name="query" 
-					       class="form-control" 
-					       placeholder="Buscar..."
-					       autofocus
-					       onKeypress="if(event.keyCode == 13) event.returnValue = false;"
-					       > {{--   --}}
-					<span class="input-group-btn">
-						<a readonly class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></a>
-					</span>
+
+	<div class="panel panel-group" style="margin-bottom: 0px; height: 500px;">
+	<div class="panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					@if(count($cliente->transactions) != 0)
+					<table class="table table-bordered table-stripped table-hover" style="margin-bottom: 0">
+						<tr class="info">
+							<th>Clave</th>
+							<th>Descripción</th>
+							<th>Marca</th>
+							<th>Precio</th>
+							<th>Acción</th>
+						</tr>
+						@foreach($cliente->transactions as $transaction)
+						@foreach($transaction->pagos as $pagos)
+						@if($pagos->status == "Aprobado")
+						<tr>
+							<td>{{ $transaction->product->clave }}</td>
+							<td>{{ $transaction->product->descripcion }}</td>
+							<td>{{ $transaction->product->marca }}</td>
+							<td>${{ number_format($transaction->product->precio_lista, 2) }}</td>
+							<td>
+							@foreach($solicitante as $sol)
+								@if($sol->clave_unidad == $transaction->product->clave)			
+								<a href="#{{--  {{ route('clientes.solicitantes.edit', ['cliente' => $cliente, 'solicitante' => $sol]) }}--}}" class="btn btn-primary disabled">
+									<i class="fa fa-pencil"></i><strong> Editar solicitud</strong>
+								</a>
+								<a href="{{ route('clientes.solicitantes.show', ['cliente' => $cliente, 'solicitante' => $sol]) }}" class="btn btn-warning">
+									<i class="fa fa-eye"></i><strong> Ver </strong>
+								</a>
+								@else
+								<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente]) }}" class="btn btn-success">
+									<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
+								</a>
+								@endif
+							@endforeach		
+							</td>
+						</tr>
+						@endif
+						@endforeach
+						@endforeach	
+					</table>
+					@else
+					<h4>No has elegido productos.</h4>
+					@endif
 				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-			
+	</div>	
 		
 
 {{-- TABLA AJAX DE PROVEEDORES --}} 
+{{-- 
 	<div id="datos" name="datos" class="jumbotron">
 		<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>
@@ -84,10 +115,12 @@
 
 
 	</div>
+	 --}}
 {{-- TABLA AJAX DE PROVEEDORES --}}
 
 
 {{--   TABLA VISTA RÀPIDA  --}}
+{{--  
  @foreach ($clientes as $cliente)
 	
 	<div class="persona" id="{{$cliente->id}}">
@@ -252,6 +285,7 @@
 		</div>
 	</div>
 @endforeach 
+--}}
 					{{--   TABLA VISTA RÀPIDA  --}}
 
 

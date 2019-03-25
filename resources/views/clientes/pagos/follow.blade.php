@@ -41,27 +41,6 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-3 form-group">
-							<label class="control-label">Identificación:</label>
-							<select class="form-control" name="identificacion" id="identificacion" required>
-								<option value="">Sin definir</option>
-								<option value="INE">INE</option>
-								<option value="IFE">IFE</option>
-								<option value="Pasaporte">Pasaporte</option>
-								<option value="Cédula Profesional">Cédula Profesional</option>
-								<option value="Cartilla">Cartilla</option>
-							</select>
-						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Comprobante de Domicilio:</label>
-							<select class="form-control" name="comprobante" id="comprobante" required>
-								<option value="">Sin definir</option>
-								<option value="Luz">Luz</option>
-								<option value="Agua">Agua</option>
-								<option value="Teléfono">Teléfono</option>
-								<option value="Predial">Predial</option>
-							</select>
-						</div>
-						<div class="col-sm-3 form-group">
 							<label class="control-label">Forma de Pago:</label>
 							<select class="form-control" name="forma_pago" id="forma" required>
 								<option value="">Sin definir</option>
@@ -103,8 +82,6 @@
 							<label class="control-label">Monto del Pago:</label>
 							<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Número de Referencia:</label>
 							<input type="text" name="referencia" id="referencia" class="form-control" required="">
@@ -113,6 +90,8 @@
 							<label class="control-label">Número de Fólio:</label>
 							<input type="text" name="folio" id="folio" class="form-control" required="">
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Cantidad a Pagar:</label>
 							<input type="text" name="restante" id="total" class="form-control" value="{{ $pago->restante }}" required readonly="">

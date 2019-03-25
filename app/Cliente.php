@@ -42,7 +42,7 @@ class Cliente extends Model
     }
     
     public function solicitante() {
-        return $this->hasOne('App\Solicitante', 'cliente_id', 'id');
+        return $this->hasMany('App\Solicitante', 'cliente_id', 'id');
     }
 
     public function prestamos() {
