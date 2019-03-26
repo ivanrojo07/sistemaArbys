@@ -40,7 +40,7 @@
 								@endif
 							@endforeach		
 							@else
-							<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente]) }}" class="btn btn-success">
+							<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente, 'clave' =>$transaction->product->clave, 'pagos' => $pagos->id]) }}" class="btn btn-success">
 								<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
 							</a>
 							@endif
