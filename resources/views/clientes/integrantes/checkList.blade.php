@@ -25,7 +25,7 @@
 	    			<input type="text" name="" class="form-control">
 	    		</div>
 	    		<div class="col-sm-4 form-group">
-	    			<span class="file_ID"><label for="file_ID" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;margin-top: 10px;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
+	    			<span class="file_ID"><label for="file_ID" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;margin-top: 15px;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
 	    			<span><input type="file" name="file_ID" id="file_ID" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden; position: absolute;z-index: -1"></span>
 	    		</div>
 	    	</div>
@@ -45,7 +45,7 @@
 	    			<input type="text" name="" class="form-control">
 	    		</div>
 	    		<div class="col-sm-4 form-group">
-	    			<span class="file_ID"><label for="file_domicilio" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
+	    			<span class="file_ID"><label for="file_domicilio" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;margin-top:15px;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
 	    			<span><input type="file" name="file_domicilio" id="file_domicilio" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden; position: absolute;z-index: -1"></span>
 	    		</div>
 	    		<div class="col-sm-4 form-group">
@@ -58,7 +58,7 @@
 	    			<label class="control-label">Solicitud Firmada:</label>
 	    		</div>
 	    		<div class="col-sm-3 form-group">
-	    			<span class="file_solicitud"><label for="file_solicitud" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
+	    			<span class="file_solicitud"><label for="file_solicitud" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;margin-top:15px;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
 	    			<span><input type="file" name="file_solicitud" id="file_solicitud" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden; position: absolute;z-index: -1"></span>
 	    		</div>
 	    	</div>
@@ -67,7 +67,7 @@
 	    			<label class="control-label">Comprovante de Pago:</label>
 	    		</div>
 	    		<div class="col-sm-3 form-group">
-	    			<span class="file_pago"><label for="file_pago" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
+	    			<span class="file_pago"><label for="file_pago" style="font-size: 10px;font-weight: 600;color: #fff;border-radius: 5px;background-color: #1464dc;display: inline-block;transition: all .5s;cursor: pointer;margin-top:15px;padding: 15px 40px !important;text-transform: uppercase;width: fit-content;text-align: center"><span>Subir Archivo</span></label></span>
 	    			<span><input type="file" name="file_pago" id="file_pago" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden; position: absolute;z-index: -1"></span>
 	    		</div>
 	    	</div>

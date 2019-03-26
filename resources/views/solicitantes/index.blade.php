@@ -24,20 +24,26 @@
 							<td>{{ $transaction->product->marca }}</td>
 							<td>${{ number_format($transaction->product->precio_lista, 2) }}</td>
 							<td>
+							@if(count($solicitante) > 0)
 							@foreach($solicitante as $sol)
 								@if($sol->clave_unidad == $transaction->product->clave)			
-								<a href="#{{--  {{ route('clientes.solicitantes.edit', ['cliente' => $cliente, 'solicitante' => $sol]) }}--}}" class="btn btn-primary disabled">
-									<i class="fa fa-pencil"></i><strong> Editar solicitud</strong>
-								</a>
-								<a href="{{ route('clientes.solicitantes.show', ['cliente' => $cliente, 'solicitante' => $sol]) }}" class="btn btn-warning">
-									<i class="fa fa-eye"></i><strong> Ver </strong>
-								</a>
+									<a href="{{ route('clientes.solicitantes.edit', ['cliente' => $cliente, 'solicitante' => $sol]) }}" class="btn btn-primary">
+										<i class="fa fa-pencil"></i><strong> Editar solicitud</strong>
+									</a>
+									<a href="{{ route('clientes.solicitantes.show', ['cliente' => $cliente, 'solicitante' => $sol]) }}" class="btn btn-warning">
+										<i class="fa fa-eye"></i><strong> Ver </strong>
+									</a>
 								@else
-								<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente]) }}" class="btn btn-success">
-									<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
-								</a>
+									<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente, 'clave' =>$transaction->product->clave, 'pagos' => $pagos->id]) }}" class="btn btn-success">
+										<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
+									</a>
 								@endif
 							@endforeach		
+							@else
+							<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente]) }}" class="btn btn-success">
+								<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
+							</a>
+							@endif
 							</td>
 						</tr>
 						@endif

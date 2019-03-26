@@ -1,266 +1,341 @@
 @extends('layouts.blank')
-	@section('content')
+@section('content')
 
-		<div class="container" id="tab">
-			<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.solicitantes.update',['cliente'=>$cliente,'solicitante'=>$cliente->solicitante]) }}" >
-				<input type="hidden" name="_method" value="PUT">
-				{{ csrf_field() }}
-
-				<input type="hidden" name="cliente_id" value="{{$cliente->id}}" id="cliente_id">
-
-				<div role="application" class="panel panel-group" >
-					<div class="panel-default">
-						<div class="panel-heading"><h4><strong>Datos del Solicitante:</strong> &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
-					Campos Requeridos</h4> 
-						</div>
-						<div class="panel-body">
-
-							<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="clienteid">ID del Cliente:</label>
-			    					<dd><strong> {{ $cliente->identificador }}</strong></dd>
-			  					</div>
-
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="tiemporesidir"><i class="fa fa-asterisk" aria-hidden="true"></i>Tiempo de Residencia:</label>
-			    					<input type="text" class="form-control" id="tiemporesidir" name="tiemporesidir" placeholder="Tiempo de Residencia" required value="{{$solicitante->tiemporesidir}}">
-			  					</div>	
-			  					
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  				<label class="control-label" for="tipovivienda">Tipo de Vivienda:</label>
-									<select type="select" class="form-control" id="tipovivienda" name="tipovivienda" required>
-										<option value="" selected="selected">Seleccionar</option>
-			    						<option value="Tipo 1"@if($solicitante->tipovivienda=='Tipo 1')
-			    												selected="selected" 
-			    												@endif
-			    						>Tipo  1</option>
-			    						<option value="Tipo 2"@if($solicitante->tipovivienda=='Tipo 2')
-			    												selected="selected" 
-			    												@endif>Tipo  2</option>
-			    						<option value="Tipo 3"@if($solicitante->tipovivienda=='Tipo 3')
-			    												selected="selected" 
-			    												@endif>Tipo  3</option>
-			    					</select>
-								
-								</div>
-
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  				<label class="control-label" for="estadocivil">Estado Civil:</label>
-									<select type="select" class="form-control" id="estadocivil" name="estadocivil" required>
-										<option value="" selected="selected">Seleccionar</option>
-			    						<option value="Soltero/a"@if($solicitante->estadocivil=='Soltero/a')
-			    												selected="selected" 
-			    												@endif>Soltero/a</option>
-			    						<option value="Casado/a"@if($solicitante->estadocivil=='Casado/a')
-			    												selected="selected" 
-			    												@endif>Casado/a</option>
-			    						<option value="Divorciado/a"@if($solicitante->estadocivil=='Divorciado/a')
-			    												selected="selected" 
-			    												@endif>Divorciado/a</option>
-			    						<option value="Viudo/a"@if($solicitante->estadocivil=='Viudo/a')
-			    												selected="selected" 
-			    												@endif>Viudo/a</option>
-			    					</select>
-								
-								</div>
-								
-			  					
-							</div>
-
-							
-							
-							
-
-							
-
-						</div>
-					</div>
-					
-
-			
-					<div class="panel-default">
-						<div class="panel-heading"><strong>Datos Laborales:</strong></div>
-						<div class="panel-body">
-							<div class="col-md-12 offset-md-2 mt-3" id="direccion1">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="nombreempresa"><i class="fa fa-asterisk" aria-hidden="true"></i> Nombre de la Empresa:</label>
-			    					<input type="text" class="form-control" id="nombreempresa" name="nombreempresa" placeholder="Empresa donde Labora" required value="{{$solicitante->nombreempresa}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="giro">Giro:</label>
-			    					<input type="text" class="form-control" id="giro" name="giro" placeholder="Giro de la Empresa" value="{{$solicitante->giro}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			    					<label class="control-label" for="puesto">Puesto:</label>
-			    					<input type="text" class="form-control" id="puesto" name="puesto" placeholder="Puesto en la Empresa" value="{{$solicitante->puesto}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-								<label class="control-label" for="antiguedad" id="lbl_antiguedad"><i class="fa fa-asterisk" aria-hidden="true"></i> Antiguedad:</label>
-								<input type="text" class="form-control" id="antiguedad" name="antiguedad" placeholder="Tiempo en la Empresa" value="{{$solicitante->antiguedad}}">
-							</div>
-			  					
-							</div>
-							<div class="col-md-12 offset-md-2 mt-3" id="direccion2">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telefono1"><i class="fa fa-asterisk" aria-hidden="true"></i> Telèfono de la Empresa:</label>
-			  						<input type="text" class="form-control" id="telefono1" name="telefono1" required placeholder="Telèfono.." pattern="+[0-9]" value="{{$solicitante->telefono1}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telefono2"><i class="fa fa-asterisk" aria-hidden="true" ></i> Telèfono de la Empresa(2):</label>
-			  						<input type="text" class="form-control" id="telefono2" name="telefono2" placeholder="Telèfono Alternatvio" pattern="+[0-9]" value="{{$solicitante->telefono2}}">
-			  					</div>
-			  					
-			  					
-							</div>
-							
-	  				
-						</div>
-					</div>
-
-					<div class="panel-default">
-						<div class="panel-heading"><strong>Referencias Personales:</strong></div>
-						<div class="panel-body">
-
-							<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombre1">Nombre:</label>
-			  						<input type="text" class="form-control" id="nombre1" name="nombre1"  placeholder="Primera Referencia" required value="{{$solicitante->nombre1}}">
-			  					</div>
-			  					
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telefonoref1"><i class="fa fa-asterisk" aria-hidden="true"></i>Telèfono:</label>
-			  						<input type="text" class="form-control" id="telefonoref1" name="telefonoref1" pattern="+[0-9]" required value="{{$solicitante->telefonoref1}}">
-			  					</div>
-
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="parentesco1"><i class="fa fa-asterisk" aria-hidden="true"></i>Parentesco:</label>
-			  						<input type="text" class="form-control" id="parentesco1" name="parentesco1" placeholder="Parentesco" required  value="{{$solicitante->parentesco1}}">
-			  					</div>
-			  				
-
-			  				</div>
-
-			  				<div class="col-md-12 offset-md-2 mt-3">
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombre2">Nombre:</label>
-			  						<input type="text" class="form-control" id="nombre2" name="nombre2"  placeholder="Segunda Referencia"  value="{{$solicitante->nombre2}}">
-			  					</div>
-			  					
-								<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telefonoref2"><i class="fa fa-asterisk" aria-hidden="true"></i>Telèfono:</label>
-			  						<input type="text" class="form-control" id="telefonoref2" name="telefonoref2" pattern="+[0-9]"  value="{{$solicitante->telefonoref2}}">
-			  					</div>
-
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="parentesco2"><i class="fa fa-asterisk" aria-hidden="true"></i>Parentesco:</label>
-			  						<input type="text" class="form-control" id="parentesco2" name="parentesco2" placeholder="Parentesco"  value="{{$solicitante->parentesco2}}">
-			  					</div>
-			  				
-
-			  				</div>
-			  		
-
-			  			
-			  				
-			  					
-						</div>
-						</div>	
-
-						<div class="panel-default">
-						 <div class="panel-heading"><strong>Datos de Solicitud:</strong></div>
-						  <div class="panel-body">
-						   <div class="col-md-12 offset-md-2 mt-3">
-						   		<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="folio">Folio:(Automàtico)</label>
-			  						<input type="text" class="form-control" id="id_auto" name="folio" readonly="" placeholder="Automàtico" value="{{$solicitante->folio}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="refcontrato">Referencia de Contrato</label>
-			  						<input type="text" class="form-control" id="refcontrato" name="refcontrato" required value="{{$solicitante->refcontrato}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="refapertura">Referencia de Apertura</label>
-			  						<input type="text" class="form-control" id="refapertura" name="refapertura" required value="{{$solicitante->refapertura}}">
-			  					</div>
-						   </div>
-						   <div class="col-md-12 offset-md-2 mt-3">
-						   
-			  				 <div class="form-group col-xs-3">
-								<label class="control-label" for="fechasolicitud">Fecha de Solicitud:</label>
-								<input type="date" class="form-control" name="fechasolicitud" id="fechasolicitud" value="{{$solicitante->fechasolicitud}}" required>
-							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="fechacontrato">Fecha de Contrato:</label>
-								<input type="date" class="form-control" name="fechacontrato" id="fechacontrato" value="{{$solicitante->fechacontrato}}" required>
-							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="fechapago">Fecha de Pago:</label>
-								<input type="date" class="form-control" name="fechapago" id="fechapago" value="{{$solicitante->fechapago}}" required>
-							</div>
-							<div class="form-group col-xs-3">
-								<label class="control-label" for="fechaentrega">Fecha de Entrega:</label>
-								<input type="date" class="form-control" name="fechaentrega" id="fechaentrega" value="{{$solicitante->fechaentrega}}">
-							</div>
-						   </div>
-						  </div>
-						 </div>
-
-						 <div class="panel-default">
-						 <div class="panel-heading"><strong>Datos del Beneficiario:</strong></div>
-						  <div class="panel-body">
-						   <div class="col-md-12 offset-md-2 mt-3">
-						   		<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="nombrebeneficiario">Nombre:</label>
-			  						<input type="text" class="form-control" id="nombrebeneficiario" name="nombrebeneficiario" value="{{$solicitante->nombrebeneficiario}}" >
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="edadbeneficiario">Edad</label>
-			  						<input type="text" class="form-control" id="edadbeneficiario" name="edadbeneficiario"  value="{{$solicitante->edadbeneficiario}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="telbeneficiario">Telèfono</label>
-			  						<input type="text" class="form-control" id="telbeneficiario" name="telbeneficiario" pattern="+[0-9]" value="{{$solicitante->telbeneficiario}}">
-			  					</div>
-						   </div>
-						 
-						  </div>
-						 </div>
-						 <div class="panel-default">
-						 <div class="panel-heading"><strong>Datos del Contrato:</strong></div>
-						  <div class="panel-body">
-						   <div class="col-md-12 offset-md-2 mt-3">
-						   		<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="numcontrato">Nùmero de Contrato:</label>
-			  						<input type="text" class="form-control" id="numcontrato" name="numcontrato" required value="{{$solicitante->numcontrato}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="numgrupo">Nùmero de Grupo</label>
-			  						<input type="text" class="form-control" id="numgrupo" name="numgrupo" required value="{{$solicitante->numgrupo}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<label class="control-label" for="integrante">Nùmero de Integrante</label>
-			  						<input type="text" class="form-control" id="integrante" name="integrante" required value="{{$solicitante->integrante}}">
-			  					</div>
-			  					<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			  						<button type="submit" 
-									        class="btn btn-success">
-									 <strong>Guardar</strong>
-								</button>
-			  					</div>
-
-			  					
-						   </div>
-						 
-						  </div>
-						 </div>
-					
-					</div>
-					
-								</form>	
-  				</div>
-						
-			
+<div class="panel panel-group" style="margin-bottom: 0px;">
+	<div class="panel-default">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-sm-3">
+					<h4>Solicitud para Integrante:</h4>
+				</div>
+			</div>
 		</div>
+		<form method="POST" action="{{ route('clientes.solicitantes.update',['cliente' => $cliente,'solicitante' => $solicitante]) }}">
+				{{ csrf_field() }}
+				<input type="hidden" name="_method" value="PUT">
+				<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+				<div class="panel-body">
+					<h4 class="text-center" style="padding: 3% 0%;">DATOS GENERALES</h4>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Clave de la unidad:</label>
+							<input class="form-control" name="clave_unidad" value="{{ $solicitante->clave_unidad }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Tipo de la unidad:</label>
+							<input class="form-control" name="tipo_unidad" value="{{ $solicitante->tipo_unidad }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Costo de la unidad:</label>
+							<input class="form-control" name="costo" value="{{ $solicitante->costo }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Cuota Mensual:</label>
+							<input class="form-control" name="cuota_mensual" value="{{ $solicitante->cuota_mensual }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Plazo</label>
+							<input class="form-control" name="plazo" value="{{ $solicitante->plazo }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Número de Tarifa:</label>
+							<input type="text" class="form-control" name="num_tarifa" value="{{ $solicitante->num_tarifa }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Clave Asesor:</label>
+							<input class="form-control" name="clave_asesor" value="{{ $solicitante->clave_asesor }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Nombre asesor:</label>
+							<input class="form-control" name="nombre_asesor" value="{{ $solicitante->nombre_asesor }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">DATOS SOLICITANTE</h4>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Nombre:</label>
+							<input class="form-control" name="nombre_sol" value="{{ $solicitante->nombre_sol }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Calle:</label>
+							<input type="text" class="form-control" name="calle" value="{{ $solicitante->calle }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Número ext.:</label>
+							<input type="number" class="form-control" name="num_int" pattern="+[0-9]" min="0" value="{{ $solicitante->num_int }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Número int.:</label>
+							<input type="number" class="form-control" name="num_ext" pattern="+[0-9]" min="0" value="{{ $solicitante->num_ext }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Colonia:</label>
+							<input type="text" class="form-control" name="colonia" value="{{ $solicitante->colonia }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Delegación (Municipio):</label>
+							<input type="text" class="form-control" name="delegacionmunicipio" value="{{ $solicitante->delegacionmunicipio }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Código Postal:</label>
+							<input type="text" class="form-control" name="cp" value="{{ $solicitante->cp }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Ciudad:</label>
+							<input type="text" class="form-control" name="ciudad" value="{{ $solicitante->ciudad }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Estado:</label>
+							<input type="text" class="form-control" name="estado" value="{{ $solicitante->estado }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Correo Electrónico:</label>
+							<input type="email" class="form-control" name="correo" value="{{ $solicitante->correo }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Telefono Fijo:</label>
+							<input type="text" class="form-control" name="telefono" pattern="+[0-9]" value="{{ $solicitante->telefono }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱RFC:</label>
+							<input type="text" class="form-control" name="RFC" value="{{ $solicitante->RFC }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Tiempo de Residir:</label>
+							<input type="text" class="form-control" name="tiempo_residir" value="{{ $solicitante->tiempo_residir }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Vive en casa:</label>
+							<select name="tipo_vivienda" class="form-control">
+								<option value=""> --- </option>
+								<option value="propia">PROPIA</option>
+								<option value="rentada">RENTADA</option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Nombre del Conyugue:</label>
+							<input type="text" class="form-control" name="nombre_conyuge" value="{{ $solicitante->nombre_conyuge }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Estado Civil:</label>
+							<select name="estado_civil" class="form-control">
+								<option value=""> --- </option>
+								<option value="soltero">SOLTERO</option>
+								<option value="casado">CASADO</option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Genero:</label>
+							<select name="genero" class="form-control">
+								<option value=""> --- </option>
+								<option value="M">MASCULINO</option>
+								<option value="F">FEMENINO</option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Sociedad Conyugal:</label>
+							<select name="sociedad_conyugal" class="form-control">
+								<option value=""> --- </option>
+								<option value="separacion de bienes">Separacion de Bienes</option>
+								<option value="bienes mancomunados">Bienes Mancomunados</option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Donde Desea Recibir su Carpeta del Integrante:</label>
+							<input type="text" class="form-control" name="carpeta_integrante" value="{{ $solicitante->carpeta_integrante }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Celular:</label>
+							<input type="text" class="form-control" name="celular" value="{{ $solicitante->celular }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL REPRESENTANTE LEGAL</h4>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Nombre:</label>
+							<input type="text" class="form-control" name="nombre_rep_leg" value="{{ $solicitante->nombre_rep_leg }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Domicilio:</label>
+							<textarea class="form-control" id="direccion_rep_leg" name="direccion_rep_leg" rows="3" style="resize: vertical;">
+								{{ $solicitante->direccion_rep_leg }}
+							</textarea>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Telefono Fijo/Celular:</label>
+							<input type="text" class="form-control" name="telefono_rep_leg" value="{{ $solicitante->telefono_rep_leg }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Correo Electrónico:</label>
+							<input type="text" class="form-control" name="correo_rep_leg" value="{{ $solicitante->correo_rep_leg }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL EMPLEO ACTUAL</h4>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Razon Social de la Empresa:</label>
+							<input type="text" class="form-control" name="razon_empresa" value="{{ $solicitante->razon_empresa }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Giro de la Empresa:</label>
+							<input type="text" class="form-control" name="giro_empresa" value="{{ $solicitante->giro_empresa }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Domicilio:</label>
+							<textarea class="form-control" id="direccion_rep_leg" name="direccion_empresa" rows="3" style="resize: vertical;">
+								{{ $solicitante->direccion_empresa }}
+							</textarea>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Puesto:</label>
+							<input type="text" class="form-control" name="puesto" value="{{ $solicitante->puesto }}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Antiguedad en la Empresa:</label>
+							<input type="text" class="form-control" name="antiguedad_empresa" value="{{ $solicitante->antiguedad_empresa }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Ingresos Mensuales:</label>
+							<input type="text" class="form-control" name="ingresos" value="{{ $solicitante->ingresos }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Telefono Fijo/Celular:</label>
+							<input type="text" class="form-control" name="telefono_empresa" value="{{ $solicitante->telefono_empresa }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Correo Electrónico:</label>
+							<input type="text" class="form-control" name="correo_empresa" value="{{ $solicitante->correo_empresa }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">REFERENCIAS PERSONALES</h4>
+					<div class="row">
+						<h5 style="padding-left: 3%;"><strong>Referencia 1</strong></h5>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Nombre:</label>
+							<input type="text" class="form-control" name="nombre_ref1" value="{{ $solicitante->nombre_ref1 }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Telefono Fijo/Celular:</label>
+							<input type="text" class="form-control" name="telefono_ref1" value="{{ $solicitante->telefono_ref1 }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Correo Electrónico:</label>
+							<input type="text" class="form-control" name="correo_ref1" value="{{ $solicitante->correo_ref1 }}">
+						</div>
+					</div>
+					<div class="row">
+						<h5 style="padding-left: 3%;"><strong>Referencia2</strong></h5>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Nombre:</label>
+							<input type="text" class="form-control" name="nombre_ref2" value="{{ $solicitante->nombre_ref2 }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Telefono Fijo/Celular:</label>
+							<input type="text" class="form-control" name="telefono_ref2" value="{{ $solicitante->telefono_ref2 }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Correo Electrónico:</label>
+							<input type="text" class="form-control" name="correo_ref2" value="{{ $solicitante->correo_ref2 }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">RECIBIMOS PAGO</h4>
+					<div class="row">
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Cuota de Inscripción e IVA:</label>
+							<input type="text" class="form-control" name="cuota_insc" value="{{ $solicitante->cuota_insc }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Cuota Mensual:</label>
+							<input type="text" class="form-control" name="cuota_mensual_pago" value="{{ $solicitante->cuota_mensual_pago }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Importe del Recibo:</label>
+							<input type="text" class="form-control" name="importe_recibo" value="{{ $solicitante->importe_recibo }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Cantidad con Letra:</label>
+							<input type="text" class="form-control" name="cantidad_letra" value="{{ $solicitante->cantidad_letra }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">CREDITICIOS</h4>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Cuenta de cheques:</label>
+							<select name="cuenta_cheques" class="form-control">
+								<option value=""> --- </option>
+								<option value="si">SI</option>
+								<option value="no">NO</option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Banco:</label>
+							<input type="text" class="form-control" name="banco" value="{{ $solicitante->banco }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Número de cuenta:</label>
+							<input type="text" class="form-control" name="num_cuenta" value="{{ $solicitante->num_cuenta }}">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Otras Cuentas:</label>
+							<select name="otra_cuenta" class="form-control">
+								<option value=""> --- </option>
+								<option value="si">SI</option>
+								<option value="no">NO</option>
+							</select>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Banco:</label>
+							<input type="text" class="form-control" name="banco2" value="{{ $solicitante->banco2 }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Tarjetas de Credito:</label>
+							<input type="text" class="form-control" name="num_tarjeta_credito" value="{{ $solicitante->num_tarjeta_credito }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Número de Cuenta:</label>
+							<input type="text" class="form-control" name="num_cuenta2" value="{{ $solicitante->num_cuenta2 }}">
+						</div>
+					</div>
+					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL BENEFICIARIO</h4>
+					<div class="row">
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Nombre:</label>
+							<input type="text" class="form-control" name="nombre_benef" value="{{ $solicitante->nombre_benef }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Edad:</label>
+							<input type="text" class="form-control" name="edad_benef" value="{{ $solicitante->edad_benef }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Parentesco:</label>
+							<input type="text" class="form-control" name="parentesco" value="{{ $solicitante->parentesco }}">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label">Telefono Fijo/celular:</label>
+							<input type="text" class="form-control" name="telefono_benef" value="{{ $solicitante->telefono_benef }}">
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4 text-center">
+							<button type="submit" class="btn btn-success">
+								<i class="fa fa-check"></i> Guardar
+							</button>
+						</div>
+						<div class="col-sm-4 text-right text-danger">
+							<h5>✱Campos Requeridos</h5>
+						</div>
+					</div>
+					<div style="margin: 50px 0;"></div>
+				</div>
+			</form>
+	</div>
+</div>	
 
 
 <script>
@@ -282,28 +357,6 @@
 			document.getElementById("id_auto").value=a+b;
     });
 });
-		
-		// function f_corta(){
-		// 	familia=document.getElementById("familia_id").value;
-		// 	var ar_familia=familia.split(",");
-		// 	tipo=document.getElementById("tipo").value;
-		// 	var ar_tipo=tipo.split(",");
-		// 	subtipo=document.getElementById("subptipo").value;
-		// 	var ar_subtipo=subtipo.split(",");
-		// 	medida=document.getElementById("medida1").value;
-		// 	medida=medida.toUpperCase(medida);
-		// 	modelo=document.getElementById("modelo_id").value;
-		// 	modelo=modelo.toUpperCase(modelo);
-		// 	presentacion=document.getElementById("presentacion").value;
-		// 	var ar_presentacion=presentacion.split(",");
-		// 	calidad=document.getElementById("calidad").value;
-		// 	var ar_calidad=calidad.split(",");
-		// 	acabado=document.getElementById("acabado").value;
-		// 	var ar_acabado= acabado.split(",");
-		// 	document.getElementById("corta_id").value=ar_familia[0]+ar_tipo[0]+ar_subtipo[0]+medida+modelo+ar_presentacion[0]+ar_calidad[0]+ar_acabado[0];
-		// 	document.getElementById("descripcion").value=ar_familia[1]+", "+ar_tipo[1]+", "+ar_subtipo[1]+ ", "+ medida + ", "+modelo+ ", "+ar_presentacion[1]+ ", "+ar_calidad[1]+ ", "+ar_acabado[1];
-
-		// }
 	</script>
 
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Solicitante;
 use App\Cliente;
+use App\Product;
+use App\Pago;
 //use App\CanalVenta;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -30,8 +32,11 @@ class ClienteSolicitanteController extends Controller
      */
     public function create(Cliente $cliente)
     {
-        
-        return view('clientes.integrantes.create',['cliente'=>$cliente]);
+        $clave = $_GET['clave'];
+        $pagos = $_GET['pagos'];
+        $pagos = Pago::find($pagos);
+        $producto = Product::where('clave', $clave)->first();
+        return view('clientes.integrantes.create',['cliente'=>$cliente, 'producto' => $producto, 'pago' =>$pagos]);
         //return view('solicitantes.create',['cliente'=>$cliente]);
     }
 
@@ -76,15 +81,12 @@ class ClienteSolicitanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente,Solicitante $solicitante)
+    public function edit(Cliente $cliente, Solicitante $solicitante)
     {
 
         // $solicitante=Solicitante::where('id',$id)->first();
         
-        return view('solicitantes.edit',[
-            'solicitante'=>$solicitante,
-            'cliente'=>$cliente
-            ]); 
+        return view('solicitantes.edit',['solicitante'=>$solicitante, 'cliente'=>$cliente]); 
     }
 
     /**
@@ -94,17 +96,17 @@ class ClienteSolicitanteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Cliente $cliente, Solicitante $solicitante, Request $request)
     {
       
-       $solicitante=Solicitante::where('id',$id)->first();
+       $solicitante=Solicitante::where('id',$solicitante->id)->first();
 
        
        $solicitante->update($request->except('_method','_token'));
        $cliente=Cliente::where('id',$solicitante->cliente_id)->first();
-       
+       $solicitante = Solicitante::all();
        Alert::success('Solicitante modificado con éxito');
-        return view('solicitantes.view',['solicitante'=>$solicitante,'cliente'=>$cliente]);
+        return view('solicitantes.index',['solicitante'=>$solicitante,'cliente'=>$cliente]);
     }
 
     /**
