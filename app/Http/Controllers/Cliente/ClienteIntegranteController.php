@@ -50,10 +50,10 @@ class ClienteIntegranteController extends Controller
     {
         $integrante = new Integrante();
         $integrante->cliente_id = $request->cliente_id;
-        $integrante->archivo_identificacion = Storage::disk('local')->put('foto1.jpg', $request->archivo_identificacion);
-        $integrante->archivo_comprobante = Storage::disk('local')->put('foto2.jpg', $request->archivo_comprobante);
-        $integrante->archivo_solicitud = Storage::disk('local')->put('foto3.jpg', $request->archivo_solicitud);
-        $integrante->archivo_pago = Storage::disk('local')->put('foto4.jpg', $request->archivo_pago);
+        $integrante->archivo_identificacion = Storage::disk('local')->put('foto1', $request->archivo_identificacion);
+        $integrante->archivo_comprobante = Storage::disk('local')->put('foto2', $request->archivo_comprobante);
+        $integrante->archivo_solicitud = Storage::disk('local')->put('foto3', $request->archivo_solicitud);
+        $integrante->archivo_pago = Storage::disk('local')->put('foto4', $request->archivo_pago);
         $integrante->identificacion = $request->identificacion;
         $integrante->num_identificacion = $request->num_identificacion;
         $integrante->comprobante_domicilio = $request->comprobante_domicilio;
@@ -62,8 +62,6 @@ class ClienteIntegranteController extends Controller
         $integrante->direccion = $request->direccion;
         $integrante->save();
 
-        return redirect()->route('clientes.index');
-        dd($request->all());
         // return "kk";
         // $integrante = Integrante::create($request->all());
         // $cliente = Cliente::find(json_decode($request->cliente)->id);
