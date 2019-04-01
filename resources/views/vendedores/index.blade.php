@@ -17,6 +17,7 @@
 						@if(count($vendedores) > 0)
 							<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px">
 								<tr class="info">
+									<th>ID</th>
 									<th>Nombre</th>
 									<th>Apellido Paterno</th>
 									<th>Apellido Materno</th>
@@ -26,6 +27,7 @@
 								</tr>
 								@foreach($vendedores as $vendedor)
 									<tr class="active">
+										<td>{{ $vendedor->id }}</td>
 										<td>{{ $vendedor->empleado->nombre }}</td>
 										<td>{{ $vendedor->empleado->appaterno }}</td>
 										<td>{{ $vendedor->empleado->apmaterno ? $vendedor->empleado->apmaterno : 'N/A' }}</td>

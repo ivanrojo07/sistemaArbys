@@ -49,4 +49,8 @@ class Cliente extends Model
         return $this->hasMany('App\Prestamo');
     }
 
+    public function integrante(){
+        return $this->hasOne('App\Integrante');
+    }
+
 }
