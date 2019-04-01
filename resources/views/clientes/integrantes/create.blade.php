@@ -18,23 +18,23 @@
 					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Clave de la unidad:</label>
-							<label class="form-control" name="clave_unidad" readonly>XXXXXXX</label>
+							<input class="form-control" name="clave_unidad" value="{{ $producto->clave }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Tipo de la unidad:</label>
-							<label class="form-control" name="tipo_unidad" readonly>XXXXXXX</label>
+							<input class="form-control" name="tipo_unidad" value="{{ $producto->tipo }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Costo de la unidad:</label>
-							<label class="form-control" name="costo" readonly>XXXXXXX</label>
+							<input class="form-control" name="costo" value="{{ $producto->precio_lista }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Cuota Mensual:</label>
-							<label class="form-control" name="cuota_mensual" readonly>XXXXXXX</label>
+							<input class="form-control" name="cuota_mensual">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Plazo</label>
-							<label class="form-control" name="plazo" readonly>xxxxxxx</label>
+							<input class="form-control" name="plazo" value="{{ $pago->meses }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Número de Tarifa:</label>
@@ -42,19 +42,26 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Clave Asesor:</label>
-							<label class="form-control" name="clave_asesor" readonly>XXXX</label>
+							<input class="form-control" name="clave_asesor" >
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Nombre asesor:</label>
-							<label class="form-control" name="nombre_asesor" readonly>XXXXXXXX</label>
+							<input class="form-control" name="nombre_asesor">
 						</div>
 					</div>
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS SOLICITANTE</h4>
 					<div class="row">
+						@if($cliente->tipo === "Fisica")
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Nombre:</label>
-							<label class="form-control" name="nombre_sol">XXXXXXX</label>
+							<input class="form-control" name="nombre_sol" value="{{ $cliente->nombre ." ".$cliente->appaterno." ".$cliente->apmaterno }}" readonly>
 						</div>
+						@else
+						<div class="col-sm-3 form-group">
+							<label class="control-label">Razon:</label>
+							<input class="form-control" name="razon" value="{{ $cliente->razon }}" readonly>
+						</div>
+						@endif
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Calle:</label>
 							<input type="text" class="form-control" name="calle">
@@ -91,7 +98,7 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Correo Electrónico:</label>
-							<input type="email" class="form-control" name="correo">
+							<input type="email" class="form-control" name="correo" value="{{ $cliente->email }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Telefono Fijo:</label>
@@ -99,7 +106,7 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱RFC:</label>
-							<input type="text" class="form-control" name="RFC">
+							<input type="text" class="form-control" name="RFC" value="{{ $cliente->rfc }}" readonly>
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Tiempo de Residir:</label>
@@ -147,7 +154,7 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Celular:</label>
-							<input type="text" class="form-control" name="celular" pattern="+[0-9]">
+							<input type="text" class="form-control" name="celular" value="{{ $cliente->movil }}" readonly>
 						</div>
 					</div>
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL REPRESENTANTE LEGAL</h4>

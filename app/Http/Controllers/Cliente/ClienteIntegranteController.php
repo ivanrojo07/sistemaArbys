@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Integrante;
 use UxWeb\SweetAlert\SweetAlert as Alert;
+use Illuminate\Support\Facades\Storage;
 
 class ClienteIntegranteController extends Controller
 {
@@ -47,10 +48,25 @@ class ClienteIntegranteController extends Controller
      */
     public function store(Request $request)
     {
-        $integrante = Integrante::create($request->all());
-        $cliente = Cliente::find(json_decode($request->cliente)->id);
-        Alert::success('Se han guardado correctamente los datos');
-        return view('clientes.integrantes.create', ['cliente' => $cliente]);
+        $integrante = new Integrante();
+        $integrante->cliente_id = $request->cliente_id;
+        $integrante->archivo_identificacion = Storage::disk('local')->put('foto1', $request->archivo_identificacion);
+        $integrante->archivo_comprobante = Storage::disk('local')->put('foto2', $request->archivo_comprobante);
+        $integrante->archivo_solicitud = Storage::disk('local')->put('foto3', $request->archivo_solicitud);
+        $integrante->archivo_pago = Storage::disk('local')->put('foto4', $request->archivo_pago);
+        $integrante->identificacion = $request->identificacion;
+        $integrante->num_identificacion = $request->num_identificacion;
+        $integrante->comprobante_domicilio = $request->comprobante_domicilio;
+        $integrante->nombre_comp_domc = $request->nombre_comp_domc;
+        $integrante->direccion = $request->direccion;
+        $integrante->direccion = $request->direccion;
+        $integrante->save();
+
+        // return "kk";
+        // $integrante = Integrante::create($request->all());
+        // $cliente = Cliente::find(json_decode($request->cliente)->id);
+        // Alert::success('Se han guardado correctamente los datos');
+        // return view('clientes.integrantes.create', ['cliente' => $cliente]);
     }
 
     /**

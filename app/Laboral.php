@@ -54,7 +54,7 @@ class Laboral extends Model
     }
 
     public function oficina() { 
-        return $this->belongsTo('App\Oficina');
+        return $this->belongsTo('App\Oficina', 'oficina_id');
     }
 
 }
