@@ -27,6 +27,8 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
          {{-- <script src="{{ asset('js/peticion.js') }}"></script> --}}
          {{-- <script src="{{ asset('js/cliente.js') }}"></script> --}}
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+         
     </head>
     <body>
         <div id="app">
@@ -44,5 +46,6 @@
         <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
          <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
          @yield('scripts')
+         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     </body>
 </html>
