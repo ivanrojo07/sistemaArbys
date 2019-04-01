@@ -125,7 +125,7 @@
 					<a data-toggle="tab" href="#solicitante" class="ui-tabs-anchor">Solicitante</a>
 				</li>
 				@endif
-				@if(count($cliente->solicitante)>0)
+				@if(count($cliente->solicitante) > 0)
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor">Integrante</a>
 				</li>

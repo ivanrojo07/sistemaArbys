@@ -131,11 +131,10 @@
 							<div class="col-sm-3 form-group" id="montos" style="display: none;">
 								<label class="control-label">Monto del Pago:</label>
 								<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
-							</div>
-							<textarea name="" id="" cols="30" rows="10">{{$cliente->vendedor->empleado->laborales->last()->oficina->abreviatura}}</textarea>
-							<div class="col-sm-3 form-group">
+							</div><div class="col-sm-3 form-group">
 								<label class="control-label">Número de Referencia:</label>
-								<input type="text" name="referencia" id="referencia" class="form-control" readonly value="{{$cliente->vendedor}}" required="">
+								
+								<input type="text" name="referencia" id="referencia" class="form-control" readonly value="{{$cliente->vendedor->empleado->laborales->last()->oficina->abreviatura}}{{$cliente->vendedor->id}}{{$cliente->transactions->last()->product->tipo[0]}}{{$cliente->transactions->last()->id}}" required="">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Número de Fólio:</label>

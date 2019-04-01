@@ -40,6 +40,13 @@
 											<a class="btn btn-warning btn-sm" href="{{ route('grupos.edit', ['grupo' => $grupo]) }}">
 												<i class="fa fa-pencil" aria-hidden="true"></i><strong> Editar</strong>
 											</a>
+											<form action="{{ route('grupos.destroy', ['grupo' => $grupo]) }}" style="display: inline;" method="post">
+												{{ csrf_field() }}
+												<input type="hidden" name="_method" value="DELETE">
+												<button type="submit" class="btn btn-danger btn-sm">
+													<i class="fa fa-times"></i> Eliminar
+												</button>
+											</form>
 										</td>
 									</tr>
 								@endforeach

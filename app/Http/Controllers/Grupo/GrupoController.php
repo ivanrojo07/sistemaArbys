@@ -121,6 +121,7 @@ class GrupoController extends Controller
 
     public function vendedores(Grupo $grupo) {
         $empleado = Auth::user()->empleado;
+
         $laborales = $empleado->laborales->last()->oficina->laborales;
         $arr = [];
         foreach ($laborales as $laboral) {
@@ -147,6 +148,17 @@ class GrupoController extends Controller
         $vendedor->grupo_id = null;
         $vendedor->save();
         return redirect()->route('grupos.show', ['grupo' => $grupo]);
+    }
+
+
+    public function destroy(Grupo $grupo){
+        foreach($grupo->vendedores as $vendedor){
+            $vendedor->grupo_id = null;
+            $vendedor->save();
+        }
+        
+        $grupo->delete();
+        return redirect()->route('grupos.index');
     }
 
 }
