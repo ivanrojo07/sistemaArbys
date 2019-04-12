@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Vendedor;
 
 use App\Vendedor;
+use App\Cliente;
+use App\Subgerente;
+use App\Grupo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class VendedorController extends Controller
@@ -48,5 +52,42 @@ class VendedorController extends Controller
     public function getVendedores(){
         $vendedores = Vendedor::whereNotIn('id', [1])->get();
         return view('vendedores.select',['vendedores'=>$vendedores]);
+    }
+
+    public function asignar()
+    {
+        $empleado = Auth::user()->empleado;
+        if($empleado->id == 1) {
+            $grupos = Grupo::get();
+            $vendedores = Vendedor::whereNotIn('id', [1])->get();
+            $subgerentes = Subgerente::get();
+            $num_grupos = Array();
+            foreach ($subgerentes as $sub) {
+                $num_grupos[$sub->id] = count(Grupo::where('subgerente_id', $sub->id)->get());
+            }
+        } else {
+            $laborales = $empleado->laborales->last()->oficina->laborales;
+            $arr = [];
+            foreach ($laborales as $laboral)
+                $arr[] = $laboral->empleado;
+            $arr = array_unique($arr);
+            $vendedores = [];
+            foreach ($arr as $emp)
+                if(isset($emp->vendedor))
+                    $vendedores[] = $emp->vendedor;
+            $arr = [];
+            foreach ($vendedores as $vendedor)
+                $arr[] = $vendedor->id;
+            $grupos = Cliente::whereIn('vendedor_id', $arr)->get();
+        }
+        return view('vendedores.asignar', ['grupos' => $grupos, 'vendedores' => $vendedores, 'num_grupos' => $num_grupos]);
+    }
+
+    public function unir(Request $request)
+    {
+        $vendedor = Vendedor::find($request->vendedor_id);
+        $vendedor->grupo_id = $request->grupo_id;
+        $vendedor->save();
+        return redirect()->route('vendedor.asignar');
     }
 }

@@ -121,6 +121,7 @@ class GrupoController extends Controller
 
     public function vendedores(Grupo $grupo) {
         $empleado = Auth::user()->empleado;
+        //return dd($empleado->laborales->last());
 
         $laborales = $empleado->laborales->last()->oficina->laborales;
         $arr = [];

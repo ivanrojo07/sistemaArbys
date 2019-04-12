@@ -48,6 +48,10 @@ Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
 Route::resource('vendedors','Vendedor\VendedorController');
 Route::get('vendedors/{vendedor}/baja','Vendedor\VendedorController@bajar')->name('vendedors.baja');
 Route::get('vendedors/{vendedor}/alta','Vendedor\VendedorController@activar')->name('vendedors.alta');
+Route::get('asignarVendedores', 'Vendedor\VendedorController@asignar')->name('vendedor.asignar');
+Route::post('unirVendedor', 'Vendedor\VendedorController@unir')->name('vendedores.unir');
+Route::post('empleados.laborals/create_laboral', 'Empleado\LaboralController@newLaboral')->name('empleados.laborals.createLaborals');
+Route::post('empleados.laborals/add', 'Empleado\LaboralController@addLaborals')->name('empleados.laborals.addLaborals');
 
 // GRUPOS
 Route::resource('grupos', 'Grupo\GrupoController');

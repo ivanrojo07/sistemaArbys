@@ -171,4 +171,22 @@ class LaboralController extends Controller
     {
         //
     }
+
+    public function newLaboral(Empleado $empleado)
+    {
+        $contratos = TipoContrato::get();
+        $areas =   Area::get();
+        if(Auth::user()->perfil->id == 1)
+            $puestos = Puesto::whereBetween('id', [2, 7])->get();
+        else
+            $puestos = Puesto::whereBetween('id', [3, 7])->get();
+        $regiones = Region::get();
+        return view('empleado.laborales.createLaboral', ['empleado' => $empleado, 'contratos' => $contratos, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
+    }
+
+    public function addLaborals(Request $request, Empleado $empleado)
+    {
+        # code...
+        //Aqui se hara el codigo para agregar nueva informacion laboral
+    }
 }
