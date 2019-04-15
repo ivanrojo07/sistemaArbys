@@ -23,17 +23,21 @@
 							<label for="nombre" class="control-label">Nombre:</label>
 							<input type="text" name="nombre" class="form-control" id="nombre" value="{{ $grupo->nombre }}">
 						</div>
-						@php($e = $grupo->subgerente->empleado)
+						@if($grupo->subgerente != null)
+							@php($e = $grupo->subgerente->empleado)
+						@endif
 						<div class="form-group col-sm-4">
 							<label for="estado" class="control-label">Subgerente:</label>
 							<select class="form-control" name="subgerente_id" id="subgerente">
 								<option>Seleccionar</option>
 								@foreach($subgerentes as $subgerente)
-								@php($empleado = $subgerente->empleado)
-								@if($subgerente->id == $grupo->subgerente_id)
-								<option value="{{ $subgerente->id }}" selected="">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
-								@else
-								<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
+								@if(!$subgerente->change_puesto)
+									@php($empleado = $subgerente->empleado)
+									@if($subgerente->id == $grupo->subgerente_id)
+									<option value="{{ $subgerente->id }}" selected="">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
+									@else
+									<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
+									@endif
 								@endif
 								@endforeach
 							</select>

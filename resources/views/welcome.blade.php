@@ -184,6 +184,11 @@
                                                             <i class="fa fa-user-o"></i> Vendedores
                                                         </a>
                                                     </li>
+                                                    <li>
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('vendedor.asignar') }}','Asignar Vendedor')">
+                                                            <i class="fa fa-user-plus"></i> Asignar Vendedor
+                                                        </a>
+                                                    </li>
                                                     @break
                                                 @endif
                                             @endforeach

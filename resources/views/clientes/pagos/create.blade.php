@@ -131,14 +131,10 @@
 							<div class="col-sm-3 form-group" id="montos" style="display: none;">
 								<label class="control-label">Monto del Pago:</label>
 								<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
-							</div><div class="col-sm-3 form-group">
-								<label class="control-label">Número de Referencia:</label>
-								
-								<input type="text" name="referencia" id="referencia" class="form-control" readonly value="{{$cliente->vendedor->empleado->laborales->last()->oficina->abreviatura}}{{$cliente->vendedor->id}}{{$cliente->transactions->last()->product->tipo[0]}}{{$cliente->transactions->last()->id}}" required="">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Número de Fólio:</label>
-								<input type="text" name="folio" id="folio" class="form-control" required="">
+								<input type="text" name="folio" id="folio" class="form-control" value="{{$cliente->vendedor->empleado->laborales->last()->oficina->abreviatura}}{{$cliente->vendedor->id}}{{$cliente->transactions->last()->product->tipo[0]}}{{$cliente->transactions->last()->id}}" required="" readonly="">
 							</div>
 							<div class="col-sm-3 form-group" id="plan_col" style="display: none;">
 								<label class="control-label">Plan de Pago:</label>

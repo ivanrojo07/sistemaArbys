@@ -28,7 +28,7 @@ class CreatePagosTable extends Migration
             $table->string('numero_tarjeta')->nullable();
             $table->string('nombre_tarjetaHabiente')->nullable();
             $table->integer('meses');
-            $table->string('referencia');
+            //$table->string('referencia');
             $table->string('folio');
             $table->decimal('total');
             $table->decimal('restante');

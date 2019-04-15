@@ -37,7 +37,7 @@
                                         <td>{{ $usuario->perfil->nombre }}</td>
                                         <td>{{ $usuario->empleado->nombre . ' ' . $usuario->empleado->appaterno . ' ' . $usuario->empleado->apmaterno }}</td>
                                         <td>{{ $usuario->email }}</td>
-                                        <td>{{ $usuario->empleado->rfc }}</td>
+                                        <td>{{ $usuario->empleado->laborales->last()->puesto->nombre }}</td>
                                         <td class="text-center">
                                             @foreach(Auth::user()->perfil->componentes as $componente)
                                                 @if($componente->nombre == 'ver usuario')
