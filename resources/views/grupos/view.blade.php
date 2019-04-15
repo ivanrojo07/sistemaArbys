@@ -32,11 +32,18 @@
 						<label for="nombre" class="control-label">Nombre:</label>
 						<input type="text" name="nombre" class="form-control" id="nombre" value="{{ $grupo->nombre }}" disabled="">
 					</div>
-					@php($e = $grupo->subgerente->empleado)
-					<div class="form-group col-sm-4">
-						<label for="estado" class="control-label">Subgerente:</label>
-						<input type="text" name="nombre" class="form-control" id="nombre" value="{{ $e->nombre . ' ' . $e->appaterno . ' ' . $e->apmaterno }}" disabled="">
-					</div>
+					@if($grupo->subgerente == null)
+						<div class="form-group col-sm-4">
+							<label for="estado" class="control-label">Subgerente:</label>
+							<input type="text" name="nombre" class="form-control" id="nombre" value="Sin asignar" disabled="">
+						</div>
+					@else
+						@php($e = $grupo->subgerente->empleado)
+						<div class="form-group col-sm-4">
+							<label for="estado" class="control-label">Subgerente:</label>
+							<input type="text" name="nombre" class="form-control" id="nombre" value="{{ $e->nombre . ' ' . $e->appaterno . ' ' . $e->apmaterno }}" disabled="">
+						</div>
+					@endif
 				</div>
 			</div>
 			<div class="panel-heading">

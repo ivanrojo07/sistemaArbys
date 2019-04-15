@@ -28,10 +28,15 @@
 								</tr>
 								@foreach($grupos as $grupo)
 									<tr>
-										@php($emp = $grupo->subgerente->empleado)
 										<td>{{ $grupo->nombre }}</td>
-										<td>{{ $grupo->subgerente->empleado->laborales->last()->oficina->nombre }}</td>
+										@if($grupo->subgerente == null)
+											<td> -- </td>
+											<td>Sin asignar</td>
+										@else
+											@php($emp = $grupo->subgerente->empleado)
+											<td>{{ $grupo->subgerente->empleado->laborales->last()->oficina->nombre }}</td>
 										<td>{{ $emp->nombre . ' ' . $emp->appaterno . ' ' . $emp->apmaterno }}</td>
+										@endif
 										<td>{{ count($grupo->vendedores) < 4 ? 4 - count($grupo->vendedores) : 'Lleno' }}</td>
 										<td class="text-center">
 											<a class="btn btn-primary btn-sm" href="{{ route('grupos.show', ['grupo' => $grupo]) }}">

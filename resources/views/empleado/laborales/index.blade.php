@@ -19,9 +19,9 @@
 						<h5>Laborales:</h5>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a class="btn btn-success btn-md" href="{{ route('empleados.laborals.create', ['empleado' => $empleado]) }}">
+						<a class="btn btn-success btn-md" href="{{ route('empleados.laborals.createLaborals', ['empleado' => $empleado]) }}">
 							<i class="fa fa-plus"></i><strong> Agregar</strong>
-						</a>--}}
+						</a>
 						<a class="btn btn-warning btn-md" href="{{ route('empleados.laborals.edit', ['empleado' => $empleado, 'laboral' => $datoslab]) }}">
 							<i class="fa fa-pencil"></i><strong> Editar</strong>
 						</a>

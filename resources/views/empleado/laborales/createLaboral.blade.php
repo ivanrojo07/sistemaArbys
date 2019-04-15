@@ -27,6 +27,10 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-3">
+							<label class="control-label">✱Fecha de actualizacion:</label>
+							<input class="form-control" type="text" id="actualizacion" name="actualizacion" required="" readonly="" value="{{ date('y-m-d') }}">
+						</div>
+						<div class="form-group col-sm-3">
 							<label class="control-label">✱Tipo de contrato:</label>
 							<select type="select" class="form-control" name="contrato_id" id="contrato_id" required="">
 								<option value="">Seleccionar</option>
@@ -49,9 +53,13 @@
 							<label class="control-label">✱Puesto:</label>
 							<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
 								<option value="">Seleccionar</option>
+								@if(count($puestos) > 0)
 								@foreach($puestos as $puesto)
 									<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>f
 								@endforeach
+								@else
+									<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
+								@endif
 							</select>
 						</div>
 						<div class="form-group col-sm-3" id="region" style="display: none;">
@@ -88,7 +96,7 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Salario Nominal:</label>
-							<input class="form-control" type="text" id="inicial" name="inicial" required>
+							<input class="form-control" type="text" id="actual" name="actual" required>
 						</div>
 					</div>
 				</div>
@@ -141,14 +149,17 @@
 					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
     				break;
     			case 5:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
     				break;
     			case 6:
@@ -156,8 +167,10 @@
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
+					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
     				break;
     			case 7:
@@ -167,8 +180,10 @@
       				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#expertos").prop('name', 'experto');
+					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('required', true);
     				break;

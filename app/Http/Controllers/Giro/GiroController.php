@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Giro;
 
+use App\Http\Controllers\Controller;
 use App\Giro;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class GiroController extends Controller
 {

@@ -176,17 +176,43 @@ class LaboralController extends Controller
     {
         $contratos = TipoContrato::get();
         $areas =   Area::get();
+        $puestos = [];
+        $puesto = 0;
         if(Auth::user()->perfil->id == 1)
             $puestos = Puesto::whereBetween('id', [2, 7])->get();
-        else
-            $puestos = Puesto::whereBetween('id', [3, 7])->get();
+        elseif ($empleado->laborales->last()->puesto->id > 2) {
+            //$puestos = Puesto::whereBetween('id', [3, 7])->get();
+            $puesto = Puesto::where('id', $empleado->laborales->last()->puesto->id - 1)->first();
+        }
         $regiones = Region::get();
-        return view('empleado.laborales.createLaboral', ['empleado' => $empleado, 'contratos' => $contratos, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
+        return view('empleado.laborales.createLaboral', ['empleado' => $empleado, 'contratos' => $contratos, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones, 'puesto' => $puesto]);
     }
 
     public function addLaborals(Request $request, Empleado $empleado)
     {
-        # code...
-        //Aqui se hara el codigo para agregar nueva informacion laboral
+        $datosLaborales = $empleado->laborales->first();
+        $request['contratacion'] = $datosLaborales->contratacion;
+        $request['inicial'] = $datosLaborales->inicial;
+        $request['original'] = $datosLaborales->puesto->nombre;
+        $grupos = Grupo::where('subgerente_id', $empleado->subgerente->id)->get();
+        foreach ($grupos as $grupo) {
+            $grupo->subgerente_id = null;
+            $grupo->save();
+        }
+        $laborales = new Laboral($request->all());
+        $empleado->laborales()->save($laborales);
+        if($request->puesto_id == 5) {
+            $gerente = new Gerente();
+            $empleado->gerente()->save($gerente);
+            $empleado->subgerente->change_puesto = true;
+        } else if($request->puesto_id == 6) {
+            $subgerente = new Subgerente();
+            $empleado->subgerente()->save($subgerente);
+            $empleado->vendedor->change_puesto = true;
+        } else if($request->puesto_id == 7) {
+            $vendedor = new Vendedor(['experto' => $request->experto]);
+            $empleado->vendedor()->save($vendedor);
+        }
+        return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 }
