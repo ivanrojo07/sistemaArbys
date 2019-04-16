@@ -132,8 +132,12 @@ class LaboralController extends Controller
             if(!$empleado->gerente) {
                 if($empleado->subgerente)
                     $empleado->subgerente->delete();
-                if($empleado->vendedor)
+                if($empleado->vendedor){
+                    foreach ($empleado->vendedor->clientes as $cliente) {
+                        $cliente->vendedor_id = 0;
+                    }
                     $empleado->vendedor->delete();
+                }
                 $gerente = new Gerente();
                 $empleado->gerente()->save($gerente);
             }
