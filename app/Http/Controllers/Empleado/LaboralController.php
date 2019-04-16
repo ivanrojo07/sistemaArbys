@@ -114,7 +114,7 @@ class LaboralController extends Controller
         $empleados = Empleado::get();
 
         foreach ($empleados as $empl) {
-            if ($empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id) {
+            if (isset($empl->laborales->last()->oficina) && $empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id) {
                 if ($empl->laborales->last()->puesto->id == 5) {
                     $hayGerente = true;
                 }

@@ -29,8 +29,8 @@
 									<th>Apellido Materno</th>
 									<th>RFC</th>
 									<th>Puesto</th>
-									<th class="text-center">Acciones</th>
 									<th>Oficina</th>
+									<th class="text-center">Acciones</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -42,8 +42,13 @@
 											<td>{{ $empleado->appaterno }}</td>
 											<td>{{ $empleado->apmaterno }}</td>
 											<td>{{ $empleado->rfc }}</td>
+											@if(count($empleado->laborales) > 0)
 											<td>{{ $empleado->laborales->last()->puesto->nombre }}</td>
 											<th>{{ $empleado->laborales->last()->oficina->nombre }}</th>
+											@else
+											<td> -- </td>
+											<td> -- </td>
+											@endif
 											<td class="text-center">
 												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">
 													<i class="fa fa-eye"></i> Ver
