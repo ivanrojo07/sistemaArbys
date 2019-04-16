@@ -85,8 +85,12 @@ class ClienteProductoController extends Controller
         // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
         if($request->all()){
             // dd($cliente);
-
-            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
+            if (isset($cliente->vendedor->empleado)) {
+                $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);    
+            }
+            else
+                $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=> 'Sin asignar']);
+            
             $transaction = new Transaction;
             $transaction->cliente_id = $cliente->id;
             $transaction->product_id = $producto->id;
