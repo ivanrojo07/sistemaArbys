@@ -108,13 +108,30 @@ class LaboralController extends Controller
     {
         $contratos = TipoContrato::get();
         $areas =   Area::get();
+        $puestos = [];
+        $puesto = 0;
+        $hayGerente = false;
+        $empleados = Empleado::get();
+
+        foreach ($empleados as $empl) {
+            if ($empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id) {
+                if ($empl->laborales->last()->puesto->id == 5) {
+                    $hayGerente = true;
+                }
+            }
+        }
+        if ($empleado->laborales->last()->puesto->id == 5) {
+            $hayGerente = true;
+        }
         if(Auth::user()->perfil->id == 1)
             $puestos = Puesto::whereBetween('id', [2, 7])->get();
+
         else
-            $puestos = Puesto::whereBetween('id', [3, 7])->get();
+            //$puestos = Puesto::whereBetween('id', [3, 7])->get();
+            $puesto = Puesto::where('id', $empleado->laborales->last()->puesto->id - 1)->first();
+
         $regiones = Region::get();
-        $contratos = TipoContrato::get();
-        return view('empleado.laborales.edit', ['datoslab' => $laboral, 'contratos' => $contratos, 'empleado' => $empleado, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones]);
+        return view('empleado.laborales.edit', ['datoslab' => $laboral, 'contratos' => $contratos, 'empleado' => $empleado, 'areas' => $areas, 'puestos' => $puestos, 'regiones' => $regiones, 'puesto' => $puesto, 'hayGerente' => $hayGerente]);
     }
 
     /**
@@ -132,12 +149,8 @@ class LaboralController extends Controller
             if(!$empleado->gerente) {
                 if($empleado->subgerente)
                     $empleado->subgerente->delete();
-                if($empleado->vendedor){
-                    foreach ($empleado->vendedor->clientes as $cliente) {
-                        $cliente->vendedor_id = 0;
-                    }
+                if($empleado->vendedor)
                     $empleado->vendedor->delete();
-                }
                 $gerente = new Gerente();
                 $empleado->gerente()->save($gerente);
             }

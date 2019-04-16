@@ -28,7 +28,9 @@
 									<th>Apellido Paterno</th>
 									<th>Apellido Materno</th>
 									<th>RFC</th>
+									<th>Puesto</th>
 									<th class="text-center">Acciones</th>
+									<th>Oficina</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -40,6 +42,8 @@
 											<td>{{ $empleado->appaterno }}</td>
 											<td>{{ $empleado->apmaterno }}</td>
 											<td>{{ $empleado->rfc }}</td>
+											<td>{{ $empleado->laborales->last()->puesto->nombre }}</td>
+											<th>{{ $empleado->laborales->last()->oficina->nombre }}</th>
 											<td class="text-center">
 												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">
 													<i class="fa fa-eye"></i> Ver

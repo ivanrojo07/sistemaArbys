@@ -59,10 +59,14 @@
 							<div class="form-group col-sm-3">
 								<label class="control-label">✱Puesto:</label>
 								<select type="select" name="puesto_id" id="puesto_id" class="form-control" required="">
-									<option>Sin Definir</option>
-									@foreach ($puestos as $puesto)
-										<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
+									<option value="">Sin Definir</option>
+									@if(count($puestos) > 0)
+									@foreach($puestos as $puesto)
+										<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>f
 									@endforeach
+									@else
+										<option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
+									@endif
 								</select>
 							</div>
 							<div class="form-group col-sm-3" style="display: none;" id="region">
@@ -131,6 +135,12 @@
     	$('#puesto_id').change(function() {
     		
     		var val = parseInt(document.getElementById("puesto_id").value);
+    		var hayGerente = {{ $hayGerente }};
+    		if (val == 5 && hayGerente == true) {
+    			swal("¡Upps!", "Ya hay un Gerente asignado en esta oficina", "error");
+    			$('#puesto_id').val('');
+    			return;
+    		}
       		document.getElementById('region').style.display = 'none';
       		document.getElementById('estado').style.display = 'none';
       		document.getElementById('oficina').style.display = 'none';
