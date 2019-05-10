@@ -27,27 +27,22 @@
 								<option value="Moral">Moral</option>
 							</select>
 						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">✱RFC:</label>
-							<input type="text" class="form-control" name="rfc" required="" id="rfc"
-								placeholder="13 Caracteres" pattern="^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}">
-						</div>
 						<div id="fisica">
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Nombre</label>
-								<input type="text" class="form-control" name="nombre" id="nombre">
+								<input type="text" class="form-control rfc" name="nombre" id="nombre" onchange="calcularRFC();">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Apellido Paterno:</label>
-								<input type="text" class="form-control" name="appaterno" id="appaterno">
+								<input type="text" class="form-control rfc" name="appaterno" id="appaterno" onchange="calcularRFC();">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Apellido Materno:</label>
-								<input type="text" class="form-control" name="apmaterno" id="apmaterno">
+								<input type="text" class="form-control rfc" name="apmaterno" id="apmaterno" onchange="calcularRFC();">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">✱Fecha de Nacimiento:</label>
-								<input type="date" class="form-control" id="nacimiento" name="nacimiento">
+								<input type="date" class="form-control rfc" id="nacimiento" name="nacimiento" onchange="calcularRFC();">
 							</div>
 						</div>
 						<div id="moral" style="display: none;">
@@ -55,6 +50,16 @@
 								<label class="control-label">✱Razon Social:</label>
 								<input type="text" class="form-control" name="razon" id="razon">
 							</div>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱RFC:</label>
+							<input type="text" class="form-control" name="rfc" required="" id="rfc"
+								 pattern="^[A-Za-z]{4}[0-9]{6}" readonly="">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label class="control-label">✱Homoclave:</label>
+							<input type="text" class="form-control" name="homoclave" required="" id="rfc" value="" 
+								 pattern="^[A-Za-z0-9]{3}" style="text-transform:uppercase;" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase();">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">✱Correo Electrónico:</label>
@@ -141,8 +146,7 @@
 			$('#nacimiento').prop('required', true);
 			$('#razon').prop('required', false);
 
-			$('#rfc').prop('pattern', '^[A-Za-z]{4}[0-9]{6}[A-Za-z0-9]{3}');
-			$('#rfc').prop('placeholder', '13 Caracteres');
+			$('#rfc').prop('pattern', '^[A-Za-z]{4}[0-9]{6}');
 		}
 		if (elemento.value == "Moral") {
 			$('#fisica').hide();
@@ -153,9 +157,20 @@
 			$('#nacimiento').prop('required', false);
 			$('#razon').prop('required', true);
 
-			$('#rfc').prop('pattern', '^[A-Za-z]{3}[0-9]{6}[A-Za-z0-9]{3}');
+			$('#rfc').prop('pattern', '^[A-Za-z]{3}[0-9]{6}');
 			$('#rfc').prop('placeholder', '12 Caracteres');
 		}
+	}
+
+	function calcularRFC(){
+		let nombre = $('#nombre').val().substring(0,1);
+		let appaterno = $('#appaterno').val().substring(0,2).toUpperCase();
+		let apmaterno = $('#apmaterno').val().substring(0,1);
+		let fecnacimiento = $('#nacimiento').val().split('-');
+
+		if (fecnacimiento.length > 1 && apmaterno != '' && appaterno != '' && nombre != '')
+			$('#rfc').val(appaterno + apmaterno + nombre + fecnacimiento[0].substring(2,4) + fecnacimiento[1] + fecnacimiento[2]);
+
 	}
 
 </script>

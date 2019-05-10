@@ -23,7 +23,8 @@ class Empleado extends Model
         'nss',
         'curp',
         'infonavit',
-        'nacimiento'
+        'nacimiento',
+        'tipo_empleado'
     ];
     
     public $sortable = [

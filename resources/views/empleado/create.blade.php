@@ -70,6 +70,14 @@
 							<label class="control-label" for="infonavit">INFONAVIT:</label>
 							<input type="text" class="form-control" name="infonavit">
 						</div>
+						<div class="form-group col-sm-3">
+							<label class="control-label" for="infonavit">Tipo de Empleado:</label>
+							<select name="tipo_empleado" class="form-control" required="">
+								<option value="">Seleccionar</option>
+								<option value="operativo">Operativo</option>
+								<option value="administrativo">Administrativo</option>
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>

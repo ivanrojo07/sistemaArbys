@@ -52,6 +52,7 @@ Route::get('asignarVendedores', 'Vendedor\VendedorController@asignar')->name('ve
 Route::post('unirVendedor', 'Vendedor\VendedorController@unir')->name('vendedores.unir');
 Route::get('empleados/laborals/{empleado}/new-laboral', 'Empleado\LaboralController@newLaboral')->name('empleados.laborals.createLaborals');
 Route::post('empleados/laborals/{empleado}/add', 'Empleado\LaboralController@addLaborals')->name('empleados.laborals.addLaborals');
+Route::resource('empleados.objetivos', 'Empleado\EmpleadoObjetivoController');
 
 // GRUPOS
 Route::resource('grupos', 'Grupo\GrupoController');

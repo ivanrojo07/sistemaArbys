@@ -56,6 +56,7 @@ class ClienteController extends Controller {
      */
     public function store(Request $request)
     {
+        $request['rfc'] = $request->rfc . $request->homoclave;
         $rfc = Cliente::where('rfc', $request->rfc)->get();
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
