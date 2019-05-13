@@ -10,7 +10,7 @@
 		
 				<li role="presentation" ><a href="{{ route('empleados.laborals.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Laborales:</a></li>
 				
-				@if($empleado->laborales != null && $empleado->laborales->last()->puesto->nombre == "Vendedor")
+				@if(count($empleado->laborales) > 0 && $empleado->laborales->last()->puesto->nombre == "Vendedor")
 					<li role="presentation" class="active"><a href="{{ route('empleados.objetivos.index', ['empleado' => $empleado]) }}">Ventas:</a></li>
 				@endif
 		
@@ -26,27 +26,24 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-sm-4">
-								<h5>Objetivos:</h5>
+								<h3>Objetivos:</h3>
 							</div>
 						</div>
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<form action="" id="objetivos">
-								{{ csrf_field() }}
-								<div class="form-group col-sm-3">
-									<label class="control-label">Fecha:</label>
-									<input class="form-control" type="date" name="fecha" value="{{ date("Y-m-d") }}" readonly="">
-								</div>
-								<div class="form-group col-sm-3">
-									<label class="control-label">Objetivo Cliente:</label>
-									<input class="form-control" type="number" name="num_clientes">
-								</div>
-								<div class="form-group col-sm-3">
-									<label class="control-label">Objetivo venta:</label>
-									<input class="form-control" type="number" name="venta">
-								</div>
-							</form>
+							<div class="form-group col-sm-3">
+								<label class="control-label">Fecha:</label>
+								<input class="form-control" type="date" name="fecha" id="fecha" value="{{ date("Y-m-d") }}" readonly="">
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="control-label">Objetivo Cliente:</label>
+								<input class="form-control" type="number" name="num_clientes" id="num_clientes">
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="control-label">Objetivo venta:</label>
+								<input class="form-control" type="number" name="venta" id="venta">
+							</div>
 						</div>
 					</div>
 					<div class="panel-footer">
@@ -92,16 +89,18 @@
 	$(document).ready(function($) {
 		$('#asignar').on('click', function(event) {
 			event.preventDefault();
+			var objetivo_cliente = $('#num_clientes').val();
+		    var objetivo_venta = $('#venta').val();
+		    var fecha = $('#fecha').val();
+		    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
+		    var data={objetivo_cliente:objetivo_cliente,_token:token, objetivo_venta:objetivo_venta, fecha:fecha};
 			$.ajax({
-				url : "empleados.objetivos.store",
+				url : {{ route('empleados.objetivos.store', ['empleado' => $empleado]) }},
 				type : "POST",
 				dataType : "json",
-				data : {
-					query : $value,
-					seccion : ""
-				},
+				data : data,
 			}).done(function (data) {
-				//
+				console.log("success");
 			});
 		});
 	});

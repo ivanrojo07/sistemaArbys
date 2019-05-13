@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Cliente;
 use App\Solicitante;
 use App\Transaction;
+use App\Pago;
 use App\Vendedor;
 use Illuminate\Support\Facades\Auth;
 use App\CanalVenta;
@@ -74,14 +75,16 @@ class ClienteController extends Controller {
     public function show(Cliente $cliente)
     {
         $aprobado = false;
+        $pagos = [];
         foreach ($cliente->transactions as $transaction) {
             foreach ($transaction->pagos as $pago) {
+                $pagos[] = $pago;
                 if ($pago->status == "Aprobado") {
                     $aprobado = true;
                 }
             }
         }
-        return view('clientes.view', ['cliente' => $cliente, 'aprobado' => $aprobado]); 
+        return view('clientes.view', ['cliente' => $cliente, 'aprobado' => $aprobado, 'pagos' => $pagos]); 
     }
 
     

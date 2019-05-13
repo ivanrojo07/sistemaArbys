@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Cliente;
 use App\Pago;
+use App\Product;
 use App\Transaction;
 use App\Banco;
 use Illuminate\Http\Request;
@@ -102,6 +103,13 @@ class ClientePagoController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function create_pago(Cliente $cliente, $producto)
+    {
+        $producto = Product::where('clave', $producto)->first();
+        $bancos = Banco::get();
+        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto]);
     }
 
 }

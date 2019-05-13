@@ -8,6 +8,7 @@ use App\Product;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
@@ -25,6 +26,11 @@ class ClienteProductoController extends Controller
         $desc = $request->kword;
         $tipo = $request->type;
         $productos = new Product();
+        /* Obtenemos el tipo de empleado del usuario autenticado para el caso de que sea vendedor 
+         * solo se muestren los vehiculos en los que es experto.
+         */
+        $tipo_empleado = Auth::user()->empleado->laborales->last()->puesto->nombre;
+
         if(isset($desc)){
             $wordsquery = explode(' ',$desc);
             $productos = $productos->where(function($q) use($wordsquery) {
@@ -37,8 +43,26 @@ class ClienteProductoController extends Controller
                 }
             });//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
         }
-        if(isset($tipo))
-            $productos = $productos->where('tipo', $tipo);//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
+        if ($tipo_empleado === "Vendedor") {
+            $experto = Auth::user()->empleado->vendedor->experto;
+            switch ($experto) {
+                case 'Autos':
+                    $productos = $productos->where('tipo', 'CARRO');
+                    break;
+
+                case 'Motos':
+                    $productos = $productos->where('tipo', 'MOTO');
+                    break;
+
+                default:
+                    $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');
+                    break;
+            }
+        }
+        else{
+            if(isset($tipo))
+                $productos = $productos->where('tipo', $tipo);//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
+        }
 
         if(isset($min) && isset($max))
             $productos = $productos->whereBetween('precio_lista', [intval($min), intval($max)]);
