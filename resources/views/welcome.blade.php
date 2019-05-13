@@ -185,14 +185,14 @@
                                                             @foreach(Auth::user()->perfil->componentes as $k)
                                                                 @if($k->nombre == "crear grupo")
                                                                     <li>
-                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Crear Grupo')">
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Control Vendedores')">
                                                                             <i class="fa fa-plus"></i> Control 
                                                                         </a>
                                                                     </li>
                                                                 @endif
                                                                 @if($k->nombre == "indice grupos")
                                                                     <li>
-                                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index')}}','Buscar Grupos')">
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index')}}','Buscar Vendedores')">
                                                                             <i class="fa fa-search"></i> Búsqueda
                                                                         </a>
                                                                     </li>

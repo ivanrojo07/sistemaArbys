@@ -101,9 +101,7 @@ class VendedorController extends Controller
     
 
     public function subgerentes(Oficina $oficina){
-        dd($oficina);
-        $oficina=Oficina::find($request->oficina_id);
-        dd($oficina);
+        $oficina=Oficina::find($oficina);
         $subgerentes=Subgerente::get();
         $grupos=Grupo::get();
         return view('vendedores.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);

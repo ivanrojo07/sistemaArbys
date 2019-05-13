@@ -126,14 +126,15 @@
 		$('#subgerentes').click(function() {			
 			var id = $('#oficinas').val();
 			//console.log(id);
+			location.href="{{ url('subgerentes') }}/"+id;
 			$.ajax({
 				url: "{{ url('subgerentes') }}/"+id,
 				type: "GET",				
 				success: function(response){
-					href="{{ url('subgerentes') }}/"+id;
+					location.href="{{ url('subgerentes') }}/"+id;
 				},
 				error: function (){
-					$('#grupos').html('');
+					console.log("error");
 				}
 			});
 			
