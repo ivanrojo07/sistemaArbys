@@ -29,9 +29,9 @@
 								@if(1 > 0)
 									<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
 										<tr class="info">
-											<th class="text-center">Subgerente</th>
-											<th class="text-center"># de grupos</th>
-											<th class="text-center"># de vendedores</th>						
+											<th class="text-center">Nombre</th>
+											<th class="text-center">Número de grupos</th>
+											<th class="text-center">Número de vendedores</th>						
 											<th class="col-sm-1">Acciones</th>
 										</tr>
 										@foreach($subgerentes as $subgerente)
@@ -55,7 +55,9 @@
 												{{$vendedores}}
 												</td>
 												<td>
-													
+													<button class="btn btn-primary detalleg">
+														Detalles
+													</button>
 												</td>
 												{{-- <td class="text-center">
 													<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
@@ -66,32 +68,7 @@
 									<br>
 									<br>
 									<br>
-									<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-										<tr class="info">
-											
-											<th class="text-center">grupo</th>
-											<th class="text-center"># de vendedores</th>						
-											<th class="col-sm-1">Acciones</th>
-										</tr>
-										@foreach($grupos as $grupo)
-											<tr>
-												{{-- @if(isset($vendedor->grupo)) --}}
-												
-												<td>{{$grupo->nombre }}</td>
-												{{-- @else --}}
-													{{-- <td>No asignado</td>
-													<td>No asignado</td> --}}
-												{{-- @endif --}}
-												
-												<td>
-												{{$grupo->vendedores->count()}}
-												</td>
-												<td></td>
-												{{-- <td class="text-center">
-													<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
-												</td> --}}
-											</tr>
-										@endforeach
+									<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;display: none;" id="grupos">
 									</table>
 									<br>
 									<br>
@@ -115,5 +92,56 @@
 				</div>
 	</div>
 </div>
+
+@endsection
+@section('scripts')
+<script>
+	$(document).ready(function() {
+		$('.detalleg').on('click', function(event) {
+			var gerente = $(this).parent().parent().children().eq(0).html().split(' ')[1];
+			arreglo_gerentes = [
+				@foreach($grupos as $grupo)
+					{
+						'appaterno':"{{ $grupo->subgerente->empleado->appaterno }}"
+					},
+				@endforeach
+			];
+			console.log(arreglo_gerentes);
+			$('#grupos').empty();
+			
+
+			var contenido = `<tr class="info">
+				<th class="text-center">grupo</th>
+				<th class="text-center"># de vendedores</th>						
+				<th class="col-sm-1">Acciones</th>
+			</tr>`;
+			// for (var i = 0; i < arreglo_gerentes.length ; i++) {
+			// 	if (arreglo_gerentes[i] == gerente) {
+			// 		contenido += `<tr>
+
+			// 		`;
+			// 	}
+			// }
+				<tr>
+					
+					{{-- @if(isset($vendedor->grupo)) --}}
+					<td>{{$grupo->nombre }}</td>
+					{{-- @else --}}
+						{{-- <td>No asignado</td>
+						<td>No asignado</td> --}}
+					{{-- @endif --}}
+					
+					<td>
+					{{$grupo->vendedores->count()}}
+					</td>
+					<td></td>
+					{{-- <td class="text-center">
+						<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
+					</td> --}}
+				</tr>
+			
+		});
+	});
+</script>
 
 @endsection

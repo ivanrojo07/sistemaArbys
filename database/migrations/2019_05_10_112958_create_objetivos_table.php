@@ -18,6 +18,7 @@ class CreateObjetivosTable extends Migration
             $table->integer('vendedor_id')->unsigned();
             $table->foreign('vendedor_id')->references('id')->on('vendedors');
             $table->integer('num_clientes');
+            $table->integer('ventas');
             $table->date('fecha');
             $table->timestamps();
         });

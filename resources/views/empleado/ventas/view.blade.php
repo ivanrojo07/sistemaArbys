@@ -89,18 +89,21 @@
 	$(document).ready(function($) {
 		$('#asignar').on('click', function(event) {
 			event.preventDefault();
+			//falta empleado id
 			var objetivo_cliente = $('#num_clientes').val();
 		    var objetivo_venta = $('#venta').val();
 		    var fecha = $('#fecha').val();
 		    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
 		    var data={objetivo_cliente:objetivo_cliente,_token:token, objetivo_venta:objetivo_venta, fecha:fecha};
 			$.ajax({
-				url : {{ route('empleados.objetivos.store', ['empleado' => $empleado]) }},
+				url : '{{ route('empleados.objetivos.store', ['empleado' => $empleado]) }}',
 				type : "POST",
 				dataType : "json",
 				data : data,
 			}).done(function (data) {
 				console.log("success");
+			}).fail(function(data){
+				console.log(data);
 			});
 		});
 	});

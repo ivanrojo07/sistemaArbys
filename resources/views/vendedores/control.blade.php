@@ -36,7 +36,7 @@
 							</select>
 						</div>
 						<ul class="nav nav-tabs nav-justified" id="opciones" style="display: none;">
-							<li class=""><a id="subgerentes"{{-- href="{{ url('control_vendedores/subgerentes') }}" --}}>Subgerentes:</a></li>
+							<li class=""><a id="subgerentes">Subgerentes:</a></li>
 							<li><a href="{{ url('control_vendedores/grupos') }}">Grupos:</a></li>
 							<li><a href="">Vendedores:</a></li>
 								
@@ -127,16 +127,16 @@
 			var id = $('#oficinas').val();
 			//console.log(id);
 			location.href="{{ url('subgerentes') }}/"+id;
-			$.ajax({
-				url: "{{ url('subgerentes') }}/"+id,
-				type: "GET",				
-				success: function(response){
-					location.href="{{ url('subgerentes') }}/"+id;
-				},
-				error: function (){
-					console.log("error");
-				}
-			});
+			// $.ajax({
+			// 	url: "{{ url('subgerentes') }}/"+id,
+			// 	type: "GET",				
+			// 	success: function(response){
+			// 		location.href="{{ url('subgerentes') }}/"+id;
+			// 	},
+			// 	error: function (){
+			// 		console.log("error");
+			// 	}
+			// });
 			
 		});
 

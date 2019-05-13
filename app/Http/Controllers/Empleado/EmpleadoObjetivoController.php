@@ -38,7 +38,11 @@ class EmpleadoObjetivoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $objetivo = new Objetivo();
+        $objetivo->num_clientes = $request->objetivo_cliente;
+        $objetivo->ventas = $request->objetivo_venta;
+        $objetivo->fecha = $request->fecha;
+        return response('Hello World', 200);
     }
 
     /**

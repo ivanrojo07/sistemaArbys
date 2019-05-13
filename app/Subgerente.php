@@ -10,7 +10,8 @@ class Subgerente extends Model
 
 	protected $fillable = [
 		'id',
-		'empleado_id'
+		'empleado_id',
+        'change_puesto'
 	];
 
     public function empleado() {

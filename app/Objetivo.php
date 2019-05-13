@@ -12,7 +12,8 @@ class Objetivo extends Model
     	'id',
     	'vendedor_id',
     	'fecha',
-    	'num_clientes'
+    	'num_clientes',
+        'ventas'
     ];
     
     protected $hidden=[ 'created_at', 'updated_at'];
