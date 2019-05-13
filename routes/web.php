@@ -45,6 +45,11 @@ Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
+
+Route::get('control_vendedores','Vendedor\VendedorController@control');
+Route::get('subgerentes/{oficina}','Vendedor\VendedorController@subgerentes');
+Route::get('control_vendedores/grupos','Vendedor\VendedorController@grupos');
+
 Route::resource('vendedors','Vendedor\VendedorController');
 Route::get('vendedors/{vendedor}/baja','Vendedor\VendedorController@bajar')->name('vendedors.baja');
 Route::get('vendedors/{vendedor}/alta','Vendedor\VendedorController@activar')->name('vendedors.alta');
