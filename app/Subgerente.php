@@ -16,4 +16,8 @@ class Subgerente extends Model
     public function empleado() {
     	return $this->belongsTo('App\Empleado');
     }
+
+    public function grupos(){
+    	return $this->hasMany('App\Grupo');
+    }
 }

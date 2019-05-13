@@ -71,6 +71,7 @@
 							<th>@sortablelink('diasrestantes','Días Restantes:')</th>
 						</tr>
 					</thead>
+					@dd($vacaciones);
 					@foreach ($vacaciones as $vacacion)
 						{{-- expr --}}
 						<tr class="active">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Vendedor;
 
 use App\Vendedor;
+use App\Oficina;
 use App\Cliente;
 use App\Subgerente;
 use App\Grupo;
+use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -89,5 +91,26 @@ class VendedorController extends Controller
         $vendedor->grupo_id = $request->grupo_id;
         $vendedor->save();
         return redirect()->route('vendedor.asignar');
+    }
+
+    public function control(){
+        $regiones=Region::get();
+        return view('vendedores.control',['regiones'=>$regiones]);
+    }
+
+    
+
+    public function subgerentes(Oficina $oficina){
+        dd($oficina);
+        $oficina=Oficina::find($request->oficina_id);
+        dd($oficina);
+        $subgerentes=Subgerente::get();
+        $grupos=Grupo::get();
+        return view('vendedores.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
+    }
+
+    public function grupos(){
+        $grupos=Grupo::get();
+        return view('vendedores.grupos',['grupos'=>$grupos]);
     }
 }
