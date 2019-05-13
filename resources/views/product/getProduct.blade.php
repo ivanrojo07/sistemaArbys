@@ -1,6 +1,6 @@
 <input type="hidden" name="product_id" value="{{ $producto->id }}">
 <div class="table-responsive">
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover" id="cancelar">
 		<tr class="info">
 			<th>Descripción</th>
 			<th>Precio</th>

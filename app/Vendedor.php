@@ -28,4 +28,12 @@ class Vendedor extends Model
         return $this->belongsTo('App\Empleado');
     }
 
+    public function objetivo() {
+        return $this->hasMany('App\Objetivo');
+    }
+
+    public function contador() {
+        return $this->hasMany('App\Contador');
+    }
+
 }

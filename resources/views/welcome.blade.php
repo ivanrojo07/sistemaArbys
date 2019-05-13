@@ -179,11 +179,32 @@
                                                             @endforeach
                                                         </ul>
                                                     </li>
-                                                    <li>
+                                                    <li class="dropdown-submenu">
+                                                        <a tabindex="-1" href="#"> <i class="fa fa-user-o"></i> Vendedores</a>
+                                                        <ul class="dropdown-menu">
+                                                            @foreach(Auth::user()->perfil->componentes as $k)
+                                                                @if($k->nombre == "crear grupo")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Control Vendedores')">
+                                                                            <i class="fa fa-plus"></i> Control 
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                                @if($k->nombre == "indice grupos")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index')}}','Buscar Vendedores')">
+                                                                            <i class="fa fa-search"></i> Búsqueda
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                    {{-- <li>
                                                         <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index') }}','Buscar Empleado')">
                                                             <i class="fa fa-user-o"></i> Vendedores
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <a href="#" onclick="AgregarNuevoTab('{{ route('vendedor.asignar') }}','Asignar Vendedor')">
                                                             <i class="fa fa-user-plus"></i> Asignar Vendedor

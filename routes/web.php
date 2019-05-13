@@ -45,6 +45,11 @@ Route::resource('empleados.emergencias','Empleado\EmpleadosEmergenciasController
 Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController');
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
+
+Route::get('control_vendedores','Vendedor\VendedorController@control');
+Route::get('subgerentes/{oficina}','Vendedor\VendedorController@subgerentes');
+Route::get('control_vendedores/grupos','Vendedor\VendedorController@grupos');
+
 Route::resource('vendedors','Vendedor\VendedorController');
 Route::get('vendedors/{vendedor}/baja','Vendedor\VendedorController@bajar')->name('vendedors.baja');
 Route::get('vendedors/{vendedor}/alta','Vendedor\VendedorController@activar')->name('vendedors.alta');
@@ -52,6 +57,7 @@ Route::get('asignarVendedores', 'Vendedor\VendedorController@asignar')->name('ve
 Route::post('unirVendedor', 'Vendedor\VendedorController@unir')->name('vendedores.unir');
 Route::get('empleados/laborals/{empleado}/new-laboral', 'Empleado\LaboralController@newLaboral')->name('empleados.laborals.createLaborals');
 Route::post('empleados/laborals/{empleado}/add', 'Empleado\LaboralController@addLaborals')->name('empleados.laborals.addLaborals');
+Route::resource('empleados.objetivos', 'Empleado\EmpleadoObjetivoController');
 
 // GRUPOS
 Route::resource('grupos', 'Grupo\GrupoController');
@@ -88,6 +94,7 @@ Route::get('clientes/{id}/seleccion', 'Cliente\ClienteController@getSeleccion')-
 Route::get('solicitantes/{id}', 'Cliente\ClienteSolicitanteController@index');
 Route::resource('clientes.info','Cliente\ClienteInfoController');
 Route::resource('clientes.pagos','Cliente\ClientePagoController');
+Route::get('clientes/{cliente}/nuevo-pago/{producto}','Cliente\ClientePagoController@create_pago')->name('clientes.pago.select');
 Route::get('clientes/{cliente}/pagos/{pago}/follow', 'Cliente\ClientePagoController@follow')->name('clientes.pagos.follow');
 Route::post('pago_c', 'Cliente\ClientePagoController@store_dos')->name('pago_c');
 // Route::get('products/{id_producto}/pdf', 'Cliente\ClienteController@pdf')->name('products.pdf');

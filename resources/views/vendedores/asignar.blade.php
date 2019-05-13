@@ -125,7 +125,7 @@
 							<div class="col-sm-6">
 								<table class="table table-stripped table-bordered table-hover">
 									<tr class="info">
-										<th class="text-center">Gerente</th>
+										<th class="text-center">Subgerente</th>
 										<th class="text-center">Grupos</th>
 										<th class="text-center">No. de Vendedores</th>
 									</tr>

@@ -7,6 +7,10 @@
 
 			<li role="presentation" class=""><a href="{{ route('empleados.datoslaborales.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Laborales:</a></li>
 
+			@if(count($empleado->laborales) > 0 && $empleado->laborales->last()->puesto->nombre == "Vendedor")
+				<li role="presentation" class=""><a href="{{ route('empleados.objetivos.index', ['empleado' => $empleado]) }}" class="ui-tabs-anchor">Ventas:</a></li>
+			@endif
+
 			<li role="presentation" class="active"><a href="{{ route('empleados.estudios.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Estudios:</a></li>
 
 			<li role="presentation" class=""><a href="{{ route('empleados.emergencias.index',['empleado'=>$empleado]) }}" class="ui-tabs-anchor">Emergencias:</a></li>

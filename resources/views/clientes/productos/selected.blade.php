@@ -20,6 +20,7 @@
 							<th>Descripción</th>
 							<th>Marca</th>
 							<th>Precio</th>
+							<th>Acción</th>
 						</tr>
 						@foreach($cliente->transactions as $transation)
 						<tr>
@@ -27,6 +28,11 @@
 							<td>{{ $transation->product->descripcion }}</td>
 							<td>{{ $transation->product->marca }}</td>
 							<td>${{ number_format($transation->product->precio_lista, 2) }}</td>
+							<td>
+				  				<a href="{{ route('clientes.pago.select' ,['cliente' => $cliente, 'producto' => $transation->product->clave]) }}" class="btn btn-success">
+							<i class="fa fa-check"></i><strong> Elegir</strong>
+						</a>
+							</td>
 						</tr>
 						@endforeach	
 					</table>
