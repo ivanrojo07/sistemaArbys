@@ -62,9 +62,6 @@
 		$("#regiones").prop('required', true);
 		$("#regiones").prop('name', 'region_id');
 		$("#oficinas").prop('required', true);
-	
-
-
 
 		$('#regiones').change(function() {
 			var id = $('#regiones').val();
@@ -119,24 +116,10 @@
 			
 		});
 
-		// function subgerentes(){
-
-		// }
 
 		$('#subgerentes').click(function() {			
 			var id = $('#oficinas').val();
-			//console.log(id);
 			location.href="{{ url('subgerentes') }}/"+id;
-			// $.ajax({
-			// 	url: "{{ url('subgerentes') }}/"+id,
-			// 	type: "GET",				
-			// 	success: function(response){
-			// 		location.href="{{ url('subgerentes') }}/"+id;
-			// 	},
-			// 	error: function (){
-			// 		console.log("error");
-			// 	}
-			// });
 			
 		});
 

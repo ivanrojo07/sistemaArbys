@@ -97,19 +97,22 @@
 @section('scripts')
 <script>
 	$(document).ready(function() {
-		$('.detalleg').on('click', function(event) {
+		var arreglo_gerentes = [
+			@foreach($grupos as $grupo)
+				{
+					'nombre': "{{ $grupo->subgerente->empleado->nombre }}",
+					'appaterno':"{{ $grupo->subgerente->empleado->appaterno }}",
+					'apmaterno':"{{ $grupo->subgerente->empleado->apmaterno }}",
+					'grupo': @json($grupo),
+				},
+			@endforeach
+		];
+		$('.detalleg').click( function(event) {
 			var gerente = $(this).parent().parent().children().eq(0).html().split(' ')[1];
-			arreglo_gerentes = [
-				@foreach($grupos as $grupo)
-					{
-						'appaterno':"{{ $grupo->subgerente->empleado->appaterno }}"
-					},
-				@endforeach
-			];
-			console.log(arreglo_gerentes);
+			console.log(gerente);
 			$('#grupos').empty();
 			
-
+			console.log(arreglo_gerentes);
 			var contenido = `<tr class="info">
 				<th class="text-center">grupo</th>
 				<th class="text-center"># de vendedores</th>						
@@ -122,23 +125,23 @@
 			// 		`;
 			// 	}
 			// }
-				<tr>
+				// <tr>
 					
-					{{-- @if(isset($vendedor->grupo)) --}}
-					<td>{{$grupo->nombre }}</td>
-					{{-- @else --}}
-						{{-- <td>No asignado</td>
-						<td>No asignado</td> --}}
-					{{-- @endif --}}
+				// 	{{-- @if(isset($vendedor->grupo)) --}}
+				// 	<td>{{-- $grupo->nombre --}}</td>
+				// 	{{-- @else --}}
+				// 		{{-- <td>No asignado</td>
+				// 		<td>No asignado</td> --}}
+				// 	{{-- @endif --}}
 					
-					<td>
-					{{$grupo->vendedores->count()}}
-					</td>
-					<td></td>
-					{{-- <td class="text-center">
-						<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
-					</td> --}}
-				</tr>
+				// 	<td>
+				// 	{{--$grupo->vendedores->count()--}}
+				// 	</td>
+				// 	<td></td>
+				// 	<td class="text-center">
+				// 		<input type="radio" name="vendedor_id" value="{{-- $vendedor->id --}}" required="">
+				// 	</td>
+				// </tr>
 			
 		});
 	});

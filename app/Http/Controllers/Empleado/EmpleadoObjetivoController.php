@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Empleado;
 
 use App\Empleado;
 use App\Objetivo;
+use App\Vendedor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,11 +39,14 @@ class EmpleadoObjetivoController extends Controller
      */
     public function store(Request $request)
     {
-        $objetivo = new Objetivo();
+        $objetivo = new Objetivo;
         $objetivo->num_clientes = $request->objetivo_cliente;
         $objetivo->ventas = $request->objetivo_venta;
         $objetivo->fecha = $request->fecha;
-        return response('Hello World', 200);
+        $objetivo->vendedor_id = $request->vendedor;
+        $objetivo->save();
+        $objetivos_ven = Vendedor::find($objetivo->vendedor_id)->objetivo;
+        return response(['objetivos'=>$objetivos_ven], 200);
     }
 
     /**

@@ -62,18 +62,22 @@
 					<div class="col-sm-12">
 					@if(count($objetivos) > 0)
 		  				<table class="table table-bordered table-hover table-stripped">
-		  					<tr class="info">
-		  						<th class="col-sm-4">Fecha:</th>
-		  						<th class="col-sm-4">Objetivo Cliente:</th>
-		  						<th class="col-sm-4">Objetivo Venta:</th>
-		  					</tr>
-		  					@foreach($laborales as $laboral)
-			  					<tr>
-									<td>${{ number_format($laboral->actual, 2) }}</td>
-			  						<td>{{ $laboral->puesto->nombre }}</td>
-			  						<td>{{ $laboral->actualizacion }}</td>
-			  					</tr>
-		  					@endforeach
+		  					<thead>
+		  						<tr class="info">
+		  							<th class="col-sm-4">Fecha:</th>
+		  							<th class="col-sm-4">Objetivo Cliente:</th>
+		  							<th class="col-sm-4">Objetivo Venta:</th>
+		  						</tr>
+		  					</thead>
+	  						<tbody id="cuerpo">
+	  							@foreach($objetivos as $objetivo)
+				  					<tr>
+										<td>{{ $objetivo->fecha }}</td>
+				  						<td>{{ $objetivo->num_clientes }}</td>
+				  						<td>${{ number_format($objetivo->ventas) }}</td>
+				  					</tr>
+								@endforeach
+							</tbody>
 		  				</table>
 		  			@else
 		  			<h5>No hay objetivos asignados</h5>
@@ -89,21 +93,27 @@
 	$(document).ready(function($) {
 		$('#asignar').on('click', function(event) {
 			event.preventDefault();
-			//falta empleado id
+			var vendedor = {{ $empleado->vendedor->id }};
 			var objetivo_cliente = $('#num_clientes').val();
 		    var objetivo_venta = $('#venta').val();
 		    var fecha = $('#fecha').val();
 		    var token = '{{csrf_token()}}';// ó $("#token").val() si lo tienes en una etiqueta html.
-		    var data={objetivo_cliente:objetivo_cliente,_token:token, objetivo_venta:objetivo_venta, fecha:fecha};
+		    var data={objetivo_cliente:objetivo_cliente,_token:token, objetivo_venta:objetivo_venta, fecha:fecha, vendedor:vendedor};
 			$.ajax({
 				url : '{{ route('empleados.objetivos.store', ['empleado' => $empleado]) }}',
 				type : "POST",
 				dataType : "json",
 				data : data,
 			}).done(function (data) {
-				console.log("success");
+				$('#cuerpo').empty();
+				var contenido = '';
+				$.each(data.objetivos, function( index, value ) {
+				   contenido += `<tr><td>${value.fecha}</td><td>${value.num_clientes}</td><td>${value.ventas}</td></tr>`;
+				});
+				$('#cuerpo').empty();
+				$('#cuerpo').append(contenido);
 			}).fail(function(data){
-				console.log(data);
+				//console.log(data);
 			});
 		});
 	});
