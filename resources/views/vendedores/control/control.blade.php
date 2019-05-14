@@ -35,14 +35,27 @@
 							<select id="oficinas" class="form-control">
 							</select>
 						</div>
-						<ul class="nav nav-tabs nav-justified" id="opciones" style="display: none;">
+						<ul class="nav nav-tabs nav-justified" id="opciones">
 							<li class=""><a id="subgerentes">Subgerentes:</a></li>
-							<li><a href="{{ url('control_vendedores/grupos') }}">Grupos:</a></li>
-							<li><a href="">Vendedores:</a></li>
-								
+							<li><a href="{{ route('control.vendedores.grupos') }}">Grupos:</a></li>
+							<li><a href="{{ route('control.vendedores.ven') }}">Vendedores:</a></li>		
 						</ul>
-						
-						
+						{{-- <div>
+						  	<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active tab"><a href="#subgerente" aria-controls="subgerente" role="tab" data-toggle="tab">Subgerente</a></li>
+								<li class="tab"><a href="#grupos-div" aria-controls="grupos-div" role="tab" data-toggle="tab">Grupos</a></li>
+								<li class="tab"><a href="#vendedores-div" aria-controls="vendedores-div" role="tab" data-toggle="tab">Vendedores</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="subgerente"></div>
+								<div role="tabpanel" class="tab-pane" id="grupos-div">profile</div>
+								<div role="tabpanel" class="tab-pane" id="vendedores-div">messages</div>
+							</div>
+
+						</div> --}}
 					</div>
 				</div>
 			</div>			
@@ -51,8 +64,12 @@
 </div>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
 
+	$(document).ready(function() {
+		$('.tab a').click(function (e) {
+		  	e.preventDefault();
+		  	console.log("Hla");
+		});
     	// document.getElementById('region').style.display = 'none';
      //  	document.getElementById('estado').style.display = 'none';
      //  	document.getElementById('oficina').style.display = 'none';
@@ -111,9 +128,7 @@
 				error: function (){
 					$('#grupos').html('');
 				}
-			});
-
-			
+			});		
 		});
 
 
