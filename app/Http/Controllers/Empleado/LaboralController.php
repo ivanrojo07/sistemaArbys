@@ -51,7 +51,7 @@ class LaboralController extends Controller
     }
 
     public function grupos(Oficina $oficina) {
-        dd($oficina);
+        //dd($oficina);
         if($oficina->id != 0)
             return view('empleado.laborales.grupos', ['oficina' => $oficina]);
     }
@@ -115,8 +115,8 @@ class LaboralController extends Controller
         $empleados = Empleado::get();
 
         foreach ($empleados as $empl) {
-            if (isset($empl->laborales->last()->oficina) && $empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id) {
-                if ($empl->laborales->last()->puesto->id == 5) {
+            if ($empl->laborales->last()->oficina != null && $empleado->laborales->last()->oficina != null) {
+                if ($empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id && $empl->laborales->last()->puesto->id == 5) {
                     $hayGerente = true;
                 }
             }

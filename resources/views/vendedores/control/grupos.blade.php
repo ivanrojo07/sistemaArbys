@@ -1,15 +1,12 @@
-@extends('layouts.blank')
-@section('content')
-
 <div class="container">
 	<div class="panel panel-group">
-		@include('vendedores.control.head')
+		{{-- @include('vendedores.control.head')
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="{{ url('control_vendedores/subgerentes') }}">Subgerentes:</a></li>
 			<li class="active"><a href="{{ route('control.vendedores.grupos') }}">Grupos:</a></li>
 			<li><a href="{{ route('control.vendedores.ven') }}">Vendedores:</a></li>
 				
-		</ul>
+		</ul> --}}
 		<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-4 col-sm-offset-3 form-group">
@@ -48,7 +45,7 @@
 											{{$grupo->vendedores->count()}}
 											</td>
 											<td>
-												<button class="btn btn-primary detallev">
+												<button class="btn btn-primary detallev-grupos">
 													Detalles
 												</button>
 											</td>
@@ -61,7 +58,7 @@
 								<br>
 								<br>
 								<br>
-								<table class="table table-stripped table-bordered table-hover" style="margin: 3%;display: none;" id="vende"></table>
+								<table class="table table-stripped table-bordered table-hover" style="margin: 3%;display: none;" id="vende-grupos"></table>
 							</div>
 						</div>
 					</div>
@@ -69,8 +66,6 @@
 	</div>
 </div>
 
-@endsection
-@section('scripts')
 <script>
 	$(document).ready(function() {
 		var arreglo_vendedores = [
@@ -85,7 +80,7 @@
 				@endforeach
 			@endforeach
 		];
-		$('.detallev').click( function(event) {
+		$('.detallev-grupos').click( function(event) {
 			var grupo = $(this).parent().parent().children().eq(0).html();
 			var contenido = `<tr class="info">
 								<th class="text-center">Vendedor</th>
@@ -93,8 +88,8 @@
 								<th class="text-center">Clientes</th>
 								<th class="text-center">Ventas</th>						
 							</tr>`;
-			$('#vende').empty();
-			$('#vende').prop('style', 'margin-bottom: 0px;');
+			$('#vende-grupos').empty();
+			$('#vende-grupos').prop('style', 'margin-bottom: 0px;');
 			$.each(arreglo_vendedores, function(index, elem) {
 				if (elem.nombre == grupo) {
 					contenido += `<tr>
@@ -105,11 +100,9 @@
 								  </tr>`;
 				}
 			});
-			$('#vende').append(contenido);
-			console.log(arreglo_vendedores);
+			$('#vende-grupos').append(contenido);
+			//console.log(arreglo_vendedores);
 		});
 	});
 
 </script>
-
-@endsection
