@@ -57,8 +57,8 @@
 								 pattern="^[A-Za-z]{4}[0-9]{6}" readonly="">
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">✱Homoclave:</label>
-							<input type="text" class="form-control" name="homoclave" required="" id="rfc" value="" 
+							<label class="control-label">Homoclave:</label>
+							<input type="text" class="form-control" name="homoclave" id="rfc" value="" 
 								 pattern="^[A-Za-z0-9]{3}" style="text-transform:uppercase;" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase();">
 						</div>
 						<div class="col-sm-3 form-group">

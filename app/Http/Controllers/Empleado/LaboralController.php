@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Empleado;
 
 use App\Http\Controllers\Controller;
@@ -80,19 +79,87 @@ class LaboralController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Empleado $empleado)
-    {
-        $request['actualizacion'] = $request->contratacion;
+    {   $request['actualizacion'] = $request->contratacion;
         $request['actual'] = $request->inicial;
-        $request['original'] = Puesto::find($request->puesto_id)->nombre;
+        $request['original'] = Puesto::find($request->puesto_id)->nombre;       
         $laborales = new Laboral($request->all());
-        $empleado->laborales()->save($laborales);
+        //dd($laborales->puesto->id);
+        //$empleado->laborales()->save($laborales);
         if($request->puesto_id == 5) {
-            $gerente = new Gerente();
-            $empleado->gerente()->save($gerente);
+            //dd($empleado);            
+           
+            if($this->VerificarGerencia($laborales))
+            {   
+                // $request['actualizacion'] = $request->contratacion;
+                // $request['actual'] = $request->inicial;
+                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+                $empleado->laborales()->save($laborales);
+                $this->MakeGerente($empleado);
+                //devuelve el id del area o ub 0 si no hace nada
+                $this->CrearGerencia($empleado);                            
+                
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+            }
         } else if($request->puesto_id == 6) {
+            // $request['actualizacion'] = $request->contratacion;
+            // $request['actual'] = $request->inicial;
+            // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+            $empleado->laborales()->save($laborales);
             $subgerente = new Subgerente();
             $empleado->subgerente()->save($subgerente);
+        }else if($request->puesto_id == 4) {
+            if($this->VerificarPuesto($laborales))
+            {                
+                // $request['actualizacion'] = $request->contratacion;
+                // $request['actual'] = $request->inicial;
+                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+                $empleado->laborales()->save($laborales);
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta ocupada'); 
+            }
+            
+            // $subgerente = new Subgerente();
+            // $empleado->subgerente()->save($subgerente);
+        }else if($request->puesto_id == 3) {
+            if($this->VerificarPuesto($laborales))
+            {                
+                // $request['actualizacion'] = $request->contratacion;
+                // $request['actual'] = $request->inicial;
+                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+                $empleado->laborales()->save($laborales);
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta ocupada'); 
+            }
+            
+            // $subgerente = new Subgerente();
+            // $empleado->subgerente()->save($subgerente);
+        } else if($request->puesto_id == 2) {
+            if($this->VerificarPuesto($laborales))
+            {                
+                // $request['actualizacion'] = $request->contratacion;
+                // $request['actual'] = $request->inicial;
+                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+                $empleado->laborales()->save($laborales);
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta ocupada'); 
+            }
+            
+            // $subgerente = new Subgerente();
+            // $empleado->subgerente()->save($subgerente);
         } else if($request->puesto_id == 7) {
+            // $request['actualizacion'] = $request->contratacion;
+            // $request['actual'] = $request->inicial;
+            // $request['original'] = Puesto::find($request->puesto_id)->nombre;
+            $empleado->laborales()->save($laborales);
             $vendedor = new Vendedor(['experto' => $request->experto]);
             $empleado->vendedor()->save($vendedor);
         }
@@ -113,14 +180,17 @@ class LaboralController extends Controller
         $puesto = 0;
         $hayGerente = false;
         $empleados = Empleado::get();
-
+        
         foreach ($empleados as $empl) {
-            if ($empl->laborales->last()->oficina != null && $empleado->laborales->last()->oficina != null) {
-                if ($empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id && $empl->laborales->last()->puesto->id == 5) {
-                    $hayGerente = true;
+            if(isset($empl->laborales->last()->oficina->id) && isset($empleado->laborales->last()->oficina->id)){
+                if (isset($empl->laborales->last()->oficina) && $empl->laborales->last()->oficina->id == $empleado->laborales->last()->oficina->id) {
+                    if ($empl->laborales->last()->puesto->id == 5) {
+                        $hayGerente = true;
+                    }
                 }
-            }
+            } 
         }
+        
         if ($empleado->laborales->last()->puesto->id == 5) {
             $hayGerente = true;
         }
@@ -141,41 +211,104 @@ class LaboralController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
-     */
+     */    
     public function update(Request $request, Empleado $empleado)
     {
         $laborales = new Laboral($request->all());
-        $empleado->laborales()->save($laborales);
-        if($request->puesto_id == 5) {
-            if(!$empleado->gerente) {
-                if($empleado->subgerente)
-                    $empleado->subgerente->delete();
-                if($empleado->vendedor)
-                    $empleado->vendedor->delete();
-                $gerente = new Gerente();
-                $empleado->gerente()->save($gerente);
+        //dd($laborales);
+        $grupos=Grupo::get();
+             
+        
+        if($request->puesto_id == 5)
+        {
+            //1 si esta libre, 0 si esta ocupada
+            if($this->VerificarGerencia($laborales))
+            {    
+                if(isset($empleado->gerente))                            
+                {
+                    Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente'); 
+                }
+                else
+                {
+                    $empleado=$this->BorrarGrupos($empleado);                
+                    $emplado=$empleado->laborales()->save($laborales);
+                    //devuelve el id del area o ub 0 si no hace nada
+                    $empleado=$this->CrearGerencia($empleado);                            
+                    $empleado=$this->MakeGerente($empleado);
+                }
+                
+                // $empleado=$this->BorrarGerencia($empleado);
+                //dd($empleado->laborales->last()->oficina);
+                
+                //dd($empleado->laborales->last()->oficina);
             }
-        } else if($request->puesto_id == 6) {
-            if(!$empleado->subgerente) {
-                if($empleado->gerente)
-                    $empleado->gerente->delete();
-                if($empleado->vendedor)
-                    $empleado->vendedor->delete();
-                $subgerente = new Subgerente();
-                $empleado->subgerente()->save($subgerente);
+            else
+            {
+                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+            }            
+        }
+        else if($request->puesto_id==4){
+            $this->BorrarGerencia($empleado);
+            $this->BorrarGrupos($empleado);
+            if($this->VerificarPuesto($laborales))
+            {
+                $empleado->laborales()->save($laborales);
             }
+            else
+            {
+                Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta coupada'); 
+            }
+
+        }
+        else if($request->puesto_id==3){
+            $this->BorrarGerencia($empleado);
+            $this->BorrarGrupos($empleado);
+            if($this->VerificarPuesto($laborales))
+            {
+                $empleado->laborales()->save($laborales);
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta coupada'); 
+            }
+
+        }
+        else if($request->puesto_id==2){
+            $this->BorrarGerencia($empleado);
+            $this->BorrarGrupos($empleado);
+            if($this->VerificarPuesto($laborales))
+            {
+                $empleado->laborales()->save($laborales);
+            }
+            else
+            {
+                Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta coupada'); 
+            }
+
+        }
+        else if($request->puesto_id == 6) {
+            if(isset($empleado->gerente))
+            {
+                Alert::message('Se le recomienda asignar un gerente', 'La gerencia queda libre'); 
+            }
+            $this->BorrarGerencia($empleado);
+            $empleado->laborales()->save($laborales);
+            $this->MakeSubgerente($empleado);
+            
         } else if($request->puesto_id == 7) {
+            $this->BorrarGerencia($empleado);
+            $this->BorrarGrupos($empleado);
+            $empleado->laborales()->save($laborales);
             if($empleado->vendedor)
                 $empleado->vendedor()->update(['experto' => $request->experto]);
-            else {
-                if($empleado->gerente)
-                    $empleado->gerente->delete();
+            else {                
                 if($empleado->subgerente)
                     $empleado->subgerente->delete();
                 $vendedor = new Vendedor(['experto' => $request->experto]);
                 $empleado->vendedor()->save($vendedor);
             }
-        }
+        }//var_dump('string');        ;
+        //dd('pausa');
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 
@@ -188,6 +321,165 @@ class LaboralController extends Controller
     public function destroy(Empleado $empleado)
     {
         //
+    }
+
+    // public function TransferirGerencia(Empleado $empleado, Laboral $laborales)
+    // {
+    //     if($empleado->laborales->last()->area->id!=$laborales->last()->area->id)
+    //         if(isset($empleado->gerente))
+    //         {
+    //             if($empleado->laborales->last()->area->id==1)
+    //             {
+    //                 $empleado->laborales->last()->oficina->responsable_adm=$laborales->last()->oficina->responsable_com;
+    //                 $laborales->last()->oficina->responsable_com=null;
+    //                 $empleado->laborales->last()->oficina->save();
+    //                 $laborales->last()->oficina->save();
+    //                 return 1;
+    //             }
+    //             else
+    //             {
+    //                 $empleado->laborales->last()->oficina->responsable_com=$laborales->last()->oficina->responsable_adm;
+    //                 $laborales->last()->oficina->responsable_adm=null;
+    //                 $empleado->laborales->last()->oficina->save();
+    //                 $laborales->last()->oficina->save();
+    //                 return 2;
+    //             }
+    //         }
+
+    //         return 0;
+    // }
+
+    public function MakeSubgerente(Empleado $empleado)
+    {
+        if(!$empleado->subgerente) {
+                //dd(isset($empleado->gerente));                
+            if($empleado->vendedor)
+                $empleado->vendedor->delete();
+            $subgerente = new Subgerente();
+            $empleado->subgerente()->save($subgerente);
+            return 1;
+        }
+        return 0;
+    }
+
+    public function BorrarGerencia(Empleado $empleado)
+    {
+        if(isset($empleado->gerente))
+        {
+            if($empleado->laborales->last()->area->id==1)
+            {
+                var_dump('borrar responsable administrativo');
+                $empleado->laborales->last()->oficina->responsable_adm=null;
+
+                $oficina=$empleado->laborales->last()->oficina->save();
+                $empleado->gerente->delete();                
+                //return 1;
+            }
+            else
+            {
+                var_dump('borrar responsable comercial');
+                $empleado->laborales->last()->oficina->responsable_com=null;
+                $oficina=$empleado->laborales->last()->oficina->save();
+                $empleado->gerente->delete();
+                //return 2;
+            }
+        }
+
+        return $empleado;
+    }
+
+
+
+    public function MakeGerente(Empleado $empleado)
+    {
+        if($empleado->gerente==null)
+        {
+            if($empleado->subgerente)
+                $empleado->subgerente->delete();
+            if($empleado->vendedor)
+                $empleado->vendedor->delete();
+            $gerente = new Gerente();
+            $empleado->gerente()->save($gerente);
+            var_dump("Hice un gerente nuevo");
+            //return 1;
+        }
+
+        return $empleado;      
+    }
+
+    public function CrearGerencia(Empleado $empleado)
+    {
+        //$empleado->laborales->last()->oficina->save();
+        if($empleado->laborales->last()->area->id==1)
+        {
+            var_dump('crear responsable_adm');
+            $empleado->laborales->last()->oficina->responsable_adm=$empleado->nombre.' '.$empleado->appaterno.' '.$empleado->apmaterno;
+            $empleado->laborales->last()->oficina->save();
+            return $empleado;
+
+        }
+        else
+        {
+            var_dump('crear responsable_com');
+            $empleado->laborales->last()->oficina->responsable_com=$empleado->nombre.' '.$empleado->appaterno.' '.$empleado->apmaterno;
+            $empleado->laborales->last()->oficina->save();
+            return $empleado;
+        }
+
+        return $empleado;
+    }
+
+    public function BorrarGrupos(Empleado $empleado)
+    {
+        if(isset($empleado->subgerente->grupos))
+        {
+            //dd($empleado->subgerente->grupos);
+            foreach ($empleado->subgerente->grupos as $group) {
+                $group->subgerente_id=null;
+                $group->save();
+            }
+           
+        }
+        return $empleado;
+    }
+
+    public function VerificarGerencia(Laboral $laborales)
+    {
+        if($laborales->area_id==1)
+        {
+            if($laborales->oficina->responsable_adm)
+            {
+                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+                return 0;    
+            }
+
+        }
+        if($laborales->area_id==2)
+        {
+            if($laborales->oficina->responsable_com)
+            {
+                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+                return 0;    
+            }
+
+        }
+        return 1;                 
+    }
+
+    public function VerificarPuesto(Laboral $laborales)
+    {
+        $empleados=Empleado::get()     ;
+        foreach ($empleados as $empleado) {
+            if(isset($empleado->laborales->last()->puesto->id))
+            {
+                if($empleado->laborales->last()->puesto->id==$laborales->puesto->id)
+                {
+                    return 0;
+                }
+            }
+                
+        }
+        return 1;
     }
 
     public function newLaboral(Empleado $empleado)

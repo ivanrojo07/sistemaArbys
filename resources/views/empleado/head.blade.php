@@ -40,6 +40,12 @@
 				<label class="control-label">RFC:</label>
 				<dd>{{ $empleado->rfc }}</dd>
 			</div>
+			@if ($empleado->homoclave)
+				<div class="form-group col-sm-3">
+				<label class="control-label">Homoclave:</label>
+				<dd>{{ $empleado->homoclave }}</dd>
+			</div>
+			@endif
 			<div class="form-group col-sm-3">
 				<label class="control-label">Correo electrónico:</label>
 				<dd>{{ $empleado->email }}</dd>

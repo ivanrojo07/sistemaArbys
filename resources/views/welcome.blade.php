@@ -218,6 +218,36 @@
                                     @break
                                 @endif
                             @endforeach
+                            {{-- vendedores --}}
+                            @foreach(Auth::user()->perfil->componentes as $componente)
+                                @if($componente->nombre == "indice empleados" || $componente->nombre == "crear empleado" || $componente->nombre == "indice grupos" || $componente->nombre == "crear grupo")
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <i class="fa fa-male"></i> Vendedores <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            @foreach(Auth::user()->perfil->componentes as $c)
+                                                @if($c->nombre == "crear empleado")
+                                                    <li>
+                                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Control Vendedores')">
+                                                            <i class="fa fa-plus"></i> Control
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                                @if($c->nombre == "indice empleados")
+                                                    <li>
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/vendedors')}}','Buscar Grupos')">
+                                                            <i class="fa fa-search"></i> Búsqueda
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                               
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    @break
+                                @endif
+                            @endforeach
                             {{-- PROVEEDORES --}}
                             @foreach(Auth::user()->perfil->componentes as $componente)
                                 @if($componente->nombre == "indice proveedores" || $componente->nombre == "crear proveedor" || $componente->nombre == "alta excel" || $componente->nombre == "indice productos")
@@ -282,14 +312,14 @@
                                             @foreach(Auth::user()->perfil->componentes as $c)
                                                 @if($c->nombre == "indice regiones")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
+                                                        <a style="display: none;" href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
                                                             <i class="fa fa-globe"></i> Región
                                                         </a>
                                                     </li>
                                                 @endif
                                                 @if($c->nombre == "indice estados")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
+                                                        <a style="display: none;" href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
                                                             <i class="fa fa-map"></i> Estado
                                                         </a>
                                                     </li>
