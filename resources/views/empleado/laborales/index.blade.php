@@ -80,10 +80,14 @@
 						<dd>{{ $datoslab->estado->region->nombre }}</dd>
 					</div>
 					@elseif($datoslab->puesto->nombre == 'Gerente' || $datoslab->puesto->nombre == 'Subgerente' || $datoslab->puesto->nombre == 'Vendedor')
-					<div class="form-group col-sm-3">
-						<label class="control-label">Region:</label>
-						<dd>{{ $datoslab->oficina->estado->region->nombre }}</dd>
-					</div>
+
+						@isset ($datoslab->oficina->estado->region->nombre)
+						    <div class="form-group col-sm-3">
+								<label class="control-label">Region:</label>
+								<dd>{{ $datoslab->oficina->estado->region->nombre }}</dd>
+							</div>
+						@endisset
+					
 					@endif
 					@if($datoslab->puesto->nombre == 'Director Estatal')
 					<div class="form-group col-sm-3">
@@ -91,26 +95,41 @@
 						<dd>{{ $datoslab->estado->nombre }}</dd>
 					</div>
 					@elseif($datoslab->puesto->nombre == 'Gerente' || $datoslab->puesto->nombre == 'Subgerente' || $datoslab->puesto->nombre == 'Vendedor')
-					<div class="form-group col-sm-3">
-						<label class="control-label">Estado:</label>
-						<dd>{{ $datoslab->oficina->estado->nombre }}</dd>
-					</div>
+						@isset ($datoslab->oficina->estado->nombre)
+						    <div class="form-group col-sm-3">
+								<label class="control-label">Estado:</label>
+								<dd>{{ $datoslab->oficina->estado->nombre }}</dd>
+							</div>
+						@endisset
+					
 					@endif
 					@if($datoslab->puesto->nombre == 'Gerente' || $datoslab->puesto->nombre == 'Subgerente' || $datoslab->puesto->nombre == 'Vendedor')
-					<div class="form-group col-sm-3">
-						<label class="control-label">Oficina:</label>
-						<dd>{{ $datoslab->oficina->nombre }}</dd>
-					</div>
+						@isset ($datoslab->oficina->nombre)
+						    <div class="form-group col-sm-3">
+								<label class="control-label">Oficina:</label>
+								<dd>{{ $datoslab->oficina->nombre }}</dd>
+							</div>
+						@endisset
+					
 					@endif
 					@if($datoslab->puesto->nombre == 'Vendedor')
 					<div class="form-group col-sm-3">
 						<label class="control-label">Grupo:</label>
-						<dd>{{ $datoslab->empleado->vendedor->grupo ? $datoslab->empleado->vendedor->grupo->nombre : 'No Asignado.' }}</dd>
+						@isset ($datoslab->empleado->vendedor->grupo)
+						    <dd>{{ $datoslab->empleado->vendedor->grupo ? $datoslab->empleado->vendedor->grupo->nombre : 'No Asignado.' }}</dd>
+						@endisset
+						@empty ($datoslab->empleado->vendedor->grupo)
+						    <dd>No Asignado</dd>
+						@endempty
+						
 					</div>
-					<div class="form-group col-sm-3">
-						<label class="control-label">Experto en:</label>
-						<dd>{{ $datoslab->empleado->vendedor->experto }}</dd>
-					</div>
+						@isset ($datoslab->empleado->vendedor->experto)
+						    <div class="form-group col-sm-3">
+								<label class="control-label">Experto en:</label>
+								<dd>{{ $datoslab->empleado->vendedor->experto }}</dd>
+							</div>
+						@endisset
+					
 					@endif
 				</div>
 			</div>

@@ -83,7 +83,7 @@
 								<select class="form-control" id="estados">
 								</select>
 							</div>
-							<div class="form-group col-sm-3" style="display: none;" id="oficina">
+							<div class="form-group col-sm-3" id="oficina" style="display: none;">
 								<label class="control-label">Oficina:</label>
 								<select class="form-control" id="oficinas">
 								</select>
@@ -133,14 +133,8 @@
     $(document).ready(function() {
 
     	$('#puesto_id').change(function() {
-    		
+
     		var val = parseInt(document.getElementById("puesto_id").value);
-    		var hayGerente = {{ $hayGerente }};
-    		if (val == 5 && hayGerente == true) {
-    			swal("¡Upps!", "Ya hay un Gerente asignado en esta oficina", "error");
-    			$('#puesto_id').val('');
-    			return;
-    		}
       		document.getElementById('region').style.display = 'none';
       		document.getElementById('estado').style.display = 'none';
       		document.getElementById('oficina').style.display = 'none';

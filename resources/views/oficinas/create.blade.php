@@ -42,12 +42,12 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-4">
-							<label class="control-label">✱Responsable Comercial:</label>
-							<input type="text" name="responsable_com" class="form-control" required="">
+							<label class="control-label">Responsable Comercial:</label>
+							<input type="text" name="responsable_com" class="form-control" readonly="">
 						</div>
 						<div class="form-group col-sm-4">
-							<label class="control-label">✱Responsable Administrativo:</label>
-							<input type="text" name="responsable_adm" class="form-control" required="">
+							<label class="control-label">Responsable Administrativo:</label>
+							<input type="text" name="responsable_adm" class="form-control" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label">Descripción:</label>

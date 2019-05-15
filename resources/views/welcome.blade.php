@@ -282,14 +282,14 @@
                                             @foreach(Auth::user()->perfil->componentes as $c)
                                                 @if($c->nombre == "indice regiones")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
+                                                        <a style="display: none;" href="#" onclick="AgregarNuevoTab('{{ url('region')}}','Región')">
                                                             <i class="fa fa-globe"></i> Región
                                                         </a>
                                                     </li>
                                                 @endif
                                                 @if($c->nombre == "indice estados")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
+                                                        <a style="display: none;" href="#" onclick="AgregarNuevoTab('{{ url('estado') }}','Estado')">
                                                             <i class="fa fa-map"></i> Estado
                                                         </a>
                                                     </li>
