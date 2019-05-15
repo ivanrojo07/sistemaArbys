@@ -24,7 +24,8 @@ class Empleado extends Model
         'curp',
         'infonavit',
         'nacimiento',
-        'tipo_empleado'
+        'tipo_empleado',
+        'homoclave'
     ];
     
     public $sortable = [

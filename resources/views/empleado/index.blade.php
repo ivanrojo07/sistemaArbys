@@ -44,7 +44,11 @@
 											<td>{{ $empleado->rfc }}</td>
 											@if(count($empleado->laborales) > 0)
 											<td>{{ $empleado->laborales->last()->puesto->nombre }}</td>
-											<th>{{ $empleado->laborales->last()->oficina->nombre }}</th>
+											<th>
+												@isset($empleado->laborales->last()->oficina->nombre)
+													{{ $empleado->laborales->last()->oficina->nombre }}
+												@endisset
+											</th>
 											@else
 											<td> -- </td>
 											<td> -- </td>

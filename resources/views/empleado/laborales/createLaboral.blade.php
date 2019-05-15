@@ -76,9 +76,9 @@
 							<select id="estados" class="form-control">
 							</select>
 						</div>
-						<div class="form-group col-sm-3" id="oficina" style="display: none;">
+						<div class="form-group col-sm-3" id="oficina">
 							<label class="control-label">✱Oficina:</label>
-							<select id="oficinas" class="form-control">
+							<select id="oficinas" class="form-control" name="oficina_id">
 							</select>
 						</div>
 						<div class="form-group col-sm-3" id="experto" style="display: none;">
@@ -130,11 +130,9 @@
       		document.getElementById('experto').style.display = 'none';
 			$("#regiones").prop('name', '');
 			$("#estados").prop('name', '');
-			$("#oficinas").prop('name', '');
 			$("#expertos").prop('name', '');
 			$("#regiones").prop('required', false);
 			$("#estados").prop('required', false);
-			$("#oficinas").prop('required', false);
 			$("#expertos").prop('required', false);
 
     		switch(val) {
