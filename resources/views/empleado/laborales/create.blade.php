@@ -60,7 +60,7 @@
 						</div>
 						<div class="form-group col-sm-3" id="region" style="display: none;">
 							<label class="control-label">✱Región:</label>
-							<select id="regiones" class="form-control">
+							<select id="regiones" name="region_id" class="form-control">
 								<option value="">Seleccionar</option>
 								@foreach($regiones as $region)
 									<option value="{{ $region->id }}">{{ $region->nombre }}</option>

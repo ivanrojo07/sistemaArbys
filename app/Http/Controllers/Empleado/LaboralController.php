@@ -50,7 +50,7 @@ class LaboralController extends Controller
     }
 
     public function grupos(Oficina $oficina) {
-        dd($oficina);
+        //dd($oficina);
         if($oficina->id != 0)
             return view('empleado.laborales.grupos', ['oficina' => $oficina]);
     }

@@ -1,15 +1,12 @@
-@extends('layouts.blank')
-@section('content')
-
 <div class="container">
 	<div class="panel panel-group">
-		@include('vendedores.control.head')
+		{{-- @include('vendedores.control.head')
 		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a href="{{ url('control_vendedores/subgerentes') }}">Subgerentes:</a></li>
 			<li><a href="{{ route('control.vendedores.grupos') }}">Grupos:</a></li>
 			<li><a href="{{ route('control.vendedores.ven') }}">Vendedores:</a></li>
 				
-		</ul>
+		</ul> --}}
 		<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-4 col-sm-offset-3 form-group">
@@ -84,8 +81,6 @@
 	</div>
 </div>
 
-@endsection
-@section('scripts')
 <script>
 	$(document).ready(function() {
 		var arreglo_gerentes = [
@@ -153,11 +148,9 @@
 				}
 			});
 			$('#vende').append(contenido);
-			console.log(arreglo_vendedores);
+			//console.log(arreglo_vendedores);
 
 		});
 	});
 
 </script>
-
-@endsection

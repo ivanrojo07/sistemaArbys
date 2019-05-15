@@ -44,13 +44,20 @@
 											<td>{{ $empleado->rfc }}</td>
 											@if(count($empleado->laborales) > 0)
 											<td>{{ $empleado->laborales->last()->puesto->nombre }}</td>
-											<th>
+
+												@php($aux_puesto = $empleado->laborales->last()->puesto->nombre)
+												@if($aux_puesto == "Director General" || $aux_puesto == "Director Regional" || $aux_puesto == "Director Estatal")
+													<td>N/A</td>
+												@else
+													<td>
 												
 												@isset($empleado->laborales->last()->oficina->nombre)
 													{{ $empleado->laborales->last()->oficina->nombre }}
 												@endisset
 
-											</th>
+											</td>
+												@endif
+
 											@else
 											<td> -- </td>
 											<td> -- </td>
