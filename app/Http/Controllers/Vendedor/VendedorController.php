@@ -95,20 +95,24 @@ class VendedorController extends Controller
 
     public function control(){
         $regiones=Region::get();
-        return view('vendedores.control',['regiones'=>$regiones]);
+        $subgerentes=Subgerente::get();
+        return view('vendedores.control.control',['regiones'=>$regiones, 'subgerentes']);
     }
-
-    
 
     public function subgerentes(Oficina $oficina){
         $oficina=Oficina::find($oficina);
         $subgerentes=Subgerente::get();
         $grupos=Grupo::get();
-        return view('vendedores.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
+        return view('vendedores.control.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
     }
 
     public function grupos(){
         $grupos=Grupo::get();
-        return view('vendedores.grupos',['grupos'=>$grupos]);
+        return view('vendedores.control.grupos',['grupos'=>$grupos]);
+    }
+
+    public function Vendedores(){
+        $vendedores = Vendedor::whereNotIn('id', [1])->get();
+        return view('vendedores.control.vendedores',['vendedores'=>$vendedores]);
     }
 }

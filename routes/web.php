@@ -46,9 +46,12 @@ Route::resource('empleados.vacaciones','Empleado\EmpleadosVacacionesController')
 Route::resource('empleados.faltas','Empleado\EmpleadosFaltasAdministrativasController');
 Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
 
+//Rutas usadas en el apartado de control de vendedores
 Route::get('control_vendedores','Vendedor\VendedorController@control');
 Route::get('subgerentes/{oficina}','Vendedor\VendedorController@subgerentes');
-Route::get('control_vendedores/grupos','Vendedor\VendedorController@grupos');
+Route::get('control_vendedores/grupos','Vendedor\VendedorController@grupos')->name('control.vendedores.grupos');
+Route::get('control_vendedores/vendedores','Vendedor\VendedorController@Vendedores')->name('control.vendedores.ven');
+// ---FIN ---
 
 Route::resource('vendedors','Vendedor\VendedorController');
 Route::get('vendedors/{vendedor}/baja','Vendedor\VendedorController@bajar')->name('vendedors.baja');
