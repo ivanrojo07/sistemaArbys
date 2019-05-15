@@ -139,14 +139,29 @@ class VendedorController extends Controller
         $dir_estatal = null;
         $dir_regional = null;
         $oficina = Oficina::find($request->oficina);
-        foreach ($empleados as $empleado) {
+        /*foreach ($empleados as $empleado) {
             if ($empleado->laborales->last()->estado->id == $request->estado && $empleado->laborales->last()->puesto->nombre == "Director Estatal") {
                 $dir_estatal = $empleado;
             }
             if ($empleado->laborales->last()->region->id == $request->region && $empleado->laborales->last()->puesto->nombre == "Director Regional") {
                 $dir_regional = $empleado;
             }
+        }*/
+        foreach ($empleados as $empleado) {
+            if ($oficina->estado->id == $request->estado ) {
+                if ($empleado->laborales->last() != null && $empleado->laborales->last()->puesto->nombre == "Director Estatal") {
+                    # code...
+                    $dir_estatal = $empleado;
+                }
+            }
+            if ($oficina->estado->region->id == $request->region ) {
+                if ($empleado->laborales->last() != null && $empleado->laborales->last()->puesto->nombre == "Director Regional") {
+                    # code...
+                    $dir_regional = $empleado;
+                }
+            }
         }
+        
         return response()->json(['estatal' => $dir_estatal, 'regional' => $dir_regional, 'oficina'=> $oficina], 200);
         
     }
