@@ -8,9 +8,12 @@ use App\Cliente;
 use App\Subgerente;
 use App\Grupo;
 use App\Region;
+use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+
 
 class VendedorController extends Controller
 {
@@ -114,5 +117,37 @@ class VendedorController extends Controller
     public function Vendedores(){
         $vendedores = Vendedor::whereNotIn('id', [1])->get();
         return view('vendedores.control.vendedores',['vendedores'=>$vendedores]);
+    }
+
+    public function getHistorialVendedor(){
+        $date = Carbon::now();
+        $endDate = Carbon::now();
+        $inicioDate = $date->subMonth(24);
+        print_r($endDate);
+        print_r($inicioDate);
+        $vendedor = Vendedor::find(5);
+        //
+        //$usuario->empleado->laborales->last()->puesto->nombre
+        //
+        //$vendedor->clientes
+    }
+
+    public function getDirectores(Request $request)
+    {
+        $datos = $request->region;
+        $empleados = Empleado::get();
+        $dir_estatal = null;
+        $dir_regional = null;
+        $oficina = Oficina::find($request->oficina);
+        foreach ($empleados as $empleado) {
+            if ($empleado->laborales->last()->estado->id == $request->estado && $empleado->laborales->last()->puesto->nombre == "Director Estatal") {
+                $dir_estatal = $empleado;
+            }
+            if ($empleado->laborales->last()->region->id == $request->region && $empleado->laborales->last()->puesto->nombre == "Director Regional") {
+                $dir_regional = $empleado;
+            }
+        }
+        return response()->json(['estatal' => $dir_estatal, 'regional' => $dir_regional, 'oficina'=> $oficina], 200);
+        
     }
 }

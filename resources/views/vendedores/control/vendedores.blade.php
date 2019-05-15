@@ -1,14 +1,5 @@
-@extends('layouts.blank')
-@section('content')
-
 <div class="container">
 	<div class="panel panel-group">
-		@include('vendedores.control.head')
-		<ul class="nav nav-tabs nav-justified">
-			<li><a href="{{ url('control_vendedores/subgerentes') }}">Subgerentes:</a></li>
-			<li><a href="{{ route('control.vendedores.grupos') }}">Grupos:</a></li>
-			<li class="active"><a href="{{ route('control.vendedores.ven') }}">Vendedores:</a></li>
-		</ul>
 		<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-4 col-sm-offset-3 form-group">
@@ -28,42 +19,45 @@
 								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
 									<tr class="info">
 										<th class="text-center">Nombre</th>
-										<th class="text-center">Número de grupos</th>
-										<th class="text-center">Número de vendedores</th>						
-										<th class="col-sm-1">Acciones</th>
+										<th class="text-center">Grupo</th>
+										<th class="text-center">Subgerente</th>						
+										<th class="text-center">Clientes</th>
+										<th class="text-center">Ventas</th>
+										<th class="col-sm-1">Acción</th>
 									</tr>
-									{{-- @foreach($subgerentes as $subgerente)
+									@foreach($vendedores as $vendedor)
 										<tr>
-											<td>{{ $subgerente->empleado->nombre}} {{ $subgerente->empleado->appaterno }} {{ $subgerente->empleado->apmaterno }}</td>
-											<td>{{ $subgerente->grupos->count() }}</td>
-											@php
-													$vendedores=0;
-													
-											@endphp	
-											<td>@foreach ($subgerente->grupos as $grupo)
-												@php
-													$vendedores+=$grupo->vendedores->count();
-												@endphp
-											@endforeach
-											{{$vendedores}}
-											</td>
+											<td>{{ $vendedor->empleado->nombre}} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}</td>
+											<td>{{ $vendedor->grupo->nombre}}</td>
+											<td>{{ $vendedor->grupo->subgerente->empleado->nombre }} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
+											<td>10</td>
+											<td>10</td>
 											<td>
-												<button class="btn btn-primary detalleg">
+												<button class="btn btn-primary detallev">
 													Detalles
 												</button>
 											</td>
 										</tr>
-									@endforeach --}}
+									@endforeach
 								</table>
 								<br>
 								<br>
+								<div class="col-sm-8 col-sm-offset-4">
+									<table class="table table-stripped table-bordered table-hover">
+										<tr>
+											<td>Total clientes</td>
+											<td>Total ventas</td>
+										</tr>
+										<tr>	
+											<td id="total_clientes"></td>
+											<td id="total_ventas"></td>											
+										</tr>
+									</table>
+								</div>
 								<br>
-								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;display: none;" id="grupos">
-								</table>
 								<br>
 								<br>
-								<br>
-								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;display: none;" id="vende">									
+								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;display: none;" id="detalle">
 								</table>
 								<br>
 								<br>
@@ -75,59 +69,44 @@
 	</div>
 </div>
 
-@endsection
-@section('scripts')
 <script>
+	var arreglo_vendedores = [
+			@foreach($vendedores as $vendedor)
+			{
+				'nombre': "{{ $vendedor->empleado->nombre}} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}",
+				'vendedor': @json($vendedor->empleado),
+				'contador': @json($vendedor->contador),
+				'clientes': {{ $vendedor->clientes->count() }},
+				'objetivo': @json($vendedor->objetivo->last()),
+			},
+			@endforeach
+		];
+
 	$(document).ready(function() {
-		$('.detalleg').click( function(event) {
-			var gerente = $(this).parent().parent().children().eq(0).html();
+		$('.detallev').click( function(event) {
+			var vendedor = $(this).parent().parent().children().eq(0).html();
 			var contenido = `<tr class="info">
-									<th class="text-center">Grupo</th>
-									<th class="text-center">Número de Vendedores</th>						
-									<th class="col-sm-1">Acciones</th>
+									<th class="text-center">Mes</th>
+									<th class="text-center">Objetivo</th>
+									<th class="text-center">Clientes</th>
+									<th class="text-center">Ventas</th>					
 								</tr>`;
-			$('#grupos').empty();
-			$('#grupos').prop('style', 'margin-bottom: 0px;');
-			$.each(arreglo_gerentes, function(index, elem) {
-				if (elem.nombre == gerente) {
-					contenido += `<tr>
-									<td>${elem.grupo.nombre}</td>
-									<td>${elem.num_vendedores}</td>
-									<td>
-										<button class="btn btn-primary detallev">Detalles</button>
-									</td>
-								  </tr>`;
-				}
-			});
-			$('#grupos').append(contenido);
-		});
-
-		$('#grupos').on('click','.detallev', function(event) {
-			var grupo = $(this).parent().parent().children().eq(0).html();
-			var contenido = `<tr class="info">
-								<th class="text-center">Vendedor</th>
-								<th class="text-center">Objetivo</th>
-								<th class="text-center">Clientes</th>
-								<th class="text-center">Ventas</th>						
-							</tr>`;
-			$('#vende').empty();
-			$('#vende').prop('style', 'margin-bottom: 0px;');
-			$.each(arreglo_vendedores, function(index, elem) {
-				if (elem.nombre == grupo) {
-					contenido += `<tr>
-									<td>${elem.vendedor.nombre} ${elem.vendedor.appaterno} ${elem.vendedor.apmaterno ? elem.vendedor.apmaterno : ' '}</td>
-									<td>${elem.objetivo ? elem.objetivo.num_clientes : '--'}</td>
-									<td>${elem.clientes ? elem.clientes.total_clientes : '--'}</td>
-									<td>${elem.clientes ? elem.clientes.total_ventas : '--'}</td>
-								  </tr>`;
-				}
-			});
-			$('#vende').append(contenido);
+			$('#detalle').empty();
+			$('#detalle').prop('style', 'margin-bottom: 0px;');
 			console.log(arreglo_vendedores);
-
+			$.each(arreglo_vendedores, function(index, elem) {
+				if (elem.nombre == vendedor) {
+					contenido += `<tr>
+									<td>--</td>
+									<td>--</td>
+									<td>${elem.clientes}</td>
+									<td>--</td>
+								  </tr>`;
+				}
+			});
+			$('#detalle').append(contenido);
 		});
+
 	});
 
 </script>
-
-@endsection
