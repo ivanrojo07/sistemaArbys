@@ -45,9 +45,11 @@
 											@if(count($empleado->laborales) > 0)
 											<td>{{ $empleado->laborales->last()->puesto->nombre }}</td>
 											<th>
+												
 												@isset($empleado->laborales->last()->oficina->nombre)
 													{{ $empleado->laborales->last()->oficina->nombre }}
 												@endisset
+
 											</th>
 											@else
 											<td> -- </td>
