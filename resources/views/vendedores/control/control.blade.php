@@ -144,10 +144,10 @@
 				data: {'region': region, 'estado': id, 'oficina': oficina},
 				dataType: "json",
 			}).done( function(res){
-				console.log("success");
-				console.log(res);
+				//console.log("success");
+				//console.log(res);
 				$('directores').prop('style', '');
-				console.log($('directores'));
+				//console.log($('directores'));
 				if (res.regional != null) 
 					$('#directores #1').html(res.regional.nombre + '' + res.regional.appaterno + ' ' + res.regional.apmaterno);
 				if (res.estatal != null)
@@ -188,7 +188,7 @@
 			}
 			else{
 				$.ajax({
-					url: "{{ route('control.vendedores.grupos') }}",
+					url: "{{ url('control_vendedores/grupos') }}/"+ id,
 					type: "GET",
 					dataType: "html",
 				}).done(function(res){
@@ -208,7 +208,7 @@
 			}
 			else{
 				$.ajax({
-					url: "{{ route('control.vendedores.ven') }}",
+					url: "{{ url('control_vendedores/vendedores') }}/" +id,
 					type: "GET",
 					dataType: "html",
 				}).done( function(res){

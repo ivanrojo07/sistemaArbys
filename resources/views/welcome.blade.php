@@ -179,7 +179,7 @@
                                                             @endforeach
                                                         </ul>
                                                     </li>
-                                                    <li class="dropdown-submenu">
+                                                    {{-- <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#"> <i class="fa fa-user-o"></i> Vendedores</a>
                                                         <ul class="dropdown-menu">
                                                             @foreach(Auth::user()->perfil->componentes as $k)
@@ -199,7 +199,7 @@
                                                                 @endif
                                                             @endforeach
                                                         </ul>
-                                                    </li>
+                                                    </li> --}}
                                                     {{-- <li>
                                                         <a href="#" onclick="AgregarNuevoTab('{{ route('vendedors.index') }}','Buscar Empleado')">
                                                             <i class="fa fa-user-o"></i> Vendedores

@@ -50,8 +50,8 @@ Route::get('buscarempleado','Empleado\EmpleadoController@buscar');
 //Usadas con AJAX
 Route::get('control_vendedores','Vendedor\VendedorController@control');
 Route::get('subgerentes/{oficina}','Vendedor\VendedorController@subgerentes');
-Route::get('control_vendedores/grupos','Vendedor\VendedorController@grupos')->name('control.vendedores.grupos');
-Route::get('control_vendedores/vendedores','Vendedor\VendedorController@Vendedores')->name('control.vendedores.ven');
+Route::get('control_vendedores/grupos/{oficina}','Vendedor\VendedorController@grupos');
+Route::get('control_vendedores/vendedores/{oficina}','Vendedor\VendedorController@Vendedores');
 Route::get('control_vendedores/getHistorial','Vendedor\VendedorController@getHistorialVendedor')->name('control.getHistorialVen');
 Route::get('control_vendedores/getDirectores','Vendedor\VendedorController@getDirectores')->name('control.getDirectores');
 // ---FIN ---

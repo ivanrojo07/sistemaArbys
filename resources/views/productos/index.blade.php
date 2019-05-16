@@ -15,6 +15,7 @@
 					<div class="col-sm-4 text-center">
 						<input type="text" id="producto" name="kword" value="{{$request->kword}}" class="form-control" placeholder="Buscar..." autofocus>
 					</div>
+					@if($experto == "Autos" || $experto == "Autos y Motos")
 					<div class="col-sm-2 text-center">
 						<label class="control-label">Carros:</label>
 						<div class="row">
@@ -23,6 +24,7 @@
 							@endif name="type" id="carro" value="CARRO">
 						</div>
 					</div>
+					@elseif($experto == "Motos" || $experto == "Autos y Motos")
 					<div class="col-sm-2 text-center">
 						<label class="control-label">Motos:</label>
 						<div class="row">
@@ -32,6 +34,7 @@
 							@endif id="moto" value="MOTO">
 						</div>
 					</div>
+					@endif
 				</div>
 				<div class="row form-group">
 					<div class="col-sm-12 text-center">

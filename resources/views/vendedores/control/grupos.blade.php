@@ -33,13 +33,8 @@
 									</tr>
 									@foreach($grupos as $grupo)
 										<tr>
-											{{-- @if(isset($vendedor->grupo)) --}}
 											
 											<td>{{$grupo->nombre }}</td>
-											{{-- @else --}}
-												{{-- <td>No asignado</td>
-												<td>No asignado</td> --}}
-											{{-- @endif --}}
 											<td>{{ $grupo->subgerente->empleado->nombre }} {{ $grupo->subgerente->empleado->appaterno }} {{ $grupo->subgerente->empleado->apmaterno }}</td>
 											<td>
 											{{$grupo->vendedores->count()}}
@@ -49,9 +44,6 @@
 													Detalles
 												</button>
 											</td>
-											{{-- <td class="text-center">
-												<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
-											</td> --}}
 										</tr>
 									@endforeach
 								</table>

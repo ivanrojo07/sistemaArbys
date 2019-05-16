@@ -109,12 +109,22 @@ class VendedorController extends Controller
         return view('vendedores.control.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
     }
 
-    public function grupos(){
-        $grupos=Grupo::get();
+    public function grupos(Oficina $oficina){
+        //$grupos=Grupo::get();
+        $grupos = [];
+
+        //obtener todos los grupos de la oficina
+        foreach ($oficina->laborales as $laboral) {
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) 
+                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                    $grupos[$grupo->id] = $grupo;
+                }
+        }
+
         return view('vendedores.control.grupos',['grupos'=>$grupos]);
     }
 
-    public function Vendedores(){
+    public function Vendedores(Oficina $oficina){
         $vendedores = Vendedor::whereNotIn('id', [1])->get();
         return view('vendedores.control.vendedores',['vendedores'=>$vendedores]);
     }

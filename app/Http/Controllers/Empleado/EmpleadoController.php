@@ -8,6 +8,7 @@ use App\Area;
 use App\Puesto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class EmpleadoController extends Controller
@@ -51,6 +52,32 @@ class EmpleadoController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|alpha',
+            'appaterno' => 'required|alpha',
+            'apmaterno' => 'nullable|alpha',
+            'nacimiento' => 'required',
+            'rfc' => 'required|alpha_num',
+            'homoclave' => 'required|alpha_num|size:3',
+            'email' => 'required|email',
+            'telefono' => 'nullable|numeric',
+            'movil' => 'nullable|numeric',
+            'nss' => 'nullable|alpha_num',
+            'curp' => 'nullable|alpha_num',
+            'infonavit' => 'nullable',
+            'tipo_empleado' => 'required',
+        ],[],[
+            'appaterno' => 'apellido paterno',
+            'apmaterno' => 'apellido materno',
+            'rfc' => 'RFC',
+            'email' => 'Correo',
+            'curp' => 'CURP',
+        ]);
+        if ($validator->fails()) {
+            return redirect('empleados/create')
+                        ->withErrors($validator->errors())
+                        ->withInput();
+        }
         if(Empleado::where('rfc', $request->input('rfc'))->first())
             return redirect()->back()->with('errors','El RFC ya existe.');
         else if (Empleado::where('email', $request->input('email'))->first())

@@ -43,8 +43,10 @@ class ClienteProductoController extends Controller
                 }
             });//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
         }
+        
+        $experto = Auth::user()->empleado->vendedor->experto;
+
         if ($tipo_empleado === "Vendedor") {
-            $experto = Auth::user()->empleado->vendedor->experto;
             switch ($experto) {
                 case 'Autos':
                     $productos = $productos->where('tipo', 'CARRO');
@@ -74,7 +76,7 @@ class ClienteProductoController extends Controller
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
-        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request'=>$request]);
+        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request'=>$request, 'experto', $experto]);
     }
 
     /**
