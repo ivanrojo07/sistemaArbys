@@ -107,7 +107,7 @@ class ClientePagoController extends Controller
 
     public function create_pago(Cliente $cliente, $producto)
     {
-        $producto = Product::where('clave', $producto)->first();
+        $producto = Product::find($producto);
         $bancos = Banco::get();
         return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto]);
     }

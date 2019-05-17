@@ -236,7 +236,7 @@
                                                 @endif
                                                 @if($c->nombre == "indice empleados")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/vendedors')}}','Buscar Grupos')">
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/vendedors')}}','Buscar Vendedores')">
                                                             <i class="fa fa-search"></i> Búsqueda
                                                         </a>
                                                     </li>

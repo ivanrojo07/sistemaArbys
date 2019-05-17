@@ -31,6 +31,85 @@ class GrupoController extends Controller
     public function index()
     {
         $grupos = Grupo::get();
+        $empleado = Auth::user()->empleado;
+        $grupos_vista = [];
+        if ($empleado->id > 1 && isset($empleado->laborales)) {
+            switch ($empleado->laborales->last()->puesto->nombre) {
+
+                case 'Subgerente':
+                    $subgerente = $empleado->subgerente;
+                    foreach ($subgerente->grupos as $grupo) {
+                        $grupos_vista[] = $grupo;
+                    }
+                    break;
+
+                case 'Gerente':
+                    $empleados_oficina = $empleado->laborales->last()->oficina->laborales;
+                    /* la variable arreglo_lab va a contener los datos laborales de los empleados en la 
+                    *  oficina dada sin repetir un empleado por los cambios en sus datos laborales.
+                    */
+                    $arreglo_lab = [];
+                    foreach ($empleados_oficina as $empleados) {
+                        $arreglo_lab[$empleados->empleado_id] = $empleados;
+                    }
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->subgerente)){
+                            foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                                $grupos_vista[] = $grupo;
+                            }
+                        }
+                            
+                    }
+
+                    break;
+
+                case 'Director Estatal':
+                    $estado = $empleado->laborales->last()->estado;
+                    $arreglo_lab = [];
+
+                    foreach ($estado->oficinas as $oficinas) {
+                        foreach ($oficinas->laborales as $laboral) {
+                            $arreglo_lab[$laboral->empleado_id] = $laboral;
+                        }
+                    }
+
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->subgerente)){
+                            foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                                $grupos_vista[] = $grupo;
+                            }
+                        }
+                            
+                    }
+
+                    break;
+
+                case 'Director Regional':
+                    $region = $empleado->laborales->last()->region;
+                    $arreglo_lab = [];
+
+                    foreach ($region->datosLab as $laboral) {
+                        $arreglo_lab[$laboral->empleado_id] = $laboral;
+                    }
+
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->subgerente)){
+                            foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                                $grupos_vista[] = $grupo;
+                            }
+                        }
+                    }
+                    break;
+                
+                default:
+                    return view('grupos.index', ['grupos' => $grupos_vista]);
+                    break;
+            }
+            return view('grupos.index', ['grupos' => $grupos_vista]);
+        }
         return view('grupos.index', ['grupos' => $grupos]);
     }
 

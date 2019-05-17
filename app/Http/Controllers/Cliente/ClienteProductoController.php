@@ -45,7 +45,6 @@ class ClienteProductoController extends Controller
         }
         
         $experto = Auth::user()->empleado->vendedor->experto;
-
         if ($tipo_empleado === "Vendedor") {
             switch ($experto) {
                 case 'Autos':
@@ -76,7 +75,7 @@ class ClienteProductoController extends Controller
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
-        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request'=>$request, 'experto', $experto]);
+        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto]);
     }
 
     /**

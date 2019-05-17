@@ -296,6 +296,8 @@
 		}).done(function(resultado) {
 			$("#producto").html(resultado);
 			$('#cancelar tr td.text-center').prop('style', 'display:none;')
+		}).fail(function(data){
+			console.log(data);
 		});
 		//$('#cancelar').prop('style', 'display:none;');
 	}
@@ -329,7 +331,7 @@
 	function getBancos(){
 		$.ajaxSetup({
 			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				'X-CSRF-TOKEN': {{ $('meta[name="csrf-token"]').attr('content') }}
 			}
 		});
 		$.ajax({

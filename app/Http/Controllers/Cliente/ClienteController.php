@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cliente;
+use App\Estado;
 use App\Solicitante;
 use App\Transaction;
 use App\Pago;
@@ -34,7 +35,100 @@ class ClienteController extends Controller {
      */
     public function index()
     {
-        $clientes = Cliente::get();   
+        $clientes = Cliente::get();
+        $empleado = Auth::user()->empleado;
+        $clientes_vista = [];
+        if ($empleado->id > 1 && isset($empleado->laborales)) {
+            switch ($empleado->laborales->last()->puesto->nombre) {
+                case 'Vendedor':
+                    $vendedor = $empleado->vendedor;
+                    foreach ($vendedor->clientes as $cliente) {
+                        $clientes_vista[] = $cliente;
+                    }
+                    break;
+
+                case 'Subgerente':
+                    $subgerente = $empleado->subgerente;
+                    foreach ($subgerente->grupos as $grupo) {
+                        foreach ($grupo->vendedores as $vendedor) {
+                            foreach ($vendedor->clientes as $cliente) {
+                                $clientes_vista[] = $cliente;
+                            }
+                        }
+                    }
+                    break;
+
+                case 'Gerente':
+                    $empleados_oficina = $empleado->laborales->last()->oficina->laborales;
+                    /* la variable arreglo_lab va a contener los datos laborales de los empleados en la 
+                    *  oficina dada sin repetir un empleado por los cambios en sus datos laborales.
+                    */
+                    $arreglo_lab = [];
+                    foreach ($empleados_oficina as $empleados) {
+                        $arreglo_lab[$empleados->empleado_id] = $empleados;
+                    }
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->vendedor)){
+                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
+                                $clientes_vista[] = $cliente;
+                            }
+                        }
+                            
+                    }
+
+                    break;
+
+                case 'Director Estatal':
+                    $estado = $empleado->laborales->last()->estado;
+                    $arreglo_lab = [];
+
+                    foreach ($estado->oficinas as $oficinas) {
+                        foreach ($oficinas->laborales as $laboral) {
+                            $arreglo_lab[$laboral->empleado_id] = $laboral;
+                        }
+                    }
+
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->vendedor)){
+                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
+                                $clientes_vista[] = $cliente;
+                            }
+                        }
+                            
+                    }
+
+
+                    break;
+
+                case 'Director Regional':
+                    $region = $empleado->laborales->last()->region;
+                    $arreglo_lab = [];
+
+                    foreach ($region->datosLab as $laboral) {
+                        $arreglo_lab[$laboral->empleado_id] = $laboral;
+                    }
+
+                    foreach ($arreglo_lab as $laboral) {
+                            
+                        if(isset($laboral->empleado->vendedor)){
+                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
+                                $clientes_vista[] = $cliente;
+                            }
+                        }
+                            
+                    }
+                    break;
+                
+                default:
+                    return view('clientes.index', ['clientes' => $clientes]);
+                    break;
+            }
+            //return dd($clientes_vista);
+            return view('clientes.index', ['clientes' => $clientes_vista]);
+        }
+
         return view('clientes.index', ['clientes' => $clientes]);
     }
 

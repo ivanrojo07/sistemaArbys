@@ -91,16 +91,19 @@
 						<label class="control-label">Comentarios:</label>
 						<textarea name="comentarios" class="form-control" readonly="">{{ $cliente->comentarios ? $cliente->comentarios : 'N/A' }}</textarea>
 					</div>
+					@if($cliente->vendedor)
 					<div class="col-sm-3 form-group">
-						@if($cliente->vendedor)
 						<label class="control-label">Vendedor:</label>
 						<input type="text" class="form-control" value="{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}" readonly="">
-						@else
-						<dd>Edite cliente para asigar vendedor</dd>
-						@endif
 					</div>
+					@else
+					<div class="col-sm-6 form-group">
+						<h3 class="alert-danger">Edite cliente o vaya al módulo asignar cliente para asigar vendedor</h3>
+					</div>
+					@endif
 				</div>
 			</div>
+			@if($cliente->vendedor)
 			<ul class="nav nav-tabs">
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#dat" class="ui-tabs-anchor">Productos Elegídos</a>
@@ -131,6 +134,7 @@
 				</li>
 				@endif
 			</ul>
+			@endif
 			<div class="tab-content">
 				<div id="dat" class="tab-pane fade">
 					{{-- <iframe src="{{ route ('seleccion', ['cliente' => $cliente]) }}" style="width: 100%; height: 500px;">
@@ -170,7 +174,7 @@
 													@endif
 													@endforeach
 													@if(!$igual)
-														<a href="{{ route('clientes.pago.select' ,['cliente' => $cliente, 'producto' => $transation->product->clave]) }}" class="btn btn-success">
+														<a href="{{ route('clientes.pago.select' ,['cliente' => $cliente, 'producto' => $transation->product->id]) }}" class="btn btn-success">
 															<i class="fa fa-check"></i><strong> Elegir</strong>
 														</a>
 													@endif

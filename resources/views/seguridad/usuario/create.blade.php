@@ -29,7 +29,7 @@
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Empleado:</label>
                             <select class="form-control" name="empleado_id" required="">
-                                <option selected="">Seleccionar</option>
+                                <option>Seleccionar</option>
                                 @foreach($empleados as $empleado)
                                     <option value="{{ $empleado->id }}">{{ $empleado->nombre }} {{ $empleado->appaterno }} - {{ $empleado->rfc }}</option>
                                 @endforeach
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Nombre de Usuario:</label>
-                            <input type="text" name="name" class="form-control" required="">
+                            <input type="text" name="name" class="form-control" required="" value="{{ old('name') }}">
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Contraseña:</label>
@@ -48,7 +48,7 @@
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Perfil:</label>
                             <select class="form-control" name="perfil_id" required="">
-                                <option selected="">Seleccionar</option>
+                                <option>Seleccionar</option>
                                 @foreach($perfiles as $perfil)
                                     <option value="{{ $perfil->id }}">{{ $perfil->nombre }}</option>
                                 @endforeach
