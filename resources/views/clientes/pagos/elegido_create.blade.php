@@ -23,36 +23,6 @@
 							@endif
 						@endforeach
 						@if($flag)
-							{{--<div class="col-sm-6">
-								<h5>Productos Elegidos</h5>
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="table-responsive">
-											<table class="table table-sm table-bordered table-stripped table-hover">
-												<tr class="info">
-													<th>Descripción</th>
-													<th>Precio</th>
-													<th>Apertura</th>
-													<th>Acción</th>
-												</tr>
-												@foreach($cliente->transactions as $transaccion)
-													@if(count($transaccion->pagos) == 0)
-														<tr>
-															<td>{{ $transaccion->product->descripcion }}</td>
-															<td>${{ number_format($transaccion->product->precio_lista, 2) }}</td>
-															<td>${{ number_format($transaccion->product->apertura, 2) }}</td>
-															<td class="text-center">
-																<a class="btn btn-sm btn-success" id="product{{ $transaccion->product->id }}" onclick="getProduct({{ $transaccion->product->id }})">Seleccionar</a>
-																<a class="btn btn-sm btn-default disabled" id="product{{ $transaccion->product->id }}d" style="display: none;">Seleccionar</a>
-															</td>
-														</tr>
-													@endif
-												@endforeach
-											</table>
-										</div>
-									</div>
-								</div> 
-							</div>--}}
 							<div class="col-sm-12">
 								<h5>Producto a Pagar</h5>
 								<div class="row">
@@ -265,6 +235,7 @@
 		change();
 		console.log('{{ $producto->id }}');
 		getProduct({{ $producto->id }});
+
 		$(document).change(function() {
 			change();
 			var monto$ = document.getElementById('monto').value;
@@ -289,8 +260,9 @@
 	function getProduct(id) {
 		
 		document.getElementById('seleccion').style.display = 'block';
+		console.log("{{ url('/getProductPago') }}/" + id);
 		$.ajax({
-			url: "{{ url('/getProduct') }}/" + id,
+			url: "{{ url('/getProductPago') }}/" + id,
 			type: "GET",
 			dataType: "html",
 		}).done(function(resultado) {
@@ -331,7 +303,7 @@
 	function getBancos(){
 		$.ajaxSetup({
 			headers: {
-				'X-CSRF-TOKEN': {{ $('meta[name="csrf-token"]').attr('content') }}
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 			}
 		});
 		$.ajax({

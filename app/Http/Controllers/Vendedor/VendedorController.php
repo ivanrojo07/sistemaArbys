@@ -211,17 +211,21 @@ class VendedorController extends Controller
         return view('vendedores.control.vendedores',['vendedores'=>$vendedores]);
     }
 
-    public function getHistorialVendedor(){
+    public function getHistorialVendedor(Request $request){
         $date = Carbon::now();
         $endDate = Carbon::now();
         $inicioDate = $date->subMonth(24);
-        print_r($endDate);
-        print_r($inicioDate);
-        $vendedor = Vendedor::find(5);
-        //
-        //$usuario->empleado->laborales->last()->puesto->nombre
-        //
-        //$vendedor->clientes
+        $vendedor = Vendedor::find($request->vendedor);
+        $historial = $vendedor->contador->where('fecha_inicio', '>=',  $inicioDate->format('Y-m-d'));
+        $objetivos = $vendedor->objetivo->where('fecha', '>=',  $inicioDate->format('Y-m-d'));
+        $array_objetivos = [];
+
+        foreach ($objetivos as $objetivo) 
+            $array_objetivos[substr($objetivo->fecha, 0, 7)] = $objetivo;
+
+        //return dd($array_objetivos);
+        return view('vendedores.control.historial_vendedor', ['historiales' => $historial, 'objetivos' => $array_objetivos]);
+        
     }
 
     public function getDirectores(Request $request)

@@ -29,6 +29,7 @@ Route::get('clientes/legacy/{id}', 'Cliente\ClienteController@legacy');
 
 // MISC
 Route::get('getProduct/{id}', 'Producto\ProductController@getProduct');
+Route::get('getProductPago/{id}', 'Cliente\ClientePagoController@getProduct');
 
 // PRODUCTOS
 Route::resource('productos','Producto\ProductController');

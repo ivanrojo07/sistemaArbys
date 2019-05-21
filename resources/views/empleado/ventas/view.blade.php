@@ -49,9 +49,18 @@
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12 text-center">
+								@php
+								$fecha = Carbon\Carbon::now();
+								$fecha = explode("-", $fecha->format("Y-m-d"));
+								$fecha = $fecha[0] . "-" . $fecha[1];
+								@endphp
+								@if($fecha != $fecha_ul_obje)
 								<button class="btn btn-success" id="asignar">
 									<i class="fa fa-pencil"></i><strong> Asignar</strong>
 								</button>
+								@else 
+								<h4>Ya has asigando un objetivo este mes</h4>
+								@endif
 							</div>
 						</div>
 					</div>

@@ -18,7 +18,12 @@ class EmpleadoObjetivoController extends Controller
     public function index(Empleado $empleado)
     {
         $objetivo = $empleado->vendedor->objetivo;
-        return view('empleado.ventas.view', ['empleado' => $empleado, 'objetivos' => $objetivo]);
+        $ultimo_objetivo = $empleado->vendedor->objetivo->last();
+        if ($ultimo_objetivo != null) {
+            $ultimo_objetivo = explode("-", $ultimo_objetivo->fecha);
+            $ultimo_objetivo = $ultimo_objetivo[0]. "-" . $ultimo_objetivo[1];
+        }
+        return view('empleado.ventas.view', ['empleado' => $empleado, 'objetivos' => $objetivo, 'fecha_ul_obje' => $ultimo_objetivo]);
     }
 
     /**

@@ -7,6 +7,8 @@ use App\Pago;
 use App\Product;
 use App\Transaction;
 use App\Banco;
+use App\Contador;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use UxWeb\SweetAlert\SweetAlert as Alert;
@@ -56,6 +58,30 @@ class ClientePagoController extends Controller
             $request['restante'] = ($request->restante - $request->monto) . "";
         $pago = new Pago($request->all());
         $transaction->pagos()->save($pago);
+        //Logica para aumentar el contador del vendedor
+        $vendedor = $cliente->vendedor;
+        $principio_mes = new Carbon('first day of this month');
+        $fin_mes = new Carbon('last day of this month');
+        $contador = $vendedor->contador->where('fecha_inicio', $principio_mes->format('Y-m-d'))->first();
+        if (is_null($contador)) {
+            $contador = $vendedor->contador()->create(['vendedor_id' => $vendedor->id, 'total_clientes' => 0, 'total_ventas' => 0,
+                                         'fecha_inicio' => $principio_mes->format('Y-m-d'), 'fecha_fin' => $fin_mes->format('Y-m-d')
+                                        ]);
+            if ($pago->status === "Aprobado") {
+                $contador->total_clientes += 1;
+                $contador->total_ventas += $pago->total;
+                $contador->save();
+                return redirect()->route('clientes.show', ['cliente' => $cliente]);
+            }
+            $contador->save();
+        }
+        if ($pago->status === "Aprobado") {
+            $contador = $vendedor->contador->last();
+            $contador->total_clientes += 1;
+            $contador->total_ventas += $pago->total;
+            $contador->save();
+        }
+
 
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
@@ -110,6 +136,11 @@ class ClientePagoController extends Controller
         $producto = Product::find($producto);
         $bancos = Banco::get();
         return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto]);
+    }
+
+    public function getProduct($id) {
+        $producto = Product::find($id);
+        return view('product.getProduct', ['producto' => $producto]);
     }
 
 }

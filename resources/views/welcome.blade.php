@@ -227,17 +227,17 @@
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             @foreach(Auth::user()->perfil->componentes as $c)
-                                                @if($c->nombre == "crear empleado")
+                                                @if($c->nombre == "indice empleados")
                                                     <li>
-                                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Control Vendedores')">
-                                                            <i class="fa fa-plus"></i> Control
+                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/vendedors')}}','Buscar Vendedores')">
+                                                            <i class="fa fa-search"></i> Búsqueda
                                                         </a>
                                                     </li>
                                                 @endif
                                                 @if($c->nombre == "indice empleados")
                                                     <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/vendedors')}}','Buscar Vendedores')">
-                                                            <i class="fa fa-search"></i> Búsqueda
+                                                        <a tabindex="-1" href="#" onclick="AgregarNuevoTab('{{ url('control_vendedores')}}','Control Vendedores')">
+                                                            <i class="fa fa-address-book"></i> Control
                                                         </a>
                                                     </li>
                                                 @endif

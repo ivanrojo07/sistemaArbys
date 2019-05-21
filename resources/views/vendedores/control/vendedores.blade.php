@@ -16,7 +16,7 @@
 					<div id="vendedores">
 						<div class="row">
 							<div class="col-sm-12 text-center">
-								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;" id="principal">
 									<tr class="info">
 										<th class="text-center">Nombre</th>
 										<th class="text-center">Grupo</th>
@@ -27,7 +27,10 @@
 									</tr>
 									@foreach($vendedores as $vendedor)
 										<tr>
-											<td>{{ $vendedor->empleado->nombre}} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}</td>
+											<td>
+												{{ $vendedor->empleado->nombre}} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}
+												<input type="hidden" name="vendedor-id" value="{{ $vendedor->id }}">
+											</td>
 											@if($vendedor->grupo != null)
 											<td>{{ $vendedor->grupo->nombre}}</td>
 											<td>{{ $vendedor->grupo->subgerente->empleado->nombre }} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
@@ -35,8 +38,13 @@
 											<td>--</td>
 											<td>--</td>
 											@endif
-											<td>10</td>
-											<td>10</td>
+											@if($vendedor->contador->count() != 0)
+											<td>{{ $vendedor->contador->last()->total_clientes }}</td>
+											<td>{{ $vendedor->contador->last()->total_ventas }}</td>
+											@else
+											<td>0</td>
+											<td>0</td>
+											@endif
 											<td>
 												<button class="btn btn-primary detallev">
 													Detalles
@@ -88,28 +96,41 @@
 		];
 
 	$(document).ready(function() {
+		//console.log($('#principal tr:gt(0)'));
+		var filas = $('#principal tr:gt(0)');
+		var clientes = 0;
+		var ventas = 0;
+		$.each(filas, function(index, el) {
+			clientes += parseInt($(el).children('td').eq(3).html());
+			ventas += parseFloat($(el).children('td').eq(4).html());
+		});
+		$('#total_clientes').text(clientes.toString());
+		$('#total_ventas').text('$' + ventas.toString());
+
+
 		$('.detallev').click( function(event) {
-			var vendedor = $(this).parent().parent().children().eq(0).html();
-			var contenido = `<tr class="info">
-									<th class="text-center">Mes</th>
-									<th class="text-center">Objetivo</th>
-									<th class="text-center">Clientes</th>
-									<th class="text-center">Ventas</th>					
-								</tr>`;
-			$('#detalle').empty();
-			$('#detalle').prop('style', 'margin-bottom: 0px;');
-			console.log(arreglo_vendedores);
-			$.each(arreglo_vendedores, function(index, elem) {
-				if (elem.nombre == vendedor) {
-					contenido += `<tr>
-									<td>--</td>
-									<td>--</td>
-									<td>${elem.clientes}</td>
-									<td>--</td>
-								  </tr>`;
+			//var vendedor = $(this).parent().parent().children().eq(0).html();
+			var vendedor = $(this).parent().parent().children().eq(0);
+			vendedor = $(vendedor).children('input').val();
+			console.log(vendedor);
+			$.ajax({
+				url: "{{ url('/control_vendedores/getHistorial') }}",
+				type: "GET",
+				data: {'vendedor': vendedor},
+				dataType: "html",
+				success: function(res){
+					console.log("success");
+					$('#detalle').empty();
+					$('#detalle').prop('style', 'margin-bottom: 0px;');
+					$('#detalle').append(res);
+				},
+				error: function (data){
+					console.log(data);
 				}
 			});
-			$('#detalle').append(contenido);
+			
+			console.log(arreglo_vendedores);
+			
 		});
 
 	});
