@@ -152,8 +152,8 @@
 					$('#directores #1').html(res.regional.nombre + '' + res.regional.appaterno + ' ' + res.regional.apmaterno);
 				if (res.estatal != null)
 					$('#directores #2').html(res.estatal.nombre + '' + res.estatal.appaterno + ' ' + res.estatal.apmaterno);
-				if(res.oficina.responsable_adm != null)
-					$('#directores #3').html(res.oficina.responsable_adm);
+				if(res.oficina.responsable_com != null)
+					$('#directores #3').html(res.oficina.responsable_com);
 			}).fail( function (res){
 				console.log(res);
 			});

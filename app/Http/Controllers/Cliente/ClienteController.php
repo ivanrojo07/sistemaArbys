@@ -226,9 +226,9 @@ class ClienteController extends Controller {
         $clientes = Cliente::where(function($q) use($wordsquery) {
             foreach ($wordsquery as $word) {
               $q->orWhere('nombre', 'LIKE', "%$word%")
-                ->orWhere('apellidopaterno', 'LIKE', "%$word%")
-                ->orWhere('apellidomaterno', 'LIKE', "%$word%")
-                ->orWhere('razonsocial', 'LIKE', "%$word%")
+                ->orWhere('appaterno', 'LIKE', "%$word%")
+                ->orWhere('apmaterno', 'LIKE', "%$word%")
+                ->orWhere('razon', 'LIKE', "%$word%")
                 ->orWhere('rfc', 'LIKE', "%$word%")
                 ->orWhere('identificador', 'LIKE', "%$word%");
             }

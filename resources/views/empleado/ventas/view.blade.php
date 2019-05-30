@@ -68,7 +68,7 @@
 			<div class="panel-default">
 				<div class="panel-heading"><h3><strong>Historial:</strong></h3></div>
 				<div class="panel-body">
-					<div class="col-sm-12">
+					<div class="col-sm-12" id="div-tabla">
 					@if(count($objetivos) > 0)
 		  				<table class="table table-bordered table-hover table-stripped">
 		  					<thead>
@@ -83,7 +83,7 @@
 				  					<tr>
 										<td>{{ $objetivo->fecha }}</td>
 				  						<td>{{ $objetivo->num_clientes }}</td>
-				  						<td>${{ number_format($objetivo->ventas) }}</td>
+				  						<td>{{ number_format($objetivo->ventas) }}</td>
 				  					</tr>
 								@endforeach
 							</tbody>
@@ -113,16 +113,28 @@
 				type : "POST",
 				dataType : "json",
 				data : data,
-			}).done(function (data) {
-				$('#cuerpo').empty();
+			}).done(function (data) {				
 				var contenido = '';
 				$.each(data.objetivos, function( index, value ) {
 				   contenido += `<tr><td>${value.fecha}</td><td>${value.num_clientes}</td><td>${value.ventas}</td></tr>`;
 				});
-				$('#cuerpo').empty();
-				$('#cuerpo').append(contenido);
+				$('#div-tabla').empty()
+				var tabla = `<table class="table table-bordered table-hover table-stripped">
+		  					<thead>
+		  						<tr class="info">
+		  							<th class="col-sm-4">Fecha:</th>
+		  							<th class="col-sm-4">Objetivo Cliente:</th>
+		  							<th class="col-sm-4">Objetivo Venta:</th>
+		  						</tr>
+		  					</thead>
+	  						<tbody id="cuerpo">
+	  						${contenido}
+	  						</tbody>
+		  				</table>
+				`;
+				$('#div-tabla').append(tabla);
 			}).fail(function(data){
-				//console.log(data);
+				console.log(data);
 			});
 		});
 	});

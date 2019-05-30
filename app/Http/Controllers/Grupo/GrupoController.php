@@ -241,4 +241,5 @@ class GrupoController extends Controller
         return redirect()->route('grupos.index');
     }
 
+
 }

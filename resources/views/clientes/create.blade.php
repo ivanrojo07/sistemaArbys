@@ -73,7 +73,7 @@
 							<label class="control-label">Teléfono Celular:</label>
 							<input type="number" class="form-control" name="movil" pattern="+[0-9]" id="movil">
 						</div>
-						<div class="col-sm-3 form-group">
+						{{-- <div class="col-sm-3 form-group">
 							<label class="control-label">✱Canal de Ventas:</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'><i
@@ -85,11 +85,11 @@
 									@endforeach
 								</select>
 							</div>
-						</div>
-						<div class="col-sm-3 form-group">
+						</div> --}}
+						{{-- <div class="col-sm-3 form-group">
 							<label class="control-label">Comentarios:</label>
 							<textarea class="form-control" name="comentarios"></textarea>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 				<div class="panel-footer">
@@ -147,6 +147,8 @@
 			$('#razon').prop('required', false);
 
 			$('#rfc').prop('pattern', '^[A-Za-z]{4}[0-9]{6}');
+			$('#rfc').prop('readonly', true);
+			$('#rfc').prop('placeholder', '');
 		}
 		if (elemento.value == "Moral") {
 			$('#fisica').hide();
@@ -159,6 +161,7 @@
 
 			$('#rfc').prop('pattern', '^[A-Za-z]{3}[0-9]{6}');
 			$('#rfc').prop('placeholder', '12 Caracteres');
+			$('#rfc').prop('readonly', false);
 		}
 	}
 

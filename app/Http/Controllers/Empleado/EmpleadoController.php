@@ -36,7 +36,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         // if($this->hasComponent('indice empleados')) {
-        $empleados = Empleado::whereNotIn('id', [1])->sortable()->paginate(10);
+        $empleados = Empleado::whereNotIn('id', [1])->sortable()->get();
         return view('empleado.index', ['empleados' => $empleados]);
         // }
         // return redirect()->route('denegado');
@@ -53,15 +53,15 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|alpha',
-            'appaterno' => 'required|alpha',
+            'nombre' => 'required|string',
+            'appaterno' => 'required|string',
             'apmaterno' => 'nullable|alpha',
             'nacimiento' => 'required',
             'rfc' => 'required|alpha_num',
-            'homoclave' => 'required|alpha_num|size:3',
+            'homoclave' => 'nullable|alpha_num|size:3',
             'email' => 'required|email',
             'telefono' => 'nullable|numeric',
-            'movil' => 'nullable|numeric',
+            'movil' => 'nullable|numeric|required',
             'nss' => 'nullable|alpha_num',
             'curp' => 'nullable|alpha_num',
             'infonavit' => 'nullable',

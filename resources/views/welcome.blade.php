@@ -158,27 +158,6 @@
                                                     </li>
                                                 @endif
                                                 @if($c->nombre == "crear grupo" || $c->nombre == "indice grupos")
-                                                    <li class="dropdown-submenu">
-                                                        <a tabindex="-1" href="#"> <i class="fa fa-users"></i> Grupos</a>
-                                                        <ul class="dropdown-menu">
-                                                            @foreach(Auth::user()->perfil->componentes as $k)
-                                                                @if($k->nombre == "crear grupo")
-                                                                    <li>
-                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/grupos/create')}}','Crear Grupo')">
-                                                                            <i class="fa fa-plus"></i> Alta
-                                                                        </a>
-                                                                    </li>
-                                                                @endif
-                                                                @if($k->nombre == "indice grupos")
-                                                                    <li>
-                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/grupos')}}','Buscar Grupos')">
-                                                                            <i class="fa fa-search"></i> Búsqueda
-                                                                        </a>
-                                                                    </li>
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                    </li>
                                                     {{-- <li class="dropdown-submenu">
                                                         <a tabindex="-1" href="#"> <i class="fa fa-user-o"></i> Vendedores</a>
                                                         <ul class="dropdown-menu">
@@ -337,6 +316,29 @@
                                                             <i class="fa fa-building-o"></i> Punto de venta
                                                         </a>
                                                     </li>                     
+                                                @endif
+                                                @if($c->nombre == "indice grupos")
+                                                    <li class="dropdown-submenu">
+                                                        <a tabindex="-1" href="#"> <i class="fa fa-users"></i> Grupos</a>
+                                                        <ul class="dropdown-menu">
+                                                            @foreach(Auth::user()->perfil->componentes as $k)
+                                                                @if($k->nombre == "crear grupo")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/grupos/create')}}','Crear Grupo')">
+                                                                            <i class="fa fa-plus"></i> Alta
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                                @if($k->nombre == "indice grupos")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/grupos')}}','Buscar Grupos')">
+                                                                            <i class="fa fa-search"></i> Búsqueda
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
                                                 @endif
                                             @endforeach
                                         </ul>

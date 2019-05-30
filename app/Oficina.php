@@ -20,6 +20,7 @@ class Oficina extends Model
         'descripcion',
         'calle',
         'numext',
+        'colonia',
         'numint',
         'cp',
         'delegacion',

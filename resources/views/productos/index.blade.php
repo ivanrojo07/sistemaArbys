@@ -10,7 +10,6 @@
 						<div class="input-group">
 							<input type="number" id="min" name="min" value="{{$request->min}}" class="form-control" placeholder="Precio Mínimo" min="0" style="width: 153px">
 							<input type="number" id="max" name="max" value="{{$request->max}}" class="form-control" placeholder="Precio Máximo" style="width: 152px">
-							{{ $experto }}
 						</div>
 					</div>
 					<div class="col-sm-4 text-center">
@@ -38,7 +37,8 @@
 							</div>
 						</div>
 						@endif
-					@elseif(Auth::user()->empleado->id == 1)
+					@endif
+					@if(Auth::user()->empleado->id == 1)
 					<div class="col-sm-2 text-center">
 							<label class="control-label">Carros:</label>
 							<div class="row">

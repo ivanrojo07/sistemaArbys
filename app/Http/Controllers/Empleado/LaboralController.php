@@ -79,20 +79,19 @@ class LaboralController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Empleado $empleado)
-    {   $request['actualizacion'] = $request->contratacion;
+    { 
+        $request['actualizacion'] = $request->contratacion;
         $request['actual'] = $request->inicial;
         $request['original'] = Puesto::find($request->puesto_id)->nombre;       
         $laborales = new Laboral($request->all());
-        //dd($laborales->puesto->id);
-        //$empleado->laborales()->save($laborales);
+        $empleado->experto = $request->experto;
+        $empleado->save();
+
         if($request->puesto_id == 5) {
             //dd($empleado);            
            
             if($this->VerificarGerencia($laborales))
             {   
-                // $request['actualizacion'] = $request->contratacion;
-                // $request['actual'] = $request->inicial;
-                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
                 $empleado->laborales()->save($laborales);
                 $this->MakeGerente($empleado);
                 //devuelve el id del area o ub 0 si no hace nada
@@ -104,18 +103,12 @@ class LaboralController extends Controller
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
             }
         } else if($request->puesto_id == 6) {
-            // $request['actualizacion'] = $request->contratacion;
-            // $request['actual'] = $request->inicial;
-            // $request['original'] = Puesto::find($request->puesto_id)->nombre;
             $empleado->laborales()->save($laborales);
             $subgerente = new Subgerente();
             $empleado->subgerente()->save($subgerente);
         }else if($request->puesto_id == 4) {
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {                
-                // $request['actualizacion'] = $request->contratacion;
-                // $request['actual'] = $request->inicial;
-                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
                 $empleado->laborales()->save($laborales);
             }
             else
@@ -123,14 +116,9 @@ class LaboralController extends Controller
                 Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta ocupada'); 
             }
             
-            // $subgerente = new Subgerente();
-            // $empleado->subgerente()->save($subgerente);
         }else if($request->puesto_id == 3) {
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {                
-                // $request['actualizacion'] = $request->contratacion;
-                // $request['actual'] = $request->inicial;
-                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
                 $empleado->laborales()->save($laborales);
             }
             else
@@ -138,27 +126,17 @@ class LaboralController extends Controller
                 Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta ocupada'); 
             }
             
-            // $subgerente = new Subgerente();
-            // $empleado->subgerente()->save($subgerente);
         } else if($request->puesto_id == 2) {
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {                
-                // $request['actualizacion'] = $request->contratacion;
-                // $request['actual'] = $request->inicial;
-                // $request['original'] = Puesto::find($request->puesto_id)->nombre;
                 $empleado->laborales()->save($laborales);
             }
             else
             {
                 Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta ocupada'); 
             }
-            
-            // $subgerente = new Subgerente();
-            // $empleado->subgerente()->save($subgerente);
+
         } else if($request->puesto_id == 7) {
-            // $request['actualizacion'] = $request->contratacion;
-            // $request['actual'] = $request->inicial;
-            // $request['original'] = Puesto::find($request->puesto_id)->nombre;
             $empleado->laborales()->save($laborales);
             $vendedor = new Vendedor(['experto' => $request->experto]);
             $empleado->vendedor()->save($vendedor);
@@ -217,7 +195,8 @@ class LaboralController extends Controller
         $laborales = new Laboral($request->all());
         //dd($laborales);
         $grupos=Grupo::get();
-             
+        $empleado->experto = $request->experto;
+        $empleado->save();
         
         if($request->puesto_id == 5)
         {
@@ -232,15 +211,10 @@ class LaboralController extends Controller
                 {
                     $empleado=$this->BorrarGrupos($empleado);                
                     $emplado=$empleado->laborales()->save($laborales);
-                    //devuelve el id del area o ub 0 si no hace nada
+                    //devuelve el id del area o un 0 si no hace nada
                     $empleado=$this->CrearGerencia($empleado);                            
                     $empleado=$this->MakeGerente($empleado);
                 }
-                
-                // $empleado=$this->BorrarGerencia($empleado);
-                //dd($empleado->laborales->last()->oficina);
-                
-                //dd($empleado->laborales->last()->oficina);
             }
             else
             {
@@ -250,7 +224,7 @@ class LaboralController extends Controller
         else if($request->puesto_id==4){
             $this->BorrarGerencia($empleado);
             $this->BorrarGrupos($empleado);
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {
                 $empleado->laborales()->save($laborales);
             }
@@ -263,8 +237,9 @@ class LaboralController extends Controller
         else if($request->puesto_id==3){
             $this->BorrarGerencia($empleado);
             $this->BorrarGrupos($empleado);
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {
+                //Comprobar la region del director
                 $empleado->laborales()->save($laborales);
             }
             else
@@ -276,7 +251,7 @@ class LaboralController extends Controller
         else if($request->puesto_id==2){
             $this->BorrarGerencia($empleado);
             $this->BorrarGrupos($empleado);
-            if($this->VerificarPuesto($laborales))
+            if($this->VerificarPuesto($laborales, $request))
             {
                 $empleado->laborales()->save($laborales);
             }
@@ -307,8 +282,7 @@ class LaboralController extends Controller
                 $vendedor = new Vendedor(['experto' => $request->experto]);
                 $empleado->vendedor()->save($vendedor);
             }
-        }//var_dump('string');        ;
-        //dd('pausa');
+        }
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 
@@ -466,16 +440,28 @@ class LaboralController extends Controller
         return 1;                 
     }
 
-    public function VerificarPuesto(Laboral $laborales)
+    public function VerificarPuesto(Laboral $laborales, Request $request)
     {
         $empleados=Empleado::get()     ;
         foreach ($empleados as $empleado) {
             if(isset($empleado->laborales->last()->puesto->id))
             {
-                if($empleado->laborales->last()->puesto->id==$laborales->puesto->id)
-                {
-                    return 0;
+                if ($empleado->laborales->last()->puesto->id == 4) {
+                    if($empleado->laborales->last()->puesto->id==$laborales->puesto->id && $empleado->laborales->last()->estado->id == $request->estado_id)
+                    {
+                        return 0;
+                    }    
                 }
+                elseif ($empleado->laborales->last()->puesto->id == 3) {
+                    if($empleado->laborales->last()->puesto->id==$laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id)
+                    {
+                        return 0;
+                    }    
+                }
+                elseif ($empleado->laborales->last()->puesto->id == 2) 
+                    return 0;
+
+                
             }
                 
         }

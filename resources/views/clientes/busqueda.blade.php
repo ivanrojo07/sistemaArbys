@@ -4,22 +4,22 @@
 			<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px">
 				<tr class="info">
 					<th>Identificador</th>
-					<th>Nombre/Razón Social</th>
 					<th>Tipo de persona</th>
+					<th>Nombre/Razón Social</th>
 					<th>RFC</th>
 					<th>Acción</th>
 				</tr>
 				@foreach($clientes as $cliente)
 					<tr class="active">
 						<td>{{ $cliente->identificador }}</td>
+						<td>{{ $cliente->tipo }}</td>
 						<td>
-							@if ($cliente->tipopersona == "Fisica")
-								{{ $cliente->nombre }} {{ $cliente->apellidopaterno }} {{ $cliente->apellidomaterno }}
+							@if ($cliente->tipo == "Física")
+								{{ $cliente->nombre }} {{ $cliente->appaterno }} {{ $cliente->apmaterno }}
 							@else
-								{{ $cliente->razonsocial }}
+								{{ $cliente->razon }}
 							@endif
 						</td>
-						<td>{{ $cliente->tipopersona }}</td>
 						<td>{{ strtoupper($cliente->rfc) }}</td>
 						<td class="text-center">
 							<a class="btn btn-primary btn-sm" href="{{ route('clientes.show', ['cliente' => $cliente]) }}">

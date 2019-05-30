@@ -53,43 +53,47 @@
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">Calle:</label>
 						<input type="text" class="form-control" id="calle" name="calle" value="{{ $oficina->calle }}" readonly="">
 					</div>
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">Número Exterior:</label>
 						<input type="text" class="form-control" id="numext" name="numext" value="{{ $oficina->numext }}" readonly="">
 					</div>
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">Número Interior:</label>
 						<input type="text" class="form-control" id="numint" name="numint" value="{{ $oficina->numint }}" readonly="">
 					</div>
+					<div class="form-group col-sm-3">
+						<label class="control-label">Colonia:</label>
+						<input type="text" class="form-control" id="colonia" name="colonia" value="{{ $oficina->colonia }}" readonly="">
+					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">CP:</label>
 						<input type="text" class="form-control" id="cp" name="cp" value="{{ $oficina->cp }}" readonly="">
 					</div>
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">Delegación:</label>
 						<input type="text" class="form-control" id="delegacion" name="delegacion" value="{{ $oficina->delegacion }}" readonly="">
 					</div>
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label class="control-label">Ciudad:</label>
 						<input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $oficina->ciudad }}" readonly="">
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<label class="control-label">Teléfono 1:</label>
 						<input type="text" class="form-control" id="cp" name="cp" value="{{ $oficina->telefono1 }}" readonly="">
 					</div>
-					<div class="col-sm-4">
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
 						<label class="control-label">Teléfono 2:</label>
 						<input type="text" class="form-control" id="delegacion" name="delegacion" value="{{ $oficina->telefono2 }}" readonly="">
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<label class="control-label">Teléfono 3:</label>
 						<input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $oficina->telefono3 }}" readonly="">
 					</div>

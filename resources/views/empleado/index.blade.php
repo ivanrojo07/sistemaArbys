@@ -75,7 +75,6 @@
 								@endforeach
 								</tbody>
 							</table>
-							{{ $empleados->links() }}
 						@else
 							<h4>No hay empleados disponibles.</h4>
 						@endif
@@ -85,6 +84,8 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('scripts')
 <script>
 $(document).ready(function() {
     $('#empleados').DataTable({

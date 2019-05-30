@@ -83,15 +83,9 @@
 							<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">Número de Referencia:</label>
-							<input type="text" name="referencia" id="referencia" class="form-control" required="">
-						</div>
-						<div class="col-sm-3 form-group">
 							<label class="control-label">Número de Fólio:</label>
-							<input type="text" name="folio" id="folio" class="form-control" required="">
+							<input type="text" name="folio" id="folio" class="form-control" value="{{$cliente->vendedor->empleado->laborales->last()->oficina->abreviatura}}{{$cliente->vendedor->id}}{{$cliente->transactions->last()->product->tipo[0]}}{{$cliente->transactions->last()->id}}" required="" readonly="">
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Cantidad a Pagar:</label>
 							<input type="text" name="restante" id="total" class="form-control" value="{{ $pago->restante }}" required readonly="">

@@ -71,7 +71,6 @@ Route::resource('grupos', 'Grupo\GrupoController');
 Route::get('grupos/{grupo}/vendedores', 'Grupo\GrupoController@vendedores')->name('grupos.vendedores');
 Route::post('grupos/{grupo}/vendedores', 'Grupo\GrupoController@bind')->name('grupos.bind');
 Route::delete('grupos/{grupo}/vendedores', 'Grupo\GrupoController@unbind')->name('grupos.unbind');
-
 // PRECARGAS
 Route::resource('contratos','Precargas\TipoContratoController');
 Route::resource('bajas','Precargas\TipoBajaController');

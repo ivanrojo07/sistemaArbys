@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifiyOficinas extends Migration
+class ModifyOficinaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class ModifiyOficinas extends Migration
     public function up()
     {
         Schema::table('oficinas', function (Blueprint $table) {
-             $table->string('responsable_com')->nullable()->change();
-             $table->string('responsable_adm')->nullable()->change();
-             $table->string('numint')->nullable()->change();
+             $table->string('colonia')->nullable();
         });
     }
 
@@ -28,9 +26,7 @@ class ModifiyOficinas extends Migration
     public function down()
     {
         Schema::table('oficinas', function (Blueprint $table) {
-             $table->string('responsable_com')->nullable(false)->change();
-             $table->string('responsable_adm')->nullable(false)->change();
-             $table->integer('numint')->nullable()->change();
+             $table->dropColumn('colonia');
         });
     }
 }

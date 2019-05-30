@@ -16,41 +16,20 @@
 			{{ csrf_field() }}
 			<div class="panel-default">
 				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-4 col-sm-offset-3 form-group">
-							<div class="input-group">
-								<input type="text" id="buscador" class="form-control" autofocus placeholder="Buscar...">
-						        <span class="input-group-btn">
-									<a class="btn btn-default" onclick="buscar()">
-										<i class="fa fa-search"></i>
-									</a>
-								</span>
-							</div>
-						</div>
-						<div class="col-sm-2">
-							<div class="row">
-								<div class="col-sm-12">
-									<input type="radio" name="status" value="Baja"> Baja
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<input type="radio" name="status" value="Activo"> Activo
-								</div>
-							</div>
-						</div>
-					</div>
 					<div id="vendedores">
 						<div class="row">
 							<div class="col-sm-12">
 								@if(count($vendedores) > 0)
-									<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-										<tr class="info">
-											<th>Nombre</th>
-											<th>Oficina</th>
-											<th>Estado</th>
-											<th class="col-sm-1">Seleccionar</th>
-										</tr>
+									<table id="tabla-vendedores" class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+										<thead>
+											<tr class="info">
+												<th>Nombre</th>
+												<th>Oficina</th>
+												<th>Estado</th>
+												<th class="col-sm-1">Seleccionar</th>
+											</tr>
+										</thead>
+										<tbody>
 										@foreach($vendedores as $vendedor)
 											<tr>
 												<td>{{ $vendedor->empleado->nombre }} {{ $vendedor->empleado->appaterno }}</td>
@@ -61,6 +40,7 @@
 												</td>
 											</tr>
 										@endforeach
+										</tbody>
 									</table>
 								@else
 									<h4>No hay vendedores disponibles.</h4>
@@ -80,12 +60,15 @@
 					<div class="row">
 						<div class="col-sm-12">
 							@if(count($clientes) > 0)
-								<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
-									<tr class="info">
-										<th>Nombre</th>
-										<th>Vendedor</th>
-										<th class="col-sm-1">Seleccionar</th>
-									</tr>
+								<table id="tabla-clientes" class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+									<thead>
+										<tr class="info">
+											<th>Nombre</th>
+											<th>Vendedor</th>
+											<th class="col-sm-1">Seleccionar</th>
+										</tr>
+									</thead>
+									<tbody>
 									@foreach($clientes as $cliente)
 										<tr>
 											<td>{{ $cliente->razon }}{{ $cliente->nombre }} {{ $cliente->appaterno }}</td>
@@ -99,6 +82,7 @@
 											</td>
 										</tr>
 									@endforeach
+									</tbody>
 								</table>
 							@else
 								<h4>No hay clientes disponibles.</h4>
@@ -123,4 +107,12 @@
 	</div>
 </div>
 
+@endsection
+@section('scripts')
+<script>
+	$(document).ready( function () {
+	    $('#tabla-vendedores').DataTable();
+	    $('#tabla-clientes').DataTable();
+	} );
+</script>
 @endsection

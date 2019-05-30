@@ -17,48 +17,38 @@
 			<div class="panel-default">
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-sm-4 col-sm-offset-3 form-group">
-							<div class="input-group">
-								<input type="text" id="buscador" class="form-control" autofocus placeholder="Buscar...">
-						        <span class="input-group-btn">
-									<a class="btn btn-default" onclick="buscar()">
-										<i class="fa fa-search"></i>
-									</a>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div id="vendedores">
-						<div class="row">
-							<div class="col-sm-12">
-								@if(count($vendedores) > 0)
-									<table class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+						<div class="col-sm-12">
+							@if(count($vendedores) > 0)
+								<table id="vendedores" class="table table-stripped table-bordered table-hover" style="margin-bottom: 0px;">
+									<thead>
 										<tr class="info">
 											<th>Vendedor</th>
 											<th>Grupo</th>
 											<th>Subgerente</th>
 											<th class="col-sm-1">Seleccionar</th>
 										</tr>
-										@foreach($vendedores as $vendedor)
-											<tr>
-												<td>{{ $vendedor->empleado->nombre }} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}</td>
-												@if(isset($vendedor->grupo))
-													<td>{{ $vendedor->grupo->nombre }}</td>
-													<td>{{ $vendedor->grupo->subgerente->empleado->nombre}} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
-												@else
-													<td>No asignado</td>
-													<td>No asignado</td>
-												@endif
-												<td class="text-center">
-													<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
-												</td>
-											</tr>
-										@endforeach
-									</table>
-								@else
-									<h4>No hay vendedores disponibles.</h4>
-								@endif
-							</div>
+									</thead>
+									<tbody>
+									@foreach($vendedores as $vendedor)
+										<tr>
+											<td>{{ $vendedor->empleado->nombre }} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}</td>
+											@if(isset($vendedor->grupo))
+												<td>{{ $vendedor->grupo->nombre }}</td>
+												<td>{{ $vendedor->grupo->subgerente->empleado->nombre}} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
+											@else
+												<td>No asignado</td>
+												<td>No asignado</td>
+											@endif
+											<td class="text-center">
+												<input type="radio" name="vendedor_id" value="{{ $vendedor->id }}" required="">
+											</td>
+										</tr>
+									@endforeach
+									</tbody>
+								</table>
+							@else
+								<h4>No hay vendedores disponibles.</h4>
+							@endif
 						</div>
 					</div>
 				</div>
@@ -73,14 +63,17 @@
 					<div class="row">
 						<div class="col-sm-12 text-center">
 							@if(count($grupos) > 0)
-								<table class="table table-stripped table-bordered table-hover">
-									<tr class="info">
-										<th class="text-center">Nombre</th>
-										<th class="text-center">Cantidad Vendedores</th>
-										<th class="text-center">Subgerente</th>
-										<th class="text-center">No. de Grupos</th>
-										<th class="col-sm-1">Seleccionar</th>
-									</tr>
+								<table id="tables" class="table table-stripped table-bordered table-hover">
+									<thead>
+										<tr class="info">
+											<th class="text-center">Nombre</th>
+											<th class="text-center">Cantidad Vendedores</th>
+											<th class="text-center">Subgerente</th>
+											<th class="text-center">No. de Grupos</th>
+											<th class="col-sm-1">Seleccionar</th>
+										</tr>
+									</thead>
+									<tbody>
 									@foreach($grupos as $grupo)
 										<tr>
 											<td>{{ $grupo->nombre }}</td>
@@ -96,6 +89,7 @@
 											</td>
 										</tr>
 									@endforeach
+									</tbody>
 								</table>
 							@else
 								<h4>No hay grupos disponibles.</h4>
@@ -158,6 +152,61 @@
 			$(this).attr('checked', false);
 		}
 	});
+	$(document).ready( function () {
+	    $('#vendedores').DataTable({
+		'language':{
+		    "sProcessing":     "Procesando...",
+		    "sLengthMenu":     "Mostrar _MENU_ registros",
+		    "sZeroRecords":    "No se encontraron resultados",
+		    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		    "sInfoPostFix":    "",
+		    "sSearch":         "Buscar:",
+		    "sUrl":            "",
+		    "sInfoThousands":  ",",
+		    "sLoadingRecords": "Cargando...",
+		    "oPaginate": {
+		        "sFirst":    "Primero",
+		        "sLast":     "Último",
+		        "sNext":     "Siguiente",
+		        "sPrevious": "Anterior"
+		    },
+		    "oAria": {
+		        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		    }
+		}
+	});
+	    $('#tables').DataTable({
+			'language':{
+			    "sProcessing":     "Procesando...",
+			    "sLengthMenu":     "Mostrar _MENU_ registros",
+			    "sZeroRecords":    "No se encontraron resultados",
+			    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+			    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+			    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+			    "sInfoPostFix":    "",
+			    "sSearch":         "Buscar:",
+			    "sUrl":            "",
+			    "sInfoThousands":  ",",
+			    "sLoadingRecords": "Cargando...",
+			    "oPaginate": {
+			        "sFirst":    "Primero",
+			        "sLast":     "Último",
+			        "sNext":     "Siguiente",
+			        "sPrevious": "Anterior"
+			    },
+			    "oAria": {
+			        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			    }
+			}
+		});
+	} );
+
 </script>
 @endsection
 @endsection

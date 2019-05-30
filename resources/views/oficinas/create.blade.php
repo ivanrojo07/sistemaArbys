@@ -61,43 +61,47 @@
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">✱Calle:</label>
 								<input type="text" class="form-control" name="calle" required="">
 							</div>
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">✱Número Exterior:</label>
 								<input type="maxlength" class="form-control" name="numext" required="">
 							</div>
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">Número Interior:</label>
-								<input type="number" class="form-control" name="numint">
+								<input type="text" class="form-control" name="numint">
+							</div>
+							<div class="form-group col-sm-3">
+								<label class="control-label">✱Colonia:</label>
+								<input type="text" class="form-control" name="colonia" required="">
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">✱CP:</label>
 								<input type="text" class="form-control" maxlength="5" name="cp" required="">
 							</div>
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">✱Delegación:</label>
 								<input type="text" class="form-control" name="delegacion" required="">
 							</div>
-							<div class="form-group col-sm-4">
+							<div class="form-group col-sm-3">
 								<label class="control-label">✱Ciudad:</label>
 								<input type="text" class="form-control" name="ciudad" required="">
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label class="control-label">✱Teléfono 1:</label>
 								<input type="text" class="form-control" maxlength="10" name="telefono1" required="">
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label class="control-label">Teléfono 2:</label>
 								<input type="text" class="form-control" maxlength="10" name="telefono2">
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label class="control-label">Teléfono 3:</label>
 								<input type="text" class="form-control" maxlength="10" name="telefono3">
 							</div>

@@ -129,7 +129,13 @@
 								<dd>{{ $datoslab->empleado->vendedor->experto }}</dd>
 							</div>
 						@endisset
-					
+					@elseif($datoslab->puesto->nombre == 'Subgerente' || $datoslab->puesto->nombre == 'Gerente' || $datoslab->puesto->nombre == 'Director Estatal' || $datoslab->puesto->nombre == 'Director Regional' )
+						@isset ($datoslab->empleado->experto)
+						<div class="form-group col-sm-3">
+							<label class="control-label">Experto en:</label>
+							<dd>{{ $datoslab->empleado->experto }}</dd>
+						</div>
+						@endisset
 					@endif
 				</div>
 			</div>

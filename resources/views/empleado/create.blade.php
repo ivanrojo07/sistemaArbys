@@ -68,8 +68,8 @@
 								 pattern="^[A-Za-z]{4}[0-9]{6}" readonly="" value="{{ old('rfc') }}">
 						</div>
 						<div @if($errors->has('homoclave'))class="form-group col-sm-3 has-error"@else class="form-group col-sm-3"@endif>
-							<label class="control-label" for="homoclave">✱Homoclave:</label>
-							<input type="text" class="form-control" name="homoclave" maxlength="3" required="" id="homoclave" value="{{ old('homoclave') }}">
+							<label class="control-label" for="homoclave">Homoclave:</label>
+							<input type="text" class="form-control" name="homoclave" maxlength="3" id="homoclave" value="{{ old('homoclave') }}">
 							@if($errors->has('homoclave'))
 								<label class="control-label">{{ $errors->first('homoclave') }}</label>
 							@endif
@@ -87,7 +87,7 @@
 							
 						</div>
 						<div class="form-group col-sm-3">
-							<label class="control-label" for="movil">Celular:</label>
+							<label class="control-label" for="movil">✱Celular:</label>
 							<input type="text" class="form-control" name="movil" value="{{ old('movil') }}">
 						</div>
 					</div>
@@ -138,8 +138,12 @@
 		let apmaterno = $('#apmaterno').val().substring(0,1);
 		let fecnacimiento = $('#nacimiento').val().split('-');
 
-		if (fecnacimiento.length > 1 && apmaterno != '' && appaterno != '' && nombre != '')
-			$('#rfc').val(appaterno + apmaterno + nombre + fecnacimiento[0].substring(2,4) + fecnacimiento[1] + fecnacimiento[2]);
+		if (fecnacimiento.length > 1 && appaterno != '' && nombre != ''){
+			if (apmaterno != '')
+				$('#rfc').val(appaterno + apmaterno + nombre + fecnacimiento[0].substring(2,4) + fecnacimiento[1] + fecnacimiento[2]);
+			else
+				$('#rfc').val(appaterno + 'X' + nombre + fecnacimiento[0].substring(2,4) + fecnacimiento[1] + fecnacimiento[2]);
+		}
 
 	}
 </script>

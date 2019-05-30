@@ -136,33 +136,41 @@
     		switch(val) {
     			case 3:
       				document.getElementById('region').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
       				$("#regiones").prop('name', 'region_id');
 					$("#regiones").prop('required', true);
+					$("#expertos").prop('name', 'experto');
     				break;
     			case 4:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
 					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#expertos").prop('name', 'experto');
     				break;
     			case 5:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
 					$("#oficinas").prop('required', true);
+					$("#expertos").prop('name', 'experto');
     				break;
     			case 6:
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
+      				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
 					$("#oficinas").prop('required', true);
+					$("#expertos").prop('name', 'experto');
     				break;
     			case 7:
       				document.getElementById('region').style.display = 'block';
