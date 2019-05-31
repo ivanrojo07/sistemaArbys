@@ -16,6 +16,7 @@
 			<div class="panel-default">
 				<div class="panel-body">
 					<div class="row">
+						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 3)
 						<div class="form-group col-sm-3" id="region">
 							<label class="control-label">✱Región:</label>
 							<select id="regiones" class="form-control">
@@ -25,16 +26,21 @@
 								@endforeach
 							</select>
 						</div>
+						@endif
+						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 4)
 						<div class="form-group col-sm-3" id="estado" >
 							<label class="control-label">✱Estado:</label>
 							<select id="estados" class="form-control">
 							</select>
 						</div>
+						@endif
+						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 5)
 						<div class="form-group col-sm-3" id="oficina" >
 							<label class="control-label">✱Oficina:</label>
 							<select id="oficinas" class="form-control">
 							</select>
 						</div>
+						@endif
 {{-- 						<ul class="nav nav-tabs nav-justified" id="opciones">
 							<li class=""><a>Subgerentes:</a></li>
 							<li><a href="{{ route('control.vendedores.grupos') }}">Grupos:</a></li>

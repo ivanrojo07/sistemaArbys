@@ -28,10 +28,32 @@
 							<label class="control-label">Costo de la unidad:</label>
 							<input class="form-control" name="costo" value="{{ $producto->precio_lista }}" readonly>
 						</div>
-						<div class="col-sm-3 form-group">
-							<label class="control-label">Cuota Mensual:</label>
-							<input class="form-control" name="cuota_mensual">
-						</div>
+						@if($pago->meses == 60)
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual" value="{{ $producto->m60}}" readonly="">
+							</div>
+						@elseif($pago->meses == 48)
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual" value="{{ $producto->m48 }}" readonly="">
+							</div>
+						@elseif($pago->meses == 36)
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual" value="{{ $producto->m36 }}" readonly="">
+							</div>
+						@elseif($pago->meses == 24)
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual" value="{{ $producto->m24 }}" readonly="">
+							</div>
+						@elseif($pago->meses == 12)
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual" value="{{ $producto->m12 }}" readonly="">
+							</div>
+						@endif
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Plazo</label>
 							<input class="form-control" name="plazo" value="{{ $pago->meses }}" readonly>
@@ -42,16 +64,16 @@
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Clave Asesor:</label>
-							<input class="form-control" name="clave_asesor" >
+							<input class="form-control" name="clave_asesor" value="{{ $cliente->vendedor->id }}" readonly="">
 						</div>
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Nombre asesor:</label>
-							<input class="form-control" name="nombre_asesor">
+							<input class="form-control" name="nombre_asesor" value="{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }} {{ $cliente->vendedor->empleado->apmaterno }}" readonly="">
 						</div>
 					</div>
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS SOLICITANTE</h4>
 					<div class="row">
-						@if($cliente->tipo === "Fisica")
+						@if($cliente->tipo === "Física")
 						<div class="col-sm-3 form-group">
 							<label class="control-label">Nombre:</label>
 							<input class="form-control" name="nombre_sol" value="{{ $cliente->nombre ." ".$cliente->appaterno." ".$cliente->apmaterno }}" readonly>
@@ -157,6 +179,7 @@
 							<input type="text" class="form-control" name="celular" value="{{ $cliente->movil }}" readonly>
 						</div>
 					</div>
+					@if($cliente->tipo == "Moral")
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL REPRESENTANTE LEGAL</h4>
 					<div class="row">
 						<div class="col-sm-3 form-group">
@@ -177,6 +200,7 @@
 							<input type="text" class="form-control" name="correo_rep_leg">
 						</div>
 					</div>
+					@endif
 					<h4 class="text-center" style="padding: 3% 0%;">DATOS DEL EMPLEO ACTUAL</h4>
 					<div class="row">
 						<div class="col-sm-3 form-group">
@@ -258,11 +282,11 @@
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Importe del Recibo:</label>
-							<input type="text" class="form-control" name="importe_recibo">
+							<input type="text" class="form-control" name="importe_recibo" value="{{ $pago->total }}" readonly="">
 						</div>
-						<div class="col-sm-4 form-group">
+						<div class="col-sm-8 form-group">
 							<label class="control-label">Cantidad con Letra:</label>
-							<input type="text" class="form-control" name="cantidad_letra">
+							<input type="text" class="form-control" name="cantidad_letra" id="cant_letra" readonly="">
 						</div>
 					</div>
 					<h4 class="text-center" style="padding: 3% 0%;">CREDITICIOS</h4>
@@ -308,11 +332,11 @@
 					<div class="row">
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Nombre:</label>
-							<input type="text" class="form-control" name="nombre_benef">
+							<input type="text" class="form-control" name="nombre_benef" value="{{ $cliente->nombre }} {{ $cliente->appaterno }} {{ $cliente->apmaterno }}" readonly="">
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Edad:</label>
-							<input type="text" class="form-control" name="edad_benef">
+							<input type="text" class="form-control" name="edad_benef" value="{{Carbon\Carbon::parse($cliente->nacimiento)->age }}" readonly="">
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Parentesco:</label>
@@ -320,7 +344,7 @@
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Telefono Fijo/celular:</label>
-							<input type="text" class="form-control" name="telefono_benef">
+							<input type="text" class="form-control" name="telefono_benef" value="{{ $cliente->movil }}" readonly="">
 						</div>
 					</div>
 				</div>
@@ -341,4 +365,177 @@
 	</div>
 </div>
 
+@endsection
+@section('scripts')
+<script>
+	var numeroALetras = (function() {
+
+	    function Unidades(num){
+
+	        switch(num)
+	        {
+	            case 1: return 'UN';
+	            case 2: return 'DOS';
+	            case 3: return 'TRES';
+	            case 4: return 'CUATRO';
+	            case 5: return 'CINCO';
+	            case 6: return 'SEIS';
+	            case 7: return 'SIETE';
+	            case 8: return 'OCHO';
+	            case 9: return 'NUEVE';
+	        }
+
+	        return '';
+	    }//Unidades()
+
+	    function Decenas(num){
+
+	        let decena = Math.floor(num/10);
+	        let unidad = num - (decena * 10);
+
+	        switch(decena)
+	        {
+	            case 1:
+	                switch(unidad)
+	                {
+	                    case 0: return 'DIEZ';
+	                    case 1: return 'ONCE';
+	                    case 2: return 'DOCE';
+	                    case 3: return 'TRECE';
+	                    case 4: return 'CATORCE';
+	                    case 5: return 'QUINCE';
+	                    default: return 'DIECI' + Unidades(unidad);
+	                }
+	            case 2:
+	                switch(unidad)
+	                {
+	                    case 0: return 'VEINTE';
+	                    default: return 'VEINTI' + Unidades(unidad);
+	                }
+	            case 3: return DecenasY('TREINTA', unidad);
+	            case 4: return DecenasY('CUARENTA', unidad);
+	            case 5: return DecenasY('CINCUENTA', unidad);
+	            case 6: return DecenasY('SESENTA', unidad);
+	            case 7: return DecenasY('SETENTA', unidad);
+	            case 8: return DecenasY('OCHENTA', unidad);
+	            case 9: return DecenasY('NOVENTA', unidad);
+	            case 0: return Unidades(unidad);
+	        }
+	    }//Unidades()
+
+	    function DecenasY(strSin, numUnidades) {
+	        if (numUnidades > 0)
+	            return strSin + ' Y ' + Unidades(numUnidades)
+
+	        return strSin;
+	    }//DecenasY()
+
+	    function Centenas(num) {
+	        let centenas = Math.floor(num / 100);
+	        let decenas = num - (centenas * 100);
+
+	        switch(centenas)
+	        {
+	            case 1:
+	                if (decenas > 0)
+	                    return 'CIENTO ' + Decenas(decenas);
+	                return 'CIEN';
+	            case 2: return 'DOSCIENTOS ' + Decenas(decenas);
+	            case 3: return 'TRESCIENTOS ' + Decenas(decenas);
+	            case 4: return 'CUATROCIENTOS ' + Decenas(decenas);
+	            case 5: return 'QUINIENTOS ' + Decenas(decenas);
+	            case 6: return 'SEISCIENTOS ' + Decenas(decenas);
+	            case 7: return 'SETECIENTOS ' + Decenas(decenas);
+	            case 8: return 'OCHOCIENTOS ' + Decenas(decenas);
+	            case 9: return 'NOVECIENTOS ' + Decenas(decenas);
+	        }
+
+	        return Decenas(decenas);
+	    }//Centenas()
+
+	    function Seccion(num, divisor, strSingular, strPlural) {
+	        let cientos = Math.floor(num / divisor)
+	        let resto = num - (cientos * divisor)
+
+	        let letras = '';
+
+	        if (cientos > 0)
+	            if (cientos > 1)
+	                letras = Centenas(cientos) + ' ' + strPlural;
+	            else
+	                letras = strSingular;
+
+	        if (resto > 0)
+	            letras += '';
+
+	        return letras;
+	    }//Seccion()
+
+	    function Miles(num) {
+	        let divisor = 1000;
+	        let cientos = Math.floor(num / divisor)
+	        let resto = num - (cientos * divisor)
+
+	        let strMiles = Seccion(num, divisor, 'UN MIL', 'MIL');
+	        let strCentenas = Centenas(resto);
+
+	        if(strMiles == '')
+	            return strCentenas;
+
+	        return strMiles + ' ' + strCentenas;
+	    }//Miles()
+
+	    function Millones(num) {
+	        let divisor = 1000000;
+	        let cientos = Math.floor(num / divisor)
+	        let resto = num - (cientos * divisor)
+
+	        let strMillones = Seccion(num, divisor, 'UN MILLON DE', 'MILLONES DE');
+	        let strMiles = Miles(resto);
+
+	        if(strMillones == '')
+	            return strMiles;
+
+	        return strMillones + ' ' + strMiles;
+	    }//Millones()
+
+	    return function NumeroALetras(num, currency) {
+	        currency = currency || {};
+	        let data = {
+	            numero: num,
+	            enteros: Math.floor(num),
+	            centavos: (((Math.round(num * 100)) - (Math.floor(num) * 100))),
+	            letrasCentavos: '',
+	            letrasMonedaPlural: currency.plural || 'PESOS',//'PESOS', 'Dólares', 'Bolívares', 'etcs'
+	            letrasMonedaSingular: currency.singular || 'PESO', //'PESO', 'Dólar', 'Bolivar', 'etc'
+	            letrasMonedaCentavoPlural: currency.centPlural || 'CENTAVOS',
+	            letrasMonedaCentavoSingular: currency.centSingular || 'CENTAVOS'
+	        };
+
+	        if (data.centavos > 0) {
+	            data.letrasCentavos = 'CON ' + (function () {
+	                    if (data.centavos == 1)
+	                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoSingular;
+	                    else
+	                        return Millones(data.centavos) + ' ' + data.letrasMonedaCentavoPlural;
+	                })();
+	        };
+
+	        if(data.enteros == 0)
+	            return 'CERO ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+	        if (data.enteros == 1)
+	            return Millones(data.enteros) + ' ' + data.letrasMonedaSingular + ' ' + data.letrasCentavos;
+	        else
+	            return Millones(data.enteros) + ' ' + data.letrasMonedaPlural + ' ' + data.letrasCentavos;
+	    };
+
+	})();
+
+	$(document).ready(function($) {
+		$('#cant_letra').val(numeroALetras({{ $pago->total}}))	;
+	});
+
+// Modo de uso: 500,34 USD
+console.log(numeroALetras(500.34, {}));
+</script>
 @endsection

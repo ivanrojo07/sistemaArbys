@@ -34,7 +34,19 @@ class ClientePagoController extends Controller
     public function create(Cliente $cliente)
     {
         $bancos = Banco::get();
-        return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos]);
+        $vendedor = $cliente->vendedor;
+        $folio = 0;
+
+        foreach ($vendedor->clientes as $client) {
+            foreach ($client->transactions as $transacion) {
+                if ($transacion->pagos->count() > 0) {
+                    $folio += 1;
+                    break;
+                }
+            }
+
+        }
+        return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos, 'folio' => $folio]);
     }
 
     public function follow(Cliente $cliente, Pago $pago) {
@@ -135,7 +147,19 @@ class ClientePagoController extends Controller
     {
         $producto = Product::find($producto);
         $bancos = Banco::get();
-        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto]);
+        $vendedor = $cliente->vendedor;
+        $folio = 0;
+
+        foreach ($vendedor->clientes as $client) {
+            foreach ($client->transactions as $transacion) {
+                if ($transacion->pagos->count() > 0) {
+                    $folio += 1;
+                    break;
+                }
+            }
+
+        }
+        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio]);
     }
 
     public function getProduct($id) {
