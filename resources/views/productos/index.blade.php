@@ -37,8 +37,7 @@
 							</div>
 						</div>
 						@endif
-					@endif
-					@if(Auth::user()->empleado->id == 1)
+					@elseif(Auth::user()->empleado->id == 1)
 					<div class="col-sm-2 text-center">
 							<label class="control-label">Carros:</label>
 							<div class="row">
