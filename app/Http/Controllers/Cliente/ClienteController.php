@@ -157,6 +157,11 @@ class ClienteController extends Controller {
             return redirect()->back()->with('errors','El RFC ya está registrado.');
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
         $cliente = Cliente::create($request->all());
+        /***********/
+        $empleado = Auth::user()->empleado;
+        $cliente->vendedor_id = $empleado->id;
+        $cliente->save();
+        /**********/
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 

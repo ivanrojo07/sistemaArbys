@@ -16,7 +16,7 @@
 						<input type="text" id="producto" name="kword" value="{{$request->kword}}" class="form-control" placeholder="Buscar..." autofocus>
 					</div>
 					@if(isset($experto))
-						@if($experto == "Autos" || $experto == "Autos y Motos")
+						@if($experto == "Autos" || $experto == "Autos y Motos" || $experto == "Autos, Motos y Casas")
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Carros:</label>
 							<div class="row">
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 						@endif
-						@if($experto == "Motos" || $experto == "Autos y Motos")
+						@if($experto == "Motos" || $experto == "Autos y Motos" || $experto == "Autos, Motos y Casas")
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">

@@ -102,11 +102,13 @@ class LaboralController extends Controller
             {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
             }
-        } else if($request->puesto_id == 6) {
+        } 
+        else if($request->puesto_id == 6) {
             $empleado->laborales()->save($laborales);
             $subgerente = new Subgerente();
             $empleado->subgerente()->save($subgerente);
-        }else if($request->puesto_id == 4) {
+        }
+        else if($request->puesto_id == 4) {
             if($this->VerificarPuesto($laborales, $request))
             {                
                 $empleado->laborales()->save($laborales);
@@ -116,17 +118,16 @@ class LaboralController extends Controller
                 Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta ocupada'); 
             }
             
-        }else if($request->puesto_id == 3) {
-            if($this->VerificarPuesto($laborales, $request))
-            {                
+        }
+        else if($request->puesto_id == 3) {
+            if($this->VerificarPuesto($laborales, $request)){                
                 $empleado->laborales()->save($laborales);
             }
             else
-            {
                 Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta ocupada'); 
-            }
             
-        } else if($request->puesto_id == 2) {
+        } 
+        else if($request->puesto_id == 2) {
             if($this->VerificarPuesto($laborales, $request))
             {                
                 $empleado->laborales()->save($laborales);
@@ -136,7 +137,8 @@ class LaboralController extends Controller
                 Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta ocupada'); 
             }
 
-        } else if($request->puesto_id == 7) {
+        } 
+        else if($request->puesto_id == 7) {
             $empleado->laborales()->save($laborales);
             $vendedor = new Vendedor(['experto' => $request->experto]);
             $empleado->vendedor()->save($vendedor);
@@ -442,28 +444,22 @@ class LaboralController extends Controller
 
     public function VerificarPuesto(Laboral $laborales, Request $request)
     {
-        $empleados=Empleado::get()     ;
+        $empleados=Empleado::get();
         foreach ($empleados as $empleado) {
-            if(isset($empleado->laborales->last()->puesto->id))
-            {
+            if(isset($empleado->laborales->last()->puesto)){
                 if ($empleado->laborales->last()->puesto->id == 4) {
                     if($empleado->laborales->last()->puesto->id==$laborales->puesto->id && $empleado->laborales->last()->estado->id == $request->estado_id)
-                    {
-                        return 0;
-                    }    
+                        return 0;   
                 }
                 elseif ($empleado->laborales->last()->puesto->id == 3) {
-                    if($empleado->laborales->last()->puesto->id==$laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id)
-                    {
-                        return 0;
-                    }    
+                    dd($empleado);
+                    if($empleado->laborales->last()->puesto->id == $laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id){
+                        return 0;   
+                    }
                 }
                 elseif ($empleado->laborales->last()->puesto->id == 2) 
                     return 0;
-
-                
             }
-                
         }
         return 1;
     }

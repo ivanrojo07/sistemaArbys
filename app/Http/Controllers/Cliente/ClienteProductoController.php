@@ -43,8 +43,10 @@ class ClienteProductoController extends Controller
                 }
             });//->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
         }
-        
-        $experto = Auth::user()->empleado->vendedor->experto;
+        if(isset(Auth::user()->empleado->vendedor))
+            $experto = Auth::user()->empleado->vendedor->experto;
+        else
+            $experto = Auth::user()->empleado->experto;
         if ($tipo_empleado === "Vendedor") {
             switch ($experto) {
                 case 'Autos':

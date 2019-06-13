@@ -34,12 +34,20 @@
 							</select>
 						</div>
 						@endif
-						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 5)
+						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 4)
 						<div class="form-group col-sm-3" id="oficina" >
 							<label class="control-label">✱Oficina:</label>
 							<select id="oficinas" class="form-control">
 							</select>
 						</div>
+						@endif
+						@if(Auth::user()->empleado->laborales->last()->puesto->id == 5 || Auth::user()->empleado->laborales->last()->puesto->id == 6)
+							<div class="form-group col-sm-3" id="oficina" >
+								<label class="control-label">✱Oficina:</label>
+								<select id="oficinas" class="form-control">
+									<option value="{{ Auth::user()->empleado->laborales->last()->oficina->id }}">{{ Auth::user()->empleado->laborales->last()->oficina->nombre }}</option>
+								</select>
+							</div>
 						@endif
 {{-- 						<ul class="nav nav-tabs nav-justified" id="opciones">
 							<li class=""><a>Subgerentes:</a></li>

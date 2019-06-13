@@ -80,10 +80,6 @@
 						<input type="text" name="telefonocel" class="form-control" value="{{ $cliente->movil ? $cliente->movil : 'N/A' }}" readonly="">
 					</div>
 					<div class="col-sm-3 form-group">
-						<label class="control-label">Canal de Ventas:</label>
-						<input type="text" name="canal_ventas" class="form-control" value="{{ $cliente->canal }}" readonly="">
-					</div>
-					<div class="col-sm-3 form-group">
 						<label class="control-label">Fecha de Actualización:</label>
 						<input type="text" name="updated_at" class="form-control" value="{{ substr($cliente->updated_at, 0, 10) }}" readonly="">
 					</div>
