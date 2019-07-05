@@ -444,6 +444,8 @@ class LaboralController extends Controller
 
     public function VerificarPuesto(Laboral $laborales, Request $request)
     {
+        
+        return dd($request);
         $empleados=Empleado::get();
         foreach ($empleados as $empleado) {
             if(isset($empleado->laborales->last()->puesto)){
