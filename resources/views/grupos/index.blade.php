@@ -41,16 +41,20 @@
 									</thead>
 									<tbody>
 									@foreach($grupos as $grupo)
-										@if(isset($grupo->subgerente) && $grupo->subgerente->empleado->laborales->last()->oficina != null)
 										<tr>
 											<td>{{ $grupo->nombre }}</td>
-											@if($grupo->subgerente == null)
+											@if($grupo->subgerente == null )
 												<td> -- </td>
 												<td>Sin asignar</td>
 											@else
 												@php($emp = $grupo->subgerente->empleado)
-												<td>{{ $grupo->subgerente->empleado->laborales->last()->oficina->nombre }}</td>
-											<td>{{ $emp->nombre . ' ' . $emp->appaterno . ' ' . $emp->apmaterno }}</td>
+												@if(isset($grupo->subgerente->empleado->laborales->last()->oficina))
+													<td>{{ $grupo->subgerente->empleado->laborales->last()->oficina->nombre }}</td>
+													<td>{{ $emp->nombre . ' ' . $emp->appaterno . ' ' . $emp->apmaterno }}</td>
+												@else
+													<td>--</td>
+													<td>{{ $emp->nombre . ' ' . $emp->appaterno . ' ' . $emp->apmaterno }}</td>
+												@endif
 											@endif
 											<td>{{ count($grupo->vendedores) < 4 ? 4 - count($grupo->vendedores) : 'Lleno' }}</td>
 											<td class="text-center">
