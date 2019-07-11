@@ -129,6 +129,7 @@
 										<th class="text-center">No. de Vendedores</th>
 									</tr>
 									@foreach($grupos as $grupo)
+									@if(isset($grupo->subgerente))
 										<tr>
 											<td>{{ $grupo->subgerente->empleado->nombre }}{{ $grupo->subgerente->empleado->appaterno }} {{ $grupo->subgerente->empleado->apmaterno }}</td>
 											<td>{{ $num_grupos[$grupo->subgerente_id] }}</td>
@@ -138,6 +139,7 @@
 												<td>No asigando</td>
 											@endif
 										</tr>
+									@endif
 									@endforeach
 								</table>
 							</div>
