@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Grupo;
 use App\Grupo;
 use App\Subgerente;
 use App\Vendedor;
+use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -171,17 +172,29 @@ class GrupoController extends Controller
     public function edit(Grupo $grupo)
     {
         $empleado = Auth::user()->empleado;
-        $laborales = $empleado->laborales->last()->oficina->laborales;
-        $arr = [];
-        foreach ($laborales as $laboral) {
-            $arr[] = $laboral->empleado;
+        if ($empleado->id != "1") {
+            $laborales = $empleado->laborales->last()->oficina->laborales;
+            $arr = [];
+            foreach ($laborales as $laboral) {
+                $arr[] = $laboral->empleado;
+            }
+            $arr = array_unique($arr);
+            $subgerentes = [];
+            foreach ($arr as $emp) {
+                $subgerentes[] = $emp->subgerente;
+            }
+            $subgerentes = array_filter($subgerentes);
         }
-        $arr = array_unique($arr);
-        $subgerentes = [];
-        foreach ($arr as $emp) {
-            $subgerentes[] = $emp->subgerente;
+        else{
+            $empleados = Empleado::get();
+            $subgerentes = [];
+            foreach ($empleados as $empleado) {
+                if ($empleado->subgerente != null) {
+                    $subgerentes[] = $empleado->subgerente;
+                }
+            }
         }
-        $subgerentes = array_filter($subgerentes);
+        
         return view('grupos.edit', ['grupo' => $grupo, 'subgerentes' => $subgerentes]);
     }
 

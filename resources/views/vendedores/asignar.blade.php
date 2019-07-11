@@ -32,7 +32,7 @@
 									@foreach($vendedores as $vendedor)
 										<tr>
 											<td>{{ $vendedor->empleado->nombre }} {{ $vendedor->empleado->appaterno }} {{ $vendedor->empleado->apmaterno }}</td>
-											@if(isset($vendedor->grupo))
+											@if(isset($vendedor->grupo) && isset($vendedor->grupo->subgerente))
 												<td>{{ $vendedor->grupo->nombre }}</td>
 												<td>{{ $vendedor->grupo->subgerente->empleado->nombre}} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
 											@else

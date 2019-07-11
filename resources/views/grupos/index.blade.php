@@ -41,6 +41,7 @@
 									</thead>
 									<tbody>
 									@foreach($grupos as $grupo)
+										@if($grupo->subgerente->empleado->laborales->last()->oficina != null)
 										<tr>
 											<td>{{ $grupo->nombre }}</td>
 											@if($grupo->subgerente == null)
@@ -68,6 +69,7 @@
 												</form>
 											</td>
 										</tr>
+										@endif
 									@endforeach
 									</tbody>
 								</table>
