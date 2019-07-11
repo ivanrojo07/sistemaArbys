@@ -41,7 +41,7 @@
 									</thead>
 									<tbody>
 									@foreach($grupos as $grupo)
-										@if($grupo->subgerente->empleado->laborales->last()->oficina != null)
+										@if(isset($grupo->subgerente) && $grupo->subgerente->empleado->laborales->last()->oficina != null)
 										<tr>
 											<td>{{ $grupo->nombre }}</td>
 											@if($grupo->subgerente == null)
