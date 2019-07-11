@@ -82,8 +82,13 @@
 											@else
 											<td>No asignado</td>
 											@endif
+											@if(isset($grupo->subgerente))
 											<td>{{ $grupo->subgerente->empleado->nombre }}{{ $grupo->subgerente->empleado->appaterno }} {{ $grupo->subgerente->empleado->apmaterno }}</td>
 											<td>{{ $num_grupos[$grupo->subgerente->id] }}</td>
+											@else
+											<td>--</td>
+											<td>--</td>
+											@endif
 											<td class="text-center">
 												<input type="radio" name="grupo_id" value="{{ $grupo->id }}" required="">
 											</td>
