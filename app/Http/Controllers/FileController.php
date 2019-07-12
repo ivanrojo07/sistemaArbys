@@ -19,11 +19,10 @@ class FileController extends Controller
     	if($request->hasFile('sample_file')) {
     		$path = $request->file('sample_file')->getPathName();
             $data = \Excel::load($path, null, null, true, null)->get();
-            $x=[];
     		if($data->count()) {
                 foreach ($data as $sheet) {
         			foreach ($data[0] as $key => $value) {
-                        $x[] = [
+                        $arr[] = [
                             'clave' => $value->clave,
                             'descripcion' => $value->descripcion,
                             'precio_lista' => number_format($value->precio_de_lista, 2, '.', ''),
@@ -43,15 +42,14 @@ class FileController extends Controller
                     foreach ($data[1] as $key => $value) {
                         $arr[] = [
                             'clave' => $value->clave,
-                            'descripcion' => $value->descripcionmodelo,
-                            'precio_lista' => number_format($value->precio_de_listas, 2, '.', ''),
+                            'descripcion' => $value->descripcion,
+                            'precio_lista' => number_format($value->precio_de_lista, 2, '.', ''),
                             'm60' => number_format($value['60'], 2, '.', ''),
                             'm48' => number_format($value['48'], 2, '.', ''),
                             'm36' => number_format($value['36'], 2, '.', ''),
                             'm24' => number_format($value['24'], 2, '.', ''),
                             'm12' => number_format($value['12'], 2, '.', ''),
                             'apertura' => number_format($value->apertura, 2, '.', ''),
-                            'cilindrada' => $value->cilindrada,
                             // 'precio_lista' => $value->precio_de_lista,
                             // 'm60' => $value['60'],
                             // 'm48' => $value['48'],
@@ -61,7 +59,7 @@ class FileController extends Controller
                             // 'apertura' => $value->apertura,
                             'marca' => $value->marca,
                             'tipo' => 'MOTO',
-                            'categoria' => $value->tipo,
+                            'categoria' => $value->categoria,
                             'created_at' => date('Y-m-d h:m:s'),
                             'updated_at' => date('Y-m-d h:m:s'),
                         ];
