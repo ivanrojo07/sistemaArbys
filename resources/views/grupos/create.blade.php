@@ -20,12 +20,12 @@
 					<div class="row">
 						<div class="form-group col-sm-4">
 							<label for="nombre" class="control-label">Nombre:</label>
-							<input type="text" name="nombre" class="form-control" id="nombre">
+							<input type="text" name="nombre" class="form-control" id="nombre" required="">
 						</div>
 						<div class="form-group col-sm-4">
 							<label for="estado" class="control-label">Subgerente:</label>
 							<select class="form-control" name="subgerente_id" id="subgerente" required="">
-								<option selected="selected">Seleccionar</option>
+								<option selected="">Seleccionar</option>
 								@foreach($subgerentes as $subgerente)
 									@php($empleado = $subgerente->empleado)
 									<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
