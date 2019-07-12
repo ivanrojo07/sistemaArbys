@@ -157,6 +157,7 @@
 												<th>Acción</th>
 											</tr>
 											@foreach($cliente->transactions as $transation)
+											@if(isset($transation->product))
 											<tr>
 												<td>{{ $transation->product->clave }}</td>
 												<td>{{ $transation->product->descripcion }}</td>
@@ -176,6 +177,7 @@
 													@endif
 												</td>
 											</tr>
+											@endif
 											@endforeach	
 										</table>
 										@else
