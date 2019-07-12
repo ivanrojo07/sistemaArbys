@@ -25,7 +25,7 @@
 						<div class="form-group col-sm-4">
 							<label for="estado" class="control-label">Subgerente:</label>
 							<select class="form-control" name="subgerente_id" id="subgerente" required="">
-								<option selected="">Seleccionar</option>
+								<option value="">Seleccionar</option>
 								@foreach($subgerentes as $subgerente)
 									@php($empleado = $subgerente->empleado)
 									<option value="{{ $subgerente->id }}">{{ $empleado->nombre . ' ' . $empleado->appaterno }}</option>
