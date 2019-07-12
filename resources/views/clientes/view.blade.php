@@ -228,6 +228,7 @@
 											</tr>
 											@foreach($cliente->transactions as $transaction)
 												@foreach($transaction->pagos as $pago)
+												@if(isset($pago) && isset($pago->transaction) && isset($pago->transaction->product))
 													<tr>
 														<td>{{ $pago->transaction->product->descripcion }}</td>
 														<td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
@@ -248,6 +249,7 @@
 															</a>
 														</td>
 													</tr>
+												@endif
 												@endforeach
 											@endforeach
 										</table>
