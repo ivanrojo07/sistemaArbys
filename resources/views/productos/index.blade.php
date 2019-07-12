@@ -107,6 +107,7 @@
 							</div>
 						@endif
 						@foreach($productos as $product)
+						@if(isset($product))
 						<tr class="active">
 							<td>{{ $product->clave }}</td>
 							<td>{{ $product->marca }}</td>
@@ -117,6 +118,7 @@
 								<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal{{ $product->id }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
 							</td>
 						</tr>
+						@endif
 						@endforeach
 					</table>
 				</div>
@@ -140,6 +142,7 @@
                 </div>
             </div>
             <div class="modal-body">
+            	@if(isset($producto))
 				<div class="row">
 					<div class="form-group col-sm-2 col-sm-offset-1">
 						<label class="control-label">Clave:</label>
@@ -162,6 +165,7 @@
 						<dd>${{ number_format($producto->apertura, 2) }}</dd>
 					</div>
 				</div>
+
 				<div class="row">
 					<form id="meses_{{$producto->id}}" method="GET" action="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}">
 						<div class="form-group col-sm-2 col-sm-offset-1">
@@ -211,6 +215,7 @@
 						</div>
 					</form>
 				</div>
+				@endif
             </div>
             <div class="modal-footer">
                 <div class="row text-center">
