@@ -51,7 +51,8 @@ class ClientePagoController extends Controller
 
     public function follow(Cliente $cliente, Pago $pago) {
         $bancos = Banco::get();
-        return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago]);
+        $folio = $pago->folio;
+        return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago, 'folio' => $folio]);
     }
 
     /**
