@@ -76,6 +76,13 @@ class ClienteProductoController extends Controller
         if(!isset($min) && isset($max)) 
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
+        if ($tipo == 'MOTO' && isset($request->cilindrada)) {
+            $productos = $productos->where('cilindrada', $request->cilindrada);
+        }
+        if ($tipo == 'MOTO' && isset($request->categoria)) {
+            $productos = $productos->where('categoria', strtoupper($request->categoria));
+        }
+
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto]);
     }

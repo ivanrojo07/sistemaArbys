@@ -57,9 +57,10 @@
 						</div>
 					@endif
 				</div>
-				<div class="row form-group">
-					<div class="col-sm-12 text-center">
-						<select name="cilindrada">
+				<div class="row form-group" id="filtro-moto" @if ($request->type != "MOTO")style="display: none;"@endif>
+					<div class="col-sm-3 col-sm-offset-3">
+						<label class="control-label">Cilindrada :</label>
+						<select name="cilindrada" class="form-control">
 							<option value="">Seleccionar</option>
 							<option value="90cc">90 CC</option>
 							<option value="102cc">102 CC</option>
@@ -77,8 +78,20 @@
 							<option value="650cc">650 CC</option>
 						</select>
 					</div>
-					<div class="col-sm-12 text-center">
-						<select name="categoria"></select>
+					<div class="col-sm-3" >
+						<label class="control-label">Tipo:</label>
+						<select name="categoria" class="form-control">
+							<option value="">Seleccionar</option>
+							<option value="chopper">Chopper</option>
+							<option value="deportiva">Deportiva</option>
+							<option value="nakeed">Nakeed</option>
+							<option value="trabajo">Trabajo</option>
+							<option value="cuatrimoto">Cuatrimoto</option>
+							<option value="doble Prop">Doble Prop</option>
+							<option value="Motoneta">Motoneta</option>
+							<option value="trabajo sem">Trabajo sem</option>
+							<option value="off road">Off road</option>
+						</select>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -254,7 +267,12 @@
 	<script>
 		$('#moto').change(function() {
 			if ($(this).prop('checked')) {
-				//
+				$('#filtro-moto').prop('style', '');
+			}
+		});
+		$('#carro').change(function() {
+			if ($(this).prop('checked')) {
+				$('#filtro-moto').prop('style', 'display: none;');
 			}
 		});
 	</script>
