@@ -123,7 +123,7 @@ class GrupoController extends Controller
     {
         $empleado = Auth::user()->empleado;
         if($empleado->id == 1) {
-            $subgerentes = Subgerente::get();
+            $subgerentes = Subgerente::where('empleado_id', '!=', '1')->get();
         } else {
             $laborales = $empleado->laborales->last()->oficina->laborales;
             $arr = [];

@@ -24,7 +24,7 @@
 						</div>
 						<div class="form-group col-sm-4">
 							<label for="estado" class="control-label">Subgerente:</label>
-							<select class="form-control" name="subgerente_id" id="subgerente">
+							<select class="form-control" name="subgerente_id" id="subgerente" required="">
 								<option selected="selected">Seleccionar</option>
 								@foreach($subgerentes as $subgerente)
 									@php($empleado = $subgerente->empleado)

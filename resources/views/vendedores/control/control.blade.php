@@ -187,8 +187,9 @@
 					dataType: "html",
 				}).done( function(res){
 					$('#subgerente').html(res);
-				}).fail( function (){
+				}).fail( function (res){
 					$('#subgerente').html('');
+					console.log(res);
 				});
 			}
 			
