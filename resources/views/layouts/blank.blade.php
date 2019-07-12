@@ -45,7 +45,7 @@
         @include('sweet::alert')
         <script type="https://unpkg.com/sweetalert/dist/main.js"></script>
          <script type="https://unpkg.com/sweetalert/dist/jquery-3.2.1.min"></script>
-         @yield('scripts')
          <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+         @yield('scripts')
     </body>
 </html>

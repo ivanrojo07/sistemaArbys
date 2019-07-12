@@ -59,6 +59,30 @@
 				</div>
 				<div class="row form-group">
 					<div class="col-sm-12 text-center">
+						<select name="cilindrada">
+							<option value="">Seleccionar</option>
+							<option value="150cc">150 CC</option>
+							<option value="220cc">220 CC</option>
+							<option value="200cc">200 CC</option>
+							<option value="275cc">375 CC</option>
+							<option value="125cc">125 CC</option>
+							<option value="135cc">135 CC</option>
+							<option value="160cc">160 CC</option>
+							<option value="150cc">150 CC</option>
+							<option value="102cc">102 CC</option>
+							<option value="400cc">400 CC</option>
+							<option value="495cc">495 CC</option>
+							<option value="800cc">800 CC</option>
+							<option value="650cc">650 CC</option>
+							<option value="90cc">90 CC</option>
+						</select>
+					</div>
+					<div class="col-sm-12 text-center">
+						<select name="categoria"></select>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-12 text-center">
 						<button type="submit" class="btn btn-success"><i class="fa fa-search"  aria-hidden="true"></i> Buscar</button>
 					</div>
 				</div>
@@ -220,4 +244,13 @@
     </div>
 </div>
 @endforeach
+@endsection
+@section('scripts')
+	<script>
+		$('#moto').change(function() {
+			if ($(this).prop('checked')) {
+				alert('1');
+			}
+		});
+	</script>
 @endsection
