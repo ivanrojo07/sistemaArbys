@@ -101,7 +101,7 @@
 		var clientes = 0;
 		var ventas = 0;
 		$.each(filas, function(index, el) {
-			console.log($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
+			//console.log($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
 			clientes += parseInt($(el).children('td').eq(3).html());
 			ventas += parseFloat($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
 		});
@@ -113,7 +113,7 @@
 			//var vendedor = $(this).parent().parent().children().eq(0).html();
 			var vendedor = $(this).parent().parent().children().eq(0);
 			vendedor = $(vendedor).children('input').val();
-			console.log(vendedor);
+			//console.log(vendedor);
 			$.ajax({
 				url: "{{ url('/control_vendedores/getHistorial') }}",
 				type: "GET",

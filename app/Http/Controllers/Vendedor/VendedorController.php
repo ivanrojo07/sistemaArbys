@@ -194,13 +194,25 @@ class VendedorController extends Controller
     public function grupos(Oficina $oficina){
         //$grupos=Grupo::get();
         $grupos = [];
-
+        $empleado = Auth::user()->empleado;
         //obtener todos los grupos de la oficina
-        foreach ($oficina->laborales as $laboral) {
-            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) 
-                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
-                    $grupos[$grupo->id] = $grupo;
+        if ($empleado->id == 1) 
+            $grupos = Grupo::get();
+
+        elseif (isset($empleado->laborlaes) && $empleado->laborlaes->last()->puesto->id < 6 ) {
+            foreach ($oficina->laborales as $laboral) {
+                if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
+                    foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                        $grupos[$grupo->id] = $grupo;
+                    }
                 }
+            }
+
+        }
+        else{
+            if (isset($empleado->subgerente)) {
+                $grupos = $empleado->subgerente->grupos;
+            }
         }
         return view('vendedores.control.grupos',['grupos'=>$grupos]);
     }

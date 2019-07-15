@@ -73,14 +73,18 @@
 						<div>
 						  	<!-- Nav tabs -->
 							<ul class="nav nav-tabs nav-justified" role="tablist">
+								@if(Auth::user()->empleado->laborales->last()->puesto->id < 6)
 								<li class="tab"><a href="#subgerente" aria-controls="subgerente" role="tab" data-toggle="tab" id="subgerentes">Subgerente</a></li>
+								@endif
 								<li class="tab"><a href="#grupos-div" aria-controls="grupos-div" role="tab" data-toggle="tab" id="grupos-pestania">Grupos</a></li>
 								<li class="tab"><a href="#vendedores-div" aria-controls="vendedores-div" role="tab" data-toggle="tab" id="vendedores-pestanias">Vendedores</a></li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
+								@if(Auth::user()->empleado->laborales->last()->puesto->id < 6)
 								<div role="tabpanel" class="tab-pane active" id="subgerente"></div>
+								@endif
 								<div role="tabpanel" class="tab-pane active" id="grupos-div"></div>
 								<div role="tabpanel" class="tab-pane active" id="vendedores-div"></div>
 							</div>
