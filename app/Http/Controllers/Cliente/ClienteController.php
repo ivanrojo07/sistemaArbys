@@ -159,8 +159,10 @@ class ClienteController extends Controller {
         $cliente = Cliente::create($request->all());
         /***********/
         $empleado = Auth::user()->empleado;
-        $cliente->vendedor_id = $empleado->id;
-        $cliente->save();
+        if(isset($empleado->laborales) && $empleado->laborales->last()->puesto->id == 7){
+            $cliente->vendedor_id = $empleado->vendedor->id;
+            $cliente->save();
+        }
         /**********/
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }

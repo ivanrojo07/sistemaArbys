@@ -40,7 +40,7 @@
 											@endif
 											@if($vendedor->contador->count() != 0)
 											<td>{{ $vendedor->contador->last()->total_clientes }}</td>
-											<td>{{ $vendedor->contador->last()->total_ventas }}</td>
+											<td>${{ number_format($vendedor->contador->last()->total_ventas,2, ".", ",") }}</td>
 											@else
 											<td>0</td>
 											<td>0</td>
@@ -101,8 +101,9 @@
 		var clientes = 0;
 		var ventas = 0;
 		$.each(filas, function(index, el) {
+			console.log($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
 			clientes += parseInt($(el).children('td').eq(3).html());
-			ventas += parseFloat($(el).children('td').eq(4).html());
+			ventas += parseFloat($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
 		});
 		$('#total_clientes').text(clientes.toString());
 		$('#total_ventas').text('$' + ventas.toString());

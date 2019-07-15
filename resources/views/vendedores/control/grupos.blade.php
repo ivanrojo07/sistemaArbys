@@ -68,6 +68,17 @@
 					'vendedor': @json($vendedor->empleado),
 					'clientes': @json($vendedor->contador->last()),
 					'objetivo': @json($vendedor->objetivo->last()),
+					@php($pagos = [])
+					@foreach($vendedor->clientes as $cliente)
+						@foreach($cliente->transactions as $transaccion)
+							@foreach($transaccion->pagos as $pago)
+								@if ($pago->status == "Aprobado")
+									@php($pagos[] = $pago)
+								@endif
+							@endforeach
+						@endforeach
+					@endforeach
+					'pagos': @json($pagos),
 				},
 				@endforeach
 			@endforeach
@@ -77,18 +88,19 @@
 			var contenido = `<tr class="info">
 								<th class="text-center">Vendedor</th>
 								<th class="text-center">Objetivo</th>
-								<th class="text-center">Clientes</th>
-								<th class="text-center">Ventas</th>						
+								<th class="text-center">No. de Clientes</th>
+								<th class="text-center">No. de Ventas</th>						
 							</tr>`;
 			$('#vende-grupos').empty();
 			$('#vende-grupos').prop('style', 'margin-bottom: 0px;');
 			$.each(arreglo_vendedores, function(index, elem) {
 				if (elem.nombre == grupo) {
+					//console.log(elem);
 					contenido += `<tr>
 									<td>${elem.vendedor.nombre} ${elem.vendedor.appaterno} ${elem.vendedor.apmaterno ? elem.vendedor.apmaterno : ' '}</td>
 									<td>${elem.objetivo ? elem.objetivo.num_clientes : '--'}</td>
 									<td>${elem.clientes ? elem.clientes.total_clientes : '--'}</td>
-									<td>${elem.clientes ? elem.clientes.total_ventas : '--'}</td>
+									<td>${elem.pagos ? elem.pagos.length : '--'}</td>
 								  </tr>`;
 				}
 			});

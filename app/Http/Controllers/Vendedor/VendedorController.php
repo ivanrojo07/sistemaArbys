@@ -202,7 +202,6 @@ class VendedorController extends Controller
                     $grupos[$grupo->id] = $grupo;
                 }
         }
-
         return view('vendedores.control.grupos',['grupos'=>$grupos]);
     }
 
