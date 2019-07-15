@@ -71,7 +71,7 @@
 							</div>
 							<div class="form-group col-sm-3" style="display: none;" id="region">
 								<label class="control-label">Región:</label>
-								<select class="form-control" id="regiones">
+								<select class="form-control" id="regiones" name="region_id">
 									<option>No Definido</option>
 									@foreach($regiones as $region)
 										<option value="{{ $region->id }}">{{ $region->nombre }}</option>
@@ -163,6 +163,7 @@
 					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#expertos").prop('name', 'experto');
     				break;
     			case 5:
@@ -173,6 +174,7 @@
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('name', 'experto');
     				break;
@@ -184,6 +186,7 @@
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('name', 'experto');
     				break;
@@ -196,6 +199,7 @@
 					$("#expertos").prop('name', 'experto');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('required', true);
     				break;

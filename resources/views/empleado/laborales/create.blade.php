@@ -148,6 +148,7 @@
 					$("#estados").prop('name', 'estado_id');
 					$("#estados").prop('required', true);
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#expertos").prop('name', 'experto');
     				break;
     			case 5:
@@ -157,7 +158,9 @@
       				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
+					$("#estados").prop('name', 'estado_id');
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('name', 'experto');
     				break;
@@ -168,7 +171,9 @@
       				document.getElementById('experto').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
+					$("#estados").prop('name', 'estado_id');
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('name', 'experto');
     				break;
@@ -180,7 +185,9 @@
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#expertos").prop('name', 'experto');
 					$("#estados").prop('required', true);
+					$("#estados").prop('name', 'estado_id');
 					$("#regiones").prop('required', true);
+					$("#regiones").prop('name', 'region_id');
 					$("#oficinas").prop('required', true);
 					$("#expertos").prop('required', true);
     				break;

@@ -94,7 +94,7 @@ class LaboralController extends Controller
             {   
                 $empleado->laborales()->save($laborales);
                 $this->MakeGerente($empleado);
-                //devuelve el id del area o ub 0 si no hace nada
+                //devuelve el id del area o un 0 si no hace nada
                 $this->CrearGerencia($empleado);                            
                 
             }
@@ -227,6 +227,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+                return redirect()->back();
             }            
         }
         else if($request->puesto_id==4){
@@ -239,6 +240,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta coupada'); 
+                return redirect()->back();
             }
 
         }
@@ -253,6 +255,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta coupada'); 
+                return redirect()->back();
             }
 
         }
@@ -266,6 +269,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta coupada'); 
+                return redirect()->back();
             }
 
         }
