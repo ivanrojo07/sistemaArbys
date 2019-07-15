@@ -100,7 +100,8 @@ class LaboralController extends Controller
             }
             else
             {
-                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada'); 
+                Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
+                return redirect()->back();
             }
         } 
         else if($request->puesto_id == 6) {
@@ -116,6 +117,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del director estatal actual primero', 'La direccion estatal esta ocupada'); 
+                return redirect()->back();
             }
             
         }
@@ -123,8 +125,11 @@ class LaboralController extends Controller
             if($this->VerificarPuesto($laborales, $request)){                
                 $empleado->laborales()->save($laborales);
             }
-            else
+            else{
                 Alert::error('Cambie el puesto del director regional actual primero', 'La direccion regional esta ocupada'); 
+                return redirect()->back();
+            }
+
             
         } 
         else if($request->puesto_id == 2) {
@@ -135,6 +140,7 @@ class LaboralController extends Controller
             else
             {
                 Alert::error('Cambie el puesto del director general actual primero', 'La direccion general esta ocupada'); 
+                return redirect()->back();
             }
 
         } 
@@ -445,22 +451,22 @@ class LaboralController extends Controller
     public function VerificarPuesto(Laboral $laborales, Request $request)
     {
         
-        return dd($request);
         $empleados=Empleado::get();
         foreach ($empleados as $empleado) {
             if(isset($empleado->laborales->last()->puesto)){
                 if ($empleado->laborales->last()->puesto->id == 4) {
                     if($empleado->laborales->last()->puesto->id==$laborales->puesto->id && $empleado->laborales->last()->estado->id == $request->estado_id)
                         return 0;   
+
                 }
                 elseif ($empleado->laborales->last()->puesto->id == 3) {
-                    dd($empleado);
-                    if($empleado->laborales->last()->puesto->id == $laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id){
+                    if($empleado->laborales->last()->puesto->id == $laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id)
                         return 0;   
-                    }
+                    
                 }
                 elseif ($empleado->laborales->last()->puesto->id == 2) 
-                    return 0;
+                    if($empleado->laborales->last()->puesto->id == $laborales->puesto->id && $empleado->laborales->last()->region->id == $request->region_id)
+                        return 0;
             }
         }
         return 1;
