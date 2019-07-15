@@ -16,7 +16,7 @@
 			<div class="panel-default">
 				<div class="panel-body">
 					<div class="row">
-						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 3)
+						@if(Auth::user()->empleado->laborales->last()->puesto->id < 3)
 						<div class="form-group col-sm-3" id="region">
 							<label class="control-label">✱Región:</label>
 							<select id="regiones" class="form-control">
@@ -26,11 +26,27 @@
 								@endforeach
 							</select>
 						</div>
+						@elseif(Auth::user()->empleado->laborales->last()->puesto->id == 3)
+						<div class="form-group col-sm-3" id="region">
+							<label class="control-label">✱Región:</label>
+							<select id="regiones" class="form-control">
+								<option value="">Seleccionar</option>
+								<option value="{{ Auth::user()->empleado->laborales->last()->region->id }}">{{ Auth::user()->empleado->laborales->last()->region->nombre }}</option>
+							</select>
+						</div>
 						@endif
-						@if(Auth::user()->empleado->laborales->last()->puesto->id <= 4)
+						@if(Auth::user()->empleado->laborales->last()->puesto->id < 4)
 						<div class="form-group col-sm-3" id="estado" >
 							<label class="control-label">✱Estado:</label>
 							<select id="estados" class="form-control">
+							</select>
+						</div>
+						@elseif(Auth::user()->empleado->laborales->last()->puesto->id == 4)
+						<div class="form-group col-sm-3" id="estado" >
+							<label class="control-label">✱Estado:</label>
+							<select id="estados" class="form-control">
+								<option value="">Seleccionar</option>
+								<option value="{{ Auth::user()->empleado->laborales->last()->estado->id }}">{{ Auth::user()->empleado->laborales->last()->estado->nombre }}</option>
 							</select>
 						</div>
 						@endif
