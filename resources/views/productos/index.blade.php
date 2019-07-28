@@ -57,10 +57,21 @@
 						</div>
 					@endif
 				</div>
-				<div class="row form-group" id="filtro-moto" @if ($request->type != "MOTO")style="display: none;"@endif>
-					<div class="col-sm-3 col-sm-offset-3">
-						<label class="control-label">Cilindrada :</label>
-						<select name="cilindrada" class="form-control">
+				<div class="row form-group" id="filtro-carro" style="display: none">
+					<div class="col-sm-3 ">
+						<label class="control-label">CATEGORIA</label>
+						<select name="categoria" class="form-control">
+							<option value="">Seleccionar</option>
+							<option value="categoria_1">CATEGORIA 1</option>
+							<option value="categoria_2">CATEGORIA 2</option>
+							<option value="categoria_3">CATEGORIA 3</option>
+						</select>
+					</div>
+				</div>
+				<div class="row form-group" id="filtro-moto" style="display: none">
+					<div class="col-sm-3 ">
+						<label class="control-label">De:</label>
+						<select name="cilindrada_minima" class="form-control">
 							<option value="">Seleccionar</option>
 							<option value="90cc">90 CC</option>
 							<option value="102cc">102 CC</option>
@@ -77,6 +88,25 @@
 							<option value="800cc">800 CC</option>
 						</select>
 					</div>
+					<div class="col-sm-3">
+							<label class="control-label">A:</label>
+							<select name="cilindrada_maxima" class="form-control">
+								<option value="">Seleccionar</option>
+								<option value="90cc">90 CC</option>
+								<option value="102cc">102 CC</option>
+								<option value="125cc">125 CC</option>
+								<option value="135cc">135 CC</option>
+								<option value="150cc">150 CC</option>
+								<option value="160cc">160 CC</option>
+								<option value="200cc">200 CC</option>
+								<option value="220cc">220 CC</option>
+								<option value="275cc">375 CC</option>
+								<option value="400cc">400 CC</option>
+								<option value="495cc">495 CC</option>
+								<option value="650cc">650 CC</option>
+								<option value="800cc">800 CC</option>
+							</select>
+						</div>
 					<div class="col-sm-3" >
 						<label class="control-label">Tipo:</label>
 						<select name="categoria" class="form-control">
@@ -105,7 +135,9 @@
 				<div class="col-sm-12">
 					<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px">
 						<tr class="info">
-							<th class="col-sm-2">Identificador</th>
+							<th class="col-sm-1">Identificador</th>
+							<th class="col-sm-1">Tipo</th>
+							<th class="col-sm-1">Categoria</th>
 							<th class="col-sm-1">Marca</th>
 							<th class="col-sm-4">Descripción</th>
 							<th class="col-sm-2">Precio de Lista</th>
@@ -122,6 +154,8 @@
 						@if(isset($product))
 						<tr class="active">
 							<td>{{ $product->clave }}</td>
+							<td>{{ $product->tipo }}</td>
+							<td> - </td>
 							<td>{{ $product->marca }}</td>
 							<td>{{ $product->descripcion }}</td>
 							<td>${{ number_format($product->precio_lista, 2) }}</td>
@@ -264,15 +298,32 @@
 @endsection
 @section('scripts')
 	<script>
+		
+		/**
+		 * Si se selecciona "moto" 
+		 * se muestran los filtros de moto
+		 * se ocultan los filtros de carro 
+		*/
+
 		$('#moto').change(function() {
 			if ($(this).prop('checked')) {
 				$('#filtro-moto').prop('style', '');
+				$('#filtro-carro').prop('style', 'display: none;');
 			}
 		});
+
+		/**
+		 * Si se selecciona "carro" 
+		 * se muestran los filtros de carro
+		 * se ocultan los filtros de moto 
+		*/
+
 		$('#carro').change(function() {
 			if ($(this).prop('checked')) {
 				$('#filtro-moto').prop('style', 'display: none;');
+				$('#filtro-carro').prop('style', '');
 			}
 		});
+
 	</script>
 @endsection

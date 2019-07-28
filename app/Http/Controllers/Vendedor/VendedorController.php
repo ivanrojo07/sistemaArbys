@@ -179,6 +179,7 @@ class VendedorController extends Controller
     }
 
     public function control(){
+
         $regiones=Region::get();
         $subgerentes=Subgerente::get();
         return view('vendedores.control.control',['regiones'=>$regiones, 'subgerentes']);
@@ -192,34 +193,58 @@ class VendedorController extends Controller
     }
 
     public function grupos(Oficina $oficina){
-        //$grupos=Grupo::get();
-        $grupos = [];
-        $empleado = Auth::user()->empleado;
-        //obtener todos los grupos de la oficina
-        if ($empleado->id == 1) 
-            $grupos = Grupo::get();
+        // //$grupos=Grupo::get();
+        // $grupos = [];
+        // $empleado = Auth::user()->empleado;
+        // //obtener todos los grupos de la oficina
+        // if ($empleado->id == 1) 
+        //     $grupos = Grupo::get();
 
-        elseif (isset($empleado->laborlaes) && $empleado->laborlaes->last()->puesto->id < 6 ) {
-            foreach ($oficina->laborales as $laboral) {
-                if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
-                    foreach ($laboral->empleado->subgerente->grupos as $grupo) {
-                        $grupos[$grupo->id] = $grupo;
-                    }
+        // elseif (isset($empleado->laborlaes) && $empleado->laborlaes->last()->puesto->id < 6 ) {
+        foreach ($oficina->laborales as $laboral) {
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
+                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                    $grupos[$grupo->id] = $grupo;
                 }
             }
+        }
 
-        }
-        else{
-            if (isset($empleado->subgerente)) {
-                $grupos = $empleado->subgerente->grupos;
-            }
-        }
+        // }
+        // else{
+        //     if (isset($empleado->subgerente)) {
+        //         $grupos = $empleado->subgerente->grupos;
+        //     }
+        // }
+
         return view('vendedores.control.grupos',['grupos'=>$grupos]);
     }
 
     public function Vendedores(Oficina $oficina){
-        $vendedores = Vendedor::whereNotIn('id', [1])->get();
-        return view('vendedores.control.vendedores',['vendedores'=>$vendedores]);
+
+        foreach ($oficina->laborales as $laboral) {
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
+                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                    $grupos[$grupo->id] = $grupo;
+                }
+            }
+        }
+
+        // Vendedor si tiene grupo
+
+        // $vendedores = Vendedor::get();
+
+        foreach( Vendedor::get() as $vendedor ){
+            if( isset( $grupos[$vendedor->grupo_id] ) ){
+                $vendedores[] = $vendedor;
+            }
+        }
+
+        if( !empty($vendedores) ){
+            return view('vendedores.control.vendedores', compact('vendedores') );
+        }else{
+            return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
+        }
+
     }
 
     public function getHistorialVendedor(Request $request){

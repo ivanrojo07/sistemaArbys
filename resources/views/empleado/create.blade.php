@@ -20,14 +20,11 @@
 		@if ($errors->any())
 		    <div class="alert alert-danger">
 		    	<h5>Por favor corrija los errores</h5>
-		        {{-- <ul>	
-		            @foreach ($errors->all() as $error)
-		                <li>{{ $error }}</li>
-		            @endforeach
-		        </ul> --}}
 		    </div>
 		@endif
+
 		<form method="POST" action="{{ route('empleados.store') }}">
+			{{-- {{route('empleados.store')}} --}}
 			{{ csrf_field() }}
 			<div class="panel-default">
 				<div class="panel-body">

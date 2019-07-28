@@ -90,6 +90,11 @@
 								<option value="Autos, Motos y Casas">Autos, Motos y Casas</option>
 							</select>
 						</div>
+						<div class="form-group col-sm-3" id="grupo" style="display: none;">
+							<label class="control-label">✱Grupo:</label>
+							<select name="group_id" id="grupos" class="form-control">
+							</select>
+						</div>
 						<div class="form-group col-sm-3">
 							<label class="control-label">✱Salario Nominal:</label>
 							<input class="form-control" type="text" id="inicial" name="inicial" required>
@@ -119,9 +124,12 @@
 
     	$('#puesto_id').change(function() {
 
+			console.log( document.getElementById("puesto_id").value );
+
     		var val = parseInt(document.getElementById("puesto_id").value);
       		document.getElementById('region').style.display = 'none';
-      		document.getElementById('estado').style.display = 'none';
+			  document.getElementById('estado').style.display = 'none';
+			  document.getElementById('estado').style.display = 'none';
       		document.getElementById('oficina').style.display = 'none';
       		document.getElementById('experto').style.display = 'none';
 			$("#regiones").prop('name', '');
@@ -181,7 +189,8 @@
       				document.getElementById('region').style.display = 'block';
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
-      				document.getElementById('experto').style.display = 'block';
+					document.getElementById('experto').style.display = 'block';
+					document.getElementById('grupo').style.display = 'block';  
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#expertos").prop('name', 'experto');
 					$("#estados").prop('required', true);
@@ -224,16 +233,19 @@
 			});
 
 			$('#oficinas').change(function() {
-				var id = $('#oficinas').val();
+
+				console.log("|| OFICINA: ", $('#oficinas').val());
+
+				var oficina_id = $('#oficinas').val();
 				$.ajax({
-					url: "{{ url('/oficina2') }}/"+id,
+					url: "{{url('api/office')}}/"+oficina_id+"/groups",
 					type: "GET",
 					dataType: "html",
 					success: function(res){
 						$('#grupos').html(res);
 					},
 					error: function (){
-						$('#grupos').html('');
+						$('#grupos').html('<option value="2">ERROR 2</option>');
 					}
 				});
 			});

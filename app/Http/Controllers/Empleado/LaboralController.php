@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
+
 class LaboralController extends Controller
 {
     /**
@@ -79,7 +80,10 @@ class LaboralController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Empleado $empleado)
-    { 
+    {
+
+        // return "It's here";
+
         $request['actualizacion'] = $request->contratacion;
         $request['actual'] = $request->inicial;
         $request['original'] = Puesto::find($request->puesto_id)->nombre;       
@@ -146,7 +150,14 @@ class LaboralController extends Controller
         } 
         else if($request->puesto_id == 7) {
             $empleado->laborales()->save($laborales);
-            $vendedor = new Vendedor(['experto' => $request->experto]);
+            // $vendedor = new Vendedor(['experto' => $request->experto]);
+            $vendedor = new Vendedor();
+            $vendedor->experto = $request->experto;
+            $vendedor->grupo_id = (int)$request->input('group_id');
+
+            // dd((int)$request->input('group_id'));
+
+            // dd($vendedor);
             $empleado->vendedor()->save($vendedor);
         }
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
@@ -200,17 +211,22 @@ class LaboralController extends Controller
      */    
     public function update(Request $request, Empleado $empleado)
     {
+
         $laborales = new Laboral($request->all());
         //dd($laborales);
         $grupos=Grupo::get();
         $empleado->experto = $request->experto;
         $empleado->save();
         
+        // Si sube de puesto a la gerencia
         if($request->puesto_id == 5)
         {
             //1 si esta libre, 0 si esta ocupada
             if($this->VerificarGerencia($laborales))
-            {    
+            {
+
+                return "Ya hay gerente";
+
                 if(isset($empleado->gerente))                            
                 {
                     Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente'); 
@@ -295,6 +311,7 @@ class LaboralController extends Controller
                 $empleado->vendedor()->save($vendedor);
             }
         }
+
         return redirect()->route('empleados.laborals.index', ['empleado' => $empleado]);
     }
 

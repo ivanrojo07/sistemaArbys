@@ -70,8 +70,8 @@
 							<input type="number" class="form-control" name="telefono" pattern="+[0-9]" id="telefono">
 						</div>
 						<div class="col-sm-3 form-group">
-							<label class="control-label">Teléfono Celular:</label>
-							<input type="number" class="form-control" name="movil" pattern="+[0-9]" id="movil">
+							<label class="control-label">✱Teléfono Celular:</label>
+							<input type="number" class="form-control" name="movil" pattern="+[0-9]" id="movil" required>
 						</div>
 						{{-- <div class="col-sm-3 form-group">
 							<label class="control-label">✱Canal de Ventas:</label>

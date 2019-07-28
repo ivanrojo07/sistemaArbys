@@ -24,7 +24,9 @@
 					<div class="col-sm-12">
 						<table class="table table-striped table-bordered table-hover" style="margin-bottom: 0px">
 							<tr class="info">
-								<th class="col-sm-2">Identificador</th>
+								<th class="col-sm-1">Identificador</th>
+								<th class="col-sm-1">Tipo</th>
+								<th class="col-sm-1">Categoria</th>
 								<th class="col-sm-1">Marca</th>
 								<th class="col-sm-4">Descripción</th>
 								<th class="col-sm-2">Precio de Lista</th>
@@ -34,6 +36,8 @@
 							@foreach($productos as $product)
 							<tr class="active">
 								<td>{{ $product->clave }}</td>
+								<td>{{ $product->tipo }}</td>
+								<td> - </td>
 								<td>{{ $product->marca }}</td>
 								<td>{{ $product->descripcion }}</td>
 								<td>${{ number_format($product->precio_lista, 2) }}</td>

@@ -26,6 +26,7 @@ class ClienteProductoController extends Controller
         $desc = $request->kword;
         $tipo = $request->type;
         $productos = new Product();
+        
         /* Obtenemos el tipo de empleado del usuario autenticado para el caso de que sea vendedor 
          * solo se muestren los vehiculos en los que es experto.
          */
@@ -76,8 +77,19 @@ class ClienteProductoController extends Controller
         if(!isset($min) && isset($max)) 
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
-        if ($tipo == 'MOTO' && isset($request->cilindrada)) {
-            $productos = $productos->where('cilindrada', $request->cilindrada);
+        if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
+
+            // Obtenemos cilindrada minima en entero
+            $cilindrada_minima = $request->cilindrada_minima;
+            $cilindrada_minima = (int)preg_replace("/[^0-9]/", "", $cilindrada_minima);
+
+            // Obtenemos cilindrada maxima en entero
+            $cilindrada_maxima = $request->cilindrada_maxima;
+            $cilindrada_maxima = (int)preg_replace("/[^0-9]/", "", $cilindrada_maxima);
+            
+            $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada','DESC');
+
+            //$productos = $productos->where('cilindrada', $request->cilindrada);
         }
         if ($tipo == 'MOTO' && isset($request->categoria)) {
             $productos = $productos->where('categoria', strtoupper($request->categoria));

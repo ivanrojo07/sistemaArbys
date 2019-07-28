@@ -243,7 +243,7 @@
 			}
 			else{
 				$.ajax({
-					url: "{{ url('control_vendedores/vendedores') }}/" +id,
+					url: "{{ url('control_vendedores/vendedores') }}/"+id,
 					type: "GET",
 					dataType: "html",
 				}).done( function(res){

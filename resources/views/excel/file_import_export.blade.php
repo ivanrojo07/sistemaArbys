@@ -23,22 +23,28 @@
 						<a class="control-label" href="{{ route('excel-file',['type'=>'csv']) }}"><i class="fa fa-download" aria-hidden="true"></i> Descargar en CSV</a>
 					</div>
 				</div>
+				@if($upgradeable)
 				<form role="form" method="POST" action="{{ route('import-csv-excel') }}" accept-charset="UTF-8" enctype="multipart/form-data">
-				{{ csrf_field() }}
-					<div class="row">
-						<div class="col-sm-3 form-group">
-							<label for="sample_file">Seleccionar archivo a importar:</label>
+					{{ csrf_field() }}
+						<div class="row">
+							<div class="col-sm-3 form-group">
+								<label for="sample_file">Seleccionar archivo a importar:</label>
+							</div>
+							<div class="col-sm-9 form-group">
+								<input class="form-control" name="sample_file" type="file" id="sample_file" accept=".xls, .xlsx, .csv">
+							</div>
 						</div>
-						<div class="col-sm-9 form-group">
-		                    <input class="form-control" name="sample_file" type="file" id="sample_file" accept=".xls, .xlsx, .csv">
-		                </div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12 text-center">
-							<input class="btn btn-success" type="submit" value="Importar">
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<input class="btn btn-success" type="submit" value="Importar">
+							</div>
 						</div>
+					</form>
+				@else
+					<div class="alert alert-info">
+						El sistema solo puede subir archivos del día 1 al 7 de cada mes
 					</div>
-				</form>
+				@endif
 			</div>
 		</div>
 	</div>

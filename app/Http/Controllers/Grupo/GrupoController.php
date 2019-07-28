@@ -9,21 +9,24 @@ use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Oficina;
 
 class GrupoController extends Controller
 {
 
-    public function __construct() {
-        $this->middleware(function ($request, $next) {
-            if(Auth::check()) {
-                if(Auth::user()->empleado->gerente)
-                    return $next($request);
-                return redirect()->route('denegado');
-            } else
-                return redirect()->route('login');
-        });
+    public function __construct()
+    {
+        // $this->middleware(function ($request, $next) {
+
+        //     if (Auth::check()) {
+        //         if (Auth::user()->empleado->gerente)
+        //             return $next($request);
+        //         // return redirect()->route('denegado');
+        //     } else
+        //         return redirect()->route('login');
+        // });
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -54,13 +57,12 @@ class GrupoController extends Controller
                         $arreglo_lab[$empleados->empleado_id] = $empleados;
                     }
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->subgerente)){
+
+                        if (isset($laboral->empleado->subgerente)) {
                             foreach ($laboral->empleado->subgerente->grupos as $grupo) {
                                 $grupos_vista[] = $grupo;
                             }
                         }
-                            
                     }
 
                     break;
@@ -76,13 +78,12 @@ class GrupoController extends Controller
                     }
 
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->subgerente)){
+
+                        if (isset($laboral->empleado->subgerente)) {
                             foreach ($laboral->empleado->subgerente->grupos as $grupo) {
                                 $grupos_vista[] = $grupo;
                             }
                         }
-                            
                     }
 
                     break;
@@ -96,15 +97,15 @@ class GrupoController extends Controller
                     }
 
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->subgerente)){
+
+                        if (isset($laboral->empleado->subgerente)) {
                             foreach ($laboral->empleado->subgerente->grupos as $grupo) {
                                 $grupos_vista[] = $grupo;
                             }
                         }
                     }
                     break;
-                
+
                 default:
                     return view('grupos.index', ['grupos' => $grupos_vista]);
                     break;
@@ -122,7 +123,7 @@ class GrupoController extends Controller
     public function create()
     {
         $empleado = Auth::user()->empleado;
-        if($empleado->id == 1) {
+        if ($empleado->id == 1) {
             $subgerentes = Subgerente::where('empleado_id', '!=', '1')->get();
         } else {
             $laborales = $empleado->laborales->last()->oficina->laborales;
@@ -184,8 +185,7 @@ class GrupoController extends Controller
                 $subgerentes[] = $emp->subgerente;
             }
             $subgerentes = array_filter($subgerentes);
-        }
-        else{
+        } else {
             $empleados = Empleado::get();
             $subgerentes = [];
             foreach ($empleados as $empleado) {
@@ -194,7 +194,7 @@ class GrupoController extends Controller
                 }
             }
         }
-        
+
         return view('grupos.edit', ['grupo' => $grupo, 'subgerentes' => $subgerentes]);
     }
 
@@ -211,7 +211,8 @@ class GrupoController extends Controller
         return view('grupos.view', ['grupo' => $grupo]);
     }
 
-    public function vendedores(Grupo $grupo) {
+    public function vendedores(Grupo $grupo)
+    {
         $empleado = Auth::user()->empleado;
         //return dd($empleado->laborales->last());
 
@@ -223,36 +224,56 @@ class GrupoController extends Controller
         $arr = array_unique($arr);
         $vendedores = [];
         foreach ($arr as $emp) {
-            if(isset($emp->vendedor) and !$emp->vendedor->grupo)
+            if (isset($emp->vendedor) and !$emp->vendedor->grupo)
                 $vendedores[] = $emp->vendedor;
         }
         return view('grupos.vendedores', ['grupo' => $grupo, 'vendedores' => $vendedores]);
     }
 
-    public function bind(Request $request, Grupo $grupo) {
+    public function bind(Request $request, Grupo $grupo)
+    {
         $vendedor = Vendedor::find($request->vendedor_id);
         $vendedor->grupo_id = $grupo->id;
         $vendedor->save();
         return redirect()->route('grupos.show', ['grupo' => $grupo]);
     }
 
-    public function unbind(Request $request, Grupo $grupo) {
+    public function unbind(Request $request, Grupo $grupo)
+    {
         $vendedor = Vendedor::find($request->vendedor_id);
         $vendedor->grupo_id = null;
         $vendedor->save();
         return redirect()->route('grupos.show', ['grupo' => $grupo]);
     }
 
+    public function getGroupsByOffice(Request $request, $office_id)
+    {
 
-    public function destroy(Grupo $grupo){
-        foreach($grupo->vendedores as $vendedor){
+        // dd( Oficina::where('id',$office_id)->first()->laborales );
+
+        $laborales = Oficina::where('id', $office_id)->first()->laborales;
+
+        foreach ($laborales as $laboral) {
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
+                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+                    $grupos[] = $grupo;
+                }
+            }
+        }
+
+        // dd($grupos[0]);
+
+        return view('empleado.laborales.grupos', compact('grupos'));
+    }
+
+    public function destroy(Grupo $grupo)
+    {
+        foreach ($grupo->vendedores as $vendedor) {
             $vendedor->grupo_id = null;
             $vendedor->save();
         }
-        
+
         $grupo->delete();
         return redirect()->route('grupos.index');
     }
-
-
 }
