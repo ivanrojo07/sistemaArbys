@@ -86,13 +86,6 @@ class LaboralController extends Controller
     public function store(Request $request, Empleado $empleado)
     {
 
-        // return "It's here";
-        // dd($request->input());
-
-        // $oficina = Oficina::where('id', (int) $request->input('oficina_id'))->first();
-        // $oficina->gerente_id =  Gerente::where('empleado_id', $empleado->id)->first()->id;
-        // dd($oficina);
-
         $request['actualizacion'] = $request->contratacion;
         $request['actual'] = $request->inicial;
         $request['original'] = Puesto::find($request->puesto_id)->nombre;
@@ -120,7 +113,6 @@ class LaboralController extends Controller
                 $oficina = Oficina::where('id', (int) $request->input('oficina_id'))->first();
                 $oficina->gerente_id =  Gerente::where('empleado_id', $empleado->id)->first()->id;
                 $oficina->save();
-
             } else {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return redirect()->back();
@@ -216,18 +208,32 @@ class LaboralController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
 
+        $gerente = Gerente::where('empleado_id', $empleado->id)->first();
+
+        if ($gerente) {
+            $oficina = Oficina::where('gerente_id', $gerente->id)->first();
+
+            if ($oficina) {
+                $oficina->gerente_id = null;
+                $oficina->save();
+            }
+        }
+
+        // dd($request->input());
+
         $laborales = new Laboral($request->all());
         //dd($laborales);
         $grupos = Grupo::get();
         $empleado->experto = $request->experto;
         $empleado->save();
 
+
         // Si sube de puesto a la gerencia
         if ($request->puesto_id == 5) {
             //1 si esta libre, 0 si esta ocupada
             if ($this->VerificarGerencia($laborales)) {
 
-                return "Ya hay gerente";
+                // return "Ya hay gerente";
 
                 if (isset($empleado->gerente)) {
                     Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente');
@@ -237,6 +243,13 @@ class LaboralController extends Controller
                     //devuelve el id del area o un 0 si no hace nada
                     $empleado = $this->CrearGerencia($empleado);
                     $empleado = $this->MakeGerente($empleado);
+
+                    $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
+
+                    if ($oficina) {
+                        $oficina->gerente_id = Gerente::where('empleado_id', $emplado->id)->first()->id;
+                        $oficina->save();
+                    }
                 }
             } else {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');

@@ -40,7 +40,21 @@
 											@endif
 											@if($vendedor->contador->count() != 0)
 											<td>{{ $vendedor->contador->last()->total_clientes }}</td>
-											<td>${{ number_format($vendedor->contador->last()->total_ventas,2, ".", ",") }}</td>
+											<td>
+
+													@php
+													$total_ventas = 0;
+													foreach ($vendedor->clientes()->get() as $cliente) {
+														foreach ($cliente->transactions()->get() as $transaction) {
+															if($transaction->status == 'pagando' || $transaction->status == 'finalizado'){
+																$total_ventas += 1;
+															}
+														}
+													}
+														
+												@endphp
+												{{$total_ventas}}
+											</td>
 											@else
 											<td>0</td>
 											<td>0</td>
@@ -62,8 +76,8 @@
 											<td>Total ventas</td>
 										</tr>
 										<tr>	
-											<td id="total_clientes"></td>
-											<td id="total_ventas"></td>											
+											<td id="total_clientes">--</td>
+											<td id="total_ventas">--</td>											
 										</tr>
 									</table>
 								</div>
@@ -96,17 +110,17 @@
 		];
 
 	$(document).ready(function() {
-		//console.log($('#principal tr:gt(0)'));
-		var filas = $('#principal tr:gt(0)');
-		var clientes = 0;
-		var ventas = 0;
-		$.each(filas, function(index, el) {
-			//console.log($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
-			clientes += parseInt($(el).children('td').eq(3).html());
-			ventas += parseFloat($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
-		});
-		$('#total_clientes').text(clientes.toString());
-		$('#total_ventas').text('$' + ventas.toString());
+		// //console.log($('#principal tr:gt(0)'));
+		// var filas = $('#principal tr:gt(0)');
+		// var clientes = 0;
+		// // var ventas = 0;
+		// $.each(filas, function(index, el) {
+		// 	//console.log($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
+		// 	clientes += parseInt($(el).children('td').eq(3).html());
+		// 	// ventas += parseFloat($(el).children('td').eq(4).html().replace("$", '').replace(",", ''));
+		// });
+		// $('#total_clientes').text(clientes.toString());
+		// // $('#total_ventas').text('$' + ventas.toString());
 
 
 		$('.detallev').click( function(event) {

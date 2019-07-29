@@ -17,6 +17,7 @@ class TipoBajaController extends Controller
         $this->borrar ='bajas.destroy';
         $this->buscar = 'buscarbaja';
     }
+    
     /**
      * Display a listing of the resource.
      *

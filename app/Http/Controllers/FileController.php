@@ -16,7 +16,7 @@ class FileController extends Controller
 
         // Solo se puede actualizar el excel del día 1 al día 7
         $upgradeable = false;
-        if ((int) date('d') <= 31) {
+        if ((int) date('d') <= 7) {
             $upgradeable = true;
         }
 

@@ -240,6 +240,7 @@ class VendedorController extends Controller
         }
 
         if( !empty($vendedores) ){
+
             return view('vendedores.control.vendedores', compact('vendedores') );
         }else{
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";

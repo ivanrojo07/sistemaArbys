@@ -260,6 +260,12 @@
                                                                         <a href="#" onclick="AgregarNuevoTab('{{ url('import-export-csv-excel') }}','Importar Excel')">
                                                                             <i class="fa fa-file-excel-o"></i> Alta por excel
                                                                         </a>
+                                                                        {{-- <a href="#" onclick="AgregarNuevoTab('{{ url('precarga-categoria') }}','Importar Excel')">
+                                                                                <i class="fa fa-file-excel-o"></i> Categoria
+                                                                        </a>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('precarga-tipo') }}','Importar Excel')">
+                                                                                <i class="fa fa-file-excel-o"></i> Tipo
+                                                                        </a>     --}}
                                                                     </li>
                                                                 @endif
                                                                 @if($k->nombre == "indice productos")

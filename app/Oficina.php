@@ -52,4 +52,8 @@ class Oficina extends Model
         return $this->hasMany('App\Subgerente');
     }
 
+    public function gerente(){
+        return $this->belongsTo('App\Gerente');
+    }
+
 }

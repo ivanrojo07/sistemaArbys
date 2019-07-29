@@ -44,12 +44,12 @@ class ClientePagoController extends Controller
                     break;
                 }
             }
-
         }
         return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos, 'folio' => $folio]);
     }
 
-    public function follow(Cliente $cliente, Pago $pago) {
+    public function follow(Cliente $cliente, Pago $pago)
+    {
         $bancos = Banco::get();
         $folio = $pago->folio;
         return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago, 'folio' => $folio]);
@@ -65,25 +65,30 @@ class ClientePagoController extends Controller
     {
         $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
         $request['transaction_id'] = "" . $transaction->id;
-        if($request->restante == null)
+        if ($request->restante == null)
             $request['restante'] = ($request->total - $request->monto) . "";
         else
             $request['restante'] = ($request->restante - $request->monto) . "";
         $pago = new Pago($request->all());
         $transaction->pagos()->save($pago);
+        $transaction->status = "pagando";
+        $transaction->save();
         //Logica para aumentar el contador del vendedor
         $vendedor = $cliente->vendedor;
         $principio_mes = new Carbon('first day of this month');
         $fin_mes = new Carbon('last day of this month');
         $contador = $vendedor->contador->where('fecha_inicio', $principio_mes->format('Y-m-d'))->first();
         if (is_null($contador)) {
-            $contador = $vendedor->contador()->create(['vendedor_id' => $vendedor->id, 'total_clientes' => 0, 'total_ventas' => 0,
-                                         'fecha_inicio' => $principio_mes->format('Y-m-d'), 'fecha_fin' => $fin_mes->format('Y-m-d')
-                                        ]);
+            $contador = $vendedor->contador()->create([
+                'vendedor_id' => $vendedor->id, 'total_clientes' => 0, 'total_ventas' => 0,
+                'fecha_inicio' => $principio_mes->format('Y-m-d'), 'fecha_fin' => $fin_mes->format('Y-m-d')
+            ]);
             if ($pago->status === "Aprobado") {
                 $contador->total_clientes += 1;
                 $contador->total_ventas += $pago->total;
                 $contador->save();
+                $transaction->status = "finalizado";
+                $transaction->save();
                 return redirect()->route('clientes.show', ['cliente' => $cliente]);
             }
             $contador->save();
@@ -93,6 +98,8 @@ class ClientePagoController extends Controller
             $contador->total_clientes += 1;
             $contador->total_ventas += $pago->total;
             $contador->save();
+            $transaction->status = "finalizado";
+            $transaction->save();
         }
 
 
@@ -158,14 +165,13 @@ class ClientePagoController extends Controller
                     break;
                 }
             }
-
         }
         return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio]);
     }
 
-    public function getProduct($id) {
+    public function getProduct($id)
+    {
         $producto = Product::find($id);
         return view('product.getProduct', ['producto' => $producto]);
     }
-
 }

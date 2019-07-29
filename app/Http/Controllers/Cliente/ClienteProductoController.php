@@ -138,6 +138,7 @@ class ClienteProductoController extends Controller
             $transaction = new Transaction;
             $transaction->cliente_id = $cliente->id;
             $transaction->product_id = $producto->id;
+            $transaction->status = "cotizacion";
             $transaction->save();
             alert()->success('Success', 'Producto añadido con exito'); 
             //return redirect()->back()->with('success', 'Producto añadido con exito');
