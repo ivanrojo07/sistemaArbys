@@ -14,9 +14,13 @@ class CreateSubgerentesTable extends Migration
     public function up()
     {
         Schema::create('subgerentes', function (Blueprint $table) {
+
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
+            $table->integer('oficina_id')->unsigned()->nullable();
+
             $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('oficina_id')->references('id')->on('oficinas');
             $table->timestamps();
         });
     }

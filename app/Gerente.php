@@ -15,5 +15,11 @@ class Gerente extends Model
 
     public function empleado() {
     	return $this->belongsTo('App\Empleado');
+	}
+
+	public function oficina()
+    {
+        return $this->hasOne('App\Oficina');
     }
+
 }

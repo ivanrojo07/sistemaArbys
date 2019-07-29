@@ -11,6 +11,7 @@ class Subgerente extends Model
 	protected $fillable = [
 		'id',
 		'empleado_id',
+		'oficina_id',
         'change_puesto'
 	];
 
@@ -20,5 +21,5 @@ class Subgerente extends Model
 
     public function grupos(){
     	return $this->hasMany('App\Grupo');
-    }
+	}
 }

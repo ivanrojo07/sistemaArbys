@@ -17,6 +17,7 @@ class Oficina extends Model
         'abreviatura',
         'responsable_com',
         'responsable_adm',
+        'gerente_id',
         'descripcion',
         'calle',
         'numext',
@@ -44,6 +45,11 @@ class Oficina extends Model
 
     public function laborales() {
         return $this->hasMany('App\Laboral');
+    }
+
+    public function subgerentes()
+    {
+        return $this->hasMany('App\Subgerente');
     }
 
 }
