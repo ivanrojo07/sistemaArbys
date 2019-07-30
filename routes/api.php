@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('office/{office_id}/groups', 'Grupo\GrupoController@getGroupsByOffice');
+
+Route::get('oficina/{oficina}/clientes','Clientes\ClientesController@getClientesByOffice')->name('oficina.clientes');
