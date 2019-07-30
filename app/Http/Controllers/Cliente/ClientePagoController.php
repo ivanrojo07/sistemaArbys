@@ -79,13 +79,7 @@ class ClientePagoController extends Controller
         $fin_mes = new Carbon('last day of this month');
         $contador = $vendedor->contador->where('fecha_inicio', $principio_mes->format('Y-m-d'))->first();
         if (is_null($contador)) {
-            $contador = $vendedor->contador()->create([
-                'vendedor_id' => $vendedor->id, 'total_clientes' => 0, 'total_ventas' => 0,
-                'fecha_inicio' => $principio_mes->format('Y-m-d'), 'fecha_fin' => $fin_mes->format('Y-m-d')
-            ]);
             if ($pago->status === "Aprobado") {
-                $contador->total_clientes += 1;
-                $contador->total_ventas += $pago->total;
                 $contador->save();
                 $transaction->status = "finalizado";
                 $transaction->save();
@@ -95,8 +89,6 @@ class ClientePagoController extends Controller
         }
         if ($pago->status === "Aprobado") {
             $contador = $vendedor->contador->last();
-            $contador->total_clientes += 1;
-            $contador->total_ventas += $pago->total;
             $contador->save();
             $transaction->status = "finalizado";
             $transaction->save();

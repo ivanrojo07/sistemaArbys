@@ -186,8 +186,11 @@ class VendedorController extends Controller
     }
 
     public function subgerentes(Oficina $oficina){
-        $oficina=Oficina::find($oficina);
-        $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
+
+        // $oficina=Oficina::find($oficina);
+        // $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
+        $subgerentes = $oficina->subgerentes()->get();
+
         $grupos=Grupo::get();
         return view('vendedores.control.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
     }

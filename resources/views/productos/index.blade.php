@@ -217,7 +217,7 @@
 						<div class="form-group col-sm-2 col-sm-offset-1">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="checkbox" name="60 meses" aria-label="60 meses">
+									<input type="checkbox" name="60 meses" aria-label="60 meses" {{ $producto['m60'] > 0 ? '' : 'disabled' }} >
 									<label class="control-label">60 Meses:</label>
 									<dd>{{ $producto['m60'] > 0 ? '$' . number_format($producto['m60'], 2) : 'N/A' }}</dd>
 								</span>
@@ -226,7 +226,7 @@
 						<div class="form-group col-sm-2">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="checkbox" name="48 meses" aria-label="48 meses">
+									<input type="checkbox" name="48 meses" aria-label="48 meses" {{ $producto['m48'] > 0 ? '' : 'disabled' }} >
 									<label class="control-label">48 Meses:</label>
 									<dd>{{ $producto['m48'] > 0 ? '$' . number_format($producto['m48'], 2) : 'N/A' }}</dd>
 								</span>
@@ -235,7 +235,7 @@
 						<div class="form-group col-sm-2">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="checkbox" name="36 meses" aria-label="36 meses">
+									<input type="checkbox" name="36 meses" aria-label="36 meses" {{ $producto['m36'] > 0 ? '' : 'disabled' }}>
 									<label class="control-label">36 Meses:</label>
 									<dd>{{ $producto['m36'] > 0 ? '$' . number_format($producto['m36'], 2) : 'N/A' }}</dd>
 								</span>
@@ -244,7 +244,7 @@
 						<div class="form-group col-sm-2">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="checkbox" name="24 meses" aria-label="24 meses">
+									<input type="checkbox" name="24 meses" aria-label="24 meses" {{ $producto['m24'] > 0 ? '' : 'disabled' }}>
 									<label class="control-label">24 Meses:</label>
 									<dd>{{ $producto['m24'] > 0 ? '$' . number_format($producto['m24'], 2) : 'N/A' }}</dd>
 								</span>
@@ -253,7 +253,7 @@
 						<div class="form-group col-sm-2">
 							<div class="input-group">
 								<span class="input-group-addon">
-									<input type="checkbox" name="12 meses" aria-label="12 meses">
+									<input type="checkbox" name="12 meses" aria-label="12 meses" {{ $producto['m12'] > 0 ? '' : 'disabled' }}>
 									<label class="control-label">12 Meses:</label>
 									<dd>{{ $producto['m12'] > 0 ? '$' . number_format($producto['m12'], 2) : 'N/A' }}</dd>
 								</span>

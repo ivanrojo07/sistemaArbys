@@ -53,6 +53,7 @@ class UsuarioController extends Controller
     {
         if($this->hasComponent('crear usuario')) {
             $perfiles = Perfil::whereNotIn('id', [1])->get();
+            
             $arrs = Empleado::get();
             $empleados = [];
             foreach ($arrs as $arr)
@@ -159,7 +160,7 @@ class UsuarioController extends Controller
     public function destroy(User $usuario)
     {
         if($this->hasComponent('eliminar usuario')) {
-            $usuario = User::find($id);
+            // $usuario = User::find($id);
             $seguridad = $this->hasSecurity($usuario->perfil);
             if($usuario->perfil->id == self::PERFIL_ID_ADMIN || (Auth::user()->perfil->id != self::PERFIL_ID_ADMIN && $seguridad))
                 return redirect()->route('denegado');
