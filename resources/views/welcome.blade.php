@@ -260,18 +260,26 @@
                                                                         <a href="#" onclick="AgregarNuevoTab('{{ url('import-export-csv-excel') }}','Importar Excel')">
                                                                             <i class="fa fa-file-excel-o"></i> Alta por excel
                                                                         </a>
-                                                                        {{-- <a href="#" onclick="AgregarNuevoTab('{{ url('precarga-categoria') }}','Importar Excel')">
-                                                                                <i class="fa fa-file-excel-o"></i> Categoria
-                                                                        </a>
-                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('precarga-tipo') }}','Importar Excel')">
-                                                                                <i class="fa fa-file-excel-o"></i> Tipo
-                                                                        </a>     --}}
                                                                     </li>
                                                                 @endif
                                                                 @if($k->nombre == "indice productos")
                                                                     <li>
                                                                         <a href="#" onclick="AgregarNuevoTab('{{ url('productos') }}','Buqueda de Productos')">
                                                                             <i class="fa fa-search"></i> Búsqueda
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                                @if($k->nombre == "indice tipo")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('provedores-agregar-tipo') }}','Agregar tipo')">
+                                                                            <i class="fa fa-file-excel-o"></i> Agregar tipo
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                                @if($k->nombre == "indice categoria")
+                                                                    <li>
+                                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('provedores-agregar-categoria') }}','Agregar categoria')">
+                                                                            <i class="fa fa-search"></i> Agregar categoria
                                                                         </a>
                                                                     </li>
                                                                 @endif

@@ -7,7 +7,7 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-sm-4">
-						<h4>{{ $titulo }}</h4>
+						<h4>Agregar tipos</h4>
 					</div>
 				</div>
 			</div>
@@ -15,14 +15,14 @@
 	</div>
 	<div class="panel-body">
 		<div class="col-lg-6">
-			<a class="btn btn-success" href="{{ route($agregar) }}">
-			<strong>Agregar {{$titulo}}</strong>
+        <a class="btn btn-success" href="{{route('tipos.create')}}">
+			<strong>Agregar tipos</strong>
 		</a>
 		</div>
 	</div>
-	@if (count($precargas) == 0)
+	@if (count($tipos) == 0)
 		{{-- expr --}}
-		<label>No hay {{$titulo}} añadidos</label>
+		<label>No hay tipos</label>
 	@else
 	<div class="jumbotron">
 	<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
@@ -30,22 +30,20 @@
 			<tr class="info">
 				<th>@sortablelink('id', '#'){{-- Nombre --}}</th>
 				<th>@sortablelink('nombre', 'Nombre')</th>
-				<th>@sortablelink('abreviatura', 'Abreviatura')</th>
 				<th>Operacion</th>
 			</tr>
 		</thead>
-		@foreach($precargas as $precarga)
+		@foreach($tipos as $tipo)
 			<tr class="active">
 				<td>
-					{{ $precarga->id }}
+					{{ $tipo->id }}
 				</td>
-				<td>{{ $precarga->nombre }}</td>
-				<td>{{ $precarga->abreviatura }}</td>
+				<td>{{ $tipo->nombre }}</td>
 				<td>
 					<div class="row-8">
 						<div class="col-sm-4">
 							<a class="btn btn-info btn-sm" 
-							   href="{{ route($editar,['precarga'=>$precarga]) }}">
+							   href="#">
 							   <strong>
 							   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar
 							   </strong>
@@ -53,11 +51,10 @@
 							
 						</div>
 					</div>
-					<form role="form" id="eliminar {{ $precarga->id }}" method="POST" action="{{ route($borrar,['precarga'=>$precarga]) }}">
+					<form role="form" method="POST">
 						{{ csrf_field() }}
 						<input type="hidden" name="_method" value="DELETE">
-					<a type="submit" onclick="deleteFunction('eliminar {{ $precarga->id }}')" class="btn btn-info btn-sm" >
-						
+					<a type="submit" class="btn btn-info btn-sm" >
 						<i class="fa fa-trash" aria-hidden="true"></i>
 						<strong>
 						 Borrar
@@ -70,7 +67,6 @@
 		@endforeach
 	</table>
 	</div>
-{{ $precargas->links()}}
 	@endif
 </div>
 

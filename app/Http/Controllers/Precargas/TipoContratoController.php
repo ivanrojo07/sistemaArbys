@@ -24,7 +24,6 @@ class TipoContratoController extends Controller
      */
     public function index()
     {
-        //
         $contratos = TipoContrato::sortable()->paginate(10);
         return view('precargas.index',['precargas'=>$contratos, 'agregar'=>$this->agregar, 'editar'=>$this->editar,'borrar'=>$this->borrar,'titulo'=>$this->titulo,'buscar'=>$this->buscar]);
     }
@@ -36,7 +35,6 @@ class TipoContratoController extends Controller
      */
     public function create()
     {
-        //
         return view('precargas.create',['titulo'=>$this->titulo,'guardar'=>$this->guardar]);
     }
 

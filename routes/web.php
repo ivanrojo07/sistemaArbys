@@ -119,6 +119,13 @@ Route::resource('provedores.direccionfisica','Provedor\ProvedorDireccionFisicaCo
 Route::resource('provedores.datosgenerales','Provedor\ProvedorDatosGeneralesController');
 Route::resource('provedores.contacto','Provedor\ProvedorContactoController');
 Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosController');
+Route::get('provedores-agregar-categoria','Provedor\ProveedorCategoriaController@index')->name('categorias.index');
+Route::get('categorias.create','Provedor\ProveedorCategoriaController@create')->name('categorias.create');
+Route::post('categoria.store','Provedor\ProveedorCategoriaController@store')->name('categoria.store');
+
+Route::get('provedores-agregar-tipo', 'Provedor\ProveedorTipoController@index')->name('tipos.index');
+Route::get('tipos.create', 'Provedor\ProveedorTipoController@create')->name('tipos.create');
+Route::post('tipos.store', 'Provedor\ProveedorTipoController@store')->name('tipos.store');
 
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
@@ -133,13 +140,6 @@ Route::resource('sucursales','Sucursal\SucursalController');
 Route::get('sucursales.create','Sucursal\SucursalController@create');
 Route::get('sucursales.index','Sucursal\SucursalController@index');
 Route::resource('sucursal','Empleado\EmpleadoSucursalController');
-
-// Route::get('pdf',function() {
-// 	$pdf = PDF::loadView('clientes.aux_html');
-// 	$clientes= App\Cliente::get();
-//     $pdf=PDF::loadView('clientes.vista',['clientes'=>$clientes]);
-// 	return $pdf->download('archivo.pdf');
-// });
 
 // OFICINAS
 Route::get('region', 'Region\RegionController@index')->name('region.index');
