@@ -122,6 +122,9 @@ Route::resource('provedores.datosbancarios','Provedor\ProveedorDatosBancariosCon
 Route::get('provedores-agregar-categoria','Provedor\ProveedorCategoriaController@index')->name('categorias.index');
 Route::get('categorias.create','Provedor\ProveedorCategoriaController@create')->name('categorias.create');
 Route::post('categoria.store','Provedor\ProveedorCategoriaController@store')->name('categoria.store');
+Route::delete('categoria.delete','Provedor\ProveedorCategoriaController@delete')->name('categoria.delete');
+Route::get('categoria.edit/{id}','Provedor\ProveedorCategoriaController@edit')->name('categoria.edit');
+Route::put('categoria.put','Provedor\ProveedorCategoriaController@put')->name('categoria.put');
 
 Route::get('provedores-agregar-tipo', 'Provedor\ProveedorTipoController@index')->name('tipos.index');
 Route::get('tipos.create', 'Provedor\ProveedorTipoController@create')->name('tipos.create');

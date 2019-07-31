@@ -42,24 +42,21 @@
 				<td>
 					<div class="row-8">
 						<div class="col-sm-4">
-							<a class="btn btn-info btn-sm" 
-							   href="#">
-							   <strong>
-							   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar
-							   </strong>
+							<a class="btn btn-info btn-sm" href="{{route('categoria.edit',['id'=>$categoria->id])}}">
+							   <strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar </strong>
 							</a>
-							
 						</div>
 					</div>
-					<form role="form" method="POST">
+					<form role="form" method="POST" action="{{route('categoria.delete')}}">
 						{{ csrf_field() }}
 						<input type="hidden" name="_method" value="DELETE">
-					<a type="submit" class="btn btn-info btn-sm" >
-						<i class="fa fa-trash" aria-hidden="true"></i>
-						<strong>
-						 Borrar
-						</strong>
-					</a>
+						<input type="hidden" name="categoria_id" value="{{$categoria->id}}">
+						<button type="submit" class="btn btn-info btn-sm" >
+							<i class="fa fa-trash" aria-hidden="true"></i>
+							<strong>
+						 		Borrar
+							</strong>
+						</button>
 					</form>
 			</tr>
 				</td>

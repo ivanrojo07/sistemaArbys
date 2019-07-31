@@ -56,8 +56,7 @@
 					<form role="form" id="eliminar {{ $precarga->id }}" method="POST" action="{{ route($borrar,['precarga'=>$precarga]) }}">
 						{{ csrf_field() }}
 						<input type="hidden" name="_method" value="DELETE">
-					<a type="submit" onclick="deleteFunction('eliminar {{ $precarga->id }}')" class="btn btn-info btn-sm" >
-						
+						<a type="submit" onclick="deleteFunction('eliminar {{ $precarga->id }}')" class="btn btn-info btn-sm" >
 						<i class="fa fa-trash" aria-hidden="true"></i>
 						<strong>
 						 Borrar

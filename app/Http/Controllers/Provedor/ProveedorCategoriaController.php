@@ -28,4 +28,25 @@ class ProveedorCategoriaController extends Controller
         Categoria::create($request->all());
         return redirect()->route('categorias.index');
     }
+
+    public function delete(Request $request)
+    {
+        $categoria = Categoria::find($request->input('categoria_id'));
+        $categoria->delete();
+        return redirect()->route('categorias.index');
+    }
+
+    public function edit($id)
+    {
+        $categoria = Categoria::find($id);
+        return view('provedores.categorias.edit', compact('categoria'));
+    }
+
+    public function put(Request $request)
+    {
+        $categoria = Categoria::find($request->input('categoria_id'));
+        $categoria->fill($request->all());
+        $categoria->save();
+        return redirect()->route('categorias.index');
+    }
 }
