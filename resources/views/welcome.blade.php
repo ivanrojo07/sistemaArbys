@@ -272,14 +272,14 @@
                                                                 @if($k->nombre == "indice tipo")
                                                                     <li>
                                                                         <a href="#" onclick="AgregarNuevoTab('{{ url('provedores-agregar-tipo') }}','Agregar tipo')">
-                                                                            <i class="fa fa-file-excel-o"></i> Agregar tipo
+                                                                            <i class="fa fa-plus"></i> Agregar tipo
                                                                         </a>
                                                                     </li>
                                                                 @endif
                                                                 @if($k->nombre == "indice categoria")
                                                                     <li>
                                                                         <a href="#" onclick="AgregarNuevoTab('{{ url('provedores-agregar-categoria') }}','Agregar categoria')">
-                                                                            <i class="fa fa-search"></i> Agregar categoria
+                                                                            <i class="fa fa-plus"></i> Agregar categoria
                                                                         </a>
                                                                     </li>
                                                                 @endif

@@ -8,14 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Pago;
 use App\Transaction;
 use App\Vendedor;
+use App\Oficina;
 
 class RellenarTransaccionesController extends Controller
 {
     public function status()
     {
-
-        $vendedor = Vendedor::find(6);
-
-        return $vendedor->transactionsByLastMonth();
+        $oficina = Oficina::find(2);
+        return $oficina->directorRegional();
     }
 }

@@ -49,11 +49,10 @@ class VendedorController extends Controller
                         $arreglo_lab[$empleados->empleado_id] = $empleados;
                     }
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor)){
+
+                        if (isset($laboral->empleado->vendedor)) {
                             $vendedores_vista[] = $laboral->empleado->vendedor;
                         }
-                            
                     }
 
                     break;
@@ -69,10 +68,9 @@ class VendedorController extends Controller
                     }
 
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor))
+
+                        if (isset($laboral->empleado->vendedor))
                             $vendedores_vista[] = $laboral->empleado->vendedor;
-                            
                     }
 
 
@@ -87,12 +85,12 @@ class VendedorController extends Controller
                     }
 
                     foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor))
+
+                        if (isset($laboral->empleado->vendedor))
                             $vendedores_vista[] = $laboral->empleado->vendedor;
                     }
                     break;
-                
+
                 default:
                     return view('vendedores.index', ['vendedores' => $vendedores]);
                     break;
@@ -102,13 +100,15 @@ class VendedorController extends Controller
         return view('vendedores.index', ['vendedores' => $vendedores]);
     }
 
-    public function activar(Vendedor $vendedor) {
+    public function activar(Vendedor $vendedor)
+    {
         $vendedor->status = 'Activo';
         $vendedor->save();
         return redirect()->route('vendedors.index');
     }
 
-    public function bajar(Vendedor $vendedor) {
+    public function bajar(Vendedor $vendedor)
+    {
         $vendedor->status = 'Baja';
         $vendedor->save();
         return redirect()->route('vendedors.index');
@@ -122,25 +122,26 @@ class VendedorController extends Controller
      */
     public function destroy(Vendedor $vendedor)
     {
-        if($vendedor->status == 'Activo' || count($vendedor->clientes) > 0 || $vendedor->grupo) {
+        if ($vendedor->status == 'Activo' || count($vendedor->clientes) > 0 || $vendedor->grupo) {
             dd('¡Error, vendedor no puede ser eliminado, todavía persisten relaciones!');
             return redirect()->route('vendedors.index');
         }
     }
 
-    public function getVendedores(){
+    public function getVendedores()
+    {
         $vendedores = Vendedor::whereNotIn('id', [1])->get();
-        return view('vendedores.select',['vendedores'=>$vendedores]);
+        return view('vendedores.select', ['vendedores' => $vendedores]);
     }
 
     public function asignar()
     {
         $empleado = Auth::user()->empleado;
-        if($empleado->id == 1) {
+        if ($empleado->id == 1) {
             $grupos = Grupo::get();
             $vendedores = Vendedor::whereNotIn('id', [1])->get();
             $subgerentes = Subgerente::get();
-            $num_grupos = Array();
+            $num_grupos = array();
             $grupos_vista = [];
             foreach ($subgerentes as $sub) {
                 $num_grupos[$sub->id] = count(Grupo::where('subgerente_id', $sub->id)->get());
@@ -153,8 +154,8 @@ class VendedorController extends Controller
                 $arr[$laboral->empleado_id] = $laboral->empleado;
             $vendedores = [];
 
-            foreach ($arr as $emp){
-                if(isset($emp->vendedor))
+            foreach ($arr as $emp) {
+                if (isset($emp->vendedor))
                     $vendedores[] = $emp->vendedor;
             }
             $num_grupos = [];
@@ -178,76 +179,76 @@ class VendedorController extends Controller
         return redirect()->route('vendedor.asignar');
     }
 
-    public function control(){
+    public function control()
+    {
 
-        $regiones=Region::get();
-        $subgerentes=Subgerente::get();
-        return view('vendedores.control.control',['regiones'=>$regiones, 'subgerentes']);
+        $regiones = Region::get();
+        $subgerentes = Subgerente::get();
+        return view('vendedores.control.control', ['regiones' => $regiones, 'subgerentes']);
     }
 
-    public function subgerentes(Oficina $oficina){
+    public function subgerentes(Oficina $oficina)
+    {
 
         // $oficina=Oficina::find($oficina);
         // $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
         $subgerentes = $oficina->subgerentes()->get();
 
-        $grupos=Grupo::get();
-        return view('vendedores.control.subgerente',['subgerentes'=>$subgerentes,'grupos'=>$grupos]);
+        $grupos = Grupo::get();
+        return view('vendedores.control.subgerente', ['subgerentes' => $subgerentes, 'grupos' => $grupos]);
     }
 
-    public function grupos(Oficina $oficina){
-        // //$grupos=Grupo::get();
-        // $grupos = [];
-        // $empleado = Auth::user()->empleado;
-        // //obtener todos los grupos de la oficina
-        // if ($empleado->id == 1) 
-        //     $grupos = Grupo::get();
-
-        // elseif (isset($empleado->laborlaes) && $empleado->laborlaes->last()->puesto->id < 6 ) {
+    public function grupos(Oficina $oficina)
+    {
         foreach ($oficina->laborales as $laboral) {
-            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
                 foreach ($laboral->empleado->subgerente->grupos as $grupo) {
                     $grupos[$grupo->id] = $grupo;
                 }
             }
         }
 
-        // }
-        // else{
-        //     if (isset($empleado->subgerente)) {
-        //         $grupos = $empleado->subgerente->grupos;
-        //     }
-        // }
+        $grupos = [];
 
-        return view('vendedores.control.grupos',['grupos'=>$grupos]);
+        foreach( $oficina->subgerentes()->get() as $subgerente ){
+            foreach( $subgerente->grupos()->get() as $grupo ){
+                $grupos[] = $grupo;
+            }
+        }
+
+        if(!empty($grupos)){
+            return view('vendedores.control.grupos', ['grupos' => $grupos]);
+        }
+        return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
     }
 
-    public function Vendedores(Oficina $oficina){
+    public function Vendedores(Oficina $oficina)
+    {
 
         foreach ($oficina->laborales as $laboral) {
-            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)){
+            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
                 foreach ($laboral->empleado->subgerente->grupos as $grupo) {
                     $grupos[$grupo->id] = $grupo;
                 }
             }
         }
 
-        foreach( Vendedor::get() as $vendedor ){
-            if( isset( $grupos[$vendedor->grupo_id] ) ){
+        foreach (Vendedor::get() as $vendedor) {
+            if (isset($grupos[$vendedor->grupo_id])) {
                 $vendedores[] = $vendedor;
             }
         }
 
-        if( !empty($vendedores) ){
+        if (!empty($vendedores)) {
 
-            return view('vendedores.control.vendedores', compact('vendedores') );
-        }else{
+            return view('vendedores.control.vendedores', compact('vendedores'));
+        } else {
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
         }
-
     }
 
-    public function getHistorialVendedor(Request $request){
+    public function getHistorialVendedor(Request $request)
+    {
         $date = Carbon::now();
         $endDate = Carbon::now();
         $inicioDate = $date->subMonth(24);
@@ -256,45 +257,30 @@ class VendedorController extends Controller
         $objetivos = $vendedor->objetivo->where('fecha', '>=',  $inicioDate->format('Y-m-d'));
         $array_objetivos = [];
 
-        foreach ($objetivos as $objetivo) 
+        foreach ($objetivos as $objetivo)
             $array_objetivos[substr($objetivo->fecha, 0, 7)] = $objetivo;
 
         //return dd($array_objetivos);
         return view('vendedores.control.historial_vendedor', ['historiales' => $historial, 'objetivos' => $array_objetivos]);
-        
     }
 
     public function getDirectores(Request $request)
     {
-        $datos = $request->region;
-        $empleados = Empleado::get();
-        $dir_estatal = null;
-        $dir_regional = null;
         $oficina = Oficina::find($request->oficina);
-        /*foreach ($empleados as $empleado) {
-            if ($empleado->laborales->last()->estado->id == $request->estado && $empleado->laborales->last()->puesto->nombre == "Director Estatal") {
-                $dir_estatal = $empleado;
-            }
-            if ($empleado->laborales->last()->region->id == $request->region && $empleado->laborales->last()->puesto->nombre == "Director Regional") {
-                $dir_regional = $empleado;
-            }
-        }*/
-        foreach ($empleados as $empleado) {
-            if ($oficina->estado->id == $request->estado ) {
-                if ($empleado->laborales->last() != null && $empleado->laborales->last()->puesto->nombre == "Director Estatal") {
-                    # code...
-                    $dir_estatal = $empleado;
-                }
-            }
-            if ($oficina->estado->region->id == $request->region ) {
-                if ($empleado->laborales->last() != null && $empleado->laborales->last()->puesto->nombre == "Director Regional") {
-                    # code...
-                    $dir_regional = $empleado;
-                }
-            }
+
+        if ($oficina) {
+            $dir_estatal = $oficina->empleadoDirectorEstatal();
+            $dir_regional = $oficina->empleadoDirectorRegional();
+            $gerente = $oficina->gerente()->first()->empleado()->first();
         }
-        
-        return response()->json(['estatal' => $dir_estatal, 'regional' => $dir_regional, 'oficina'=> $oficina], 200);
-        
+
+        return response()->json(
+            [
+                'estatal' => $dir_estatal,
+                'regional' => $dir_regional,
+                'gerente' => $gerente
+            ],
+            200
+        );
     }
 }

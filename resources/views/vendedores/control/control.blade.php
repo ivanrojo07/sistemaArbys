@@ -74,15 +74,15 @@
 					<div class="row" id="directores">
 						<div class="form-group col-sm-3">
 							<label class="control-label">Director Regional:</label>
-							<span id="1"></span>
+							<span id="director-regional"></span>
 						</div>
 						<div class="form-group col-sm-3">
 							<label class="control-label">Director Estatal:</label>
-							<span id="2"></span>
+							<span id="director-estatal"></span>
 						</div>
 						<div class="form-group col-sm-3">
 							<label class="control-label">Gerente:</label>
-							<span id="3"></span>
+							<span id="gerente"></span>
 						</div>
 					</div>
 					<div class="row">
@@ -165,31 +165,45 @@
 				}
 			});
 
+			$('#director-regional').html('');
+			$('#director-estatal').html('');
+			$('#gerente').html('');
+
 
 		});
 
 		$('#oficina').change(function() {
 			var region = $('#regiones').val();
-			var id = $('#estados').val();
+			var estado_id = $('#estados').val();
 			var oficina = $('#oficinas').val();
+
+			console.log('region: ',region,' estados: ',estado_id, 'oficinas: ', oficina);
+
 			$.ajax({
 				url: "{{ route('control.getDirectores') }}",
 				type: "GET",
-				data: {'region': region, 'estado': id, 'oficina': oficina},
+				data: {'region': region, 'estado': estado_id, 'oficina': oficina},
 				dataType: "json",
 			}).done( function(res){
-				//console.log("success");
-				//console.log(res);
-				$('directores').prop('style', '');
-				//console.log($('directores'));
-				if (res.regional != null) 
-					$('#directores #1').html(res.regional.nombre + '' + res.regional.appaterno + ' ' + res.regional.apmaterno);
-				if (res.estatal != null)
-					$('#directores #2').html(res.estatal.nombre + '' + res.estatal.appaterno + ' ' + res.estatal.apmaterno);
-				if(res.oficina.responsable_com != null)
-					$('#directores #3').html(res.oficina.responsable_com);
-			}).fail( function (res){
 				console.log(res);
+				$('directores').prop('style', '');
+				if (res.regional != null){
+					$('#director-regional').html(res.regional.nombre + " " + res.regional.appaterno + " " + res.regional.apmaterno);
+				}else{
+					$('#director-regional').html('N/E');
+				}
+				if (res.estatal != null){
+					$('#director-estatal').html(res.estatal.nombre + " " + res.estatal.appaterno + " " + res.estatal.apmaterno);
+				}else{
+					$('#director-estatal').html('N/E');
+				}if(res.gerente != null){
+					$('#gerente').html(res.gerente.nombre + " " + res.gerente.appaterno + " " + res.gerente.apmaterno);
+				}else{
+					$('#gerente').html('N/E');
+				}
+					
+			}).fail( function (res){
+				console.log('No funciona');
 			});
 		});
 
