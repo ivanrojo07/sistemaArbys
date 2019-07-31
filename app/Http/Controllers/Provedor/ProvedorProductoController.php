@@ -23,16 +23,9 @@ class ProvedorProductoController extends Controller
         $tipos = DB::select('select distinct tipo from products');
         // dd($marcas[0]);
         if (count($request->all()) == 0) {
-            # code...
-            //
-            // if ($personal->tipo == 'Cliente') {
-            //     # code...
             $productos = Product::where('status','=','disponible')->sortable()->paginate(10);
             return view('productos.index',['provedore'=>$provedore,'productos'=>$productos,'marcas'=>$marcas, 'tipos'=>$tipos,'request'=>$request]);
-            // } else {
-            //     # code...
-            //     return redirect('provedores');
-            // }
+
         } else {
             # code...
             // dd($request->all());

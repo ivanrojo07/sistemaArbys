@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 use UxWeb\SweetAlert\SweetAlert as Alert;
+use App\Tipo;
+use App\Categoria;
 
 class ClienteProductoController extends Controller
 {
@@ -95,8 +97,11 @@ class ClienteProductoController extends Controller
             $productos = $productos->where('categoria', strtoupper($request->categoria));
         }
 
+        $tipos = Tipo::get();
+        $categorias = Categoria::get();
+
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
-        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto]);
+        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos'=>$tipos, 'categorias'=>$categorias]);
     }
 
     /**

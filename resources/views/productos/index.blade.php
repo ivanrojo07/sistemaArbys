@@ -62,9 +62,9 @@
 						<label class="control-label">CATEGORIA</label>
 						<select name="categoria" class="form-control">
 							<option value="">Seleccionar</option>
-							<option value="categoria_1">CATEGORIA 1</option>
-							<option value="categoria_2">CATEGORIA 2</option>
-							<option value="categoria_3">CATEGORIA 3</option>
+							@foreach ($categorias as $categoria)
+								<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>
@@ -107,19 +107,13 @@
 								<option value="800cc">800 CC</option>
 							</select>
 						</div>
+						{{-- Tipos de moto --}}
 					<div class="col-sm-3" >
 						<label class="control-label">Tipo:</label>
-						<select name="categoria" class="form-control">
-							<option value="">Seleccionar</option>
-							<option value="chopper">Chopper</option>
-							<option value="deportiva">Deportiva</option>
-							<option value="nakeed">Nakeed</option>
-							<option value="trabajo">Trabajo</option>
-							<option value="cuatrimoto">Cuatrimoto</option>
-							<option value="doble Prop">Doble Prop</option>
-							<option value="Motoneta">Motoneta</option>
-							<option value="trabajo sem">Trabajo sem</option>
-							<option value="off road">Off road</option>
+						<select name="tipo" class="form-control">
+							@foreach ($tipos as $tipo)
+								<option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>

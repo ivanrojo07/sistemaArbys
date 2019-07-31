@@ -15,6 +15,6 @@ class RellenarTransaccionesController extends Controller
     public function status()
     {
         $oficina = Oficina::find(2);
-        return $oficina->directorRegional();
+        return $oficina->empleadoDirectorRegional();
     }
 }
