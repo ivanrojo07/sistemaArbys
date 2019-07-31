@@ -20,11 +20,14 @@
 									<tr class="info">
 										<th class="text-center">Nombre</th>
 										<th class="text-center">Grupo</th>
-										<th class="text-center">Subgerente</th>						
+										<th class="text-center">Subgerente</th>
+										<th class="text-center">Ventas</th>						
 										<th class="text-center">Clientes</th>
-										<th class="text-center">Ventas</th>
 										<th class="col-sm-1">Acción</th>
 									</tr>
+									@php
+										$ventas_totales = 0;	
+									@endphp
 									@foreach($vendedores as $vendedor)
 										<tr>
 											<td>
@@ -38,30 +41,25 @@
 											<td>--</td>
 											<td>--</td>
 											@endif
-											@if($vendedor->contador->count() != 0)
-											<td>{{ count($vendedor->clientes) }}</td>
 											<td>
+												@php
+													$transactions = $vendedor->transactionsByLastMonth();
+													$ventas_vendedor = [];
 
-													@php
-													$total_ventas = 0;
-													$clientes = [];
-													$total_ventas_vendedor = 0;
-													foreach ($vendedor->clientes()->get() as $cliente) {
-														$clientes[] = $cliente;
-														foreach ($cliente->transactions()->get() as $transaction) {
-															if($transaction->status == 'pagando' || $transaction->status == 'finalizado'){
-																$total_ventas_vendedor += 1;
-															}
+													foreach ($transactions as $transaction) {
+														
+														if( $transaction->status == 'pagando' || $transaction->status == 'finalizado'){
+															$ventas_vendedor[] = $transactions;
 														}
+
 													}
-													$total_ventas += $total_ventas_vendedor;
+
+													$ventas_totales += count($ventas_vendedor);
+													echo count($ventas_vendedor);
+
 												@endphp
-												{{$total_ventas_vendedor}}
 											</td>
-											@else
-											<td>0</td>
-											<td>0</td>
-											@endif
+											<td>{{count($vendedor->clientesByLastMonth())}}</td>
 											<td>
 												<button class="btn btn-primary detallev">
 													Detalles
@@ -79,8 +77,18 @@
 											<td>Total ventas</td>
 										</tr>
 										<tr>	
-										<td id="total_clientes">{{count($clientes)}}</td>
-											<td id="total_ventas">{{$total_ventas}}</td>											
+										<td id="total_clientes">
+
+											@php
+												$clientes_totales = 0;
+												foreach ($vendedores as $vendedor) {
+													$clientes_totales += count($vendedor->clientesByLastMonth());
+												}	
+												echo $clientes_totales;
+											@endphp
+
+										</td>
+											<td id="total_ventas">{{$ventas_totales}}</td>											
 										</tr>
 									</table>
 								</div>

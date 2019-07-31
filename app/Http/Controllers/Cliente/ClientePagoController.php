@@ -80,7 +80,6 @@ class ClientePagoController extends Controller
         $contador = $vendedor->contador->where('fecha_inicio', $principio_mes->format('Y-m-d'))->first();
         if (is_null($contador)) {
             if ($pago->status === "Aprobado") {
-                $contador->save();
                 $transaction->status = "finalizado";
                 $transaction->save();
                 return redirect()->route('clientes.show', ['cliente' => $cliente]);

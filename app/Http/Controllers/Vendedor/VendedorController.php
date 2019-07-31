@@ -232,10 +232,6 @@ class VendedorController extends Controller
             }
         }
 
-        // Vendedor si tiene grupo
-
-        // $vendedores = Vendedor::get();
-
         foreach( Vendedor::get() as $vendedor ){
             if( isset( $grupos[$vendedor->grupo_id] ) ){
                 $vendedores[] = $vendedor;
