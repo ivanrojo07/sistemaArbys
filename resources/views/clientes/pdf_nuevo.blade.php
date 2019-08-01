@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Cotización</title>
-	<style type="text/css">
-html {
+  <style>
+    @page { margin: 100px 25px; }
+    header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
+    footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
+    p { page-break-after: always; }
+    p:last-child { page-break-after: never; }
+
+    html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -611,211 +614,279 @@ table th[class*="col-"] {
 	width:100%;
 	height: 100%;
 }
-
-	</style>
+  </style>
 </head>
-	<body>
-		<div class="row-fluid">
-			<div class="row">
-				<div class="col-sm-12">
-					<img class="img" src="img/header2.jpg">
-					
-				</div>
-			</div>
-			<div class="panel panel-default">
-			  <div class="panel-heading">Cotización para {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}} &nbsp;&nbsp;&nbsp; Fecha: {{date('d-m-Y')}}</div>
-			  <div class="panel-body">
-			    <p>Estimado {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}}:  </p>
-			    <p>Se adjunta la información requerida para la cotización de {{ $producto->marca }} {{ $producto->descripcion }}. Asi mismo informarle que esta cotización esta vigente solo por el mes en el que se imprimio este documento. </p>
-			    <div class="row">
-			    	<div class="panel panel-default">
-			    		<div class="panel-heading">
-			    			Cotización
-			    		</div>
-			    	</div>
-			    	<div class="panel-body">
-				    	<div class="row">
-				    		<div class="col-xs-6">
-								<strong>Producto:</strong> {{ $producto->descripcion }}
-							</div>
-							<div class="col-xs-4">
-								<strong>Marca:</strong> {{ $producto->marca }}
-							</div>
-							
-				    	</div>
-				    	<br>
-				    	<div class="row">
-				    		<div class="col-xs-4">
-								<strong>Clave: </strong>{{ $producto->clave }}
-							</div>
-							<div class="col-xs-6">
-								<strong>Precio de lista: </strong>${{ $producto->precio_lista }}
-							</div>
-				    	</div>
-			    	</div>
-			    	<table class="table table-bordered">
-			    		<thead>
-			    			<tr>
-			    				<th></th>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<th colspan="2">60 Meses</th>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<th colspan="2">48 Meses</th>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<th colspan="2">36 Meses</th>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<th colspan="2">24 Meses</th>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<th colspan="2">12 Meses</th>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<th>Concepto</th>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<th>Plan Ahorra</th>
-			    					<th>Plan Inmediato</th>
-			    				@endif
-			    			</tr>
-			    		</thead>
-			    		<tbody>
-			    			<tr>
-			    				<td>
-			    					Mensualidad
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->m60}}</td>
-			    					<td>$ {{$producto->m60}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->m48}}</td>
-			    					<td>$ {{$producto->m48}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->m36}}</td>
-			    					<td>$ {{$producto->m36}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->m24}}</td>
-			    					<td>$ {{$producto->m24}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->m12}}</td>
-			    					<td>$ {{$producto->m12}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Apertura
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->apertura}}</td>
-			    					<td>$ {{$producto->apertura}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Pago Inicial
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>$ {{$producto->m60+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>$ {{$producto->m48+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>$ {{$producto->m36+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>$ {{$producto->m24+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>$ {{$producto->m12+$producto->apertura}}</td>
-			    					<td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
-			    				@endif
-			    			</tr>
-			    			<tr>
-			    				<td>
-			    					Meses de entrega
-			    				</td>
-			    				@if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m60)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['48_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m48)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['36_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m36)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['24_meses']))
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m24)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    				@if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
-			    					<td>{{ceil(($producto->precio_lista * 0.30)/$producto->m12)}} meses</td>
-			    					<td>Inmediato</td>
-			    				@endif
-			    			</tr>
-			    		</tbody>
-			    	</table>
-			    	<div class="panel-heading">
-		              <div class="col-xs-3">
-		                <p>Quedo a sus ordenes: </p>
-		              </div>
-		              <div class="col-xs-offset-3 col-xs-6">
-		                <p>
-		                  <strong>{{$empleado->nombre." ".$empleado->appaterno." ".$empleado->apmaterno}}</strong>
-		                </p>
-		                <p>
-		                  <strong>Ventas</strong>
-		                </p>
-		              </div>
-		            </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
-	</body>
+<body>
+  <header><img class="img" src="img/header2.jpg"></header>
+  {{-- FOOTER --}}
+  <footer>
+      <div class="row">
+          {{-- FOOTER IZQUIERDO --}}
+            <div class="col-xs-6">
+                ASOCIADO: {{$emplado->nombre . " " . $emplado->appaterno . " " $emplado->appmaterno}}<br>
+                CEL: {{$empleado->movil}}<br>
+                E-MAIL: {{$empleado->email}}<br>
+            </div>
+          {{-- FOOTER DERECHO --}}
+            <div class="col-xs-6">
+                ARBYS PERICENTRO PLAZA DE LA TECNOLOGIA<br>
+                LOCAL B39 COL. LOMAS DE SOTELO EDO DE MEX<br>
+                TEL: 51627031 - 51627142<br>
+            </div>
+      </div>
+  </footer>
+  <main>
+      {{-- SALUDO --}}
+        <div class="panel panel-default">
+            <div class="panel-heading">¡Hola {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}} !</div>
+            <div class="panel-body">
+                Aprovecho esta oportunidad para agradecerle nuevamente 
+                su contacto y ayudarle con su solicitud de información 
+                sobre las versiones de 250 c. c.. <br><br>
+
+                Es un placer para mi poder apoyarle en la selección de 
+                las mejores opciones para que cumpla con sus necesidades. <br><br>
+                
+                Por favor no dude en llamarme en cualquier momento. Mi 
+                agenda está abierta y flexible para usted. Sería recomendable 
+                que usted se ponga en contacto conmigo antes de su llegada a 
+                nuestras instalaciones, para que pueda atenderlo como usted se 
+                lo merece y disfrute de la  experiencia de estrenar la motocicleta 
+                de su agrado. <br><br>
+                
+                Cualquier información que necesite o comentario que me quiera 
+                hacer por favor tome en cuenta que estoy a sus órdenes. <br><br>
+
+                ¡Gracias por permitirnos atenderle! 😊<br>
+                Excelente Día.<br>
+            </div>
+        </div>
+        </div>
+        {{-- Página 2 --}}
+        <p>
+            <div class="panel panel-default">
+                <div class="panel-heading">Fecha: {{date('d-m-Y')}}</div>
+                <div class="panel-body">
+                    Estimado {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}}:  <br>
+                    Le presentamos nuestra oferta comercial para {{$producto->tipo == "CARRO" ? 'el carro ' : 'la moto'}} de su interés.
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Cotización</div>
+                <div class="panel-body">
+                    {{-- PRODUCTO Y MARCA --}}
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <strong>Producto:</strong> {{ $producto->descripcion }}
+                        </div>
+                        <div class="col-xs-6">
+                            <strong>Marca:</strong> {{ $producto->marca }}
+                        </div>
+                    </div>
+                    {{-- DATOS DE MOTO --}}
+                    @if ($producto->tipo == "MOTO")
+                        <div class="row">
+                            <div class="col-xs-4"><strong>TIPO: </strong>{{$producto->tipo_moto}}</div>
+                            <div class="col-xs-4"><strong>CILINDRADA: </strong>{{$producto->cilindrada}}</div>
+                        </div>
+                    @endif
+                    {{-- DATOS CARRO --}}
+                    @if ($producto->tipo == "CARRO")
+                        <div class="row">
+                            <div class="col-xs-4"><strong>CATEGORIA: </strong>{{$producto->categoria}}</div>
+                        </div>
+                    @endif
+                    {{-- DATOS ECONOMICOS --}}
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <strong>CLAVE: </strong>{{ $producto->clave }}
+                        </div>
+                        <div class="col-xs-6">
+                            <strong>PRECIO DE CONTADO: </strong>${{ $producto->precio_lista }}
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <th colspan="2">60 Meses</th>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <th colspan="2">48 Meses</th>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <th colspan="2">36 Meses</th>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <th colspan="2">24 Meses</th>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <th colspan="2">12 Meses</th>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>Concepto</th>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <th>Plan Ahorra</th>
+                                <th>Plan Inmediato</th>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <th>Plan Ahorra</th>
+                                <th>Plan Inmediato</th>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <th>Plan Ahorra</th>
+                                <th>Plan Inmediato</th>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <th>Plan Ahorra</th>
+                                <th>Plan Inmediato</th>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <th>Plan Ahorra</th>
+                                <th>Plan Inmediato</th>
+                            @endif
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Mensualidad
+                            </td>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <td>$ {{$producto->m60}}</td>
+                                <td>$ {{$producto->m60}}</td>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <td>$ {{$producto->m48}}</td>
+                                <td>$ {{$producto->m48}}</td>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <td>$ {{$producto->m36}}</td>
+                                <td>$ {{$producto->m36}}</td>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <td>$ {{$producto->m24}}</td>
+                                <td>$ {{$producto->m24}}</td>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <td>$ {{$producto->m12}}</td>
+                                <td>$ {{$producto->m12}}</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>
+                                Apertura
+                            </td>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <td>$ {{$producto->apertura}}</td>
+                                <td>$ {{$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <td>$ {{$producto->apertura}}</td>
+                                <td>$ {{$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <td>$ {{$producto->apertura}}</td>
+                                <td>$ {{$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <td>$ {{$producto->apertura}}</td>
+                                <td>$ {{$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <td>$ {{$producto->apertura}}</td>
+                                <td>$ {{$producto->apertura}}</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>
+                                Pago Inicial
+                            </td>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <td>$ {{$producto->m60+$producto->apertura}}</td>
+                                <td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <td>$ {{$producto->m48+$producto->apertura}}</td>
+                                <td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <td>$ {{$producto->m36+$producto->apertura}}</td>
+                                <td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <td>$ {{$producto->m24+$producto->apertura}}</td>
+                                <td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <td>$ {{$producto->m12+$producto->apertura}}</td>
+                                <td>$ {{($producto->precio_lista * 0.30)+$producto->apertura}}</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <td>
+                                Meses de entrega
+                            </td>
+                            @if (isset($request['60_meses'])  && $producto->tipo =="CARRO")
+                                <td>{{ceil(($producto->precio_lista * 0.30)/$producto->m60)}} meses</td>
+                                <td>1 mes</td>
+                            @endif
+                            @if (isset($request['48_meses']))
+                                <td>{{ceil(($producto->precio_lista * 0.30)/$producto->m48)}} meses</td>
+                                <td>1 mes</td>
+                            @endif
+                            @if (isset($request['36_meses']))
+                                <td>{{ceil(($producto->precio_lista * 0.30)/$producto->m36)}} meses</td>
+                                <td>1 mes</td>
+                            @endif
+                            @if (isset($request['24_meses']))
+                                <td>{{ceil(($producto->precio_lista * 0.30)/$producto->m24)}} meses</td>
+                                <td>1 mes</td>
+                            @endif
+                            @if (isset($request['12_meses']) && $producto->tipo =="MOTO" )
+                                <td>{{ceil(($producto->precio_lista * 0.30)/$producto->m12)}} meses</td>
+                                <td>1 mes</td>
+                            @endif
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            PLAN DE AHORRO
+                        </div>
+                        <div class="panel-body">
+                            36 meses, entrega a 7 meses<br>
+                            24 meses, entrega a 5 meses<br>
+                            12 meses, entrega a 3 meses
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                REQUISITOS
+                            </div>
+                            <div class="panel-body">
+                                Comprobante de domicilio<br>
+                                Identificación oficial<br>
+                                Priner pago
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+                Promoción de julio: kit de accesorios que incluye casco certificado, 
+                guantes alarma, portacelular con cargador, red y protector para zapato de pedal
+        </p>
+    {{-- </div> --}}
+  </main>
+</body>
 </html>

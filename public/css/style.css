@@ -1,6 +1,6 @@
 
 .navbar.navbar-default, .navbar.navbar-default.navbar-static-top{
-    background: url('../img/header.jpg') no-repeat 0px 0px;
+    background: url('../img/header2.jpg') no-repeat 0px 0px;
     background-size: 100% 100%;
     /*background-size: 170px, 50px;
     -webkit-background-size:cover;
@@ -13,7 +13,7 @@
 @media (max-width: 767px) {
 
     .container>.navbar-header{
-        background: url('../img/header.jpg') no-repeat 0px 0px;
+        background: url('../img/header2.jpg') no-repeat 0px 0px;
         background-size: 100% 100%;
         /*background-size: 170px, 50px;*/
         /*-webkit-background-size:cover;

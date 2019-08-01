@@ -29,7 +29,11 @@ class FileController extends Controller
             $path = $request->file('sample_file')->getPathName();
             $data = \Excel::load($path, null, null, true, null)->get();
             if ($data->count()) {
-                // foreach ($data as $sheet) {
+
+                /**
+                 * Carga los datos del carro a la tabla de productos
+                 */
+
                 foreach ($data[0] as $key => $value) {
                     $arr[] = [
                         'clave' => $value->clave,
@@ -43,12 +47,22 @@ class FileController extends Controller
                         'apertura' => number_format($value->apertura, 2, '.', ''),
                         'marca' => $value->marca,
                         'tipo' => 'CARRO',
+                        'tipo_moto' => null,
                         'categoria' => $value->categoria,
                         'created_at' => date('Y-m-d h:m:s'),
                         'updated_at' => date('Y-m-d h:m:s'),
                         'cilindrada' => null
                     ];
                 }
+
+                // dd($data[1]);
+
+                /**
+                 * Carga los datos de la moto a la tabla de productos
+                 */
+
+                // dd($data[1]);
+
                 foreach ($data[1] as $key => $value) {
 
                     // Pasando cilindrada a entero
@@ -66,11 +80,14 @@ class FileController extends Controller
                         'apertura' => number_format($value->apertura, 2, '.', ''),
                         'marca' => $value->marca,
                         'tipo' => 'MOTO',
-                        'categoria' => $value->categoria,
+                        'tipo_moto' => $value->tipo,
+                        'categoria' => null,
                         'created_at' => date('Y-m-d h:m:s'),
                         'updated_at' => date('Y-m-d h:m:s'),
                         'cilindrada' => $cilindrada
                     ];
+
+                    // dd($arr[583]);
                 }
                 // }
                 if (!empty($arr)) {

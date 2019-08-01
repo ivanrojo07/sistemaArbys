@@ -28,6 +28,7 @@ class Product extends Model
         'marca',
         'tipo',
         'categoria',
+        'tipo_moto',
         'cilindrada'
     ];
                          

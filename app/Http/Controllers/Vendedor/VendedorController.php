@@ -210,13 +210,13 @@ class VendedorController extends Controller
 
         $grupos = [];
 
-        foreach( $oficina->subgerentes()->get() as $subgerente ){
-            foreach( $subgerente->grupos()->get() as $grupo ){
+        foreach ($oficina->subgerentes()->get() as $subgerente) {
+            foreach ($subgerente->grupos()->get() as $grupo) {
                 $grupos[] = $grupo;
             }
         }
 
-        if(!empty($grupos)){
+        if (!empty($grupos)) {
             return view('vendedores.control.grupos', ['grupos' => $grupos]);
         }
         return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
@@ -268,19 +268,15 @@ class VendedorController extends Controller
     {
         $oficina = Oficina::find($request->oficina);
 
-        if ($oficina) {
-            $dir_estatal = $oficina->empleadoDirectorEstatal();
-            $dir_regional = $oficina->empleadoDirectorRegional();
+        $gerente = null;
+
+        $dir_estatal = $oficina->empleadoDirectorEstatal();
+        $dir_regional = $oficina->empleadoDirectorRegional();
+
+        if ($oficina->gerente()->first()) {
             $gerente = $oficina->gerente()->first()->empleado()->first();
         }
 
-        return response()->json(
-            [
-                'estatal' => $dir_estatal,
-                'regional' => $dir_regional,
-                'gerente' => $gerente
-            ],
-            200
-        );
+        return response()->json(['estatal' => $dir_estatal, 'regional' => $dir_regional, 'gerente' => $gerente], 200);
     }
 }

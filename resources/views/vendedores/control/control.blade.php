@@ -185,7 +185,6 @@
 				data: {'region': region, 'estado': estado_id, 'oficina': oficina},
 				dataType: "json",
 			}).done( function(res){
-				console.log(res);
 				$('directores').prop('style', '');
 				if (res.regional != null){
 					$('#director-regional').html(res.regional.nombre + " " + res.regional.appaterno + " " + res.regional.apmaterno);
