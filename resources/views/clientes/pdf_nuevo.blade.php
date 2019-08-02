@@ -642,7 +642,14 @@ table th[class*="col-"] {
             <div class="panel-body">
                 Aprovecho esta oportunidad para agradecerle nuevamente 
                 su contacto y ayudarle con su solicitud de información 
-                sobre las versiones de 250 c. c.. <br><br>
+                sobre las versiones de 
+                <strong>
+                  {{ $producto->marca . " " }}
+                  {{ $producto->descripcion . " " }}
+                  {{ $producto->categoria ? $producto->categoria . " " : "" }}
+                  {{ $producto->tipo_moto ? $producto->tipo_moto . " " : "" }}
+                </strong>
+                <br><br>
 
                 Es un placer para mi poder apoyarle en la selección de 
                 las mejores opciones para que cumpla con sus necesidades. <br><br>
@@ -687,7 +694,7 @@ table th[class*="col-"] {
                     @if ($producto->tipo == "MOTO")
                         <div class="row">
                             <div class="col-xs-4"><strong>TIPO: </strong>{{$producto->tipo_moto}}</div>
-                            <div class="col-xs-4"><strong>CILINDRADA: </strong>{{$producto->cilindrada}}</div>
+                            <div class="col-xs-4"><strong>CILINDRADA: </strong>{{$producto->cilindrada}} C.C</div>
                         </div>
                     @endif
                     {{-- DATOS CARRO --}}

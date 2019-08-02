@@ -61,7 +61,7 @@
 					<div class="col-sm-3 ">
 						<label class="control-label">CATEGORIA</label>
 						<select name="categoria" class="form-control">
-							<option value="">Seleccionar</option>
+							<option value="{{null}}">Seleccionar</option>
 							@foreach ($categorias as $categoria)
 								<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
 							@endforeach
@@ -111,6 +111,7 @@
 					<div class="col-sm-3" >
 						<label class="control-label">Tipo:</label>
 						<select name="tipo" class="form-control">
+							<option value="{{null}}">Seleccionar</option>
 							@foreach ($tipos as $tipo)
 								<option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
 							@endforeach
