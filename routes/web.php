@@ -129,6 +129,9 @@ Route::put('categoria.put','Provedor\ProveedorCategoriaController@put')->name('c
 Route::get('provedores-agregar-tipo', 'Provedor\ProveedorTipoController@index')->name('tipos.index');
 Route::get('tipos.create', 'Provedor\ProveedorTipoController@create')->name('tipos.create');
 Route::post('tipos.store', 'Provedor\ProveedorTipoController@store')->name('tipos.store');
+Route::delete('tipo.delete', 'Provedor\ProveedorTipoController@delete')->name('tipo.delete');
+Route::get('tipo.edit', 'Provedor\ProveedorTipoController@edit')->name('tipo.edit');
+Route::put('tipo.put', 'Provedor\ProveedorTipoController@put')->name('tipo.put');
 
 // AJAX
 Route::get('getcanales','CanalVenta\CanalVentaController@getCanales');
@@ -165,7 +168,5 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-
-
-// SCRIPTS
-Route::get('rellenarTransaccionesStatus', 'scripts\RellenarTransaccionesController@status');
+// PRUEBAS
+Route::get('pruebas', 'scripts\RellenarTransaccionesController@status');

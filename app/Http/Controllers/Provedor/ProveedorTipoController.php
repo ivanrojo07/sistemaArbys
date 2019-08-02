@@ -27,21 +27,32 @@ class ProveedorTipoController extends Controller
         return redirect()->route('tipos.index');
     }
 
-    public function view() {
+    public function view()
+    { }
 
-    }
-
-    public function edit()
+    public function edit(Request $request)
     {
-
+        $tipo = Tipo::find($request->input('tipo_id'));
+        return view('provedores.tipos.edit', compact('tipo'));
     }
 
-    public function update()
+    public function put(Request $request)
     {
+        $tipo = Tipo::find($request->input('tipo_id'));
+        $tipo->nombre = $request->input('nombre');
+        $tipo->save();
+        return redirect()->route('tipos.index');
     }
 
-    public function destroy() {
+    /**
+     * Eliminamos un tipo de la base de datos
+     * mediante un verbo delete http
+     */
 
+    public function delete(Request $request)
+    {
+        $tipo = Tipo::find($request->input('tipo_id'));
+        $tipo->delete();
+        return redirect()->route('tipos.index');
     }
-
 }

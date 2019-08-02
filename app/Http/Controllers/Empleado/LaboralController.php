@@ -97,22 +97,29 @@ class LaboralController extends Controller
         /**
          * Si la peticion es crear un gerente
          */
+
         if ($request->puesto_id == 5) {
-            //dd($empleado);            
 
             if ($this->VerificarGerencia($laborales)) {
 
                 $empleado->laborales()->save($laborales);
                 $this->MakeGerente($empleado);
-                //devuelve el id del area o un 0 si no hace nada
                 $this->CrearGerencia($empleado);
 
                 /**
                  * Agregamos al gerente a su respectiva oficina
                  */
+
                 $oficina = Oficina::where('id', (int) $request->input('oficina_id'))->first();
-                $oficina->gerente_id =  Gerente::where('empleado_id', $empleado->id)->first()->id;
+                $gerente = Gerente::where('empleado_id', $empleado->id)->first();
+
+                // dd($request->input());
+
+                // if ($gerente) {
+                $oficina->gerente_id = $gerente->id;
                 $oficina->save();
+                // }
+
             } else {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return redirect()->back();
@@ -208,6 +215,7 @@ class LaboralController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
 
+        $emp = $empleado;
         $gerente = Gerente::where('empleado_id', $empleado->id)->first();
 
         if ($gerente) {
@@ -245,12 +253,15 @@ class LaboralController extends Controller
                     $empleado = $this->MakeGerente($empleado);
 
                     $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
-
                     if ($oficina) {
-                        $oficina->gerente_id = Gerente::where('empleado_id', $emplado->id)->first()->id;
-                        $oficina->save();
+                        $gerente = Gerente::where('empleado_id', $emp->id)->first();
+                            $oficina->gerente_id = $gerente->id;
+                            $oficina->save();              
                     }
                 }
+
+                // dd($empleado);
+
             } else {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return redirect()->back();
@@ -403,18 +414,37 @@ class LaboralController extends Controller
 
     public function VerificarGerencia(Laboral $laborales)
     {
+
+        /**
+         * Si la oficina cuenta con un responsable administrador
+         * entonces está ocupada
+         */
+
         if ($laborales->area_id == 1) {
             if ($laborales->oficina->responsable_adm) {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return 0;
             }
         }
+
+        /**
+         * Si la oficina cuenta con un responsable comercial
+         * entonces la oficina está ocupada
+         */
+
         if ($laborales->area_id == 2) {
             if ($laborales->oficina->responsable_com) {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return 0;
             }
         }
+
+        /**
+         * Si la oficina no tiene responsable administrador
+         * ni responsable comercial, entonces la oficina 
+         * tiene la gerencia disponible
+         */
+
         return 1;
     }
 

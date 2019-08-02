@@ -623,7 +623,7 @@ table th[class*="col-"] {
       <div class="row">
           {{-- FOOTER IZQUIERDO --}}
             <div class="col-xs-6">
-                ASOCIADO: {{$emplado->nombre . " " . $emplado->appaterno . " " $emplado->appmaterno}}<br>
+                ASOCIADO: {{$empleado->nombre . " " . $empleado->appaterno . " " . $empleado->apmaterno}}<br>
                 CEL: {{$empleado->movil}}<br>
                 E-MAIL: {{$empleado->email}}<br>
             </div>
@@ -657,7 +657,7 @@ table th[class*="col-"] {
                 Cualquier información que necesite o comentario que me quiera 
                 hacer por favor tome en cuenta que estoy a sus órdenes. <br><br>
 
-                ¡Gracias por permitirnos atenderle! 😊<br>
+                ¡Gracias por permitirnos atenderle!<br>
                 Excelente Día.<br>
             </div>
         </div>
@@ -877,7 +877,7 @@ table th[class*="col-"] {
                             <div class="panel-body">
                                 Comprobante de domicilio<br>
                                 Identificación oficial<br>
-                                Priner pago
+                                Primer pago
                             </div>
                         </div>
                     </div>

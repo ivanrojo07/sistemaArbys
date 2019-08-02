@@ -34,35 +34,36 @@
 			</tr>
 		</thead>
 		@foreach($tipos as $tipo)
-			<tr class="active">
-				<td>
-					{{ $tipo->id }}
-				</td>
-				<td>{{ $tipo->nombre }}</td>
-				<td>
-					<div class="row-8">
-						<div class="col-sm-4">
-							<a class="btn btn-info btn-sm" 
-							   href="#">
-							   <strong>
-							   <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar
-							   </strong>
-							</a>
-							
-						</div>
-					</div>
-					<form role="form" method="POST">
-						{{ csrf_field() }}
-						<input type="hidden" name="_method" value="DELETE">
-					<a type="submit" class="btn btn-info btn-sm" >
-						<i class="fa fa-trash" aria-hidden="true"></i>
-						<strong>
-						 Borrar
-						</strong>
-					</a>
-					</form>
-			</tr>
-				</td>
+			<tbody>
+				<tr class="active">
+					<td>
+						{{ $tipo->id }}
+					</td>
+					<td>{{ $tipo->nombre }}</td>
+					<td>
+						{{-- BOTON EDITAR TIPO --}}
+						<form style="display: inline-block !important;" role="form" method="GET" action="{{route('tipo.edit')}}">
+							{{ csrf_field() }}
+							<input type="hidden" name="tipo_id" value="{{$tipo->id}}">
+							<button type="submit" class="btn btn-info btn-sm" >
+								<i class="fa fa-pencil" aria-hidden="true"></i>
+								<strong>Editar</strong>
+							</button>
+						</form>
+						{{-- BOTON ELIMINAR TIPO --}}
+						<form style="display: inline-block !important;" role="form" method="POST" action="{{route('tipo.delete')}}">
+							{{ csrf_field() }}
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="tipo_id" value="{{$tipo->id}}">
+							<button type="submit" class="btn btn-info btn-sm" >
+								<i class="fa fa-trash" aria-hidden="true"></i>
+								<strong>
+								Borrar
+								</strong>
+							</button>
+						</form>
+					</td>
+				</tr>
 			</tbody>
 		@endforeach
 	</table>
