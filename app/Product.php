@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Product as Product;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use UxWeb\SweetAlert\SweetAlert as Alert;
@@ -15,7 +14,6 @@ class Product extends Model
     public $table = 'products';
 
     protected $fillable = [
-        'id',
         'clave',
         'descripcion',
         'precio_lista',

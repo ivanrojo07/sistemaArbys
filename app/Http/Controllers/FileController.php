@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
+use App\ExcelProduct;
 
 class FileController extends Controller
 {
@@ -97,7 +98,7 @@ class FileController extends Controller
                      * productos y si ya existe lo actualiza
                      */
                     foreach ($arr as $product) {
-                        Product::updateOrCreate(
+                        ExcelProduct::updateOrCreate(
                             ['clave' => $product['clave']],
                             $product
                         );
