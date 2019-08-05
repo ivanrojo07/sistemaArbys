@@ -14,11 +14,12 @@ use App\Http\Controllers\Controller;
 class EmpleadoController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(function ($request, $next) {
-            if(Auth::check()) {
+            if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
-                    if($componente->modulo->nombre == "rh")
+                    if ($componente->modulo->nombre == "rh")
                         return $next($request);
                 return redirect()->route('denegado');
             } else
@@ -26,9 +27,10 @@ class EmpleadoController extends Controller
         });
     }
 
-    private function hasComponent($nombre) {
+    private function hasComponent($nombre)
+    {
         foreach (Auth::user()->perfil->componentes as $componente)
-            if($componente->nombre == $nombre)
+            if ($componente->nombre == $nombre)
                 return true;
         return false;
     }
@@ -52,7 +54,6 @@ class EmpleadoController extends Controller
 
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string',
             'appaterno' => 'required|string',
@@ -67,7 +68,7 @@ class EmpleadoController extends Controller
             'curp' => 'nullable|alpha_num',
             'infonavit' => 'nullable',
             'tipo_empleado' => 'required',
-        ],[],[
+        ], [], [
             'appaterno' => 'apellido paterno',
             'apmaterno' => 'apellido materno',
             'rfc' => 'RFC',
@@ -76,13 +77,13 @@ class EmpleadoController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect('empleados/create')
-                        ->withErrors($validator->errors())
-                        ->withInput();
+                ->withErrors($validator->errors())
+                ->withInput();
         }
-        if(Empleado::where('rfc', $request->input('rfc'))->first())
-            return redirect()->back()->with('errors','El RFC ya existe.');
+        if (Empleado::where('rfc', $request->input('rfc'))->first())
+            return redirect()->back()->with('errors', 'El RFC ya existe.');
         else if (Empleado::where('email', $request->input('email'))->first())
-            return redirect()->back()->with('errors','El email ya existe.');
+            return redirect()->back()->with('errors', 'El email ya existe.');
         else {
             $empleado = Empleado::create($request->all());
             return redirect()->route('empleados.show', ['empleado' => $empleado]);
@@ -91,50 +92,41 @@ class EmpleadoController extends Controller
 
     public function show(Empleado $empleado)
     {
-        // if($this->hasComponent('ver empleado')) {
         return view('empleado.view', ['empleado' => $empleado]);
-        // }
-        // return redirect()->route('denegado');
     }
 
     public function edit(Empleado $empleado)
     {
-        // if($this->hasComponent('editar empleado')) {
         return view('empleado.edit', ['empleado' => $empleado]);
-        // }
-        // return redirect()->route('denegado');
     }
 
     public function update(Request $request, Empleado $empleado)
     {
-        // if($this->hasComponent('editar empleado')) {
         $empleado->update($request->all());
-        if($empleado->user) {
+        if ($empleado->user) {
             $empleado->user->email = $empleado->email;
             $empleado->user->save();
         }
         return redirect()->route('empleados.show', ['empleado' => $empleado]);
-        // }
-        // return redirect()->route('denegado');
-
     }
-    
-    public function consulta() {
-        return view('empleado.consulta');
-    } 
 
-    public function buscar(Request $request) {
+    public function consulta()
+    {
+        return view('empleado.consulta');
+    }
+
+    public function buscar(Request $request)
+    {
         $query = $request->input('busqueda');
         $wordsquery = explode(' ', $query);
-        $empleados = Empleado::where(function($q) use($wordsquery) {
+        $empleados = Empleado::where(function ($q) use ($wordsquery) {
             foreach ($wordsquery as $word) {
-                $q->orWhere('nombre', 'LIKE',"%$word%")
-                  ->orWhere('appaterno', 'LIKE', "%$word%")
-                  ->orWhere('apmaterno', 'LIKE', "%$word%")
-                  ->orWhere('rfc', 'LIKE', "%$word%");
+                $q->orWhere('nombre', 'LIKE', "%$word%")
+                    ->orWhere('appaterno', 'LIKE', "%$word%")
+                    ->orWhere('apmaterno', 'LIKE', "%$word%")
+                    ->orWhere('rfc', 'LIKE', "%$word%");
             }
         })->get();
         return view('empleado.busqueda', ['empleados' => $empleados]);
     }
-
 }

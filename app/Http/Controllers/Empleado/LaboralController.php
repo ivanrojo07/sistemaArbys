@@ -215,22 +215,20 @@ class LaboralController extends Controller
     public function update(Request $request, Empleado $empleado)
     {
 
-        $emp = $empleado;
+        /**
+         * Si el empleado que se desea actualizar es un gerente
+         * eliminamos su cargo de la gerencia
+         */
         $gerente = Gerente::where('empleado_id', $empleado->id)->first();
-
         if ($gerente) {
             $oficina = Oficina::where('gerente_id', $gerente->id)->first();
-
             if ($oficina) {
                 $oficina->gerente_id = null;
                 $oficina->save();
             }
         }
 
-        // dd($request->input());
-
         $laborales = new Laboral($request->all());
-        //dd($laborales);
         $grupos = Grupo::get();
         $empleado->experto = $request->experto;
         $empleado->save();
@@ -240,8 +238,6 @@ class LaboralController extends Controller
         if ($request->puesto_id == 5) {
             //1 si esta libre, 0 si esta ocupada
             if ($this->VerificarGerencia($laborales)) {
-
-                // return "Ya hay gerente";
 
                 if (isset($empleado->gerente)) {
                     Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente');
@@ -259,8 +255,6 @@ class LaboralController extends Controller
                             $oficina->save();              
                     }
                 }
-
-                // dd($empleado);
 
             } else {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
