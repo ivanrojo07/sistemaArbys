@@ -23,11 +23,22 @@ class ClienteProductoController extends Controller
      */
     public function index(Cliente $cliente, Request $request)
     {
+
         $min = $request->min;
         $max = $request->max;
         $desc = $request->kword;
         $tipo = $request->type;
         $productos = new Product();
+
+        $categoria = Categoria::find($request->input('categoria'));
+        if($categoria){
+            $productos = $productos->categoria($categoria->nombre);
+        }
+
+        $tipo_moto = Tipo::find($request->input('tipo_moto_id'));
+        if($tipo_moto){
+            $productos = $productos->tipoMoto($tipo_moto->nombre);
+        }
         
         /* Obtenemos el tipo de empleado del usuario autenticado para el caso de que sea vendedor 
          * solo se muestren los vehiculos en los que es experto.
@@ -90,8 +101,6 @@ class ClienteProductoController extends Controller
             $cilindrada_maxima = (int)preg_replace("/[^0-9]/", "", $cilindrada_maxima);
             
             $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada','DESC');
-
-            //$productos = $productos->where('cilindrada', $request->cilindrada);
         }
         if ($tipo == 'MOTO' && isset($request->categoria)) {
             $productos = $productos->where('categoria', strtoupper($request->categoria));
@@ -133,9 +142,7 @@ class ClienteProductoController extends Controller
      */
     public function show(Request $request, Cliente $cliente, Product $producto)
     {
-        // return view('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all()]);
         if($request->all()){
-            // dd($cliente);
             if ($cliente->vendedor != null) 
                 $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
             else

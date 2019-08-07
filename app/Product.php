@@ -29,7 +29,7 @@ class Product extends Model
         'tipo_moto',
         'cilindrada'
     ];
-                         
+
     public $sortable = [
         'clave',
         'marca',
@@ -42,8 +42,31 @@ class Product extends Model
         'updated_at'
     ];
 
-    public function transactions() {
-    	return $this->hasMany('App\Transaction');
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
     }
 
+    /**
+     * Scope methods
+     */
+
+    public function scopeCategoria($query, $categoria)
+    {
+        return $query->where('categoria', $categoria);
+    }
+
+    public function scopeTipoMoto($query, $tipo_moto){
+        return $query->where('tipo_moto', $tipo_moto);
+    }
+
+    public function scopePrecioMinimo($query, $precio_minimo)
+    {
+        return $query->where('precio_lista', '>=', $precio_minimo);
+    }
+
+    public function scopePrecioMaximo($query, $precio_maximo)
+    {
+        return $query->where('precio_lista', '<=', $precio_maximo);
+    }
 }

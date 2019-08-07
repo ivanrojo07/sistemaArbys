@@ -17,16 +17,10 @@ class RellenarTransaccionesController extends Controller
 {
     public function status()
     {
-
-        $products = Product::get();
-
-        foreach( $products as $product ){
-            Product::updateOrCreate(
-                ['clave' => $product['clave']],
-                json_decode(json_encode($product), true)
-            );
-        }
-
-        return $products;
+        $productos = new Product;
+        $productos = $productos->categoria('camioneta');
+        $productos = $productos->precioMinimo('275000.00');
+        $productos = $productos->precioMaximo('520500.00');
+        return $productos->get();
     }
 }

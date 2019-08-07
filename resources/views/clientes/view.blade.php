@@ -108,7 +108,7 @@
 					<a data-toggle="tab" href="#crm" class="ui-tabs-anchor">CRM</a>
 				</li>
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-					<a data-toggle="tab" href="#cot" class="ui-tabs-anchor">Cotizaciòn</a>
+					<a data-toggle="tab" href="#cot" class="ui-tabs-anchor">Cotización</a>
 				</li>
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a data-toggle="tab" href="#pagos" class="ui-tabs-anchor">Pagos</a>
