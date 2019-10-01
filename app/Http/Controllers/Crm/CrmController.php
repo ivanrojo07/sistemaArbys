@@ -51,8 +51,8 @@ class CrmController extends Controller
         } else if ($puesto->nombre == 'Director Estatal') {
             $estado = $empleado->estado()->first();
             $laborals = Laboral::where('estado_id', $estado->id)->get();
-            $empleados_id = $laborals->pluck('empleado_id')->flatten();
-            $vendedores = Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get();
+            $empleados_id = $laborals ? $laborals->pluck('empleado_id')->flatten() : null;
+            $vendedores = $empleados_id ? Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get() : null;
         } else if ($puesto->nombre == 'Director Regional') {
             $region = $empleado->laborales()->orderBy('id', 'desc')->first()->region()->first();
             $laborals = Laboral::where('region_id', $region->id)->get();
