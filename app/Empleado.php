@@ -75,4 +75,12 @@ class Empleado extends Model
     public function user() {
         return $this->hasOne('App\User');
     }
+
+    public function puesto(){
+        return $this->laborales()->orderBy('id','desc')->first()->puesto();
+    }
+
+    public function estado(){
+        return $this->laborales()->orderBy('id','desc')->first()->estado();
+    }
 }

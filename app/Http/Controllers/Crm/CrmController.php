@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers\Crm;
 
+// namespace App\Repositories\Empleados;
+
 use App\ClienteCRM;
 use App\Cliente;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Laboral;
+use App\User;
+use App\Vendedor;
 
 class CrmController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(function ($request, $next) {
-            if(Auth::check()) {
+            if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
-                    if($componente->modulo->nombre == "crm")
+                    if ($componente->modulo->nombre == "crm")
                         return $next($request);
             } else
                 return redirect()->route('login');
@@ -27,10 +33,41 @@ class CrmController extends Controller
      */
     public function index()
     {
-        $crms = ClienteCrm::select('cliente_id','fecha_cont','fecha_aviso', 'fecha_act', 'hora', 'status', 'comentarios', 'acuerdos', 'observaciones','tipo_cont')->groupBy('cliente_id')->get();
-        $clientes=Cliente::orderBy('nombre','desc')->get();
-        return view('crm.index', ['crms'    =>$crms,
-                                  'clientes'=>$clientes]);
+        $user = Auth::user();
+        $empleado = $user->empleado()->first();
+        $puesto = $empleado->puesto()->first();
+
+        // OBTENEMOS LOS VENDEDORES DEPENDIENDO DEL PUESTO DEL USUARIO QUE INGRESÓ
+        if ($puesto->nombre == 'Vendedor') {
+            $vendedores = $empleado->vendedor()->with('clientes.crm')->get();
+        } else if ($puesto->nombre == 'Subgerente') {
+            $subgerente = $empleado->subgerente()->first();
+            $grupos = $subgerente->grupos()->with('vendedores.clientes.crm')->get();
+            $vendedores = $grupos->pluck('vendedores')->flatten();
+        } else if ($puesto->nombre == 'Gerente') {
+            $subgerente = $empleado->subgerente()->first();
+            $grupos = $subgerente ? $subgerente->grupos()->with('vendedores.clientes.crm')->get() : null;
+            $vendedores = $grupos ? $grupos->pluck('vendedores')->flatten() : null;
+        } else if ($puesto->nombre == 'Director Estatal') {
+            $estado = $empleado->estado()->first();
+            $laborals = Laboral::where('estado_id', $estado->id)->get();
+            $empleados_id = $laborals->pluck('empleado_id')->flatten();
+            $vendedores = Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get();
+        } else if ($puesto->nombre == 'Director Regional') {
+            $region = $empleado->laborales()->orderBy('id', 'desc')->first()->region()->first();
+            $laborals = Laboral::where('region_id', $region->id)->get();
+            $empleados_id = $laborals->pluck('empleado_id')->flatten();
+            $vendedores = Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get();
+        } else if ($puesto->nombre == 'Director General' || Auth::user()->id == 1) {
+            $vendedores = Vendedor::get();
+        } else {
+            return redirect()->back();
+        }
+
+        $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
+        $crms = $clientes ? $clientes->pluck('crm')->flatten() : collect();
+
+        return view('crm.index', ['crms' => $crms, 'clientes' => $clientes]);
     }
 
     /**
@@ -53,7 +90,7 @@ class CrmController extends Controller
     {
 
         $crm = ClienteCRM::create($request->all());
-        return redirect()->route('crm.index'); 
+        return redirect()->route('crm.index');
     }
 
     /**
@@ -67,17 +104,19 @@ class CrmController extends Controller
         //
     }
 
-    public function porFecha(Request $request){
+    public function porFecha(Request $request)
+    {
 
         //dd($request->fechaH);
-        $crms =   ClienteCRM::whereBetween('fecha_cont', [$request->fechaD,$request->fechaH])->orderBy('fecha_cont','asc')->get();
-        $todos=   ClienteCRM::get();
-        $clientes=Cliente::orderBy('nombre','desc')->get();
+        $crms =   ClienteCRM::whereBetween('fecha_cont', [$request->fechaD, $request->fechaH])->orderBy('fecha_cont', 'asc')->get();
+        $todos =   ClienteCRM::get();
+        $clientes = Cliente::orderBy('nombre', 'desc')->get();
 
-        return view('crm.index',['crms'    =>$crms,
-                                 'todos'   =>$todos,
-                                 'clientes'=>$clientes]);
-
+        return view('crm.index', [
+            'crms'    => $crms,
+            'todos'   => $todos,
+            'clientes' => $clientes
+        ]);
     }
     /**
      * Show the form for editing the specified resource.

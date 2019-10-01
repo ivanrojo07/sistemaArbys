@@ -22,4 +22,10 @@ class Subgerente extends Model
     public function grupos(){
     	return $this->hasMany('App\Grupo');
 	}
+
+	public function vendedores(){
+		$grupos_ids = $this->grupos()->get()->pluck('id');
+		return Vendedor::whereIn('grupo_id',$grupos_ids);
+	}
+
 }
