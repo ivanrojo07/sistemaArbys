@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Crm;
 
 use App\ClienteCRM;
 use App\Cliente;
+use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,8 +16,11 @@ use App\Vendedor;
 
 class CrmController extends Controller
 {
-    public function __construct()
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory)
     {
+
+        $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
+
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
@@ -37,32 +41,36 @@ class CrmController extends Controller
         $empleado = $user->empleado()->first();
         $puesto = $empleado->puesto()->first();
 
-        // OBTENEMOS LOS VENDEDORES DEPENDIENDO DEL PUESTO DEL USUARIO QUE INGRESÓ
-        if ($puesto->nombre == 'Vendedor') {
-            $vendedores = $empleado->vendedor()->with('clientes.crm')->get();
-        } else if ($puesto->nombre == 'Subgerente') {
-            $subgerente = $empleado->subgerente()->first();
-            $grupos = $subgerente->grupos()->with('vendedores.clientes.crm')->get();
-            $vendedores = $grupos->pluck('vendedores')->flatten();
-        } else if ($puesto->nombre == 'Gerente') {
-            $subgerente = $empleado->subgerente()->first();
-            $grupos = $subgerente ? $subgerente->grupos()->with('vendedores.clientes.crm')->get() : null;
-            $vendedores = $grupos ? $grupos->pluck('vendedores')->flatten() : null;
-        } else if ($puesto->nombre == 'Director Estatal') {
-            $estado = $empleado->estado()->first();
-            $laborals = Laboral::where('estado_id', $estado->id)->get();
-            $empleados_id = $laborals ? $laborals->pluck('empleado_id')->flatten() : null;
-            $vendedores = $empleados_id ? Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get() : null;
-        } else if ($puesto->nombre == 'Director Regional') {
-            $region = $empleado->laborales()->orderBy('id', 'desc')->first()->region()->first();
-            $laborals = Laboral::where('region_id', $region->id)->get();
-            $empleados_id = $laborals->pluck('empleado_id')->flatten();
-            $vendedores = Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get();
-        } else if ($puesto->nombre == 'Director General' || Auth::user()->id == 1) {
-            $vendedores = Vendedor::get();
-        } else {
-            return redirect()->back();
-        }
+        // dd( $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado) );
+
+        $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
+
+        // // OBTENEMOS LOS VENDEDORES DEPENDIENDO DEL PUESTO DEL USUARIO QUE INGRESÓ
+        // if ($puesto->nombre == 'Vendedor') {
+        //     $vendedores = $empleado->vendedor()->with('clientes.crm')->get();
+        // } else if ($puesto->nombre == 'Subgerente') {
+        //     $subgerente = $empleado->subgerente()->first();
+        //     $grupos = $subgerente->grupos()->with('vendedores.clientes.crm')->get();
+        //     $vendedores = $grupos->pluck('vendedores')->flatten();
+        // } else if ($puesto->nombre == 'Gerente') {
+        //     $subgerente = $empleado->subgerente()->first();
+        //     $grupos = $subgerente ? $subgerente->grupos()->with('vendedores.clientes.crm')->get() : null;
+        //     $vendedores = $grupos ? $grupos->pluck('vendedores')->flatten() : null;
+        // } else if ($puesto->nombre == 'Director Estatal') {
+        //     $estado = $empleado->estado()->first();
+        //     $laborals = Laboral::where('estado_id', $estado->id)->get();
+        //     $empleados_id = $laborals ? $laborals->pluck('empleado_id')->flatten() : null;
+        //     $vendedores = $empleados_id ? Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get() : null;
+        // } else if ($puesto->nombre == 'Director Regional') {
+        //     $region = $empleado->laborales()->orderBy('id', 'desc')->first()->region()->first();
+        //     $laborals = Laboral::where('region_id', $region->id)->get();
+        //     $empleados_id = $laborals->pluck('empleado_id')->flatten();
+        //     $vendedores = Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get();
+        // } else if ($puesto->nombre == 'Director General' || Auth::user()->id == 1) {
+        //     $vendedores = Vendedor::get();
+        // } else {
+        //     return redirect()->back();
+        // }
 
         $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
         $crms = $clientes ? $clientes->pluck('crm')->flatten() : collect();
