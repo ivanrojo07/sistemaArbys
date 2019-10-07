@@ -110,6 +110,25 @@ class EmpleadoController extends Controller
         return redirect()->route('empleados.show', ['empleado' => $empleado]);
     }
 
+    public function delete(Request $request){
+        $empleado_id = $request->input('empleado_id');
+        $empleado = Empleado::find($empleado_id);
+        $empleado->delete();
+        return redirect()->back()->with('status', '¡Empleado eliminado exitosamente!');
+    }
+
+    public function recuperar($id){
+        $empleado = Empleado::withTrashed()->find($id);
+        $empleado->restore();
+        return redirect()->route('empleados.index')->with('status', '¡Empleado recuperado exitosamente!');
+    }
+
+    public function eliminados(){
+        $empleados = Empleado::onlyTrashed()->get();
+        // dd($empleados);
+        return view('empleado.eliminados', compact('empleados'));
+    }
+
     public function consulta()
     {
         return view('empleado.consulta');

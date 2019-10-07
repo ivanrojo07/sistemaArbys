@@ -39,6 +39,9 @@ Route::post('import-csv-excel', array('as' => 'import-csv-excel', 'uses' => 'Fil
 Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => 'FileController@downloadExcelFile'));
 
 // EMPLEADOS
+Route::delete('empleados','Empleado\EmpleadoController@delete');
+Route::get('empleados/eliminados','Empleado\EmpleadoController@eliminados');
+Route::get('empleados/recuperar/{id}','Empleado\EmpleadoController@recuperar');
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.laborals','Empleado\LaboralController');
 Route::resource('empleados.estudios','Empleado\EmpleadosEstudiosController');

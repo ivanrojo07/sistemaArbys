@@ -1,20 +1,7 @@
 @extends('layouts.blank')
 @section('content')
 
-
-
 <div class="container mt-2">
-
-	{{-- MENSAJE EN CASO DE HABER ELIMIADO UN USUARIO --}}
-	@if (session('status'))
-	<div class="row">
-		<div class="col-12">
-			<div class="alert alert-success">
-				{{ session('status') }}
-			</div>
-		</div>
-	</div>
-	@endif
 
 	<div class="panel panel-group">
 		<div class="panel-default">
@@ -77,40 +64,9 @@
 											<td> -- </td>
 											@endif
 											<td class="text-center">
-												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">
-													<i class="fa fa-eye"></i> Ver
+												<a class="btn btn-warning btn-sm" href="{{ url('empleados/recuperar', ['id' => $empleado->id]) }}">
+													 Recuperar
 												</a>
-												<a class="btn btn-warning btn-sm" href="{{ route('empleados.edit', ['empleado' => $empleado]) }}">
-													<i class="fa fa-pencil"></i> Editar
-												</a>
-												{{-- BOTON ELIMINAR --}}
-												<button type="button" class="btn btn-danger eliminar" data-toggle="modal" data-target="#exampleModal{{$empleado->id}}" id-empleado={{$empleado->id}}>Eliminar</button>
-												{{-- MODAL --}}
-												<div class="modal fade" id="exampleModal{{$empleado->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLabel">Eliminar usuario</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body">
-																{{-- {{url('empleados', [$empleado->id])}} --}}
-															<form action="{{url('empleados')}}" method="POST" class="mt-1">
-																{{ csrf_field() }}
-																{{method_field('DELETE')}}
-																<div class="form-group">
-																	<label for="motivo" class="col-form-label">¿Estás seguro que quieres eliminarlo?</label>
-																</div>
-																<input type="hidden" name="empleado_id" value="{{$empleado->id}}">
-																<button type="submit" class="btn btn-danger">
-																	Eliminar
-																</button>
-															</form>
-														</div>
-													</div>
-												</div>
 											</td>
 										</tr>
 									@endif

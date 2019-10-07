@@ -12,6 +12,7 @@ use App\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Laboral;
 use Carbon\Carbon;
 
 
@@ -192,7 +193,15 @@ class VendedorController extends Controller
 
         // $oficina=Oficina::find($oficina);
         // $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
-        $subgerentes = $oficina->subgerentes()->get();
+        // $subgerentes = $oficina->subgerentes()->get();
+
+        $subgerentes = Laboral::where('oficina_id',$oficina->id)
+                        ->where('puesto_id',6)
+                        ->with('empleado.subgerente')
+                        ->get()
+                        ->pluck('empleado')
+                        ->flatten()
+                        ->pluck('subgerente');
 
         $grupos = Grupo::get();
         return view('vendedores.control.subgerente', ['subgerentes' => $subgerentes, 'grupos' => $grupos]);
@@ -200,51 +209,50 @@ class VendedorController extends Controller
 
     public function grupos(Oficina $oficina)
     {
-        foreach ($oficina->laborales as $laboral) {
-            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
-                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
-                    $grupos[$grupo->id] = $grupo;
-                }
-            }
-        }
+        // foreach ($oficina->laborales as $laboral) {
+        //     if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
+        //         foreach ($laboral->empleado->subgerente->grupos as $grupo) {
+        //             $grupos[$grupo->id] = $grupo;
+        //         }
+        //     }
+        // }
 
-        $grupos = [];
+        // $grupos = [];
 
-        foreach ($oficina->subgerentes()->get() as $subgerente) {
-            foreach ($subgerente->grupos()->get() as $grupo) {
-                $grupos[] = $grupo;
-            }
-        }
+        // foreach ($oficina->subgerentes()->get() as $subgerente) {
+        //     foreach ($subgerente->grupos()->get() as $grupo) {
+        //         $grupos[] = $grupo;
+        //     }
+        // }
 
-        if (!empty($grupos)) {
-            return view('vendedores.control.grupos', ['grupos' => $grupos]);
+        $grupos = Laboral::where('oficina_id',$oficina->id)
+                        ->where('puesto_id',6)
+                        ->with('empleado.subgerente.grupos')
+                        ->get()
+                        ->pluck('empleado.subgerente')
+                        ->flatten()
+                        ->pluck('grupos')
+                        ->flatten();
+
+        if(empty($grupos)){
+            return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
         }
-        return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
+        return view('vendedores.control.grupos', ['grupos' => $grupos]);
     }
 
     public function Vendedores(Oficina $oficina)
     {
 
-        foreach ($oficina->laborales as $laboral) {
-            if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
-                foreach ($laboral->empleado->subgerente->grupos as $grupo) {
-                    $grupos[$grupo->id] = $grupo;
-                }
-            }
-        }
+        $laborales = $oficina->laborales()->where('puesto_id', 7)->with('empleado.vendedor')->get();
+        $empleados = $laborales ? $laborales->pluck('empleado')->flatten() : null;
+        $empleados = $empleados ? $empleados->unique() : null;
+        $vendedores = $empleados ? $empleados->pluck('vendedor')->flatten()->filter() : null;
 
-        foreach (Vendedor::get() as $vendedor) {
-            if (isset($grupos[$vendedor->grupo_id])) {
-                $vendedores[] = $vendedor;
-            }
-        }
-
-        if (!empty($vendedores)) {
-
-            return view('vendedores.control.vendedores', compact('vendedores'));
-        } else {
+        if (empty($vendedores)) {
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
         }
+
+        return view('vendedores.control.vendedores', compact('vendedores'));
     }
 
     public function getHistorialVendedor(Request $request)

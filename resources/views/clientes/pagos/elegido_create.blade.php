@@ -279,7 +279,7 @@
 		$('#total').val('');
 		$('#restante').val('');
 		@foreach($cliente->transactions as $transaccion)
-			@if(count($transaccion->pagos) == 0 && isset($transaction->product))
+			@if(count($transaccion->pagos) == 0 && isset($transaccion->product) && !empty($transaccion->product))
 	            document.getElementById('product{{ $transaccion->product->id }}').style.display = 'inline-block';
 	            document.getElementById('product{{ $transaccion->product->id }}d').style.display = 'none';
         	@endif

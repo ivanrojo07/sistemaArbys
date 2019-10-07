@@ -78,13 +78,21 @@ class ClientePagoController extends Controller
         $principio_mes = new Carbon('first day of this month');
         $fin_mes = new Carbon('last day of this month');
         $contador = $vendedor->contador->where('fecha_inicio', $principio_mes->format('Y-m-d'))->first();
+        // dd($principio_mes->format('Y-m-d'));
         if (is_null($contador)) {
             if ($pago->status === "Aprobado") {
                 $transaction->status = "finalizado";
                 $transaction->save();
                 return redirect()->route('clientes.show', ['cliente' => $cliente]);
             }
-            $contador->save();
+            // $contador->save();
+            $contador = Contador::create([
+                'vendedor_id' => $vendedor->id,
+                'total_clientes' => 1,
+                'total_ventas' => $request->restante - $request->monto,
+                'fecha_inicio' => $principio_mes,
+                'fecha_fin' => $fin_mes
+            ]);
         }
         if ($pago->status === "Aprobado") {
             $contador = $vendedor->contador->last();

@@ -221,7 +221,7 @@
 				}).done( function(res){
 					$('#subgerente').html(res);
 				}).fail( function (res){
-					$('#subgerente').html('');
+					$('#subgerente').html('error');
 					console.log(res);
 				});
 			}
