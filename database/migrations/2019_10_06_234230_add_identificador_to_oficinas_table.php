@@ -13,9 +13,9 @@ class AddIdentificadorToOficinasTable extends Migration
      */
     public function up()
     {
-        Schema::table('oficinas', function (Blueprint $table) {
-            $table->string('identificador')->unique();
-        });
+        // Schema::table('oficinas', function (Blueprint $table) {
+        //     $table->string('identificador')->unique();
+        // });
     }
 
     /**
