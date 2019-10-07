@@ -85,4 +85,8 @@ class Empleado extends Model
     public function estado(){
         return $this->laborales()->orderBy('id','desc')->first()->estado();
     }
+
+    public function oficina(){
+        return $this->laborales()->orderBy('id','desc')->first()->oficina();
+    }
 }

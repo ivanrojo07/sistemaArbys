@@ -37,6 +37,8 @@
 										<th>Tipo de persona</th>
 										<th>Nombre/Razón Social</th>
 										<th>RFC</th>
+										<th>Vendedor</th>
+										<th>Oficina</th>
 										<th>Acción</th>
 									</tr>
 									@foreach($clientes as $cliente)
@@ -51,6 +53,10 @@
 												@endif
 											</td>
 											<td>{{ strtoupper($cliente->rfc) }}</td>
+											{{-- VENDEDOR --}}
+											<td>{{ !$cliente->vendedor ? "" : $cliente->vendedor->empleado->nombre }}</td>
+											{{-- OFICINA --}}
+											<td>{{ !$cliente->vendedor ? " " : !$cliente->vendedor->empleado->oficina ? "" : $cliente->vendedor->empleado->oficina->nombre }}</td>
 											<td class="text-center">
 												<a class="btn btn-primary btn-sm" href="{{ route('clientes.show', ['cliente' => $cliente]) }}">
 													<i class="fa fa-eye"></i><strong> Ver</strong>
