@@ -8,15 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class OficinaController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(function ($request, $next) {
-            if(Auth::check()) {
+            if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
-                    if($componente->modulo->nombre == "oficinas")
+                    if ($componente->modulo->nombre == "oficinas")
                         return $next($request);
                 return redirect()->route('denegado');
             } else
@@ -24,16 +26,17 @@ class OficinaController extends Controller
         });
     }
 
-    private function hasComponent($nombre) {
+    private function hasComponent($nombre)
+    {
         foreach (Auth::user()->perfil->componentes as $componente)
-            if($componente->nombre == $nombre)
+            if ($componente->nombre == $nombre)
                 return true;
         return false;
     }
 
     public function index()
     {
-        if($this->hasComponent('indice oficinas')) {
+        if ($this->hasComponent('indice oficinas')) {
             $oficinas = Oficina::get();
             return view('oficinas.index', ['oficinas' => $oficinas]);
         }
@@ -47,7 +50,7 @@ class OficinaController extends Controller
      */
     public function create()
     {
-        if($this->hasComponent('crear oficina')) {
+        if ($this->hasComponent('crear oficina')) {
             $estados = Estado::get();
             return view('oficinas.create', ['estados' => $estados]);
         }
@@ -62,7 +65,18 @@ class OficinaController extends Controller
      */
     public function store(Request $request)
     {
-        if($this->hasComponent('crear oficina')) {
+
+        $validator = Validator::make($request->all(), [
+            'identificador' => 'required|unique:oficinas|max:99',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator);
+        }
+
+        if ($this->hasComponent('crear oficina')) {
             $oficina = Oficina::create($request->all());
             return redirect()->route('oficinas.show', ['oficina' => $oficina]);
         }
@@ -77,7 +91,7 @@ class OficinaController extends Controller
      */
     public function show($id)
     {
-        if($this->hasComponent('ver oficina')) {
+        if ($this->hasComponent('ver oficina')) {
             $oficina = Oficina::find($id);
             return view('oficinas.view', ['oficina' => $oficina]);
         }
@@ -92,7 +106,7 @@ class OficinaController extends Controller
      */
     public function edit($id)
     {
-        if($this->hasComponent('editar oficina')) {
+        if ($this->hasComponent('editar oficina')) {
             $oficina = Oficina::find($id);
             $estados = Estado::get();
             return view('oficinas.edit', ['oficina' => $oficina, 'estados' => $estados]);
@@ -109,7 +123,7 @@ class OficinaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($this->hasComponent('editar oficina')) {
+        if ($this->hasComponent('editar oficina')) {
             $oficina = Oficina::find($id);
             $oficina->update($request->all());
             return redirect()->route('oficinas.show', ['oficina' => $oficina]);

@@ -17,7 +17,7 @@ class Oficina extends Model
         'id',
         'estado_id',
         'nombre',
-        'abreviatura',
+        'identificador',
         'responsable_com',
         'responsable_adm',
         'gerente_id',
@@ -34,7 +34,7 @@ class Oficina extends Model
         'telefono3',
     ];
 
-    public $sortable = ['id', 'nombre', 'abreviatura', 'responsable'];
+    public $sortable = ['id', 'nombre', 'identificador', 'responsable'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

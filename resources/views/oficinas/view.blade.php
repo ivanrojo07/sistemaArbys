@@ -29,8 +29,8 @@
 						<input type="text" name="estado_id" class="form-control" value="{{ $oficina->estado->nombre }}" readonly="">
 					</div>
 					<div class="form-group col-sm-1">
-						<label class="control-label">Abreviatura:</label>
-						<input type="text" name="abreviatura" maxlength="3" class="form-control" value="{{ $oficina->abreviatura }}" readonly="">
+						<label class="control-label">identificador:</label>
+						<input type="text" name="identificador" maxlength="3" class="form-control" value="{{ $oficina->identificador }}" readonly="">
 					</div>
 				</div>
 				<div class="row">

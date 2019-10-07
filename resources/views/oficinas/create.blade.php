@@ -2,6 +2,17 @@
 @section('content')
 
 <div class="container">
+
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
+
 	<div class="panel panel-group">
 		<div class="panel-default">
 			<div class="panel-heading">
@@ -36,8 +47,8 @@
 							</select>
 						</div>
 						<div class="form-group col-sm-1">
-							<label class="control-label">✱Abreviatura:</label>
-							<input type="text" name="abreviatura" maxlength="3" class="form-control" required="">
+							<label class="control-label">✱identificador:</label>
+							<input type="number" id="identificador" name="identificador" min="0" max="99" class="form-control" required  onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;">
 						</div>
 					</div>
 					<div class="row">

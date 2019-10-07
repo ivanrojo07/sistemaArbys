@@ -32,8 +32,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-3">
-									<label for="abreviatura" class="control-label">Abreviatura:</label>
-									<input type="text" name="abreviatura" maxlength="3" class="form-control" id="abreviatura" value="{{ $oficina->abreviatura }}">
+									<label for="identificador" class="control-label">identificador:</label>
+									<input type="text" name="identificador" maxlength="3" class="form-control" id="identificador" value="{{ $oficina->abreviatura }}">
 								</div>
 							</div>
 						</div>
