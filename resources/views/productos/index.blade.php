@@ -205,8 +205,9 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<form id="meses_{{$producto->id}}" method="GET" action="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}">
+				
+				<form id="meses_{{$producto->id}}" method="GET" action="{{ route('clientes.producto.show', ['cliente' => $cliente, 'producto' => $producto]) }}">
+					<div class="row">
 						<div class="form-group col-sm-2 col-sm-offset-1">
 							<div class="input-group">
 								<span class="input-group-addon">
@@ -252,20 +253,21 @@
 								</span>
 							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<label class="radio-inline"><input type="radio" name="tipo_mensaje" class="standard" value="standard" checked>Mensaje standard</label>
+							<label class="radio-inline"><input type="radio" name="tipo_mensaje" class="personalizado" value="personalizado">Mensaje personalizado</label>
+						</div>
+						<div class="col-sm-6 col-sm-offset-3 text-center">
+							<textarea name="mensaje" maxlength="500" class="form-control mensaje" style="display:none"></textarea>
+						</div>
+					</div>
+				</form>
 				@endif
-            </div>
+			</div>
             <div class="modal-footer">
                 <div class="row text-center">
-                	{{-- <div class="col-sm-3">
-						<form role="form" id="form-cliente" method="POST" action="{{ route('clientes.products.transactions.store', ['cliente' => $cliente,'product' => $producto]) }}">
-							{{ csrf_field() }}
-							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
-							<input type="hidden" name="product_id" value="{{ $producto->id }}">
-							<input class="btn btn-success" type="submit" value="Agregar al cliente">
-						</form>
-                	</div>--}}
 					<div class="col-sm-4">
 						<form role="form" id="form-cliente" method="POST" action="{{ route('enviarCorreo', ['cliente' => $cliente,'producto' => $producto]) }}">
 							{{ csrf_field() }}
@@ -315,6 +317,15 @@
 			if ($(this).prop('checked')) {
 				$('#filtro-moto').prop('style', 'display: none;');
 				$('#filtro-carro').prop('style', '');
+			}
+		});
+
+		$('input[type=radio][name=tipo_mensaje]').change(function() {
+			if(this.value == 'personalizado'){
+				$('.mensaje').show('slow');
+			}else{
+				$('.mensaje').hide('slow');
+				$(".mensaje").val('');
 			}
 		});
 

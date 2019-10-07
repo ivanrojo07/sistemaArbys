@@ -667,6 +667,10 @@ table th[class*="col-"] {
                 ¡Gracias por permitirnos atenderle!<br>
                 Excelente Día.<br>
             </div>
+            <div class="panel-body">
+              <span>{{$mensaje}}</span>
+              <h3 class="text-center">¡En Arbys te queremos ayudar!</h3>
+            </div>
         </div>
         </div>
         {{-- Página 2 --}}

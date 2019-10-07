@@ -171,24 +171,27 @@ class ClientePagoController extends Controller
             }
         }
 
-        // $consecutivo = null;
-
-        // $numFolio = $cliente->vendedor->empleado->laborales->last()->oficina ? $cliente->vendedor->empleado->laborales->last()->oficina->identificador : "OFIC1" . $cliente->vendedor->id;
-        // dd($numFolio);
-
         $oficina = Auth::user()->empleado->oficina;
-        // dd($oficina_id);
-        $transacciones = Transaction::where('oficina_id',$oficina->id)
+        // dd($oficina);
+
+        if(!is_null($oficina)){
+            $transacciones = Transaction::where('oficina_id',$oficina->id)
                                 ->whereIn('status', ['pagando', 'finalizado'])
                                 ->whereYear('created_at', '=', date('Y'))
                                 ->get();
                                 
-        $consecutivo = count($transacciones)+1;
-        $consecutivo = sprintf('%03d', $consecutivo);
-        $anio = date("y");
+            $consecutivo = count($transacciones)+1;
+            $consecutivo = sprintf('%03d', $consecutivo);
+            $anio = date("y");
 
-        $numFolio = $oficina->identificador . $consecutivo . $anio;
+            $numFolio = $oficina->identificador . $consecutivo . $anio;
+        }else{
+            $numFolio = '';
+        }
 
+        
+
+        
         return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio, 'numFolio' => $numFolio]);
     }
 

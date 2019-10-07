@@ -143,10 +143,11 @@ class ClienteProductoController extends Controller
     public function show(Request $request, Cliente $cliente, Product $producto)
     {
         if($request->all()){
+            $mensaje = $request->input('mensaje');
             if ($cliente->vendedor != null) 
-                $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
+                $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado, 'mensaje'=>$mensaje]);
             else
-                $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>Auth::user()->empleado]);
+                $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>Auth::user()->empleado, 'mensaje'=>$mensaje]);
             $transaction = new Transaction;
             $transaction->cliente_id = $cliente->id;
             $transaction->product_id = $producto->id;
