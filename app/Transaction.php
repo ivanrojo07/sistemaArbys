@@ -18,6 +18,7 @@ class Transaction extends Model
 		'id',
 		'cliente_id',
 		'product_id',
+		'oficina_id',
 		'status',
 	];
 	

@@ -276,10 +276,36 @@
 							<label class="control-label">Cuota de Inscripción e IVA:</label>
 							<input type="text" class="form-control" name="cuota_insc">
 						</div>
-						<div class="col-sm-4 form-group">
+						{{-- <div class="col-sm-4 form-group">
 							<label class="control-label">Cuota Mensual:</label>
 							<input type="text" class="form-control" name="cuota_mensual_pago">
-						</div>
+						</div> --}}
+						@if($pago->meses == 60)
+							<div class="col-sm-4 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual_pago" value="{{ $producto->m60}}">
+							</div>
+						@elseif($pago->meses == 48)
+							<div class="col-sm-4 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual_pago" value="{{ $producto->m48 }}">
+							</div>
+						@elseif($pago->meses == 36)
+							<div class="col-sm-4 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual_pago" value="{{ $producto->m36 }}">
+							</div>
+						@elseif($pago->meses == 24)
+							<div class="col-sm-4 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual_pago" value="{{ $producto->m24 }}">
+							</div>
+						@elseif($pago->meses == 12)
+							<div class="col-sm-4 form-group">
+								<label class="control-label">Cuota Mensual:</label>
+								<input class="form-control" name="cuota_mensual_pago" value="{{ $producto->m12 }}">
+							</div>
+						@endif
 						<div class="col-sm-4 form-group">
 							<label class="control-label">Importe del Recibo:</label>
 							<input type="text" class="form-control" name="importe_recibo" value="{{ $pago->total }}" readonly="">

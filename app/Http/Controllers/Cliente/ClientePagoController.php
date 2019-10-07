@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
 
 class ClientePagoController extends Controller
 {
@@ -63,6 +64,7 @@ class ClientePagoController extends Controller
      */
     public function store(Request $request, Cliente $cliente)
     {
+        $oficina_id = Auth::user()->empleado->oficina->id;
         $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
         $request['transaction_id'] = "" . $transaction->id;
         if ($request->restante == null)
@@ -73,6 +75,9 @@ class ClientePagoController extends Controller
         $transaction->pagos()->save($pago);
         $transaction->status = "pagando";
         $transaction->save();
+        $transaction->update([
+            'oficina_id' => $oficina_id
+        ]);
         //Logica para aumentar el contador del vendedor
         $vendedor = $cliente->vendedor;
         $principio_mes = new Carbon('first day of this month');
@@ -165,7 +170,26 @@ class ClientePagoController extends Controller
                 }
             }
         }
-        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio]);
+
+        // $consecutivo = null;
+
+        // $numFolio = $cliente->vendedor->empleado->laborales->last()->oficina ? $cliente->vendedor->empleado->laborales->last()->oficina->identificador : "OFIC1" . $cliente->vendedor->id;
+        // dd($numFolio);
+
+        $oficina = Auth::user()->empleado->oficina;
+        // dd($oficina_id);
+        $transacciones = Transaction::where('oficina_id',$oficina->id)
+                                ->whereIn('status', ['pagando', 'finalizado'])
+                                ->whereYear('created_at', '=', date('Y'))
+                                ->get();
+                                
+        $consecutivo = count($transacciones)+1;
+        $consecutivo = sprintf('%03d', $consecutivo);
+        $anio = date("y");
+
+        $numFolio = $oficina->identificador . $consecutivo . $anio;
+
+        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio, 'numFolio' => $numFolio]);
     }
 
     public function getProduct($id)
