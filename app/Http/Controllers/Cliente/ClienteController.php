@@ -12,12 +12,16 @@ use App\Pago;
 use App\Vendedor;
 use Illuminate\Support\Facades\Auth;
 use App\CanalVenta;
+use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class ClienteController extends Controller {
 
-    public function __construct() {
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory) {
+
+        $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
+
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
@@ -34,102 +38,20 @@ class ClienteController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $clientes = Cliente::get();
-        $empleado = Auth::user()->empleado;
-        $clientes_vista = [];
-        if ($empleado->id > 1 && isset($empleado->laborales)) {
-            switch ($empleado->laborales->last()->puesto->nombre) {
-                case 'Vendedor':
-                    $vendedor = $empleado->vendedor;
-                    foreach ($vendedor->clientes as $cliente) {
-                        $clientes_vista[] = $cliente;
-                    }
-                    break;
+    {   
 
-                case 'Subgerente':
-                    $subgerente = $empleado->subgerente;
-                    foreach ($subgerente->grupos as $grupo) {
-                        foreach ($grupo->vendedores as $vendedor) {
-                            foreach ($vendedor->clientes as $cliente) {
-                                $clientes_vista[] = $cliente;
-                            }
-                        }
-                    }
-                    break;
-
-                case 'Gerente':
-                    $empleados_oficina = $empleado->laborales->last()->oficina->laborales;
-                    /* la variable arreglo_lab va a contener los datos laborales de los empleados en la 
-                    *  oficina dada sin repetir un empleado por los cambios en sus datos laborales.
-                    */
-                    $arreglo_lab = [];
-                    foreach ($empleados_oficina as $empleados) {
-                        $arreglo_lab[$empleados->empleado_id] = $empleados;
-                    }
-                    foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor)){
-                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
-                                $clientes_vista[] = $cliente;
-                            }
-                        }
-                            
-                    }
-
-                    break;
-
-                case 'Director Estatal':
-                    $estado = $empleado->laborales->last()->estado;
-                    $arreglo_lab = [];
-
-                    foreach ($estado->oficinas as $oficinas) {
-                        foreach ($oficinas->laborales as $laboral) {
-                            $arreglo_lab[$laboral->empleado_id] = $laboral;
-                        }
-                    }
-
-                    foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor)){
-                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
-                                $clientes_vista[] = $cliente;
-                            }
-                        }
-                            
-                    }
+        // dd('just here');
 
 
-                    break;
+// VENDEDORES DEL USUARIO AUTENTICADO
+    $user = Auth::user();
+    $empleado = $user->empleado()->first();
+    $puesto = $empleado->puesto()->first();
+    $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
 
-                case 'Director Regional':
-                    $region = $empleado->laborales->last()->region;
-                    $arreglo_lab = [];
+    $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
 
-                    foreach ($region->datosLab as $laboral) {
-                        $arreglo_lab[$laboral->empleado_id] = $laboral;
-                    }
-
-                    foreach ($arreglo_lab as $laboral) {
-                            
-                        if(isset($laboral->empleado->vendedor)){
-                            foreach ($laboral->empleado->vendedor->clientes as $cliente) {
-                                $clientes_vista[] = $cliente;
-                            }
-                        }
-                            
-                    }
-                    break;
-                
-                default:
-                    return view('clientes.index', ['clientes' => $clientes]);
-                    break;
-            }
-            //return dd($clientes_vista);
-            return view('clientes.index', ['clientes' => $clientes_vista]);
-        }
-
-        return view('clientes.index', ['clientes' => $clientes]);
+    return view('clientes.index', ['clientes' => $clientes]);
     }
 
     /**

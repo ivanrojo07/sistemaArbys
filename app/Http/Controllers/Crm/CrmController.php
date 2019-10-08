@@ -97,10 +97,6 @@ class CrmController extends Controller
         $crms =   $crms ? $crms->where('fecha_cont', '>=', $request->fechaD)->where('fecha_cont','<=',$request->fechaH) : collect();
         $todos =   ClienteCRM::get();
 
-        // $crms =   ClienteCRM::whereBetween('fecha_cont', [$request->fechaD, $request->fechaH])->orderBy('fecha_cont', 'asc')->get();
-        // $todos =   ClienteCRM::get();
-        // $clientes = Cliente::orderBy('nombre', 'desc')->get();
-
         return view('crm.index', [
             'crms'    => $crms,
             'todos'   => $todos,
