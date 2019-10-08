@@ -80,8 +80,10 @@ class ClienteProductTransactionController extends Controller
 
     public function enviarCorreo(Request $request, Cliente $cliente,Product $producto){
         //anie@maiasdas.com
+        $mensaje = $request->input('mensaje_correo');
+        dd($mensaje);
         if($request->all()){
-            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado]);
+            $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado, 'mensaje'=>$mensaje]);
             $transaction = new Transaction;
             $transaction->cliente_id = $request->cliente_id;
             $transaction->product_id = $request->product_id;

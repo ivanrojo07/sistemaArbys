@@ -273,6 +273,7 @@
 							{{ csrf_field() }}
 							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
 							<input type="hidden" name="product_id" value="{{ $producto->id }}">
+							<input type="hidden" name="mensaje_correo" class="mensaje_correo">
 							<input class="btn btn-success" type="submit" value="Enviar a Correo">
 						</form>
 					</div>
@@ -328,6 +329,13 @@
 				$(".mensaje").val('');
 			}
 		});
+
+		$('.mensaje').change( function(){
+			const mensaje = this.value;
+			$('.mensaje_correo').each( function(){
+				$(this).val(mensaje);
+			} );
+		} );
 
 	</script>
 @endsection
