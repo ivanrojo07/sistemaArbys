@@ -61,6 +61,7 @@
 							<div class="form-group col-sm-3" id="oficina" >
 								<label class="control-label">✱Oficina:</label>
 								<select id="oficinas" class="form-control">
+									<option value="">Seleccionar</option>
 									<option value="{{ Auth::user()->empleado->laborales->last()->oficina->id }}">{{ Auth::user()->empleado->laborales->last()->oficina->nombre }}</option>
 								</select>
 							</div>

@@ -9,6 +9,7 @@ use App\Subgerente;
 use App\Grupo;
 use App\Region;
 use App\Empleado;
+use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,12 @@ use Carbon\Carbon;
 
 class VendedorController extends Controller
 {
+
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory)
+    {
+        $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -234,21 +241,19 @@ class VendedorController extends Controller
                         ->pluck('grupos')
                         ->flatten();
 
-        
-
         if(empty($grupos)){
             return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
         }
-        return view('vendedores.control.grupos', ['grupos' => $grupos]);
+        return view('vendedores.control.grupos', ['grupos' => $grupos->unique()]);
     }
 
     public function Vendedores(Oficina $oficina)
     {
 
-        $laborales = $oficina->laborales()->where('puesto_id', 7)->with('empleado.vendedor')->get();
-        $empleados = $laborales ? $laborales->pluck('empleado')->flatten() : null;
-        $empleados = $empleados ? $empleados->unique() : null;
-        $vendedores = $empleados ? $empleados->pluck('vendedor')->flatten()->filter() : null;
+        $user = Auth::user();
+        $empleado = $user->empleado()->first();
+        $puesto = $empleado->puesto()->first();
+        $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
 
         if (empty($vendedores)) {
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
