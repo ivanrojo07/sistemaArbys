@@ -216,21 +216,6 @@ class VendedorController extends Controller
 
     public function grupos(Oficina $oficina)
     {
-        // foreach ($oficina->laborales as $laboral) {
-        //     if ($laboral->puesto->nombre == "Subgerente" || isset($laboral->empleado->subgerente)) {
-        //         foreach ($laboral->empleado->subgerente->grupos as $grupo) {
-        //             $grupos[$grupo->id] = $grupo;
-        //         }
-        //     }
-        // }
-
-        // $grupos = [];
-
-        // foreach ($oficina->subgerentes()->get() as $subgerente) {
-        //     foreach ($subgerente->grupos()->get() as $grupo) {
-        //         $grupos[] = $grupo;
-        //     }
-        // }
 
         $grupos = Laboral::where('oficina_id',$oficina->id)
                         ->where('puesto_id',6)
@@ -254,6 +239,16 @@ class VendedorController extends Controller
         $empleado = $user->empleado()->first();
         $puesto = $empleado->puesto()->first();
         $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
+        
+        // return $vendedores;
+
+        $empleado_id =  $vendedores->pluck('empleado')->flatten()->pluck('id');
+
+        // return $empleado_id;
+
+        $empleados = Laboral::where('oficina_id',$oficina->id)->whereIn('empleado_id',$empleado_id)->with('empleado.vendedor')->get()->pluck('empleado')->flatten();
+
+        $vendedores =  $empleados->pluck('vendedor')->flatten();
 
         if (empty($vendedores)) {
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
