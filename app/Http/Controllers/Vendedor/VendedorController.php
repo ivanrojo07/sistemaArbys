@@ -234,6 +234,8 @@ class VendedorController extends Controller
                         ->pluck('grupos')
                         ->flatten();
 
+        
+
         if(empty($grupos)){
             return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
         }
