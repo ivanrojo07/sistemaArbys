@@ -143,7 +143,7 @@ class OficinaController extends Controller
         //
     }
 
-    public function getVentas(Oficina $oficina){
+    public function getCurrentFolio(Oficina $oficina){
 
         $transacciones = Transaction::where('oficina_id',$oficina->id)
                                 ->whereIn('status', ['pagando', 'finalizado'])

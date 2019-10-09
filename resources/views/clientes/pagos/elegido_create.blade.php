@@ -273,7 +273,7 @@
 			const oficina_id = this.value;
 			
 			await $.ajax({
-				url: "{{ url('/getVentas') }}/" + oficina_id,
+				url: "{{ url('/getCurrentFolio') }}/" + oficina_id,
 				type: "GET",
 				dataType: "html",
 			}).done(function(resultado) {
