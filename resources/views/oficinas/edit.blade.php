@@ -33,7 +33,7 @@
 							<div class="row">
 								<div class="form-group col-sm-3">
 									<label for="identificador" class="control-label">identificador:</label>
-									<input type="text" name="identificador" maxlength="3" class="form-control" id="identificador" value="{{ $oficina->abreviatura }}">
+									<input type="text" name="identificador" maxlength="3" class="form-control" id="identificador" value="{{ $oficina->identificador }}" @if (!empty($oficina->identificador)) readonly @endif>
 								</div>
 							</div>
 						</div>

@@ -64,7 +64,13 @@ class ClientePagoController extends Controller
      */
     public function store(Request $request, Cliente $cliente)
     {
-        $oficina_id = Auth::user()->empleado->oficina->id;
+
+        if( $request->input('oficina_id') && !is_null($request->input('oficina_id')) ){
+            $oficina_id = $request->input('oficina_id');
+        }else{
+            $oficina_id = Auth::user()->empleado->oficina->id;
+        }
+
         $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
         $request['transaction_id'] = "" . $transaction->id;
         if ($request->restante == null)
@@ -105,7 +111,6 @@ class ClientePagoController extends Controller
             $transaction->status = "finalizado";
             $transaction->save();
         }
-
 
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }

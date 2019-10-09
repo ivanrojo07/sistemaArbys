@@ -71,6 +71,17 @@
 									<option value="Depósito">Depósito</option>
 								</select>
 							</div>
+							@if (Auth::user()->id == 1 || Auth::user()->empleado->puesto->nombre == "Director General" || Auth::user()->empleado->puesto->nombre == "Director Regional" || Auth::user()->empleado->puesto->nombre == "Director Estatal")
+								<div class="col-sm-3 form-group">
+									<label class="control-label">Oficina:</label>
+									<select type="select" class="form-control" id="oficina" name="oficina_id" required>
+										<option value="">Seleccionar...</option>
+										@foreach(App\Oficina::get() as $oficina)
+											<option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
+										@endforeach
+									</select>
+								</div>
+							@endif
 							<div class="col-sm-3 form-group" id="bancos" style="display: none;">
 								<label onclick="getBancos()" class="control-label">Banco:</label>
 								<select type="select" name="banco" class="form-control" id="banco">
@@ -255,6 +266,24 @@
 			document.getElementById('guardar').style.display = restante$ === 0 ? 'none' : 'inline-block';
 			document.getElementById('status').value = restante$ === 0 ? 'Aprobado' : 'No Aprobado';
 		});
+
+
+
+		$('#oficina').change( async function(){
+			const oficina_id = this.value;
+			
+			await $.ajax({
+				url: "{{ url('/getVentas') }}/" + oficina_id,
+				type: "GET",
+				dataType: "html",
+			}).done(function(resultado) {
+				$('#folio').val(resultado);
+			}).fail(function(data){
+				console.log('Falló la conexión a internet', data);
+			});
+
+		} );
+
 	});
 
 	function getProduct(id) {

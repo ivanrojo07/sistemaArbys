@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Http\Controllers\Controller;
+use App\Transaction;
 use Illuminate\Support\Facades\Validator;
 
 class OficinaController extends Controller
@@ -140,5 +141,20 @@ class OficinaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getVentas(Oficina $oficina){
+
+        $transacciones = Transaction::where('oficina_id',$oficina->id)
+                                ->whereIn('status', ['pagando', 'finalizado'])
+                                ->whereYear('created_at', '=', date('Y'))
+                                ->get();
+                                
+        $consecutivo = count($transacciones)+1;
+        $consecutivo = sprintf('%03d', $consecutivo);
+        $anio = date("y");
+
+        $numFolio = $oficina->identificador . $consecutivo . $anio;
+        return $numFolio;
     }
 }
