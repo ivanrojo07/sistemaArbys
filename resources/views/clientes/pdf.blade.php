@@ -627,7 +627,8 @@ table th[class*="col-"] {
 			  <div class="panel-body">
 			    <p>Estimado {{$cliente->nombre ? $cliente->nombre." ".$cliente->appaterno." ".$cliente->apmaterno : $cliente->razon}}:  </p>
 			    <p>Se adjunta la información requerida para la cotización de {{ $producto->marca }} {{ $producto->descripcion }}. Asi mismo informarle que esta cotización esta vigente solo por el mes en el que se imprimio este documento. </p>
-			    <div class="row">
+				<p>{{$mensaje}}</p>
+				<div class="row">
 			    	<div class="panel panel-default">
 			    		<div class="panel-heading">
 			    			Cotización
