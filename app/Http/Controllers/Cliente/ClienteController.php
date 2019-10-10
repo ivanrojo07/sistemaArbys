@@ -23,6 +23,7 @@ class ClienteController extends Controller {
         $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
 
         $this->middleware(function ($request, $next) {
+            
             if(Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
                     if($componente->modulo->nombre == "clientes")
@@ -40,15 +41,13 @@ class ClienteController extends Controller {
     public function index()
     {   
 
-        // dd('just here');
-
-
-// VENDEDORES DEL USUARIO AUTENTICADO
+    // PUESTO DEL USUARIO AUTENTICADO
     $user = Auth::user();
     $empleado = $user->empleado()->first();
     $puesto = $empleado->puesto()->first();
-    $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
 
+    // CLIENTES DEL USUARIO AUTENTICADO
+    $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
     $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
 
     return view('clientes.index', ['clientes' => $clientes]);
@@ -73,19 +72,25 @@ class ClienteController extends Controller {
      */
     public function store(Request $request)
     {
+        // VALIDAMOS QUE EL RFC NO EXISTA
         $request['rfc'] = $request->rfc . $request->homoclave;
         $rfc = Cliente::where('rfc', $request->rfc)->get();
         if (count($rfc) > 0)
             return redirect()->back()->with('errors','El RFC ya está registrado.');
+        
+        // GENERAMOS EL IDENTIFICADOR DEL CLIENTE
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
+        dd($request['identificador']);
+        
         $cliente = Cliente::create($request->all());
-        /***********/
+        
+        // SI EL EMPLEADO ES VENDEDOR LO ASOCIAMOS CON EL CLIENTE
         $empleado = Auth::user()->empleado;
         if(isset($empleado->laborales) && $empleado->laborales->last()->puesto->id == 7){
             $cliente->vendedor_id = $empleado->vendedor->id;
             $cliente->save();
         }
-        /**********/
+ 
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 

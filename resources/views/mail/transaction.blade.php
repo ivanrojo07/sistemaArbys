@@ -1,5 +1,5 @@
 @component('mail::message')
-# Bienvenido a {{ config('app.name') }}
+# ¡Bienvenido a Arbys!
 
 @if($transaction->cliente->tipo == 'Moral')
 # Estimad@ {{$transaction->cliente->razon}}:
@@ -15,5 +15,5 @@ Saludos cordiales,
 
 {{$transaction->cliente->vendedor->empleado->nombre." ".$transaction->cliente->vendedor->empleado->appaterno." ".$transaction->cliente->vendedor->empleado->apmaterno}}
 
-{{ config('app.name') }}
+Arbys
 @endcomponent
