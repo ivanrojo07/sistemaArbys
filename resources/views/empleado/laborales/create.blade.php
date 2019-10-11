@@ -128,8 +128,8 @@
 
     		var val = parseInt(document.getElementById("puesto_id").value);
       		document.getElementById('region').style.display = 'none';
-			  document.getElementById('estado').style.display = 'none';
-			  document.getElementById('estado').style.display = 'none';
+			document.getElementById('estado').style.display = 'none';
+			document.getElementById('estado').style.display = 'none';
       		document.getElementById('oficina').style.display = 'none';
       		document.getElementById('experto').style.display = 'none';
 			$("#regiones").prop('name', '');
@@ -177,6 +177,7 @@
       				document.getElementById('estado').style.display = 'block';
       				document.getElementById('oficina').style.display = 'block';
       				document.getElementById('experto').style.display = 'block';
+					document.getElementById('grupo').style.display = 'block';
 					$("#oficinas").prop('name', 'oficina_id');
 					$("#estados").prop('required', true);
 					$("#estados").prop('name', 'estado_id');

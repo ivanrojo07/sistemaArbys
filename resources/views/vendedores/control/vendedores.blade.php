@@ -37,6 +37,9 @@
 											@if($vendedor->grupo != null)
 											<td>{{ $vendedor->grupo->nombre}}</td>
 											<td>{{ $vendedor->grupo->subgerente->empleado->nombre }} {{ $vendedor->grupo->subgerente->empleado->appaterno }} {{ $vendedor->grupo->subgerente->empleado->apmaterno }}</td>
+											@elseif( $vendedor->empleado->subgerente !== null )
+											<td>--</td>
+											<td>{{$vendedor->empleado->nombre}} {{$vendedor->empleado->appaterno}} {{$vendedor->empleado->apmaterno}}</td>
 											@else
 											<td>--</td>
 											<td>--</td>

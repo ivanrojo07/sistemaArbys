@@ -50,6 +50,8 @@ class ClienteController extends Controller {
     $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
     $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
 
+    // return $puesto;
+
     return view('clientes.index', ['clientes' => $clientes]);
     }
 
@@ -80,7 +82,6 @@ class ClienteController extends Controller {
         
         // GENERAMOS EL IDENTIFICADOR DEL CLIENTE
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
-        dd($request['identificador']);
         
         $cliente = Cliente::create($request->all());
         
@@ -91,6 +92,12 @@ class ClienteController extends Controller {
             $cliente->save();
         }
  
+        if($empleado->puesto()->first()->id == 6){
+            $cliente->vendedor_id = $empleado->vendedor->id;
+            $cliente->save();
+            // dd($cliente);
+        }
+
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 

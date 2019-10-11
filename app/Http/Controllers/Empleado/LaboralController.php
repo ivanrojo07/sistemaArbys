@@ -126,10 +126,23 @@ class LaboralController extends Controller
             }
         } else if ($request->puesto_id == 6) {
 
+            // dd($request->input());
+
             $empleado->laborales()->save($laborales);
             $subgerente = new Subgerente();
-            $subgerente->oficina_id = (int) $request->input('oficina_id');
+            // $subgerente->oficina_id = (int) $request->input('oficina_id');
             $empleado->subgerente()->save($subgerente);
+
+            $vende = Vendedor::create([
+                'empleado_id' => $empleado->id,
+                'grupo_id' => $request->group_id,
+                'experto' => $request->experto,
+                'status' => 'Activo'
+            ]);
+
+            // dd($vende);
+
+            // $empleado->vendedor()->save();
         } else if ($request->puesto_id == 4) {
             if ($this->VerificarPuesto($laborales, $request)) {
                 $empleado->laborales()->save($laborales);
@@ -243,14 +256,14 @@ class LaboralController extends Controller
                     Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente');
                 } else {
                     $empleado = $this->BorrarGrupos($empleado);
-                    $emplado = $empleado->laborales()->save($laborales);
+                    $empleado = $empleado->laborales()->save($laborales);
                     //devuelve el id del area o un 0 si no hace nada
                     $empleado = $this->CrearGerencia($empleado);
                     $empleado = $this->MakeGerente($empleado);
 
                     $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
                     if ($oficina) {
-                        $gerente = Gerente::where('empleado_id', $emp->id)->first();
+                        $gerente = Gerente::where('empleado_id', $empleado->id)->first();
                             $oficina->gerente_id = $gerente->id;
                             $oficina->save();              
                     }
@@ -295,6 +308,15 @@ class LaboralController extends Controller
             $this->BorrarGerencia($empleado);
             $empleado->laborales()->save($laborales);
             $this->MakeSubgerente($empleado);
+
+            $vendedor = Vendedor::updateOrCreate([
+                'empleado_id' => $empleado->id,
+                'experto' => $request->experto
+            ], [
+                'empleado_id' => $empleado->id,
+                'experto' => $request->experto
+            ]);
+
         } else if ($request->puesto_id == 7) {
             $this->BorrarGerencia($empleado);
             $this->BorrarGrupos($empleado);

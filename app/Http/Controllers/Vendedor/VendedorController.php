@@ -249,6 +249,7 @@ class VendedorController extends Controller
         $empleados = Laboral::where('oficina_id',$oficina->id)->whereIn('empleado_id',$empleado_id)->with('empleado.vendedor')->get()->pluck('empleado')->flatten();
 
         $vendedores =  $empleados->pluck('vendedor')->flatten();
+        $vendedores = $vendedores->unique();
 
         if (empty($vendedores)) {
             return "<br><div class='alert alert-danger'>La oficina no cuenta con vendedores</div>";
