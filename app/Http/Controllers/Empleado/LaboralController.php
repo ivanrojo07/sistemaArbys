@@ -250,30 +250,28 @@ class LaboralController extends Controller
         // SI SUBE DE PUESTO A LA GERENCIA
         if ($request->puesto_id == 5) {
 
-            // SI LA GERENCIA ESTA LIBRE ASIGNAMOS AL EMPLEADO AL PUESTO
-            if ($this->VerificarGerencia($laborales)) {
-
-                if (isset($empleado->gerente)) {
-                    Alert::error('Degradelo de gerente primero', 'Este empelado ya es un gerente');
-                } else {
-                    $empleado = $this->BorrarGrupos($empleado);
-                    $empleado = $empleado->laborales()->save($laborales);
-                    //devuelve el id del area o un 0 si no hace nada
-                    $empleado = $this->CrearGerencia($empleado);
-                    $empleado = $this->MakeGerente($empleado);
-
-                    $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
-                    if ($oficina) {
-                        $gerente = Gerente::where('empleado_id', $empleado->id)->first();
-                            $oficina->gerente_id = $gerente->id;
-                            $oficina->save();              
-                    }
-                }
-
-            } else {
+            // SI LA GERENCIA NO ESTA LIBRE LO NOTIFICAMOS AL USUARIO
+            if(!$this->VerificarGerencia($laborales)){
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return redirect()->back();
             }
+
+            $empleado = $this->BorrarGrupos($empleado);
+            $laborales = $empleado->laborales()->save($laborales);
+            //devuelve el id del area o un 0 si no hace nada
+            $empleado = $this->CrearGerencia($empleado);
+            $empleado = $this->MakeGerente($empleado);
+
+            $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
+            if ($oficina) {
+                $gerente = Gerente::where('empleado_id', $empleado->id)->first();
+                $oficina->gerente_id = $gerente->id;
+                $oficina->save();              
+            }
+
+
+
+
         } else if ($request->puesto_id == 4) {
             $this->BorrarGerencia($empleado);
             $this->BorrarGrupos($empleado);
@@ -419,8 +417,9 @@ class LaboralController extends Controller
 
     public function BorrarGrupos(Empleado $empleado)
     {
+        // SI HAY UN SUBGERENTE CON GRUPOS
         if (isset($empleado->subgerente->grupos)) {
-            //dd($empleado->subgerente->grupos);
+            // ELIMINAMOS EL GRUPO
             foreach ($empleado->subgerente->grupos as $group) {
                 $group->subgerente_id = null;
                 $group->save();
@@ -432,36 +431,25 @@ class LaboralController extends Controller
     public function VerificarGerencia(Laboral $laborales)
     {
 
-        /**
-         * Si la oficina cuenta con un responsable administrador
-         * entonces está ocupada
-         */
-
+        // SI ES UN RESPONSABLE ADMINISTRADOR
         if ($laborales->area_id == 1) {
+            // Y LA OFICINA CUENTA CON RESPONSABLE ADMIN, ENTONCES LA OFICINA ESTA OCUPADA
             if ($laborales->oficina->responsable_adm) {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return 0;
             }
         }
 
-        /**
-         * Si la oficina cuenta con un responsable comercial
-         * entonces la oficina está ocupada
-         */
-
+        // SI ES UN RESPONSABLE COMERCIAL
         if ($laborales->area_id == 2) {
+            // Y LA OFICINA CUENTA CON RESPONSABLE COMERCIAL, ENTONCES LA OFICINA ESTA OCUPADA
             if ($laborales->oficina->responsable_com) {
                 Alert::error('Cambie el puesto del gerente actual primero', 'La gerencia esta ocupada');
                 return 0;
             }
         }
 
-        /**
-         * Si la oficina no tiene responsable administrador
-         * ni responsable comercial, entonces la oficina 
-         * tiene la gerencia disponible
-         */
-
+        // SI LA OFICINA NO TIENE RESPONSABLE COMERCIAL Y ADMINISTRADOR, ENTONCES LA GERENCIA ESTA LIBRE
         return 1;
     }
 
