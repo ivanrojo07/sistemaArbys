@@ -247,9 +247,10 @@ class LaboralController extends Controller
         $empleado->save();
 
 
-        // Si sube de puesto a la gerencia
+        // SI SUBE DE PUESTO A LA GERENCIA
         if ($request->puesto_id == 5) {
-            //1 si esta libre, 0 si esta ocupada
+
+            // SI LA GERENCIA ESTA LIBRE ASIGNAMOS AL EMPLEADO AL PUESTO
             if ($this->VerificarGerencia($laborales)) {
 
                 if (isset($empleado->gerente)) {

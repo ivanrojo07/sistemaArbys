@@ -12,15 +12,30 @@ use App\Oficina;
 use App\Gerente;
 use App\ExcelProduct;
 use App\Product;
+use App\Subgerente;
 
 class RellenarTransaccionesController extends Controller
 {
     public function status()
     {
-        $productos = new Product;
-        $productos = $productos->categoria('camioneta');
-        $productos = $productos->precioMinimo('275000.00');
-        $productos = $productos->precioMaximo('520500.00');
-        return $productos->get();
+        $subgerentes = Subgerente::get();
+
+        foreach($subgerentes as $subgerente){
+
+            Vendedor::updateOrCreate(
+                ['empleado_id' => $subgerente->empleado_id],
+                [
+                    'empleado_id' => $subgerente->empleado_id,
+                    'status' => 'Activo',
+                    'grupo_id' => null
+                ]
+            );
+
+        }
+
+        $subgerentes =  Subgerente::with('empleado.vendedor')->get();
+
+        return $subgerentes->pluck('empleado')->flatten()->pluck('vendedor')->flatten();
+
     }
 }
