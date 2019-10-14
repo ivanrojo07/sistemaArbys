@@ -256,12 +256,14 @@ class LaboralController extends Controller
                 return redirect()->back();
             }
 
+            // BORRAMOS LOS GRUPOS 
             $empleado = $this->BorrarGrupos($empleado);
             $laborales = $empleado->laborales()->save($laborales);
             //devuelve el id del area o un 0 si no hace nada
             $empleado = $this->CrearGerencia($empleado);
             $empleado = $this->MakeGerente($empleado);
 
+            // SI LA OFICINA SOLICITADA EXISTE, SE LA ASIGNAMOS AL GERENTE
             $oficina = Oficina::where('id', $request->input('oficina_id'))->first();
             if ($oficina) {
                 $gerente = Gerente::where('empleado_id', $empleado->id)->first();
