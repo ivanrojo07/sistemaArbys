@@ -36,7 +36,7 @@
 						@if(count($empleados) > 0)
 							<table id="empleados" class="table table-striped table-bordered table-hover" style=" margin-bottom: 0px;">
 								<thead>
-								<tr class="info">
+								<tr class="info text-center">
 									<th>ID</th>
 									<th>Nombre</th>
 									<th>Apellido Paterno</th>
@@ -44,13 +44,15 @@
 									<th>RFC</th>
 									<th>Puesto</th>
 									<th>Oficina</th>
-									<th class="text-center">Acciones</th>
+									<th>Ver</th>
+									<th>Editar</th>
+									<th class="text-center">Eliminar</th>
 								</tr>
 								</thead>
 								<tbody>
 								@foreach ($empleados as $empleado)
 									@if($empleado->id != 1)
-										<tr>
+										<tr class="text-center">
 											<td>{{ $empleado->id }}</td>
 											<td>{{ $empleado->nombre }}</td>
 											<td>{{ $empleado->appaterno }}</td>
@@ -76,13 +78,17 @@
 											<td> -- </td>
 											<td> -- </td>
 											@endif
-											<td class="text-center">
+											<td>
 												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">
 													<i class="fa fa-eye"></i> Ver
 												</a>
+											</td>
+											<td>
 												<a class="btn btn-warning btn-sm" href="{{ route('empleados.edit', ['empleado' => $empleado]) }}">
 													<i class="fa fa-pencil"></i> Editar
 												</a>
+											</td>
+											<td class="text-center">
 												{{-- BOTON ELIMINAR --}}
 												<button type="button" class="btn btn-danger eliminar" data-toggle="modal" data-target="#exampleModal{{$empleado->id}}" id-empleado={{$empleado->id}}>Eliminar</button>
 												{{-- MODAL --}}

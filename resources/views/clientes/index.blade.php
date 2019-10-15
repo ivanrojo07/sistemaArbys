@@ -39,7 +39,8 @@
 										<th>RFC</th>
 										<th>Vendedor</th>
 										<th>Oficina</th>
-										<th>Acción</th>
+										<th>Ver</th>
+										<th>Editar</th>
 									</tr>
 									@foreach($clientes as $cliente)
 										<tr class="active">
@@ -61,6 +62,8 @@
 												<a class="btn btn-primary btn-sm" href="{{ route('clientes.show', ['cliente' => $cliente]) }}">
 													<i class="fa fa-eye"></i><strong> Ver</strong>
 												</a>
+											</td>
+											<td class="text-center">
 												<a class="btn btn-warning btn-sm" href="{{ route('clientes.edit', ['cliente' => $cliente]) }}">
 													<i class="fa fa-pencil"></i><strong> Editar</strong>
 												</a>

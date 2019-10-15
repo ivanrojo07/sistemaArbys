@@ -174,4 +174,4 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 // PRUEBAS
-Route::get('pruebas', 'scripts\RellenarTransaccionesController@status');
+Route::get('pruebas', 'PruebasController@create');

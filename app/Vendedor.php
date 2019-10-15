@@ -45,6 +45,7 @@ class Vendedor extends Model
     {
         $transactions = [];
 
+        // OBTENEMOS TODAS LAS TRANSACCIONES DE TODOS LOS CLIENTES QUE ESTÁN EN ESTE MES
         foreach ($this->clientes()->get() as $cliente) {
             foreach ($cliente->transactions()->get() as $transaction) {
                 $transaction_date = $transaction->created_at->format('Y-m-d');

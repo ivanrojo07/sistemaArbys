@@ -246,7 +246,14 @@ class VendedorController extends Controller
 
         // return $empleado_id;
 
-        $empleados = Laboral::where('oficina_id',$oficina->id)->whereIn('empleado_id',$empleado_id)->with('empleado.vendedor')->get()->pluck('empleado')->flatten();
+        $laborales = Laboral::where('oficina_id',$oficina->id)->whereIn('empleado_id',$empleado_id)->with('empleado.vendedor')->get();
+
+
+        $laborales = $laborales->filter( function($laboral){
+            return $laboral->id == Laboral::where('empleado_id',$laboral->empleado_id)->get()->last()->id;
+        } );
+
+        $empleados = $laborales->pluck('empleado')->flatten();
 
         $vendedores =  $empleados->pluck('vendedor')->flatten();
         $vendedores = $vendedores->unique();

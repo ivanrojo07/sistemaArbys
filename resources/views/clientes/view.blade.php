@@ -92,6 +92,10 @@
 						<label class="control-label">Vendedor:</label>
 						<input type="text" class="form-control" value="{{ $cliente->vendedor->empleado->nombre }} {{ $cliente->vendedor->empleado->appaterno }}" readonly="">
 					</div>
+					<div class="col-sm-3 form-group">
+						<label class="control-label">Oficina:</label>
+						<input type="text" class="form-control" value="{{ !$cliente->vendedor->empleado->oficina ? : $cliente->vendedor->empleado->oficina->nombre }} " readonly="">
+					</div>
 					@else
 					<div class="col-sm-6 form-group">
 						<h3 class="alert-danger">Edite cliente o vaya al módulo asignar cliente para asigar vendedor</h3>
