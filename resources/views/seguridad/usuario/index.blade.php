@@ -26,18 +26,22 @@
                         @if(count($usuarios) > 0)
                             <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;">
                                 <tr class="info">
-                                    <th class="col-sm-1" >Perfil</th>
-                                    <th class="col-sm-3">Nombre</th>
-                                    <th class="col-sm-2">Correo</th>
-                                    <th class="col-sm-3">Puesto</th>
-                                    <th class="text-center col-sm-3">Acciones</th>
+                                    <th >Perfil</th>
+                                    <th >Nombre/s</th>
+                                    <th >Apellidos</th>
+                                    <th >Correo</th>
+                                    <th >Puesto</th>
+                                    <th >Ver</th>
+                                    <th >Editar</th>
+                                    <th >Eliminar</th>
                                 </tr>
                                 @foreach($usuarios as $usuario)
                                     <tr>
                                         <td>{{ $usuario->perfil->nombre }}</td>
-                                        <td>{{ $usuario->empleado->nombre . ' ' . $usuario->empleado->appaterno . ' ' . $usuario->empleado->apmaterno }}</td>
+                                        <td>{{ !$usuario->empleado ? '' : $usuario->empleado->nombre . ' ' }}</td>
+                                        <td>{{ !$usuario->empleado ? '' : $usuario->empleado->appaterno . ' ' . $usuario->empleado->apmaterno}}</td>
                                         <td>{{ $usuario->email }}</td>
-                                        <td>{{ $usuario->empleado->laborales->last()->puesto->nombre }}</td>
+                                        <td>{{ !$usuario->empleado ? '' : $usuario->empleado->laborales->last()->puesto->nombre }}</td>
                                         <td class="text-center">
                                             @foreach(Auth::user()->perfil->componentes as $componente)
                                                 @if($componente->nombre == 'ver usuario')
@@ -45,11 +49,20 @@
                                                         <i class="fa fa-eye"></i> Ver
                                                     </a>
                                                 @endif
+                                            @endforeach
+                                        </td>
+                                        <td class="text-center">
+                                            @foreach(Auth::user()->perfil->componentes as $componente)
                                                 @if($componente->nombre == 'editar usuario')
                                                     <a class="btn btn-warning btn-sm" href="{{ route('usuarios.edit', ['usuario' => $usuario]) }}">
                                                         <i class="fa fa-pencil"></i> Editar
                                                     </a>
                                                 @endif
+                                            @endforeach
+                                        </td>
+                                        <td class="text-center">
+                                            @foreach(Auth::user()->perfil->componentes as $componente)
+                                                
                                                 @if($componente->nombre == 'eliminar usuario')
                                                     <form method="post" action="{{ route('usuarios.destroy', ['usuario' => $usuario]) }}" style="display: inline;">
                                                         <input type="hidden" name="_method" value="DELETE">

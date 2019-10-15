@@ -202,13 +202,13 @@ class VendedorController extends Controller
         // $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
         // $subgerentes = $oficina->subgerentes()->get();
 
-        $subgerentes = Laboral::where('oficina_id',$oficina->id)
-                        ->where('puesto_id',6)
-                        ->with('empleado.subgerente')
-                        ->get()
-                        ->pluck('empleado')
-                        ->flatten()
-                        ->pluck('subgerente');
+        $subgerentes = Laboral::where('oficina_id', $oficina->id)
+            ->where('puesto_id', 6)
+            ->with('empleado.subgerente')
+            ->get()
+            ->pluck('empleado')
+            ->flatten()
+            ->pluck('subgerente');
 
         $grupos = Grupo::get();
         return view('vendedores.control.subgerente', ['subgerentes' => $subgerentes, 'grupos' => $grupos]);
@@ -217,16 +217,16 @@ class VendedorController extends Controller
     public function grupos(Oficina $oficina)
     {
 
-        $grupos = Laboral::where('oficina_id',$oficina->id)
-                        ->where('puesto_id',6)
-                        ->with('empleado.subgerente.grupos')
-                        ->get()
-                        ->pluck('empleado.subgerente')
-                        ->flatten()
-                        ->pluck('grupos')
-                        ->flatten();
+        $grupos = Laboral::where('oficina_id', $oficina->id)
+            ->where('puesto_id', 6)
+            ->with('empleado.subgerente.grupos')
+            ->get()
+            ->pluck('empleado.subgerente')
+            ->flatten()
+            ->pluck('grupos')
+            ->flatten();
 
-        if(empty($grupos)){
+        if (empty($grupos)) {
             return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
         }
         return view('vendedores.control.grupos', ['grupos' => $grupos->unique()]);
@@ -235,23 +235,29 @@ class VendedorController extends Controller
     public function Vendedores(Oficina $oficina)
     {
 
+        // OBTENEMOS LOS VENDEDORES DEL USUARIO AUTENTICADO
         $user = Auth::user();
         $empleado = $user->empleado()->first();
         $puesto = $empleado->puesto()->first();
-        $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
-        
-        // return $vendedores;
-
-        $empleado_id =  $vendedores->pluck('empleado')->flatten()->pluck('id');
+        $vendedores = $this->empleadoRepositorieFactory
+            ->make($puesto)
+            ->getVendedores($empleado);
+            
+        $empleado_id =  $vendedores->pluck('empleado')
+            ->flatten()
+            ->pluck('id');
 
         // return $empleado_id;
 
-        $laborales = Laboral::where('oficina_id',$oficina->id)->whereIn('empleado_id',$empleado_id)->with('empleado.vendedor')->get();
+        $laborales = Laboral::where('oficina_id', $oficina->id)
+            ->whereIn('empleado_id', $empleado_id)
+            ->with('empleado.vendedor')
+            ->get();
 
 
-        $laborales = $laborales->filter( function($laboral){
-            return $laboral->id == Laboral::where('empleado_id',$laboral->empleado_id)->get()->last()->id;
-        } );
+        $laborales = $laborales->filter(function ($laboral) {
+            return $laboral->id == Laboral::where('empleado_id', $laboral->empleado_id)->get()->last()->id;
+        });
 
         $empleados = $laborales->pluck('empleado')->flatten();
 
