@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Laboral;
+use App\Repositories\Oficina\OficinaRepositorie;
 use Carbon\Carbon;
 
 
@@ -197,19 +198,7 @@ class VendedorController extends Controller
 
     public function subgerentes(Oficina $oficina)
     {
-
-        // $oficina=Oficina::find($oficina);
-        // $subgerentes=Subgerente::where('empleado_id', '!=', '1')->get();
-        // $subgerentes = $oficina->subgerentes()->get();
-
-        $subgerentes = Laboral::where('oficina_id', $oficina->id)
-            ->where('puesto_id', 6)
-            ->with('empleado.subgerente')
-            ->get()
-            ->pluck('empleado')
-            ->flatten()
-            ->pluck('subgerente');
-
+        $subgerentes = OficinaRepositorie::getSubgerentes($oficina);
         $grupos = Grupo::get();
         return view('vendedores.control.subgerente', ['subgerentes' => $subgerentes, 'grupos' => $grupos]);
     }
@@ -217,19 +206,14 @@ class VendedorController extends Controller
     public function grupos(Oficina $oficina)
     {
 
-        $grupos = Laboral::where('oficina_id', $oficina->id)
-            ->where('puesto_id', 6)
-            ->with('empleado.subgerente.grupos')
-            ->get()
-            ->pluck('empleado.subgerente')
-            ->flatten()
-            ->pluck('grupos')
-            ->flatten();
+        $grupos = OficinaRepositorie::getGrupos($oficina);
 
+        
         if (empty($grupos)) {
             return "<br><div class='mr-5 alert alert-danger'>La oficina no cuenta con grupos</div>";
         }
-        return view('vendedores.control.grupos', ['grupos' => $grupos->unique()]);
+
+        return view('vendedores.control.grupos', ['grupos' => $grupos]);
     }
 
     public function Vendedores(Oficina $oficina)
@@ -242,7 +226,7 @@ class VendedorController extends Controller
         $vendedores = $this->empleadoRepositorieFactory
             ->make($puesto)
             ->getVendedores($empleado);
-            
+
         $empleado_id =  $vendedores->pluck('empleado')
             ->flatten()
             ->pluck('id');

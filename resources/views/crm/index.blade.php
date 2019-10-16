@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="col-sm-2 col-sm-offset-5 text-center">
                         <button name="vinculo" id="vinculo" class="btn btn-block btn-success">Crear Nuevo</button>
-                        <button type="submit" form="enviadordecrm" name="enviador" id="enviador" style="display: none;" class="btn btn-block btn-success">Crear Nueasduhasdhvo</button>
+                        <button type="submit" form="enviadordecrm" name="enviador" id="enviador" style="display: none;" class="btn btn-block btn-success">Crear Nuevo</button>
                     </div>
                     <div class="col-sm-2 col-sm-offset-3 text-center">
                         <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
