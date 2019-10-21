@@ -70,12 +70,12 @@
                                 </td>
                                 <input type="hidden" name="id_cliente" value="{{ $crm->clientes->id }}">
                                 <input type="hidden" name="nombre" value="{{ $crm->clientes->nombre }}">
-                                <input type="hidden" name="ap" value="{{ $crm->clientes->apellidopaterno }}">
-                                <input type="hidden" name="am" value="{{ $crm->clientes->apellidomaterno }}">
+                                <input type="hidden" name="ap" value="{{ $crm->clientes->appaterno }}">
+                                <input type="hidden" name="am" value="{{ $crm->clientes->apmaterno }}">
                                 <input type="hidden" name="razon" value="{{ $crm->clientes->razonsocial }}">
-                                <input type="hidden" name="correo" value="{{ $crm->clientes->mail }}">
+                                <input type="hidden" name="correo" value="{{ $crm->clientes->email }}">
                                 <input type="hidden" name="telefono" value="{{ $crm->clientes->telefono }}">
-                                <input type="hidden" name="celular" value="{{ $crm->clientes->telefonocel }}">
+                                <input type="hidden" name="celular" value="{{ $crm->clientes->movil }}">
                                 <input type="hidden" name="fecha_cont" value="{{ $crm->fecha_cont }}">
                                 <input type="hidden" name="fecha_aviso" value="{{ $crm->fecha_aviso }}">
                                 <input type="hidden" name="hora" value="{{ $crm->hora }}">
@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="col-sm-2 col-sm-offset-5 text-center">
                         <button name="vinculo" id="vinculo" class="btn btn-block btn-success">Crear Nuevo</button>
-                        <button type="submit" form="enviadordecrm" name="enviador" id="enviador" style="display: none;" class="btn btn-block btn-success">Crear Nuevo</button>
+                        <button type="submit" form="enviadordecrm" name="enviador" id="enviador" style="display: none;" class="btn btn-block btn-success">Guardar</button>
                     </div>
                     <div class="col-sm-2 col-sm-offset-3 text-center">
                         <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Cerrar</button>
@@ -368,7 +368,7 @@
             $('#hora').attr('required', true);
             $('#vinculo').hide(function(){
                 $('#enviador').show();
-                $('#enviadordecrm').trigger('reset');
+                // $('#enviadordecrm').trigger('reset');
             });
         });
     });
