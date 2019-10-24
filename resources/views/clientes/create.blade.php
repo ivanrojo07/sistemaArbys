@@ -159,7 +159,7 @@
 			$('#nacimiento').prop('required', false);
 			$('#razon').prop('required', true);
 
-			$('#rfc').prop('pattern', '^[A-Za-z]{3}[0-9]{6}');
+			$('#rfc').prop('pattern', '^[A-Za-z]{3}[0-9]{6}[A-Za-z0-9]{3}');
 			$('#rfc').prop('placeholder', '12 Caracteres');
 			$('#rfc').prop('readonly', false);
 		}
