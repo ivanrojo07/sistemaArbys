@@ -1,7 +1,12 @@
 @extends('layouts.blank')
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid mt-4">
+	@if ( session('error') )
+		<div class="alert alert-danger">
+			{{session('error')}}
+		</div>
+	@endif
 	<div class="panel panel-group">
 		<div class="panel-default">
 			<div class="panel-heading">
@@ -34,8 +39,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-12 text-center">
-							<input class="btn btn-success" type="submit" value="Importar">
+						<div class="col-sm-12">
+							<input class="btn btn-success" type="submit" name="tipo" value="carros">
+							<input class="btn btn-success" type="submit"name="tipo" value="motos">
 						</div>
 					</div>
 				</form>

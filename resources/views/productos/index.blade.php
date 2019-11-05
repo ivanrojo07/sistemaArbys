@@ -71,28 +71,26 @@
 				<div class="row form-group" id="filtro-moto" style="display: none">
 					<div class="col-sm-3 ">
 						<label class="control-label">De:</label>
-						<select name="cilindrada_minima" class="form-control">
+						<select name="cilindrada_minima" class="form-control" id="cilindrada_minima">
 							<option value="">Seleccionar</option>
-							<option value="90cc">90 CC</option>
-							<option value="102cc">102 CC</option>
-							<option value="125cc">125 CC</option>
-							<option value="135cc">135 CC</option>
-							<option value="150cc">150 CC</option>
-							<option value="160cc">160 CC</option>
+							<option value="0cc">0 CC</option>
+							<option value="100cc">100 CC</option>
 							<option value="200cc">200 CC</option>
-							<option value="220cc">220 CC</option>
-							<option value="275cc">375 CC</option>
+							<option value="300cc">300 CC</option>
 							<option value="400cc">400 CC</option>
-							<option value="495cc">495 CC</option>
-							<option value="650cc">650 CC</option>
+							<option value="500cc">500 CC</option>
+							<option value="600cc">600 CC</option>
+							<option value="700cc">700 CC</option>
 							<option value="800cc">800 CC</option>
+							<option value="900cc">900 CC</option>
+							<option value="1000cc">1000 CC</option>
 						</select>
 					</div>
 					<div class="col-sm-3">
 							<label class="control-label">A:</label>
-							<select name="cilindrada_maxima" class="form-control">
+							<select name="cilindrada_maxima" class="form-control" id="cilindrada_maxima">
 								<option value="">Seleccionar</option>
-								<option value="90cc">90 CC</option>
+								{{-- <option value="90cc">90 CC</option>
 								<option value="102cc">102 CC</option>
 								<option value="125cc">125 CC</option>
 								<option value="135cc">135 CC</option>
@@ -100,16 +98,16 @@
 								<option value="160cc">160 CC</option>
 								<option value="200cc">200 CC</option>
 								<option value="220cc">220 CC</option>
-								<option value="275cc">375 CC</option>
+								<option value="800cc">800 CC</option>
 								<option value="400cc">400 CC</option>
 								<option value="495cc">495 CC</option>
 								<option value="650cc">650 CC</option>
-								<option value="800cc">800 CC</option>
+								<option value="800cc">800 CC</option> --}}
 							</select>
 						</div>
 						{{-- Tipos de moto --}}
 					<div class="col-sm-3" >
-						<label class="control-label">Tipo:</label>
+						<label class="control-label">Categoria:</label>
 						<select name="tipo_moto_id" class="form-control">
 							<option value="">Seleccionar</option>
 							@foreach ($tipos as $tipo)
@@ -335,6 +333,18 @@
 			$('.mensaje_correo').each( function(){
 				$(this).val(mensaje);
 			} );
+		} );
+
+		$('#cilindrada_minima').change( function(){
+			$('#cilindrada_maxima').html("");
+			cilindrada_minima = parseInt( this.value.replace(/\D/g,''));
+			for (var i = 0; i <= 10; i++) {
+				// console.log('i',i,'min:',cilindrada_minima);
+				if( i*100 >= cilindrada_minima ){
+					// console.log(i*100);
+					$("#cilindrada_maxima").append(`<option value="${i*100}cc">${i*100} CC</option>`);
+				}
+			}
 		} );
 
 	</script>

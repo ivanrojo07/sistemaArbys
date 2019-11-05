@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 use App\ExcelProduct;
+use Exception;
 
 class FileController extends Controller
 {
@@ -26,25 +27,35 @@ class FileController extends Controller
 
     public function importFileIntoDB(Request $request)
     {
-        if ($request->hasFile('sample_file')) {
-            $path = $request->file('sample_file')->getPathName();
-            $data = \Excel::load($path, null, null, true, null)->get();
-            if ($data->count()) {
 
-                /**
-                 * Carga los datos del carro a la tabla de productos
-                 */
+        // VALIDAMOS QUE LA PETICION TENGA UN ARCHIVO
+        if(!$request->hasFile('sample_file')){
+            return redirect()->back()->with('error', 'No se subió ningún archivo');
+        }
 
-                foreach ($data[0] as $key => $value) {
+        // CARGAMOS LOS DATOS DEL ARCHIVO
+        $path = $request->file('sample_file')->getPathName();
+        $data = \Excel::load($path, null, null, true, null)->get();
+
+        // VALIDAMOS QUE EL ARCHIVO TENGA DATOS
+        if(!$data->count()){
+            return redirect()->back()->with('error', 'El archivo no contiene información.');
+        }
+
+        if ($request->input('tipo') == 'carros') {
+
+
+            foreach ($data[0] as $key => $value) {
+                try {
                     $arr[] = [
                         'clave' => $value->clave,
                         'descripcion' => $value->descripcion,
                         'precio_lista' => number_format($value->precio_de_lista, 2, '.', ''),
-                        'm60' => number_format($value['60'], 2, '.', ''),
-                        'm48' => number_format($value['48'], 2, '.', ''),
-                        'm36' => number_format($value['36'], 2, '.', ''),
-                        'm24' => number_format($value['24'], 2, '.', ''),
-                        'm12' => number_format($value['12'], 2, '.', ''),
+                        'm60' => is_numeric($value['60']) ? number_format($value['60'], 2, '.', '') : null,
+                        'm48' => is_numeric($value['60']) ? number_format($value['48'], 2, '.', '') : null,
+                        'm36' => is_numeric($value['60']) ? number_format($value['36'], 2, '.', '') : null,
+                        'm24' => is_numeric($value['60']) ? number_format($value['24'], 2, '.', '') : null,
+                        'm12' => is_numeric($value['60']) ? number_format($value['12'], 2, '.', '') : null,
                         'apertura' => number_format($value->apertura, 2, '.', ''),
                         'marca' => $value->marca,
                         'tipo' => 'CARRO',
@@ -54,65 +65,74 @@ class FileController extends Controller
                         'updated_at' => date('Y-m-d h:m:s'),
                         'cilindrada' => null
                     ];
+                } catch (\Throwable $th) {
+                    return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
                 }
+            }
+        }
 
-                // dd($data[1]);
+        if ($request->input('tipo') == 'motos') {
+            // dd('motos');
+            // dd($data[0]);
+            foreach ($data[0] as $key => $value) {
 
-                /**
-                 * Carga los datos de la moto a la tabla de productos
-                 */
+                // dd($value);
+                // Pasando cilindrada a entero
+                $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
 
-                // dd($data[1]);
+                // dd($data[0]);
 
-                foreach ($data[1] as $key => $value) {
-
-                    // Pasando cilindrada a entero
-                    $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
-
-                    $arr[] = [
-                        'clave' => $value->clave,
-                        'descripcion' => $value->descripcionmodelo,
-                        'precio_lista' => number_format($value->precio_de_listas, 2, '.', ''),
-                        'm60' => number_format($value['60'], 2, '.', ''),
-                        'm48' => number_format($value['48'], 2, '.', ''),
-                        'm36' => number_format($value['36'], 2, '.', ''),
-                        'm24' => number_format($value['24'], 2, '.', ''),
-                        'm12' => number_format($value['12'], 2, '.', ''),
-                        'apertura' => number_format($value->apertura, 2, '.', ''),
-                        'marca' => $value->marca,
-                        'tipo' => 'MOTO',
-                        'tipo_moto' => $value->tipo,
-                        'categoria' => null,
-                        'created_at' => date('Y-m-d h:m:s'),
-                        'updated_at' => date('Y-m-d h:m:s'),
-                        'cilindrada' => $cilindrada
-                    ];
-
-                    // dd($arr[583]);
-                }
-                // }
-                if (!empty($arr)) {
-
-                    /**
-                     * Inserta en la base de datos cada uno de los
-                     * productos y si ya existe lo actualiza
-                     */
-                    foreach ($arr as $product) {
-                        ExcelProduct::updateOrCreate(
-                            ['clave' => $product['clave']],
-                            $product
-                        );
+                if(!is_null($value->clave)){
+                    try {
+                        $arr[] = [
+                            'clave' => $value->clave,
+                            'descripcion' => $value->descripcion,
+                            'precio_lista' => number_format($value->precio_de_listas, 2, '.', ''),
+                            'm60' => !is_null($value['60_mens']) ? number_format(floatval($value['60_mens']), 2, '.', '') : null,
+                            'm48' => !is_null($value['48_mens']) ? number_format(floatval($value['48_mens']), 2, '.', '') : null,
+                            'm36' => !is_null($value['36_mens']) ? number_format(floatval($value['36_mens']), 2, '.', '') : null,
+                            'm24' => !is_null($value['24_mens']) ? number_format(floatval($value['24_mens']), 2, '.', '') : null,
+                            'm12' => !is_null($value['12_mens']) ? number_format(floatval($value['12_mens']), 2, '.', '') : null,
+                            'apertura' => number_format($value->apertura, 2, '.', ''),
+                            'marca' => $value->marca,
+                            'tipo' => $value->tipo,
+                            'tipo_moto' => strtoupper($value->tipo),
+                            'categoria' => $value->categoria,
+                            'created_at' => date('Y-m-d h:m:s'),
+                            'updated_at' => date('Y-m-d h:m:s'),
+                            'cilindrada' => $cilindrada
+                        ];
+                    } catch (\Throwable $th) {
+                        return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
                     }
+                }
 
-                    return redirect()->back()->with('success', 'Archivo subido correctamente.');
-                } else
-                    return redirect()->back()->with('error', 'Error al subir el archivo.');
-            } else
-                return redirect()->back()->with('error', 'Error al subir el archivo.');
-        } else
-            return redirect()->back()->with('error', 'No se subio ningun archivo');
+                
 
-        return redirect()->back()->with('error', 'Error al subir el archivo.');
+                // dd($arr[0]);
+            }
+        }
+
+        if(empty($arr)){
+            return redirect()->back()->with('error', 'Error al subir el archivo.');
+
+        }
+
+        /**
+         * Inserta en la base de datos cada uno de los
+         * productos y si ya existe lo actualiza
+         */
+        foreach ($arr as $product) {
+            ExcelProduct::updateOrCreate(
+                ['clave' => $product['clave']],
+                $product
+            );
+        }
+
+        // dd(ExcelProduct::get());
+
+        return redirect()->back()->with('success', 'Archivo subido correctamente.');
+
     }
 
     public function downloadExcelFile($type)
