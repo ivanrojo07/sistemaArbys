@@ -30,7 +30,7 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">
-								<input type="radio" name="type" @if ($request->type == "MOTO")
+								<input type="radio" id="radio-button-moto" name="type" @if ($request->type == "MOTO")
 									{{-- expr --}}
 									checked
 								@endif id="moto" value="MOTO">
@@ -344,6 +344,12 @@
 					// console.log(i*100);
 					$("#cilindrada_maxima").append(`<option value="${i*100}cc">${i*100} CC</option>`);
 				}
+			}
+		} );
+
+		$(document).ready( function(){
+			if($('#radio_button').is(':checked')) { 
+				alert("it's checked");
 			}
 		} );
 

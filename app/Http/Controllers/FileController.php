@@ -127,6 +127,10 @@ class FileController extends Controller
                 ['clave' => $product['clave']],
                 $product
             );
+            Product::updateOrCreate(
+                ['clave' => $product['clave']],
+                $product
+            );
         }
 
         // dd(ExcelProduct::get());
