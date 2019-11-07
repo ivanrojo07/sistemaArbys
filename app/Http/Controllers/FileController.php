@@ -29,7 +29,7 @@ class FileController extends Controller
     {
 
         // VALIDAMOS QUE LA PETICION TENGA UN ARCHIVO
-        if(!$request->hasFile('sample_file')){
+        if (!$request->hasFile('sample_file')) {
             return redirect()->back()->with('error', 'No se subió ningún archivo');
         }
 
@@ -37,15 +37,17 @@ class FileController extends Controller
         $path = $request->file('sample_file')->getPathName();
         $data = \Excel::load($path, null, null, true, null)->get();
 
+        // dd($data);
+
         // VALIDAMOS QUE EL ARCHIVO TENGA DATOS
-        if(!$data->count()){
+        if (!$data->count()) {
             return redirect()->back()->with('error', 'El archivo no contiene información.');
         }
 
         if ($request->input('tipo') == 'carros') {
 
 
-            foreach ($data[0] as $key => $value) {
+            foreach ($data as $key => $value) {
                 try {
                     $arr[] = [
                         'clave' => $value->clave,
@@ -74,48 +76,45 @@ class FileController extends Controller
         if ($request->input('tipo') == 'motos') {
             // dd('motos');
             // dd($data[0]);
-            foreach ($data[0] as $key => $value) {
+            foreach ($data as $key => $value) {
 
-                // dd($value);
-                // Pasando cilindrada a entero
-                $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
 
-                // dd($data[0]);
+                try {
+                    $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
 
-                if(!is_null($value->clave)){
-                    try {
-                        $arr[] = [
-                            'clave' => $value->clave,
-                            'descripcion' => $value->descripcion,
-                            'precio_lista' => number_format($value->precio_de_listas, 2, '.', ''),
-                            'm60' => !is_null($value['60_mens']) ? number_format(floatval($value['60_mens']), 2, '.', '') : null,
-                            'm48' => !is_null($value['48_mens']) ? number_format(floatval($value['48_mens']), 2, '.', '') : null,
-                            'm36' => !is_null($value['36_mens']) ? number_format(floatval($value['36_mens']), 2, '.', '') : null,
-                            'm24' => !is_null($value['24_mens']) ? number_format(floatval($value['24_mens']), 2, '.', '') : null,
-                            'm12' => !is_null($value['12_mens']) ? number_format(floatval($value['12_mens']), 2, '.', '') : null,
-                            'apertura' => number_format($value->apertura, 2, '.', ''),
-                            'marca' => $value->marca,
-                            'tipo' => $value->tipo,
-                            'tipo_moto' => strtoupper($value->tipo),
-                            'categoria' => $value->categoria,
-                            'created_at' => date('Y-m-d h:m:s'),
-                            'updated_at' => date('Y-m-d h:m:s'),
-                            'cilindrada' => $cilindrada
-                        ];
-                    } catch (\Throwable $th) {
-                        return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
+
+                    if (!is_null($value->clave)) {
+                        try {
+                            $arr[] = [
+                                'clave' => $value->clave,
+                                'descripcion' => $value->descripcion,
+                                'precio_lista' => number_format($value->precio_de_listas, 2, '.', ''),
+                                'm60' => !is_null($value['60_mens']) ? number_format(floatval($value['60_mens']), 2, '.', '') : null,
+                                'm48' => !is_null($value['48_mens']) ? number_format(floatval($value['48_mens']), 2, '.', '') : null,
+                                'm36' => !is_null($value['36_mens']) ? number_format(floatval($value['36_mens']), 2, '.', '') : null,
+                                'm24' => !is_null($value['24_mens']) ? number_format(floatval($value['24_mens']), 2, '.', '') : null,
+                                'm12' => !is_null($value['12_mens']) ? number_format(floatval($value['12_mens']), 2, '.', '') : null,
+                                'apertura' => number_format($value->apertura, 2, '.', ''),
+                                'marca' => $value->marca,
+                                'tipo' => $value->tipo,
+                                'tipo_moto' => strtoupper($value->tipo),
+                                'categoria' => $value->categoria,
+                                'created_at' => date('Y-m-d h:m:s'),
+                                'updated_at' => date('Y-m-d h:m:s'),
+                                'cilindrada' => $cilindrada
+                            ];
+                        } catch (\Throwable $th) {
+                            return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
+                        }
                     }
+                } catch (\Throwable $th) {
+                    return redirect()->back()->with('error','Verifica que la estructura de tu archivo sea correcta y que no tenga otras pestañas añadidas.');
                 }
-
-                
-
-                // dd($arr[0]);
             }
         }
 
-        if(empty($arr)){
+        if (empty($arr)) {
             return redirect()->back()->with('error', 'Error al subir el archivo.');
-
         }
 
         /**
@@ -136,7 +135,6 @@ class FileController extends Controller
         // dd(ExcelProduct::get());
 
         return redirect()->back()->with('success', 'Archivo subido correctamente.');
-
     }
 
     public function downloadExcelFile($type)
