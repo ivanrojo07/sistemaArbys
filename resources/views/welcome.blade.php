@@ -394,7 +394,7 @@
                                                 @endif
                                             @endforeach
                                             <li>
-                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/precargas/carros') }}','Carros')">
+                                                <a href="#" onclick="AgregarNuevoTab('{{ route('precagas.carros.index') }}','Carros')">
                                                     <i class="fa fa-phone"></i> Carros
                                                 </a>
                                             </li>

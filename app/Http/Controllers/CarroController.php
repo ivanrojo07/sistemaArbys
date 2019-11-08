@@ -87,4 +87,8 @@ class CarroController extends Controller
         $categoriasCarros = CategoriaCarro::get();
         return view('precargas.carros.index', compact('categoriasCarros'));
     }
+
+    public function precargaCreate(){
+        return view('precargas.carros.create');
+    }
 }

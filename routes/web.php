@@ -84,7 +84,8 @@ Route::resource('bancos','Banco\BancoController', ['except'=>'show']);
 Route::resource('canalventas','CanalVenta\CanalVentaController', ['except'=>'show']);
 Route::resource('gastos','Gasto\GastoController', ['except'=>'show']);
 Route::resource('giros','Giro\GiroController', ['except'=>'show']);
-Route::get('precargas/carros', 'CarroController@precargaIndex')->name('precargas.carros.index');
+Route::get('/precargas/carros', 'CarroController@precargaIndex')->name('precargas.carros.index');
+Route::get('precargas/carros/crear', 'CarroController@precargaCreate')->name('precargas.carros.create');
 
 // CLIENTES
 Route::resource('clientes','Cliente\ClienteController');
