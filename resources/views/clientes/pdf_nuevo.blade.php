@@ -893,9 +893,6 @@ table th[class*="col-"] {
                         </div>
                     </div>
             </div>
-            
-                Promoción de julio: kit de accesorios que incluye casco certificado, 
-                guantes alarma, portacelular con cargador, red y protector para zapato de pedal
         </p>
     {{-- </div> --}}
   </main>

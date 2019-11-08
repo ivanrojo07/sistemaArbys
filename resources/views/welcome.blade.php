@@ -393,6 +393,16 @@
                                                     </li>
                                                 @endif
                                             @endforeach
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/precargas/carros') }}','Carros')">
+                                                    <i class="fa fa-phone"></i> Carros
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ url('/precargas/motos') }}','Motos')">
+                                                    <i class="fa fa-phone"></i> Motos
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     @break
