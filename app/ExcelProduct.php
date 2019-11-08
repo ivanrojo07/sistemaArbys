@@ -20,6 +20,7 @@ class ExcelProduct extends Model
         'tipo',
         'categoria',
         'tipo_moto',
-        'cilindrada'
+        'cilindrada',
+        'mostrar',
     ];
 }

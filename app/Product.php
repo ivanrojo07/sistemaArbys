@@ -27,7 +27,8 @@ class Product extends Model
         'tipo',
         'categoria',
         'tipo_moto',
-        'cilindrada'
+        'cilindrada',
+        'mostrar',
     ];
 
     public $sortable = [

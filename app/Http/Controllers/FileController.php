@@ -75,12 +75,20 @@ class FileController extends Controller
 
         if ($request->input('tipo') == 'motos') {
             // dd('motos');
-            // dd($data[0]);
+            // dd($data);
             foreach ($data as $key => $value) {
 
 
                 try {
                     $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
+                    $mostrar = strtolower($value->id);
+
+                    // if($mostrar != 's' && $mostrar != 'S'){
+                    //     dd($mostrar);
+                    // }
+
+                    $mostrar = $mostrar === 's' ? 1 : 0;
+                    
 
 
                     if (!is_null($value->clave)) {
@@ -101,14 +109,20 @@ class FileController extends Controller
                                 'categoria' => $value->categoria,
                                 'created_at' => date('Y-m-d h:m:s'),
                                 'updated_at' => date('Y-m-d h:m:s'),
-                                'cilindrada' => $cilindrada
+                                'cilindrada' => $cilindrada,
+                                'mostrar' => $mostrar,
                             ];
+
+                            // if($mostrar != 1){
+                            //     dd($arr);
+                            // }
+                            
                         } catch (\Throwable $th) {
                             return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
                         }
                     }
                 } catch (\Throwable $th) {
-                    return redirect()->back()->with('error','Verifica que la estructura de tu archivo sea correcta y que no tenga otras pestañas añadidas.');
+                    return redirect()->back()->with('error', 'Verifica que la estructura de tu archivo sea correcta y que no tenga otras pestañas añadidas.');
                 }
             }
         }
@@ -121,7 +135,8 @@ class FileController extends Controller
          * Inserta en la base de datos cada uno de los
          * productos y si ya existe lo actualiza
          */
-        foreach ($arr as $product) {
+        foreach ($arr as $key => $product) {
+
             ExcelProduct::updateOrCreate(
                 ['clave' => $product['clave']],
                 $product

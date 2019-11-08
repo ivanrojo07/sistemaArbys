@@ -109,6 +109,7 @@ class ClienteProductoController extends Controller
         $tipos = Tipo::get();
         $categorias = Categoria::get();
 
+        $productos = $productos->where('mostrar',1);
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos'=>$tipos, 'categorias'=>$categorias]);
     }
