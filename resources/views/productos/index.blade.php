@@ -30,10 +30,9 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">
-								<input type="radio" id="radio-button-moto" name="type" @if ($request->type == "MOTO")
-									{{-- expr --}}
+									<input type="radio" @if ($request->type == "MOTO")
 									checked
-								@endif id="moto" value="MOTO">
+								@endif name="type" id="moto" value="MOTO">
 							</div>
 						</div>
 						@endif
@@ -293,18 +292,7 @@
 @section('scripts')
 	<script>
 		
-		/**
-		 * Si se selecciona "moto" 
-		 * se muestran los filtros de moto
-		 * se ocultan los filtros de carro 
-		*/
-
-		$('#moto').change(function() {
-			if ($(this).prop('checked')) {
-				$('#filtro-moto').prop('style', '');
-				$('#filtro-carro').prop('style', 'display: none;');
-			}
-		});
+		
 
 		/**
 		 * Si se selecciona "carro" 
@@ -316,6 +304,20 @@
 			if ($(this).prop('checked')) {
 				$('#filtro-moto').prop('style', 'display: none;');
 				$('#filtro-carro').prop('style', '');
+			}
+		});
+
+			/**
+		 * Si se selecciona "moto" 
+		 * se muestran los filtros de moto
+		 * se ocultan los filtros de carro 
+		*/
+
+
+		$('#moto').click(function() {
+			if ($(this).prop('checked')) {
+				$('#filtro-moto').prop('style', '');
+				$('#filtro-carro').prop('style', 'display: none;');
 			}
 		});
 
@@ -351,6 +353,9 @@
 			if($('#radio_button').is(':checked')) { 
 				alert("it's checked");
 			}
+
+
+		
 		} );
 
 	</script>
