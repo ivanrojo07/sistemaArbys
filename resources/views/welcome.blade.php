@@ -393,7 +393,7 @@
                                                     </li>
                                                 @endif
                                             @endforeach
-                                            <li>
+                                            {{-- <li>
                                                 <a href="#" onclick="AgregarNuevoTab('{{ route('precagas.carros.index') }}','Carros')">
                                                     <i class="fa fa-phone"></i> Carros
                                                 </a>
@@ -402,7 +402,7 @@
                                                 <a href="#" onclick="AgregarNuevoTab('{{ url('/precargas/motos') }}','Motos')">
                                                     <i class="fa fa-phone"></i> Motos
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </li>
                                     @break
