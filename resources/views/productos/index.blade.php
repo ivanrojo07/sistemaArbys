@@ -89,19 +89,6 @@
 							<label class="control-label">A:</label>
 							<select name="cilindrada_maxima" class="form-control" id="cilindrada_maxima">
 								<option value="">Seleccionar</option>
-								{{-- <option value="90cc">90 CC</option>
-								<option value="102cc">102 CC</option>
-								<option value="125cc">125 CC</option>
-								<option value="135cc">135 CC</option>
-								<option value="150cc">150 CC</option>
-								<option value="160cc">160 CC</option>
-								<option value="200cc">200 CC</option>
-								<option value="220cc">220 CC</option>
-								<option value="800cc">800 CC</option>
-								<option value="400cc">400 CC</option>
-								<option value="495cc">495 CC</option>
-								<option value="650cc">650 CC</option>
-								<option value="800cc">800 CC</option> --}}
 							</select>
 						</div>
 						{{-- Tipos de moto --}}

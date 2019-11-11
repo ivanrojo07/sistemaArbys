@@ -92,6 +92,9 @@ Route::get('precargas/carros/edit/{id}', 'CarroController@precargaEdit')->name('
 Route::get('/precargas/motos/index', 'MotoController@precargaIndex')->name('precargas.motos.index');
 Route::get('/precargas/motos/crear', 'MotoController@precargaCreate')->name('precargas.motos.create');
 Route::post('precargas/motos/store', 'MotoController@precargaStore')->name('precargas.motos.store');
+Route::get('precargas/motos/edit/{id}', 'MotoController@precargaEdit')->name('precargas.motos.edit');
+Route::put('precargas/motos/{id}/update', 'MotoController@precargaUpdate')->name('precargas.motos.update');
+Route::delete('precargas/motos/{id}/delete', 'MotoController@precargaDelete')->name('precargas.motos.delete');
 
 // CLIENTES
 Route::resource('clientes','Cliente\ClienteController');

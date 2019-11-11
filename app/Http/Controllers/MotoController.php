@@ -97,6 +97,22 @@ class MotoController extends Controller
         CategoriaMoto::create([
             'nombre'=>$request->nombre,
         ]);
-        return redirect()->route('precargas.motos.index')->with('success','Categoría añadida con exito.');
+        return redirect()->route('precargas.motos.index')->with('success','Categoría añadida con éxito.');
+    }
+
+    public function precargaEdit($id){
+        $categoriaMoto = CategoriaMoto::find($id);
+        return view('precargas.motos.edit',compact('categoriaMoto'));
+    }
+
+    public function precargaUpdate(Request $request, $id){
+        $categoriaMoto = CategoriaMoto::find($id);
+        $categoriaMoto->update($request->all());
+        return redirect()->route('precargas.motos.index')->with('success','Categoría editada con éxito.');
+    }
+
+    public function precargaDelete(Request $request, $id){
+        CategoriaMoto::find($id)->delete();
+        return redirect()->route('precargas.motos.index')->with('success','Categoría eliminada con éxito.');
     }
 }

@@ -35,8 +35,14 @@
 					@foreach ($categoriasMotos as $categoriaMoto)
 					<tr>
 						<td>{{$categoriaMoto->nombre}}</td>
-						<td class="text-center"><a href="#" class="btn btn-warning">Editar</a></td>
-						<td class="text-center"><a href="#" class="btn btn-danger">Eliminar</a></td>
+						<td class="text-center"><a href="{{route('precargas.motos.edit',['categoriaMoto'=>$categoriaMoto])}}" class="btn btn-warning">Editar</a></td>
+						<td class="text-center">
+							<form action="{{route('precargas.motos.delete',['id'=>$categoriaMoto->id])}}" method="POST">
+								{{ csrf_field() }}
+								<input type="hidden" name="_method" value="delete" />
+								<button type="submit" class="btn btn-danger">Eliminar</button>
+							</form>
+						</td>
 					</tr
 					@endforeach>
 				</tbody>
