@@ -99,4 +99,9 @@ class CarroController extends Controller
         ]);
         return redirect()->route('precargas.carros.index')->with('success','Categoría añadida con exito.');
     }
+
+    public function precargaEdit($id){
+        dd($id);
+        // return view('precargas.carros.edit');
+    }
 }

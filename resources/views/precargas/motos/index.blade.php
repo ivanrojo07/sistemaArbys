@@ -12,13 +12,13 @@
 		<div class="col-lg-6">
 		</div>
 		<div class="col-lg-6">
-			<a class="btn btn-success" href="{{route('precargas.carros.create')}}">
+			<a class="btn btn-success" href="#">
 				<strong>Agregar categoria</strong>
 			</a>
 		</div>
 	</div>
 
-	@if (!count($categoriasCarros))
+	@if (!count($categoriasMotos))
 		<label for="">No hay categorias añadidas</label>
 	@else
 
@@ -32,10 +32,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($categoriasCarros as $categoriaCarro)
+					@foreach ($categoriasMotos as $categoriaMoto)
 					<tr>
-						<td>{{$categoriaCarro->nombre}}</td>
-						<td class="text-center"><a href="{{route('precargas.carros.edit',['categoriaCarro'=>$categoriaCarro])}}" class="btn btn-warning">Editar</a></td>
+						<td>{{$categoriaMoto->nombre}}</td>
+						<td class="text-center"><a href="{{route('precargas.carros.edit',['categoriaCarro'=>$categoriaMoto])}}" class="btn btn-warning">Editar</a></td>
 						<td class="text-center"><a href="#" class="btn btn-danger">Eliminar</a></td>
 					</tr
 					@endforeach>

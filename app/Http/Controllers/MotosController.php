@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaMoto;
 use Illuminate\Http\Request;
 
 class MotosController extends Controller
@@ -80,5 +81,10 @@ class MotosController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function precargaIndex(){
+        $categoriasMotos = CategoriaMoto::get();
+        return view('precargas.motos.index', compact('categoriasMotos'));
     }
 }

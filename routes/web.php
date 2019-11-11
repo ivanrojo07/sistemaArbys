@@ -87,6 +87,9 @@ Route::resource('giros','Giro\GiroController', ['except'=>'show']);
 Route::get('/precargas/carros/index', 'CarroController@precargaIndex')->name('precargas.carros.index');
 Route::get('precargas/carros/crear', 'CarroController@precargaCreate')->name('precargas.carros.create');
 Route::post('precargas/carros/store', 'CarroController@precargaStore')->name('precargas.carros.store');
+Route::get('precargas/carros/edit/{id}', 'CarroController@precargaEdit')->name('precargas.carros.edit');
+
+Route::get('/precargas/motos/index', 'MotoController@precargaIndex')->name('precargas.motos.index');
 
 // CLIENTES
 Route::resource('clientes','Cliente\ClienteController');

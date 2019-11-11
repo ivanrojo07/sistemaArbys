@@ -260,20 +260,25 @@
 							<textarea name="mensaje" maxlength="500" class="form-control mensaje" style="display:none"></textarea>
 						</div>
 					</div>
+					<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+							<input type="hidden" name="product_id" value="{{ $producto->id }}">
+							<input type="hidden" name="mensaje_correo" class="mensaje_correo">
+					<input class="btn btn-success" type="submit" value="Enviar a Correo" name="correo">
 				</form>
 				@endif
 			</div>
             <div class="modal-footer">
                 <div class="row text-center">
-					<div class="col-sm-4">
+					{{-- <div class="col-sm-4">
 						<form role="form" id="form-cliente" method="POST" action="{{ route('enviarCorreo', ['cliente' => $cliente,'producto' => $producto]) }}">
 							{{ csrf_field() }}
 							<input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
 							<input type="hidden" name="product_id" value="{{ $producto->id }}">
 							<input type="hidden" name="mensaje_correo" class="mensaje_correo">
-							<input class="btn btn-success" type="submit" value="Enviar a Correo">
+							<input form="meses_{{$producto->id}}" class="btn btn-success" type="submit" value="Enviar a Correo">
+
 						</form>
-					</div>
+					</div> --}}
 					<div class="col-sm-4">
 						<button form="meses_{{$producto->id}}" type="submit" class="btn btn-warning">Descargar PDF</button>
 					</div>

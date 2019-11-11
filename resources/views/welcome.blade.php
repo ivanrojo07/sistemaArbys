@@ -398,6 +398,11 @@
                                                     <i class="fa fa-phone"></i> Carros
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ route('precargas.motos.index') }}','Motos')">
+                                                    <i class="fa fa-phone"></i> Motos
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     @break

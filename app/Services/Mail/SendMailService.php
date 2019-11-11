@@ -11,7 +11,9 @@ class SendMailService
 {
     public function make($request, $cliente, $producto)
     {
+        // dd($request->input());
         // GENERAR PDF PARA EL CORREO
+
         $mensaje = $request->input('mensaje');
         if ($cliente->vendedor != null) 
             $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado, 'mensaje'=>$mensaje]);
