@@ -91,4 +91,12 @@ class CarroController extends Controller
     public function precargaCreate(){
         return view('precargas.carros.create');
     }
+
+    public function precargaStore(Request $request){
+        // dd($request->input());
+        CategoriaCarro::create([
+            'nombre'=>$request->nombre
+        ]);
+        return redirect()->route('precargas.carros.index')->with('success','Categoría añadida con exito.');
+    }
 }

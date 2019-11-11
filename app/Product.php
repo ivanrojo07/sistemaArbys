@@ -54,11 +54,11 @@ class Product extends Model
 
     public function scopeCategoria($query, $categoria)
     {
-        return $query->where('categoria', $categoria);
+        return $query->where('categoria', 'like', '%'.$categoria.'%');
     }
 
     public function scopeTipoMoto($query, $tipo_moto){
-        return $query->where('tipo_moto', $tipo_moto);
+        return $query->where('tipo_moto', 'like', '%'. $tipo_moto . '%');
     }
 
     public function scopePrecioMinimo($query, $precio_minimo)

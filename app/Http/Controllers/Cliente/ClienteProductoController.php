@@ -13,6 +13,8 @@ use Barryvdh\DomPDF\Facade as PDF;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Tipo;
 use App\Categoria;
+use App\CategoriaCarro;
+use App\CategoriaMoto;
 
 class ClienteProductoController extends Controller
 {
@@ -30,12 +32,12 @@ class ClienteProductoController extends Controller
         $tipo = $request->type;
         $productos = new Product();
 
-        $categoria = Categoria::find($request->input('categoria'));
+        $categoria = CategoriaCarro::find($request->input('categoria'));
         if($categoria){
             $productos = $productos->categoria($categoria->nombre);
         }
 
-        $tipo_moto = Tipo::find($request->input('tipo_moto_id'));
+        $tipo_moto = CategoriaMoto::find($request->input('tipo_moto_id'));
         if($tipo_moto){
             $productos = $productos->tipoMoto($tipo_moto->nombre);
         }
@@ -108,10 +110,12 @@ class ClienteProductoController extends Controller
 
         $tipos = Tipo::get();
         $categorias = Categoria::get();
+        $categoriasCarros = CategoriaCarro::get();
+        $categoriasMotos = CategoriaMoto::get();
 
         $productos = $productos->where('mostrar',1);
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
-        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos'=>$tipos, 'categorias'=>$categorias]);
+        return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos'=>$tipos, 'categorias'=>$categorias, 'categoriasCarros'=>$categoriasCarros, 'categoriasMotos'=>$categoriasMotos]);
     }
 
     /**

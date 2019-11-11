@@ -2,6 +2,12 @@
 @section('content')
 <div class="container">
 
+	@if (session('success'))
+		<div class="alert alert-success">
+			{{session('success')}}
+		</div>
+	@endif
+
 	<div class="panel-body">
 		<div class="col-lg-6">
 		</div>
@@ -12,7 +18,7 @@
 		</div>
 	</div>
 
-	@if (count($categoriasCarros))
+	@if (!count($categoriasCarros))
 		<label for="">No hay categorias añadidas</label>
 	@else
 
@@ -20,17 +26,19 @@
 			<table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 				<thead>
 					<tr class="info">
-						<th>Nombre</th>
-						<th>Editar</th>
-						<th>Eliminar</th>
+						<th class="text-center">Nombre</th>
+						<th class="text-center">Editar</th>
+						<th class="text-center">Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
+					@foreach ($categoriasCarros as $categoriaCarro)
 					<tr>
-						<th>1</th>
-						<th>2</th>
-						<th>3</th>
-					</tr>
+						<td>{{$categoriaCarro->nombre}}</td>
+						<td class="text-center"><a href="#" class="btn btn-warning">Editar</a></td>
+						<td class="text-center"><a href="#" class="btn btn-danger">Eliminar</a></td>
+					</tr
+					@endforeach>
 				</tbody>
 			</table>
 	</div>

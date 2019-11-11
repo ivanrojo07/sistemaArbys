@@ -61,8 +61,8 @@
 						<label class="control-label">CATEGORIA</label>
 						<select name="categoria" class="form-control">
 							<option value="{{null}}">Seleccionar</option>
-							@foreach ($categorias as $categoria)
-								<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+							@foreach ($categoriasCarros as $categoriaCarro)
+								<option value="{{$categoriaCarro->id}}">{{$categoriaCarro->nombre}}</option>
 							@endforeach
 						</select>
 					</div>
