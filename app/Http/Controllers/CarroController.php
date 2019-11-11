@@ -101,7 +101,8 @@ class CarroController extends Controller
     }
 
     public function precargaEdit($id){
-        dd($id);
-        // return view('precargas.carros.edit');
+        // dd($id);
+        $categoriaCarro = CategoriaCarro::find($id);
+        return view('precargas.carros.edit',compact('categoriaCarro'));
     }
 }
