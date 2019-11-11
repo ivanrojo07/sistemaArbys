@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\CategoriaMoto;
 use Illuminate\Http\Request;
 
-class MotosController extends Controller
+class MotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -86,5 +86,17 @@ class MotosController extends Controller
     public function precargaIndex(){
         $categoriasMotos = CategoriaMoto::get();
         return view('precargas.motos.index', compact('categoriasMotos'));
+    }
+
+    public function precargaCreate(){
+        return view('precargas.motos.create');
+    }
+
+    public function precargaStore(Request $request){
+        // dd($request->input());
+        CategoriaMoto::create([
+            'nombre'=>$request->nombre,
+        ]);
+        return redirect()->route('precargas.motos.index')->with('success','Categoría añadida con exito.');
     }
 }

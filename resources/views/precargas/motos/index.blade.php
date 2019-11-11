@@ -12,7 +12,7 @@
 		<div class="col-lg-6">
 		</div>
 		<div class="col-lg-6">
-			<a class="btn btn-success" href="#">
+			<a class="btn btn-success" href="{{route('precargas.motos.create')}}">
 				<strong>Agregar categoria</strong>
 			</a>
 		</div>
@@ -35,7 +35,7 @@
 					@foreach ($categoriasMotos as $categoriaMoto)
 					<tr>
 						<td>{{$categoriaMoto->nombre}}</td>
-						<td class="text-center"><a href="{{route('precargas.carros.edit',['categoriaCarro'=>$categoriaMoto])}}" class="btn btn-warning">Editar</a></td>
+						<td class="text-center"><a href="#" class="btn btn-warning">Editar</a></td>
 						<td class="text-center"><a href="#" class="btn btn-danger">Eliminar</a></td>
 					</tr
 					@endforeach>

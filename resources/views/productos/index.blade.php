@@ -109,8 +109,8 @@
 						<label class="control-label">Categoria:</label>
 						<select name="tipo_moto_id" class="form-control">
 							<option value="">Seleccionar</option>
-							@foreach ($tipos as $tipo)
-								<option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+							@foreach ($categoriasMotos as $categoriaMoto)
+								<option value="{{$categoriaMoto->id}}">{{$categoriaMoto->nombre}}</option>
 							@endforeach
 						</select>
 					</div>

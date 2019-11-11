@@ -44,7 +44,7 @@ class ClienteProductoController extends Controller
 
         $tipo_moto = CategoriaMoto::find($request->input('tipo_moto_id'));
         if ($tipo_moto) {
-            $productos = $productos->tipoMoto($tipo_moto->nombre);
+            $productos = $productos->categoria($tipo_moto->nombre);
         }
 
         /* Obtenemos el tipo de empleado del usuario autenticado para el caso de que sea vendedor 
