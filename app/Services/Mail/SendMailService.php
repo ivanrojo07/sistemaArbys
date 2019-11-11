@@ -12,8 +12,11 @@ class SendMailService
     public function make($request, $cliente, $producto)
     {
         // GENERAR PDF PARA EL CORREO
-        $mensaje = $request->input('mensaje_correo');
-        $pdf = PDF::loadView('clientes.pdf', ['cliente' => $cliente, 'producto' => $producto, "request" => $request->all(), "empleado" => $cliente->vendedor->empleado, 'mensaje' => $mensaje]);
+        $mensaje = $request->input('mensaje');
+        if ($cliente->vendedor != null) 
+            $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>$cliente->vendedor->empleado, 'mensaje'=>$mensaje]);
+        else
+            $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>Auth::user()->empleado, 'mensaje'=>$mensaje]);
         
         // CREAR TRANSACCIÓN
         $transaction = Transaction::create([
