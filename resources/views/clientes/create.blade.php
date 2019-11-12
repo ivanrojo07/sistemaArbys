@@ -20,7 +20,7 @@
 				{{ csrf_field() }}
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">Tipo de Persona:</label>
 							<select type="select" name="tipo" class="form-control" onchange="persona(this)">
 								<option value="Física">Física</option>
@@ -28,52 +28,52 @@
 							</select>
 						</div>
 						<div id="fisica">
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 col-md-4 form-group">
 								<label class="control-label">✱Nombre</label>
 								<input type="text" class="form-control rfc" name="nombre" id="nombre" onchange="calcularRFC();">
 							</div>
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 col-md-4 form-group">
 								<label class="control-label">✱Apellido Paterno:</label>
 								<input type="text" class="form-control rfc" name="appaterno" id="appaterno" onchange="calcularRFC();">
 							</div>
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 col-md-4 form-group">
 								<label class="control-label">Apellido Materno:</label>
 								<input type="text" class="form-control rfc" name="apmaterno" id="apmaterno" onchange="calcularRFC();">
 							</div>
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 col-md-4 form-group">
 								<label class="control-label">✱Fecha de Nacimiento:</label>
 								<input type="date" class="form-control rfc" id="nacimiento" name="nacimiento" onchange="calcularRFC();">
 							</div>
 						</div>
 						<div id="moral" style="display: none;">
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 col-md-4 form-group">
 								<label class="control-label">✱Razon Social:</label>
 								<input type="text" class="form-control" name="razon" id="razon">
 							</div>
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">✱RFC:</label>
 							<input type="text" class="form-control" name="rfc" required="" id="rfc"
 								 pattern="^[A-Za-z]{4}[0-9]{6}" readonly="">
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">Homoclave:</label>
 							<input type="text" class="form-control" name="homoclave" id="rfc" value="" 
 								 pattern="^[A-Za-z0-9]{3}" style="text-transform:uppercase;" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase();">
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">✱Correo Electrónico:</label>
 							<input type="email" class="form-control" name="email" id="email" required>
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">Teléfono:</label>
 							<input type="number" class="form-control" name="telefono" pattern="+[0-9]" id="telefono">
 						</div>
-						<div class="col-sm-3 form-group">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">✱Teléfono Celular:</label>
 							<input type="number" class="form-control" name="movil" pattern="+[0-9]" id="movil" required>
 						</div>
-						<div class="col-sm-3 form-grou">
+						<div class="col-sm-6 col-md-4 form-group">
 							<label for="" class="control-label">✱Canal de ventas:</label>
 							<select name="canal" id="" class="form-control">
 								@foreach ($canal_ventas as $canal)
@@ -81,7 +81,7 @@
 								@endforeach
 							</select>
 						</div>
-						{{-- <div class="col-sm-3 form-group">
+						{{-- <div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">✱Canal de Ventas:</label>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'><i
@@ -94,10 +94,16 @@
 								</select>
 							</div>
 						</div> --}}
-						{{-- <div class="col-sm-3 form-group">
+						{{-- <div class="col-sm-6 col-md-4 form-group">
 							<label class="control-label">Comentarios:</label>
 							<textarea class="form-control" name="comentarios"></textarea>
 						</div> --}}
+					</div>
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<label for="" class="control-label">✱Comentarios:</label>
+							<textarea name="comentarios" id="" cols="30" rows="5" class="form-control"></textarea>
+						</div>
 					</div>
 				</div>
 				<div class="panel-footer">

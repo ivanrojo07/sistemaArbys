@@ -94,15 +94,18 @@
 						<div class="col-sm-4 col-sm-offset-4 form-group">
 						<label class="control-label" for="canal_ventas">Vendedor asignado:</label>
 							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon3" onclick='getCanales()'>
+								{{-- <span class="input-group-addon" id="basic-addon3" onclick='getCanales()'>
 									<i class="fa fa-refresh"></i>
-								</span>
-		    					<select type="select" name="vendedor_id" class="form-control" id="vendedores">
+								</span> --}}
+		    					{{-- <select type="select" name="vendedor_id" class="form-control" id="vendedores">
 		    						<option  value="">Seleccionar</option>
 		    						@foreach($vendedores as $vendedor)
 		    							<option value="{{ $vendedor->id }}" {{ $cliente->vendedor ? $cliente->vendedor->id == $vendedor->id ? ' selected' : '' : ''}}>{{ $vendedor->empleado->nombre }} {{$vendedor->empleado->apaterno}}</option>
 		    						@endforeach
-		    					</select>
+								</select> --}}
+								{{-- {{dd($cliente->vendedor)}} --}}
+								<input type="hidden" name="vendedor_id" value="{{$cliente->vendedor ? $cliente->vendedor->id : null}}">
+								<input type="text" class="form-control" value="{{$cliente->vendedor ? $cliente->vendedor->empleado->nombre . " " . $cliente->vendedor->empleado->appaterno : null}}" readonly>
 						   </div>
 						</div>
 					</div>
