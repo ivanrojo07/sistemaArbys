@@ -21,7 +21,8 @@ class SendMailService
             $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request"=>$request->all(), "empleado"=>Auth::user()->empleado, 'mensaje'=>$mensaje]);
         
         // CREAR TRANSACCIÓN
-        $transaction = Transaction::create([
+        $transaction = new Transaction();
+        $transaction->fill([
             'cliente_id' => $request->cliente_id,
             'product_id' => $request->product_id,
             'status' => 'enviada'

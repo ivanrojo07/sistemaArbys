@@ -162,15 +162,30 @@ class ClienteProductoController extends Controller
                     $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request" => $request->all(), "empleado" => $cliente->vendedor->empleado, 'mensaje' => $mensaje]);
                 else
                     $pdf = PDF::loadView('clientes.pdf_nuevo', ['cliente' => $cliente, 'producto' => $producto, "request" => $request->all(), "empleado" => Auth::user()->empleado, 'mensaje' => $mensaje]);
-                $transaction = new Transaction;
-                $transaction->cliente_id = $cliente->id;
-                $transaction->product_id = $producto->id;
-                $transaction->status = "cotizacion";
-                $transaction->save();
-                alert()->success('Success', 'Producto añadido con exito');
-                //return redirect()->back()->with('success', 'Producto añadido con exito');
-                return $pdf->download('cotizacion.pdf');
+                
             }
+
+
+            $transaction = new Transaction;
+
+                $existe_cotizacion = Transaction::where('cliente_id', $cliente->id)
+                    ->where('product_id', $producto->id)
+                    ->where('status', 'cotizacion')
+                    ->first();
+
+                if(!$existe_cotizacion){
+                    $transaction->cliente_id = $cliente->id;
+                    $transaction->product_id = $producto->id;
+                    $transaction->status = "cotizacion";
+                    $transaction->save();
+                }
+
+                alert()->success('Success', 'Cotización generada con éxito');
+
+                
+                //return redirect()->back()->with('success', 'Producto añadido con exito');
+                return isset($pdf) ? $pdf->download('cotizacion.pdf') : redirect()->back();
+
         } else {
             return back();
         }
