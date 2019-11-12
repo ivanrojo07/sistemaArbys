@@ -36,7 +36,15 @@
 					<tr>
 						<td>{{$categoriaCarro->nombre}}</td>
 						<td class="text-center"><a href="{{route('precargas.carros.edit',['categoriaCarro'=>$categoriaCarro])}}" class="btn btn-warning">Editar</a></td>
-						<td class="text-center"><a href="#" class="btn btn-danger">Eliminar</a></td>
+						<td class="text-center">
+							<form action="{{route('precargas.carros.delete',['id'=>$categoriaCarro->id])}}" method="POST">
+								{{ csrf_field() }}
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger">
+									eliminar
+								</button>
+							</form>
+						</td>
 					</tr
 					@endforeach>
 				</tbody>

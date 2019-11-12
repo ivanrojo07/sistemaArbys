@@ -83,26 +83,45 @@ class CarroController extends Controller
         //
     }
 
-    public function precargaIndex(){
+    public function precargaIndex()
+    {
         $categoriasCarros = CategoriaCarro::get();
         return view('precargas.carros.index', compact('categoriasCarros'));
     }
 
-    public function precargaCreate(){
+    public function precargaCreate()
+    {
         return view('precargas.carros.create');
     }
 
-    public function precargaStore(Request $request){
+    public function precargaStore(Request $request)
+    {
         // dd($request->input());
         CategoriaCarro::create([
-            'nombre'=>$request->nombre
+            'nombre' => $request->nombre
         ]);
-        return redirect()->route('precargas.carros.index')->with('success','Categoría añadida con exito.');
+        return redirect()->route('precargas.carros.index')->with('success', 'Categoría añadida con exito.');
     }
 
-    public function precargaEdit($id){
+    public function precargaEdit($id)
+    {
         // dd($id);
         $categoriaCarro = CategoriaCarro::find($id);
-        return view('precargas.carros.edit',compact('categoriaCarro'));
+        return view('precargas.carros.edit', compact('categoriaCarro'));
+    }
+
+    public function precargaUpdate(Request $request, $id)
+    {
+        $categoriaCarro = CategoriaCarro::find($id);
+        $categoriaCarro->update([
+            'nombre' => $request->nombre,
+        ]);
+        return redirect()->route('precargas.carros.index')->with('success', 'Categoría editada con exito.');
+    }
+
+    public function precargaDelete(Request $request, $id)
+    {
+        $categoriaCarro = CategoriaCarro::find($id)->delete();
+        return redirect()->route('precargas.carros.index')->with('success', 'Categoría eliminada con exito.');
     }
 }
