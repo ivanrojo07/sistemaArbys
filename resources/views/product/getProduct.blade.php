@@ -20,12 +20,19 @@
 <div class="table-responsive">
 	<table class="table table-bordered table-hover">
 		<tr class="info">
-			@if($producto->m60 > 0)
+			@if( $producto->m60 > 0)
 				<th class="col-sm-3"><input type="radio" name="meses" value="60" onclick="pago(60)"> 60 Meses</th>
 			@endif
-			<th class="col-sm-3"><input type="radio" name="meses" value="48" onclick="pago(48)"> 48 Meses</th>
-			<th class="col-sm-3"><input type="radio" name="meses" value="36" onclick="pago(36)" required=""> 36 Meses</th>
-			<th class="col-sm-3"><input type="radio" name="meses" value="24" onclick="pago(24)"> 24 Meses</th>
+			@if ($producto->m48 > 0)
+			<th class="col-sm-3"><input type="radio" name="meses" value="48" onclick="pago(48)"> 48 Meses</th>				
+			@endif
+
+			@if ($producto->m36 > 0)
+				<th class="col-sm-3"><input type="radio" name="meses" value="36" onclick="pago(36)" required=""> 36 Meses</th>
+			@endif
+			@if ($producto->m24 > 0)
+			<th class="col-sm-3"><input type="radio" name="meses" value="24" onclick="pago(24)"> 24 Meses</th>				
+			@endif
 			@if($producto->m12 > 0)
 				<th class="col-sm-3"><input type="radio" name="meses" value="12" onclick="pago(12)"> 12 Meses</th>
 			@endif
@@ -34,9 +41,18 @@
 			@if($producto->m60 > 0)
 				<td>${{ number_format($producto->m60, 2) }} por mes</td>
 			@endif
+			@if ($producto->m48 > 0)
 			<td>${{ number_format($producto->m48, 2) }} por mes</td>
+			@endif
+			
+			@if ($producto->m36 > 0)
 			<td>${{ number_format($producto->m36, 2) }} por mes</td>
-			<td>${{ number_format($producto->m24, 2) }} por mes</td>
+			@endif
+
+			@if ($producto->m24 > 0)
+			<td>${{ number_format($producto->m24, 2) }} por mes</td>				
+			@endif
+
 			@if($producto->m12 > 0)
 				<td>${{ number_format($producto->m12, 2) }} por mes</td>
 			@endif
@@ -57,24 +73,24 @@
 		if(plan == 'Plan Ahorro') {
 			switch(meses) {
 				case 60:
-					entrega += Math.ceil(prec / {{ $producto->m60 }}) + ' meses';
-					prec = {{ $producto->m60 }};
+					entrega += Math.ceil(prec / {{ $producto->m60  ? $producto->m60 : 0 }}) + ' meses';
+					prec = {{ $producto->m60 ? $producto->m60 : 0 }};
 					break;
 				case 48:
-					entrega += Math.ceil(prec / {{ $producto->m48 }}) + ' meses';
-					prec = {{ $producto->m48 }};
+					entrega += Math.ceil(prec / {{ $producto->m48 ? $producto->m48 : 0 }}) + ' meses';
+					prec = {{ $producto->m48 ? $producto->m48 : 0 }};
 					break;
 				case 36:
-					entrega += Math.ceil(prec / {{ $producto->m36 }}) + ' meses';
-					prec = {{ $producto->m36 }};
+					entrega += Math.ceil(prec / {{ $producto->m36 ? $producto->m36 : 0 }}) + ' meses';
+					prec = {{ $producto->m36 ? $producto->m36 : 0 }};
 					break;
 				case 24:
-					entrega += Math.ceil(prec / {{ $producto->m24 }}) + ' meses';
-					prec = {{ $producto->m24 }};
+					entrega += Math.ceil(prec / {{ $producto->m24 ? $producto->m24 : 0 }}) + ' meses';
+					prec = {{ $producto->m24 ? $producto->m24 : 0 }};
 					break;
 				case 12:
-					entrega += Math.ceil(prec / {{ $producto->m12 }}) + ' meses';
-					prec = {{ $producto->m12 }};
+					entrega += Math.ceil(prec / {{ $producto->m12 ? $producto->m12 : 0 }}) + ' meses';
+					prec = {{ $producto->m12 ? $producto->m12 : 0 }};
 					break;
 			}
 		} else {
