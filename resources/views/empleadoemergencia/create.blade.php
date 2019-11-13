@@ -149,8 +149,10 @@
     					<label class="control-label" for="movilcontac3">Telefono celular:</label>
     					<input type="text" class="form-control" id="movilcontac3" name="movilcontac3" value="{{ $emergencias->movilcontac3 }}">
   					</div>
-  				</div>
-  				<button type="submit" class="btn btn-success">Guardar</button>
+				  </div>
+				  @if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first())
+				  <button type="submit" class="btn btn-success">Guardar</button>
+				  @endif
 				
 			</form>
 		</div>

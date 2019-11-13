@@ -121,14 +121,14 @@
                                                         </a>
                                                     </li>
                                                 @endif
-                                                @if($c->nombre == "indice solicitantes")
-                                                    <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('/asignarClientes') }}', 'Asignar Clientes')">
-                                                            <i class="fa fa-user-plus"></i> Asignar Clientes
-                                                        </a>
-                                                    </li>
-                                                @endif
                                             @endforeach
+                                            @if( Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','asignar cliente')->first() )
+                                                <li>
+                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('/asignarClientes') }}', 'Asignar Clientes')">
+                                                        <i class="fa fa-user-plus"></i> Asignar Clientes
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </li>
                                     @break
@@ -157,13 +157,6 @@
                                                         </a>
                                                     </li>
                                                 @endif
-                                                @if($c->nombre == "indice empleados")
-                                                    <li>
-                                                        <a href="#" onclick="AgregarNuevoTab('{{ url('empleados/eliminados') }}','Empleados eliminados')">
-                                                            <i class="fa fa-search"></i> Eliminados
-                                                        </a>
-                                                    </li>
-                                                @endif
                                                 @if($c->nombre == "crear grupo" || $c->nombre == "indice grupos")
                                                     <li>
                                                         <a href="#" onclick="AgregarNuevoTab('{{ route('vendedor.asignar') }}','Asignar Vendedor')">
@@ -173,6 +166,13 @@
                                                     @break
                                                 @endif
                                             @endforeach
+                                            @if(Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','indice empleados')->first())
+                                                <li>
+                                                    <a href="#" onclick="AgregarNuevoTab('{{ url('empleados/eliminados') }}','Empleados eliminados')">
+                                                        <i class="fa fa-search"></i> Eliminados
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </li>
                                     @break
@@ -277,7 +277,7 @@
                             @endforeach
                             {{-- OFICINAS --}}
                             @foreach(Auth::user()->perfil->componentes as $componente)
-                                @if($componente->nombre == "indice regiones" || $componente->nombre == "indice estados" || $componente->nombre == "indice oficinas" || $componente->nombre == "indice puntos")
+                                @if($componente->nombre == "indice estados" || $componente->nombre == "indice oficinas" || $componente->nombre == "indice puntos")
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                             <i class="fa fa-briefcase"></i> Oficinas<span class="caret"></span>

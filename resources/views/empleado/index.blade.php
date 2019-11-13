@@ -24,9 +24,12 @@
 						<h4>Empleados:</h4>
 					</div>
 					<div class="col-sm-4 text-center">
-						<a class="btn btn-success" href="{{ route('empleados.create') }}">
-							<i class="fa fa-plus"></i><strong> Agregar Empleado</strong>
-						</a>
+						@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','crear empleado')->first())
+							<a class="btn btn-success" href="{{ route('empleados.create') }}">
+								<i class="fa fa-plus"></i><strong>Agregar Empleado</strong>
+							</a>
+						@endif
+						
 					</div>
 				</div>
 			</div>
@@ -79,17 +82,24 @@
 											<td> -- </td>
 											@endif
 											<td>
+												@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','ver empleado')->first())
 												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $empleado]) }}">
 													<i class="fa fa-eye"></i> Ver
 												</a>
+												@endif
+												
 											</td>
 											<td>
-												<a class="btn btn-warning btn-sm" href="{{ route('empleados.edit', ['empleado' => $empleado]) }}">
-													<i class="fa fa-pencil"></i> Editar
-												</a>
+												@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first())
+													<a class="btn btn-warning btn-sm" href="{{ route('empleados.edit', ['empleado' => $empleado]) }}">
+														<i class="fa fa-pencil"></i> Editar
+													</a>
+												@endif
+												
 											</td>
 											<td class="text-center">
-												{{-- BOTON ELIMINAR --}}
+												@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','eliminar empleado')->first())
+													{{-- BOTON ELIMINAR --}}
 												<button type="button" class="btn btn-danger eliminar" data-toggle="modal" data-target="#exampleModal{{$empleado->id}}" id-empleado={{$empleado->id}}>Eliminar</button>
 												{{-- MODAL --}}
 												<div class="modal fade" id="exampleModal{{$empleado->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,6 +127,7 @@
 														</div>
 													</div>
 												</div>
+												@endif
 											</td>
 										</tr>
 									@endif

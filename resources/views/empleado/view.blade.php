@@ -50,9 +50,12 @@
 			<div class="panel-footer">
 				<div class="row">
 					<div class="col-sm-12 text-center">
+						@if ( Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first() )
 						<a class="btn btn-warning" href="{{ route('empleados.edit', ['empleado' => $empleado]) }}">
-							<i class="fa fa-pencil"></i><strong> Editar</strong>
-						</a>
+								<i class="fa fa-pencil"></i><strong> Editar</strong>
+							</a>
+						@endif
+						
 					</div>
 				</div>
 			</div>

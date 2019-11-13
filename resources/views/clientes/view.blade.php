@@ -10,19 +10,27 @@
 						<h4>Datos del Cliente:</h4>
 					</div>
 					<div class="col-sm-3 text-center">
+						@if( Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar cliente')->first() )
 						<a href="{{ route('clientes.edit', ['cliente' => $cliente]) }}" class="btn btn-warning">
-							<i class="fa fa-pencil"></i><strong> Editar Cliente</strong>
-						</a>
+								<i class="fa fa-pencil"></i><strong> Editar Cliente</strong>
+							</a>
+						@endif
+						
 					</div>
 					<div class="col-sm-3 text-center">
+						@if ( Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','crear cliente')->first() )
 						<a href="{{ route('clientes.create') }}" class="btn btn-success">
-							<i class="fa fa-plus"></i><strong> Agregar Cliente</strong>
-						</a>
+								<i class="fa fa-plus"></i><strong> Agregar Cliente</strong>
+							</a>
+						@endif
+						
 					</div>
 					<div class="col-sm-3 text-center">
-						<a href="{{ route('clientes.index') }}" class="btn btn-primary">
-							<i class="fa fa-bars"></i><strong> Lista de Clientes</strong>
-						</a>
+						@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','indice clientes')->first())
+							<a href="{{ route('clientes.index') }}" class="btn btn-primary">
+								<i class="fa fa-bars"></i><strong> Lista de Clientes</strong>
+							</a>
+						@endif
 					</div>
 				</div>
 			</div>

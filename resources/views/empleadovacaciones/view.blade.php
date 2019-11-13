@@ -61,7 +61,9 @@
 						<label class="" for="dias_vac_rest">Días totales: </label> <input type="text" class="form-control" id="dias_vac_rest" name="diastotal">
 					</div>
 				</div>
+				@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first())
 				<button type="submit" class="btn btn-success">Guardar</button>
+				@endif
 				
 			</form>
 			<div class="col-xs-12 offset-md-2 mt-6">

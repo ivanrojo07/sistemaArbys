@@ -22,12 +22,11 @@
 						<h5>Laborales:</h5>
 					</div>
 					<div class="col-sm-4 text-center">
-						{{--  <a class="btn btn-success btn-md" href="{{ route('empleados.laborals.createLaborals', ['empleado' => $empleado]) }}">
-							<i class="fa fa-plus"></i><strong> Agregar</strong>
-						</a>--}}
-						<a class="btn btn-warning btn-md" href="{{ route('empleados.laborals.edit', ['empleado' => $empleado, 'laboral' => $datoslab]) }}">
-							<i class="fa fa-pencil"></i><strong> Editar</strong>
-						</a>
+						@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first())
+							<a class="btn btn-warning btn-md" href="{{ route('empleados.laborals.edit', ['empleado' => $empleado, 'laboral' => $datoslab]) }}">
+								<i class="fa fa-pencil"></i><strong> Editar</strong>
+							</a>
+						@endif
 					</div>
 				</div>
 		  	</div>

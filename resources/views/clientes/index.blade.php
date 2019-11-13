@@ -64,9 +64,12 @@
 												</a>
 											</td>
 											<td class="text-center">
-												<a class="btn btn-warning btn-sm" href="{{ route('clientes.edit', ['cliente' => $cliente]) }}">
-													<i class="fa fa-pencil"></i><strong> Editar</strong>
-												</a>
+												@if ( Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar cliente')->first() )
+													<a class="btn btn-warning btn-sm" href="{{ route('clientes.edit', ['cliente' => $cliente]) }}">
+														<i class="fa fa-pencil"></i><strong> Editar</strong>
+													</a>
+												@endif
+												
 											</td>
 										</tr>
 									@endforeach

@@ -64,9 +64,11 @@
 											<td> -- </td>
 											@endif
 											<td class="text-center">
+												@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','eliminar empleado')->first())
 												<a class="btn btn-warning btn-sm" href="{{ url('empleados/recuperar', ['id' => $empleado->id]) }}">
-													 Recuperar
-												</a>
+													Recuperar
+											   </a>
+												@endif
 											</td>
 										</tr>
 									@endif

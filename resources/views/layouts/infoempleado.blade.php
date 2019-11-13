@@ -5,9 +5,11 @@
 		<div class="panel-default">
 			<div class="panel-heading">
 				<h4>Datos del Empleado:</h4>
-				<a class="btn btn-success" href="{{ route('empleados.create') }}">
-					<i class="fa fa-plus"></i><strong>Nuevo Empleado</strong>
-				</a>
+				@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','crear empleado')->first())
+					<a class="btn btn-success" href="{{ route('empleados.create') }}">
+						<i class="fa fa-plus"></i><strong>Nuevo Empleado</strong>
+					</a>
+				@endif
 			</div>
 			<div class="panel-body">
 				<div class="col-xs-12 offset-md-2 mt-3">

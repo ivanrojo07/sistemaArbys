@@ -43,8 +43,11 @@
 								<td>${{ number_format($product->precio_lista, 2) }}</td>
 								<td>${{ number_format($product->apertura, 2) }}</td>
 								<td class="text-center">
+								@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','ver producto')->first())
 									<a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal{{ $product->id }}"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+								@endif
 								</td>
+								
 							</tr>
 							@endforeach
 						</table>

@@ -31,19 +31,23 @@
 								@foreach($vendedores as $vendedor)
 									<tr class="active">
 										<td>{{ $vendedor->id }}</td>
-										<td>{{ $vendedor->empleado->nombre }}</td>
-										<td>{{ $vendedor->empleado->appaterno }}</td>
-										<td>{{ $vendedor->empleado->apmaterno ? $vendedor->empleado->apmaterno : 'N/A' }}</td>
-										<td>{{ $vendedor->empleado->rfc }}</td>
+										<td>{{ !$vendedor->empleado ?: $vendedor->empleado->nombre }}</td>
+										<td>{{ !$vendedor->empleado ?: $vendedor->empleado->appaterno }}</td>
+										<td>{{ !$vendedor->empleado ?: $vendedor->empleado->apmaterno }}</td>
+										<td>{{ !$vendedor->empleado ?: $vendedor->empleado->rfc }}</td>
 										<td>{{ $vendedor->status }}</td>
 										<td class="text-center">
-											<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $vendedor->empleado]) }}">
-												<i class="fa fa-eye"></i> Ver
-											</a>
+											@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','ver empleado')->first())
+												<a class="btn btn-primary btn-sm" href="{{ route('empleados.show', ['empleado' => $vendedor->empleado]) }}">
+													<i class="fa fa-eye"></i> Ver
+												</a>
+											@endif
 											@if($vendedor->status == 'Activo')
+											@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','eliminar empleado')->first())
 												<a class="btn btn-warning btn-sm" href="{{ route('vendedors.baja', ['vendedor' => $vendedor]) }}">
 													<i class="fa fa-level-down"></i> Baja
 												</a>
+											@endif
 											@else
 												<a class="btn btn-success btn-sm" href="{{ route('vendedors.alta', ['vendedor' => $vendedor]) }}">
 													<i class="fa fa-level-up"></i> Alta

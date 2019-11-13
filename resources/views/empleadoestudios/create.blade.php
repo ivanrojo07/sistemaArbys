@@ -314,7 +314,9 @@
 						</label>
 					</div>
 				</div>
+				@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','editar empleado')->first())
 				<button type="submit" class="btn btn-success">Guardar</button>
+				@endif
 				
 				</form>
 		</div>

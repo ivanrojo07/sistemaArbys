@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Componente;
 use App\Empleado;
 use App\ExcelProduct;
 use App\Laboral;
@@ -11,6 +12,19 @@ class PruebasController extends Controller
 {
     public function create()
     {
-        $productosExcel = ExcelProduct::where('tipo','like','%moto%');
+        Componente::firstOrCreate([
+            'modulo_id' => 3,
+            'nombre' => 'asignar cliente'
+        ],[
+            'modulo_id' => 3,
+            'nombre' => 'asignar cliente'
+        ]);
+        Componente::firstOrCreate([
+            'modulo_id' => 2,
+            'nombre' => 'eliminar empleado'
+        ],[
+            'modulo_id' => 2,
+            'nombre' => 'eliminar empleado'
+        ]);
     }
 }

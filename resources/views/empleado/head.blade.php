@@ -5,14 +5,19 @@
 				<h4>Datos del Empleado:</h4>
 			</div>
 			<div class="col-sm-4 text-center form-group">
-				<a class="btn btn-success" href="{{ route('empleados.create') }}">
-					<i class="fa fa-plus"></i><strong> Agregar Empleado</strong>
-				</a>
+				@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','crear empleado')->first())
+					<a class="btn btn-success" href="{{ route('empleados.create') }}">
+						<i class="fa fa-plus"></i><strong> Agregar Empleado</strong>
+					</a>
+				@endif
+				
 			</div>
 			<div class="col-sm-4 text-center form-group">
-				<a class="btn btn-primary" href="{{ route('empleados.index') }}">
-					<i class="fa fa-bars"></i><strong> Lista de Empleados</strong>
-				</a>
+				@if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','indice empleados')->first())
+					<a class="btn btn-primary" href="{{ route('empleados.index') }}">
+						<i class="fa fa-bars"></i><strong> Lista de Empleados</strong>
+					</a>
+				@endif
 			</div>
 		</div>
 	</div>

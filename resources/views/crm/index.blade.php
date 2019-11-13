@@ -35,9 +35,12 @@
                             <button type="submit" class="btn btn-primary">
                                 <strong>Buscar</strong>
                             </button>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal-crm">
-                                <strong>Crear C.R.M.</strong>
-                            </button>
+                            @if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','crear crm')->first())
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal-crm">
+                                    <strong>Crear C.R.M.</strong>
+                                </button>
+                            @endif
+                            
                         </form>
                     </div>
                 </div>
@@ -64,10 +67,14 @@
                                 <td>{{ $crm->status }}</td>
                                 <td>{{ $crm->fecha_aviso }}</td>
                                 <td class="text-center">
+                                @if (Auth::user()->id == 1 || Auth::user()->perfil->componentes()->where('nombre','ver cliente')->first())
+                                
                                     <a class="btn btn-primary btn-sm" href="{{ route('clientes.show', ['id' => $crm->clientes->id]) }}">
                                         <i class="fa fa-eye" aria-hidden="true"></i> <strong>Ver Cliente</strong>
                                     </a>
+                                @endif
                                 </td>
+                                        
                                 <input type="hidden" name="id_cliente" value="{{ $crm->clientes->id }}">
                                 <input type="hidden" name="nombre" value="{{ $crm->clientes->nombre }}">
                                 <input type="hidden" name="ap" value="{{ $crm->clientes->appaterno }}">

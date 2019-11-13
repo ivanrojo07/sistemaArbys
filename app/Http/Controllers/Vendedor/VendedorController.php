@@ -33,79 +33,18 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        $vendedores = Vendedor::whereNotIn('id', [1])->get();
-        $empleado = Auth::user()->empleado;
-        $vendedores_vista = [];
-        if ($empleado->id > 1 && isset($empleado->laborales)) {
-            switch ($empleado->laborales->last()->puesto->nombre) {
 
-                case 'Subgerente':
-                    $subgerente = $empleado->subgerente;
-                    foreach ($subgerente->grupos as $grupo) {
-                        foreach ($grupo->vendedores as $vendedor) {
-                            $vendedores_vista[] = $vendedor;
-                        }
-                    }
-                    break;
+        // dd(Auth::user()->empleado->laborales->last()->puesto->nombre);
 
-                case 'Gerente':
-                    $empleados_oficina = $empleado->laborales->last()->oficina->laborales;
-                    /* la variable arreglo_lab va a contener los datos laborales de los empleados en la 
-                    *  oficina dada sin repetir un empleado por los cambios en sus datos laborales.
-                    */
-                    $arreglo_lab = [];
-                    foreach ($empleados_oficina as $empleados) {
-                        $arreglo_lab[$empleados->empleado_id] = $empleados;
-                    }
-                    foreach ($arreglo_lab as $laboral) {
-
-                        if (isset($laboral->empleado->vendedor)) {
-                            $vendedores_vista[] = $laboral->empleado->vendedor;
-                        }
-                    }
-
-                    break;
-
-                case 'Director Estatal':
-                    $estado = $empleado->laborales->last()->estado;
-                    $arreglo_lab = [];
-
-                    foreach ($estado->oficinas as $oficinas) {
-                        foreach ($oficinas->laborales as $laboral) {
-                            $arreglo_lab[$laboral->empleado_id] = $laboral;
-                        }
-                    }
-
-                    foreach ($arreglo_lab as $laboral) {
-
-                        if (isset($laboral->empleado->vendedor))
-                            $vendedores_vista[] = $laboral->empleado->vendedor;
-                    }
-
-
-                    break;
-
-                case 'Director Regional':
-                    $region = $empleado->laborales->last()->region;
-                    $arreglo_lab = [];
-
-                    foreach ($region->datosLab as $laboral) {
-                        $arreglo_lab[$laboral->empleado_id] = $laboral;
-                    }
-
-                    foreach ($arreglo_lab as $laboral) {
-
-                        if (isset($laboral->empleado->vendedor))
-                            $vendedores_vista[] = $laboral->empleado->vendedor;
-                    }
-                    break;
-
-                default:
-                    return view('vendedores.index', ['vendedores' => $vendedores]);
-                    break;
-            }
-            return view('vendedores.index', ['vendedores' => $vendedores_vista]);
+        if(Auth::user()->id == 1){
+            $vendedores = Vendedor::get();
+        }else{
+            $empleado = Auth::user()->empleado;
+            $vendedores = $this->empleadoRepositorieFactory->make(Auth::user()->empleado->laborales->last()->puesto)->getVendedores($empleado);
         }
+        
+        // dd($vendedores);
+
         return view('vendedores.index', ['vendedores' => $vendedores]);
     }
 
@@ -145,7 +84,10 @@ class VendedorController extends Controller
 
     public function asignar()
     {
+        // OBTENEMOS AL EMPLEADO EN SESIÓN
         $empleado = Auth::user()->empleado;
+
+        // SI ES EL USUARIO ADMIN OBTENEMOS TODOS LOS VENDEDORES Y SUBGERENTES
         if ($empleado->id == 1) {
             $grupos = Grupo::get();
             $vendedores = Vendedor::whereNotIn('id', [1])->get();
