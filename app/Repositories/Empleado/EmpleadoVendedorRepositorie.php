@@ -21,6 +21,7 @@ class EmpleadoVendedorRepositorie
 
     public function getEmpleados($empleado)
     {
-        return Empleado::where('id', Auth::user()->empleado->id);
+        // dd(Auth::user()->empleado->id);
+        return Empleado::where('id', Auth::user()->empleado->id)->get();
     }
 }

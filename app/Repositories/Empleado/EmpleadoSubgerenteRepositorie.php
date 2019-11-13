@@ -24,7 +24,13 @@ class EmpleadoSubgerenteRepositorie{
     }
 
     public function getEmpleados($empleado){
-        return Empleado::get();
+        // dd('aqui');
+
+        $subgerente = $empleado->subgerente()->first();
+        $grupos = $subgerente->grupos()->with('vendedores.empleado')->get();
+        $empleados = $grupos->pluck('vendedores')->flatten()->pluck('empleado')->flatten();
+        
+        return $empleados;
     }
 
 }
