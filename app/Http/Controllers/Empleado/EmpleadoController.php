@@ -113,6 +113,7 @@ class EmpleadoController extends Controller
     public function delete(Request $request){
         $empleado_id = $request->input('empleado_id');
         $empleado = Empleado::find($empleado_id);
+        !$empleado->user ?: $empleado->user->delete();
         $empleado->delete();
         return redirect()->back()->with('status', '¡Empleado eliminado exitosamente!');
     }

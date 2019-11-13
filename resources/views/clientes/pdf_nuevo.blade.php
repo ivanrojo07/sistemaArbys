@@ -1,6 +1,6 @@
 <html>
 <head>
-  <style>
+  <style type="text/css" media="all">
     @page { margin: 100px 25px; }
     header { position: fixed; top: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
     footer { position: fixed; bottom: -60px; left: 0px; right: 0px; height: 50px; }
@@ -614,6 +614,12 @@ table th[class*="col-"] {
 	width:100%;
 	height: 100%;
 }
+
+
+.text-center{
+  text-align: center !important;
+}
+
   </style>
 </head>
 <body>
@@ -881,23 +887,66 @@ table th[class*="col-"] {
                     </div>
                 </div>
                 <div class="col-xs-5">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                REQUISITOS
-                            </div>
-                            <div class="panel-body">
-                                Comprobante de domicilio<br>
-                                Identificación oficial<br>
-                                Primer pago
-                            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            REQUISITOS
+                        </div>
+                        <div class="panel-body">
+                            Comprobante de domicilio<br>
+                            Identificación oficial<br>
+                            Primer pago
                         </div>
                     </div>
+                </div>
             </div>
-{{--             
-                Promoción de julio: kit de accesorios que incluye casco certificado, 
-                guantes alarma, portacelular con cargador, red y protector para zapato de pedal --}}
         </p>
-    {{-- </div> --}}
+        <br>
+        <br>
+        
+        <p>
+          <div class="panel panel-default">
+            <div class="panel panel-heading">
+                <h5 class="text-center text-uppercase" >Memorandom</h5>
+            </div>
+            
+            <div class="panel-body">
+                <span class="text-right">11 de Noviembre del 2019</span>
+                <br><br>PROMOCIONES DEL BUEN FIN.
+                <hr>
+                <br>
+                Por este medio les damos a conocer las promociones 
+                autorizadas por la dirección general de Plan Arbys 
+                durante el buen fin.
+                <br><br>
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Autofinanciamiento</b></div>
+                <div class="panel-body">
+                  - Plan ahorro seguro y casco gratis en cualquiera de sus plazos. <br>
+                  - Plan enganche 2 mensualidades gratis.
+                </div>
+              </div>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                      Bajaj y carabela compras de contado 6 meses sin intereses o casco y 
+                      guantes gratis.
+                  </div>
+                </div>
+                Vigencia será del <b>15</b> al <b>18</b> de noviembre.
+                <br><br>
+                Quedo 
+                a sus órdenes ante cualquier duda o aclaración
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="text-center">
+                    Dirección General <br>
+                    Grupo Arbys
+                </div>
+            </div>
+          </div>
+        </p>
   </main>
 </body>
 </html>

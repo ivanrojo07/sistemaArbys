@@ -24,4 +24,15 @@ class EmpleadoGerenteRepositorie
         $vendedores = $empleados->pluck('vendedor')->filter()->flatten();
         return $vendedores;
     }
+
+    // public function getUsuarios($empleado){
+
+    //     $gerente = Gerente::where('empleado_id',$empleado->id)->first();
+    //     $oficina = $gerente->oficina;
+
+    //     $empleados = Laboral::where('oficina_id', $oficina->id)
+    //         ->with('empleado.')
+        
+
+    // }
 }
