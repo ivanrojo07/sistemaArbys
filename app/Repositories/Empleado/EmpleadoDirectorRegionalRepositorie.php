@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Empleado;
 
+use App\Empleado;
 use App\Laboral;
 use App\User;
 use App\Vendedor;
@@ -20,5 +21,9 @@ class EmpleadoDirectorRegionalRepositorie
 
     public function getUsers($empleado){
         return User::get();
+    }
+
+    public function getEmpleados($empleado){
+        return Empleado::get();
     }
 }

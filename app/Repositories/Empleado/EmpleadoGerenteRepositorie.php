@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Empleado;
 
+use App\Cliente;
 use App\Empleado;
 use App\Gerente;
 use App\Laboral;
@@ -48,5 +49,24 @@ class EmpleadoGerenteRepositorie
             ->unique();
 
         return $users;
+    }
+
+    public function getEmpleados($empleado){
+
+        $gerente = Gerente::where('empleado_id', $empleado->id)->first();
+        $oficina = $gerente->oficina;
+
+        $empleados = Laboral::where('oficina_id', $oficina->id)
+            ->whereHas('empleado')
+            ->get()
+            ->pluck('empleado')
+            ->unique();
+
+        return $empleados;
+
+    }
+
+    public function getClientes($empleado){
+        return Cliente::get();
     }
 }

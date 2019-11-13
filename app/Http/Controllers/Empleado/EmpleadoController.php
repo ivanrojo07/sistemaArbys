@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Empleado;
 use App\EmpleadosDatosLab;
 use App\Empleado;
 use App\Area;
+use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use App\Puesto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,11 @@ use App\Http\Controllers\Controller;
 class EmpleadoController extends Controller
 {
 
-    public function __construct()
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory)
     {
+
+        $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
+
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
@@ -37,11 +41,15 @@ class EmpleadoController extends Controller
 
     public function index()
     {
-        // if($this->hasComponent('indice empleados')) {
-        $empleados = Empleado::whereNotIn('id', [1])->sortable()->get();
+
+        $empleado = Auth::user()->empleado;
+        $puesto = $empleado->puesto;
+
+        $empleados = $this->empleadoRepositorieFactory
+        ->make($puesto)
+        ->getEmpleados($empleado);
+
         return view('empleado.index', ['empleados' => $empleados]);
-        // }
-        // return redirect()->route('denegado');
     }
 
     public function create()

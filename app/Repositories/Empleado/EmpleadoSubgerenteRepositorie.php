@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Empleado;
 
+use App\Empleado;
 use App\User;
 
 class EmpleadoSubgerenteRepositorie{
@@ -20,6 +21,10 @@ class EmpleadoSubgerenteRepositorie{
 
     public function getUsers($empleado){
         return User::get();
+    }
+
+    public function getEmpleados($empleado){
+        return Empleado::get();
     }
 
 }
