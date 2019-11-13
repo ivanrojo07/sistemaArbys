@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Empleado;
 
+use App\User;
+
 class EmpleadoSubgerenteRepositorie{
     
     public function getVendedores($empleado){
@@ -14,6 +16,10 @@ class EmpleadoSubgerenteRepositorie{
         $vendedores = $vendedores->push( $empleado->vendedor )->unique();
 
         return $vendedores;
+    }
+
+    public function getUsers($empleado){
+        return User::get();
     }
 
 }

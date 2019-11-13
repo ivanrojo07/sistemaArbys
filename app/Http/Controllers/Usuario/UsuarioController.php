@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Usuario;
 use App\User;
 use App\Perfil;
 use App\Empleado;
+use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,10 @@ class UsuarioController extends Controller
 
     const PERFIL_ID_ADMIN = 1;
 
-    public function __construct() {
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory) {
+
+        $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
+
         $this->middleware(function ($request, $next) {
             if(Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
@@ -42,11 +46,23 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        if($this->hasComponent('indice usuarios')) {
-            $usuarios = User::whereNotIn('id', [1])->get();
-            return view('seguridad.usuario.index', ['usuarios' => $usuarios]);
+        $empleado = Auth::user()->empleado;
+        $puesto = $empleado->puesto;
+
+        $usuarios = $this->empleadoRepositorieFactory
+        ->make($puesto)
+        ->getUsers($empleado);
+
+        // dd($usuarios);
+
+
+        if(!$this->hasComponent('indice usuarios')){
+            return redirect()->route('denegado');
         }
-        return redirect()->route('denegado');
+        
+        // $usuarios = User::whereNotIn('id', [1])->get();
+        return view('seguridad.usuario.index', ['usuarios' => $usuarios]);
+        
     }
 
     public function create()

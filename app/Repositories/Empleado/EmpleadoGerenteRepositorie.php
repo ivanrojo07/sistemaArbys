@@ -2,8 +2,11 @@
 
 namespace App\Repositories\Empleado;
 
+use App\Empleado;
 use App\Gerente;
 use App\Laboral;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class EmpleadoGerenteRepositorie
 {
@@ -25,14 +28,25 @@ class EmpleadoGerenteRepositorie
         return $vendedores;
     }
 
-    // public function getUsuarios($empleado){
+    public function getUsers($empleado)
+    {
 
-    //     $gerente = Gerente::where('empleado_id',$empleado->id)->first();
-    //     $oficina = $gerente->oficina;
+        $gerente = Gerente::where('empleado_id', $empleado->id)->first();
+        $oficina = $gerente->oficina;
 
-    //     $empleados = Laboral::where('oficina_id', $oficina->id)
-    //         ->with('empleado.')
-        
 
-    // }
+        // dd(Auth::user()->empleado()->with('puesto')->get());
+
+        $users = Laboral::where('oficina_id', $oficina->id)
+            ->whereHas('empleado')
+            ->with('empleado.user')
+            ->get()
+            ->pluck('empleado')
+            ->unique()
+            ->pluck('user')
+            ->filter()
+            ->unique();
+
+        return $users;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories\Empleado;
 
 use App\Laboral;
+use App\User;
 use App\Vendedor;
 
 class EmpleadoDirectorEstatalRepositorie
@@ -15,5 +16,9 @@ class EmpleadoDirectorEstatalRepositorie
         $empleados_id = $laborals ? $laborals->pluck('empleado_id')->flatten() : null;
         $vendedores = $empleados_id ? Vendedor::whereIn('empleado_id', $empleados_id)->with('clientes.crm')->get() : null;
         return $vendedores;
+    }
+
+    public function getUsers($empleado){
+        return User::get();
     }
 }
