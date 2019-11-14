@@ -44,6 +44,9 @@ class CrmController extends Controller
         $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
 
         $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
+
+        // dd($clientes);
+
         $crms = $clientes ? $clientes->pluck('crm')->flatten() : collect();
 
         return view('crm.index', ['crms' => $crms, 'clientes' => $clientes]);

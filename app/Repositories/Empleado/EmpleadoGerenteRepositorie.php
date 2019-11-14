@@ -14,8 +14,13 @@ class EmpleadoGerenteRepositorie
 
     public function getVendedores($empleado)
     {
+
+        // dd($empleado);
+
         $gerente = Gerente::where('empleado_id', $empleado->id)->first();
         $oficina = $gerente->oficina()->first();
+
+        // dd($oficina);
 
         $empleados = Laboral::where('oficina_id', $oficina->id)
             ->where('puesto_id', 7)
