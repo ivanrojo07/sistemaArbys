@@ -903,50 +903,6 @@ table th[class*="col-"] {
         <br>
         <br>
         
-        <p>
-          <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <h5 class="text-center text-uppercase" >Memorandom</h5>
-            </div>
-            
-            <div class="panel-body">
-                <span class="text-right">11 de Noviembre del 2019</span>
-                <br><br>PROMOCIONES DEL BUEN FIN.
-                <hr>
-                <br>
-                Por este medio les damos a conocer las promociones 
-                autorizadas por la dirección general de Plan Arbys 
-                durante el buen fin.
-                <br><br>
-
-              <div class="panel panel-default">
-                <div class="panel-heading"><b>Autofinanciamiento</b></div>
-                <div class="panel-body">
-                  - Plan ahorro seguro y casco gratis en cualquiera de sus plazos. <br>
-                  - Plan enganche 2 mensualidades gratis.
-                </div>
-              </div>
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                      Bajaj y carabela compras de contado 6 meses sin intereses o casco y 
-                      guantes gratis.
-                  </div>
-                </div>
-                Vigencia será del <b>15</b> al <b>18</b> de noviembre.
-                <br><br>
-                Quedo 
-                a sus órdenes ante cualquier duda o aclaración
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="text-center">
-                    Dirección General <br>
-                    Grupo Arbys
-                </div>
-            </div>
-          </div>
-        </p>
   </main>
 </body>
 </html>
