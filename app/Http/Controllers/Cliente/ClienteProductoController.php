@@ -100,21 +100,22 @@ class ClienteProductoController extends Controller
 
         if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
 
+            $productos = Product::where('tipo','MOTO');
 
-            // Obtenemos cilindrada minima en entero
-            $cilindrada_minima = $request->cilindrada_minima;
-            $cilindrada_minima = (int) preg_replace("/[^0-9]/", "", $cilindrada_minima);
+            // // Obtenemos cilindrada minima en entero
+            // $cilindrada_minima = $request->cilindrada_minima;
+            // $cilindrada_minima = (int) preg_replace("/[^0-9]/", "", $cilindrada_minima);
 
-            // Obtenemos cilindrada maxima en entero
-            $cilindrada_maxima = $request->cilindrada_maxima;
-            $cilindrada_maxima = (int) preg_replace("/[^0-9]/", "", $cilindrada_maxima);
+            // // Obtenemos cilindrada maxima en entero
+            // $cilindrada_maxima = $request->cilindrada_maxima;
+            // $cilindrada_maxima = (int) preg_replace("/[^0-9]/", "", $cilindrada_maxima);
 
-            $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
+            // $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
         }
-        if ($tipo == 'MOTO' && isset($request->categoria)) {
+        // if ($tipo == 'MOTO' && isset($request->categoria)) {
 
-            $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
-        }
+        //     $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
+        // }
 
         $tipos = Tipo::get();
         $categorias = Categoria::get();
