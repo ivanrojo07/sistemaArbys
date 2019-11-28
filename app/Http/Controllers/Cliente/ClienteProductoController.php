@@ -31,6 +31,8 @@ class ClienteProductoController extends Controller
     public function index(Cliente $cliente, Request $request)
     {
 
+        // dd($request->input());
+
         $min = $request->min;
         $max = $request->max;
         $desc = $request->kword;
@@ -98,6 +100,7 @@ class ClienteProductoController extends Controller
 
         if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
 
+
             // Obtenemos cilindrada minima en entero
             $cilindrada_minima = $request->cilindrada_minima;
             $cilindrada_minima = (int) preg_replace("/[^0-9]/", "", $cilindrada_minima);
@@ -109,7 +112,8 @@ class ClienteProductoController extends Controller
             $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
         }
         if ($tipo == 'MOTO' && isset($request->categoria)) {
-            $productos = $productos->where('categoria', strtoupper($request->categoria));
+
+            $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
         }
 
         $tipos = Tipo::get();
