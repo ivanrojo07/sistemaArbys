@@ -126,7 +126,7 @@ class ClienteProductoController extends Controller
 
             if($request->type == "MOTO"){
                 $productos = Product::where('tipo','MOTO')->where('mostrar',1)->get();
-                dd($productos);
+                // dd($productos);
             }
 
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
