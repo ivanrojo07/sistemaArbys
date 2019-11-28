@@ -124,11 +124,8 @@ class ClienteProductoController extends Controller
 
         $productos = $productos->where('mostrar', 1);
 
-            if($request->type == "MOTO"){
-                $productos = Product::where('tipo','MOTO')->where('mostrar',1)->get();
-                // dd($productos);
-            }
-
+        dd('funciona');
+        
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos' => $tipos, 'categorias' => $categorias, 'categoriasCarros' => $categoriasCarros, 'categoriasMotos' => $categoriasMotos]);
     }
