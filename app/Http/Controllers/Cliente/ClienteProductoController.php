@@ -73,11 +73,11 @@ class ClienteProductoController extends Controller
         if ($tipo_empleado === "Vendedor") {
             switch ($experto) {
                 case 'Autos':
-                    $productos = $productos->where('tipo', 'CARRO');
+                    $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');;
                     break;
 
                 case 'Motos':
-                    $productos = $productos->where('tipo', 'MOTO');
+                    $productos = $productos->where('tipo', 'MOTO')->orWhere('tipo', 'MOTO');;
                     break;
 
                 default:
@@ -98,9 +98,9 @@ class ClienteProductoController extends Controller
         if (!isset($min) && isset($max))
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
-        if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
+        // if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
 
-            $productos = Product::where('tipo','MOTO');
+        //     $productos = Product::where('tipo','MOTO');
 
             // // Obtenemos cilindrada minima en entero
             // $cilindrada_minima = $request->cilindrada_minima;
@@ -111,7 +111,7 @@ class ClienteProductoController extends Controller
             // $cilindrada_maxima = (int) preg_replace("/[^0-9]/", "", $cilindrada_maxima);
 
             // $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
-        }
+        // }
         // if ($tipo == 'MOTO' && isset($request->categoria)) {
 
         //     $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
