@@ -20,9 +20,7 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Carros:</label>
 							<div class="row">
-								<input type="radio" @if ($request->type == "CARRO")
-									checked
-								@endif name="type" id="carro" value="CARRO">
+								<input type="radio" name="type" id="carro" value="CARRO">
 							</div>
 						</div>
 						@endif
@@ -30,9 +28,7 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">
-									<input type="radio" @if ($request->type == "MOTO")
-									checked
-								@endif name="type" id="moto" value="MOTO">
+									<input type="radio"  name="type" id="moto" value="MOTO">
 							</div>
 						</div>
 						@endif
@@ -48,10 +44,7 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">
-								<input type="radio" name="type" @if ($request->type == "MOTO")
-									{{-- expr --}}
-									checked
-								@endif id="moto" value="MOTO">
+								<input type="radio" name="type"  id="moto" value="MOTO">
 							</div>
 						</div>
 					@endif
