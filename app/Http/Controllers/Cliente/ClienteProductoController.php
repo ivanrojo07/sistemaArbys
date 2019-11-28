@@ -31,7 +31,7 @@ class ClienteProductoController extends Controller
     public function index(Cliente $cliente, Request $request)
     {
 
-        // dd($request->input());
+        dd('no');
 
         $min = $request->min;
         $max = $request->max;
@@ -98,24 +98,24 @@ class ClienteProductoController extends Controller
         if (!isset($min) && isset($max))
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
-        // if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
+        if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
 
-        //     $productos = Product::where('tipo','MOTO');
+            $productos = Product::where('tipo','MOTO');
 
-            // // Obtenemos cilindrada minima en entero
-            // $cilindrada_minima = $request->cilindrada_minima;
-            // $cilindrada_minima = (int) preg_replace("/[^0-9]/", "", $cilindrada_minima);
+            // Obtenemos cilindrada minima en entero
+            $cilindrada_minima = $request->cilindrada_minima;
+            $cilindrada_minima = (int) preg_replace("/[^0-9]/", "", $cilindrada_minima);
 
-            // // Obtenemos cilindrada maxima en entero
-            // $cilindrada_maxima = $request->cilindrada_maxima;
-            // $cilindrada_maxima = (int) preg_replace("/[^0-9]/", "", $cilindrada_maxima);
+            // Obtenemos cilindrada maxima en entero
+            $cilindrada_maxima = $request->cilindrada_maxima;
+            $cilindrada_maxima = (int) preg_replace("/[^0-9]/", "", $cilindrada_maxima);
 
-            // $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
-        // }
-        // if ($tipo == 'MOTO' && isset($request->categoria)) {
+            $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
+        }
+        if ($tipo == 'MOTO' && isset($request->categoria)) {
 
-        //     $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
-        // }
+            $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
+        }
 
         $tipos = Tipo::get();
         $categorias = Categoria::get();
@@ -123,8 +123,6 @@ class ClienteProductoController extends Controller
         $categoriasMotos = CategoriaMoto::get();
 
         $productos = $productos->where('mostrar', 1);
-
-        dd('funciona');
         
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos' => $tipos, 'categorias' => $categorias, 'categoriasCarros' => $categoriasCarros, 'categoriasMotos' => $categoriasMotos]);
