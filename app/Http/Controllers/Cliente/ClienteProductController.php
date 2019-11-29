@@ -15,7 +15,7 @@ class ClienteProductController extends Controller
      */
     public function index(Cliente $cliente)
     {
-        //
+        dd('alert');
         $productos = $cliente->transactions()->with('product')->get()->pluck('product');
         return view('clientes.indexproducselect',['cliente'=>$cliente,'productos'=>$productos]);
     }

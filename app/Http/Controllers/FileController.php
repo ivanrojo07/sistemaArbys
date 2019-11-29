@@ -81,13 +81,9 @@ class FileController extends Controller
 
                 try {
                     $cilindrada = (int) preg_replace("/[^0-9]/", "", $value->cilindrada);
-                    $mostrar = strtolower($value->id);
+                    $mostrar = strtolower($value->cot);
 
-                    // if($mostrar != 's' && $mostrar != 'S'){
-                    //     dd($mostrar);
-                    // }
-
-                    $mostrar = $mostrar === 's' ? 1 : 0;
+                    $mostrar = $mostrar == 's' ? 1 : 0;
                     
 
 

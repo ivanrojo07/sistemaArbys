@@ -31,7 +31,7 @@ class ClienteProductoController extends Controller
     public function index(Cliente $cliente, Request $request)
     {
 
-        dd('no');
+        // dd('no');
 
         $min = $request->min;
         $max = $request->max;
