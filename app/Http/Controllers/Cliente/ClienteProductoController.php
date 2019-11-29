@@ -70,24 +70,24 @@ class ClienteProductoController extends Controller
             $experto = Auth::user()->empleado->vendedor->experto;
         else
             $experto = Auth::user()->empleado->experto;
-        if ($tipo_empleado === "Vendedor") {
-            switch ($experto) {
-                case 'Autos':
-                    $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');;
-                    break;
+        // if ($tipo_empleado === "Vendedor") {
+        //     switch ($experto) {
+        //         case 'Autos':
+        //             $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');;
+        //             break;
 
-                case 'Motos':
-                    $productos = $productos->where('tipo', 'MOTO')->orWhere('tipo', 'MOTO');;
-                    break;
+        //         case 'Motos':
+        //             $productos = $productos->where('tipo', 'MOTO')->orWhere('tipo', 'MOTO');;
+        //             break;
 
-                default:
-                    $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');
-                    break;
-            }
-        } else {
-            if (isset($tipo))
-                $productos = $productos->where('tipo', $tipo); //->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
-        }
+        //         default:
+        //             $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');
+        //             break;
+        //     }
+        // } else {
+        //     if (isset($tipo))
+        //         $productos = $productos->where('tipo', $tipo); //->whereMonth('created_at', date("m"));  Se usuara cuando se pida los registros por mes
+        // }
 
         if (isset($min) && isset($max))
             $productos = $productos->whereBetween('precio_lista', [intval($min), intval($max)]);
@@ -98,7 +98,7 @@ class ClienteProductoController extends Controller
         if (!isset($min) && isset($max))
             $productos = $productos->whereBetween('precio_lista', [0, intval($max)]);
 
-        if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
+        if (isset($request->cilindrada_minima)) {
 
             $productos = Product::where('tipo','MOTO');
 
@@ -112,7 +112,7 @@ class ClienteProductoController extends Controller
 
             $productos = $productos->whereBetween('cilindrada', [$cilindrada_minima, $cilindrada_maxima])->orderBy('cilindrada', 'DESC');
         }
-        if ($tipo == 'MOTO' && isset($request->categoria)) {
+        if (isset($request->categoria)) {
 
             $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
         }
