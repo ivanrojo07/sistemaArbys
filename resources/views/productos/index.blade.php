@@ -20,7 +20,9 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Carros:</label>
 							<div class="row">
-								<input type="radio" name="type" id="carro" value="CARRO">
+								<input type="radio" name="type" id="carro" value="CARRO" @if ($request->type == "CARRO")
+								checked
+							@endif>
 							</div>
 						</div>
 						@endif
@@ -28,7 +30,9 @@
 						<div class="col-sm-2 text-center">
 							<label class="control-label">Motos:</label>
 							<div class="row">
-									<input type="radio"  name="type" id="moto" value="MOTO">
+									<input type="radio"  name="type" id="moto" value="MOTO" @if ($request->type == "MOTO")
+									checked
+								@endif>
 							</div>
 						</div>
 						@endif

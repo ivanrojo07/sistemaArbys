@@ -79,7 +79,7 @@ class ClienteProductoController extends Controller
                 case 'Motos':
                     $productos = $productos->where('tipo', 'MOTO');
                     break;
-                    
+
 
                 default:
                     $productos = $productos->where('tipo', 'CARRO')->orWhere('tipo', 'MOTO');
@@ -101,7 +101,7 @@ class ClienteProductoController extends Controller
 
         if ($tipo == 'MOTO' && isset($request->cilindrada_minima)) {
 
-            $productos = $productos->where('tipo','MOTO');
+            $productos = $productos->where('tipo', 'MOTO');
 
             // Obtenemos cilindrada minima en entero
             $cilindrada_minima = $request->cilindrada_minima;
@@ -115,7 +115,7 @@ class ClienteProductoController extends Controller
         }
         if ($tipo == 'MOTO' && isset($request->categoria)) {
 
-            $productos = $productos->where('categoria','like', '%'.strtoupper($request->categoria).'%');
+            $productos = $productos->where('categoria', 'like', '%' . strtoupper($request->categoria) . '%');
         }
 
         $tipos = Tipo::get();
@@ -124,7 +124,7 @@ class ClienteProductoController extends Controller
         $categoriasMotos = CategoriaMoto::get();
 
         $productos = $productos->where('mostrar', 1);
-        
+
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos' => $tipos, 'categorias' => $categorias, 'categoriasCarros' => $categoriasCarros, 'categoriasMotos' => $categoriasMotos]);
     }
