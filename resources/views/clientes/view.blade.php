@@ -131,16 +131,14 @@
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
 					<a href="{{ route('crm.index') }}" class="ui-tabs-anchor">CRM General</a>
 				</li>
-				@if($aprobado === true)
-				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-					<a data-toggle="tab" href="#solicitante" class="ui-tabs-anchor">Solicitante</a>
+				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" >
+					<a data-toggle="tab" href="#solicitante" class="ui-tabs-anchor btn {{$aprobado === true ? '' : 'disabled'}}">Solicitante</a>
 				</li>
-				@endif
-				@if(count($cliente->solicitante) > 0)
+				{{-- @if(count($cliente->solicitante) > 0) --}}
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor">Integrante</a>
+					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor btn {{count($cliente->solicitante) > 0 ? '' : 'disabled'}}">Integrante</a>
 				</li>
-				@endif
+				{{-- @endif --}}
 			</ul>
 			@endif
 			<div class="tab-content">

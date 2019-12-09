@@ -1,6 +1,8 @@
 @extends('layouts.blank')
 @section('content')
 
+{{dd($solicitante)}}
+
 <div class="panel panel-group" style="margin-bottom: 0px;">
 	<div class="panel-default">
 		<div class="panel-heading">

@@ -1,3 +1,4 @@
+{{dd($clientes)}}
 <table class="table table-striped table-bordered table-hover" style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 			<thead>
 				<tr class="info">

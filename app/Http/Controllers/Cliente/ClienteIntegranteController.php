@@ -62,6 +62,15 @@ class ClienteIntegranteController extends Controller
         $integrante->direccion = $request->direccion;
         $integrante->save();
 
+        // dd($integrante);
+
+        $cliente = Cliente::find($integrante->cliente_id);
+        return view('clientes.integrantes.checkList', ['cliente' => $cliente]);
+
+        // return view('clientes.integrantes.index', ['integrante' => $integrante]);
+
+        // return redirect()->route('clientes.integrante.index');
+
         // return "kk";
         // $integrante = Integrante::create($request->all());
         // $cliente = Cliente::find(json_decode($request->cliente)->id);

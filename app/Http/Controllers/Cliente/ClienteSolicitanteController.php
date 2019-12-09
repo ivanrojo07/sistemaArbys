@@ -20,9 +20,9 @@ class ClienteSolicitanteController extends Controller
      */
     public function index($id)
     {
-        $clientes=Cliente::find($id);
-        $solicitantes = $clientes->solicitante;
-        return view('solicitantes.index',['cliente'=>$clientes, 'solicitante' => $solicitantes]);
+        $cliente=Cliente::find($id);
+        $solicitante = $cliente->solicitante;
+        return view('solicitantes.index',['cliente'=>$cliente, 'solicitante' => $solicitante]);
     }
 
     /**
@@ -49,9 +49,12 @@ class ClienteSolicitanteController extends Controller
     public function store(Request $request)
     {
        
+        // dd('Store');
+
         $cliente = json_decode($request->cliente);
         $cliente = Cliente::find($cliente->id);
         $solicitante = Solicitante::create($request->all());
+        // dd($solicitante);
         $solicitante->cliente_id = $cliente->id;
         $solicitante->save();
         Alert::success('Solicitante creado con éxito');
@@ -99,6 +102,8 @@ class ClienteSolicitanteController extends Controller
     public function update(Cliente $cliente, Solicitante $solicitante, Request $request)
     {
       
+        // return "Hola";
+
        $solicitante=Solicitante::where('id',$solicitante->id)->first();
 
        

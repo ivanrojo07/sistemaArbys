@@ -1,6 +1,5 @@
 @extends('layouts.blank')
 @section('content')
-
 	<div class="panel panel-group" style="margin-bottom: 0px; height: 500px;">
 	<div class="panel-default">
 		<div class="panel-body">
@@ -19,14 +18,14 @@
 						@foreach($transaction->pagos as $pagos)
 						@if($pagos->status == "Aprobado")
 						<tr>
-							<td>{{ $transaction->product->clave }}</td>
-							<td>{{ $transaction->product->descripcion }}</td>
-							<td>{{ $transaction->product->marca }}</td>
-							<td>${{ number_format($transaction->product->precio_lista, 2) }}</td>
+							<td>{{ !$transaction->product ? '' : $transaction->product->clave }}</td>
+							<td>{{ !$transaction->product ? '' : $transaction->product->descripcion }}</td>
+							<td>{{ !$transaction->product ? '' : $transaction->product->marca }}</td>
+							<td>${{ !$transaction->product ? '' : number_format($transaction->product->precio_lista, 2) }}</td>
 							<td>
 							@if($solicitante == null)
 								@foreach($solicitante as $sol)
-									@if($sol->clave_unidad == $transaction->product->clave)			
+									@if($transaction->product && $sol->clave_unidad == $transaction->product->clave)			
 										<a href="{{ route('clientes.solicitantes.edit', ['cliente' => $cliente, 'solicitante' => $sol]) }}" class="btn btn-primary">
 											<i class="fa fa-pencil"></i><strong> Editar solicitud</strong>
 										</a>
@@ -40,9 +39,12 @@
 									@endif
 								@endforeach		
 							@else
+							@if ($transaction->product)
 							<a href="{{ route('clientes.solicitantes.create', ['cliente' => $cliente, 'clave' =>$transaction->product->clave, 'pagos' => $pagos->id]) }}" class="btn btn-success">
-								<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
-							</a>
+									<i class="fa fa-plus"></i><strong> Crear solicitud</strong>
+								</a>
+							@endif
+							
 							@endif
 							</td>
 						</tr>
