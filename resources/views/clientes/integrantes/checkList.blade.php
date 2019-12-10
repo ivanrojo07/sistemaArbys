@@ -20,10 +20,8 @@
 			<th class="col-sm-1">Pago</th>
 		</tr>
 		<tr>
-			{{-- {{dd(storage_path('../'))}} --}}
-			{{-- {{dd(\Illuminate\Support\Facades\Storage::url($cliente->integrante->archivo_identificacion))}} --}}
 			<td>{{$cliente->integrante->id}}</td>
-			<td><img width="200px" src="{{env('PUBLIC_PATH').'storage/'.''.$cliente->integrante->archivo_identificacion}}" alt=""></td>
+			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_identificacion)}}" alt=""></td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_comprobante)}}" alt=""></td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_solicitud)}}" alt=""></td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_pago)}}" alt=""></td>
