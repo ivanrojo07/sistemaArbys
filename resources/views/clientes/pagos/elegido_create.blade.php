@@ -13,6 +13,7 @@
 			</div>
 			<form action="{{ route('clientes.pagos.store', ['cliente' => $cliente]) }}" method="post" id="form">
 				{{ csrf_field() }}
+				<input type="text" name="transaction_id" value="{{$transaction->id}}">
 				<div class="panel-body">
 					<div class="row">
 						@php($flag = false)
@@ -244,8 +245,8 @@
 
 	$(document).ready(function() {
 		change();
-		console.log('{{ $producto->id }}');
-		getProduct({{ $producto->id }});
+		console.log('{{ $transaction->product->id }}');
+		getProduct({{ $transaction->product->id }});
 
 		$(document).change(function() {
 			change();

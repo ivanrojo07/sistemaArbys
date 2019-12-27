@@ -49,11 +49,11 @@ class ClientePagoController extends Controller
         return view('clientes.pagos.create', ['cliente' => $cliente, 'bancos' => $bancos, 'folio' => $folio]);
     }
 
-    public function follow(Cliente $cliente, Pago $pago)
+    public function follow(Cliente $cliente, Pago $pago, Transaction $transaction)
     {
         $bancos = Banco::get();
         $folio = $pago->folio;
-        return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago, 'folio' => $folio]);
+        return view('clientes.pagos.follow', ['cliente' => $cliente, 'bancos' => $bancos, 'pago' => $pago, 'folio' => $folio, 'transaction' => $transaction]);
     }
 
     /**
@@ -65,14 +65,16 @@ class ClientePagoController extends Controller
     public function store(Request $request, Cliente $cliente)
     {
 
-        // SELECCIONA LA OFICINA DEL PAGO
+
+        // dd($request->input());
+
         if( $request->input('oficina_id') && !is_null($request->input('oficina_id')) ){
             $oficina_id = $request->input('oficina_id');
         }else{
             $oficina_id = Auth::user()->empleado->oficina->id;
         }
 
-        $transaction = Transaction::where(['cliente_id' => $cliente->id, 'product_id' => $request->product_id])->first();
+        $transaction = Transaction::find($request->transaction_id);
         $request['transaction_id'] = "" . $transaction->id;
         if ($request->restante == null)
             $request['restante'] = ($request->total - $request->monto) . "";
@@ -161,9 +163,9 @@ class ClientePagoController extends Controller
         //
     }
 
-    public function create_pago(Cliente $cliente, $producto)
+    public function create_pago(Cliente $cliente, Transaction $transaction)
     {
-        $producto = Product::find($producto);
+        $producto = $transaction->producto;
         $bancos = Banco::get();
         $vendedor = $cliente->vendedor;
         $folio = 0;
@@ -198,7 +200,7 @@ class ClientePagoController extends Controller
         
 
         
-        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'producto' => $producto, 'folio' => $folio, 'numFolio' => $numFolio]);
+        return view('clientes.pagos.elegido_create', ['cliente' => $cliente, 'bancos' => $bancos, 'transaction' => $transaction, 'folio' => $folio, 'numFolio' => $numFolio]);
     }
 
     public function getProduct($id)

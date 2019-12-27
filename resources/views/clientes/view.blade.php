@@ -181,7 +181,7 @@
 													@endif
 													@endforeach
 													@if(!$igual)
-														<a href="{{ route('clientes.pago.select' ,['cliente' => $cliente, 'producto' => $transation->product->id]) }}" class="btn btn-success">
+														<a href="{{ route('clientes.pago.select' ,['cliente' => $cliente, 'transaction' => $transation->id]) }}" class="btn btn-success">
 															<i class="fa fa-check"></i><strong> Elegir</strong>
 														</a>
 													@endif
@@ -226,6 +226,7 @@
 									<div class="table-responsive">
 										<table class="table table-bordered table-stripped table-hover">
 											<tr class="info">
+												<th>Núm. compra</th>
 												<th>Producto</th>
 												<th>Fecha de Pago</th>
 												<th>Forma de Pago</th>
@@ -240,6 +241,7 @@
 												@foreach($transaction->pagos as $pago)
 												@if(isset($pago) && isset($pago->transaction) && isset($pago->transaction->product))
 													<tr>
+														<td>{{$transaction->id}}</td>
 														<td>{{ $pago->transaction->product->descripcion }}</td>
 														<td>{{ date('d/m/Y H:m:s', strtotime($pago->created_at)) }}</td>
 														<td>{{ $pago->forma_pago }}</td>
@@ -250,7 +252,7 @@
 														<td>{{ $pago->status }}</td>
 														<td class="text-center">
 															@if($pago == $transaction->pagos->last() && $pago->status != "Aprobado")
-																<a class="btn btn-warning btn-sm" href="{{ route('clientes.pagos.follow', ['cliente' => $cliente, 'pago' => $pago]) }}">
+																<a class="btn btn-warning btn-sm" href="{{ route('clientes.pagos.follow', ['cliente' => $cliente, 'pago' => $pago, 'transaction' => $transaction->id]) }}">
 																	<i class="fa fa-usd" aria-hidden="true"></i> <strong>Pagar</strong>
 																</a>
 															@endif
