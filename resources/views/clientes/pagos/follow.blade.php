@@ -16,7 +16,7 @@
 				<input type="hidden" name="product_id" value="{{ $pago->transaction->product->id }}">
 				<input type="hidden" name="meses" value="{{ $pago->meses }}">
 				<input type="hidden" name="total" value="{{ $pago->total }}">
-				<input type="text" name="transaction_id" value="{{$transaction->id}}">
+				<input type="hidden" name="transaction_id" value="{{$transaction->id}}">
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-12">
