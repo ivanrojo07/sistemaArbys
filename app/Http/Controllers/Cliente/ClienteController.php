@@ -16,17 +16,19 @@ use App\Factories\Empleado\EmpleadoRepositorieFactory;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Barryvdh\DomPDF\Facade as PDF;
 
-class ClienteController extends Controller {
+class ClienteController extends Controller
+{
 
-    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory) {
+    public function __construct(EmpleadoRepositorieFactory $empleadoRepositorieFactory)
+    {
 
         $this->empleadoRepositorieFactory = $empleadoRepositorieFactory;
 
         $this->middleware(function ($request, $next) {
-            
-            if(Auth::check()) {
+
+            if (Auth::check()) {
                 foreach (Auth::user()->perfil->componentes as $componente)
-                    if($componente->modulo->nombre == "clientes")
+                    if ($componente->modulo->nombre == "clientes")
                         return $next($request);
             } else
                 return redirect()->route('login');
@@ -39,20 +41,20 @@ class ClienteController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
 
-    // PUESTO DEL USUARIO AUTENTICADO
-    $user = Auth::user();
-    $empleado = $user->empleado()->first();
-    $puesto = $empleado->puesto()->first();
+        // PUESTO DEL USUARIO AUTENTICADO
+        $user = Auth::user();
+        $empleado = $user->empleado()->first();
+        $puesto = $empleado->puesto()->first();
 
-    // CLIENTES DEL USUARIO AUTENTICADO
-    $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
-    $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
+        // CLIENTES DEL USUARIO AUTENTICADO
+        $vendedores = $this->empleadoRepositorieFactory->make($puesto)->getVendedores($empleado);
+        $clientes = $vendedores ? $vendedores->pluck('clientes')->flatten() : collect();
 
-    // return $puesto;
+        // return $puesto;
 
-    return view('clientes.index', ['clientes' => $clientes]);
+        return view('clientes.index', ['clientes' => $clientes]);
     }
 
     /**
@@ -75,33 +77,33 @@ class ClienteController extends Controller {
     public function store(Request $request)
     {
 
-        $rfc_requested = $request->homoclave ? $request->rfc.$request->homoclave : $request->rfc;
+        $rfc_requested = $request->homoclave ? $request->rfc . $request->homoclave : $request->rfc;
         // dd($rfc_requested);
 
-        
+
         // dd($request->input());
         // VALIDAMOS QUE EL RFC NO EXISTA
         $request['rfc'] = $request->rfc . $request->homoclave;
         $rfc = Cliente::where('rfc', $rfc_requested)->get();
         if (count($rfc) > 0)
-            return redirect()->back()->with('errors','El RFC ya está registrado.');
-        
+            return redirect()->back()->with('errors', 'El RFC ya está registrado.');
+
         // GENERAMOS EL IDENTIFICADOR DEL CLIENTE
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
-        
+
         $cliente = Cliente::create($request->all());
         $cliente->update([
-            'rfc'=>$rfc_requested
+            'rfc' => $rfc_requested
         ]);
-        
+
         // SI EL EMPLEADO ES VENDEDOR LO ASOCIAMOS CON EL CLIENTE
         $empleado = Auth::user()->empleado;
-        if(isset($empleado->laborales) && $empleado->laborales->last()->puesto->id == 7){
+        if (isset($empleado->laborales) && $empleado->laborales->last()->puesto->id == 7) {
             $cliente->vendedor_id = $empleado->vendedor->id;
             $cliente->save();
         }
- 
-        if($empleado->puesto()->first()->id == 6){
+
+        if ($empleado->puesto()->first()->id == 6) {
             $cliente->vendedor_id = $empleado->vendedor->id;
             $cliente->save();
             // dd($cliente);
@@ -130,14 +132,14 @@ class ClienteController extends Controller {
                 }
             }
         }
-        return view('clientes.view', ['cliente' => $cliente, 'aprobado' => $aprobado, 'pagos' => $pagos]); 
+        return view('clientes.view', ['cliente' => $cliente, 'aprobado' => $aprobado, 'pagos' => $pagos]);
     }
 
-    
+
     public function legacy(Cliente $cliente)
     {
-        return view('clientes.legacy.view', ['cliente' => $cliente]); 
-    }    
+        return view('clientes.legacy.view', ['cliente' => $cliente]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -149,7 +151,7 @@ class ClienteController extends Controller {
     {
         $vendedores = Vendedor::get();
         $canal_ventas = CanalVenta::get();
-        return view('clientes.edit', ['cliente' => $cliente, 'canal_ventas' => $canal_ventas, 'vendedores'=>$vendedores]); 
+        return view('clientes.edit', ['cliente' => $cliente, 'canal_ventas' => $canal_ventas, 'vendedores' => $vendedores]);
     }
 
     /**
@@ -163,26 +165,28 @@ class ClienteController extends Controller {
     {
         //$request['vendedor_id'] = Auth::user()->empleado->vendedor->id;
         $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
-        $cliente->update($request->except('_method','_token'));
+        $cliente->update($request->except('_method', '_token'));
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }
 
-    public function getSeleccion($cliente) {
+    public function getSeleccion($cliente)
+    {
         $cliente = Cliente::find($cliente);
         return view('clientes.productos.selected', ['cliente' => $cliente]);
     }
 
-    public function buscar(Request $request) {
+    public function buscar(Request $request)
+    {
         $query = $request->input('query');
         $wordsquery = explode(' ', $query);
-        $clientes = Cliente::where(function($q) use($wordsquery) {
+        $clientes = Cliente::where(function ($q) use ($wordsquery) {
             foreach ($wordsquery as $word) {
-              $q->orWhere('nombre', 'LIKE', "%$word%")
-                ->orWhere('appaterno', 'LIKE', "%$word%")
-                ->orWhere('apmaterno', 'LIKE', "%$word%")
-                ->orWhere('razon', 'LIKE', "%$word%")
-                ->orWhere('rfc', 'LIKE', "%$word%")
-                ->orWhere('identificador', 'LIKE', "%$word%");
+                $q->orWhere('nombre', 'LIKE', "%$word%")
+                    ->orWhere('appaterno', 'LIKE', "%$word%")
+                    ->orWhere('apmaterno', 'LIKE', "%$word%")
+                    ->orWhere('razon', 'LIKE', "%$word%")
+                    ->orWhere('rfc', 'LIKE', "%$word%")
+                    ->orWhere('identificador', 'LIKE', "%$word%");
             }
         })->get();
         return view('clientes.busqueda', ['clientes' => $clientes]);
@@ -195,9 +199,10 @@ class ClienteController extends Controller {
     // }
 
 
-    public function asignar() {
+    public function asignar()
+    {
         $empleado = Auth::user()->empleado;
-        if($empleado->id == 1) {
+        if ($empleado->id == 1) {
             $clientes = Cliente::get();
             $vendedores = Vendedor::whereNotIn('id', [1])->get();
         } else {
@@ -208,7 +213,7 @@ class ClienteController extends Controller {
             $arr = array_unique($arr);
             $vendedores = [];
             foreach ($arr as $emp)
-                if(isset($emp->vendedor))
+                if (isset($emp->vendedor))
                     $vendedores[] = $emp->vendedor;
             $arr = [];
             foreach ($vendedores as $vendedor)
@@ -218,17 +223,18 @@ class ClienteController extends Controller {
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }
 
-    public function asignarPorNotificacion(Cliente $cliente){
+    public function asignarPorNotificacion(Cliente $cliente)
+    {
         $vendedores = Vendedor::whereNotIn('id', [1])->get();
         $clientes = array($cliente);
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }
 
-    public function unir(Request $request) {
+    public function unir(Request $request)
+    {
         $cliente = Cliente::find($request->cliente_id);
         $cliente->vendedor_id = $request->vendedor_id;
         $cliente->save();
         return redirect()->route('clientes.asignar');
     }
-
 }

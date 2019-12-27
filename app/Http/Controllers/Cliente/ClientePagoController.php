@@ -65,6 +65,7 @@ class ClientePagoController extends Controller
     public function store(Request $request, Cliente $cliente)
     {
 
+        // SELECCIONA LA OFICINA DEL PAGO
         if( $request->input('oficina_id') && !is_null($request->input('oficina_id')) ){
             $oficina_id = $request->input('oficina_id');
         }else{

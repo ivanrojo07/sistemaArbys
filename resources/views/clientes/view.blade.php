@@ -209,13 +209,13 @@
 				</div>
 				<div id="pagos" class="tab-pane fade">
 					<div class="panel-body">
-						<div class="row">
+						{{-- <div class="row">
 							<div class="col-sm-12 text-center form-group">
 								<a class="btn btn-success" href="{{ route('clientes.pagos.create', ['cliente' => $cliente]) }}">
 									<i class="fa fa-plus" aria-hidden="true"></i> <strong>Registrar Pago</strong>
 								</a>
 							</div>
-						</div>
+						</div> --}}
 						<div class="row">
 							<div class="col-sm-12">
 								@php($pagoss = 0)

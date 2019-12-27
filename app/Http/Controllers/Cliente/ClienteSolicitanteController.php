@@ -58,7 +58,9 @@ class ClienteSolicitanteController extends Controller
         $solicitante->cliente_id = $cliente->id;
         $solicitante->save();
         Alert::success('Solicitante creado con éxito');
-        return view('solicitantes.index',['solicitante'=>$solicitante,'cliente'=>$cliente]); 
+
+        return redirect()->route('clienteSolicitante', compact('cliente'));
+        // return view('solicitantes.index',['solicitante'=>$solicitante,'cliente'=>$cliente]); 
               
     }
     

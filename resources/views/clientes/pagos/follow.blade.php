@@ -94,6 +94,7 @@
 							<label class="control-label">Restante:</label>
 							<input type="text" id="restante" class="form-control" readonly="">
 						</div>
+						{{-- {{dd(substr($folio, 0, 2))}} --}}
 						<input type="hidden" value="{{App\Oficina::where('identificador',substr($folio, 0, 2))->first()->id}}" name="oficina_id">
 					</div>
 					<div class="row">
