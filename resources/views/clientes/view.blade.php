@@ -136,7 +136,7 @@
 				</li>
 				{{-- @if(count($cliente->solicitante) > 0) --}}
 				<li class="ui-tabs-tab ui-corner-top ui-state-default ui-tab">
-					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor btn {{count($cliente->solicitante) > 0 ? '' : 'disabled'}}">Integrante</a>
+					<a data-toggle="tab" href="#integrante" class="ui-tabs-anchor btn {{count($cliente->solicitante) > 0 && $aprobado === true ? '' : 'disabled'}}">Integrante</a>
 				</li>
 				{{-- @endif --}}
 			</ul>
