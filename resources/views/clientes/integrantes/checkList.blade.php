@@ -21,7 +21,8 @@
 		</tr>
 		<tr>
 			<td>{{$cliente->integrante->id}}</td>
-			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_identificacion)}}" alt=""></td>
+			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_identificacion)}}" alt="">
+			</td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_comprobante)}}" alt=""></td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_solicitud)}}" alt=""></td>
 			<td><img width="200px" src="{{asset('storage/'.''.$cliente->integrante->archivo_pago)}}" alt=""></td>
@@ -164,12 +165,6 @@
 @endsection
 @section('scripts')
 <script type="application/javascript">
-
-
-
-
-
-
 	function readURL(input, id) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();

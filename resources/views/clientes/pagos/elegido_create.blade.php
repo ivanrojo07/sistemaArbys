@@ -18,24 +18,24 @@
 					<div class="row">
 						@php($flag = false)
 						@foreach($cliente->transactions as $transaction)
-							@if(count($transaction->pagos) == 0)
-								@php($flag = true)
-								@break
-							@endif
+						@if(count($transaction->pagos) == 0)
+						@php($flag = true)
+						@break
+						@endif
 						@endforeach
 						@if($flag)
-							<div class="col-sm-12">
-								<h5>Producto a Pagar</h5>
-								<div class="row">
-									<div class="col-sm-12" id="producto">
-										<h4>Seleccione un producto.</h4>
-									</div>
+						<div class="col-sm-12">
+							<h5>Producto a Pagar</h5>
+							<div class="row">
+								<div class="col-sm-12" id="producto">
+									<h4>Seleccione un producto.</h4>
 								</div>
 							</div>
+						</div>
 						@else
-							<div class="col-sm-12">
-								<h4>No hay productos por empezar a pagar.</h4>
-							</div>
+						<div class="col-sm-12">
+							<h4>No hay productos por empezar a pagar.</h4>
+						</div>
 						@endif
 					</div>
 					<div id="seleccion" style="display: none;">
@@ -72,23 +72,26 @@
 									<option value="Depósito">Depósito</option>
 								</select>
 							</div>
-							@if (Auth::user()->id == 1 || Auth::user()->empleado->puesto->nombre == "Director General" || Auth::user()->empleado->puesto->nombre == "Director Regional" || Auth::user()->empleado->puesto->nombre == "Director Estatal")
-								<div class="col-sm-3 form-group">
-									<label class="control-label">Oficina:</label>
-									<select type="select" class="form-control" id="oficina" name="oficina_id" required>
-										<option value="">Seleccionar...</option>
-										@foreach(App\Oficina::get() as $oficina)
-											<option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
-										@endforeach
-									</select>
-								</div>
+							@if (Auth::user()->id == 1 || Auth::user()->empleado->puesto->nombre == "Director General"
+							|| Auth::user()->empleado->puesto->nombre == "Director Regional" ||
+							Auth::user()->empleado->puesto->nombre == "Director Estatal")
+							<div class="col-sm-3 form-group">
+								<label class="control-label">Oficina:</label>
+								<select type="select" class="form-control" id="oficina" name="oficina_id" required>
+									<option value="">Seleccionar...</option>
+									@foreach(App\Oficina::get() as $oficina)
+									<option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
+									@endforeach
+								</select>
+							</div>
 							@endif
 							<div class="col-sm-3 form-group" id="bancos" style="display: none;">
 								<label onclick="getBancos()" class="control-label">Banco:</label>
 								<select type="select" name="banco" class="form-control" id="banco">
 									<option id="sin_definir" value="">Seleccionar</option>
 									@foreach($bancos as $banco)
-										<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}</option>
+									<option id="{{ $banco->id }}" value="{{ $banco->nombre }}">{{ $banco->nombre }}
+									</option>
 									@endforeach
 								</select>
 							</div>
@@ -99,7 +102,8 @@
 							<div id="tarjetas" style="display: none;">
 								<div class="col-sm-3 form-group">
 									<label class="control-label">Número de Tarjeta:</label>
-									<input type="number" name="numero_tarjeta" class="form-control" min="0" id="tarjeta">
+									<input type="number" name="numero_tarjeta" class="form-control" min="0"
+										id="tarjeta">
 								</div>
 								<div class="col-sm-3 form-group">
 									<label class="control-label">Nombre de Tarjetahabiente:</label>
@@ -112,11 +116,13 @@
 							</div>
 							<div class="col-sm-3 form-group" id="montos" style="display: none;">
 								<label class="control-label">Monto del Pago:</label>
-								<input type="number" name="monto" id="monto" class="form-control" min="0" required id="monto" step="0.01">
+								<input type="number" name="monto" id="monto" class="form-control" min="0" required
+									id="monto" step="0.01">
 							</div>
 							<div class="col-sm-3 form-group">
 								<label class="control-label">Número de Fólio:</label>
-								<input type="text" name="folio" id="folio" class="form-control" value="{{$numFolio}}" required="" readonly="">
+								<input type="text" name="folio" id="folio" class="form-control" value="{{$numFolio}}"
+									required="" readonly="">
 							</div>
 							<div class="col-sm-3 form-group" id="plan_col" style="display: none;">
 								<label class="control-label">Plan de Pago:</label>
@@ -144,18 +150,18 @@
 							<div class="col-sm-12 text-center">
 								<input type="submit" id="guardar" class="btn btn-warning" value="Guardar">
 								<input type="hidden" name="status" id="status" value="No Aprobado">
-								<input type="submit" id="aprobar" class="btn btn-success" value="Aprobar Pago" style="display: none;">
+								<input type="submit" id="aprobar" class="btn btn-success" value="Aprobar Pago"
+									style="display: none;">
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</form>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-	
 	var tipo = monto = banco = tarjeta = cheque = deposito = false; 
 	var forma;
 
