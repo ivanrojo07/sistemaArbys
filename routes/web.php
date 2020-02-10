@@ -74,7 +74,11 @@ Route::resource('grupos', 'Grupo\GrupoController');
 Route::get('grupos/{grupo}/vendedores', 'Grupo\GrupoController@vendedores')->name('grupos.vendedores');
 Route::post('grupos/{grupo}/vendedores', 'Grupo\GrupoController@bind')->name('grupos.bind');
 Route::delete('grupos/{grupo}/vendedores', 'Grupo\GrupoController@unbind')->name('grupos.unbind');
+
 // PRECARGAS
+Route::get('precargas/mensualidades/index','Precargar\MensualidadController@index')->name('precargas.mensualidades.index');
+Route::get('precargas/mensualidades/{mensualidad}/edit','Precargar\MensualidadController@edit')->name('precargas.mensualidades.edit');
+Route::put('precargas/mensualidades/{mensualidad}/update','Precargar\MensualidadController@update')->name('precargas.mensualidades.update');
 Route::resource('contratos','Precargas\TipoContratoController');
 Route::resource('bajas','Precargas\TipoBajaController');
 Route::resource('formacontactos','FormaContacto\FormaContactoController');

@@ -13,6 +13,7 @@ use App\Vendedor;
 use Illuminate\Support\Facades\Auth;
 use App\CanalVenta;
 use App\Factories\Empleado\EmpleadoRepositorieFactory;
+use App\Services\Cliente\StoreClienteService;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -77,39 +78,8 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
 
-        $rfc_requested = $request->homoclave ? $request->rfc . $request->homoclave : $request->rfc;
-        // dd($rfc_requested);
-
-
-        // dd($request->input());
-        // VALIDAMOS QUE EL RFC NO EXISTA
-        $request['rfc'] = $request->rfc . $request->homoclave;
-        $rfc = Cliente::where('rfc', $rfc_requested)->get();
-        if (count($rfc) > 0)
-            return redirect()->back()->with('errors', 'El RFC ya está registrado.');
-
-        // GENERAMOS EL IDENTIFICADOR DEL CLIENTE
-        $request['identificador'] = str_replace(' ', '', mb_strtoupper(mb_substr($request->razon, 0, 8)) . mb_substr($request->nombre, 0, 2) . mb_substr($request->appaterno, 0, 2) . mb_substr($request->apmaterno, 0, 2) . $request->nacimiento);
-
-        $cliente = Cliente::create($request->all());
-        $cliente->update([
-            'rfc' => $rfc_requested
-        ]);
-
-        // SI EL EMPLEADO ES VENDEDOR LO ASOCIAMOS CON EL CLIENTE
-        $empleado = Auth::user()->empleado;
-        if (isset($empleado->laborales) && $empleado->laborales->last()->puesto->id == 7) {
-            $cliente->vendedor_id = $empleado->vendedor->id;
-            $cliente->save();
-        }
-
-        if ($empleado->puesto()->first()->id == 6) {
-            $cliente->vendedor_id = $empleado->vendedor->id;
-            $cliente->save();
-            // dd($cliente);
-        }
-
-        // dd($cliente);
+        $storeClienteService = new StoreClienteService($request);
+        $cliente = $storeClienteService->getCliente();
 
         return redirect()->route('clientes.show', ['cliente' => $cliente]);
     }

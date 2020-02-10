@@ -395,12 +395,17 @@
                                             @endforeach
                                             <li>
                                                 <a href="#" onclick="AgregarNuevoTab('{{ route('precargas.carros.index') }}','Carros')">
-                                                    <i class="fa fa-phone"></i> Carros
+                                                    <i class="fa fa-car"></i> Carros
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#" onclick="AgregarNuevoTab('{{ route('precargas.motos.index') }}','Motos')">
-                                                    <i class="fa fa-phone"></i> Motos
+                                                    <i class="fa fa-motorcycle"></i> Motos
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" onclick="AgregarNuevoTab('{{ route('precargas.mensualidades.index') }}','Mensualidades')">
+                                                    <i class="fa fa-calendar"></i> Mensualidades
                                                 </a>
                                             </li>
                                         </ul>
