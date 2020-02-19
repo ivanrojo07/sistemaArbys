@@ -28,7 +28,7 @@
                                         {{$mensualidad->factor_actualizacion}}%
                                     </td>
                                     <td>
-                                        {{$mensualidad->monto_minimo}}
+                                        ${{ number_format( $mensualidad->monto_minimo, 2,'.', ',' ) }}
                                     </td>
                                     <td>
                                         <a href="{{route('precargas.mensualidades.edit',['mensualidad'=>$mensualidad->id])}}"
@@ -63,7 +63,7 @@
                                         {{$mensualidad->factor_actualizacion}}%
                                     </td>
                                     <td>
-                                        {{$mensualidad->monto_minimo}}
+                                        ${{ number_format( $mensualidad->monto_minimo, 2,'.', ',' ) }}
                                     </td>
                                     <td>
                                         <a href="{{route('precargas.mensualidades.edit',['mensualidad'=>$mensualidad->id])}}"

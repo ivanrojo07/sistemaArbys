@@ -77,6 +77,10 @@ class UpdateProductosService
                 $mostrar = $mostrar == 's' ? 1 : 0;
 
                 if (!is_null($value->clave)) {
+                    
+                    // dd( number_format($value->precio_de_listas, 2, '.', '') );
+                    // dd($value);
+
                     try {
                         $this->arr[] = [
                             'clave' => $value->clave,
@@ -87,7 +91,7 @@ class UpdateProductosService
                             'm36' => $this->calcularMensualidad(36, $value->precio_de_listas),
                             'm24' => $this->calcularMensualidad(24, $value->precio_de_listas),
                             'm12' => $this->calcularMensualidad(12, $value->precio_de_listas),
-                            'apertura' => $this->getPrecioApertura($value->precio_de_lista),
+                            'apertura' => $this->getPrecioApertura($value->precio_de_listas),
                             'marca' => $value->marca,
                             'tipo' => $value->tipo,
                             'tipo_moto' => strtoupper($value->tipo),
@@ -110,6 +114,7 @@ class UpdateProductosService
     }
 
     public function getPrecioApertura($precioLista){
+
 
         if($precioLista <= 49990){
             return 1300;
