@@ -18,6 +18,7 @@ class UpdateProductosService
 
     public function __construct($request)
     {
+
         // CARGAMOS LOS DATOS DEL ARCHIVO
         $path = $request->file('sample_file')->getPathName();
         $data = \Excel::load($path, null, null, true, null)->get();
@@ -45,23 +46,32 @@ class UpdateProductosService
          * Inserta en la base de datos cada uno de los
          * productos y si ya existe lo actualiza
          */
-        $this->updateProductos();
+        $this->updateProductos( $request->mes_lista );
 
         // dd(ExcelProduct::get());
     }
 
-    public function updateProductos()
+    public function updateProductos( $mes_lista )
     {
         foreach ($this->arr as $key => $product) {
 
-            ExcelProduct::updateOrCreate(
+            $producto = ExcelProduct::updateOrCreate(
                 ['clave' => $product['clave']],
                 $product
             );
-            Product::updateOrCreate(
+
+            $producto->update([
+                'fecha_lista' => date('Y-') . $mes_lista . date('-d')
+            ]);
+
+            $producto = Product::updateOrCreate(
                 ['clave' => $product['clave']],
                 $product
             );
+
+            $producto->update([
+                'fecha_lista' => date('Y-') . $mes_lista . date('-d')
+            ]);
         }
     }
 
