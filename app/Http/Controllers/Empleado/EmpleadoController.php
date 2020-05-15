@@ -46,8 +46,8 @@ class EmpleadoController extends Controller
         $puesto = $empleado->puesto;
 
         $empleados = $this->empleadoRepositorieFactory
-        ->make($puesto)
-        ->getEmpleados($empleado);
+            ->make($puesto)
+            ->getEmpleados($empleado);
 
         return view('empleado.index', ['empleados' => $empleados]);
     }
@@ -84,18 +84,21 @@ class EmpleadoController extends Controller
             'curp' => 'CURP',
         ]);
         if ($validator->fails()) {
-            return redirect('empleados/create')
-                ->withErrors($validator->errors())
+            dd('aqui fue donde fallo');
+            return redirect()->back()
+                ->withErrors($validator->errors()->all())
                 ->withInput();
         }
-        if (Empleado::where('rfc', $request->input('rfc'))->first())
-            return redirect()->back()->with('errors', 'El RFC ya existe.');
-        else if (Empleado::where('email', $request->input('email'))->first())
-            return redirect()->back()->with('errors', 'El email ya existe.');
-        else {
-            $empleado = Empleado::create($request->all());
-            return redirect()->route('empleados.show', ['empleado' => $empleado]);
+        if (Empleado::where('rfc', $request->input('rfc'))->first()) {
+            return redirect()->back()->withErrors(['error' => 'El RFC ya existe.']);
         }
+
+        if (Empleado::where('email', $request->input('email'))->first()) {
+            return redirect()->back()->withErrors(['error' => 'El email ya existe.']);
+        }
+
+        $empleado = Empleado::create($request->all());
+        return redirect()->route('empleados.show', ['empleado' => $empleado]);
     }
 
     public function show(Empleado $empleado)
@@ -118,7 +121,8 @@ class EmpleadoController extends Controller
         return redirect()->route('empleados.show', ['empleado' => $empleado]);
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $empleado_id = $request->input('empleado_id');
         $empleado = Empleado::find($empleado_id);
         !$empleado->user ?: $empleado->user->delete();
@@ -126,13 +130,15 @@ class EmpleadoController extends Controller
         return redirect()->back()->with('status', '¡Empleado eliminado exitosamente!');
     }
 
-    public function recuperar($id){
+    public function recuperar($id)
+    {
         $empleado = Empleado::withTrashed()->find($id);
         $empleado->restore();
         return redirect()->route('empleados.index')->with('status', '¡Empleado recuperado exitosamente!');
     }
 
-    public function eliminados(){
+    public function eliminados()
+    {
         $empleados = Empleado::onlyTrashed()->get();
         // dd($empleados);
         return view('empleado.eliminados', compact('empleados'));
