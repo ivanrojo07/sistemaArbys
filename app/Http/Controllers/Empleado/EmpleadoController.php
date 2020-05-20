@@ -84,7 +84,6 @@ class EmpleadoController extends Controller
             'curp' => 'CURP',
         ]);
         if ($validator->fails()) {
-            dd('aqui fue donde fallo');
             return redirect()->back()
                 ->withErrors($validator->errors()->all())
                 ->withInput();

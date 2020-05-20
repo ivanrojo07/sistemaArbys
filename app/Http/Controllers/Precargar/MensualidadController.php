@@ -72,11 +72,15 @@ class MensualidadController extends Controller
      */
     public function update(Request $request, Mensualidad $mensualidad)
     {
-        // return $request->input();
 
         $mensualidad->update([
             'factor_actualizacion' => $request->factor_actualizacion,
-            'monto_minimo' => $request->monto_minimo
+            'monto_minimo' => $request->monto_minimo,
+            'aportacion' => $request->aportacion,
+            'gastos_administracion' => $request->gastos_administracion,
+            'iva_gda' => $request->iva_gda,
+            'seguro_vida' => $request->seguro_vida,
+            'porcentaje_compensatorio' => $request->porcentaje_compensatorio
         ]);
 
         return redirect()->route('precargas.mensualidades.index');

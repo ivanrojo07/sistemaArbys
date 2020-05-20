@@ -114,7 +114,6 @@
 				"El mes que elegiste cuenta con productos",
 				"Si guardas la lista podrías sobreescribir los datos",
 				"warning");
-			return
 		}
 
 		if( archivoExcel ){
