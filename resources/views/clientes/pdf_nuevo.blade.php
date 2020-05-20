@@ -635,9 +635,9 @@ table th[class*="col-"] {
             </div>
           {{-- FOOTER DERECHO --}}
             <div class="col-xs-6">
-                ARBYS PERICENTRO PLAZA DE LA TECNOLOGIA<br>
-                LOCAL B39 COL. LOMAS DE SOTELO EDO DE MEX<br>
-                TEL: 51627031 - 51627142<br>
+                ARBYS {{$empleado->oficina()->first()->nombre}}<br>
+                COL. {{$empleado->oficina()->first()->colonia}}<br>
+                TEL: {{$empleado->oficina()->first()->telefono1}} - {{$empleado->oficina()->first()->telefono2}}<br>
             </div>
       </div>
   </footer>

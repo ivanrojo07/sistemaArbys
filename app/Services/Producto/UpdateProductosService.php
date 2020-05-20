@@ -2,6 +2,7 @@
 
 namespace App\Services\Producto;
 
+use App\Apertura;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,17 +47,20 @@ class UpdateProductosService
          * Inserta en la base de datos cada uno de los
          * productos y si ya existe lo actualiza
          */
-        $this->updateProductos( $request->mes_lista );
+        $this->updateProductos($request->mes_lista);
 
         // dd(ExcelProduct::get());
     }
 
-    public function updateProductos( $mes_lista )
+    public function updateProductos($mes_lista)
     {
         foreach ($this->arr as $key => $product) {
 
             $producto = ExcelProduct::updateOrCreate(
-                ['clave' => $product['clave']],
+                [
+                    'clave' => $product['clave'],
+                    'fecha_lista' => date('Y-') . $mes_lista . date('-d')
+                ],
                 $product
             );
 
@@ -65,7 +69,10 @@ class UpdateProductosService
             ]);
 
             $producto = Product::updateOrCreate(
-                ['clave' => $product['clave']],
+                [
+                    'clave' => $product['clave'],
+                    'fecha_lista' => date('Y-') . $mes_lista . date('-d')
+                ],
                 $product
             );
 
@@ -87,7 +94,7 @@ class UpdateProductosService
                 $mostrar = $mostrar == 's' ? 1 : 0;
 
                 if (!is_null($value->clave)) {
-                    
+
                     // dd( number_format($value->precio_de_listas, 2, '.', '') );
                     // dd($value);
 
@@ -111,8 +118,6 @@ class UpdateProductosService
                             'cilindrada' => $cilindrada,
                             'mostrar' => $mostrar,
                         ];
-
-
                     } catch (\Throwable $th) {
                         return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
                     }
@@ -123,43 +128,13 @@ class UpdateProductosService
         }
     }
 
-    public function getPrecioApertura($precioLista){
+    public function getPrecioApertura($precioLista)
+    {
+        $apertura = Apertura::where('cuota_inicial', '<=', $precioLista)
+        ->where('cuota_final', '>=', $precioLista)
+        ->first();
 
-
-        if($precioLista <= 49990){
-            return 1300;
-        }
-
-        if($precioLista <= 69990){
-            return 2600;
-        }
-        
-        if($precioLista <= 100000){
-            return 3900;
-        }
-
-        if($precioLista <= 149990){
-            return 5200;
-        }
-
-        if($precioLista <= 200000){
-            return 6500;
-        }
-
-        if($precioLista <= 249990){
-            return 7800;
-        }
-
-        if($precioLista <= 300000){
-            return 9100;
-        }
-
-        if($precioLista <= 349990){
-            return 10400;
-        }
-
-        return 0;
-
+        return is_null($apertura) ? 0 : $apertura->precio_apertura;
     }
 
     public function calcularMensualidad($meses, $monto)
@@ -179,8 +154,7 @@ class UpdateProductosService
 
         // dd(number_format(floatval($monto), 2, '.', '')*$mensualidad->factor_actualizacion);
 
-        return number_format(floatval($monto), 2, '.', '')*$mensualidad->factor_actualizacion;
-
+        return number_format(floatval($monto), 2, '.', '') * $mensualidad->factor_actualizacion;
     }
 
     public function setCarros($data)
