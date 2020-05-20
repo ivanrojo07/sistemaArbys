@@ -42,7 +42,7 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label class="control-label" for="fnac">Fecha de nacimiento:</label>
-							<input type="date" class="form-control" name="nacimiento" value="{{ $empleado->fnac }}">
+							<input type="date" class="form-control" name="nacimiento" value="{{ $empleado->nacimiento }}">
 						</div>
 					</div>
 					<div class="row">
