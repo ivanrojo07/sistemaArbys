@@ -28,16 +28,16 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Empleado:</label>
-                            <select class="form-control" name="empleado_id" required="">
+                            <select class="form-control" name="empleado_id" required="" id="inputEmpleadoId">
                                 <option>Seleccionar</option>
                                 @foreach($empleados as $empleado)
-                                    <option value="{{ $empleado->id }}">{{ $empleado->nombre }} {{ $empleado->appaterno }} - {{ $empleado->rfc }}</option>
+                                    <option value="{{ $empleado->id }}" correo="{{ $empleado->email }}">{{ $empleado->nombre }} {{ $empleado->appaterno }} - {{ $empleado->rfc }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Nombre de Usuario:</label>
-                            <input type="text" name="name" class="form-control" required="" value="{{ old('name') }}">
+                            <input type="text" name="name" id="inputNombreUsuario" class="form-control" required="" value="{{ old('name') }}" readonly>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">✱Contraseña:</label>
@@ -72,5 +72,15 @@
         </form>
 	</div>
 </div>
+
+<script>
+
+
+$(document).on('change','#inputEmpleadoId', function(){
+    const correoUsuario = $('option:selected',this).attr('correo');
+    $('#inputNombreUsuario').val( correoUsuario );
+});
+
+</script>
 
 @endsection

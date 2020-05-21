@@ -91,7 +91,7 @@ class UsuarioController extends Controller
                 $rules = [
                     'perfil_id'=>'required|integer',
                     'empleado_id'=>'required|integer',
-                    'name'=>'required|alpha',
+                    'name'=>'required',
                     'password' => 'required|string'
                 ];
                 $this->validate($request, $rules);
