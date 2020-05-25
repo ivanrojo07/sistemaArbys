@@ -22,6 +22,6 @@ class ExcelProduct extends Model
         'tipo_moto',
         'cilindrada',
         'mostrar',
-        'fecha_lista'
+        'lista_id'
     ];
 }

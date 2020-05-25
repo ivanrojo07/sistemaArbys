@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 use App\ExcelProduct;
+use App\ListaProductos;
 use App\Mensualidad;
 use Exception;
-
+use Illuminate\Support\Facades\Auth;
 
 class UpdateProductosService
 {
 
     protected $arr;
+    protected $lista;
 
     public function __construct($request)
     {
@@ -43,6 +45,8 @@ class UpdateProductosService
             return redirect()->back()->with('error', 'Error al subir el archivo.');
         }
 
+        $this->crearListaProductos();
+
         /**
          * Inserta en la base de datos cada uno de los
          * productos y si ya existe lo actualiza
@@ -52,33 +56,24 @@ class UpdateProductosService
         // dd(ExcelProduct::get());
     }
 
+    public function crearListaProductos()
+    {
+        $this->lista = ListaProductos::create([
+            'user_id' => Auth::user()->id
+        ]);
+    }
+
     public function updateProductos($mes_lista)
     {
         foreach ($this->arr as $key => $product) {
 
-            $producto = ExcelProduct::updateOrCreate(
-                [
-                    'clave' => $product['clave'],
-                    'fecha_lista' => date('Y-') . $mes_lista . date('-d')
-                ],
+            $producto = ExcelProduct::create(
                 $product
             );
 
-            $producto->update([
-                'fecha_lista' => date('Y-') . $mes_lista . date('-d')
-            ]);
-
-            $producto = Product::updateOrCreate(
-                [
-                    'clave' => $product['clave'],
-                    'fecha_lista' => date('Y-') . $mes_lista . date('-d')
-                ],
+            $producto = Product::create(
                 $product
             );
-
-            $producto->update([
-                'fecha_lista' => date('Y-') . $mes_lista . date('-d')
-            ]);
         }
     }
 
@@ -117,6 +112,7 @@ class UpdateProductosService
                             'updated_at' => date('Y-m-d h:m:s'),
                             'cilindrada' => $cilindrada,
                             'mostrar' => $mostrar,
+                            'lista_id' => ListaProductos::get()->count() + 1
                         ];
                     } catch (\Throwable $th) {
                         return redirect()->back()->with('error', 'Error en la estructura o en los datos propuestos del archivo excel.');
@@ -131,8 +127,8 @@ class UpdateProductosService
     public function getPrecioApertura($precioLista)
     {
         $apertura = Apertura::where('cuota_inicial', '<=', $precioLista)
-        ->where('cuota_final', '>=', $precioLista)
-        ->first();
+            ->where('cuota_final', '>=', $precioLista)
+            ->first();
 
         return is_null($apertura) ? 0 : $apertura->precio_apertura;
     }

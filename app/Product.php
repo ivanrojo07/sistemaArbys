@@ -29,7 +29,7 @@ class Product extends Model
         'tipo_moto',
         'cilindrada',
         'mostrar',
-        'fecha_lista'
+        'lista_id'
     ];
 
     public $sortable = [
@@ -53,13 +53,20 @@ class Product extends Model
      * Scope methods
      */
 
-    public function scopeCategoria($query, $categoria)
+    public function scopeActuales($query)
     {
-        return $query->where('categoria', 'like', '%'.$categoria.'%');
+        $ultimaLista = ListaProductos::orderBy('id', 'desc')->first();
+        return $query->where('lista_id', $ultimaLista->id);
     }
 
-    public function scopeTipoMoto($query, $tipo_moto){
-        return $query->where('tipo_moto', 'like', '%'. $tipo_moto . '%');
+    public function scopeCategoria($query, $categoria)
+    {
+        return $query->where('categoria', 'like', '%' . $categoria . '%');
+    }
+
+    public function scopeTipoMoto($query, $tipo_moto)
+    {
+        return $query->where('tipo_moto', 'like', '%' . $tipo_moto . '%');
     }
 
     public function scopePrecioMinimo($query, $precio_minimo)

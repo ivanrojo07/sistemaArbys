@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Precargar;
 
 use App\Apertura;
+use App\HistorialApertura;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AperturaController extends Controller
 {
@@ -15,8 +17,10 @@ class AperturaController extends Controller
      */
     public function index()
     {
-        $aperturas = Apertura::orderBy('cuota_inicial','asc')->get();
-        return view('precargas.aperturas.index', compact('aperturas'));
+        $aperturasMotos = Apertura::motos()->orderBy('cuota_inicial','asc')->get();
+        $aperturasCasas = Apertura::casas()->orderBy('cuota_inicial','asc')->get();
+        $aperturasCarros = Apertura::carros()->orderBy('cuota_inicial','asc')->get();
+        return view('precargas.aperturas.index', compact('aperturasMotos', 'aperturasCasas', 'aperturasCarros'));
     }
 
     /**
@@ -37,11 +41,20 @@ class AperturaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $historialApertura = HistorialApertura::create([
+            'user_id' => Auth::user()->id,
+            'descripcion' => 'Creación de apertura para ' . $request->categoria,
+        ]);
+
         Apertura::create([
             'cuota_inicial' => $request->cuota_inicial,
             'cuota_final' => $request->cuota_final,
-            'precio_apertura' => $request->precio_apertura
+            'precio_apertura' => $request->precio_apertura,
+            'historial_id' => $historialApertura->id,
+            'categoria' => $request->categoria
         ]);
+
         return redirect()->back();
     }
 
@@ -74,9 +87,24 @@ class AperturaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $apertura = Apertura::find( $request->apertura_id );
+
+        $historialApertura = HistorialApertura::create([
+            'user_id' => Auth::user()->id,
+            'descripcion' => 'Actualización de apertura para ' . $request->categoria
+        ]);
+
+        $apertura->update([
+            'cuota_inicial' => $request->cuota_inicial,
+            'cuota_final' => $request->cuota_final,
+            'precio_apertura' => $request->precio_apertura,
+            'historial_id' => $historialApertura->id,
+        ]);
+
+        return redirect()->back();
     }
 
     /**

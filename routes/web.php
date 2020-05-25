@@ -78,6 +78,7 @@ Route::delete('grupos/{grupo}/vendedores', 'Grupo\GrupoController@unbind')->name
 // PRECARGAS
 Route::get('precargas/aperturas/index','Precargar\AperturaController@index')->name('precargas.aperturas.index');
 Route::post('precargas/aperturas/store','Precargar\AperturaController@store')->name('precargas.aperturas.store');
+Route::put('precargas/aperturas','Precargar\AperturaController@update')->name('precargas.aperturas.update');
 Route::get('precargas/mensualidades/index','Precargar\MensualidadController@index')->name('precargas.mensualidades.index');
 Route::get('precargas/mensualidades/{mensualidad}/edit','Precargar\MensualidadController@edit')->name('precargas.mensualidades.edit');
 Route::put('precargas/mensualidades/{mensualidad}/update','Precargar\MensualidadController@update')->name('precargas.mensualidades.update');
