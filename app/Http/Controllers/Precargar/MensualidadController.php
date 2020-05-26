@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Precargar;
 
+use App\HistorialMensualidad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mensualidad;
+use Illuminate\Support\Facades\Auth;
 
 class MensualidadController extends Controller
 {
@@ -17,7 +19,14 @@ class MensualidadController extends Controller
     {
         $mensualidadesMotos = Mensualidad::where('concepto','Moto')->get();
         $mensualidadesCarros = Mensualidad::where('concepto','Carro')->get();
-        return view('precargas.mensualidades.index',compact('mensualidadesMotos', 'mensualidadesCarros'));
+        $mensualidadesCasas = Mensualidad::where('concepto','Casa')->get();
+        $historialMensualidades = HistorialMensualidad::get();
+        return view('precargas.mensualidades.index',compact(
+            'mensualidadesMotos', 
+            'mensualidadesCarros', 
+            'mensualidadesCasas',
+            'historialMensualidades'
+        ));
     }
 
     /**
@@ -72,6 +81,11 @@ class MensualidadController extends Controller
      */
     public function update(Request $request, Mensualidad $mensualidad)
     {
+
+        HistorialMensualidad::create([
+            'user_id' => Auth::user()->id,
+            'descripcion' => 'Actualización de la mensualidad de ' . $mensualidad->concepto . ' a ' . $mensualidad->meses . ' meses'
+        ]);
 
         $mensualidad->update([
             'factor_actualizacion' => $request->factor_actualizacion,

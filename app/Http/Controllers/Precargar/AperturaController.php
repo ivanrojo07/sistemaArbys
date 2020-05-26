@@ -20,7 +20,8 @@ class AperturaController extends Controller
         $aperturasMotos = Apertura::motos()->orderBy('cuota_inicial','asc')->get();
         $aperturasCasas = Apertura::casas()->orderBy('cuota_inicial','asc')->get();
         $aperturasCarros = Apertura::carros()->orderBy('cuota_inicial','asc')->get();
-        return view('precargas.aperturas.index', compact('aperturasMotos', 'aperturasCasas', 'aperturasCarros'));
+        $historialAperturas = HistorialApertura::get();
+        return view('precargas.aperturas.index', compact('aperturasMotos', 'aperturasCasas', 'aperturasCarros', 'historialAperturas'));
     }
 
     /**

@@ -8,8 +8,8 @@
 	</div>
 	@endif
 
+	<br>
 	<div class="row">
-		<div class="col-12 col-md-4"></div>
 		<div class="col-12 col-md-4">
 
 			<div class="panel panel-group">
@@ -56,7 +56,107 @@
 			</div>
 
 		</div>
-		<div class="col-12 col-md-4"></div>
+		<div class="col-12 col-md-8">
+			<div class="table-responsive">
+				<table class="table border" id="tabla-lista-productos">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col"># MOV.</th>
+							<th scope="col">Responsable</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Productos</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach ($listasProductos as $lista)
+						<tr>
+							<th scope="row">{{$lista->id}}</th>
+							<td>{{$lista->user->empleado->nombre_completo}}</td>
+							<td>{{$lista->created_at}}</td>
+							<td>
+								<button class="btn btn-primary" data-toggle="modal" data-target="#lista-{{$lista->id}}">
+									<i class="fa fa-th-large" aria-hidden="true"></i>
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="lista-{{$lista->id}}" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Lista # {{$lista->id}}
+												</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="row">
+															<div class="col-xs-12 col-md-6">
+																<label for="">Responsable</label>
+																<input type="text" class="form-control" value="{{$lista->user->empleado->nombre_completo}}" readonly>
+															</div>
+															<div class="col-xs-12 col-md-6">
+																<label for="">Fecha de creación</label>
+																<input type="text" class="form-control" value="{{$lista->created_at}}" readonly>
+															</div>
+														</div>
+													</div>
+													<br><br><hr>
+													<div class="col-xs-12">
+														<div class="table-responsive">
+															<table class="table tablaProductos">
+																<thead>
+																	<tr>
+																		<th scope="col">ID</th>
+																		<th scope="col">Clave</th>
+																		<th scope="col">Descripcion</th>
+																		<th scope="col">Precio</th>
+																		<th scope="col">Apertura</th>
+																		<th scope="col">Marca</th>
+																		<th scope="col">Tipo</th>
+																		<th scope="col">¿Mostrar?</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	@foreach ($lista->productos as $producto)
+																	<tr>
+																		<th scope="row">{{$producto->id}}</th>
+																		<td>{{$producto->clave}}</td>
+																		<td>{{$producto->descripcion}}</td>
+																		<td>{{$producto->precio_lista}}</td>
+																		<td>{{$producto->apertura}}</td>
+																		<td>{{$producto->marca}}</td>
+																		<td>{{$producto->tipo}}</td>
+																		<td>{{$producto->mostrar ? 'Sí' : 'No'}}</td>
+																	</tr>
+																	@endforeach
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+					{{$listasProductos->links()}}
+				</table>
+			</div>
+		</div>
 	</div>
 
 
@@ -65,8 +165,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-
-$(document).on('change','#inputArchivo',function(){
+	$(document).on('change','#inputArchivo',function(){
 
 	$(".botonSubirExcel").each( function(){
 		$(this).attr('disabled',false)
@@ -76,4 +175,18 @@ $(document).on('change','#inputArchivo',function(){
 
 </script>
 
+@endsection
+
+@section('scripts')
+<script>
+
+$(document).ready(function(){
+	$('.tablaProductos').each( function(){
+		$(this).DataTable({
+			pageLength: 4,
+		});
+	} );
+});
+
+</script>
 @endsection

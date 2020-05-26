@@ -146,6 +146,37 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="text-center">MOVIMIENTOS DE APERTURA</h4>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table" id="tablaHistorialAperturas">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"># MOV.</th>
+                                        <th scope="col">Responsable</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($historialAperturas as $historial)
+                                    <tr>
+                                        <th scope="row">{{$historial->id}}</th>
+                                        <td>{{$historial->user->empleado->nombre_completo}}</td>
+                                        <td>{{$historial->descripcion}}</td>
+                                        <td>{{$historial->created_at}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -296,6 +327,14 @@
 	    $('#tablaAperturaCarros').DataTable({
             pageLength: 5,
             lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']]
+        });
+	} );
+
+    $(document).ready( function () {
+	    $('#tablaHistorialAperturas').DataTable({
+            pageLength: 5,
+            lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+            order: [[0,'desc']]
         });
 	} );
 </script>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel;
 use App\ExcelProduct;
+use App\ListaProductos;
 use App\Services\Producto\UpdateProductosService;
 use Exception;
 
@@ -23,7 +24,9 @@ class FileController extends Controller
             $upgradeable = true;
         }
 
-        return view('excel.file_import_export', compact('upgradeable'));
+        $listasProductos = ListaProductos::orderBy('id','desc')->paginate('3');
+
+        return view('excel.file_import_export', compact('upgradeable','listasProductos'));
     }
 
     public function importFileIntoDB(Request $request)
