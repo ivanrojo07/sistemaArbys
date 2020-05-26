@@ -123,7 +123,7 @@ class ClienteProductoController extends Controller
         $categoriasCarros = CategoriaCarro::get();
         $categoriasMotos = CategoriaMoto::get();
 
-        $productos = $productos->where('mostrar', 1);
+        $productos = $productos->mostrables()->actuales();
 
         $productos = $productos->sortable()->paginate(10)->appends($request->all());
         return view('productos.index', ['cliente' => $cliente, 'productos' => $productos, 'request' => $request, 'experto' => $experto, 'tipos' => $tipos, 'categorias' => $categorias, 'categoriasCarros' => $categoriasCarros, 'categoriasMotos' => $categoriasMotos]);

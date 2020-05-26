@@ -59,6 +59,11 @@ class Product extends Model
         return $query->where('lista_id', $ultimaLista->id);
     }
 
+    public function scopeMostrables($query)
+    {
+        return $query->where('mostrar', 1);
+    }
+
     public function scopeCategoria($query, $categoria)
     {
         return $query->where('categoria', 'like', '%' . $categoria . '%');
