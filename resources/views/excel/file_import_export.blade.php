@@ -19,10 +19,10 @@
 					</div>
 					<div class="panel-body">
 						<div class="row text-center">
-							<div class="col-sm-12 col-md-4 form-group">
+							<!--<div class="col-sm-12 col-md-4 form-group">
 								<a class="control-label" href="{{ route('excel-file',['type'=>'xls']) }}"><i
 										class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar en XLS</a>
-							</div>
+							</div>-->
 							<div class="col-sm-12 col-md-4 form-group">
 								<a class="control-label" href="{{ route('excel-file',['type'=>'xlsx']) }}"><i
 										class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar en XLSX</a>
