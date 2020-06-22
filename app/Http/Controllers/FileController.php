@@ -45,7 +45,7 @@ class FileController extends Controller
     {
 
         $products_cars = Product::where('tipo', 'CARRO')->get()->toArray();
-        $products_motorcycles = Product::where('tipo', 'MOTO')->get()->toArray();
+        $products_motorcycles = Product::where('tipo', 'MOTO')->get(['clave','descripcion','precio_lista','apertura','marca','tipo','categoria','tipo_moto','cilindrada','mostrar','lista_id'])->toArray();
 
         $products = Product::get()->toArray();
         return \Excel::create('productos', function ($excel) use ($products_cars, $products_motorcycles) {
