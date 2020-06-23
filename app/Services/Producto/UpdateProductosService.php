@@ -150,7 +150,7 @@ class UpdateProductosService
 
         // dd(number_format(floatval($monto), 2, '.', '')*$mensualidad->factor_actualizacion);
 
-        return number_format(floatval($monto), 2, '.', '') * $mensualidad->factor_actualizacion;
+        return number_format(floatval($monto), 2, '.', '') * ($mensualidad->factor_actualizacion/100);
     }
 
     public function setCarros($data)
