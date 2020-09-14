@@ -102,10 +102,6 @@ class Empleado extends Model
     {
         return $this->laborales()->orderBy('id', 'desc')->first()->oficina();
     }
-     public function vendedors()
-    {
-        return $this->belongsTo('App\Vendedor');
-    }
 
 
     // ==========

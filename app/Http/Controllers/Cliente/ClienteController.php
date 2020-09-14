@@ -174,10 +174,7 @@ class ClienteController extends Controller
         $empleado = Auth::user()->empleado;
         if ($empleado->id == 1) {
             $clientes = Cliente::get();
-            // $vendedores = Vendedor::whereNotIn('id', [1])->get();
-             $vendedores = Vendedor::find(2);
-             dd($vendedores->all());
-
+            $vendedores = Vendedor::whereNotIn('id', [1])->get();
         } else {
             $laborales = $empleado->laborales->last()->oficina->laborales;
             $arr = [];
@@ -193,7 +190,6 @@ class ClienteController extends Controller
                 $arr[] = $vendedor->id;
             $clientes = Cliente::whereIn('vendedor_id', $arr)->get();
         }
-
         return view('clientes.asignar.index', ['clientes' => $clientes, 'vendedores' => $vendedores]);
     }
 
