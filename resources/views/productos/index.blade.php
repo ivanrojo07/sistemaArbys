@@ -131,7 +131,7 @@
 						</div>
 						@endif
 						@foreach($productos as $product)
-						@if(isset($product))
+						
 						<tr class="active">
 							<td>{{ $product->clave }}</td>
 							<td>{{ $product->categoria }}</td>
@@ -145,7 +145,7 @@
 										aria-hidden="true"></i> Ver</a>
 							</td>
 						</tr>
-						@endif
+						
 						@endforeach
 					</table>
 				</div>

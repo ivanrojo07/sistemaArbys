@@ -623,7 +623,7 @@ table th[class*="col-"] {
   </style>
 </head>
 <body>
-  <header><img class="img" src="img/header2.jpg"></header>
+  <header><img class="img" src="img/header.jpg"></header>
   {{-- FOOTER --}}
   <footer>
       <div class="row">
