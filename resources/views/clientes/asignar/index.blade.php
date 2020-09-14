@@ -30,9 +30,10 @@
 											</tr>
 										</thead>
 										<tbody>
-										@foreach($vendedores as $vendedor)
+
+										@foreach($vendedores->empleado() as $vendedor)
 											<tr>
-												<td>{{ $vendedor->empleado->nombre }} {{ $vendedor->empleado->appaterno }}</td>
+												<td>{{ $vendedor->empleado()->nombre }} {{ $vendedor->empleado->appaterno }}</td>
 												<td>{{ $vendedor->empleado->laborales->last()->oficina->nombre }}</td>
 												<td>{{ $vendedor->status }}</td>
 												<td class="text-center">
